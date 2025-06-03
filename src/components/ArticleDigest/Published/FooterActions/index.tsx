@@ -1,9 +1,9 @@
 import { useIntl } from 'react-intl'
 
-import { ReactComponent as IconClap } from '@/public/static/icons/24px/clap.svg'
-import { ReactComponent as IconComment } from '@/public/static/icons/24px/comment.svg'
-import { ReactComponent as IconMoney } from '@/public/static/icons/24px/money.svg'
-import { ReactComponent as IconUser } from '@/public/static/icons/24px/user.svg'
+import IconClap from '@/public/static/icons/24px/clap.svg'
+import IconComment from '@/public/static/icons/24px/comment.svg'
+import IconMoney from '@/public/static/icons/24px/money.svg'
+import IconUser from '@/public/static/icons/24px/user.svg'
 import { TEST_ID } from '~/common/enums'
 import { numAbbr } from '~/common/utils'
 import { TextIcon } from '~/components'

@@ -1,10 +1,10 @@
-import { VisuallyHidden } from '@reach/visually-hidden'
 import classNames from 'classnames'
 import { useCallback, useEffect, useState } from 'react'
+import { useVisuallyHidden } from 'react-aria'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { ReactComponent as IconCirclePlus } from '@/public/static/icons/24px/circle-plus.svg'
-import { ReactComponent as IconImage } from '@/public/static/icons/24px/image.svg'
+import IconCirclePlus from '@/public/static/icons/24px/circle-plus.svg'
+import IconImage from '@/public/static/icons/24px/image.svg'
 import {
   ACCEPTED_MOMENT_ASSETS_UPLOAD_IMAGE_TYPES,
   ADD_MOMENT_ASSETS,
@@ -38,6 +38,8 @@ export const MomentAssetsUploader: React.FC<MomentAssetsUploaderProps> = ({
   isInPage,
 }) => {
   const intl = useIntl()
+
+  const { visuallyHiddenProps } = useVisuallyHidden()
 
   const [assets, setAssets] = useState<MomentAsset[]>(_assets)
 
@@ -114,14 +116,11 @@ export const MomentAssetsUploader: React.FC<MomentAssetsUploaderProps> = ({
     [assets.length, addAssets]
   )
 
-  useEventListener(
-    ADD_MOMENT_ASSETS,
-    async (payload: { [key: string]: any }) => {
-      if (payload.files) {
-        handleFileUpload(payload.files as File[])
-      }
+  useEventListener(ADD_MOMENT_ASSETS, async (payload: { files: File[] }) => {
+    if (payload.files) {
+      handleFileUpload(payload.files as File[])
     }
-  )
+  })
 
   const acceptTypes = ACCEPTED_MOMENT_ASSETS_UPLOAD_IMAGE_TYPES.join(',')
   const fieldId = _fieldId || 'moment-assets-uploader-form'
@@ -137,21 +136,20 @@ export const MomentAssetsUploader: React.FC<MomentAssetsUploaderProps> = ({
   }
 
   const FileInput = (
-    <VisuallyHidden>
-      <input
-        id={fieldId}
-        type="file"
-        name="file"
-        aria-label={intl.formatMessage({
-          defaultMessage: 'Upload Moment Assets',
-          id: 'Xq7h6o',
-        })}
-        accept={acceptTypes}
-        multiple={true}
-        onChange={handleChange}
-        // onClick={handleClick}
-      />
-    </VisuallyHidden>
+    <input
+      id={fieldId}
+      type="file"
+      name="file"
+      aria-label={intl.formatMessage({
+        defaultMessage: 'Upload Moment Assets',
+        id: 'Xq7h6o',
+      })}
+      accept={acceptTypes}
+      multiple={true}
+      onChange={handleChange}
+      // onClick={handleClick}
+      {...visuallyHiddenProps}
+    />
   )
 
   const imageButtonClasses = classNames(styles.imageButton, styles.editing)

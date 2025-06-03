@@ -1,3 +1,4 @@
+import { ApolloError } from '@apollo/client'
 import { useContext, useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
@@ -105,7 +106,7 @@ const SocialCallback = ({ type }: Props) => {
     if (isLoginType || localOauthType === OAUTH_TYPE.login) {
       ;(async () => {
         try {
-          let input: Object = {
+          let input: object = {
             nonce: localNonce,
             codeVerifier: localCodeVerifier,
             authorizationCode: code,
@@ -148,7 +149,7 @@ const SocialCallback = ({ type }: Props) => {
           }
         } catch (error) {
           let hasFobiddenError = false
-          const codes = getErrorCodes(error as any)
+          const codes = getErrorCodes(error as ApolloError)
           codes.forEach((code) => {
             if (code.includes(ERROR_CODES.FORBIDDEN_BY_STATE)) {
               hasFobiddenError = true
@@ -176,7 +177,7 @@ const SocialCallback = ({ type }: Props) => {
     if (isBindType || localOauthType === OAUTH_TYPE.bind) {
       ;(async () => {
         try {
-          let input: Object = {
+          let input: object = {
             nonce: localNonce,
             codeVerifier: localCodeVerifier,
             authorizationCode: code,
@@ -207,7 +208,7 @@ const SocialCallback = ({ type }: Props) => {
             window.location.href = localPath
           }
         } catch (error) {
-          const codes = getErrorCodes(error as any)
+          const codes = getErrorCodes(error as ApolloError)
           let hasBindFailure = false
           codes.forEach((code) => {
             if (code.includes(ERROR_CODES.ACTION_FAILED)) {

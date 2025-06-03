@@ -1,7 +1,7 @@
 .content {
   display: flex;
-  flex-direction: column;
   flex-grow: 1;
+  flex-direction: column;
   width: 21.5rem;
 
   @media (--md-up) {

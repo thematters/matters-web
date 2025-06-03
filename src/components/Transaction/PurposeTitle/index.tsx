@@ -1,11 +1,11 @@
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconFiatCurrency } from '@/public/static/icons/24px/fiat-currency.svg'
-import { ReactComponent as IconHelp } from '@/public/static/icons/24px/help.svg'
-import { ReactComponent as IconLikeCoin } from '@/public/static/icons/24px/likecoin.svg'
-import { ReactComponent as IconTether } from '@/public/static/icons/24px/tether.svg'
-import { ReactComponent as IconLogoGraph } from '@/public/static/icons/logo-graph.svg'
+import IconFiatCurrency from '@/public/static/icons/24px/fiat-currency.svg'
+import IconHelp from '@/public/static/icons/24px/help.svg'
+import IconLikeCoin from '@/public/static/icons/24px/likecoin.svg'
+import IconTether from '@/public/static/icons/24px/tether.svg'
+import IconLogoGraph from '@/public/static/icons/logo-graph.svg'
 import { Icon, Tooltip, ViewerContext } from '~/components'
 import {
   DigestTransactionFragment,

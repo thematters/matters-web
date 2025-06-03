@@ -3,8 +3,8 @@ import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 import { formatUnits } from 'viem'
 
-import { ReactComponent as IconRight } from '@/public/static/icons/24px/right.svg'
-import { ReactComponent as IconTether } from '@/public/static/icons/24px/tether.svg'
+import IconRight from '@/public/static/icons/24px/right.svg'
+import IconTether from '@/public/static/icons/24px/tether.svg'
 import {
   contract,
   OPEN_WITHDRAW_VAULT_USDT_DIALOG,

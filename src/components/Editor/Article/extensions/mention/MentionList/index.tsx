@@ -12,20 +12,17 @@ import { UserDigestMiniUserFragment } from '~/gql/graphql'
 import styles from './styles.module.css'
 
 export const MentionList = forwardRef(
-  (
-    {
-      users,
-      onClick,
-      loading,
-      onHide,
-    }: {
-      users: UserDigestMiniUserFragment[]
-      onClick: (user: UserDigestMiniUserFragment) => void
-      loading?: boolean
-      onHide: () => void
-    },
-    ref
-  ) => {
+  ({
+    users,
+    onClick,
+    loading,
+    onHide,
+  }: {
+    users: UserDigestMiniUserFragment[]
+    onClick: (user: UserDigestMiniUserFragment) => void
+    loading?: boolean
+    onHide: () => void
+  }) => {
     const [activeItem, setActiveItem] = useState('')
     const resetActiveItem = () => setActiveItem('')
     const items = users.map((user) => user.id)

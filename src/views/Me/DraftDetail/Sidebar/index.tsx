@@ -159,7 +159,7 @@ const EditDraftCampaign = ({ draft, campaigns }: SidebarProps) => {
       campaigns={selectableCampaigns}
       selectedCampaign={selectedCampaign}
       selectedStage={selectedStage}
-      editCampaign={(value) => edit(value as any)}
+      editCampaign={edit}
     />
   )
 }

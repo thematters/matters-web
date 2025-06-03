@@ -1,4 +1,4 @@
-import { ReactComponent as IconWarn } from '@/public/static/icons/24px/warn.svg'
+import IconWarn from '@/public/static/icons/24px/warn.svg'
 import { Empty, Icon, Translate } from '~/components'
 
 export const EmptyFollowingTag = () => (

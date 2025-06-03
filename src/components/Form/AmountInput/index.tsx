@@ -1,4 +1,4 @@
-import { forwardRef } from 'react'
+import { forwardRef, useId } from 'react'
 
 import Field, { FieldProps } from '../Field'
 import styles from './styles.module.css'
@@ -48,8 +48,8 @@ const AmountInput = forwardRef<HTMLInputElement, AmountInputProps>(
     },
     ref
   ) => {
-    const fieldId = `field-${name}`
-    const fieldMsgId = `field-msg-${name}`
+    const fieldId = useId()
+    const fieldMsgId = `${fieldId}-msg`
 
     return (
       <Field spacingTop={spacingTop} spacingBottom={spacingBottom}>

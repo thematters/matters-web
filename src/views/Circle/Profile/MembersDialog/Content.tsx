@@ -105,7 +105,7 @@ const MembersDialogContent = () => {
     <Dialog.Content noSpacing>
       <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
         <List hasBorder={false}>
-          {edges.map(({ node, cursor }, i) => (
+          {edges.map(({ node }, i) => (
             <List.Item key={node.user.id}>
               <UserDigest.Rich
                 user={node.user}

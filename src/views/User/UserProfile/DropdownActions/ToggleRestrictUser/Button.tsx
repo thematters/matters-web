@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/client'
 import gql from 'graphql-tag'
 
-import { ReactComponent as IconNavEnter } from '@/public/static/icons/24px/nav-enter.svg'
+import IconNavEnter from '@/public/static/icons/24px/nav-enter.svg'
 import { Icon, Menu, Spinner } from '~/components'
 import { UserRestrictionsAdminQuery } from '~/gql/graphql'
 

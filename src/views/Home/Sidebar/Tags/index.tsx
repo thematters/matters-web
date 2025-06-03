@@ -70,7 +70,7 @@ const Tags = () => {
       {!loading && (
         <List hasBorder={false} className={styles.list}>
           {edges &&
-            edges.map(({ node, cursor }, i) => (
+            edges.map(({ node }, i) => (
               <List.Item key={node.id}>
                 <ArticleTag
                   tag={node}

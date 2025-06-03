@@ -1,5 +1,4 @@
 import { useFormik } from 'formik'
-import _pickBy from 'lodash/pickBy'
 import { useContext, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
@@ -13,7 +12,7 @@ import SupportPreview from './SupportPreview'
 import Tab, { TabType } from './Tab'
 
 interface FormProps {
-  back?: () => any
+  back?: () => void
   closeDialog: () => void
   submitCallback?: () => void
 
@@ -25,7 +24,7 @@ interface FormProps {
   editSupportSetting: (
     requestForDonation: string | null,
     replyToDonator: string | null
-  ) => any
+  ) => void
   supportSettingSaving: boolean
 }
 

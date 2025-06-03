@@ -2,7 +2,7 @@ import mockRouter from 'next-router-mock'
 import { describe, expect, it, vi } from 'vitest'
 
 import { TEST_ID } from '~/common/enums'
-import { render, screen } from '~/common/utils/test'
+import { fireEvent, render, screen } from '~/common/utils/test'
 import { ArticleDigestCurated } from '~/components'
 import { MOCK_ARTILCE } from '~/stories/mocks'
 
@@ -31,11 +31,11 @@ describe('<ArticleDigest.Curated>', () => {
     const $author = screen.getByText(MOCK_ARTILCE.author.displayName)
     expect($author).toBeInTheDocument()
 
-    $digest.click()
+    fireEvent.click($digest)
     expect(mockRouter.asPath).toContain(MOCK_ARTILCE.shortHash)
     expect(handleClickDigest).toHaveBeenCalled()
 
-    $author.click()
+    fireEvent.click($author)
     expect(handleClickAuthor).toHaveBeenCalled()
   })
 })

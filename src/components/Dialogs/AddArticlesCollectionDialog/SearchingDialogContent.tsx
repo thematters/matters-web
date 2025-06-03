@@ -1,4 +1,4 @@
-import { FieldInputProps, FormikProvider, useField } from 'formik'
+import { FieldInputProps, FormikProps, FormikProvider, useField } from 'formik'
 import { useEffect } from 'react'
 import { FormattedMessage } from 'react-intl'
 
@@ -21,7 +21,7 @@ import { USER_ARTICLES_SEARCH } from './gql'
 import styles from './styles.module.css'
 
 interface SearchingDialogContentProps {
-  formik: any
+  formik: FormikProps<{ checked: string[] }>
   user: UserArticlesUserFragment
   collection: CollectionArticlesCollectionFragment
   checkingIds: string[]
@@ -139,7 +139,9 @@ const SearchingDialogContent: React.FC<SearchingDialogContentProps> = ({
                   supHeight={18}
                   hint={node.title}
                   disabled={disabled}
-                  {...(formik.getFieldProps('checked') as FieldInputProps<any>)}
+                  {...(formik.getFieldProps('checked') as FieldInputProps<
+                    string[]
+                  >)}
                   value={node.id}
                   contents={(() => {
                     const index = node.title

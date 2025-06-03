@@ -14,14 +14,14 @@
     position: fixed;
     z-index: calc(var(--z-index-over-bottom-bar) + 1);
     display: flex;
+    visibility: hidden;
     flex-direction: column;
     padding: 0 var(--sp48);
     overflow-y: auto;
     overscroll-behavior: contain;
-    visibility: hidden;
     background: white;
-    backdrop-filter: blur(12px);
     box-shadow: -8px 0 56px 0 rgb(0 0 0 / 8%) !important;
+    backdrop-filter: blur(12px);
     will-change: transform, visibility;
   }
 }

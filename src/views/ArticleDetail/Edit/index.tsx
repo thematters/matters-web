@@ -49,6 +49,7 @@ import {
   DigestTagFragment,
   DirectImageUploadDoneMutation,
   DirectImageUploadMutation,
+  PublishState as PublishStateType,
   QueryEditArticleAssetsQuery,
   QueryEditArticleQuery,
   SingleFileUploadMutation,
@@ -389,10 +390,10 @@ const BaseEdit = ({ article }: { article: Article }) => {
           }
         />
 
-        {showPublishState && (
+        {showPublishState && article.versions.edges[0]?.node.id && (
           <PublishState
             articleId={article.id}
-            currVersionId={article.versions.edges[0]?.node.id!}
+            currVersionId={article.versions.edges[0]?.node.id}
           />
         )}
 
@@ -403,9 +404,9 @@ const BaseEdit = ({ article }: { article: Article }) => {
               __typename: 'Draft',
               id: article.id,
               title: article.title,
-              publishState: (showPublishState
-                ? 'pending'
-                : 'unpublished') as any,
+              publishState: showPublishState
+                ? PublishStateType.Pending
+                : PublishStateType.Unpublished,
               content: article.contents.html,
               summary: article.summary,
               summaryCustomized: article.summaryCustomized,
@@ -437,7 +438,6 @@ const BaseEdit = ({ article }: { article: Article }) => {
           >
             {({ openDialog: openSupportSettingDialog }) => (
               <BottomBar
-                saving={false}
                 disabled={false}
                 {...coverProps}
                 {...tagsProps}

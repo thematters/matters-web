@@ -1,4 +1,4 @@
-import { ReactComponent as IconWarn } from '@/public/static/icons/24px/warn.svg'
+import IconWarn from '@/public/static/icons/24px/warn.svg'
 import { Icon, Menu } from '~/components'
 
 type ArchiveUserButtonProps = {

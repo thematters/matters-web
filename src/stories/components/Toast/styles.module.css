@@ -14,11 +14,11 @@
   margin-top: var(--sp8);
 }
 
-.buttons :global(> *) {
+.buttons > :global(*) {
   margin-bottom: var(--sp16);
 }
 
-.buttons :global(> * + *) {
+.buttons > :global(* + *) {
   margin-left: var(--sp8);
 }
 

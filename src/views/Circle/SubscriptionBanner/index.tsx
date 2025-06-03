@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 
-import { ReactComponent as IconCircle } from '@/public/static/icons/24px/circle.svg'
+import IconCircle from '@/public/static/icons/24px/circle.svg'
 import {
   OPEN_SUBSCRIBE_CIRCLE_DIALOG,
   OPEN_UNIVERSAL_AUTH_DIALOG,

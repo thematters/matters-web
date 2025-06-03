@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 
-import { ReactComponent as IconWorld } from '@/public/static/icons/24px/world.svg'
+import IconWorld from '@/public/static/icons/24px/world.svg'
 import { LANG_TEXT_MAP, Z_INDEX } from '~/common/enums'
 import {
   Button,

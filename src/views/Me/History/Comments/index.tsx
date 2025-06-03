@@ -1,5 +1,4 @@
 import { useQuery } from '@apollo/client'
-import _flatten from 'lodash/flatten'
 import { useContext } from 'react'
 import { useIntl } from 'react-intl'
 
@@ -112,7 +111,7 @@ const Comments = () => {
         eof
       >
         <List>
-          {articleEdges.map(({ cursor, node, comments }) => (
+          {articleEdges.map(({ node, comments }) => (
             <List.Item key={node.id}>
               <section className={styles.item}>
                 <section className={styles.user}>

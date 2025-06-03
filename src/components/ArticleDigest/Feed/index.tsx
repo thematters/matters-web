@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { ReactComponent as IconDot } from '@/public/static/icons/dot.svg'
+import IconDot from '@/public/static/icons/dot.svg'
 import { MAX_FEED_SUMMARY_LENGTH, TEST_ID } from '~/common/enums'
 import { makeSummary, toPath } from '~/common/utils'
 import {
@@ -23,7 +23,7 @@ import Placeholder from './Placeholder'
 import styles from './styles.module.css'
 
 export type ArticleDigestFeedControls = {
-  onClick?: () => any
+  onClick?: () => void
   onClickAuthor?: () => void
   hasHeader?: boolean
   hasCircle?: boolean
@@ -35,7 +35,6 @@ export type ArticleDigestFeedControls = {
 export type ArticleDigestFeedProps = {
   article: ArticleDigestFeedArticlePublicFragment &
     Partial<ArticleDigestFeedArticlePrivateFragment>
-  header?: React.ReactNode
   collectionId?: string
   excludesTimeStamp?: boolean // this is only for timestamp next to the profile
 } & ArticleDigestFeedControls &
@@ -43,7 +42,6 @@ export type ArticleDigestFeedProps = {
 
 const BaseArticleDigestFeed = ({
   article,
-  header,
   collectionId,
   hasHeader = true,
   hasCircle = true,
@@ -177,7 +175,7 @@ type MemoizedArticleDigestFeed = React.MemoExoticComponent<
 
 export const ArticleDigestFeed = React.memo(
   BaseArticleDigestFeed,
-  ({ article: prevArticle, ...prevProps }, { article, ...props }) => {
+  ({ article: prevArticle }, { article }) => {
     return (
       prevArticle.bookmarked === article.bookmarked &&
       prevArticle.articleState === article.articleState &&

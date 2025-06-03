@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { ReactComponent as IconLink } from '@/public/static/icons/24px/link.svg'
+import IconLink from '@/public/static/icons/24px/link.svg'
 import { REFERRAL_QUERY_REFERRAL_KEY } from '~/common/enums'
 import { analytics } from '~/common/utils'
 import { CopyToClipboard, Icon, TextIcon, ViewerContext } from '~/components'

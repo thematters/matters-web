@@ -1,17 +1,20 @@
 import { useEffect } from 'react'
-import { Chain, useDisconnect, useNetwork, useSwitchNetwork } from 'wagmi'
+import { useAccount, useDisconnect, useSwitchChain } from 'wagmi'
 
-export const useTargetNetwork = (target: Chain) => {
+import { featureSupportedChains } from '~/common/utils'
+
+export const useCurationNetwork = () => {
   const { disconnect } = useDisconnect()
-  const { chain: currentChain } = useNetwork()
-  const { switchNetwork, isLoading, error } = useSwitchNetwork()
+  const { switchChain, isPending, error } = useSwitchChain()
+  const { chain: currentChain } = useAccount()
 
-  const isUnsupportedNetwork = currentChain?.id !== target.id
-  const targetChainId = target.id
+  const targetNetork = featureSupportedChains.curation[0]
+  const isUnsupportedNetwork = currentChain?.id !== targetNetork.id
+  const targetChainId = targetNetork.id
 
   const switchToTargetNetwork = async () => {
-    if (!switchNetwork) return
-    switchNetwork(targetChainId)
+    if (!switchChain) return
+    switchChain({ chainId: targetChainId })
   }
 
   // disconnect if failed to switch network
@@ -24,8 +27,8 @@ export const useTargetNetwork = (target: Chain) => {
 
   return {
     isUnsupportedNetwork,
-    isSwitchingNetwork: isLoading,
-    switchNetwork,
+    isSwitchingNetwork: isPending,
+    switchNetwork: switchChain,
     switchToTargetNetwork,
   }
 }

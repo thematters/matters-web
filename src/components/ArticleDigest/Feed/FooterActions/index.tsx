@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { useContext } from 'react'
 
-import { ReactComponent as IconPaywall } from '@/public/static/icons/24px/paywall.svg'
+import IconPaywall from '@/public/static/icons/24px/paywall.svg'
 import { toPath } from '~/common/utils'
 import {
   CircleDigest,
@@ -86,19 +86,17 @@ const FooterActions = ({
                   page: 'campaignDetail',
                   campaign: article.campaigns[0].campaign,
                 })}
-                legacyBehavior
+                className={styles.campaign}
               >
-                <a className={styles.campaign}>
-                  {
-                    article.campaigns[0].campaign[
-                      lang === 'zh_hans'
-                        ? 'nameZhHans'
-                        : lang === 'zh_hant'
-                          ? 'nameZhHant'
-                          : 'nameEn'
-                    ]
-                  }
-                </a>
+                {
+                  article.campaigns[0].campaign[
+                    lang === 'zh_hans'
+                      ? 'nameZhHans'
+                      : lang === 'zh_hant'
+                        ? 'nameZhHant'
+                        : 'nameEn'
+                  ]
+                }
               </Link>
             )}
           </>

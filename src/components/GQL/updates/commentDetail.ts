@@ -14,7 +14,7 @@ export const updateCommentDetail = ({
   comment,
   type,
 }: {
-  cache: ApolloCache<any>
+  cache: ApolloCache<object>
   commentId: string
   comment?: Comment
   type: 'add'

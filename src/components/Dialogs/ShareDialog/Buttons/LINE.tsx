@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 
-import { ReactComponent as IconLINE } from '@/public/static/icons/24px/line.svg'
+import IconLINE from '@/public/static/icons/24px/line.svg'
 import { REFERRAL_QUERY_REFERRAL_KEY } from '~/common/enums'
 import { analytics } from '~/common/utils'
 import { Icon, TextIcon, ViewerContext } from '~/components'

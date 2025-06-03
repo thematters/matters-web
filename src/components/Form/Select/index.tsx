@@ -1,4 +1,5 @@
 import classNames from 'classnames'
+import { useId } from 'react'
 
 import { Z_INDEX } from '~/common/enums'
 import { Dropdown } from '~/components'
@@ -28,7 +29,6 @@ export type FormSelectOption<OptionValue> = {
 }
 
 export type FormSelectProps<OptionValue> = {
-  name: string
   options: FormSelectOption<OptionValue>[]
   size?: 14 | 16
   color?: 'campaignBlue'
@@ -36,7 +36,6 @@ export type FormSelectProps<OptionValue> = {
 } & Omit<FieldProps, 'fieldMsgId'>
 
 const Select = <OptionValue,>({
-  name,
   label,
   hasLabel,
 
@@ -49,7 +48,7 @@ const Select = <OptionValue,>({
   spacingTop,
   spacingBottom,
 }: FormSelectProps<OptionValue>) => {
-  const fieldId = `field-${name}`
+  const fieldId = useId()
   const selectedOptionId = `${fieldId}-selected`
 
   const selectedOption = options.find((o) => o.selected) || options[0]
@@ -99,7 +98,7 @@ const Select = <OptionValue,>({
             extra={selectedOption?.extra}
             size={size}
             color={color}
-            ref={ref}
+            ref={ref as React.RefObject<HTMLLIElement>}
           />
         </ul>
       )}

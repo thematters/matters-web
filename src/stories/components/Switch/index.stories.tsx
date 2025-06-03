@@ -1,27 +1,36 @@
 import { MockedProvider } from '@apollo/client/testing'
-import { ComponentMeta, ComponentStory } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react'
 import React, { useState } from 'react'
 
 import { Switch } from '~/components'
 
-export default {
+const meta = {
   title: 'Components/Switch',
   component: Switch,
-} as ComponentMeta<typeof Switch>
+} satisfies Meta<typeof Switch>
 
-const Template: ComponentStory<typeof Switch> = () => {
-  const [checked, setChecked] = useState(false)
+export default meta
+type Story = StoryObj<typeof meta>
 
-  return (
-    <MockedProvider>
-      <Switch
-        name="any"
-        label="any"
-        checked={checked}
-        onChange={() => setChecked(!checked)}
-      />
-    </MockedProvider>
-  )
+export const Default: Story = {
+  args: {
+    name: 'any',
+    label: 'any',
+    checked: false,
+    onChange: () => {},
+  },
+  render: () => {
+    const [checked, setChecked] = useState(false)
+
+    return (
+      <MockedProvider>
+        <Switch
+          name="any"
+          label="any"
+          checked={checked}
+          onChange={() => setChecked(!checked)}
+        />
+      </MockedProvider>
+    )
+  },
 }
-
-export const Default = Template.bind({})

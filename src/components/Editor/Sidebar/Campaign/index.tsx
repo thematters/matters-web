@@ -1,6 +1,6 @@
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconRead } from '@/public/static/icons/24px/read.svg'
+import IconRead from '@/public/static/icons/24px/read.svg'
 import { Icon } from '~/components'
 
 import SelectCampaign, { SelectCampaignProps } from '../../SelectCampaign'

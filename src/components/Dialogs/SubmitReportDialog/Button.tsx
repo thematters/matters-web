@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconReport } from '@/public/static/icons/24px/report.svg'
+import IconReport from '@/public/static/icons/24px/report.svg'
 import {
   OPEN_UNIVERSAL_AUTH_DIALOG,
   UNIVERSAL_AUTH_TRIGGER,

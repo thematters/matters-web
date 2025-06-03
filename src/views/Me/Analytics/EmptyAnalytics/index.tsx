@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as SupporterListRocket } from '@/public/static/images/supporter-list-rocket.svg'
+import IconSupporterListRocket from '@/public/static/images/supporter-list-rocket.svg'
 import { GUIDE_LINKS, PATHS } from '~/common/enums'
 import { analytics } from '~/common/utils'
 import { Button, LanguageContext, TextIcon } from '~/components'
@@ -21,7 +21,7 @@ const EmptyAnalytics = () => {
         />
       </p>
       <section className={styles.rocket}>
-        <SupporterListRocket />
+        <IconSupporterListRocket />
       </section>
       <Button
         size={['19.5rem', '3rem']}

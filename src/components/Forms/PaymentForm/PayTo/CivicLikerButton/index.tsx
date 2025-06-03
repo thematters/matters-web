@@ -1,4 +1,4 @@
-import { ReactComponent as IconExternal } from '@/public/static/icons/24px/external.svg'
+import IconExternal from '@/public/static/icons/24px/external.svg'
 import { EXTERNAL_LINKS } from '~/common/enums'
 import { Button, Icon, TextIcon, Translate } from '~/components'
 

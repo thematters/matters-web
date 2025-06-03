@@ -72,7 +72,7 @@ const TagsFeed = () => {
       <SectionHeader type="tags" viewAll={true} />
       {_chunk(edges, perColumn).map((chunks, edgeIndex) => (
         <section key={edgeIndex} className={styles.tagSection}>
-          {chunks.map(({ node, cursor }, nodeIndex) => (
+          {chunks.map(({ node }, nodeIndex) => (
             <TagDigest.Concise
               key={node.id}
               tag={node}

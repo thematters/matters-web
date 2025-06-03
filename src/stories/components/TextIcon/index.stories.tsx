@@ -1,20 +1,23 @@
 import { MockedProvider } from '@apollo/client/testing'
-import { ComponentMeta, ComponentStory } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react'
 import React from 'react'
 
 import { TextIcon } from '~/components'
 
 import TextIcons from './TextIcons'
 
-export default {
+const meta = {
   title: 'Components/TextIcon',
   component: TextIcon,
-} as ComponentMeta<typeof TextIcon>
+} satisfies Meta<typeof TextIcon>
 
-const Template: ComponentStory<typeof TextIcon> = () => (
-  <MockedProvider>
-    <TextIcons />
-  </MockedProvider>
-)
+export default meta
+type Story = StoryObj<typeof meta>
 
-export const All = Template.bind({})
+export const All: Story = {
+  render: () => (
+    <MockedProvider>
+      <TextIcons />
+    </MockedProvider>
+  ),
+}

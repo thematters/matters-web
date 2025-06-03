@@ -1,9 +1,10 @@
+import { ApolloError } from '@apollo/client'
 import { Editor } from '@matters/matters-editor'
 import classNames from 'classnames'
 import { useContext, useEffect, useRef, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { ReactComponent as IconImage } from '@/public/static/icons/24px/image.svg'
+import IconImage from '@/public/static/icons/24px/image.svg'
 import {
   ADD_MOMENT_ASSETS,
   CLEAR_MOMENT_FORM,
@@ -227,7 +228,7 @@ const MomentForm = ({ setFirstRendered }: MomentFormProps) => {
       window.dispatchEvent(new CustomEvent(CLEAR_MOMENT_FORM))
     } catch (error) {
       setSubmitting(false)
-      const [, codes] = parseFormSubmitErrors(error as any)
+      const [, codes] = parseFormSubmitErrors(error as ApolloError)
       codes.forEach((code) => {
         if (code === 'ACTION_LIMIT_EXCEEDED') {
           toast.success({

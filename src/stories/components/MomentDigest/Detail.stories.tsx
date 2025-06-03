@@ -1,47 +1,59 @@
 import { MockedProvider } from '@apollo/client/testing'
-import { ComponentMeta, ComponentStory } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react'
 import React from 'react'
 
 import { MomentDigestDetail } from '~/components'
 
 import { MOCK_MOMENT } from '../../mocks'
 
-export default {
+const meta = {
   title: 'Components/MomentDigest/Detail',
   component: MomentDigestDetail,
-} as ComponentMeta<typeof MomentDigestDetail>
+  decorators: [
+    (Story) => (
+      <MockedProvider>
+        <Story />
+      </MockedProvider>
+    ),
+  ],
+} satisfies Meta<typeof MomentDigestDetail>
 
-const Template: ComponentStory<typeof MomentDigestDetail> = (args) => (
-  <MockedProvider>
-    <MomentDigestDetail {...args} />
-  </MockedProvider>
-)
+export default meta
+type Story = StoryObj<typeof meta>
 
-export const Default = Template.bind({})
-Default.args = {
-  moment: MOCK_MOMENT,
-}
-
-export const WithoutContent = Template.bind({})
-WithoutContent.args = {
-  moment: {
-    ...MOCK_MOMENT,
-    content: null,
+export const Default: Story = {
+  args: {
+    moment: MOCK_MOMENT,
+    onClose: () => {},
   },
 }
 
-export const WithoutAssets = Template.bind({})
-WithoutAssets.args = {
-  moment: {
-    ...MOCK_MOMENT,
-    assets: [],
+export const WithoutContent: Story = {
+  args: {
+    moment: {
+      ...MOCK_MOMENT,
+      content: null,
+    },
+    onClose: () => {},
   },
 }
 
-export const LongContent = Template.bind({})
-LongContent.args = {
-  moment: {
-    ...MOCK_MOMENT,
-    content: `<p>This is a content\nThis is a content\nThis is a content\nThis is a content\nThis is a content\nThis is a content\nThis is a content\nThis is a content</p>`,
+export const WithoutAssets: Story = {
+  args: {
+    moment: {
+      ...MOCK_MOMENT,
+      assets: [],
+    },
+    onClose: () => {},
+  },
+}
+
+export const LongContent: Story = {
+  args: {
+    moment: {
+      ...MOCK_MOMENT,
+      content: `<p>This is a content\nThis is a content\nThis is a content\nThis is a content\nThis is a content\nThis is a content\nThis is a content\nThis is a content</p>`,
+    },
+    onClose: () => {},
   },
 }

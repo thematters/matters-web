@@ -1,6 +1,6 @@
 import { FormattedMessage } from 'react-intl'
 
-import PUBLISH_IMAGE from '@/public/static/images/publish-1.svg'
+import IMAGE_PUBLISH from '@/public/static/images/publish-1.svg?url'
 import { Dialog, Translate } from '~/components'
 
 import styles from './styles.module.css'
@@ -46,7 +46,7 @@ const ConfirmRevisedPublishDialogContent = ({
           <section className={styles.imageContainer}>
             <div
               className={styles.image}
-              style={{ backgroundImage: `url(${PUBLISH_IMAGE})` }}
+              style={{ backgroundImage: `url(${IMAGE_PUBLISH.src})` }}
             />
           </section>
 

@@ -1,4 +1,4 @@
-import { ReactComponent as IconSortUlAlt } from '@/public/static/icons/24px/sort-ul-alt.svg'
+import IconSortUlAlt from '@/public/static/icons/24px/sort-ul-alt.svg'
 import { Icon, Menu } from '~/components'
 
 type SetArticleChannelsButtonProps = {

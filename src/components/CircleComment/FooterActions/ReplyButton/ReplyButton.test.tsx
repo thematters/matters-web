@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from 'vitest'
 
 import { TEST_ID } from '~/common/enums'
-import { render, screen } from '~/common/utils/test'
+import { fireEvent, render, screen } from '~/common/utils/test'
 import { MOCK_COMMENT } from '~/stories/mocks'
 
 import ReplyButton from './'
@@ -14,7 +14,7 @@ describe('<Comemnt/FooterActions/ReplyButton>', () => {
     expect($button).toBeInTheDocument()
 
     // open dialog
-    $button.click()
+    fireEvent.click($button)
     expect(screen.getByTestId(TEST_ID.DIALOG_COMMENT_FORM)).toBeInTheDocument()
   })
 
@@ -33,7 +33,7 @@ describe('<Comemnt/FooterActions/ReplyButton>', () => {
     const $button = screen.getByRole('button', { name: 'Write a comment' })
     expect($button).toBeInTheDocument()
 
-    $button.click()
+    fireEvent.click($button)
     expect(onClick).toHaveBeenCalled()
   })
 
@@ -53,7 +53,7 @@ describe('<Comemnt/FooterActions/ReplyButton>', () => {
     const $button = screen.getByRole('button', { name: 'Write a comment' })
     expect($button).toBeInTheDocument()
 
-    $button.click()
+    fireEvent.click($button)
     expect(onClick).not.toHaveBeenCalled()
   })
 })

@@ -235,7 +235,7 @@ describe('utils/url/parseCommentHash', () => {
   })
 
   it('should return undefined when window is undefined', () => {
-    global.window = undefined as any
+    global.window = undefined as unknown as Window & typeof globalThis
 
     const result = parseCommentHash()
     expect(result).toEqual({ parentId: undefined, descendantId: undefined })

@@ -13,7 +13,10 @@ import {
   usePublicQuery,
   useRoute,
 } from '~/components'
-import { SearchAggregateTagsPublicQuery } from '~/gql/graphql'
+import {
+  SearchAggregateTagsPublicQuery,
+  TagDigestFeedTagFragment,
+} from '~/gql/graphql'
 
 import { SEARCH_AGGREGATE_TAGS_PUBLIC } from './gql'
 import styles from './styles.module.css'
@@ -93,7 +96,9 @@ const AggregateTagResults = () => {
   return (
     <section className={styles.aggregateSection}>
       <TagList.Infinite
-        edges={edges}
+        edges={
+          edges as Array<{ node: TagDigestFeedTagFragment; cursor?: string }>
+        }
         pageInfo={pageInfo}
         loadMore={loadMore}
         trackingType="search_tag"

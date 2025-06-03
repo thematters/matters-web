@@ -50,7 +50,7 @@ const TagCustomStagingArea = ({
   const addTag = (tag: SelectTag) => {
     const oldTags = tags.filter((t) => t.node.id !== tag.id)
     setTags([...oldTags, { node: tag, selected: true }])
-    toStagingArea && toStagingArea()
+    toStagingArea?.()
   }
 
   if (loading) {

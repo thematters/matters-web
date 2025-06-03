@@ -1,6 +1,6 @@
-import { VisuallyHidden } from '@reach/visually-hidden'
 import Link from 'next/link'
 import React from 'react'
+import { useVisuallyHidden } from 'react-aria'
 
 import { toPath } from '~/common/utils'
 import { Card, CardProps } from '~/components'
@@ -23,6 +23,8 @@ type Props = {
 const RecommendUser = ({ user, ...cardProps }: Props) => {
   const { displayName, info } = user
 
+  const { visuallyHiddenProps } = useVisuallyHidden()
+
   const path = toPath({
     page: 'userProfile',
     userName: user.userName || '',
@@ -38,18 +40,14 @@ const RecommendUser = ({ user, ...cardProps }: Props) => {
     >
       <section className={styles.container}>
         <section className={styles.head}>
-          <Link {...path} legacyBehavior>
-            <a className={styles.avatar}>
-              <VisuallyHidden>
-                <span>{user.displayName}</span>
-              </VisuallyHidden>
-              <Avatar size={56} user={user} />
-            </a>
+          <Link {...path} className={styles.avatar}>
+            <span {...visuallyHiddenProps}>{user.displayName}</span>
+            <Avatar size={56} user={user} />
           </Link>
 
           <section className={styles.wrap}>
-            <Link {...path} legacyBehavior>
-              <a className={styles.name}>{displayName}</a>
+            <Link {...path} className={styles.name}>
+              {displayName}
             </Link>
 
             <section className={styles.follow}>

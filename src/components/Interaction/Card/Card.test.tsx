@@ -2,7 +2,7 @@ import mockRouter from 'next-router-mock'
 import React from 'react'
 import { describe, expect, it, vi } from 'vitest'
 
-import { render, screen } from '~/common/utils/test'
+import { fireEvent, render, screen } from '~/common/utils/test'
 import { Card } from '~/components'
 
 describe('<Card>', () => {
@@ -14,7 +14,7 @@ describe('<Card>', () => {
     const $button = screen.getByRole('button', { name: 'Click me' })
     expect($button).toBeInTheDocument()
 
-    $button.click()
+    fireEvent.click($button)
     expect(handleClick).toHaveBeenCalled()
   })
 
@@ -32,7 +32,7 @@ describe('<Card>', () => {
     expect($button).toBeInTheDocument()
     expect($button).not.toHaveAttribute('href', '/about')
 
-    $button.click()
+    fireEvent.click($button)
     expect(mockRouter.asPath).toContain(link)
     expect(handleClick).toHaveBeenCalled()
   })
@@ -51,7 +51,7 @@ describe('<Card>', () => {
     expect($link).toBeInTheDocument()
     expect($link).toHaveAttribute('href', '/about')
 
-    $link.click()
+    fireEvent.click($link)
     expect(handleClick).toHaveBeenCalled()
     expect(mockRouter.asPath).toContain(link)
   })
@@ -76,7 +76,7 @@ describe('<Card>', () => {
     expect($link).toHaveAttribute('href', link)
     expect($link).toHaveAttribute('target', '_blank')
 
-    $link.click()
+    fireEvent.click($link)
     expect(mockRouter.asPath).not.toContain(link)
     expect(handleClick).toHaveBeenCalled()
   })
@@ -105,7 +105,7 @@ describe('<Card>', () => {
     const $link2 = screen.getByRole('button', { name: 'Contact' })
     expect($link2).toBeInTheDocument()
 
-    $link2.click()
+    fireEvent.click($link2)
     expect(mockRouter.asPath).toContain(link2)
   })
 })

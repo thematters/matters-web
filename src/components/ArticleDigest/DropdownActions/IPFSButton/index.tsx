@@ -1,4 +1,4 @@
-import { ReactComponent as IconIPFS } from '@/public/static/icons/24px/ipfs.svg'
+import IconIPFS from '@/public/static/icons/24px/ipfs.svg'
 import type { ClickButtonProp as TrackEventProps } from '~/common/utils'
 import { analytics, toPath } from '~/common/utils'
 import { Icon, Menu, useRoute } from '~/components'
@@ -14,6 +14,7 @@ const IPFSButton: React.FC<IPFSButtonProps> = ({
   pageComponent,
 }) => {
   const { router } = useRoute()
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { shortHash, v, ...qs } = router.query
 
   return (

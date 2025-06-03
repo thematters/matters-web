@@ -2,7 +2,7 @@ import gql from 'graphql-tag'
 import { useContext } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { ReactComponent as IconComment } from '@/public/static/icons/24px/comment.svg'
+import IconComment from '@/public/static/icons/24px/comment.svg'
 import {
   OPEN_UNIVERSAL_AUTH_DIALOG,
   UNIVERSAL_AUTH_TRIGGER,
@@ -126,7 +126,7 @@ const ReplyButton = ({
 
   return (
     <CircleCommentFormDialog
-      circleId={circle?.id!}
+      circleId={circle?.id || ''}
       type={type}
       replyToId={id}
       parentId={parentComment?.id || id}

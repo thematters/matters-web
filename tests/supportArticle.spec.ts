@@ -31,7 +31,7 @@ test.describe('Support article', () => {
 
       // [Bob] Go to Alice's article page
       await pageGoto(bobPage, aliceArticleLink)
-      const aliceArticleDetail = new ArticleDetailPage(bobPage, isMobile)
+      const aliceArticleDetail = new ArticleDetailPage(bobPage)
 
       const amount = _random(1, 50, false)
 

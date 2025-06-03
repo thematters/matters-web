@@ -1,6 +1,6 @@
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconNavSearch } from '@/public/static/icons/24px/nav-search.svg'
+import IconNavSearch from '@/public/static/icons/24px/nav-search.svg'
 import { Empty, Icon } from '~/components'
 
 export const EmptySearch = ({

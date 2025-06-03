@@ -1,8 +1,8 @@
-import { act, renderHook } from '@testing-library/react-hooks'
 import mockRouter from 'next-router-mock'
 import { beforeEach, describe, expect, it } from 'vitest'
 
 import { PATHS } from '~/common/enums'
+import { act, renderHook } from '~/common/utils/test'
 
 import { useRoute } from './useRoute'
 

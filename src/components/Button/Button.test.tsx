@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from 'vitest'
 
 import { PATHS } from '~/common/enums'
-import { render, screen } from '~/common/utils/test'
+import { fireEvent, render, screen } from '~/common/utils/test'
 import { Button } from '~/components'
 
 describe('<Button>', () => {
@@ -15,7 +15,7 @@ describe('<Button>', () => {
     expect($button).toHaveAttribute('type', 'button')
 
     // ACT
-    $button.click()
+    fireEvent.click($button)
 
     // ASSERT
     expect(handleClick).toHaveBeenCalled()
@@ -33,7 +33,7 @@ describe('<Button>', () => {
     expect($button).toHaveAttribute('form', formId)
 
     // ACT
-    $button.click()
+    fireEvent.click($button)
 
     // ASSERT
     expect(handleClick).toHaveBeenCalled()
@@ -48,7 +48,7 @@ describe('<Button>', () => {
     expect($button).toHaveAttribute('disabled')
 
     // ACT
-    $button.click()
+    fireEvent.click($button)
 
     // ASSERT
     expect(handleClick).not.toHaveBeenCalled()

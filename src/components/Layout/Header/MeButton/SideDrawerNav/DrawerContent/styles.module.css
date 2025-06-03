@@ -4,7 +4,6 @@
   justify-content: space-between;
   width: 20rem;
   height: 100%;
-  padding-top: constant(safe-area-inset-top);
   padding-top: env(safe-area-inset-top);
   overflow-y: auto;
   background: var(--color-white);

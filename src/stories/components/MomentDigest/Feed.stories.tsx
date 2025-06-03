@@ -1,40 +1,47 @@
 import { MockedProvider } from '@apollo/client/testing'
-import { ComponentMeta, ComponentStory } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react'
 import React from 'react'
 
 import { MomentDigestFeed } from '~/components'
 
 import { MOCK_MOMENT } from '../../mocks'
 
-export default {
+const meta = {
   title: 'Components/MomentDigest/Feed',
   component: MomentDigestFeed,
-} as ComponentMeta<typeof MomentDigestFeed>
+  decorators: [
+    (Story) => (
+      <MockedProvider>
+        <Story />
+      </MockedProvider>
+    ),
+  ],
+} satisfies Meta<typeof MomentDigestFeed>
 
-const Template: ComponentStory<typeof MomentDigestFeed> = (args) => (
-  <MockedProvider>
-    <MomentDigestFeed {...args} />
-  </MockedProvider>
-)
+export default meta
+type Story = StoryObj<typeof meta>
 
-export const Default = Template.bind({})
-Default.args = {
-  moment: MOCK_MOMENT,
-}
-
-export const LongContent = Template.bind({})
-LongContent.args = {
-  moment: {
-    ...MOCK_MOMENT,
-    content: `<p>This is a content\nThis is a content\nThis is a content\nThis is a content\nThis is a content\nThis is a content\nThis is a content\nThis is a content</p>`,
+export const Default: Story = {
+  args: {
+    moment: MOCK_MOMENT,
   },
 }
 
-export const FollowFeed = Template.bind({})
-FollowFeed.args = {
-  moment: {
-    ...MOCK_MOMENT,
+export const LongContent: Story = {
+  args: {
+    moment: {
+      ...MOCK_MOMENT,
+      content: `<p>This is a content\nThis is a content\nThis is a content\nThis is a content\nThis is a content\nThis is a content\nThis is a content\nThis is a content</p>`,
+    },
   },
-  hasAuthor: true,
-  hasCommentedFollowees: true,
+}
+
+export const FollowFeed: Story = {
+  args: {
+    moment: {
+      ...MOCK_MOMENT,
+    },
+    hasAuthor: true,
+    hasCommentedFollowees: true,
+  },
 }

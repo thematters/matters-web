@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest'
 
-import { render, screen } from '~/common/utils/test'
+import { fireEvent, render, screen } from '~/common/utils/test'
 import { Form } from '~/components'
 
 describe('<Form.SquareCheckBox>', () => {
@@ -10,8 +10,8 @@ describe('<Form.SquareCheckBox>', () => {
     const hint = 'hint-test'
     const value = 'value-test'
     const contents = 'content-test'
-    const fieldId = `field-${value}`
-    const fieldMsgId = `field-msg-${value}`
+    const fieldId = `__use_id__`
+    const fieldMsgId = `__use_id__-msg`
 
     const handleOnBlur = vi.fn()
     const handleOnChange = vi.fn()
@@ -68,7 +68,7 @@ describe('<Form.SquareCheckBox>', () => {
     expect(handleOnChange).toHaveBeenCalledTimes(0)
 
     // onChange has been called
-    $checkbox.click()
+    fireEvent.click($checkbox)
     expect($checkbox).toBeChecked()
     expect(handleOnChange).toHaveBeenCalledTimes(1)
   })

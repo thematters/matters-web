@@ -12,7 +12,7 @@ export type CircleDigestFeedProps = {
   circle: FollowingFeedCircleFragment
   header?: React.ReactNode
   date: Date | string | number
-  onClick?: () => any
+  onClick?: () => void
 } & DropdownActionsControls
 
 const FeedCircle = ({

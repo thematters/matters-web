@@ -34,21 +34,18 @@ const CampaignArticleFeaturedNotice = ({
     >
       <section className={styles.noticeActorsNameAndTitleInfo}>
         <Link {...campaignPath}>
-          <a>
-            <FormattedMessage
-              defaultMessage="Your article {articleTitle} has been listed as a feature of event in 7 days. Come and view more wonderful articles!"
-              id="b0RNGM"
-              description="src/components/Notice/CampaignArticleNotice/CampaignArticleFeaturedNotice.tsx"
-              values={{
-                articleTitle: (
-                  <NoticeArticleTitle article={notice.article} disabled />
-                ),
-              }}
-            />
-          </a>
+          <FormattedMessage
+            defaultMessage="Your article {articleTitle} has been listed as a feature of event in 7 days. Come and view more wonderful articles!"
+            id="b0RNGM"
+            description="src/components/Notice/CampaignArticleNotice/CampaignArticleFeaturedNotice.tsx"
+            values={{
+              articleTitle: (
+                <NoticeArticleTitle article={notice.article} disabled />
+              ),
+            }}
+          />
         </Link>
       </section>
-
       <section className={styles.footer}>
         <NoticeDate notice={notice} />
       </section>

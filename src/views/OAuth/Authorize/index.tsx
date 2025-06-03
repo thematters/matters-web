@@ -151,14 +151,12 @@ const BaseOAuthAuthorize = () => {
               <Translate zh_hant="不是你？" zh_hans="不是你？" en="Not you?" />
             </span>
 
-            <Link {...appendTarget(PATHS.LOGIN, true)} legacyBehavior>
-              <a className="u-link-green">
-                <Translate
-                  zh_hant="切換帳戶"
-                  zh_hans="切换帐户"
-                  en="switch account"
-                />
-              </a>
+            <Link {...appendTarget(PATHS.LOGIN, true)} className="u-link-green">
+              <Translate
+                zh_hant="切換帳戶"
+                zh_hans="切换帐户"
+                en="switch account"
+              />
             </Link>
           </p>
         </section>
