@@ -16,9 +16,9 @@
   font-size: 14px;
   line-height: 1.4;
   color: #fff;
+  outline: 0;
   background-color: #333;
   border-radius: 4px;
-  outline: 0;
   transition-property: transform, visibility, opacity;
 }
 

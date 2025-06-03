@@ -48,6 +48,7 @@ export const toUserDigestMiniPlaceholder = (displayName: string) =>
     displayName,
     status: null,
     avatar: null,
+
     liker: {
       __typename: 'Liker',
       civicLiker: false,

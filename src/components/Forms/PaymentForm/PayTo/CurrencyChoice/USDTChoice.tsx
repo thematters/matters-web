@@ -1,8 +1,8 @@
 import { useContext } from 'react'
 import { useAccount } from 'wagmi'
 
-import { ReactComponent as IconTether } from '@/public/static/icons/24px/tether.svg'
-import { ReactComponent as IconTetherDisabled } from '@/public/static/icons/tether-disabled.svg'
+import IconTether from '@/public/static/icons/24px/tether.svg'
+import IconTetherDisabled from '@/public/static/icons/tether-disabled.svg'
 import { PATHS, PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
 import { formatAmount } from '~/common/utils'
 import {

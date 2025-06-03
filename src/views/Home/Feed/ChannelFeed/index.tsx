@@ -1,40 +1,22 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useRef } from 'react'
 import { useIntl } from 'react-intl'
 
-import { analytics } from '~/common/utils'
+import { analytics, mergeConnections } from '~/common/utils'
 import {
   ArticleDigestCurated,
   EmptyWork,
   Media,
+  usePublicQuery,
   ViewerContext,
 } from '~/components'
 import { useRoute } from '~/components'
 import { FeedArticlesPublicChannelQuery } from '~/gql/graphql'
 
-import { useMixedFeed } from '../../common/useMixedFeed'
-import Authors from '../Authors'
-import FeedRenderer from '../components/FeedRenderer'
+import { MixedFeedArticleEdge, useMixedFeed } from '../../common'
+import FeedRenderer from '../FeedRenderer'
 import { FEED_ARTICLES_PRIVATE, FEED_ARTICLES_PUBLIC_CHANNEL } from '../gql'
-import { useFeed } from '../hooks/useFeed'
 import feedStyles from '../styles.module.css'
-import Tags from '../Tags'
 import { ChannelHeader } from './ChannelHeader'
-
-const channelHorizontalFeeds: Record<
-  number,
-  React.FC<{ after?: string; first?: number }>
-> = {
-  11: () => (
-    <Media lessThan="lg">
-      <Authors />
-    </Media>
-  ),
-  17: () => (
-    <Media lessThan="lg">
-      <Tags />
-    </Media>
-  ),
-}
 
 const ChannelFeed = () => {
   const intl = useIntl()
@@ -43,6 +25,20 @@ const ChannelFeed = () => {
   const shortHash = getQuery('shortHash')
   const feedType = 'channel'
   const numOfCards = 6
+
+  const { data, error, loading, fetchMore, client } =
+    usePublicQuery<FeedArticlesPublicChannelQuery>(
+      FEED_ARTICLES_PUBLIC_CHANNEL,
+      { variables: { shortHash } }
+    )
+
+  const connectionPath = 'channel.articles'
+  const { edges, pageInfo } =
+    data?.channel?.__typename === 'CurationChannel' ||
+    data?.channel?.__typename === 'TopicChannel'
+      ? data?.channel?.articles
+      : {}
+  const fetchedPrivateSortsRef = useRef<string[]>([])
 
   const loadPrivate = (publicData?: FeedArticlesPublicChannelQuery) => {
     if (!viewer.isAuthed || !publicData) {
@@ -54,7 +50,7 @@ const ChannelFeed = () => {
       return
     }
 
-    const publiceEdges = channel.feed.edges || []
+    const publiceEdges = channel.articles.edges || []
     const publicIds = publiceEdges.map(({ node }) => node.id)
 
     client.query({
@@ -64,18 +60,47 @@ const ChannelFeed = () => {
     })
   }
 
-  const { data, loading, error, edges, pageInfo, loadMore, client } = useFeed({
-    query: FEED_ARTICLES_PUBLIC_CHANNEL,
-    variables: { shortHash },
-    connectionPath: 'channel.feed',
-    privateQueryFn: loadPrivate,
-    keyPrefix: `channel:${shortHash}`,
-  })
+  // fetch private data for first page
+  useEffect(() => {
+    const fetched = fetchedPrivateSortsRef.current.indexOf(shortHash) >= 0
+    if (loading || !edges || fetched || !viewer.isAuthed) {
+      return
+    }
 
-  const mixFeed = useMixedFeed(edges, true, channelHorizontalFeeds)
+    loadPrivate(data)
+    fetchedPrivateSortsRef.current = [
+      ...fetchedPrivateSortsRef.current,
+      shortHash,
+    ]
+  }, [!!edges, loading, viewer.id, shortHash])
+
+  const loadMore = async () => {
+    if (loading) {
+      return
+    }
+
+    const { data: newData } = await fetchMore({
+      variables: {
+        shortHash,
+        after: pageInfo?.endCursor,
+      },
+      updateQuery: (previousResult, { fetchMoreResult }) =>
+        mergeConnections({
+          oldData: previousResult,
+          newData: fetchMoreResult,
+          path: connectionPath,
+          dedupe: true,
+        }),
+    })
+
+    loadPrivate(newData)
+    return { newData, count: edges?.length || 0 }
+  }
+
+  const mixFeed = useMixedFeed(edges || [], true, feedType)
 
   const renderCards = (
-    cardEdges: any[],
+    cardEdges: MixedFeedArticleEdge[],
     numOfCards: number,
     channelId?: string
   ) => {
@@ -84,7 +109,7 @@ const ChannelFeed = () => {
       location: number,
       id: string,
       rootId?: string,
-      note?: Record<string, any>
+      note?: Record<string, unknown>
     ) => {
       analytics.trackEvent('click_feed', {
         type: 'channel_card',
@@ -96,9 +121,13 @@ const ChannelFeed = () => {
       })
     }
 
+    const edges = cardEdges
+      ?.filter((edge) => edge.__typename === 'ChannelArticleEdge')
+      .slice(0, numOfCards)
+
     return (
       <section className={feedStyles.cards}>
-        {cardEdges.slice(0, numOfCards).map((edge, i) => (
+        {edges.map((edge, i) => (
           <React.Fragment key={edge.node.id}>
             <Media at="xs">
               <ArticleDigestCurated

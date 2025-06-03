@@ -29,10 +29,10 @@
   & .title {
     @mixin line-clamp;
 
+    -webkit-line-clamp: 2;
     font-size: var(--text14);
     font-weight: var(--font-normal);
     line-height: 1.375rem;
-    -webkit-line-clamp: 2;
   }
 
   & .cover {

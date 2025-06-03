@@ -317,11 +317,11 @@
 
 @define-mixin line-clamp {
   display: -webkit-box;
+  overflow: hidden;
   -webkit-line-clamp: 1;
 
   /* autoprefixer: ignore next */
   -webkit-box-orient: vertical;
-  overflow: hidden;
 }
 
 /* FIXME: fix cropped descenders of letters  */

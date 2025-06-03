@@ -11,6 +11,7 @@ import {
 import {
   ArchiveArticleArticleFragment,
   ArchiveArticleMutation,
+  ArticleState,
 } from '~/gql/graphql'
 
 const ARCHIVE_ARTICLE = gql`
@@ -46,7 +47,7 @@ const ArchiveArticleDialog = ({
       optimisticResponse: {
         editArticle: {
           id: article.id,
-          articleState: 'archived' as any,
+          articleState: ArticleState.Archived,
           __typename: 'Article',
         },
       },

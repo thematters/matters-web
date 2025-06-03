@@ -4,7 +4,7 @@ import _pickBy from 'lodash/pickBy'
 import { useContext } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { ReactComponent as IconMore } from '@/public/static/icons/24px/more.svg'
+import IconMore from '@/public/static/icons/24px/more.svg'
 import { ERROR_CODES, ERROR_MESSAGES } from '~/common/enums'
 import {
   Button,
@@ -52,8 +52,6 @@ interface DialogProps {
 type BaseDropdownActionsProps = DropdownActionsProps & Controls & DialogProps
 
 const BaseDropdownActions = ({
-  moment,
-
   hasDelete,
   hasReport,
 
@@ -118,7 +116,7 @@ const DropdownActions = (props: DropdownActionsProps) => {
   }
 
   const WithReport = withDialog<Omit<SubmitReportDialogProps, 'children'>>(
-    BaseDropdownActions,
+    BaseDropdownActions as React.ComponentType<object>,
     SubmitReport.Dialog,
     { id: moment.id },
     ({ openDialog }) => ({ openSubmitReportDialog: openDialog })

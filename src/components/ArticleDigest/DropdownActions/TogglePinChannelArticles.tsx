@@ -1,5 +1,5 @@
-import { ReactComponent as IconPin } from '@/public/static/icons/24px/pin.svg'
-import { ReactComponent as IconUnpin } from '@/public/static/icons/24px/unpin.svg'
+import IconPin from '@/public/static/icons/24px/pin.svg'
+import IconUnpin from '@/public/static/icons/24px/unpin.svg'
 import { Icon, Menu, toast, useMutation } from '~/components'
 import { TOGGLE_PIN_CHANNEL_ARTICLES } from '~/components/GQL/mutations/togglePinChannelArticles'
 import { TogglePinChannelArticlesMutation } from '~/gql/graphql'

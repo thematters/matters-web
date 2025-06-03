@@ -1,7 +1,5 @@
 import classNames from 'classnames'
 import _chunk from 'lodash/chunk'
-import _get from 'lodash/get'
-import _random from 'lodash/random'
 import { FormattedMessage } from 'react-intl'
 
 import { analytics } from '~/common/utils'
@@ -66,7 +64,7 @@ const RecommendedAuthors: React.FC<RecommendedAuthorsProps> = ({
         <RecommendedAuthorsHeader />
         <section className={styles.users}>
           <List hasBorder={false}>
-            {edges.map(({ node, cursor }, i) => (
+            {edges.map(({ node }, i) => (
               <List.Item key={node.id}>
                 <UserDigest.Rich
                   user={node}
@@ -89,7 +87,7 @@ const RecommendedAuthors: React.FC<RecommendedAuthorsProps> = ({
       <Slides header={<RecommendedAuthorsHeader />}>
         {_chunk(edges, perColumn).map((chunks, i) => (
           <Slides.Item size="xs" key={i}>
-            {chunks.map(({ node, cursor }) => (
+            {chunks.map(({ node }) => (
               <UserDigest.Rich
                 key={node.id}
                 user={node}

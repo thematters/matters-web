@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/client'
 import gql from 'graphql-tag'
 
-import { ReactComponent as IconExternal } from '@/public/static/icons/24px/external.svg'
+import IconExternal from '@/public/static/icons/24px/external.svg'
 import { Icon, Spinner, TableView, TextIcon, Translate } from '~/components'
 import { GetStripeLoginUrlQuery } from '~/gql/graphql'
 

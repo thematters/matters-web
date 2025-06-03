@@ -2,17 +2,13 @@ import { Dialog } from '~/components'
 
 import CommentDetail from '../CommentDetail'
 
-interface CommentsDialogDetailContentProps {
-  closeDialog: () => void
+// interface CommentsDialogDetailContentProps {
+//   closeDialog: () => void
 
-  backToCommentList: () => void
-}
+//   backToCommentList: () => void
+// }
 
-const CommentsDialogDetailContent = ({
-  closeDialog,
-
-  backToCommentList,
-}: CommentsDialogDetailContentProps) => {
+const CommentsDialogDetailContent = () => {
   return (
     <>
       <Dialog.Content fixedHeight>

@@ -1,56 +1,64 @@
 import { MockedProvider } from '@apollo/client/testing'
-import { ComponentMeta, ComponentStory } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react'
 import React from 'react'
 
 import { Book } from '~/components'
 
 import { MOCK_ARTILCE } from '../../mocks'
 
-export default {
+const meta = {
   title: 'Components/Book/Flat',
   component: Book.Flat,
-} as ComponentMeta<typeof Book.Flat>
+  decorators: [
+    (Story) => (
+      <MockedProvider>
+        <Story />
+      </MockedProvider>
+    ),
+  ],
+} satisfies Meta<typeof Book.Flat>
 
-const Template: ComponentStory<typeof Book.Flat> = (args) => {
-  return (
-    <MockedProvider>
-      <Book.Flat {...args} />
-    </MockedProvider>
-  )
+export default meta
+type Story = StoryObj<typeof meta>
+
+export const Collection: Story = {
+  args: {
+    title: MOCK_ARTILCE.title,
+    type: 'collection',
+  },
 }
 
-export const Collection = Template.bind({})
-Collection.args = {
-  title: MOCK_ARTILCE.title,
-  type: 'collection',
+export const CollectionTitleMd: Story = {
+  args: {
+    title: 'Qui amet anim',
+    type: 'collection',
+  },
 }
 
-export const CollectionTitleMd = Template.bind({})
-CollectionTitleMd.args = {
-  title: 'Qui amet anim',
-  type: 'collection',
+export const CollectionTitleShort: Story = {
+  args: {
+    title: 'Short',
+    type: 'collection',
+  },
 }
 
-export const CollectionTitleShort = Template.bind({})
-CollectionTitleShort.args = {
-  title: 'Short',
-  type: 'collection',
+export const Article: Story = {
+  args: {
+    title: MOCK_ARTILCE.title,
+    type: 'article',
+  },
 }
 
-export const Article = Template.bind({})
-Article.args = {
-  title: MOCK_ARTILCE.title,
-  type: 'article',
+export const ArticleTitleMd: Story = {
+  args: {
+    title: 'Qui amet anim',
+    type: 'article',
+  },
 }
 
-export const ArticleTitleMd = Template.bind({})
-ArticleTitleMd.args = {
-  title: 'Qui amet anim',
-  type: 'article',
-}
-
-export const ArticleTitleShort = Template.bind({})
-ArticleTitleShort.args = {
-  title: 'Short',
-  type: 'article',
+export const ArticleTitleShort: Story = {
+  args: {
+    title: 'Short',
+    type: 'article',
+  },
 }

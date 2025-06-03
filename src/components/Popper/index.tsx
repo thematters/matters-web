@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import _throttle from 'lodash/throttle'
 import dynamic from 'next/dynamic'
 import { forwardRef, useEffect, useState } from 'react'
@@ -22,7 +23,7 @@ type ForwardChildrenNode = ({
   ref,
 }: {
   openDropdown: () => void
-  ref?: React.Ref<any>
+  ref?: React.ForwardedRef<any>
 }) => React.ReactNode
 
 interface ForwardChildrenProps {
@@ -183,7 +184,7 @@ export const hidePopperOnClick = (instance: PopperInstance) => {
     return
   }
 
-  box.addEventListener('click', (event: any) => {
+  box.addEventListener('click', (event: React.MouseEvent<HTMLElement>) => {
     const target = event.target as HTMLElement
 
     if (target?.closest && target.closest('[data-clickable], a, button')) {

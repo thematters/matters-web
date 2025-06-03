@@ -60,7 +60,7 @@ const ApplyCampaignDialog = ({
     try {
       await applyCampaign()
       closeDialog()
-    } catch (error) {
+    } catch {
       toast.error({
         message: (
           <FormattedMessage

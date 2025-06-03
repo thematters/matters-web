@@ -62,7 +62,9 @@ const ArticleFeedsTabs = ({
     <section className={styles.tabs}>
       <SquareTabs spacing={!isInWritingChallengeChannel ? 'sm' : undefined}>
         <SquareTabs.Tab
-          ref={(el) => (tabsRef.current[FEED_TYPE_ALL] = el)}
+          ref={(el) => {
+            tabsRef.current[FEED_TYPE_ALL] = el
+          }}
           selected={feedType === FEED_TYPE_ALL}
           onClick={() => {
             setFeedType(FEED_TYPE_ALL)
@@ -80,7 +82,9 @@ const ArticleFeedsTabs = ({
 
         {shouldShowFeaturedTab && (
           <SquareTabs.Tab
-            ref={(el) => (tabsRef.current[FEED_TYPE_FEATURED] = el)}
+            ref={(el) => {
+              tabsRef.current[FEED_TYPE_FEATURED] = el
+            }}
             selected={feedType === FEED_TYPE_FEATURED}
             onClick={() => {
               setFeedType(FEED_TYPE_FEATURED)
@@ -102,7 +106,9 @@ const ArticleFeedsTabs = ({
           shouldShowTab(stage.period?.start) ? (
             <SquareTabs.Tab
               key={stage.id}
-              ref={(el) => (tabsRef.current[stage.id] = el)}
+              ref={(el) => {
+                tabsRef.current[stage.id] = el
+              }}
               selected={stage.id === feedType}
               onClick={() => {
                 setFeedType(stage.id)
@@ -127,7 +133,9 @@ const ArticleFeedsTabs = ({
 
         {shouldShowAnnouncementTab && (
           <SquareTabs.Tab
-            ref={(el) => (tabsRef.current[FEED_TYPE_ANNOUNCEMENT] = el)}
+            ref={(el) => {
+              tabsRef.current[FEED_TYPE_ANNOUNCEMENT] = el
+            }}
             selected={feedType === FEED_TYPE_ANNOUNCEMENT}
             onClick={() => {
               setFeedType(FEED_TYPE_ANNOUNCEMENT)

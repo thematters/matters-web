@@ -1,4 +1,4 @@
-import { ReactComponent as IconInfo } from '@/public/static/icons/24px/information.svg'
+import IconInfo from '@/public/static/icons/24px/information.svg'
 import { Icon, TextIcon, Translate } from '~/components'
 
 import styles from './styles.module.css'

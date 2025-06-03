@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 import { useConnect } from 'wagmi'
 
@@ -43,11 +43,20 @@ export const SelectAuthMethodForm: React.FC<FormProps> = ({
   const { connectors } = useConnect()
   const injectedConnector = connectors.find((c) => c.id === 'injected')
 
+  const [injectedReady, setInjectedReady] = useState(false)
+
   useEffect(() => {
-    if (injectedConnector?.ready && checkWallet) {
+    ;(async () => {
+      const provider = await injectedConnector?.getProvider()
+      setInjectedReady(!!provider)
+    })()
+  }, [injectedConnector])
+
+  useEffect(() => {
+    if (injectedConnector && injectedReady && checkWallet) {
       setAuthFeedType('wallet')
     }
-  }, [injectedConnector?.ready])
+  }, [injectedConnector, injectedReady, checkWallet])
 
   const InnerForm = (
     <>

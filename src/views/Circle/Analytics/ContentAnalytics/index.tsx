@@ -3,7 +3,7 @@ import _get from 'lodash/get'
 import { useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconAnalyticsContent24 } from '@/public/static/icons/24px/analytics-content.svg'
+import IconAnalyticsContent24 from '@/public/static/icons/24px/analytics-content.svg'
 import {
   EmptyAnalytics,
   List,

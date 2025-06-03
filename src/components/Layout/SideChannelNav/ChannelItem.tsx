@@ -1,5 +1,5 @@
 import classnames from 'classnames'
-import { useContext, useLayoutEffect } from 'react'
+import { useContext, useEffect } from 'react'
 import { useRef, useState } from 'react'
 
 import { CHANNEL_PATH_TYPES } from '~/common/enums'
@@ -22,9 +22,9 @@ const ChannelItem = ({ channel }: ChannelItemProps) => {
 
   const [lineClampable, setLineClampable] = useState(false)
   const [firstRender, setFirstRender] = useState(true)
-  const node: React.RefObject<any> | null = useRef(null)
+  const node: React.RefObject<HTMLAnchorElement> | null = useRef(null)
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (!node || !node.current) {
       return
     }

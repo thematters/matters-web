@@ -1,11 +1,10 @@
 import { useContext } from 'react'
+import { erc20Abi } from 'viem'
 import {
-  erc20ABI,
   useAccount,
   useBalance,
-  useContractRead,
-  useContractWrite,
-  usePrepareContractWrite,
+  useReadContract,
+  useWriteContract,
 } from 'wagmi'
 
 import { contract } from '~/common/enums'
@@ -21,9 +20,9 @@ import { ViewerContext } from '~/components'
 export const useAllowanceUSDT = (useCurationVault: boolean) => {
   const { address } = useAccount()
 
-  return useContractRead({
+  return useReadContract({
     address: contract.Optimism.tokenAddress,
-    abi: erc20ABI,
+    abi: erc20Abi,
     functionName: 'allowance',
     args: [
       address as `0x${string}`,
@@ -47,7 +46,9 @@ export const useBalanceUSDT = ({
     address: (addr || viewerEthAddress) as `0x${string}`,
     token: (contract.Optimism.tokenAddress || '') as `0x${string}`,
     chainId: targetNetwork.id,
-    cacheTime: 5_000,
+    query: {
+      gcTime: 5_000,
+    },
   })
 }
 
@@ -63,7 +64,9 @@ export const useBalanceEther = ({
   return useBalance({
     address: (addr || viewerEthAddress) as `0x${string}`,
     chainId: targetNetwork.id,
-    cacheTime: 5_000,
+    query: {
+      gcTime: 5_000,
+    },
   })
 }
 
@@ -73,28 +76,34 @@ export const useVaultBalanceUSDT = () => {
   const uid = toCurationVaultUID(fromGlobalId(viewerId).id)
   const targetNetwork = featureSupportedChains.curation[0]
 
-  return useContractRead({
+  return useReadContract({
     address: contract.Optimism.curationVaultAddress,
     abi: CurationVaultABI,
     functionName: 'erc20Balances',
     args: [uid, contract.Optimism.tokenAddress],
     chainId: targetNetwork.id,
-    cacheTime: 5_000,
+    query: {
+      gcTime: 5_000,
+    },
   })
 }
 
 export const useApproveUSDT = (useCurationVault: boolean) => {
-  const { config } = usePrepareContractWrite({
-    address: contract.Optimism.tokenAddress,
-    abi: erc20ABI,
-    functionName: 'approve',
-    args: [
-      useCurationVault
-        ? contract.Optimism.curationVaultAddress
-        : contract.Optimism.curationAddress,
-      MaxApprovedUSDTAmount,
-    ],
-  })
+  const { writeContract, ...rest } = useWriteContract()
 
-  return useContractWrite(config)
+  return {
+    ...rest,
+    write: () =>
+      writeContract({
+        address: contract.Optimism.tokenAddress,
+        abi: erc20Abi,
+        functionName: 'approve',
+        args: [
+          useCurationVault
+            ? contract.Optimism.curationVaultAddress
+            : contract.Optimism.curationAddress,
+          MaxApprovedUSDTAmount,
+        ],
+      }),
+  }
 }

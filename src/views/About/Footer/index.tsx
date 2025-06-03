@@ -1,9 +1,9 @@
-import { ReactComponent as IconFooterBlog } from '@/public/static/icons/24px/footer-blog.svg'
-import { ReactComponent as IconFooterDiscord } from '@/public/static/icons/24px/footer-discord.svg'
-import { ReactComponent as IconFooterFacebook } from '@/public/static/icons/24px/footer-facebook.svg'
-import { ReactComponent as IconFooterInstagram } from '@/public/static/icons/24px/footer-instagram.svg'
-import { ReactComponent as IconFooterLinkedin } from '@/public/static/icons/24px/footer-linkedin.svg'
-import { ReactComponent as IconFooterTwitter } from '@/public/static/icons/24px/footer-twitter.svg'
+import IconFooterBlog from '@/public/static/icons/24px/footer-blog.svg'
+import IconFooterDiscord from '@/public/static/icons/24px/footer-discord.svg'
+import IconFooterFacebook from '@/public/static/icons/24px/footer-facebook.svg'
+import IconFooterInstagram from '@/public/static/icons/24px/footer-instagram.svg'
+import IconFooterLinkedin from '@/public/static/icons/24px/footer-linkedin.svg'
+import IconFooterTwitter from '@/public/static/icons/24px/footer-twitter.svg'
 import { EXTERNAL_LINKS } from '~/common/enums'
 import {
   Button,

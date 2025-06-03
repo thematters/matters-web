@@ -8,8 +8,8 @@ const setup = () => {
   const type = 'text'
   const placeholder = 'Username'
   const hint = 'This is a hint'
-  const fieldId = `field-${name}`
-  const fieldMsgId = `field-msg-${name}`
+  const fieldId = `__use_id__`
+  const fieldMsgId = `__use_id__-msg-${name}`
 
   const handleOnChange = vi.fn()
   const handleOnBlur = vi.fn()

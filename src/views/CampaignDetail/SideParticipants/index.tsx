@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic'
 import { useContext, useMemo, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconRight } from '@/public/static/icons/24px/right.svg'
+import IconRight from '@/public/static/icons/24px/right.svg'
 import { analytics, toPath } from '~/common/utils'
 import {
   Avatar,

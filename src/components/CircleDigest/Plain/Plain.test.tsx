@@ -2,7 +2,7 @@ import mockRouter from 'next-router-mock'
 import { describe, expect, it, vi } from 'vitest'
 
 import { TEST_ID } from '~/common/enums'
-import { render, screen } from '~/common/utils/test'
+import { fireEvent, render, screen } from '~/common/utils/test'
 import { CircleDigest } from '~/components'
 import { MOCK_CIRCLE } from '~/stories/mocks'
 
@@ -18,7 +18,7 @@ describe('<CircleDigest.Plain>', () => {
     const $displayName = screen.getByText(MOCK_CIRCLE.displayName)
     expect($displayName).toBeInTheDocument()
 
-    $digest.click()
+    fireEvent.click($digest)
     expect(mockRouter.asPath).toContain(MOCK_CIRCLE.name)
     expect(handleClick).toHaveBeenCalled()
   })

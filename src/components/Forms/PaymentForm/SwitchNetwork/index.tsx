@@ -2,16 +2,15 @@ import classNames from 'classnames'
 import { useContext, useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconOpenWallet } from '@/public/static/icons/24px/open-wallet.svg'
+import IconOpenWallet from '@/public/static/icons/24px/open-wallet.svg'
 import { GUIDE_LINKS } from '~/common/enums'
-import { featureSupportedChains } from '~/common/utils'
 import {
   Dialog,
   Icon,
   LanguageContext,
   SpinnerBlock,
   TextIcon,
-  useTargetNetwork,
+  useCurationNetwork,
 } from '~/components'
 
 import styles from './styles.module.css'
@@ -22,9 +21,8 @@ interface SwitchNetworkProps {
 
 const SwitchNetwork: React.FC<SwitchNetworkProps> = ({ submitCallback }) => {
   const { lang } = useContext(LanguageContext)
-  const targetNetork = featureSupportedChains.curation[0]
   const { isUnsupportedNetwork, switchToTargetNetwork, isSwitchingNetwork } =
-    useTargetNetwork(targetNetork)
+    useCurationNetwork()
 
   const [showNote, setShowNote] = useState(false)
   const [showLoading, setShowLoading] = useState(true)

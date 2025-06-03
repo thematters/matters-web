@@ -1,10 +1,10 @@
-import { VisuallyHidden } from '@reach/visually-hidden'
 import { Formik } from 'formik'
-import { useContext } from 'react'
+import { useContext, useId } from 'react'
+import { useVisuallyHidden } from 'react-aria'
 import { useIntl } from 'react-intl'
 
-import { ReactComponent as IconMinus } from '@/public/static/icons/24px/minus.svg'
-import { ReactComponent as IconNavSearch } from '@/public/static/icons/24px/nav-search.svg'
+import IconMinus from '@/public/static/icons/24px/minus.svg'
+import IconNavSearch from '@/public/static/icons/24px/nav-search.svg'
 import { translate } from '~/common/utils'
 import { Icon, LanguageContext } from '~/components'
 
@@ -31,9 +31,11 @@ const SearchInput: React.FC<SearchInputProps> = ({
   onBlur,
   autoFocus,
 }) => {
-  const fieldId = `search-input-${type}`.toLocaleLowerCase()
+  const fieldId = useId()
   const { lang } = useContext(LanguageContext)
   const intl = useIntl()
+  const { visuallyHiddenProps } = useVisuallyHidden()
+
   const textAriaLabel = intl.formatMessage({
     defaultMessage: 'Search',
     id: 'xmcVZ0',
@@ -82,9 +84,9 @@ const SearchInput: React.FC<SearchInputProps> = ({
             autoComplete="off"
             action=""
           >
-            <VisuallyHidden>
-              <label htmlFor={fieldId}>{textAriaLabel}</label>
-            </VisuallyHidden>
+            <label htmlFor={fieldId} {...visuallyHiddenProps}>
+              {textAriaLabel}
+            </label>
 
             <input
               id={fieldId}
@@ -100,10 +102,10 @@ const SearchInput: React.FC<SearchInputProps> = ({
                 onChange(e.target.value)
               }}
               onFocus={() => {
-                onFocus && onFocus()
+                onFocus?.()
               }}
               onBlur={() => {
-                onBlur && onBlur()
+                onBlur?.()
               }}
             />
 

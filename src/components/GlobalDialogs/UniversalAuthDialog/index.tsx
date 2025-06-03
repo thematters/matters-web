@@ -45,8 +45,17 @@ const BaseUniversalAuthDialog = () => {
   const injectedConnector = connectors.find((c) => c.id === 'injected')
   const [authFeedType, setAuthFeedType] = useState<AuthFeedType>('normal')
 
+  const [injectedReady, setInjectedReady] = useState(false)
+
   useEffect(() => {
-    if (injectedConnector?.ready && firstRender) {
+    ;(async () => {
+      const provider = await injectedConnector?.getProvider()
+      setInjectedReady(!!provider)
+    })()
+  }, [injectedConnector])
+
+  useEffect(() => {
+    if (injectedConnector && injectedReady && firstRender) {
       setAuthFeedType('wallet')
     }
 
@@ -79,7 +88,7 @@ const BaseUniversalAuthDialog = () => {
   useEventListener(CLOSE_ACTIVE_DIALOG, closeDialog)
   useEventListener(
     OPEN_UNIVERSAL_AUTH_DIALOG,
-    (payload: { [key: string]: any }) => {
+    (payload: { trigger?: string }) => {
       const trigger = payload?.trigger
       analytics.trackEvent('authenticate', {
         step: 'engage',
@@ -186,7 +195,7 @@ const UniversalAuthDialog = () => {
   const Children = ({ openDialog }: { openDialog: () => void }) => {
     useEventListener(
       OPEN_UNIVERSAL_AUTH_DIALOG,
-      (payload: { [key: string]: any }) => {
+      (payload: { trigger?: string }) => {
         const trigger = payload?.trigger
         analytics.trackEvent('authenticate', {
           step: 'engage',

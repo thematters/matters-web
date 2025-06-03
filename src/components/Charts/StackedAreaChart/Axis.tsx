@@ -1,9 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { range as d3Range } from 'd3-array'
 import { axisBottom as d3AxisBottom, axisLeft as d3AxisLeft } from 'd3-axis'
 import { format as d3Format } from 'd3-format'
 import { select as d3Select } from 'd3-selection'
 import { timeFormat as d3TimeFormat } from 'd3-time-format'
-import _uniqBy from 'lodash/uniqBy'
 import { useContext, useEffect, useRef } from 'react'
 
 import { LanguageContext } from '~/components'

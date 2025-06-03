@@ -2,7 +2,7 @@ import { ApolloError } from '@apollo/client'
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconOpenWallet } from '@/public/static/icons/24px/open-wallet.svg'
+import IconOpenWallet from '@/public/static/icons/24px/open-wallet.svg'
 import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
 import {
   Dialog,
@@ -24,6 +24,7 @@ type SubmitButtonProps = {
   isValid: boolean
   isSubmitting: boolean
   isExceededAllowance: boolean
+  needReauthorize: boolean
   isBalanceInsufficient: boolean
   switchToAddCredit: () => void
   approving: boolean
@@ -131,10 +132,8 @@ const HKDSubmitButton: React.FC<SubmitButtonProps> = ({
 const LIKESubmitButton: React.FC<SubmitButtonProps> = ({
   mode,
   formId,
-  recipient,
   isValid,
   isSubmitting,
-  isBalanceInsufficient,
   value,
 }) => {
   return (
@@ -162,7 +161,7 @@ const USDTSubmitButton: React.FC<SubmitButtonProps> = ({
   isValid,
   isSubmitting,
   isExceededAllowance,
-  isBalanceInsufficient,
+  needReauthorize,
   approving,
   approveConfirming,
   allowanceLoading,
@@ -174,10 +173,18 @@ const USDTSubmitButton: React.FC<SubmitButtonProps> = ({
         mode={mode}
         text={
           <TextIcon icon={<Icon icon={IconOpenWallet} size={20} />}>
-            <FormattedMessage
-              defaultMessage="Go to Authorization"
-              id="/cyuh2"
-            />
+            {needReauthorize ? (
+              <FormattedMessage
+                defaultMessage="Authorize in Wallet"
+                description="REAUTHORIZE"
+                id="XqTMgg"
+              />
+            ) : (
+              <FormattedMessage
+                defaultMessage="Authorize in Wallet"
+                id="0PpH2v"
+              />
+            )}
           </TextIcon>
         }
         loading={approving || approveConfirming || allowanceLoading}

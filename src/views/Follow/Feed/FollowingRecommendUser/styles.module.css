@@ -11,8 +11,8 @@
 
 .wrap {
   display: flex;
-  flex-direction: column;
   flex-grow: 1;
+  flex-direction: column;
   margin-left: var(--sp16);
 
   & .name {
@@ -26,7 +26,7 @@
   @mixin line-clamp;
 
   height: 4rem;
+  -webkit-line-clamp: 3;
   font-size: var(--text14);
   color: var(--color-grey-dark);
-  -webkit-line-clamp: 3;
 }

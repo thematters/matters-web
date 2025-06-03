@@ -1,5 +1,6 @@
-import { act } from '@testing-library/react'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
+
+import { act } from '~/common/utils/test'
 
 import { deferTry, sleep } from './timer'
 

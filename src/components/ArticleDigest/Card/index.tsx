@@ -18,7 +18,7 @@ import styles from './styles.module.css'
 export interface ArticleDigestCardProps {
   article: ArticleDigestCardArticleFragment
 
-  onClick?: () => any
+  onClick?: () => void
   onClickAuthor?: () => void
 }
 

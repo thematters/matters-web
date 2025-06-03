@@ -1,6 +1,6 @@
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconSave } from '@/public/static/icons/24px/save.svg'
+import IconSave from '@/public/static/icons/24px/save.svg'
 import { Empty, Icon } from '~/components'
 
 export const EmptyTagBookmark = () => (

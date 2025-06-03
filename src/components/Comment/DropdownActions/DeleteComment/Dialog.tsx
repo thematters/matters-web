@@ -12,6 +12,7 @@ import {
 import { updateArticleComments, updateArticlePublic } from '~/components/GQL'
 import {
   CommentDropdownActionsCommentPublicFragment,
+  CommentState,
   DeleteCommentMutation,
 } from '~/gql/graphql'
 
@@ -61,7 +62,7 @@ const DeleteCommentDialog = ({
     optimisticResponse: {
       deleteComment: {
         id: id,
-        state: 'archived' as any,
+        state: CommentState.Archived,
         node:
           isMoment && node?.__typename === 'Moment'
             ? {

@@ -1,3 +1,4 @@
+import { ApolloError } from '@apollo/client'
 import { useFormik } from 'formik'
 import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
@@ -16,7 +17,7 @@ import { ResetPaymentPasswordMutation } from '~/gql/graphql'
 interface FormProps {
   codeId: string
   submitCallback: () => void
-  closeDialog?: () => any
+  closeDialog?: () => void
   back?: () => void
 }
 
@@ -97,7 +98,7 @@ const Confirm: React.FC<FormProps> = ({
       } catch (error) {
         setSubmitting(false)
 
-        const [messages, codes] = parseFormSubmitErrors(error as any)
+        const [messages, codes] = parseFormSubmitErrors(error as ApolloError)
         setFieldError('password', intl.formatMessage(messages[codes[0]]))
         setFieldValue('comparedPassword', '', false)
       }

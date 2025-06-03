@@ -1,6 +1,6 @@
 import { useIntl } from 'react-intl'
 
-import { ReactComponent as IconEmptyBook } from '@/public/static/icons/empty-book.svg'
+import IconEmptyBook from '@/public/static/icons/empty-book.svg'
 import { Empty, Icon } from '~/components'
 
 export const EmptyCollection = () => {

@@ -70,7 +70,7 @@ const EditCollectionDialogContent: React.FC<FormProps> = ({
   const [update] = useMutation<PutCollectionMutation>(
     PUT_COLLECTION,
     {
-      update: (cache, result) => {
+      update: (cache) => {
         cache.evict({
           id: cache.identify(viewer),
           fieldName: 'collections',
@@ -114,10 +114,7 @@ const EditCollectionDialogContent: React.FC<FormProps> = ({
       _pickBy({
         displayName: validateTitle(title),
       }),
-    onSubmit: async (
-      { cover, title, description },
-      { setSubmitting, setFieldError }
-    ) => {
+    onSubmit: async ({ cover, title, description }, { setSubmitting }) => {
       try {
         await update({
           variables: {
@@ -135,7 +132,7 @@ const EditCollectionDialogContent: React.FC<FormProps> = ({
 
         setSubmitting(false)
         closeDialog()
-      } catch (error) {
+      } catch {
         setSubmitting(false)
       }
     },

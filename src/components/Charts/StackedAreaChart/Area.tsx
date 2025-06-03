@@ -1,10 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { easeLinear as d3EaseLinear } from 'd3-ease'
 import { interpolate as d3Interpolate } from 'd3-interpolate'
 import { scaleOrdinal as d3ScaleOrdinal } from 'd3-scale'
 import { select as d3Select } from 'd3-selection'
 import { area as d3Area, curveNatural as d3CurveNatural } from 'd3-shape'
 import { transition as d3Transition } from 'd3-transition'
-import _uniqBy from 'lodash/uniqBy'
 import { Fragment, useEffect, useRef } from 'react'
 
 import { InnerChart } from './'
@@ -23,6 +23,7 @@ const Area: React.FC<AreaProps> = ({
 }) => {
   const gRef: React.RefObject<any> = useRef(null)
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [_, ...stackedKeys] = Object.keys(data[0])
 
   useEffect(() => {

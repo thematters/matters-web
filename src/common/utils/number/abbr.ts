@@ -16,10 +16,7 @@ const abbreviate = (num: number, decPlaces: number): string => {
         i++
       }
 
-      // @ts-ignore
-      num += UNITS[i]
-
-      break
+      return num + UNITS[i]
     }
   }
 

@@ -52,14 +52,11 @@ const PaymentReceivedDonationNotice = ({
             {isUSDT && !hasEthAddress && (
               <Link
                 href={`${PATHS.ME_WALLET}?${URL_ME_WALLET.OPEN_WITHDRAW_VAULT_USDT_DIALOG.key}=${URL_ME_WALLET.OPEN_WITHDRAW_VAULT_USDT_DIALOG.value}`}
-                legacyBehavior
               >
-                <a>
-                  <FormattedMessage
-                    defaultMessage=", connect your wallet to claim"
-                    id="CgPGAu"
-                  />
-                </a>
+                <FormattedMessage
+                  defaultMessage=", connect your wallet to claim"
+                  id="CgPGAu"
+                />
               </Link>
             )}
           </>

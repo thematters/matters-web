@@ -1,9 +1,9 @@
 import classNames from 'classnames'
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconChecked } from '@/public/static/icons/checked.svg'
-import { ReactComponent as IconUnChecked } from '@/public/static/icons/unchecked.svg'
-import { ReactComponent as IconUnCheckedGrey } from '@/public/static/icons/uncheckedGrey.svg'
+import IconChecked from '@/public/static/icons/checked.svg'
+import IconUnChecked from '@/public/static/icons/unchecked.svg'
+import IconUnCheckedGrey from '@/public/static/icons/uncheckedGrey.svg'
 import { TEST_ID } from '~/common/enums'
 import { Icon } from '~/components'
 

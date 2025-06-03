@@ -19,7 +19,6 @@ import { SupportDialog } from '../../SupportDialog'
 
 interface SupportButtonProps {
   recipient: UserDonationRecipientFragment
-  targetId: string
   article: NonNullable<ArticleDetailPublicQuery['article']>
   supported?: boolean
   toggleDonationDrawer: () => void
@@ -27,7 +26,6 @@ interface SupportButtonProps {
 
 const SupportButton = ({
   recipient,
-  targetId,
   article,
   supported = false,
   toggleDonationDrawer,

@@ -1,6 +1,6 @@
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconCircleSlash } from '@/public/static/icons/24px/circle-slash.svg'
+import IconCircleSlash from '@/public/static/icons/24px/circle-slash.svg'
 import { Icon, Menu, toast, useMutation } from '~/components'
 import TOGGLE_BLOCK_USER from '~/components/GQL/mutations/toggleBlockUser'
 import {

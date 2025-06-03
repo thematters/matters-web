@@ -2,9 +2,9 @@ import { useApolloClient } from '@apollo/client'
 import { useContext, useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconGoogle2 } from '@/public/static/icons/24px/google2.svg'
-import { ReactComponent as IconTimes } from '@/public/static/icons/24px/times.svg'
-import { ReactComponent as IconX2 } from '@/public/static/icons/24px/x2.svg'
+import IconGoogle2 from '@/public/static/icons/24px/google2.svg'
+import IconTimes from '@/public/static/icons/24px/times.svg'
+import IconX2 from '@/public/static/icons/24px/x2.svg'
 import {
   OAUTH_STORAGE_BIND_STATE,
   OAUTH_STORAGE_BIND_STATE_FAILURE,
@@ -70,7 +70,7 @@ const Socials = () => {
       }
       const url = await twitterOauthUrl(oauthType, oauthRequestToken)
       router.push(url)
-    } catch (error) {
+    } catch {
       await sleep(3 * 1000)
       gotoTwitter()
     }

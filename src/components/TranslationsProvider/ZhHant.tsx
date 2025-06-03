@@ -9,7 +9,13 @@ const TranslationsZhHantProvider = ({
     messages: Record<string, string>
   }) => React.ReactNode
 }) => {
-  return <>{children({ messages: TRANSLATIONS_ZH_HANT as any })}</>
+  return (
+    <>
+      {children({
+        messages: TRANSLATIONS_ZH_HANT as unknown as Record<string, string>,
+      })}
+    </>
+  )
 }
 
 export default TranslationsZhHantProvider

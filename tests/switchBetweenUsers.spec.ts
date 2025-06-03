@@ -28,7 +28,7 @@ test.describe('Switch between multiple users', () => {
       await pageGoto(page, articleLink)
 
       // Confirm that the comment area is clickable
-      const articleDetail = new ArticleDetailPage(page, isMobile)
+      const articleDetail = new ArticleDetailPage(page)
       if (await articleDetail.toolbarCommentButton.isEnabled()) {
         break
       }
@@ -48,7 +48,7 @@ test.describe('Switch between multiple users', () => {
     })
     await page.waitForLoadState('networkidle')
 
-    const articleDetail = new ArticleDetailPage(page, isMobile)
+    const articleDetail = new ArticleDetailPage(page)
 
     // [Bob] Send a comment
     await articleDetail.sendComment()
@@ -91,7 +91,7 @@ test.describe('Switch between multiple users', () => {
       await pageGoto(alicePage, articleLink)
 
       // Confirm that the comment area is clickable
-      const articleDetail = new ArticleDetailPage(alicePage, isMobile)
+      const articleDetail = new ArticleDetailPage(alicePage)
       if (await articleDetail.toolbarCommentButton.isEnabled()) {
         await pageGoto(alicePage, '/')
         break
@@ -120,7 +120,7 @@ test.describe('Switch between multiple users', () => {
     })
     await bobPage.waitForLoadState('networkidle')
 
-    const articleDetail = new ArticleDetailPage(bobPage, isMobile)
+    const articleDetail = new ArticleDetailPage(bobPage)
 
     // [Bob] Send a comment
     await articleDetail.sendComment()

@@ -1,7 +1,7 @@
 import mockRouter from 'next-router-mock'
 import { describe, expect, it, vi } from 'vitest'
 
-import { render, screen } from '~/common/utils/test'
+import { fireEvent, render, screen } from '~/common/utils/test'
 import { ArticleTag } from '~/components'
 import { MOCK_TAG } from '~/stories/mocks'
 
@@ -13,7 +13,7 @@ describe('<ArticleTag>', () => {
     const $name = screen.getByText(new RegExp(MOCK_TAG.content, 'i'))
     expect($name).toBeInTheDocument()
 
-    $name.click()
+    fireEvent.click($name)
     expect(mockRouter.asPath).toContain(MOCK_TAG.slug)
     expect(handleClick).toBeCalledTimes(1)
   })

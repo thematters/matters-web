@@ -1,7 +1,7 @@
 import React from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconReadingTime } from '@/public/static/icons/24px/reading-time.svg'
+import IconReadingTime from '@/public/static/icons/24px/reading-time.svg'
 import { toPath } from '~/common/utils'
 import {
   Card,

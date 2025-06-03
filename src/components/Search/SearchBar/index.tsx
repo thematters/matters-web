@@ -1,11 +1,11 @@
-import { FormikHelpers, FormikValues } from 'formik'
+import { FormikValues } from 'formik'
 import dynamic from 'next/dynamic'
 import { useEffect, useRef, useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useDebounce } from 'use-debounce'
 
-import { ReactComponent as IconNavSearch } from '@/public/static/icons/24px/nav-search.svg'
-import { ReactComponent as IconTimes } from '@/public/static/icons/24px/times.svg'
+import IconNavSearch from '@/public/static/icons/24px/nav-search.svg'
+import IconTimes from '@/public/static/icons/24px/times.svg'
 import {
   INPUT_DEBOUNCE,
   KEYVALUE,
@@ -130,12 +130,12 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   const hasTags = tagEdges && tagEdges.length > 0
 
   if (hasUsers) {
-    userEdges.map(({ cursor }, i) => {
+    userEdges.map(({ cursor }) => {
       items.push(`user${cursor}`)
     })
   }
   if (hasTags) {
-    tagEdges.map(({ cursor }, i) => {
+    tagEdges.map(({ cursor }) => {
       items.push(`tag${cursor}`)
     })
   }
@@ -189,10 +189,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
     }
   }, [debouncedSearch])
 
-  const handleFormSubmit = (
-    values: FormikValues,
-    formikHelpers?: FormikHelpers<FormikValues>
-  ) => {
+  const handleFormSubmit = (values: FormikValues) => {
     const path = toPath({
       page: 'search',
       q: (values.q as string).slice(0, MAX_SEARCH_KEY_LENGTH),
@@ -239,7 +236,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
     formProps: {
       values: FormikValues
       handleSubmit: (e?: React.FormEvent<HTMLFormElement>) => void
-      handleChange: (e: React.ChangeEvent<any>) => void
+      handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void
       setValues: (values: FormikValues) => void
     },
     ref?: React.Ref<HTMLFormElement>

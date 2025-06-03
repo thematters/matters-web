@@ -1,4 +1,4 @@
-import { ReactComponent as IconDonate } from '@/public/static/icons/24px/donate.svg'
+import IconDonate from '@/public/static/icons/24px/donate.svg'
 import { toPath } from '~/common/utils'
 import { Card, Icon, TextIcon, UserDigest } from '~/components'
 import { MeAnalyticsQuery } from '~/gql/graphql'

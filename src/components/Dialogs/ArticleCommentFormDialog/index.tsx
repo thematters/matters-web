@@ -14,7 +14,7 @@ const BaseArticleCommentFormDialog = ({
   ...props
 }: ArticleCommentFormDialogProps) => {
   const { show, openDialog, closeDialog } = useDialogSwitch(true)
-  const ref: React.RefObject<HTMLDivElement> | null = useRef(null)
+  const ref = useRef<HTMLDivElement>(null)
 
   return (
     <div ref={ref}>

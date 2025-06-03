@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 
-import IMG_PLACEHOLDER from '@/public/static/images/placeholder.svg'
+import IMAGE_PLACEHOLDER from '@/public/static/images/placeholder.svg?url'
 import { Avatar, Cover, Media, useRoute } from '~/components'
 
 import styles from '../styles.module.css'
@@ -17,12 +17,12 @@ const Placeholder = () => {
 
   return (
     <section className={styles.userProfile} aria-busy="true" aria-live="polite">
-      <Cover fallbackCover={IMG_PLACEHOLDER} />
+      <Cover fallbackCover={IMAGE_PLACEHOLDER.src} />
 
       <Media lessThan="md">
         <header className={styles.header}>
           <section className={styles.avatar}>
-            <Avatar size={76} src={IMG_PLACEHOLDER} />
+            <Avatar size={76} src={IMAGE_PLACEHOLDER.src} />
           </section>
 
           <section className={rightClasses}>

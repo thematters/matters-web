@@ -1,13 +1,7 @@
-import _differenceBy from 'lodash/differenceBy'
-import _get from 'lodash/get'
 import { useContext, useEffect } from 'react'
 
 import { COMMENTS_COUNT } from '~/common/enums'
-import {
-  filterComments,
-  mergeConnections,
-  parseCommentHash,
-} from '~/common/utils'
+import { filterComments, mergeConnections } from '~/common/utils'
 import {
   ArticleCommentForm,
   CommentThreadComment,
@@ -46,8 +40,6 @@ type CommentArticle = NonNullable<
 
 const LatestComments = ({ id, lock }: { id: string; lock: boolean }) => {
   const viewer = useContext(ViewerContext)
-
-  const { parentId, descendantId } = parseCommentHash()
 
   /**
    * Data Fetching
@@ -101,7 +93,7 @@ const LatestComments = ({ id, lock }: { id: string; lock: boolean }) => {
   }, [articleId, viewer.id])
 
   // load next page
-  const loadMore = async (params?: { before: string }) => {
+  const loadMore = async () => {
     const { data: newData } = await fetchMore({
       variables: {
         after: pageInfo?.endCursor,
@@ -157,9 +149,6 @@ const LatestComments = ({ id, lock }: { id: string; lock: boolean }) => {
               <List.Item key={pinnedComment.id}>
                 <CommentThreadComment
                   comment={pinnedComment}
-                  defaultExpand={
-                    pinnedComment.id === parentId && !!descendantId
-                  }
                   hasLink
                   disabled={lock}
                 />
@@ -173,7 +162,6 @@ const LatestComments = ({ id, lock }: { id: string; lock: boolean }) => {
                     <CommentThreadComment
                       comment={comment}
                       pinnedComment={pinnedComment}
-                      defaultExpand={comment.id === parentId && !!descendantId}
                       hasLink
                       disabled={lock}
                     />

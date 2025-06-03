@@ -89,7 +89,6 @@ const DesktopToolbar = ({
               title={`${makeSummary(articleDetails.title, MAX_META_SUMMARY_LENGTH)} - ${articleDetails?.author.displayName} - Matters`}
               path={sharePath}
               iconSize={24}
-              inCard={false}
               textActiveColor="greyDarker"
               disabled={lock}
               spacing={[10, 10]}

@@ -1,11 +1,12 @@
-import { VisuallyHidden } from '@reach/visually-hidden'
+import { NextRouter } from 'next/router'
 import { useContext } from 'react'
+import { useVisuallyHidden } from 'react-aria'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { ReactComponent as IconNavCreate } from '@/public/static/icons/24px/nav-create.svg'
-import { ReactComponent as IconNavSearch } from '@/public/static/icons/24px/nav-search.svg'
-import { ReactComponent as IconNavSearchActive } from '@/public/static/icons/24px/nav-search-active.svg'
-import { ReactComponent as IconLogo } from '@/public/static/icons/logo.svg'
+import IconNavCreate from '@/public/static/icons/24px/nav-create.svg'
+import IconNavSearch from '@/public/static/icons/24px/nav-search.svg'
+import IconNavSearchActive from '@/public/static/icons/24px/nav-search-active.svg'
+import IconLogo from '@/public/static/icons/logo.svg'
 import { PATHS, Z_INDEX } from '~/common/enums'
 import { toPath } from '~/common/utils'
 import {
@@ -18,6 +19,7 @@ import {
   useRoute,
   ViewerContext,
 } from '~/components'
+import type { Viewer } from '~/components/Context/Viewer'
 import { Icon } from '~/components/Icon'
 import { SearchBar } from '~/components/Search'
 
@@ -55,7 +57,7 @@ const UnauthenticatedNav = () => (
 )
 interface CreateButtonProps {
   openDropdown: () => void
-  buttonRef?: React.Ref<any>
+  buttonRef?: React.ForwardedRef<HTMLButtonElement>
 }
 
 const CreateButton = ({ openDropdown, buttonRef }: CreateButtonProps) => (
@@ -123,21 +125,20 @@ const NotificationButton = ({ isInNotification }: NotificationButtonProps) => (
 )
 
 interface UserMenuProps {
-  viewer: any
+  viewer: Viewer
 }
 
 const UserMenu = ({ viewer }: UserMenuProps) => {
   const intl = useIntl()
+  const { visuallyHiddenProps } = useVisuallyHidden()
 
   return (
     <Dropdown
       content={
         <section>
-          <VisuallyHidden>
-            <button type="button">
-              <FormattedMessage defaultMessage="Cancel" id="47FYwb" />
-            </button>
-          </VisuallyHidden>
+          <button type="button" {...visuallyHiddenProps}>
+            <FormattedMessage defaultMessage="Cancel" id="47FYwb" />
+          </button>
           <MeMenu />
           <SideFooter />
         </section>
@@ -169,7 +170,7 @@ const UserMenu = ({ viewer }: UserMenuProps) => {
 
 interface MobileSearchButtonProps {
   isInSearch: boolean
-  router: any
+  router: NextRouter
 }
 
 const MobileSearchButton = ({
@@ -199,7 +200,7 @@ const MobileSearchButton = ({
 )
 
 interface AuthenticatedNavProps {
-  viewer: any
+  viewer: Viewer
   isInNotification: boolean
 }
 

@@ -1,11 +1,11 @@
-import { ReactComponent as IconDown } from '@/public/static/icons/24px/down.svg'
+import IconDown from '@/public/static/icons/24px/down.svg'
 import { Button, Icon, TextIcon, Translate } from '~/components'
 
 const ExpandButton = ({
   onClick,
   restCount,
 }: {
-  onClick: () => any
+  onClick: () => void
   restCount: number
 }) => (
   <Button

@@ -117,7 +117,10 @@ const Content = ({
     }
   }, [lastScroll])
 
-  useReadTimer({ container: contentContainer })
+  // Always call the hook, but handle the null case inside
+  useReadTimer({
+    container: contentContainer as React.RefObject<HTMLDivElement>,
+  })
 
   return (
     <>

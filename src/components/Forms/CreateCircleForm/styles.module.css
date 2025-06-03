@@ -17,7 +17,7 @@
 
 .coverField {
   position: relative;
-  margin: calc(var(--sp16) * -1) calc(var(--sp16) * -1);
+  margin: calc(var(--sp16) * -1);
 
   & .hint {
     position: absolute;

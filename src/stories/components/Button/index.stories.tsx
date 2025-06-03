@@ -2,8 +2,8 @@ import { MockedProvider } from '@apollo/client/testing'
 import { Meta } from '@storybook/react'
 import React from 'react'
 
-import { ReactComponent as IconMore } from '@/public/static/icons/24px/more.svg'
-import { ReactComponent as IconNavSearch } from '@/public/static/icons/24px/nav-search.svg'
+import IconMore from '@/public/static/icons/24px/more.svg'
+import IconNavSearch from '@/public/static/icons/24px/nav-search.svg'
 import {
   Button,
   Icon,

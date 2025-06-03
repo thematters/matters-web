@@ -21,9 +21,9 @@
 }
 
 .summary {
+  -webkit-line-clamp: 2;
   font-size: var(--text14);
   color: var(--color-grey-darker);
-  -webkit-line-clamp: 2;
 
   @mixin line-clamp;
 }

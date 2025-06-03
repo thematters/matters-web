@@ -1,7 +1,7 @@
 import mockRouter from 'next-router-mock'
 import { describe, expect, it } from 'vitest'
 
-import { render, screen } from '~/common/utils/test'
+import { fireEvent, render, screen } from '~/common/utils/test'
 import { CircleDigest } from '~/components'
 import { MOCK_CIRCLE } from '~/stories/mocks'
 
@@ -15,7 +15,7 @@ describe('<CircleDigest.UserProfile>', () => {
       name: MOCK_CIRCLE.displayName,
     })
     expect($displayName).toBeInTheDocument()
-    $displayName.click()
+    fireEvent.click($displayName)
     expect(mockRouter.asPath).toContain(MOCK_CIRCLE.name)
 
     const $description = screen.getByText(MOCK_CIRCLE.description)
@@ -26,7 +26,7 @@ describe('<CircleDigest.UserProfile>', () => {
     })
     expect($footer).toBeInTheDocument()
     mockRouter.push('/')
-    $footer.click()
+    fireEvent.click($footer)
     expect(mockRouter.asPath).toContain(MOCK_CIRCLE.name)
   })
 
@@ -41,7 +41,7 @@ describe('<CircleDigest.UserProfile>', () => {
 
     const $displayName = screen.getByText(MOCK_CIRCLE.displayName)
     expect($displayName).toBeInTheDocument()
-    $displayName.click()
+    fireEvent.click($displayName)
     expect(mockRouter.asPath).toContain(MOCK_CIRCLE.name)
 
     const $description = screen.queryByText(MOCK_CIRCLE.description)

@@ -28,7 +28,7 @@ test.describe('Comment to article', () => {
 
       // [Bob] Go to Alice's article page
       await pageGoto(bobPage, aliceArticleLink)
-      const aliceArticleDetail = new ArticleDetailPage(bobPage, isMobile)
+      const aliceArticleDetail = new ArticleDetailPage(bobPage)
 
       // [Bob] Send a comment
       const commentContent = await aliceArticleDetail.sendComment()

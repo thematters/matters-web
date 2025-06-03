@@ -18,7 +18,7 @@ interface ResetPasswordData {
 }
 
 interface PaymentResetPasswordFormProps {
-  callback?: () => any
+  callback?: () => void
   callbackText?: React.ReactNode
   closeDialog: () => void
   back?: () => void

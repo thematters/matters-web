@@ -23,7 +23,7 @@ import { toastMutationErrors, ToastMutationErrorsOptions } from './error'
  */
 type CustomMutationProps = ToastMutationErrorsOptions
 
-export const useMutation = <TData = any, TVariables = OperationVariables>(
+export const useMutation = <TData = unknown, TVariables = OperationVariables>(
   mutation: DocumentNode,
   options?: MutationHookOptions<NoInfer<TData>, NoInfer<TVariables>>,
   customMutationProps?: CustomMutationProps
@@ -46,7 +46,7 @@ interface CustomQueryProps {
   publicQuery?: boolean
 }
 export const usePublicQuery = <
-  TData = any,
+  TData = unknown,
   TVariables extends OperationVariables = OperationVariables,
 >(
   query: DocumentNode,
@@ -67,7 +67,7 @@ export const usePublicQuery = <
 }
 
 export const usePublicLazyQuery = <
-  TData = any,
+  TData = unknown,
   TVariables extends OperationVariables = OperationVariables,
 >(
   query: DocumentNode,
@@ -99,7 +99,7 @@ export const usePublicLazyQuery = <
  * }
  */
 export const useImperativeQuery = <
-  TData = any,
+  TData = unknown,
   TVariables extends OperationVariables = OperationVariables,
 >(
   query: DocumentNode,

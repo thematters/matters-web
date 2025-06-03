@@ -16,6 +16,8 @@ export interface LinkWrapperProps {
   onClick?: () => void
 
   testId?: TEST_ID
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any
 }
 
@@ -65,24 +67,24 @@ export const LinkWrapper = React.forwardRef<
     })
 
     // Remove className from restProps as we've already applied it
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { className, ...otherProps } = restProps
 
     return (
-      <Link href={href} legacyBehavior>
-        <a
-          ref={ref}
-          className={linkClasses}
-          onClick={(e) => {
-            if (onClick) {
-              onClick()
-              e.stopPropagation()
-            }
-          }}
-          {...(testId ? { ['data-test-id']: testId } : {})}
-          {...otherProps}
-        >
-          {children}
-        </a>
+      <Link
+        href={href}
+        ref={ref}
+        className={linkClasses}
+        onClick={(e) => {
+          if (onClick) {
+            onClick()
+            e.stopPropagation()
+          }
+        }}
+        {...(testId ? { ['data-test-id']: testId } : {})}
+        {...otherProps}
+      >
+        {children}
       </Link>
     )
   }

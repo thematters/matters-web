@@ -1,6 +1,6 @@
-import IMAGE_FEATURE_1 from '@/public/static/images/migration-feature-1.svg'
-import IMAGE_FEATURE_2 from '@/public/static/images/migration-feature-2.svg'
-import IMAGE_FEATURE_3 from '@/public/static/images/migration-feature-3.svg'
+import IMAGE_FEATURE_1 from '@/public/static/images/migration-feature-1.svg?url'
+import IMAGE_FEATURE_2 from '@/public/static/images/migration-feature-2.svg?url'
+import IMAGE_FEATURE_3 from '@/public/static/images/migration-feature-3.svg?url'
 import { Translate } from '~/components'
 
 import layoutStyles from '../../About/layout.module.css'
@@ -113,7 +113,7 @@ const Features = () => {
               </p>
             </section>
 
-            <img src={IMAGE_FEATURE_1} alt="illustration 1" />
+            <img src={IMAGE_FEATURE_1.src} alt="illustration 1" />
           </div>
         </li>
 
@@ -150,7 +150,7 @@ const Features = () => {
               </p>
             </section>
 
-            <img src={IMAGE_FEATURE_2} alt="illustration 2" />
+            <img src={IMAGE_FEATURE_2.src} alt="illustration 2" />
           </div>
         </li>
 
@@ -187,7 +187,7 @@ const Features = () => {
               </p>
             </section>
 
-            <img src={IMAGE_FEATURE_3} alt="illustration 3" />
+            <img src={IMAGE_FEATURE_3.src} alt="illustration 3" />
           </div>
         </li>
       </ul>
