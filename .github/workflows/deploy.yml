@@ -117,7 +117,7 @@ jobs:
 
       - name: Upload Assets (develop - R2)
         if: github.base_ref == 'develop' || github.base_ref == 'main'
-        run: rclone sync .next/static r2:matters-assets-next-develop/_next/static -P
+        run: rclone sync .next r2:matters-assets-next-develop/_next --include "/*" --include "/static/**" -P
 
       - name: Deploy to EB (develop)
         if: github.base_ref == 'develop'
@@ -136,7 +136,7 @@ jobs:
 
       - name: Upload Assets (production - R2)
         if: github.base_ref == 'master' || github.base_ref == 'main'
-        run: rclone sync .next/static r2:matters-assets-next/_next/static -P
+        run: rclone sync .next r2:matters-assets-next/_next --include "/*" --include "/static/**" -P
 
       - name: Deploy to EB (production)
         if: github.base_ref == 'master' || github.base_ref == 'main'
