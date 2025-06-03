@@ -183,6 +183,9 @@
   "0tRUjd": {
     "defaultMessage": "因違反社區約章，評論已被隱藏"
   },
+  "0xVT+0": {
+    "defaultMessage": "已關聯"
+  },
   "0zZd0T": {
     "defaultMessage": "作品發布成功，快把作品分享到不同渠道，吸引更多人為你拍手！",
     "description": "src/views/Me/DraftDetail/PublishState/PublishedState.tsx"
@@ -238,6 +241,12 @@
   "1zVIWy": {
     "defaultMessage": "在 {commentArticle} 評論提到了你",
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
+  },
+  "2/2yg+": {
+    "defaultMessage": "添加"
+  },
+  "2/C36c": {
+    "defaultMessage": "你無權進行此操作"
   },
   "202PEj": {
     "defaultMessage": "確認 Matters ID",
@@ -2335,6 +2344,9 @@
   "d5+b8r": {
     "defaultMessage": "限制級內容"
   },
+  "d5Y+dZ": {
+    "defaultMessage": "關聯作品"
+  },
   "d5bM8A": {
     "defaultMessage": "投稿日程⋯"
   },
@@ -2397,6 +2409,9 @@
   },
   "eKVBm/": {
     "defaultMessage": "Optimism 是獨立運行的區塊鏈，若你在其他鏈上已有 USDT 貨幣，需要將它們轉移到 Optimism 網絡才能使用，詳情參考{link}。"
+  },
+  "eKeBF9": {
+    "defaultMessage": "作品不存在"
   },
   "eTpiYa": {
     "defaultMessage": "尚無支持數據"
@@ -3056,6 +3071,9 @@
     "defaultMessage": "請輸入電子信箱",
     "description": "src/components/Forms/PaymentForm/ResetPassword/Request.tsx"
   },
+  "reRn/s": {
+    "defaultMessage": "貼上想要關聯的站上作品連結"
+  },
   "rfz/fN": {
     "defaultMessage": "建議尺寸 1600 x 900 像素"
   },
@@ -3186,6 +3204,9 @@
   },
   "ucxFlV": {
     "defaultMessage": "提現流程已啟動"
+  },
+  "uhiBn9": {
+    "defaultMessage": "引用、連結相關作品，可延伸策展或主題式閱讀功能"
   },
   "ulh3kf": {
     "defaultMessage": "選集"
@@ -3510,6 +3531,9 @@
   },
   "zlug1R": {
     "defaultMessage": "已翻譯成{targetLang}，顯示"
+  },
+  "znN84l": {
+    "defaultMessage": "幫助讀者更容易發現優質內容"
   },
   "zvNfwL": {
     "defaultMessage": "操作過於頻繁，請稍候重試",

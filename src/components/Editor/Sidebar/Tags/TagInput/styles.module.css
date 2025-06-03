@@ -11,12 +11,15 @@
   border-radius: var(--sp8);
 
   & input {
-    max-width: calc(100vw - 102px);
+    max-width: calc(
+      100vw - 102px
+    ); /* 102px is the width of the icon and the spacing */
+
     line-height: 1.3725rem;
     background: transparent;
 
     @media (--sm-up) {
-      max-width: 276px;
+      max-width: 17.25rem;
     }
   }
 }

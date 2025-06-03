@@ -70,6 +70,7 @@ export const MOCK_USER = {
   ownCircles: null,
   isFollower: false,
   isFollowee: false,
+  isBlocking: false,
 }
 
 // Circle

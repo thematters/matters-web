@@ -29,9 +29,11 @@ const fragments = {
       slug
       shortHash
       cover
+      state
       author {
         id
         userName
+        isBlocking
         ...UserDigestMiniUser
       }
       ...ArticleDigestTitleArticle

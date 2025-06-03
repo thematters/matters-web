@@ -183,6 +183,9 @@
   "0tRUjd": {
     "defaultMessage": "因违反社区规定，评论已被隐藏"
   },
+  "0xVT+0": {
+    "defaultMessage": "已关联"
+  },
   "0zZd0T": {
     "defaultMessage": "作品发布成功，快把作品分享到不同渠道，吸引更多人为你拍手！",
     "description": "src/views/Me/DraftDetail/PublishState/PublishedState.tsx"
@@ -238,6 +241,12 @@
   "1zVIWy": {
     "defaultMessage": "在 {commentArticle} 评论提到了你",
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
+  },
+  "2/2yg+": {
+    "defaultMessage": "添加"
+  },
+  "2/C36c": {
+    "defaultMessage": "你无权进行此操作"
   },
   "202PEj": {
     "defaultMessage": "确认 Matters ID",
@@ -2335,6 +2344,9 @@
   "d5+b8r": {
     "defaultMessage": "限制级内容"
   },
+  "d5Y+dZ": {
+    "defaultMessage": "关联作品"
+  },
   "d5bM8A": {
     "defaultMessage": "投稿日程⋯"
   },
@@ -2397,6 +2409,9 @@
   },
   "eKVBm/": {
     "defaultMessage": "Optimism 是独立运行的区块链，若你在其他链上已有 USDT 货币，需要将它们转移到 Optimism 网络才能使用，详情参考{link}。"
+  },
+  "eKeBF9": {
+    "defaultMessage": "作品不存在"
   },
   "eTpiYa": {
     "defaultMessage": "尚无支持数据"
@@ -3056,6 +3071,9 @@
     "defaultMessage": "请输入邮箱",
     "description": "src/components/Forms/PaymentForm/ResetPassword/Request.tsx"
   },
+  "reRn/s": {
+    "defaultMessage": "粘贴想要关联的站上作品链接"
+  },
   "rfz/fN": {
     "defaultMessage": "建議尺寸 1600 x 900 像素"
   },
@@ -3186,6 +3204,9 @@
   },
   "ucxFlV": {
     "defaultMessage": "提现流程已启动"
+  },
+  "uhiBn9": {
+    "defaultMessage": "引用、链接相关作品，可延伸策展或主题式阅读功能"
   },
   "ulh3kf": {
     "defaultMessage": "选集"
@@ -3510,6 +3531,9 @@
   },
   "zlug1R": {
     "defaultMessage": "已翻译成{targetLang}，显示"
+  },
+  "znN84l": {
+    "defaultMessage": "帮助读者更容易发现优质内容"
   },
   "zvNfwL": {
     "defaultMessage": "操作过于频繁，请稍候重试",

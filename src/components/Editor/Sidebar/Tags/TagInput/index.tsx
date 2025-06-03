@@ -26,8 +26,8 @@ import {
   QuickResultQuery,
 } from '~/gql/graphql'
 
+import InputAutosize from '../../InputAutosize'
 import { EDITOR_RECENT_TAGS } from './gql'
-import InputAutosize from './InputAutosize'
 import styles from './styles.module.css'
 
 type TagInputProps = {
