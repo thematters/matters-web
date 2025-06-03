@@ -7,17 +7,13 @@
 
   & .left {
     display: flex;
-    gap: var(--sp4);
     align-items: center;
-    font-size: var(--text14);
-    line-height: 1.375rem;
-
-    & .title {
-      @mixin line-clamp;
-    }
+    height: 1.375rem;
   }
 
   & .right {
+    display: flex;
+    align-items: center;
     height: 1.25rem;
 
     & button {

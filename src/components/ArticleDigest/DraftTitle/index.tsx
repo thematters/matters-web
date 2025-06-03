@@ -3,7 +3,7 @@ import { useIntl } from 'react-intl'
 
 import { ReactComponent as IconDraft } from '@/public/static/icons/24px/draft.svg'
 import { ReactComponent as IconTimes } from '@/public/static/icons/24px/times.svg'
-import { Icon } from '~/components'
+import { Icon, TextIcon } from '~/components'
 import { ArticleDigestDraftTitleArticleFragment } from '~/gql/graphql'
 
 import styles from './styles.module.css'
@@ -35,8 +35,14 @@ export const ArticleDigestDraftTitle = ({
   return (
     <section className={styles.container}>
       <section className={styles.left}>
-        <Icon icon={IconDraft} color="greyDark" />
-        <span className={styles.title}>{article.title}</span>
+        <TextIcon
+          icon={<Icon icon={IconDraft} color="greyDark" />}
+          textLineClamp
+          size={14}
+          spacing={4}
+        >
+          {article.title}
+        </TextIcon>
       </section>
       <section className={styles.right}>
         <button
