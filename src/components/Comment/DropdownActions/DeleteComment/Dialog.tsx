@@ -123,10 +123,15 @@ const DeleteCommentDialog = ({
 
     if (commentElements.length > 0) {
       commentElements.forEach((commentElement) => {
-        commentElement.parentElement?.addEventListener('animationend', () => {
-          commentElement.parentElement?.classList.add(styles.hideComment)
-          deleteComment()
-        })
+        commentElement.parentElement?.addEventListener(
+          'animationend',
+          (event: AnimationEvent) => {
+            if (event.animationName.includes('slide-up-fade')) {
+              commentElement.parentElement?.classList.add(styles.hideComment)
+              deleteComment()
+            }
+          }
+        )
       })
     }
     if (commentElements.length > 0 && !isDescendantComment) {
