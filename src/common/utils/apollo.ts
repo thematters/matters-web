@@ -94,23 +94,35 @@ const directionalLink = ({
 /**
  * Logging error message
  */
-const errorLink = onError(({ graphQLErrors, networkError }) => {
-  if (graphQLErrors) {
-    graphQLErrors.map(({ message, locations, extensions, path }) =>
-      console.log(
-        `[GraphQL error]: Message: ${message}, Location: ${JSON.stringify(
-          locations
-        )}, Path: ${JSON.stringify(path)}, Code: ${
-          extensions && extensions.code
-        }`
+const errorLink = onError(
+  ({ graphQLErrors, networkError, protocolErrors, response, operation }) => {
+    if (graphQLErrors) {
+      graphQLErrors.map(({ message, locations, extensions, path }) =>
+        console.log(
+          `[GraphQL error]: Message: ${message}, Location: ${JSON.stringify(
+            locations
+          )}, Path: ${JSON.stringify(path)}, Code: ${
+            extensions && extensions.code
+          }`
+        )
       )
-    )
-  }
+    }
 
-  if (networkError) {
-    console.log(`[Network error]: ${networkError}`)
+    if (protocolErrors) {
+      protocolErrors.forEach(({ message, extensions }) => {
+        console.log(
+          `[Protocol error]: Message: ${message}, Extensions: ${JSON.stringify(extensions)}`
+        )
+      })
+    }
+
+    if (networkError) {
+      console.log(`[Network error]: ${networkError}`)
+      console.log(response)
+      console.log(operation)
+    }
   }
-})
+)
 
 /**
  * Determine whether the token should be included and where to retrieve from.
