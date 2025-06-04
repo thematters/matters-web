@@ -117,6 +117,9 @@ const errorLink = onError(({ graphQLErrors, networkError, protocolErrors }) => {
 
   if (networkError) {
     console.log(`[Network error]: ${networkError}`)
+    console.log(networkError.message)
+    console.log(networkError.name)
+    console.log(networkError.stack)
   }
 })
 
@@ -251,8 +254,6 @@ export const createApolloClient = (
 
   const host = headers?.host || (isClient ? _get(window, 'location.host') : '')
   const cookie = headers?.cookie || (isClient ? document.cookie : '')
-
-  console.log(headers)
 
   const client = new ApolloClient({
     name: packageJson.name,
