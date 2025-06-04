@@ -5,5 +5,11 @@
 }
 
 .campaign {
+  @mixin line-clamp;
+
   color: var(--color-campaign-blue-label);
+}
+
+.footer .left .campaign {
+  flex-shrink: initial;
 }
