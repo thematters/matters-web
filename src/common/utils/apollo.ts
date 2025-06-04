@@ -94,35 +94,31 @@ const directionalLink = ({
 /**
  * Logging error message
  */
-const errorLink = onError(
-  ({ graphQLErrors, networkError, protocolErrors, response, operation }) => {
-    if (graphQLErrors) {
-      graphQLErrors.map(({ message, locations, extensions, path }) =>
-        console.log(
-          `[GraphQL error]: Message: ${message}, Location: ${JSON.stringify(
-            locations
-          )}, Path: ${JSON.stringify(path)}, Code: ${
-            extensions && extensions.code
-          }`
-        )
+const errorLink = onError(({ graphQLErrors, networkError, protocolErrors }) => {
+  if (graphQLErrors) {
+    graphQLErrors.map(({ message, locations, extensions, path }) =>
+      console.log(
+        `[GraphQL error]: Message: ${message}, Location: ${JSON.stringify(
+          locations
+        )}, Path: ${JSON.stringify(path)}, Code: ${
+          extensions && extensions.code
+        }`
       )
-    }
-
-    if (protocolErrors) {
-      protocolErrors.forEach(({ message, extensions }) => {
-        console.log(
-          `[Protocol error]: Message: ${message}, Extensions: ${JSON.stringify(extensions)}`
-        )
-      })
-    }
-
-    if (networkError) {
-      console.log(`[Network error]: ${networkError}`)
-      console.log(response)
-      console.log(operation)
-    }
+    )
   }
-)
+
+  if (protocolErrors) {
+    protocolErrors.forEach(({ message, extensions }) => {
+      console.log(
+        `[Protocol error]: Message: ${message}, Extensions: ${JSON.stringify(extensions)}`
+      )
+    })
+  }
+
+  if (networkError) {
+    console.log(`[Network error]: ${networkError}`)
+  }
+})
 
 /**
  * Determine whether the token should be included and where to retrieve from.
@@ -255,6 +251,8 @@ export const createApolloClient = (
 
   const host = headers?.host || (isClient ? _get(window, 'location.host') : '')
   const cookie = headers?.cookie || (isClient ? document.cookie : '')
+
+  console.log(headers)
 
   const client = new ApolloClient({
     name: packageJson.name,
