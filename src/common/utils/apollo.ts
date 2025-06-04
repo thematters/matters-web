@@ -94,7 +94,7 @@ const directionalLink = ({
 /**
  * Logging error message
  */
-const errorLink = onError(({ graphQLErrors, networkError }) => {
+const errorLink = onError(({ graphQLErrors, networkError, protocolErrors }) => {
   if (graphQLErrors) {
     graphQLErrors.map(({ message, locations, extensions, path }) =>
       console.log(
@@ -107,8 +107,19 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
     )
   }
 
+  if (protocolErrors) {
+    protocolErrors.forEach(({ message, extensions }) => {
+      console.log(
+        `[Protocol error]: Message: ${message}, Extensions: ${JSON.stringify(extensions)}`
+      )
+    })
+  }
+
   if (networkError) {
     console.log(`[Network error]: ${networkError}`)
+    console.log(networkError.message)
+    console.log(networkError.name)
+    console.log(networkError.stack)
   }
 })
 
