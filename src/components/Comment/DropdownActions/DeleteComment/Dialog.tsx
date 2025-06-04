@@ -91,6 +91,12 @@ const DeleteCommentDialog = ({
         })
 
         if (comment.parentComment) {
+          updateArticleComments({
+            cache,
+            commentId: comment.id,
+            articleId: node.id,
+            type: 'deleteSecondaryComment',
+          })
           updateArticlePublic({
             cache,
             shortHash: node.shortHash,
@@ -200,7 +206,12 @@ const DeleteCommentDialog = ({
               text={<FormattedMessage defaultMessage="Delete" id="K3r6DQ" />}
               color="red"
               onClick={() => {
-                playAnimationAndDelete()
+                // if comment has children, don't play animation
+                if (comment.dropdownComments.totalCount <= 0) {
+                  playAnimationAndDelete()
+                } else {
+                  deleteComment()
+                }
                 closeDialog()
               }}
             />
@@ -210,7 +221,11 @@ const DeleteCommentDialog = ({
               text={<FormattedMessage defaultMessage="Delete" id="K3r6DQ" />}
               color="red"
               onClick={() => {
-                playAnimationAndDelete()
+                if (comment.dropdownComments.totalCount <= 0) {
+                  playAnimationAndDelete()
+                } else {
+                  deleteComment()
+                }
                 closeDialog()
               }}
             />
