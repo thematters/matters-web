@@ -217,6 +217,10 @@
   & .left,
   & .right {
     @mixin inline-flex-center-all;
+
+    & > * {
+      flex-shrink: 0;
+    }
   }
 
   & .left {
