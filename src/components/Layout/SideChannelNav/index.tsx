@@ -2,7 +2,7 @@ import classnames from 'classnames'
 import { useCallback, useContext, useEffect, useRef, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { PATHS } from '~/common/enums'
+import { FEATUED_CHANNEL_SHORT_HASH, PATHS } from '~/common/enums'
 import { analytics } from '~/common/utils'
 import { LinkWrapper, useRoute, ViewerContext } from '~/components'
 import { useChannels } from '~/components/Context'
@@ -46,6 +46,11 @@ const SideChannelNav = () => {
     })
   }
 
+  const featuredShortHash =
+    process.env.NODE_ENV === 'production'
+      ? FEATUED_CHANNEL_SHORT_HASH.production
+      : FEATUED_CHANNEL_SHORT_HASH.development
+
   return (
     <section className={styles.content} ref={contentRef}>
       <section
@@ -82,9 +87,11 @@ const SideChannelNav = () => {
             <FormattedMessage defaultMessage="Featured" id="CnPG8j" />
           </span>
         </LinkWrapper>
-        {channels.map((c) => (
-          <ChannelItem key={c.id} channel={c} />
-        ))}
+        {channels.map((c) =>
+          c.shortHash !== featuredShortHash ? (
+            <ChannelItem key={c.id} channel={c} />
+          ) : null
+        )}
         <LinkWrapper
           href={`${PATHS.NEWEST}`}
           className={classnames({
