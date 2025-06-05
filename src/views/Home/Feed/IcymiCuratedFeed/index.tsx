@@ -3,7 +3,6 @@ import React, { useContext, useEffect } from 'react'
 
 import { analytics } from '~/common/utils'
 import {
-  ArticleDigestCurated,
   ArticleDigestFeed,
   CardExposureTracker,
   List,
@@ -13,6 +12,7 @@ import {
 import { IcymiCuratedFeedRecommendationFragment } from '~/gql/graphql'
 
 import { FEED_ARTICLES_PRIVATE } from '../gql'
+import { ArticleDigestCurated } from './ArticleDigestCurated'
 import { fragments } from './gql'
 import styles from './styles.module.css'
 

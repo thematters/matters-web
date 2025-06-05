@@ -1,10 +1,9 @@
 import React from 'react'
 
 import { TEST_ID } from '~/common/enums'
-import { DateTime } from '~/components'
+import { ArticleDigestTitle, DateTime } from '~/components'
 import { ArticleDigestTitleArticleFragment } from '~/gql/graphql'
 
-import { ArticleDigestTitle } from '../Title'
 import styles from './styles.module.css'
 
 export type ArticleDigestArchivedProps = {

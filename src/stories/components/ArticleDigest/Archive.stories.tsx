@@ -2,8 +2,8 @@ import { MockedProvider } from '@apollo/client/testing'
 import type { Meta, StoryObj } from '@storybook/react'
 import React from 'react'
 
-import { ArticleDigestArchived } from '~/components'
 import { ArticleState } from '~/gql/graphql'
+import { ArticleDigestArchived } from '~/views/Me/Works/Archived/ArticleDigestArchived'
 
 import { MOCK_ARTILCE } from '../../mocks'
 

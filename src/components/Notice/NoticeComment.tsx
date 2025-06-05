@@ -1,16 +1,11 @@
 import gql from 'graphql-tag'
+import Link from 'next/link'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import { PATHS } from '~/common/enums'
 import { MOMENT_DIGEST_REFERRER } from '~/common/enums/moment'
 import { sessionStorage, toPath } from '~/common/utils'
-import {
-  LinkWrapper,
-  Media,
-  MomentDetailDialog,
-  toast,
-  useRoute,
-} from '~/components'
+import { Media, MomentDetailDialog, toast, useRoute } from '~/components'
 import { CommentContent } from '~/components/Comment/Content'
 import { NoticeCommentFragment } from '~/gql/graphql'
 
@@ -215,11 +210,11 @@ const NoticeComment = ({
   }
 
   return (
-    <LinkWrapper {...path}>
+    <Link {...path}>
       <section>
         <NoticeContentDigest content={comment.content || ''} />
       </section>
-    </LinkWrapper>
+    </Link>
   )
 }
 

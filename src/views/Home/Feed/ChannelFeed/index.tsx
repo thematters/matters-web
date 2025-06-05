@@ -2,19 +2,14 @@ import React, { useContext, useEffect, useRef } from 'react'
 import { useIntl } from 'react-intl'
 
 import { analytics, mergeConnections } from '~/common/utils'
-import {
-  ArticleDigestCurated,
-  EmptyWork,
-  Media,
-  usePublicQuery,
-  ViewerContext,
-} from '~/components'
+import { EmptyWork, Media, usePublicQuery, ViewerContext } from '~/components'
 import { useRoute } from '~/components'
 import { FeedArticlesPublicChannelQuery } from '~/gql/graphql'
 
 import { MixedFeedArticleEdge, useMixedFeed } from '../../common'
 import FeedRenderer from '../FeedRenderer'
 import { FEED_ARTICLES_PRIVATE, FEED_ARTICLES_PUBLIC_CHANNEL } from '../gql'
+import { ArticleDigestCurated } from '../IcymiCuratedFeed/ArticleDigestCurated'
 import feedStyles from '../styles.module.css'
 import { ChannelHeader } from './ChannelHeader'
 

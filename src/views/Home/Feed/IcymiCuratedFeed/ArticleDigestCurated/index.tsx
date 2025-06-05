@@ -1,15 +1,16 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
+import Link from 'next/link'
 import { useIntl } from 'react-intl'
 
 import IconStar from '@/public/static/icons/24px/star.svg'
 import { TEST_ID } from '~/common/enums'
 import { toPath } from '~/common/utils'
 import {
+  ArticleDigestTitle,
   Card,
   CardProps,
   Icon,
-  LinkWrapper,
   Media,
   ResponsiveImage,
   Tooltip,
@@ -17,7 +18,6 @@ import {
 import { UserDigest } from '~/components/UserDigest'
 import { ArticleDigestCuratedArticleFragment, AssetType } from '~/gql/graphql'
 
-import { ArticleDigestTitle } from '../Title'
 import CoverIcon from './CoverIcon'
 import FooterActions from './FooterActions'
 import styles from './styles.module.css'
@@ -94,7 +94,7 @@ export const ArticleDigestCurated = ({
       testId={TEST_ID.DIGEST_ARTICLE_CURATED}
       {...cardProps}
     >
-      <LinkWrapper {...path} onClick={onClick}>
+      <Link {...path} onClick={onClick}>
         <div
           className={coverClasses}
           data-test-id={TEST_ID.DIGEST_ARTICLE_FEED_COVER}
@@ -123,7 +123,7 @@ export const ArticleDigestCurated = ({
             </Tooltip>
           )}
         </div>
-      </LinkWrapper>
+      </Link>
 
       <section className={styles.author}>
         <UserDigest.Mini

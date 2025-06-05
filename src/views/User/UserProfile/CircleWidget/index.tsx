@@ -1,11 +1,11 @@
 import classNames from 'classnames'
 
-import { CircleDigest } from '~/components/CircleDigest'
 import {
   UserProfileUserPrivateQuery,
   UserProfileUserPublicQuery,
 } from '~/gql/graphql'
 
+import CircleDigestUserProfile from './CircleDigestUserProfile'
 import styles from './styles.module.css'
 
 type CircleWidgetCircle = NonNullable<
@@ -43,38 +43,13 @@ const CircleWidget: React.FC<CircleWidgetProps> = ({
 
   if (isMe && !hasCircle) {
     return null
-
-    // return (
-    //   <section className={circleWidgetClasses}>
-    //     <TableView spacingX={0}>
-    //       <TableView.Cell
-    //         bold
-    //         title={
-    //           <FormattedMessage
-    //             defaultMessage="Come build a Circle and call on your supporters to join you!"
-    //             description="src/components/UserProfile/CircleWidget/index.tsx"
-    //           />
-    //         }
-    //         href={PATHS.CIRCLE_CREATION}
-    //         onClick={() => {
-    //           analytics.trackEvent('click_button', { type: 'create_circle' })
-    //         }}
-    //         role="button"
-    //         bgColor="greyLighter"
-    //         bgActiveColor="greyLighter"
-    //         spacing={[0, 16]}
-    //         borderRadius="xtight"
-    //       />
-    //     </TableView>
-    //   </section>
-    // )
   }
 
   const circle = circles[0]
 
   return (
     <section className={circleWidgetClasses}>
-      <CircleDigest.UserProfile
+      <CircleDigestUserProfile
         circle={circle}
         hasDescription={hasDescription}
         hasFooter={hasFooter}

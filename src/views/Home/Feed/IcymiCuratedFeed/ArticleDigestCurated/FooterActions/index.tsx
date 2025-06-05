@@ -1,10 +1,10 @@
 import { useContext } from 'react'
 
+import DropdownActions from '~/components/ArticleDigest/DropdownActions'
+import type { FooterActionsControls } from '~/components/ArticleDigest/Feed/FooterActions'
 import { ViewerContext } from '~/components/Context'
 import { CuratedFooterActionsArticleFragment } from '~/gql/graphql'
 
-import DropdownActions from '../../DropdownActions'
-import { FooterActionsControls } from '../../Feed/FooterActions'
 import { fragments } from './gql'
 import styles from './styles.module.css'
 const isAdminView = process.env.NEXT_PUBLIC_ADMIN_VIEW === 'true'

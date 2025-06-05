@@ -1,10 +1,11 @@
 import gql from 'graphql-tag'
+import Link from 'next/link'
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { TEST_ID } from '~/common/enums'
 import { toPath } from '~/common/utils'
-import { LinkWrapper, ViewerContext } from '~/components'
+import { ViewerContext } from '~/components'
 import { CircleNewBroadcastCommentsFragment } from '~/gql/graphql'
 
 import NoticeActorAvatar from '../NoticeActorAvatar'
@@ -75,9 +76,9 @@ const CircleNewBroadcastComments = ({
         }
         content={
           !isMultiActors ? (
-            <LinkWrapper {...circleCommentPath}>
+            <Link {...circleCommentPath}>
               <NoticeContentDigest content={latestComment.content || ''} />
-            </LinkWrapper>
+            </Link>
           ) : undefined
         }
         testId={TEST_ID.NOTICE_CIRCLE_NEW_BROADCAST_COMMENTS}
@@ -124,9 +125,9 @@ const CircleNewBroadcastComments = ({
       }
       content={
         !isMultiActors ? (
-          <LinkWrapper {...circleCommentPath}>
+          <Link {...circleCommentPath}>
             <NoticeContentDigest content={latestComment.content || ''} />
-          </LinkWrapper>
+          </Link>
         ) : undefined
       }
       testId={TEST_ID.NOTICE_CIRCLE_NEW_BROADCAST_COMMENTS}
