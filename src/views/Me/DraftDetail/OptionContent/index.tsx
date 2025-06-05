@@ -86,10 +86,10 @@ const EditDraftConnections = ({ draft, disabled }: OptionItemProps) => {
   const articles = draft?.collection?.edges?.map(({ node }) => node) || []
 
   return (
-    <Sidebar.Connection
-      connection={articles}
-      editConnection={edit}
-      connectionSaving={saving}
+    <Sidebar.Connections
+      connections={articles}
+      editConnections={edit}
+      connectionsSaving={saving}
       disabled={disabled}
     />
   )

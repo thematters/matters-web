@@ -25,23 +25,23 @@ import InputAutosize from '../../InputAutosize'
 import styles from './styles.module.css'
 
 type ConnectionInputProps = {
-  connection: ArticleDigestDropdownArticleFragment[]
+  connections: ArticleDigestDropdownArticleFragment[]
   onAddArticle: (article: ArticleDigestDropdownArticleFragment) => Promise<void>
   saving?: boolean
 }
 
 type DropdownMenuProps = {
   article: ArticleDigestDropdownArticleFragment | null
-  connection: ArticleDigestDropdownArticleFragment[]
+  connections: ArticleDigestDropdownArticleFragment[]
   onSelectArticle: () => void
 }
 
 const renderFoundArticle = (
   article: ArticleDigestDropdownArticleFragment,
-  connection: ArticleDigestDropdownArticleFragment[],
+  connections: ArticleDigestDropdownArticleFragment[],
   onSelectArticle: () => void
 ) => {
-  const isRelated = connection.some((a) => a.id === article.id)
+  const isRelated = connections.some((a) => a.id === article.id)
   return (
     <Menu.Item
       spacing={[8, 16]}
@@ -72,18 +72,20 @@ const renderFoundArticle = (
 
 const DropdownMenu = ({
   article,
-  connection,
+  connections,
   onSelectArticle,
 }: DropdownMenuProps) => {
   if (!article) {
     return null
   }
 
-  return <Menu>{renderFoundArticle(article, connection, onSelectArticle)}</Menu>
+  return (
+    <Menu>{renderFoundArticle(article, connections, onSelectArticle)}</Menu>
+  )
 }
 
 export const ConnectionInput = ({
-  connection,
+  connections,
   onAddArticle,
   saving,
 }: ConnectionInputProps) => {
@@ -180,7 +182,7 @@ export const ConnectionInput = ({
       article={
         searchData?.article as ArticleDigestDropdownArticleFragment | null
       }
-      connection={connection}
+      connections={connections}
       onSelectArticle={handleSelectArticle}
     />
   )

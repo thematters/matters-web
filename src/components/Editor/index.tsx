@@ -11,12 +11,12 @@ export * from './MoreSettings'
 export * from './SetCover'
 export * from './ToggleResponse'
 
-export type SetConnectionProps = {
-  connection: ArticleDigestDropdownArticleFragment[]
-  editConnection: (
+export type SetConnectionsProps = {
+  connections: ArticleDigestDropdownArticleFragment[]
+  editConnections: (
     articles: ArticleDigestDropdownArticleFragment[]
   ) => Promise<FetchResult<SetDraftConnectionsMutation> | void | unknown>
-  connectionSaving?: boolean
+  connectionsSaving?: boolean
   nodeExclude?: string
 }
 

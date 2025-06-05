@@ -63,7 +63,7 @@ const EditModeHeader = ({
   ...restProps
 }: EditModeHeaderProps) => {
   const router = useRouter()
-  const { tags, connection, circle, accessType, license } = restProps
+  const { tags, connections, circle, accessType, license } = restProps
   const [editArticle, { loading }] = useMutation<EditArticleMutation>(
     EDIT_ARTICLE,
     {
@@ -102,7 +102,7 @@ const EditModeHeader = ({
     article.tags?.map((tag) => tag.id).sort()
   )
   const isConnectionRevised = !_isEqual(
-    connection.map((connection) => connection.id).sort(),
+    connections.map((connection) => connection.id).sort(),
     article.collection.edges?.map(({ node }) => node.id).sort()
   )
   const isCoverRevised = article.cover
@@ -161,7 +161,7 @@ const EditModeHeader = ({
           ...(isContentRevised ? { content: revision.content } : {}),
           ...(isTagRevised ? { tags: tags.map((tag) => tag.content) } : {}),
           ...(isConnectionRevised
-            ? { connection: connection.map(({ id }) => id) }
+            ? { connections: connections.map(({ id }) => id) }
             : {}),
           ...(isCoverRevised ? { cover: revision.cover?.id || null } : {}),
           ...(isRequestForDonationRevised

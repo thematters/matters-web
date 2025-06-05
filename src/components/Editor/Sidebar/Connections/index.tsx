@@ -6,7 +6,7 @@ import IconPlus from '@/public/static/icons/24px/plus.svg'
 import IconTimes from '@/public/static/icons/24px/times.svg'
 import { MAX_ARTICLE_COLLECT_LENGTH } from '~/common/enums'
 import { Icon, Tooltip } from '~/components'
-import { SetConnectionProps } from '~/components/Editor'
+import { SetConnectionsProps } from '~/components/Editor'
 import { ArticleDigestDropdownArticleFragment } from '~/gql/graphql'
 
 import Box from '../Box'
@@ -14,28 +14,28 @@ import { ConnectionInput } from './ConnectionInput'
 import { ArticleDigestDraftTitle } from './DraftTitle'
 import styles from './styles.module.css'
 
-export type SidebarConnectionProps = {
+export type SidebarConnectionsProps = {
   disabled?: boolean
-} & SetConnectionProps
+} & SetConnectionsProps
 
-const SidebarConnection = ({
-  connection,
-  editConnection,
-  connectionSaving,
+const SidebarConnections = ({
+  connections,
+  editConnections,
+  connectionsSaving,
   disabled,
-}: SidebarConnectionProps) => {
+}: SidebarConnectionsProps) => {
   const intl = useIntl()
   const [isEditing, setIsEditing] = useState(false)
 
   const onAddArticle = async (
     article: ArticleDigestDropdownArticleFragment
   ) => {
-    await editConnection([...connection, article])
+    await editConnections([...connections, article])
     setIsEditing(false)
   }
 
   const onRemoveArticle = (article: ArticleDigestDropdownArticleFragment) => {
-    editConnection(connection.filter((a) => a.id !== article.id))
+    editConnections(connections.filter((a) => a.id !== article.id))
   }
 
   return (
@@ -87,7 +87,7 @@ const SidebarConnection = ({
                 defaultMessage: 'Add',
                 id: '2/2yg+',
               })}
-              disabled={connection.length >= MAX_ARTICLE_COLLECT_LENGTH}
+              disabled={connections.length >= MAX_ARTICLE_COLLECT_LENGTH}
             >
               <Icon icon={IconPlus} size={24} color="black" />
             </button>
@@ -97,14 +97,14 @@ const SidebarConnection = ({
       disabled={disabled}
     >
       <div className={styles.content}>
-        {connection.length > 0 && (
+        {connections.length > 0 && (
           <ul className={styles.list}>
-            {connection.map((article) => (
+            {connections.map((article) => (
               <li key={article.id}>
                 <ArticleDigestDraftTitle
                   article={article}
                   onRemove={() => onRemoveArticle(article)}
-                  saving={connectionSaving}
+                  saving={connectionsSaving}
                 />
               </li>
             ))}
@@ -113,9 +113,9 @@ const SidebarConnection = ({
         {isEditing && (
           <div className={styles.connectionInput}>
             <ConnectionInput
-              connection={connection}
+              connections={connections}
               onAddArticle={onAddArticle}
-              saving={connectionSaving}
+              saving={connectionsSaving}
             />
           </div>
         )}
@@ -124,4 +124,4 @@ const SidebarConnection = ({
   )
 }
 
-export default SidebarConnection
+export default SidebarConnections

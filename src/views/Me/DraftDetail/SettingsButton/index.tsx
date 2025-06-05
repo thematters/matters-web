@@ -12,7 +12,7 @@ import {
 } from '~/components'
 import {
   MoreSettingsProps,
-  SetConnectionProps,
+  SetConnectionsProps,
   SetCoverProps,
   SetResponseProps,
   SetTagsProps,
@@ -101,7 +101,7 @@ const SettingsButton = ({
   campaigns,
   publishable,
 }: SettingsButtonProps) => {
-  const { edit: editConnection, saving: connectionSaving } =
+  const { edit: editConnections, saving: connectionsSaving } =
     useEditDraftConnections()
   const { edit: editCover, saving: coverSaving, refetch } = useEditDraftCover()
   const { edit: editTags, saving: tagsSaving } = useEditDraftTags()
@@ -140,10 +140,10 @@ const SettingsButton = ({
     editTags,
     tagsSaving,
   }
-  const connectionProps: SetConnectionProps = {
-    connection: draft?.collection?.edges?.map(({ node }) => node) || [],
-    editConnection,
-    connectionSaving,
+  const connectionProps: SetConnectionsProps = {
+    connections: draft?.collection?.edges?.map(({ node }) => node) || [],
+    editConnections,
+    connectionsSaving,
   }
   const accessProps: MoreSettingsProps = {
     circle: draft?.access.circle,
@@ -190,7 +190,7 @@ const SettingsButton = ({
     <EditorSettingsDialog
       saving={false}
       disabled={
-        connectionSaving ||
+        connectionsSaving ||
         coverSaving ||
         tagsSaving ||
         accessSaving ||
