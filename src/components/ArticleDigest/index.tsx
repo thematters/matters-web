@@ -1,5 +1,4 @@
 export * from './Card'
-export * from './Curated'
 export * from './Dropdown'
 export * from './Feed'
 export * from './List'

@@ -3,8 +3,9 @@ import { describe, expect, it, vi } from 'vitest'
 
 import { TEST_ID } from '~/common/enums'
 import { fireEvent, render, screen } from '~/common/utils/test'
-import { ArticleDigestCurated } from '~/components'
 import { MOCK_ARTILCE } from '~/stories/mocks'
+
+import { ArticleDigestCurated } from './'
 
 describe('<ArticleDigest.Curated>', () => {
   it('should render an ArticleDigest.Curated', () => {
