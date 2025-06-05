@@ -11,7 +11,6 @@ import {
   unshiftConnections,
 } from '~/common/utils'
 import {
-  ArticleDigestAuthorSidebar,
   DualScroll,
   LinkWrapper,
   List,
@@ -24,6 +23,7 @@ import {
   AuthorSidebarCollectionQuery,
 } from '~/gql/graphql'
 
+import { ArticleDigestAuthorSidebar } from '../ArticleDigestAuthorSidebar'
 import {
   ArticleDigestAuthorSidebarFeedPlaceholder,
   FeedPlaceholder,
