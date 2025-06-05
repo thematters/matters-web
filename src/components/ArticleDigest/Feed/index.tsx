@@ -106,6 +106,7 @@ const BaseArticleDigestFeed = ({
                   )}
                 </section>
               )}
+
               {!excludesTimeStamp && (
                 <Link {...path}>
                   <DateTime date={article.createdAt} color="grey" />
@@ -113,6 +114,7 @@ const BaseArticleDigestFeed = ({
               )}
             </header>
           )}
+
           <section className={styles.head}>
             <section className={styles.title}>
               <ArticleDigestTitle
@@ -134,6 +136,7 @@ const BaseArticleDigestFeed = ({
 
           <Media greaterThan="sm">{footerActions}</Media>
         </section>
+
         {cover && (
           <Link {...path} onClick={onClick}>
             <div

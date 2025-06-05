@@ -52,7 +52,7 @@ export const ArticleDigestTitle = ({
   textWeight = 'medium',
   lineClamp = true,
   is = 'h2',
-  textColor = 'greyDarker',
+  textColor,
   disabled,
   disabledArchived,
   onClick,
@@ -82,7 +82,8 @@ export const ArticleDigestTitle = ({
     [styles.lineClamp]: !!lineClamp,
     [styles[`lineClampLine${lineClamp}`]]: lineClamp === 1 || lineClamp === 3,
     [styles.archived]: isArchived && disabledArchived,
-    [styles[`textColor${capitalizeFirstLetter(textColor)}`]]: !!textColor,
+    [textColor ? styles[`textColor${capitalizeFirstLetter(textColor)}`] : '']:
+      !!textColor,
   })
   const isClickable = !disabled && !isBanned
 

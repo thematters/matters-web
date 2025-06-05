@@ -58,12 +58,12 @@ const fragments = {
 
 export const ArticleDigestDropdown = ({
   article,
-  nameColor = 'black',
+  nameColor,
   relatedNode,
   titleTextSize,
-  titleIs = 'h3',
-  titleTextWeight = 'medium',
-  titleColor = 'greyDarker',
+  titleIs,
+  titleTextWeight,
+  titleColor,
   disabled,
   extraButton,
   lineClamp,
