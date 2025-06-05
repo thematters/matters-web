@@ -16,7 +16,7 @@ export type CircleDigestUserProfileProps = {
   hasFooter?: boolean
 }
 
-const UserProfile = ({
+const CircleDigestUserProfile = ({
   circle,
   hasDescription = true,
   hasFooter = true,
@@ -70,6 +70,6 @@ const UserProfile = ({
   )
 }
 
-UserProfile.fragments = fragments
+CircleDigestUserProfile.fragments = fragments
 
-export default UserProfile
+export default CircleDigestUserProfile
