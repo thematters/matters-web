@@ -1,8 +1,8 @@
 import classNames from 'classnames'
+import Link from 'next/link'
 
 import { TEST_ID } from '~/common/enums'
 import { capitalizeFirstLetter, toPath } from '~/common/utils'
-import { LinkWrapper, LinkWrapperProps } from '~/components'
 import { DigestTitleCircleFragment } from '~/gql/graphql'
 
 import { fragments } from './gql'
@@ -21,7 +21,7 @@ type CircleDigestTitleProps = {
 
   disabled?: boolean
   onClick?: () => void
-} & Pick<LinkWrapperProps, 'onClick'>
+}
 
 const CircleDigestTitle = ({
   circle,
@@ -44,19 +44,29 @@ const CircleDigestTitle = ({
     [styles[`font${capitalizeFirstLetter(textWeight)}`]]: !!textWeight,
   })
 
+  if (!disabled) {
+    return (
+      <>
+        <>{is === 'h2' && <h2 className={titleClasses}>{displayName}</h2>}</>
+        <>
+          {is === 'span' && <span className={titleClasses}>{displayName}</span>}
+        </>
+      </>
+    )
+  }
+
   return (
-    <LinkWrapper
+    <Link
       {...path}
-      textActiveColor={!disabled ? 'green' : undefined}
-      disabled={disabled}
       onClick={onClick}
-      testId={TEST_ID.DIGEST_CIRCLE_TITLE}
+      data-test-id={TEST_ID.DIGEST_CIRCLE_TITLE}
+      className={!disabled ? 'u-link-active-green' : undefined}
     >
       <>{is === 'h2' && <h2 className={titleClasses}>{displayName}</h2>}</>
       <>
         {is === 'span' && <span className={titleClasses}>{displayName}</span>}
       </>
-    </LinkWrapper>
+    </Link>
   )
 }
 

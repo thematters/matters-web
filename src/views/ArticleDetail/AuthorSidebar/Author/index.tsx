@@ -1,6 +1,8 @@
+import Link from 'next/link'
+
 import type { ClickButtonProp as TrackEventProps } from '~/common/utils'
 import { analytics, toPath } from '~/common/utils'
-import { Avatar, LinkWrapper } from '~/components'
+import { Avatar } from '~/components'
 import { ArticleDetailPublicQuery } from '~/gql/graphql'
 
 import { fragments } from './gql'
@@ -30,7 +32,7 @@ const Author = ({ article }: AuthorProps) => {
   return (
     <section className={styles.container}>
       <section>
-        <LinkWrapper
+        <Link
           {...userProfilePath}
           onClick={() => {
             analytics.trackEvent('click_button', {
@@ -40,11 +42,11 @@ const Author = ({ article }: AuthorProps) => {
           }}
         >
           <Avatar size={64} user={author} inProfile />
-        </LinkWrapper>
+        </Link>
       </section>
 
       <section className={styles.info}>
-        <LinkWrapper
+        <Link
           {...userProfilePath}
           onClick={() => {
             analytics.trackEvent('click_button', {
@@ -54,7 +56,7 @@ const Author = ({ article }: AuthorProps) => {
           }}
         >
           <span className={styles.displayName}>{displayName}</span>
-        </LinkWrapper>
+        </Link>
         {!!description && <span className={styles.bio}>{description}</span>}
       </section>
     </section>

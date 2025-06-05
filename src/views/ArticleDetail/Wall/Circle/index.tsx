@@ -1,9 +1,9 @@
+import Link from 'next/link'
 import { FormattedMessage } from 'react-intl'
 
 import IMAGE_WALL_BACKGROUND_MD from '@/public/static/images/circle-wall-background-md.jpg'
 import IMAGE_WALL_BACKGROUND_SM from '@/public/static/images/circle-wall-background-sm.jpg'
 import { toPath } from '~/common/utils'
-import { LinkWrapper } from '~/components'
 import {
   CircleWallCirclePrivateFragment,
   CircleWallCirclePublicFragment,
@@ -30,7 +30,7 @@ const CircleWall = ({ circle }: CircleWallProps) => {
 
   return (
     <section className={styles.container} style={style}>
-      <LinkWrapper {...path}>
+      <Link {...path}>
         <section className={styles.message}>
           <FormattedMessage
             defaultMessage="Subscribe to unlock all articles of"
@@ -47,7 +47,7 @@ const CircleWall = ({ circle }: CircleWallProps) => {
             }}
           />
         </section>
-      </LinkWrapper>
+      </Link>
     </section>
   )
 }

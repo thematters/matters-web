@@ -1,5 +1,4 @@
-import { ArticleDigestAuthorSidebar } from '~/components'
-
+import { ArticleDigestAuthorSidebar } from '../ArticleDigestAuthorSidebar'
 import { Placeholder as AuthorPlaceholder } from '../Author/Placeholder'
 import styles from './styles.module.css'
 

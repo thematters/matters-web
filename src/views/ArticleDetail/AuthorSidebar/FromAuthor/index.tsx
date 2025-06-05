@@ -1,13 +1,10 @@
 import gql from 'graphql-tag'
 
 import { analytics } from '~/common/utils'
-import {
-  ArticleDigestAuthorSidebar,
-  ArticleDigestSidebar,
-  CollectionDigestAuthorSidebar,
-  List,
-} from '~/components'
+import { CollectionDigestAuthorSidebar, List } from '~/components'
 import { ArticleDetailPublicQuery } from '~/gql/graphql'
+
+import { ArticleDigestAuthorSidebar } from '../ArticleDigestAuthorSidebar'
 
 type FromAuthorProps = {
   article: NonNullable<ArticleDetailPublicQuery['article']>
@@ -23,7 +20,7 @@ const fragments = {
           title
           cover
           ... on Article {
-            ...ArticleDigestSidebarArticle
+            ...ArticleDigestAuthorSidebarArticle
           }
           ... on Collection {
             ...CollectionDigestAuthorSidebarCollection
@@ -31,7 +28,7 @@ const fragments = {
         }
       }
     }
-    ${ArticleDigestSidebar.fragments.article}
+    ${ArticleDigestAuthorSidebar.fragments.article}
     ${CollectionDigestAuthorSidebar.fragments.collection}
   `,
 }

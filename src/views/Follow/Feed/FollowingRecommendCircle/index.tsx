@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import React, { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
@@ -12,7 +13,6 @@ import {
   Card,
   CardProps,
   CircleAvatar,
-  LinkWrapper,
   SetEmailDialog,
   SubscribeCircleDialog,
   TextIcon,
@@ -63,9 +63,9 @@ const RecommendCircle = ({ circle, ...cardProps }: Props) => {
 
                 <section className={styles.wrap}>
                   <p className={styles.name}>
-                    <LinkWrapper textActiveColor="green" {...path}>
+                    <Link className="u-link-active-green" {...path}>
                       {displayName}
-                    </LinkWrapper>
+                    </Link>
                   </p>
 
                   <section className={styles.follow}>
