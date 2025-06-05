@@ -6,7 +6,7 @@
   background-color: var(--color-white);
 
   @media (--xs-up) {
-    flex-direction: row;
+    flex-flow: row wrap;
     gap: var(--sp12);
     align-items: center;
   }
