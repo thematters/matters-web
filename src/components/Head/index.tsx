@@ -54,7 +54,11 @@ export const Head: React.FC<HeadProps> = (props) => {
     ? `https://${siteDomain}${props.path}`
     : `https://${siteDomain}${router.asPath || '/'}`
 
-  const noindex = props.noindex || !isProd
+  const noindex =
+    props.noindex ||
+    !isProd ||
+    siteDomain.includes('web-next') ||
+    siteDomain.includes('vercel.app')
 
   const i18nUrl = (language: string) => {
     return props.path
