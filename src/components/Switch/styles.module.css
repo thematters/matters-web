@@ -36,8 +36,8 @@
   left: 0;
   width: var(--switch-thumb-width);
   height: var(--switch-thumb-width);
-  transition-property: transform;
   transform: translateX(var(--switch-spacing));
+  transition-property: transform;
 }
 
 .switch .loading :global(svg) {

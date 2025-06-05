@@ -1,6 +1,6 @@
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconUnlock } from '@/public/static/icons/24px/unlock.svg'
+import IconUnlock from '@/public/static/icons/24px/unlock.svg'
 import {
   Dropdown,
   Icon,

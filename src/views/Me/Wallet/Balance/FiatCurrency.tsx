@@ -2,10 +2,10 @@ import classNames from 'classnames'
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconFiatCurrency } from '@/public/static/icons/24px/fiat-currency.svg'
-import { ReactComponent as IconRight } from '@/public/static/icons/24px/right.svg'
-import { ReactComponent as IconWallet } from '@/public/static/icons/24px/wallet.svg'
-import { ReactComponent as IconWithdraw } from '@/public/static/icons/24px/withdraw.svg'
+import IconFiatCurrency from '@/public/static/icons/24px/fiat-currency.svg'
+import IconRight from '@/public/static/icons/24px/right.svg'
+import IconWallet from '@/public/static/icons/24px/wallet.svg'
+import IconWithdraw from '@/public/static/icons/24px/withdraw.svg'
 import { analytics, formatAmount } from '~/common/utils'
 import {
   AddCreditDialog,

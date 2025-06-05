@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { List, Notice } from '~/components'
 
 import { MOCK_NOTICE_LIST } from './mock'

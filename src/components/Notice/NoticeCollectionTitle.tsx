@@ -25,13 +25,12 @@ const NoticeCollectionTitle = ({
   })
 
   return (
-    <Link {...path}>
-      <a
-        className={styles.noticeArticleTitle}
-        data-test-id={TEST_ID.NOTICE_COLLECTION_TITLE}
-      >
-        {makeSummary(notice.collection.title, MAX_NOTICE_SUMMARY_LENGTH, '\n')}
-      </a>
+    <Link
+      {...path}
+      className={styles.noticeArticleTitle}
+      data-test-id={TEST_ID.NOTICE_COLLECTION_TITLE}
+    >
+      {makeSummary(notice.collection.title, MAX_NOTICE_SUMMARY_LENGTH, '\n')}
     </Link>
   )
 }

@@ -1,7 +1,7 @@
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconExternal } from '@/public/static/icons/24px/external.svg'
-import { ReactComponent as IconInfo } from '@/public/static/icons/24px/information.svg'
+import IconExternal from '@/public/static/icons/24px/external.svg'
+import IconInfo from '@/public/static/icons/24px/information.svg'
 import { explorers } from '~/common/utils'
 import { Button, Icon, TextIcon, Tooltip } from '~/components'
 import { DigestTransactionFragment, TransactionState } from '~/gql/graphql'

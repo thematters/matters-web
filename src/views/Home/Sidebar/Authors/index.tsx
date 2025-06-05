@@ -1,7 +1,7 @@
 import { analytics } from '~/common/utils'
 import { List, QueryError, ShuffleButton, UserDigest } from '~/components'
 
-import { useAuthorsRecommendation } from '../../common/useAuthorsRecommendation'
+import { useAuthorsRecommendation } from '../../common'
 import SectionHeader from '../../SectionHeader'
 import { AuthorsPlaceholder } from './placeholder'
 import styles from './styles.module.css'

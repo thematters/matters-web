@@ -1,4 +1,3 @@
-import _get from 'lodash/get'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import { Dialog, Switch, useDialogSwitch } from '~/components'

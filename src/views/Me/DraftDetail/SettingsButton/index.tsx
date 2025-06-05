@@ -144,7 +144,7 @@ const SettingsButton = ({
     campaigns: selectableCampaigns,
     selectedCampaign,
     selectedStage,
-    editCampaign: (value) => editCampaign(value as any),
+    editCampaign,
   }
 
   const responseProps: SetResponseProps = {

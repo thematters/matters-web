@@ -1,5 +1,6 @@
-import { act, renderHook } from '@testing-library/react-hooks'
 import { describe, expect, it } from 'vitest'
+
+import { act, renderHook } from '~/common/utils/test'
 
 import { useStep } from './useStep'
 

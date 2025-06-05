@@ -1,23 +1,26 @@
+import type { FetchResult } from '@apollo/client'
 import { useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { Dialog } from '~/components'
-import { AssetFragment } from '~/gql/graphql'
+import type { AssetFragment, SetDraftCoverMutation } from '~/gql/graphql'
 
 import SetCoverDialog from './Dialog'
 import Selector from './Selector'
 import Uploader, { UploadEntity } from './Uploader'
 
 export type SetCoverProps = {
-  back?: () => any
-  submitCallback?: () => any
-  closeDialog?: () => any
+  back?: () => void
+  submitCallback?: () => void
+  closeDialog?: () => void
 
   cover?: string | null
   assets: AssetFragment[]
 
-  editCover: (asset?: AssetFragment) => any
-  refetchAssets: () => any
+  editCover: (
+    asset?: AssetFragment
+  ) => Promise<FetchResult<SetDraftCoverMutation> | void>
+  refetchAssets: () => void
   coverSaving?: boolean
 } & UploadEntity
 

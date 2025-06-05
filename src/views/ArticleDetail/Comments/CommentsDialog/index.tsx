@@ -2,8 +2,8 @@ import dynamic from 'next/dynamic'
 import { useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconLeft } from '@/public/static/icons/24px/left.svg'
-import { ReactComponent as IconTimes } from '@/public/static/icons/24px/times.svg'
+import IconLeft from '@/public/static/icons/24px/left.svg'
+import IconTimes from '@/public/static/icons/24px/times.svg'
 import { OPEN_COMMENT_DETAIL_DIALOG } from '~/common/enums'
 import { Dialog, Icon, useDialogSwitch, useEventListener } from '~/components'
 import { ArticleDetailPublicQuery } from '~/gql/graphql'
@@ -118,8 +118,8 @@ const BaseCommentsDialogDialog = ({
         )}
         {isInCommentDetail && (
           <DynamicDetailContent
-            closeDialog={closeDialog}
-            backToCommentList={backToCommentList}
+          // closeDialog={closeDialog}
+          // backToCommentList={backToCommentList}
           />
         )}
       </Dialog>

@@ -4,8 +4,8 @@ import type { Toast as ToastType } from 'react-hot-toast'
 import baseToast, { Toaster as BaseToaster } from 'react-hot-toast'
 import { useIntl } from 'react-intl'
 
-import { ReactComponent as IconTimes } from '@/public/static/icons/24px/times.svg'
-import { ReactComponent as IconWarn } from '@/public/static/icons/24px/warn.svg'
+import IconTimes from '@/public/static/icons/24px/times.svg'
+import IconWarn from '@/public/static/icons/24px/warn.svg'
 import { Button, ButtonProps, Icon, TextIcon } from '~/components'
 
 import styles from './styles.module.css'
@@ -36,9 +36,9 @@ const ToastActions: React.FC<ToastActionsProps> = ({
         <Button
           textColor={type === 'error' ? 'white' : 'whiteLight'}
           onClick={() => {
-            onClick && onClick()
+            onClick?.()
             if (hasClose) {
-              onDismiss && onDismiss()
+              onDismiss?.()
             }
           }}
           {...props}

@@ -52,14 +52,16 @@ const PinInput: React.FC<PinInputProps> = ({
     0,
     length
   )
-  const [itemRefs, setItemRefs] = useState<any>([])
+  const [itemRefs, setItemRefs] = useState<React.RefObject<HTMLInputElement>[]>(
+    []
+  )
   const fieldMsgId = `field-msg-${name}`
 
   useEffect(() => {
-    setItemRefs((refs: any) =>
+    setItemRefs((refs: React.RefObject<HTMLInputElement>[]) =>
       Array(length)
         .fill('')
-        .map((_, i) => refs[i] || createRef<any>())
+        .map((_, i) => refs[i] || createRef<HTMLInputElement>())
     )
   }, [])
 

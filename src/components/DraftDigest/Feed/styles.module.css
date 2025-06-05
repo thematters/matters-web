@@ -18,8 +18,8 @@
   & .left {
     @mixin inline-flex-start-center;
 
-    flex-direction: column;
     flex-grow: 1;
+    flex-direction: column;
     gap: var(--sp8);
 
     & .content {

@@ -1,6 +1,6 @@
-import { fireEvent } from '@testing-library/react'
-import { renderHook } from '@testing-library/react-hooks'
 import { describe, expect, it, vi } from 'vitest'
+
+import { fireEvent, renderHook } from '~/common/utils/test'
 
 import { useNativeEventListener } from './useNativeEventListener'
 

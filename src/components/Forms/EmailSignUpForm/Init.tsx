@@ -1,9 +1,10 @@
+import { ApolloError } from '@apollo/client'
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
-import { useContext } from 'react'
+import { useContext, useId } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { ReactComponent as IconLeft } from '@/public/static/icons/24px/left.svg'
+import IconLeft from '@/public/static/icons/24px/left.svg'
 import {
   ERROR_CODES,
   REFERRAL_QUERY_REFERRAL_KEY,
@@ -62,7 +63,7 @@ const Init: React.FC<FormProps> = ({
   back,
 }) => {
   const { lang } = useContext(LanguageContext)
-  const formId = 'email-sign-up-init-form'
+  const formId = useId()
 
   const isInPage = purpose === 'page'
 
@@ -123,7 +124,7 @@ const Init: React.FC<FormProps> = ({
       } catch (error) {
         setSubmitting(false)
 
-        const [messages, codes] = parseFormSubmitErrors(error as any)
+        const [messages, codes] = parseFormSubmitErrors(error as ApolloError)
         if (codes[0].includes(ERROR_CODES.FORBIDDEN_BY_STATE)) {
           setFieldError(
             'email',

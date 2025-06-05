@@ -2,7 +2,7 @@ import mockRouter from 'next-router-mock'
 import { describe, expect, it, vi } from 'vitest'
 
 import { TEST_ID } from '~/common/enums'
-import { render, screen } from '~/common/utils/test'
+import { fireEvent, render, screen } from '~/common/utils/test'
 import { UserDigest } from '~/components'
 import { MOCK_USER } from '~/stories/mocks'
 
@@ -35,12 +35,12 @@ describe('<UserDigest.Mini>', () => {
     const $userName = screen.getByText(`@${MOCK_USER.userName}`)
     expect($userName).toBeInTheDocument()
 
-    $avatar.click()
+    fireEvent.click($avatar)
     expect(mockRouter.asPath).toContain(MOCK_USER.userName)
     expect(handleClick).toBeCalledTimes(1)
     mockRouter.push('/')
 
-    $digest.click()
+    fireEvent.click($digest)
     expect(mockRouter.asPath).toContain(MOCK_USER.userName)
     expect(handleClick).toBeCalledTimes(2)
   })
@@ -59,7 +59,7 @@ describe('<UserDigest.Mini>', () => {
     const $avatar = screen.getByTestId(TEST_ID.AVATAR)
     expect($avatar).toBeInTheDocument()
 
-    $avatar.click()
+    fireEvent.click($avatar)
     expect(mockRouter.asPath).not.toContain(MOCK_USER.userName)
   })
 

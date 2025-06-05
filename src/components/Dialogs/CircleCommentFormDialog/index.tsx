@@ -14,7 +14,7 @@ const BaseCommentFormDialog = ({
   ...props
 }: CircleCommentFormDialogProps) => {
   const { show, openDialog, closeDialog } = useDialogSwitch(true)
-  const ref: React.RefObject<HTMLDivElement> | null = useRef(null)
+  const ref = useRef<HTMLDivElement>(null)
 
   return (
     <div ref={ref}>

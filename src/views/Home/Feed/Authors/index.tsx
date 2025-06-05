@@ -11,7 +11,7 @@ import {
   UserDigest,
 } from '~/components'
 
-import { useAuthorsRecommendation } from '../../common/useAuthorsRecommendation'
+import { useAuthorsRecommendation } from '../../common'
 import SectionHeader from '../../SectionHeader'
 import styles from './styles.module.css'
 

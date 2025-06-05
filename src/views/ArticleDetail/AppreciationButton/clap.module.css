@@ -1,8 +1,8 @@
 .clap {
   &:hover {
     & .iconLike {
-      transition: transform 0.15s ease-in;
       transform: scale(1) !important;
+      transition: transform 0.15s ease-in;
       will-change: transform;
     }
 

@@ -1,4 +1,3 @@
-import _pickBy from 'lodash/pickBy'
 import dynamic from 'next/dynamic'
 
 import { Dialog, SpinnerBlock, useDialogSwitch } from '~/components'
@@ -13,7 +12,7 @@ interface SupportSettingDialogProps {
   editSupportSetting: (
     requestForDonation: string | null,
     replyToDonator: string | null
-  ) => any
+  ) => void
   supportSettingSaving: boolean
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }

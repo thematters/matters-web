@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-import { ReactComponent as IconComment } from '@/public/static/icons/24px/comment.svg'
+import IconComment from '@/public/static/icons/24px/comment.svg'
 import { TEST_ID } from '~/common/enums'
 import { numAbbr } from '~/common/utils'
 import { Button } from '~/components'

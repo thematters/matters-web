@@ -1,3 +1,4 @@
+import { ApolloError } from '@apollo/client'
 import gql from 'graphql-tag'
 import { useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
@@ -39,7 +40,7 @@ const Request: React.FC<Props> = ({ back, nextStep, closeDialog }) => {
       window.open(redirectUrl, '_blank')
       nextStep()
     } catch (error) {
-      const [messages, codes] = parseFormSubmitErrors(error as any)
+      const [messages, codes] = parseFormSubmitErrors(error as ApolloError)
 
       toast.error({ message: intl.formatMessage(messages[codes[0]]) })
     }

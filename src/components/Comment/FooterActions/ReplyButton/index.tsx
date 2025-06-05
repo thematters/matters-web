@@ -2,7 +2,7 @@ import gql from 'graphql-tag'
 import { useContext } from 'react'
 import { useIntl } from 'react-intl'
 
-import { ReactComponent as IconComment } from '@/public/static/icons/24px/comment.svg'
+import IconComment from '@/public/static/icons/24px/comment.svg'
 import {
   OPEN_UNIVERSAL_AUTH_DIALOG,
   UNIVERSAL_AUTH_TRIGGER,
@@ -17,7 +17,6 @@ export interface ReplyButtonProps {
   replySubmitCallback?: () => void
   onClick?: () => void
   disabled?: boolean
-  inCard: boolean
 }
 
 const fragments = {
@@ -52,10 +51,7 @@ const fragments = {
   `,
 }
 
-const CommentButton: React.FC<ButtonProps & { inCard: boolean }> = ({
-  inCard,
-  ...props
-}) => {
+const CommentButton: React.FC<ButtonProps> = ({ ...props }) => {
   const intl = useIntl()
 
   return (
@@ -74,7 +70,7 @@ const CommentButton: React.FC<ButtonProps & { inCard: boolean }> = ({
   )
 }
 
-const ReplyButton = ({ onClick, disabled, inCard }: ReplyButtonProps) => {
+const ReplyButton = ({ onClick, disabled }: ReplyButtonProps) => {
   const viewer = useContext(ViewerContext)
 
   if (!viewer.isAuthed) {
@@ -90,27 +86,19 @@ const ReplyButton = ({ onClick, disabled, inCard }: ReplyButtonProps) => {
 
     return (
       <>
-        <CommentButton
-          aria-haspopup="dialog"
-          inCard={inCard}
-          disabled={disabled}
-          {...props}
-        />
+        <CommentButton aria-haspopup="dialog" disabled={disabled} {...props} />
       </>
     )
   }
 
   if (onClick) {
-    return (
-      <CommentButton onClick={onClick} inCard={inCard} disabled={disabled} />
-    )
+    return <CommentButton onClick={onClick} disabled={disabled} />
   }
 
   return (
     <>
       <CommentButton
         onClick={onClick}
-        inCard={inCard}
         disabled={disabled}
         aria-haspopup="dialog"
       />

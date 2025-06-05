@@ -1,4 +1,4 @@
-import { ReactComponent as IconRight } from '@/public/static/icons/24px/right.svg'
+import IconRight from '@/public/static/icons/24px/right.svg'
 import { toPath } from '~/common/utils'
 import { Icon, Menu, TextIcon, Translate } from '~/components'
 

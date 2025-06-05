@@ -137,7 +137,13 @@ export type ButtonProps = {
 
   is?: 'span'
   className?: string
-  ref?: RefObject<any> | ((instance: any) => void) | null | undefined
+  ref?:
+    | RefObject<HTMLButtonElement | HTMLAnchorElement | HTMLSpanElement>
+    | ((
+        instance: HTMLButtonElement | HTMLAnchorElement | HTMLSpanElement
+      ) => void)
+    | null
+    | undefined
 
   // navtive props
   htmlHref?: string
@@ -148,9 +154,9 @@ export type ButtonProps = {
   rel?: string
   testId?: string
   tabIndex?: number
-  onClick?: (event?: React.MouseEvent<HTMLElement, MouseEvent>) => any
-  onMouseEnter?: (event?: React.MouseEvent<HTMLElement, MouseEvent>) => any
-  onMouseLeave?: (event?: React.MouseEvent<HTMLElement, MouseEvent>) => any
+  onClick?: (event?: React.MouseEvent<HTMLElement, MouseEvent>) => void
+  onMouseEnter?: (event?: React.MouseEvent<HTMLElement, MouseEvent>) => void
+  onMouseLeave?: (event?: React.MouseEvent<HTMLElement, MouseEvent>) => void
 }
 
 /**
@@ -182,161 +188,177 @@ export type ButtonProps = {
  *  </Button>
  * ```
  */
-export const Button: React.FC<React.PropsWithChildren<ButtonProps>> =
-  forwardRef(
-    (
-      {
-        spacing = [0, 0],
-        size = [null, null],
+export const Button = forwardRef<
+  HTMLButtonElement | HTMLAnchorElement | HTMLSpanElement,
+  React.PropsWithChildren<ButtonProps>
+>(
+  (
+    {
+      spacing = [0, 0],
+      size = [null, null],
 
-        textColor,
-        textActiveColor,
+      textColor,
+      textActiveColor,
 
-        bgColor,
-        bgActiveColor,
+      bgColor,
+      bgActiveColor,
 
-        borderColor,
-        borderActiveColor,
-        borderWidth = 'md',
-        borderRadius = '5rem',
+      borderColor,
+      borderActiveColor,
+      borderWidth = 'md',
+      borderRadius = '5rem',
 
-        href,
-        replace,
+      href,
+      replace,
 
-        is,
-        className,
-        htmlHref,
-        htmlTarget,
-        type = 'button',
+      is,
+      className,
+      htmlHref,
+      htmlTarget,
+      type = 'button',
 
-        children,
-        testId,
-        ...restProps
-      },
-      ref
-    ) => {
-      const fallbackRef = useRef(null)
-      const buttonRef = (ref || fallbackRef) as React.RefObject<any> | null
+      children,
+      testId,
+      ...restProps
+    },
+    ref
+  ) => {
+    const fallbackRef = useRef(null)
+    const buttonRef = (ref || fallbackRef) as React.RefObject<
+      HTMLButtonElement | HTMLAnchorElement | HTMLSpanElement
+    > | null
 
-      const isClickable = is !== 'span' && !restProps.disabled
-      const isTransparent = !bgColor && !borderColor
-      const [width, height] = size
-      const [spacingY, spacingX] = spacing
+    const isClickable = is !== 'span' && !restProps.disabled
+    const isTransparent = !bgColor && !borderColor
+    const [width, height] = size
+    const [spacingY, spacingX] = spacing
 
-      // container
-      const containerClasses = classNames({
-        [styles.container]: true,
-        [styles.isTransparent]: isTransparent,
-        [styles.centeringX]: width && isTransparent,
-        [styles.centeringY]: height && isTransparent,
-        [styles[`spacingY${capitalizeFirstLetter(spacingY + '')}`]]: !!spacingY,
-        [styles[`spacingX${capitalizeFirstLetter(spacingX + '')}`]]: !!spacingX,
-        [bgColor ? styles[`bg${capitalizeFirstLetter(bgColor)}`] : '']:
-          !!bgColor,
-        [bgActiveColor
-          ? styles[`bgActive${capitalizeFirstLetter(bgActiveColor)}`]
-          : '']: !!bgActiveColor && isClickable,
-        [borderColor
-          ? styles[`border${capitalizeFirstLetter(borderColor)}`]
-          : '']: !!borderColor,
-        [borderActiveColor
-          ? styles[`borderActive${capitalizeFirstLetter(borderActiveColor)}`]
-          : '']: !!borderActiveColor && isClickable,
-        [styles[`border${capitalizeFirstLetter(borderWidth)}`]]:
-          borderWidth && borderColor,
-        [textColor ? styles[`text${capitalizeFirstLetter(textColor)}`] : '']:
-          !!textColor,
-        [textActiveColor
-          ? styles[`textActive${capitalizeFirstLetter(textActiveColor)}`]
-          : '']: !!textActiveColor && isClickable,
-        [`${className}`]: !!className,
-      })
+    // container
+    const containerClasses = classNames({
+      [styles.container]: true,
+      [styles.isTransparent]: isTransparent,
+      [styles.centeringX]: width && isTransparent,
+      [styles.centeringY]: height && isTransparent,
+      [styles[`spacingY${capitalizeFirstLetter(spacingY + '')}`]]: !!spacingY,
+      [styles[`spacingX${capitalizeFirstLetter(spacingX + '')}`]]: !!spacingX,
+      [bgColor ? styles[`bg${capitalizeFirstLetter(bgColor)}`] : '']: !!bgColor,
+      [bgActiveColor
+        ? styles[`bgActive${capitalizeFirstLetter(bgActiveColor)}`]
+        : '']: !!bgActiveColor && isClickable,
+      [borderColor
+        ? styles[`border${capitalizeFirstLetter(borderColor)}`]
+        : '']: !!borderColor,
+      [borderActiveColor
+        ? styles[`borderActive${capitalizeFirstLetter(borderActiveColor)}`]
+        : '']: !!borderActiveColor && isClickable,
+      [styles[`border${capitalizeFirstLetter(borderWidth)}`]]:
+        borderWidth && borderColor,
+      [textColor ? styles[`text${capitalizeFirstLetter(textColor)}`] : '']:
+        !!textColor,
+      [textActiveColor
+        ? styles[`textActive${capitalizeFirstLetter(textActiveColor)}`]
+        : '']: !!textActiveColor && isClickable,
+      [`${className}`]: !!className,
+    })
 
-      // handle click
-      const onClick = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
-        if (restProps.onClick) {
-          restProps.onClick(event)
-        }
-
-        // blur on click
-        if (buttonRef?.current) {
-          buttonRef.current.blur()
-        }
+    // handle click
+    const onClick = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
+      if (restProps.onClick) {
+        restProps.onClick(event)
       }
 
-      const containerProps = {
-        ...restProps,
-        onClick,
-        ref: buttonRef as React.RefObject<any>,
-        className: containerClasses,
-        ...(testId ? { ['data-test-id']: testId } : {}),
+      // blur on click
+      if (buttonRef?.current) {
+        buttonRef.current.blur()
       }
+    }
 
-      const sizeStyle = {
-        width: (!isTransparent && width) || undefined,
-        height: (!isTransparent && height) || undefined,
-      }
+    const containerProps = {
+      ...restProps,
+      onClick,
+      className: containerClasses,
+      ...(testId ? { ['data-test-id']: testId } : {}),
+    }
 
-      // hotarea
-      const hotAreaStyle = {
-        width: width || undefined,
-        height: height || undefined,
-        borderRadius,
-      }
+    const sizeStyle = {
+      width: (!isTransparent && width) || undefined,
+      height: (!isTransparent && height) || undefined,
+    }
 
-      // span
-      if (is === 'span') {
-        return (
-          <span {...containerProps} style={sizeStyle}>
-            <div className={styles.content} style={sizeStyle}>
-              <div className={styles.hotarea} style={hotAreaStyle} />
-              {children}
-            </div>
-          </span>
-        )
-      }
+    // hotarea
+    const hotAreaStyle = {
+      width: width || undefined,
+      height: height || undefined,
+      borderRadius,
+    }
 
-      // anchor
-      if (htmlHref) {
-        return (
-          <a
-            href={htmlHref}
-            target={htmlTarget}
-            {...containerProps}
-            style={sizeStyle}
-          >
-            <div className={styles.content} style={sizeStyle}>
-              <div className={styles.hotarea} style={hotAreaStyle} />
-              {children}
-            </div>
-          </a>
-        )
-      }
-
-      // link
-      if (href) {
-        return (
-          <Link href={href} replace={replace} legacyBehavior>
-            <a {...containerProps} style={sizeStyle}>
-              <div className={styles.content} style={sizeStyle}>
-                <div className={styles.hotarea} style={hotAreaStyle} />
-                {children}
-              </div>
-            </a>
-          </Link>
-        )
-      }
-
-      // button
+    // span
+    if (is === 'span') {
       return (
-        <button {...containerProps} type={type} style={sizeStyle}>
+        <span
+          {...containerProps}
+          ref={buttonRef as React.RefObject<HTMLSpanElement>}
+          style={sizeStyle}
+        >
           <div className={styles.content} style={sizeStyle}>
             <div className={styles.hotarea} style={hotAreaStyle} />
             {children}
           </div>
-        </button>
+        </span>
       )
     }
-  )
+
+    // anchor
+    if (htmlHref) {
+      return (
+        <a
+          href={htmlHref}
+          target={htmlTarget}
+          {...containerProps}
+          ref={buttonRef as React.RefObject<HTMLAnchorElement>}
+          style={sizeStyle}
+        >
+          <div className={styles.content} style={sizeStyle}>
+            <div className={styles.hotarea} style={hotAreaStyle} />
+            {children}
+          </div>
+        </a>
+      )
+    }
+
+    // link
+    if (href) {
+      return (
+        <Link
+          href={href}
+          replace={replace}
+          {...containerProps}
+          ref={buttonRef as React.RefObject<HTMLAnchorElement>}
+          style={sizeStyle}
+        >
+          <div className={styles.content} style={sizeStyle}>
+            <div className={styles.hotarea} style={hotAreaStyle} />
+            {children}
+          </div>
+        </Link>
+      )
+    }
+
+    // button
+    return (
+      <button
+        {...containerProps}
+        ref={buttonRef as React.RefObject<HTMLButtonElement>}
+        type={type}
+        style={sizeStyle}
+      >
+        <div className={styles.content} style={sizeStyle}>
+          <div className={styles.hotarea} style={hotAreaStyle} />
+          {children}
+        </div>
+      </button>
+    )
+  }
+)
 
 Button.displayName = 'Button'

@@ -16,15 +16,13 @@ const MeDigest = () => {
 
   return (
     <section className={styles.meDigest}>
-      <Link {...viewerPath} legacyBehavior>
-        <a className={styles.header}>
-          <Avatar user={viewer} size={48} />
+      <Link {...viewerPath} className={styles.header}>
+        <Avatar user={viewer} size={48} />
 
-          <section className={styles.names}>
-            <h1 className={styles.displayName}>{viewer.displayName}</h1>
-            <p className={styles.username}>@{viewer.userName}</p>
-          </section>
-        </a>
+        <section className={styles.names}>
+          <h1 className={styles.displayName}>{viewer.displayName}</h1>
+          <p className={styles.username}>@{viewer.userName}</p>
+        </section>
       </Link>
     </section>
   )

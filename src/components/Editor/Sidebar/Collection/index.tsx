@@ -1,6 +1,6 @@
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconCollection } from '@/public/static/icons/24px/collection.svg'
+import IconCollection from '@/public/static/icons/24px/collection.svg'
 import {
   ArticleDigestDropdown,
   EditorSearchSelectDialog,

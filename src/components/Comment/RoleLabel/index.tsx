@@ -13,13 +13,14 @@ const fragments = {
         id
       }
       node {
-        id
         ... on Article {
+          id
           author {
             id
           }
         }
         ... on Moment {
+          id
           author {
             id
           }

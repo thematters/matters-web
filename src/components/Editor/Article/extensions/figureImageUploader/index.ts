@@ -83,7 +83,7 @@ export const FigureImageUploader = Node.create<FigcaptionImageUploaderOptions>({
   addCommands() {
     return {
       insertFigureImageUploaders:
-        ({ files, pos, ...restAttrs }) =>
+        ({ files, pos }) =>
         ({ chain }) => {
           if (!files.length) {
             return true

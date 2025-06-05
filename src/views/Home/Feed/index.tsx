@@ -5,7 +5,7 @@ import { Layout, Spacer, useRoute, ViewerContext } from '~/components'
 import ChannelFeed from './ChannelFeed'
 import MainFeed from './MainFeed'
 
-export type FeedType = 'icymi' | 'newest' | 'hottest' | 'channel'
+export type FeedType = 'icymi' | 'newest'
 
 const HomeFeed = () => {
   const { isInPath } = useRoute()

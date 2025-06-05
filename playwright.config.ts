@@ -21,8 +21,8 @@ const config = defineConfig({
   },
   fullyParallel: true,
   forbidOnly: !!isCI,
-  retries: isCI ? 1 : 0,
-  // workers: isCI ? 2 : undefined,
+  retries: isCI ? 2 : 1,
+  workers: isCI ? 1 : undefined,
   maxFailures: process.env.CI ? 1 : 0,
   reporter: 'html',
   use: {

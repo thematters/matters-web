@@ -1,24 +1,29 @@
 import { MockedProvider } from '@apollo/client/testing'
-import { ComponentMeta, ComponentStory } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react'
 import React from 'react'
 
 import { TagDigest } from '~/components'
 
 import { MOCK_TAG } from '../../mocks'
 
-export default {
+const meta = {
   title: 'Components/TagDigest/Concise',
   component: TagDigest.Concise,
-} as ComponentMeta<typeof TagDigest.Concise>
+  decorators: [
+    (Story) => (
+      <MockedProvider>
+        <Story />
+      </MockedProvider>
+    ),
+  ],
+} satisfies Meta<typeof TagDigest.Concise>
 
-const Template: ComponentStory<typeof TagDigest.Concise> = (args) => (
-  <MockedProvider>
-    <TagDigest.Concise {...args} />
-  </MockedProvider>
-)
+export default meta
+type Story = StoryObj<typeof meta>
 
-export const Default = Template.bind({})
-Default.args = {
-  tag: MOCK_TAG as any,
-  showArticlesNum: true,
+export const Default: Story = {
+  args: {
+    tag: MOCK_TAG,
+    showArticlesNum: true,
+  },
 }

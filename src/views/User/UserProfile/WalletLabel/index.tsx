@@ -1,7 +1,7 @@
 import { FormattedMessage } from 'react-intl'
 import { useEnsName } from 'wagmi'
 
-import { ReactComponent as IconWallet } from '@/public/static/icons/24px/wallet.svg'
+import IconWallet from '@/public/static/icons/24px/wallet.svg'
 import { featureSupportedChains, truncate } from '~/common/utils'
 import {
   CopyToClipboard,
@@ -16,22 +16,16 @@ import styles from './styles.module.css'
 
 type WalletLabelProps = {
   user: NonNullable<UserProfileUserPublicQuery['user']>
-  isMe: boolean
   hasTooltip?: boolean
 }
 
-const WalletLabel: React.FC<WalletLabelProps> = ({
-  user,
-  isMe,
-  hasTooltip,
-}) => {
+const WalletLabel: React.FC<WalletLabelProps> = ({ user, hasTooltip }) => {
   const address = user?.info.ethAddress
-  const targetNetork = featureSupportedChains.ens[0]
   const { show, openDialog, closeDialog } = useDialogSwitch(false)
 
   const { data: ensName } = useEnsName({
     address: address as `0x${string}`,
-    chainId: targetNetork.id,
+    chainId: featureSupportedChains.ens[0].id,
   })
 
   if (!address) {

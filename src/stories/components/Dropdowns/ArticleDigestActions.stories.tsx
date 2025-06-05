@@ -1,28 +1,28 @@
-import { MockedProvider } from '@apollo/client/testing'
-import { ComponentMeta, ComponentStory } from '@storybook/react'
-import React from 'react'
+import type { Meta, StoryObj } from '@storybook/react'
 
 import FooterActions from '~/components/ArticleDigest/Feed/FooterActions'
 
 import { MOCK_ARTILCE } from '../../mocks'
 
-export default {
+const meta = {
   title: 'Components/Dropdowns/ArticleDigestActions',
   component: FooterActions,
-} as ComponentMeta<typeof FooterActions>
+  parameters: {
+    layout: 'centered',
+  },
+} satisfies Meta<typeof FooterActions>
 
-const Template: ComponentStory<typeof FooterActions> = (args) => (
-  <MockedProvider>
-    <FooterActions
-      article={MOCK_ARTILCE}
-      inUserArticles
-      hasExtend
-      hasEdit
-      hasShare
-      hasArchive
-      hasBookmark={false}
-    />
-  </MockedProvider>
-)
+export default meta
+type Story = StoryObj<typeof meta>
 
-export const Default = Template.bind({})
+export const Default: Story = {
+  args: {
+    article: MOCK_ARTILCE,
+    inUserArticles: true,
+    hasExtend: true,
+    hasEdit: true,
+    hasShare: true,
+    hasArchive: true,
+    hasBookmark: false,
+  },
+}

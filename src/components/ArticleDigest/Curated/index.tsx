@@ -1,9 +1,8 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
-import Link from 'next/link'
 import { useIntl } from 'react-intl'
 
-import { ReactComponent as IconStar } from '@/public/static/icons/24px/star.svg'
+import IconStar from '@/public/static/icons/24px/star.svg'
 import { TEST_ID } from '~/common/enums'
 import { toPath } from '~/common/utils'
 import {
@@ -30,7 +29,7 @@ export type ArticleDigestCuratedProps = {
   channelId?: string
   pinned?: boolean
 
-  onClick?: () => any
+  onClick?: () => void
   onClickAuthor?: () => void
 } & CardProps
 
@@ -96,7 +95,7 @@ export const ArticleDigestCurated = ({
       {...cardProps}
     >
       <LinkWrapper {...path} onClick={onClick}>
-        <section
+        <div
           className={coverClasses}
           data-test-id={TEST_ID.DIGEST_ARTICLE_FEED_COVER}
         >
@@ -123,23 +122,21 @@ export const ArticleDigestCurated = ({
               </div>
             </Tooltip>
           )}
-        </section>
+        </div>
       </LinkWrapper>
 
-      <Link href={path.href}>
-        <section className={styles.author}>
-          <UserDigest.Mini
-            user={article.author}
-            avatarSize={20}
-            textSize={13}
-            nameColor="black"
-            spacing={4}
-            hasAvatar
-            hasDisplayName
-            onClick={onClickAuthor}
-          />
-        </section>
-      </Link>
+      <section className={styles.author}>
+        <UserDigest.Mini
+          user={article.author}
+          avatarSize={20}
+          textSize={13}
+          nameColor="black"
+          spacing={4}
+          hasAvatar
+          hasDisplayName
+          onClick={onClickAuthor}
+        />
+      </section>
 
       <section className={styles.title}>
         <ArticleDigestTitle

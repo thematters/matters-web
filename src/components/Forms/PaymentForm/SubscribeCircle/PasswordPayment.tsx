@@ -1,9 +1,10 @@
+import { ApolloError } from '@apollo/client'
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
-import { useEffect } from 'react'
+import { useEffect, useId } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { ReactComponent as IconStripeCard } from '@/public/static/icons/stripe-card.svg'
+import IconStripeCard from '@/public/static/icons/stripe-card.svg'
 import { PAYMENT_PASSSWORD_LENGTH } from '~/common/enums'
 import { parseFormSubmitErrors, validatePaymentPassword } from '~/common/utils'
 import {
@@ -48,7 +49,7 @@ const Confirm: React.FC<FormProps> = ({
   closeDialog,
 }) => {
   const intl = useIntl()
-  const formId = 'subscirbe-circle-form'
+  const formId = useId()
 
   const [subscribeCircle] = useMutation<SubscribeCircleMutation>(
     SUBSCRIBE_CIRCLE,
@@ -83,7 +84,7 @@ const Confirm: React.FC<FormProps> = ({
         submitCallback()
       } catch (error) {
         setSubmitting(false)
-        const [messages, codes] = parseFormSubmitErrors(error as any)
+        const [messages, codes] = parseFormSubmitErrors(error as ApolloError)
         setFieldError('password', intl.formatMessage(messages[codes[0]]))
         setFieldValue('password', '', false)
       }

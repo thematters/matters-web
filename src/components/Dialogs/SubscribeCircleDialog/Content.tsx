@@ -29,9 +29,7 @@ const DynamicSubscribeCircleForm = dynamic(
 
 const SubscribeCircleDialogContent = ({
   forward,
-  back,
   currStep,
-  prevStep,
   closeDialog,
   circle,
 }: SubscribeCircleDialogContentProps) => {

@@ -83,8 +83,6 @@ const EditorSearchingArea: React.FC<SearchingAreaProps> = ({
   stagingNodes,
 
   inSearchingArea,
-  toStagingArea,
-  toSearchingArea,
   addNodeToStaging,
 
   createTag,

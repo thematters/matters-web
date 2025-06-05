@@ -1,6 +1,6 @@
 import { useIntl } from 'react-intl'
 
-import { ReactComponent as IconShare } from '@/public/static/icons/24px/share.svg'
+import IconShare from '@/public/static/icons/24px/share.svg'
 import { Button, Icon, ShareDialog, ShareDialogProps } from '~/components'
 
 export const ShareButton: React.FC<Omit<ShareDialogProps, 'children'>> = (

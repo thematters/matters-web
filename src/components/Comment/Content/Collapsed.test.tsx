@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
-import { render, screen } from '~/common/utils/test'
+import { fireEvent, render, screen } from '~/common/utils/test'
 import { MOCK_COMMENT } from '~/stories/mocks'
 
 import CommentCollapsed from './Collapsed'
@@ -22,7 +22,7 @@ describe('<Comemnt.Content/Collapsed>', () => {
 
     // expanded
     const $expandBtn = screen.getByRole('button', { name: 'Expand' })
-    $expandBtn.click()
+    fireEvent.click($expandBtn)
     expect(screen.getByText(MOCK_COMMENT.content)).toBeInTheDocument()
   })
 })

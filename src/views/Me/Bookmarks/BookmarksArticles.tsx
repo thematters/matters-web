@@ -74,7 +74,7 @@ const BaseMeBookmarksArticles = () => {
   return (
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore} eof>
       <List>
-        {edges.map(({ node, cursor }) => (
+        {edges.map(({ node }) => (
           <List.Item key={node.id}>
             <ArticleDigestFeed article={node} disabledArchived />
           </List.Item>

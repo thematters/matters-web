@@ -2,9 +2,9 @@ import { useApolloClient } from '@apollo/client'
 import { useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconGoogle2 } from '@/public/static/icons/24px/google2.svg'
-import { ReactComponent as IconMail } from '@/public/static/icons/24px/mail.svg'
-import { ReactComponent as IconX2 } from '@/public/static/icons/24px/x2.svg'
+import IconGoogle2 from '@/public/static/icons/24px/google2.svg'
+import IconMail from '@/public/static/icons/24px/mail.svg'
+import IconX2 from '@/public/static/icons/24px/x2.svg'
 import { PATHS } from '~/common/enums'
 import { googleOauthUrl, sleep, twitterOauthUrl } from '~/common/utils'
 import { Icon, Spinner, useRoute } from '~/components'
@@ -49,7 +49,7 @@ export const AuthNormalFeed = ({ gotoEmailSignup, gotoEmailLogin }: Props) => {
       }
       const url = await twitterOauthUrl(oauthType, oauthRequestToken)
       router.push(url)
-    } catch (error) {
+    } catch {
       await sleep(3 * 1000)
       gotoTwitter()
     }

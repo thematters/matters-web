@@ -8,10 +8,10 @@
     @mixin line-clamp;
 
     padding-left: var(--sp12);
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 3;
     font-size: var(--text16);
     color: var(--color-grey);
-    text-overflow: ellipsis;
     border-left-width: 3px;
-    -webkit-line-clamp: 3;
   }
 }

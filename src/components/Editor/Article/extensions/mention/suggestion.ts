@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ApolloClient } from '@apollo/client'
 import { ReactRenderer } from '@tiptap/react'
 import type { SuggestionProps } from '@tiptap/suggestion'
@@ -11,7 +12,7 @@ import { SearchUsersQuery, UserDigestMiniUserFragment } from '~/gql/graphql'
 import { MentionList } from './MentionList'
 
 type MakeMentionSuggestionProps = {
-  client: ApolloClient<{}>
+  client: ApolloClient<object>
 }
 
 export const makeMentionSuggestion = ({
@@ -111,7 +112,7 @@ export const makeMentionSuggestion = ({
           return true
         }
 
-        // @ts-ignore
+        // @ts-expect-error - The type definition for onKeyDown is incorrect
         return component?.ref?.onKeyDown(props)
       },
 

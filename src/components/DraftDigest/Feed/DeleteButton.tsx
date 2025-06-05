@@ -2,7 +2,7 @@ import gql from 'graphql-tag'
 import { useContext } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { ReactComponent as IconDelete } from '@/public/static/icons/24px/delete.svg'
+import IconDelete from '@/public/static/icons/24px/delete.svg'
 import { TEST_ID } from '~/common/enums'
 import {
   Dialog,
@@ -48,7 +48,8 @@ const DeleteButton = ({ draft }: DeleteButtonProps) => {
         fields: {
           drafts(existingDrafts, { readField }) {
             const filteredEdges = existingDrafts.edges.filter(
-              ({ node }: { node: any }) => readField('id', node) !== draft.id
+              ({ node }: { node: DeleteButtonDraftFragment }) =>
+                readField('id', node) !== draft.id
             )
             return {
               ...existingDrafts,

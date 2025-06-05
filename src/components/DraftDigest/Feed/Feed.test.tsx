@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 
 import { TEST_ID } from '~/common/enums'
-import { render, screen, waitFor } from '~/common/utils/test'
+import { fireEvent, render, screen, waitFor } from '~/common/utils/test'
 import { DraftDigest } from '~/components'
 import { MOCK_DRAFT } from '~/stories/mocks'
 
@@ -17,7 +17,7 @@ describe('<DraftDigest.Feed>', () => {
 
     const $deleteButton = screen.getByRole('button', { name: 'Delete' })
     expect($deleteButton).toBeInTheDocument()
-    $deleteButton.click()
+    fireEvent.click($deleteButton)
 
     await waitFor(() => {
       expect(

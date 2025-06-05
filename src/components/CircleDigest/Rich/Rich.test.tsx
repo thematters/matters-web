@@ -2,7 +2,7 @@ import mockRouter from 'next-router-mock'
 import { describe, expect, it, vi } from 'vitest'
 
 import { TEST_ID } from '~/common/enums'
-import { render, screen } from '~/common/utils/test'
+import { fireEvent, render, screen } from '~/common/utils/test'
 import { CircleDigest } from '~/components'
 import { MOCK_CIRCLE } from '~/stories/mocks'
 
@@ -23,7 +23,7 @@ describe('<CircleDigest.Rich>', () => {
 
     const $digest = screen.getByTestId(TEST_ID.DIGEST_CIRCLE_RICH)
     expect($digest).toBeInTheDocument()
-    $digest.click()
+    fireEvent.click($digest)
     expect(mockRouter.asPath).toContain(MOCK_CIRCLE.name)
     expect(handleClick).toBeCalledTimes(1)
 
@@ -31,7 +31,7 @@ describe('<CircleDigest.Rich>', () => {
     const $displayName = screen.getByTestId(TEST_ID.DIGEST_CIRCLE_DISPLAY_NAME)
     expect($displayName).toHaveTextContent(MOCK_CIRCLE.displayName)
     mockRouter.push('/')
-    $displayName.click()
+    fireEvent.click($displayName)
     expect(mockRouter.asPath).toContain(MOCK_CIRCLE.name)
     expect(handleClick).toBeCalledTimes(2)
 
@@ -39,7 +39,7 @@ describe('<CircleDigest.Rich>', () => {
     const $avatar = screen.getByTestId(TEST_ID.CIRCLE_AVATAR)
     expect($avatar).toBeInTheDocument()
     mockRouter.push('/')
-    $avatar.click()
+    fireEvent.click($avatar)
     expect(mockRouter.asPath).toContain(MOCK_CIRCLE.name)
     expect(handleClick).toBeCalledTimes(3)
 
@@ -85,7 +85,7 @@ describe('<CircleDigest.Rich>', () => {
 
     const $digest = screen.getByTestId(TEST_ID.DIGEST_CIRCLE_RICH)
     expect($digest).toBeInTheDocument()
-    $digest.click()
+    fireEvent.click($digest)
     expect(mockRouter.asPath).not.toContain(MOCK_CIRCLE.name)
     expect(handleClick).toBeCalledTimes(0)
 
@@ -93,7 +93,7 @@ describe('<CircleDigest.Rich>', () => {
     const $displayName = screen.getByText(MOCK_CIRCLE.displayName)
     expect($displayName).toBeInTheDocument()
     mockRouter.push('/')
-    $displayName.click()
+    fireEvent.click($displayName)
     expect(mockRouter.asPath).not.toContain(MOCK_CIRCLE.name)
     expect(handleClick).toBeCalledTimes(0)
   })

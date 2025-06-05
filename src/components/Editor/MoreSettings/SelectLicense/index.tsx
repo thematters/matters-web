@@ -113,7 +113,6 @@ const SelectLicense = ({ isInCircle, license, onChange }: Props) => {
 
   return (
     <Form.Select<ArticleLicenseType>
-      name="select-license"
       label={<FormattedMessage defaultMessage="License" id="HBxXD/" />}
       onChange={(option) => onChange(option.value)}
       options={options.map((value) => {

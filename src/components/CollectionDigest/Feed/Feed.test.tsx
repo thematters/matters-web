@@ -2,7 +2,7 @@ import mockRouter from 'next-router-mock'
 import { describe, expect, it, vi } from 'vitest'
 
 import { TEST_ID } from '~/common/enums'
-import { render, screen } from '~/common/utils/test'
+import { fireEvent, render, screen } from '~/common/utils/test'
 import { CollectionDigestFeed } from '~/components'
 import { MOCK_COLLECTON } from '~/stories/mocks'
 
@@ -20,21 +20,21 @@ describe('<CollectionDigestFeed>', () => {
     const $book = screen.getByTestId(TEST_ID.BOOK_COLLECTION)
     expect($book).toBeInTheDocument()
     mockRouter.push('/')
-    $book.click()
+    fireEvent.click($book)
     expect(mockRouter.asPath).toContain(MOCK_COLLECTON.id)
     expect(handleClick).toBeCalledTimes(1)
 
     const $heading = screen.getByTestId(TEST_ID.BOOK_TITLE)
     expect($heading).toBeInTheDocument()
     mockRouter.push('/')
-    $heading.click()
+    fireEvent.click($heading)
     expect(mockRouter.asPath).toContain(MOCK_COLLECTON.id)
     expect(handleClick).toBeCalledTimes(2)
 
     const $description = screen.getByText(MOCK_COLLECTON.description)
     expect($description).toBeInTheDocument()
     mockRouter.push('/')
-    $description.click()
+    fireEvent.click($description)
     expect(mockRouter.asPath).toContain(MOCK_COLLECTON.id)
     expect(handleClick).toBeCalledTimes(3)
 

@@ -46,7 +46,7 @@ export const Drawer: React.ComponentType<
     setId(crypto.randomUUID())
   }, [])
 
-  useEventListener(CLOSE_OTHER_DRAWERS, (detail: { [key: string]: any }) => {
+  useEventListener(CLOSE_OTHER_DRAWERS, (detail: { id: string }) => {
     if (!isOpen) {
       return
     }

@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { ReactComponent as IconSave } from '@/public/static/icons/24px/save.svg'
+import IconSave from '@/public/static/icons/24px/save.svg'
 import {
   ERROR_CODES,
   ERROR_MESSAGES,

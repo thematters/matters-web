@@ -1,8 +1,8 @@
 import { useQuery } from '@apollo/client'
 import gql from 'graphql-tag'
 
-import { ReactComponent as IconPin } from '@/public/static/icons/24px/pin.svg'
-import { ReactComponent as IconUnpin } from '@/public/static/icons/24px/unpin.svg'
+import IconPin from '@/public/static/icons/24px/pin.svg'
+import IconUnpin from '@/public/static/icons/24px/unpin.svg'
 import { Icon, Menu, Spinner, toast, useMutation } from '~/components'
 import {
   FetchArticleAdStatusQuery,

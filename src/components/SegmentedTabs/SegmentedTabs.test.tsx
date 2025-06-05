@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { describe, expect, it } from 'vitest'
 
-import { render, screen } from '~/common/utils/test'
+import { fireEvent, render, screen } from '~/common/utils/test'
 import { SegmentedTabs } from '~/components'
 
 type FeedType = 'alice' | 'bob'
@@ -38,13 +38,13 @@ describe('<SegmentedTabs>', () => {
     )
 
     // switch to second tab
-    $secondTab.click()
+    fireEvent.click($secondTab)
     expect(screen.getByRole('tab', { selected: true }).innerText).toBe(
       $secondTab.innerText
     )
 
     // switch to first tab
-    $firstTab.click()
+    fireEvent.click($firstTab)
     expect(screen.getByRole('tab', { selected: true }).innerText).toBe(
       $firstTab.innerText
     )
@@ -70,7 +70,7 @@ describe('<SegmentedTabs>', () => {
     )
 
     // switch to second tab
-    $secondTab.click()
+    fireEvent.click($secondTab)
     expect(screen.getByRole('tab', { selected: true }).innerText).toBe(
       $firstTab.innerText
     )

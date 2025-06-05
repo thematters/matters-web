@@ -14,11 +14,11 @@
   & .actions {
     @mixin flex-center-space-between;
 
-    & :global(> *) {
+    & > :global(*) {
       margin-left: var(--sp32);
     }
 
-    & :global(> * + *) {
+    & > :global(* + *) {
       position: relative;
 
       &::before {
@@ -46,7 +46,7 @@
   background: var(--color-negative-red);
 
   & .actions {
-    & :global(> * + *) {
+    & > :global(* + *) {
       &::before {
         background: var(--color-white);
       }

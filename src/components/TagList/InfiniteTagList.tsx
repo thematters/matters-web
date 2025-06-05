@@ -1,15 +1,16 @@
 import { analytics } from '~/common/utils'
 import { InfiniteScroll, TagDigest } from '~/components'
+import { TagDigestFeedTagFragment } from '~/gql/graphql'
 
 import styles from './styles.module.css'
 
 interface Props {
-  edges: Array<{ node: any; cursor?: string }>
+  edges: Array<{ node: TagDigestFeedTagFragment; cursor?: string }>
   pageInfo: {
     hasNextPage: boolean
     endCursor?: string | null
   }
-  loadMore: () => Promise<any>
+  loadMore: () => Promise<unknown>
   trackingType: 'search_tag' | 'all_tags' | 'all_tags_recommended'
   searchKey?: string
   maxResults?: number

@@ -2,7 +2,7 @@ import '@testing-library/jest-dom/vitest'
 import 'vitest-canvas-mock'
 
 import { Globals } from '@react-spring/web'
-import { cleanup, configure } from '@testing-library/react'
+import { configure } from '@testing-library/react'
 import mockRouter from 'next-router-mock'
 import { afterEach, beforeAll, vi } from 'vitest'
 
@@ -18,7 +18,6 @@ beforeAll(() => {
 
 // runs a cleanup after each test case (e.g. clearing jsdom)
 afterEach(() => {
-  cleanup()
   mockRouter.push('/')
 })
 
@@ -60,5 +59,13 @@ vi.mock('next/dynamic', async () => {
 
       return RequiredComponent
     },
+  }
+})
+
+vi.mock(import('react'), async (importOriginal) => {
+  const actual = await importOriginal()
+  return {
+    ...actual,
+    useId: () => '__use_id__',
   }
 })

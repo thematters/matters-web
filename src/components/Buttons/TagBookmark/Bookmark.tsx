@@ -2,7 +2,7 @@ import _isNil from 'lodash/isNil'
 import { useContext } from 'react'
 import { useIntl } from 'react-intl'
 
-import { ReactComponent as IconSave } from '@/public/static/icons/24px/save.svg'
+import IconSave from '@/public/static/icons/24px/save.svg'
 import {
   OPEN_UNIVERSAL_AUTH_DIALOG,
   UNIVERSAL_AUTH_TRIGGER,

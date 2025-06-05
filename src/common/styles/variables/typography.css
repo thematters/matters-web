@@ -1,19 +1,24 @@
 :root {
   /* Font Stack */
-  --font-sans-tc: -apple-system, blinkmacsystemfont, 'Helvetica Neue',
-    'Segoe UI', roboto, arial, 'PingFang TC', 'PingFang SC',
-    'Microsoft JhengHei', 'Microsoft YaHei', 'WenQuanYi Micro Hei', sans-serif,
+  --font-sans-tc:
+    -apple-system, blinkmacsystemfont, 'Helvetica Neue', 'Segoe UI', roboto,
+    arial, 'PingFang TC', 'PingFang SC', 'Microsoft JhengHei',
+    'Microsoft YaHei', 'Noto Sans TC', 'WenQuanYi Micro Hei', sans-serif,
     'Apple Color Emoji', 'Segoe UI Emoji';
-  --font-sans-sc: -apple-system, blinkmacsystemfont, 'Helvetica Neue',
-    'Segoe UI', roboto, arial, 'PingFang SC', 'PingFang TC', 'Microsoft YaHei',
-    'Microsoft JhengHei', 'WenQuanYi Micro Hei', sans-serif, 'Apple Color Emoji',
-    'Segoe UI Emoji';
-  --font-serif-tc: 'Songti TC', 'Songti SC', 'NSimSun', 'SimSun', serif,
-    var(--font-sans-sc), 'Apple Color Emoji', 'Segoe UI Emoji';
-  --font-serif-sc: 'Songti SC', 'Songti TC', 'NSimSun', 'SimSun', serif,
-    var(--font-sans-sc), 'Apple Color Emoji', 'Segoe UI Emoji';
-  --font-mono: menlo, 'SFMono-Regular', consolas, monaco, monospace,
-    var(--font-sans-sc), 'Apple Color Emoji', 'Segoe UI Emoji';
+  --font-sans-sc:
+    -apple-system, blinkmacsystemfont, 'Helvetica Neue', 'Segoe UI', roboto,
+    arial, 'PingFang SC', 'PingFang TC', 'Microsoft YaHei',
+    'Microsoft JhengHei', 'Noto Sans SC', 'WenQuanYi Micro Hei', sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji';
+  --font-serif-tc:
+    'Songti TC', 'Songti SC', 'NSimSun', 'SimSun', serif, var(--font-sans-sc),
+    'Apple Color Emoji', 'Segoe UI Emoji';
+  --font-serif-sc:
+    'Songti SC', 'Songti TC', 'NSimSun', 'SimSun', serif, var(--font-sans-sc),
+    'Apple Color Emoji', 'Segoe UI Emoji';
+  --font-mono:
+    menlo, 'SFMono-Regular', consolas, monaco, monospace, var(--font-sans-sc),
+    'Apple Color Emoji', 'Segoe UI Emoji';
 
   /* Type Scale */
   --text12: 0.75rem; /* 12px */

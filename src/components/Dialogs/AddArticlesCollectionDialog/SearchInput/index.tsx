@@ -1,15 +1,15 @@
-import { VisuallyHidden } from '@reach/visually-hidden'
 import { Formik } from 'formik'
+import { useId } from 'react'
+import { useVisuallyHidden } from 'react-aria'
 import { useIntl } from 'react-intl'
 
-import { ReactComponent as IconNavSearch } from '@/public/static/icons/24px/nav-search.svg'
-import { ReactComponent as IconTimes } from '@/public/static/icons/24px/times.svg'
+import IconNavSearch from '@/public/static/icons/24px/nav-search.svg'
+import IconTimes from '@/public/static/icons/24px/times.svg'
 import { Icon } from '~/components'
 
 import styles from './styles.module.css'
 
 export interface SearchInputProps {
-  value: string
   onChange: (value: string) => void
   onFocus?: () => void
   onBlur?: () => void
@@ -17,18 +17,19 @@ export interface SearchInputProps {
 }
 
 const SearchInput: React.FC<SearchInputProps> = ({
-  value,
   onChange,
   onFocus,
   onBlur,
   autoFocus,
 }) => {
-  const fieldId = `search-input`
+  const fieldId = useId()
   const intl = useIntl()
   const searchCopy = intl.formatMessage({
     defaultMessage: 'Search',
     id: 'xmcVZ0',
   })
+
+  const { visuallyHiddenProps } = useVisuallyHidden()
 
   return (
     <Formik initialValues={{ q: '' }} enableReinitialize onSubmit={() => {}}>
@@ -41,9 +42,9 @@ const SearchInput: React.FC<SearchInputProps> = ({
             autoComplete="off"
             action=""
           >
-            <VisuallyHidden>
-              <label htmlFor={fieldId}>{searchCopy}</label>
-            </VisuallyHidden>
+            <label htmlFor={fieldId} {...visuallyHiddenProps}>
+              {searchCopy}
+            </label>
 
             <input
               id={fieldId}
@@ -59,10 +60,10 @@ const SearchInput: React.FC<SearchInputProps> = ({
                 onChange(e.target.value)
               }}
               onFocus={() => {
-                onFocus && onFocus()
+                onFocus?.()
               }}
               onBlur={() => {
-                onBlur && onBlur()
+                onBlur?.()
               }}
             />
 

@@ -53,7 +53,7 @@ const uploadLink = ({
   isPublicOperation,
 }: {
   host: string
-  headers: any
+  headers?: IncomingHttpHeaders
   isPublicOperation: boolean
 }) => {
   let apiUrl = process.env.NEXT_PUBLIC_API_URL as string
@@ -70,15 +70,21 @@ const uploadLink = ({
   return createUploadLink({
     uri: apiUrl,
     headers: {
-      ...headers,
-      cookie: isPublicOperation ? '' : headers.cookie,
+      ...(headers as Record<string, string>),
+      ...(isPublicOperation ? {} : { cookie: headers?.cookie || '' }),
       host: hostname,
       'Apollo-Require-Preflight': 'true',
     },
   })
 }
 
-const directionalLink = ({ host, headers }: { host: string; headers: any }) =>
+const directionalLink = ({
+  host,
+  headers,
+}: {
+  host: string
+  headers?: IncomingHttpHeaders
+}) =>
   new RetryLink().split(
     (operation) => operation.getContext()[GQL_CONTEXT_PUBLIC_QUERY_KEY],
     uploadLink({ host, headers, isPublicOperation: true }),
@@ -88,7 +94,7 @@ const directionalLink = ({ host, headers }: { host: string; headers: any }) =>
 /**
  * Logging error message
  */
-const errorLink = onError(({ graphQLErrors, networkError }) => {
+const errorLink = onError(({ graphQLErrors, networkError, protocolErrors }) => {
   if (graphQLErrors) {
     graphQLErrors.map(({ message, locations, extensions, path }) =>
       console.log(
@@ -101,8 +107,19 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
     )
   }
 
+  if (protocolErrors) {
+    protocolErrors.forEach(({ message, extensions }) => {
+      console.log(
+        `[Protocol error]: Message: ${message}, Extensions: ${JSON.stringify(extensions)}`
+      )
+    })
+  }
+
   if (networkError) {
     console.log(`[Network error]: ${networkError}`)
+    console.log(networkError.message)
+    console.log(networkError.name)
+    console.log(networkError.stack)
   }
 })
 
@@ -183,7 +200,10 @@ const agentHashLink = setContext((_, { headers }) => {
  */
 let globalApolloClient: ApolloClient<NormalizedCacheObject>
 
-export const getApollo = (initialState?: {}, headers?: {}) => {
+export const getApollo = (
+  initialState?: object,
+  headers?: IncomingHttpHeaders
+) => {
   // Ensure you create a new client for each server-side request to prevent
   // data sharing between connections.
   if (isServer) {
@@ -197,7 +217,7 @@ export const getApollo = (initialState?: {}, headers?: {}) => {
 }
 
 export const createApolloClient = (
-  initialState?: {},
+  initialState?: object,
   headers?: IncomingHttpHeaders
 ) => {
   const cache = new InMemoryCache({
@@ -220,7 +240,7 @@ export const createApolloClient = (
       User: {
         fields: {
           recommendation: {
-            read(_, { args, toReference }) {
+            read(_, { toReference }) {
               return toReference({
                 __typename: 'Recommendation',
                 id: 'visitor',
@@ -230,7 +250,7 @@ export const createApolloClient = (
         },
       },
     },
-  }).restore(initialState || {})
+  }).restore((initialState || {}) as NormalizedCacheObject)
 
   const host = headers?.host || (isClient ? _get(window, 'location.host') : '')
   const cookie = headers?.cookie || (isClient ? document.cookie : '')

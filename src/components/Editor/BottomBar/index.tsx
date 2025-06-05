@@ -1,10 +1,10 @@
 import classNames from 'classnames'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { ReactComponent as IconCollection } from '@/public/static/icons/24px/collection.svg'
-import { ReactComponent as IconHashtag } from '@/public/static/icons/24px/hashtag.svg'
-import { ReactComponent as IconImage } from '@/public/static/icons/24px/image.svg'
-import { ReactComponent as IconSettings } from '@/public/static/icons/24px/settings.svg'
+import IconCollection from '@/public/static/icons/24px/collection.svg'
+import IconHashtag from '@/public/static/icons/24px/hashtag.svg'
+import IconImage from '@/public/static/icons/24px/image.svg'
+import IconSettings from '@/public/static/icons/24px/settings.svg'
 import {
   EditorSearchSelectDialog,
   Icon,
@@ -36,7 +36,6 @@ import MobileSettingsDialog from './MobileSettingsDialog'
 import styles from './styles.module.css'
 
 export type BottomBarProps = {
-  saving: boolean
   disabled: boolean
 } & SetCoverProps &
   SetCollectionProps &
@@ -101,7 +100,6 @@ const BottomBar: React.FC<BottomBarProps> = ({
   toggleIndent,
   indentSaving,
 
-  saving,
   disabled,
 }) => {
   const intl = useIntl()

@@ -103,7 +103,7 @@ const BaseAuthors = () => {
   return (
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore} eof>
       <List hasBorder={false}>
-        {edges.map(({ node, cursor }, i) => (
+        {edges.map(({ node }, i) => (
           <List.Item key={node.id}>
             <UserDigest.Rich
               user={node}

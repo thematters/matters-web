@@ -1,10 +1,10 @@
 import jump from 'jump.js'
 
-import IMAGE_MIGRATION_LG from '@/public/static/images/migration-intro-lg.svg'
-import IMAGE_MIGRATION_MD from '@/public/static/images/migration-intro-md.svg'
-import IMAGE_MIGRATION_SM from '@/public/static/images/migration-intro-sm.svg'
-import IMAGE_MIGRATION_XL from '@/public/static/images/migration-intro-xl.svg'
-import IMAGE_MIGRATION_XS from '@/public/static/images/migration-intro-xs.svg'
+import IMAGE_MIGRATION_LG from '@/public/static/images/migration-intro-lg.svg?url'
+import IMAGE_MIGRATION_MD from '@/public/static/images/migration-intro-md.svg?url'
+import IMAGE_MIGRATION_SM from '@/public/static/images/migration-intro-sm.svg?url'
+import IMAGE_MIGRATION_XL from '@/public/static/images/migration-intro-xl.svg?url'
+import IMAGE_MIGRATION_XS from '@/public/static/images/migration-intro-xs.svg?url'
 import { Button, TextIcon, Translate } from '~/components'
 
 import layoutStyles from '../../About/layout.module.css'
@@ -12,11 +12,11 @@ import styles from './styles.module.css'
 
 const Intro = () => {
   const style = {
-    '--migration-intro-bg-xs': `url(${IMAGE_MIGRATION_XS})`,
-    '--migration-intro-bg-sm': `url(${IMAGE_MIGRATION_SM})`,
-    '--migration-intro-bg-md': `url(${IMAGE_MIGRATION_MD})`,
-    '--migration-intro-bg-lg': `url(${IMAGE_MIGRATION_LG})`,
-    '--migration-intro-bg-xl': `url(${IMAGE_MIGRATION_XL})`,
+    '--migration-intro-bg-xs': `url(${IMAGE_MIGRATION_XS.src})`,
+    '--migration-intro-bg-sm': `url(${IMAGE_MIGRATION_SM.src})`,
+    '--migration-intro-bg-md': `url(${IMAGE_MIGRATION_MD.src})`,
+    '--migration-intro-bg-lg': `url(${IMAGE_MIGRATION_LG.src})`,
+    '--migration-intro-bg-xl': `url(${IMAGE_MIGRATION_XL.src})`,
   } as React.CSSProperties
 
   return (

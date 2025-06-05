@@ -1,7 +1,7 @@
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconIllustation } from '@/public/static/images/callback/Illustation.svg'
-import { ReactComponent as IconLogo } from '@/public/static/images/callback/logo.svg'
+import IconIllustation from '@/public/static/images/callback/Illustation.svg'
+import IconLogo from '@/public/static/images/callback/logo.svg'
 import { PATHS } from '~/common/enums'
 import { Icon } from '~/components'
 

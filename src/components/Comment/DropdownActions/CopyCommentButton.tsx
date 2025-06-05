@@ -1,7 +1,7 @@
 import { ReactNode } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconCopy } from '@/public/static/icons/24px/copy.svg'
+import IconCopy from '@/public/static/icons/24px/copy.svg'
 import { CopyToClipboard, Icon, Menu } from '~/components'
 
 const CopyCommentButton = ({

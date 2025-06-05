@@ -5,8 +5,8 @@ const site_domain_tld =
     process.env.NEXT_PUBLIC_SITE_DOMAIN_TLD_OLD || 'matters.news'
 
 // Sentry CSP reporting config
-const SENTRY_REPORT_URI = `https://${process.env.NEXT_PUBLIC_SENTRY_DOMAIN}/api/${process.env.NEXT_PUBLIC_SENTRY_PROJECT_ID}/security/?sentry_key=${process.env.NEXT_PUBLIC_SENTRY_PUBLIC_KEY}`
-const SENTRY_CSP_REPORT_GROUP = 'csp-endpoint'
+export const SENTRY_REPORT_URI = `https://${process.env.NEXT_PUBLIC_SENTRY_DOMAIN}/api/${process.env.NEXT_PUBLIC_SENTRY_PROJECT_ID}/security/?sentry_key=${process.env.NEXT_PUBLIC_SENTRY_PUBLIC_KEY}`
+export const SENTRY_CSP_REPORT_GROUP = 'csp-endpoint'
 
 // For WalletConnect
 // @see https://github.com/WalletConnect/walletconnect-docs/pull/1603/files
@@ -152,6 +152,7 @@ const CONNECT_SRC = [
   // WalletConnect
   '*.walletconnect.org',
   '*.walletconnect.com',
+  '*.web3modal.org',
 
   // Alchemy
   '*.alchemyapi.io',
@@ -211,7 +212,7 @@ const PREFETCH_SRC = [
   process.env.NEXT_PUBLIC_NEXT_ASSET_DOMAIN,
 ]
 
-const CSP_POLICY = Object.entries({
+export const CSP_POLICY = Object.entries({
   'default-src': DEFAULT_SRC,
   'script-src': SCRIPT_SRC,
   'style-src': STYLE_SRC,
@@ -234,5 +235,3 @@ const CSP_POLICY = Object.entries({
     return `${k} ${values.trim()}`
   })
   .join('; ')
-
-module.exports = { CSP_POLICY, SENTRY_REPORT_URI, SENTRY_CSP_REPORT_GROUP }

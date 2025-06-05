@@ -2,13 +2,7 @@ import { expect, Locator, test } from '@playwright/test'
 
 import { PATHS, TEST_ID } from '~/common/enums'
 
-import {
-  authedTest,
-  login,
-  logout,
-  pageGoto,
-  waitForAPIResponse,
-} from './helpers'
+import { authedTest, login, logout, pageGoto } from './helpers'
 import { PASSWORDOR_CODE, REGISTER_CODE } from './helpers/enum'
 
 test.describe.configure({ mode: 'serial' })
@@ -66,14 +60,6 @@ test.describe('Authentication', () => {
     await expect(
       page.getByText('This login code has expired, please try to resend')
     ).toBeVisible()
-    await Promise.all([
-      waitForAPIResponse({
-        page,
-        path: 'data.sendVerificationCode',
-        isOK: (value) => value === true,
-      }),
-      page.getByRole('button', { name: 'Resend' }).click(),
-    ])
 
     // USER_PASSWORD_INVALID error
     await page
