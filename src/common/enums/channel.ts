@@ -3,7 +3,7 @@ export const CHANNEL_PATH_TYPES = {
   REGULAR_CHANNEL: 'c',
 } as const
 
-export const FEATUED_CHANNEL_SHORT_HASH = {
-  development: 'zctb1wb9s2vn',
-  production: 'zlkqtdykun21',
-}
+const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
+export const FEATUED_CHANNEL_SHORT_HASH = isProd
+  ? 'zlkqtdykun21'
+  : 'zctb1wb9s2vn'

@@ -47,10 +47,9 @@ const SideChannelNav = () => {
     })
   }
 
-  const featuredShortHash =
-    process.env.NODE_ENV === 'production'
-      ? FEATUED_CHANNEL_SHORT_HASH.production
-      : FEATUED_CHANNEL_SHORT_HASH.development
+  const filteredChannels = channels.filter(
+    (c) => c.shortHash !== FEATUED_CHANNEL_SHORT_HASH
+  )
 
   return (
     <section className={styles.content} ref={contentRef}>
@@ -95,11 +94,9 @@ const SideChannelNav = () => {
           </span>
         </Link>
 
-        {channels.map((c) =>
-          c.shortHash !== featuredShortHash ? (
-            <ChannelItem key={c.id} channel={c} />
-          ) : null
-        )}
+        {filteredChannels.map((c) => (
+          <ChannelItem key={c.id} channel={c} />
+        ))}
 
         <Link
           href={PATHS.NEWEST}
