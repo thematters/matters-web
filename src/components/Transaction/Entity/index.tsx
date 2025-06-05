@@ -1,5 +1,7 @@
+import Link from 'next/link'
+
 import { toPath } from '~/common/utils'
-import { ArticleDigestTitle, CircleDigest, LinkWrapper } from '~/components'
+import { ArticleDigestTitle, CircleDigest } from '~/components'
 import { DigestTransactionFragment } from '~/gql/graphql'
 
 import styles from './styles.module.css'
@@ -20,7 +22,7 @@ const Entity = ({ tx }: { tx: DigestTransactionFragment }) => {
   return (
     <section className={styles.entity}>
       {isDonation && article && (
-        <LinkWrapper {...path!}>
+        <Link {...path!}>
           <section className={styles.title}>
             <ArticleDigestTitle
               article={article}
@@ -29,11 +31,11 @@ const Entity = ({ tx }: { tx: DigestTransactionFragment }) => {
               textSize={12}
             />
           </section>
-        </LinkWrapper>
+        </Link>
       )}
 
       {isSubscription && circle && (
-        <LinkWrapper {...path!}>
+        <Link {...path!}>
           <section className={`${styles.title} ${styles.circleTitle}`}>
             <CircleDigest.Title
               circle={circle}
@@ -42,7 +44,7 @@ const Entity = ({ tx }: { tx: DigestTransactionFragment }) => {
               textSize={12}
             />
           </section>
-        </LinkWrapper>
+        </Link>
       )}
     </section>
   )

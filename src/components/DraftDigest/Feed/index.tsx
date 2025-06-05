@@ -1,10 +1,11 @@
 import gql from 'graphql-tag'
+import Link from 'next/link'
 import React from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { TEST_ID } from '~/common/enums'
 import { toPath } from '~/common/utils'
-import { DateTime, LinkWrapper } from '~/components'
+import { DateTime } from '~/components'
 import { DraftDigestFeedDraftFragment } from '~/gql/graphql'
 
 import DeleteButton from './DeleteButton'
@@ -42,13 +43,13 @@ const DraftDigestFeed = ({ draft }: DraftDigestFeedProps) => {
           <DateTime date={updatedAt} color="grey" />
         </section>
         <section className={styles.content}>
-          <LinkWrapper {...path} textActiveColor="green">
+          <Link {...path} className="u-link-active-green">
             <section className={styles.title}>
               {title || (
                 <FormattedMessage defaultMessage="Untitled" id="3kbIhS" />
               )}
             </section>
-          </LinkWrapper>
+          </Link>
         </section>
       </section>
 

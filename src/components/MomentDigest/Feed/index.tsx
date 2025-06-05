@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { FormattedMessage } from 'react-intl'
 
 import IconDot from '@/public/static/icons/dot.svg'
@@ -8,7 +9,6 @@ import {
   DateTime,
   Expandable,
   Icon,
-  LinkWrapper,
   Media,
   MomentDetailDialog,
   UserDigest,
@@ -83,9 +83,9 @@ export const MomentDigestFeed = ({
             </section>
           )}
           <section>
-            <LinkWrapper {...momentDetailPath} onClick={handleClickDateTime}>
+            <Link {...momentDetailPath} onClick={handleClickDateTime}>
               <DateTime date={createdAt} color="grey" />
-            </LinkWrapper>
+            </Link>
           </section>
         </header>
         {!!content && (
