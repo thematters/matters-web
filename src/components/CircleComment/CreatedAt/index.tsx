@@ -1,7 +1,8 @@
 import gql from 'graphql-tag'
+import Link from 'next/link'
 
 import { toPath } from '~/common/utils'
-import { DateTime, LinkWrapper } from '~/components'
+import { DateTime } from '~/components'
 import { CreatedAtCommentFragment } from '~/gql/graphql'
 
 export interface CreatedAtControls {
@@ -41,10 +42,14 @@ const CreatedAt = ({ comment, hasLink }: CreatedAtProps) => {
       circle,
     })
 
+    if (!hasLink) {
+      return <DateTime date={comment.createdAt} />
+    }
+
     return (
-      <LinkWrapper {...path} disabled={!hasLink}>
+      <Link {...path}>
         <DateTime date={comment.createdAt} />
-      </LinkWrapper>
+      </Link>
     )
   }
 

@@ -1,10 +1,11 @@
+import Link from 'next/link'
 import React from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import IconDot from '@/public/static/icons/dot.svg'
 import { MAX_FEED_SUMMARY_LENGTH, TEST_ID } from '~/common/enums'
 import { makeSummary, toPath } from '~/common/utils'
-import { Book, DateTime, Icon, LinkWrapper, Media } from '~/components'
+import { Book, DateTime, Icon, Media } from '~/components'
 import { CollectionDigestFeedCollectionFragment } from '~/gql/graphql'
 
 import DropdownActions from '../DropdownActions'
@@ -43,17 +44,17 @@ const BaseCollectionDigestFeed = ({
       data-test-id={TEST_ID.DIGEST_COLLECTION_FEED}
     >
       <section className={styles.container}>
-        <LinkWrapper {...path} onClick={onClick}>
+        <Link {...path} onClick={onClick}>
           <section className={styles.book}>
             <Book.Collection cover={cover} title={title} />
           </section>
-        </LinkWrapper>
+        </Link>
 
         <section className={styles.content}>
           <header className={styles.header}>
-            <LinkWrapper {...path} onClick={onClick} textActiveColor="green">
+            <Link {...path} onClick={onClick} className="u-link-active-green">
               <h2 className={styles.title}>{title}</h2>
-            </LinkWrapper>
+            </Link>
           </header>
 
           <Media at="sm">
@@ -68,9 +69,9 @@ const BaseCollectionDigestFeed = ({
           </Media>
 
           {cleanedDescription && (
-            <LinkWrapper {...path} onClick={onClick}>
+            <Link {...path} onClick={onClick}>
               <p className={styles.description}>{cleanedDescription}</p>
-            </LinkWrapper>
+            </Link>
           )}
 
           <footer className={styles.footer}>

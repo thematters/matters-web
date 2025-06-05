@@ -1,4 +1,5 @@
 import gql from 'graphql-tag'
+import Link from 'next/link'
 
 import IMAGE_DEFAULT_CURATED from '@/public/static/images/default-curated.svg?url'
 import { TEST_ID } from '~/common/enums'
@@ -7,7 +8,6 @@ import {
   ArticleDigestTitle,
   Card,
   CardProps,
-  LinkWrapper,
   ResponsiveImage,
   UserDigest,
 } from '~/components'
@@ -75,13 +75,13 @@ export const ArticleDigestCurated = ({
         className={styles.cover}
         data-test-id={TEST_ID.DIGEST_ARTICLE_FEED_COVER}
       >
-        <LinkWrapper {...path} onClick={onClick}>
+        <Link {...path} onClick={onClick}>
           <ResponsiveImage
             url={cover || IMAGE_DEFAULT_CURATED.src}
             width={404}
             height={404}
           />
-        </LinkWrapper>
+        </Link>
       </section>
 
       <section className={styles.author}>
