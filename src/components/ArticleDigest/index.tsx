@@ -1,4 +1,3 @@
-export * from './Archived'
 export * from './Card'
 export * from './Curated'
 export * from './Dropdown'
