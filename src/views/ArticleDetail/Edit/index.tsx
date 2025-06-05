@@ -22,7 +22,7 @@ import {
 } from '~/components'
 import {
   MoreSettingsProps,
-  SetCollectionProps,
+  SetConnectionProps,
   SetCoverProps,
   SetResponseProps,
   SetTagsProps,
@@ -101,7 +101,7 @@ const BaseEdit = ({ article }: { article: Article }) => {
 
   // tags
   const [tags, setTags] = useState<DigestTagFragment[]>(article.tags || [])
-  const [collection, setCollection] = useState<
+  const [connection, setConnection] = useState<
     ArticleDigestDropdownArticleFragment[]
   >(article.collection.edges?.map(({ node }) => node) || [])
 
@@ -179,11 +179,11 @@ const BaseEdit = ({ article }: { article: Article }) => {
     tagsSaving: false,
     editTags: async (t: DigestTagFragment[]) => setTags(t),
   }
-  const collectionProps: SetCollectionProps = {
-    collection,
-    collectionSaving: false,
-    editCollection: async (c: ArticleDigestDropdownArticleFragment[]) =>
-      setCollection(c),
+  const connectionProps: SetConnectionProps = {
+    connection,
+    connectionSaving: false,
+    editConnection: async (c: ArticleDigestDropdownArticleFragment[]) =>
+      setConnection(c),
     nodeExclude: article.id,
   }
   const setCommentProps: SetResponseProps = {
@@ -338,7 +338,7 @@ const BaseEdit = ({ article }: { article: Article }) => {
             <Sidebar.Cover {...coverProps} />
             <Sidebar.Indent {...indentProps} />
             <Sidebar.Tags {...tagsProps} />
-            <Sidebar.Collection {...collectionProps} />
+            <Sidebar.Connection {...connectionProps} />
             <Sidebar.Response
               inSidebar
               disableChangeCanComment={article.canComment}
@@ -366,7 +366,7 @@ const BaseEdit = ({ article }: { article: Article }) => {
             <EditHeader
               {...coverProps}
               {...tagsProps}
-              {...collectionProps}
+              {...connectionProps}
               {...accessProps}
               {...setCommentProps}
               {...setIndentProps}
@@ -441,7 +441,7 @@ const BaseEdit = ({ article }: { article: Article }) => {
                 disabled={false}
                 {...coverProps}
                 {...tagsProps}
-                {...collectionProps}
+                {...connectionProps}
                 {...accessProps}
                 {...setCommentProps}
                 {...campaignProps}

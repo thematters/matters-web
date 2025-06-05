@@ -14,7 +14,7 @@ import {
 } from '~/components'
 import {
   MoreSettingsProps,
-  SetCollectionProps,
+  SetConnectionProps,
   SetCoverProps,
   SetResponseProps,
   SetTagsProps,
@@ -38,7 +38,7 @@ import styles from './styles.module.css'
 export type BottomBarProps = {
   disabled: boolean
 } & SetCoverProps &
-  SetCollectionProps &
+  SetConnectionProps &
   SetTagsProps &
   SetResponseProps &
   MoreSettingsProps &
@@ -58,9 +58,9 @@ const BottomBar: React.FC<BottomBarProps> = ({
   entityType,
   coverSaving,
 
-  collection,
-  editCollection,
-  collectionSaving,
+  connection,
+  editConnection,
+  connectionSaving,
   nodeExclude,
 
   tags,
@@ -238,10 +238,10 @@ const BottomBar: React.FC<BottomBarProps> = ({
               searchExclude={SearchExclude.Blocked}
               nodeExclude={nodeExclude}
               onSave={(nodes: SearchSelectNode[]) =>
-                editCollection(nodes as ArticleDigestDropdownArticleFragment[])
+                editConnection(nodes as ArticleDigestDropdownArticleFragment[])
               }
-              nodes={collection}
-              saving={collectionSaving}
+              nodes={connection}
+              saving={connectionSaving}
               CustomStagingArea={ArticleCustomStagingArea}
               dismissOnClickOutside={false}
               dismissOnESC={false}

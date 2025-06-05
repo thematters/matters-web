@@ -2,7 +2,7 @@ import { ENTITY_TYPE } from '~/common/enums'
 import { toDigestTagPlaceholder } from '~/components'
 import {
   MoreSettingsProps,
-  SetCollectionProps,
+  SetConnectionProps,
   SetCoverProps,
   SetResponseProps,
   SetTagsProps,
@@ -24,7 +24,7 @@ import {
   useEditDraftAccess,
   useEditDraftCampaign,
   useEditDraftCanComment,
-  useEditDraftCollection,
+  useEditDraftConnections,
   useEditDraftCover,
   useEditDraftPublishISCN,
   useEditDraftSensitiveByAuthor,
@@ -44,8 +44,8 @@ const EditDraftBottomBar = ({
   ownCircles,
   campaigns,
 }: BottomBarProps) => {
-  const { edit: editCollection, saving: collectionSaving } =
-    useEditDraftCollection()
+  const { edit: editConnection, saving: connectionSaving } =
+    useEditDraftConnections()
   const { edit: editCover, saving: coverSaving, refetch } = useEditDraftCover()
   const { edit: editTags, saving: tagsSaving } = useEditDraftTags()
   const { edit: toggleContentSensitive, saving: contentSensitiveSaving } =
@@ -95,10 +95,10 @@ const EditDraftBottomBar = ({
     editTags,
     tagsSaving,
   }
-  const collectionProps: SetCollectionProps = {
-    collection: draft?.collection?.edges?.map(({ node }) => node) || [],
-    editCollection,
-    collectionSaving,
+  const connectionProps: SetConnectionProps = {
+    connection: draft?.collection?.edges?.map(({ node }) => node) || [],
+    editConnection,
+    connectionSaving,
   }
   const accessProps: MoreSettingsProps &
     SetResponseProps &
@@ -143,7 +143,7 @@ const EditDraftBottomBar = ({
       {({ openDialog }) => (
         <BottomBar
           disabled={
-            collectionSaving ||
+            connectionSaving ||
             coverSaving ||
             tagsSaving ||
             accessSaving ||
@@ -153,7 +153,7 @@ const EditDraftBottomBar = ({
           }
           {...coverProps}
           {...tagsProps}
-          {...collectionProps}
+          {...connectionProps}
           {...accessProps}
           onOpenSupportSetting={openDialog}
         />

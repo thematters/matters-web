@@ -20,7 +20,7 @@ import {
   PublishState as PublishStateType,
   SetDraftAccessMutation,
   SetDraftCanCommentMutation,
-  SetDraftCollectionMutation,
+  SetDraftConnectionsMutation,
   SetDraftCoverMutation,
   SetDraftIndentMutation,
   SetDraftPublishIscnMutation,
@@ -36,7 +36,7 @@ import {
   SET_ACCESS,
   SET_CAMPAIGN,
   SET_CAN_COMMENT,
-  SET_COLLECTION,
+  SET_CONNECTIONS,
   SET_COVER,
   SET_INDENT,
   SET_PUBLISH_ISCN,
@@ -184,12 +184,12 @@ export const useEditDraftTags = () => {
   }
 }
 
-export const useEditDraftCollection = () => {
+export const useEditDraftConnections = () => {
   const { addRequest, createDraft, getDraftId, getDraftUpdatedAt } = useContext(
     DraftDetailStateContext
   )
-  const [setCollection, { loading: saving }] =
-    useMutation<SetDraftCollectionMutation>(SET_COLLECTION)
+  const [setConnections, { loading: saving }] =
+    useMutation<SetDraftConnectionsMutation>(SET_CONNECTIONS)
   const handleVersionConflict = useVersionConflictHandler()
 
   const edit = async (
@@ -198,18 +198,18 @@ export const useEditDraftCollection = () => {
     lastUpdatedAt?: string
   ) => {
     return handleVersionConflict(
-      setCollection({
+      setConnections({
         variables: {
           id: newId || getDraftId(),
-          collection: _uniq(newArticles.map(({ id }) => id)),
+          connections: _uniq(newArticles.map(({ id }) => id)),
           lastUpdatedAt,
         },
       }),
       () =>
-        setCollection({
+        setConnections({
           variables: {
             id: newId || getDraftId(),
-            collection: _uniq(newArticles.map(({ id }) => id)),
+            connections: _uniq(newArticles.map(({ id }) => id)),
           },
         })
     )

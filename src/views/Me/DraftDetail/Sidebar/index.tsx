@@ -13,7 +13,7 @@ import {
   useEditDraftAccess,
   useEditDraftCampaign,
   useEditDraftCanComment,
-  useEditDraftCollection,
+  useEditDraftConnections,
   useEditDraftCover,
   useEditDraftPublishISCN,
   useEditDraftSensitiveByAuthor,
@@ -32,14 +32,14 @@ interface BaseSidebarProps {
 type SidebarProps = BaseSidebarProps & { disabled: boolean }
 
 const EditDraftCollection = ({ draft, disabled }: SidebarProps) => {
-  const { edit, saving } = useEditDraftCollection()
+  const { edit, saving } = useEditDraftConnections()
   const articles = draft?.collection?.edges?.map(({ node }) => node) || []
 
   return (
-    <Sidebar.Collection
-      collection={articles}
-      editCollection={edit}
-      collectionSaving={saving}
+    <Sidebar.Connection
+      connection={articles}
+      editConnection={edit}
+      connectionSaving={saving}
       disabled={disabled}
     />
   )

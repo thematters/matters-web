@@ -24,24 +24,24 @@ import {
 import InputAutosize from '../../InputAutosize'
 import styles from './styles.module.css'
 
-type CollectionInputProps = {
-  collection: ArticleDigestDropdownArticleFragment[]
+type ConnectionInputProps = {
+  connection: ArticleDigestDropdownArticleFragment[]
   onAddArticle: (article: ArticleDigestDropdownArticleFragment) => Promise<void>
   saving?: boolean
 }
 
 type DropdownMenuProps = {
   article: ArticleDigestDropdownArticleFragment | null
-  collection: ArticleDigestDropdownArticleFragment[]
+  connection: ArticleDigestDropdownArticleFragment[]
   onSelectArticle: () => void
 }
 
 const renderFoundArticle = (
   article: ArticleDigestDropdownArticleFragment,
-  collection: ArticleDigestDropdownArticleFragment[],
+  connection: ArticleDigestDropdownArticleFragment[],
   onSelectArticle: () => void
 ) => {
-  const isRelated = collection.some((a) => a.id === article.id)
+  const isRelated = connection.some((a) => a.id === article.id)
   return (
     <Menu.Item
       spacing={[8, 16]}
@@ -72,21 +72,21 @@ const renderFoundArticle = (
 
 const DropdownMenu = ({
   article,
-  collection,
+  connection,
   onSelectArticle,
 }: DropdownMenuProps) => {
   if (!article) {
     return null
   }
 
-  return <Menu>{renderFoundArticle(article, collection, onSelectArticle)}</Menu>
+  return <Menu>{renderFoundArticle(article, connection, onSelectArticle)}</Menu>
 }
 
-export const CollectionInput = ({
-  collection,
+export const ConnectionInput = ({
+  connection,
   onAddArticle,
   saving,
-}: CollectionInputProps) => {
+}: ConnectionInputProps) => {
   const intl = useIntl()
   const client = useApolloClient()
 
@@ -180,7 +180,7 @@ export const CollectionInput = ({
       article={
         searchData?.article as ArticleDigestDropdownArticleFragment | null
       }
-      collection={collection}
+      connection={connection}
       onSelectArticle={handleSelectArticle}
     />
   )

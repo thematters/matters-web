@@ -63,7 +63,7 @@ const EditModeHeader = ({
   ...restProps
 }: EditModeHeaderProps) => {
   const router = useRouter()
-  const { tags, collection, circle, accessType, license } = restProps
+  const { tags, connection, circle, accessType, license } = restProps
   const [editArticle, { loading }] = useMutation<EditArticleMutation>(
     EDIT_ARTICLE,
     {
@@ -101,8 +101,8 @@ const EditModeHeader = ({
     tags.map((tag) => tag.id).sort(),
     article.tags?.map((tag) => tag.id).sort()
   )
-  const isCollectionRevised = !_isEqual(
-    collection.map((collection) => collection.id).sort(),
+  const isConnectionRevised = !_isEqual(
+    connection.map((connection) => connection.id).sort(),
     article.collection.edges?.map(({ node }) => node.id).sort()
   )
   const isCoverRevised = article.cover
@@ -129,7 +129,7 @@ const EditModeHeader = ({
     isSummaryRevised ||
     isContentRevised ||
     isTagRevised ||
-    isCollectionRevised ||
+    isConnectionRevised ||
     isCoverRevised
 
   const isRevised =
@@ -160,8 +160,8 @@ const EditModeHeader = ({
           ...(isSummaryRevised ? { summary: revision.summary || null } : {}),
           ...(isContentRevised ? { content: revision.content } : {}),
           ...(isTagRevised ? { tags: tags.map((tag) => tag.content) } : {}),
-          ...(isCollectionRevised
-            ? { collection: collection.map(({ id }) => id) }
+          ...(isConnectionRevised
+            ? { connection: connection.map(({ id }) => id) }
             : {}),
           ...(isCoverRevised ? { cover: revision.cover?.id || null } : {}),
           ...(isRequestForDonationRevised

@@ -3,7 +3,7 @@ import type { FetchResult } from '@apollo/client'
 import {
   ArticleDigestDropdownArticleFragment,
   DigestTagFragment,
-  SetDraftCollectionMutation,
+  SetDraftConnectionsMutation,
   SetDraftTagsMutation,
 } from '~/gql/graphql'
 
@@ -11,12 +11,12 @@ export * from './MoreSettings'
 export * from './SetCover'
 export * from './ToggleResponse'
 
-export type SetCollectionProps = {
-  collection: ArticleDigestDropdownArticleFragment[]
-  editCollection: (
+export type SetConnectionProps = {
+  connection: ArticleDigestDropdownArticleFragment[]
+  editConnection: (
     articles: ArticleDigestDropdownArticleFragment[]
-  ) => Promise<FetchResult<SetDraftCollectionMutation> | void | unknown>
-  collectionSaving?: boolean
+  ) => Promise<FetchResult<SetDraftConnectionsMutation> | void | unknown>
+  connectionSaving?: boolean
   nodeExclude?: string
 }
 
