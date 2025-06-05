@@ -44,7 +44,7 @@ const CircleDigestTitle = ({
     [styles[`font${capitalizeFirstLetter(textWeight)}`]]: !!textWeight,
   })
 
-  if (!disabled) {
+  if (disabled) {
     return (
       <>
         <>{is === 'h2' && <h2 className={titleClasses}>{displayName}</h2>}</>
