@@ -33,7 +33,7 @@ type SidebarProps = BaseSidebarProps & { disabled: boolean }
 
 const EditDraftCollection = ({ draft, disabled }: SidebarProps) => {
   const { edit, saving } = useEditDraftConnections()
-  const articles = draft?.collection?.edges?.map(({ node }) => node) || []
+  const articles = draft?.connections?.edges?.map(({ node }) => node) || []
 
   return (
     <Sidebar.Connections

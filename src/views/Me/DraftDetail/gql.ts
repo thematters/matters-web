@@ -21,7 +21,7 @@ export const editMetaFragment = gql`
       ...Asset
     }
     tags
-    collection(input: { first: null }) {
+    connections(input: { first: null }) {
       edges {
         node {
           ...ArticleDigestDropdownArticle

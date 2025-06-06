@@ -141,7 +141,7 @@ const SettingsButton = ({
     tagsSaving,
   }
   const connectionProps: SetConnectionsProps = {
-    connections: draft?.collection?.edges?.map(({ node }) => node) || [],
+    connections: draft?.connections?.edges?.map(({ node }) => node) || [],
     editConnections,
     connectionsSaving,
   }

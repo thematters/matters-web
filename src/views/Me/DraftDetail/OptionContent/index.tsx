@@ -83,7 +83,7 @@ const EditDraftTags = ({ draft, disabled }: OptionItemProps) => {
 
 const EditDraftConnections = ({ draft, disabled }: OptionItemProps) => {
   const { edit, saving } = useEditDraftConnections()
-  const articles = draft?.collection?.edges?.map(({ node }) => node) || []
+  const articles = draft?.connections?.edges?.map(({ node }) => node) || []
 
   return (
     <Sidebar.Connections

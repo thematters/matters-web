@@ -628,7 +628,7 @@ export const EMPTY_DRAFT: DraftDetailQueryQuery['node'] = {
   cover: null,
   assets: [],
   tags: null,
-  collection: {
+  connections: {
     edges: null,
     __typename: 'ArticleConnection',
   },
