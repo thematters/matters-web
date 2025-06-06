@@ -219,6 +219,9 @@
     "defaultMessage": "尚無閱讀紀錄",
     "description": "src/views/Me/History/index.tsx"
   },
+  "1eKD7S": {
+    "defaultMessage": "幫你的故事收集成冊"
+  },
   "1exrSw": {
     "defaultMessage": "歡迎上船！"
   },
@@ -2737,6 +2740,9 @@
   "l31hCd": {
     "defaultMessage": "效果預覽",
     "description": "src/components/Editor/MoreSettings/SupportSettingDialog/Content.tsx"
+  },
+  "lFi0TA": {
+    "defaultMessage": "加入選集"
   },
   "lI2l2/": {
     "defaultMessage": "驗證碼不正確，請檢查輸入內容或重新發送",
