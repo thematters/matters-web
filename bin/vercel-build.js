@@ -17,7 +17,7 @@ function exec(command) {
 
 // Function to append to .env.local
 function appendToEnvLocal(key, value) {
-  const envLine = `${key}=${value}\n`
+  const envLine = `\n${key}=${value}\n`
   fs.appendFileSync('.env.local', envLine)
   console.log(`Added to .env.local: ${key}=${value}`)
 }
