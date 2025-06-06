@@ -1,4 +1,5 @@
 import Campaign from './Campaign'
+import Collections from './Collections'
 import Connections from './Connections'
 import Cover from './Cover'
 import Indent from './Indent'
@@ -14,6 +15,7 @@ const Sidebar = {
   Response,
   Campaign,
   Indent,
+  Collections,
 }
 
 export default Sidebar

@@ -6,6 +6,7 @@ import { Tabs, toDigestTagPlaceholder } from '~/components'
 import { getSelectCampaigns } from '~/components/Editor/SelectCampaign'
 import Sidebar from '~/components/Editor/Sidebar'
 import {
+  CollectionDigestCollectionPublicFragment,
   DigestRichCirclePublicFragment,
   EditorSelectCampaignFragment,
 } from '~/gql/graphql'
@@ -13,6 +14,7 @@ import { EditMetaDraftFragment } from '~/gql/graphql'
 
 import {
   useEditDraftCampaign,
+  useEditDraftCollections,
   useEditDraftConnections,
   useEditDraftCover,
   useEditDraftTags,
@@ -23,6 +25,7 @@ export interface OptionContentProps {
   draft: EditMetaDraftFragment
   campaigns?: EditorSelectCampaignFragment[]
   ownCircles?: DigestRichCirclePublicFragment[]
+  ownCollections?: CollectionDigestCollectionPublicFragment[]
 }
 
 type OptionItemProps = OptionContentProps & { disabled: boolean }
@@ -94,6 +97,24 @@ const EditDraftConnections = ({ draft, disabled }: OptionItemProps) => {
     />
   )
 }
+
+const EditDraftCollections = ({
+  disabled,
+  ownCollections,
+}: OptionItemProps) => {
+  const { edit, saving } = useEditDraftCollections()
+  const collections = ownCollections || []
+
+  return (
+    <Sidebar.Collections
+      collections={collections}
+      editCollections={edit}
+      collectionsSaving={saving}
+      disabled={disabled}
+    />
+  )
+}
+
 export const OptionContent = (props: OptionContentProps) => {
   const [type, setType] = useState<'contentAndLayout' | 'settings'>(
     'contentAndLayout'
@@ -138,6 +159,7 @@ export const OptionContent = (props: OptionContentProps) => {
             <EditDraftCover {...props} disabled={disabled} />
             <EditDraftTags {...props} disabled={disabled} />
             <EditDraftConnections {...props} disabled={disabled} />
+            <EditDraftCollections {...props} disabled={disabled} />
           </>
         )}
       </section>
