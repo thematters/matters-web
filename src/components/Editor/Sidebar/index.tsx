@@ -1,5 +1,5 @@
 import Campaign from './Campaign'
-import Collection from './Collection'
+import Connections from './Connections'
 import Cover from './Cover'
 import Indent from './Indent'
 import Management from './Management'
@@ -9,7 +9,7 @@ import Tags from './Tags'
 const Sidebar = {
   Cover,
   Tags,
-  Collection,
+  Connections,
   Management,
   Response,
   Campaign,

@@ -12,7 +12,7 @@ import {
 } from '~/components'
 import {
   MoreSettingsProps,
-  SetCollectionProps,
+  SetConnectionsProps,
   SetCoverProps,
   SetResponseProps,
   SetTagsProps,
@@ -32,7 +32,7 @@ import {
   useEditDraftAccess,
   useEditDraftCampaign,
   useEditDraftCanComment,
-  useEditDraftCollection,
+  useEditDraftConnections,
   useEditDraftCover,
   useEditDraftPublishISCN,
   useEditDraftSensitiveByAuthor,
@@ -101,8 +101,8 @@ const SettingsButton = ({
   campaigns,
   publishable,
 }: SettingsButtonProps) => {
-  const { edit: editCollection, saving: collectionSaving } =
-    useEditDraftCollection()
+  const { edit: editConnections, saving: connectionsSaving } =
+    useEditDraftConnections()
   const { edit: editCover, saving: coverSaving, refetch } = useEditDraftCover()
   const { edit: editTags, saving: tagsSaving } = useEditDraftTags()
   const { edit: toggleContentSensitive, saving: contentSensitiveSaving } =
@@ -140,10 +140,10 @@ const SettingsButton = ({
     editTags,
     tagsSaving,
   }
-  const collectionProps: SetCollectionProps = {
-    collection: draft?.collection?.edges?.map(({ node }) => node) || [],
-    editCollection,
-    collectionSaving,
+  const connectionProps: SetConnectionsProps = {
+    connections: draft?.connections?.edges?.map(({ node }) => node) || [],
+    editConnections,
+    connectionsSaving,
   }
   const accessProps: MoreSettingsProps = {
     circle: draft?.access.circle,
@@ -190,7 +190,7 @@ const SettingsButton = ({
     <EditorSettingsDialog
       saving={false}
       disabled={
-        collectionSaving ||
+        connectionsSaving ||
         coverSaving ||
         tagsSaving ||
         accessSaving ||
@@ -205,7 +205,7 @@ const SettingsButton = ({
       ConfirmStepContent={ConfirmPublishDialogContent}
       {...coverProps}
       {...tagsProps}
-      {...collectionProps}
+      {...connectionProps}
       {...accessProps}
       {...responseProps}
       {...campaignProps}

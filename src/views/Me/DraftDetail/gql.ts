@@ -21,7 +21,7 @@ export const editMetaFragment = gql`
       ...Asset
     }
     tags
-    collection(input: { first: null }) {
+    connections(input: { first: null }) {
       edges {
         node {
           ...ArticleDigestDropdownArticle
@@ -146,14 +146,18 @@ export const SET_CONTENT = gql`
   ${assetFragment}
 `
 
-export const SET_COLLECTION = gql`
-  mutation SetDraftCollection(
+export const SET_CONNECTIONS = gql`
+  mutation SetDraftConnections(
     $id: ID!
-    $collection: [ID]
+    $connections: [ID!]
     $lastUpdatedAt: DateTime
   ) {
     putDraft(
-      input: { id: $id, collection: $collection, lastUpdatedAt: $lastUpdatedAt }
+      input: {
+        id: $id
+        connections: $connections
+        lastUpdatedAt: $lastUpdatedAt
+      }
     ) {
       id
       ...EditMetaDraft
