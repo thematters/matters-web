@@ -85,7 +85,7 @@ export const ArticleDigestTitle = ({
   })
   const isClickable = !disabled && !isBanned
 
-  const Title = () => (
+  const titleElement = (
     <>
       {is === 'h2' ? (
         <h2 className={titleClasses}>{title}</h2>
@@ -113,7 +113,7 @@ export const ArticleDigestTitle = ({
           })
         }}
       >
-        <Title />
+        {titleElement}
       </section>
     )
   }
@@ -127,7 +127,7 @@ export const ArticleDigestTitle = ({
       testId={TEST_ID.DIGEST_ARTICLE_TITLE}
       {...restProps}
     >
-      <Title />
+      {titleElement}
     </LinkWrapper>
   )
 }
