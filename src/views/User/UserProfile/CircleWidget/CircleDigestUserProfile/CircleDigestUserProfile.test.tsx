@@ -2,13 +2,14 @@ import mockRouter from 'next-router-mock'
 import { describe, expect, it } from 'vitest'
 
 import { fireEvent, render, screen } from '~/common/utils/test'
-import { CircleDigest } from '~/components'
 import { MOCK_CIRCLE } from '~/stories/mocks'
+
+import CircleDigestUserProfile from './'
 
 describe('<CircleDigest.UserProfile>', () => {
   it('should render a CircleDigest.UserProfile', async () => {
     render(
-      <CircleDigest.UserProfile circle={MOCK_CIRCLE} hasDescription hasFooter />
+      <CircleDigestUserProfile circle={MOCK_CIRCLE} hasDescription hasFooter />
     )
 
     const $displayName = screen.getByRole('link', {
@@ -32,7 +33,7 @@ describe('<CircleDigest.UserProfile>', () => {
 
   it('should render a CircleDigest.UserProfile without description and footer', async () => {
     render(
-      <CircleDigest.UserProfile
+      <CircleDigestUserProfile
         circle={MOCK_CIRCLE}
         hasDescription={false}
         hasFooter={false}

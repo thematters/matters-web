@@ -1,8 +1,7 @@
 import gql from 'graphql-tag'
 
+import DropdownActions from '~/components/ArticleDigest/DropdownActions'
 import { BookmarkButton } from '~/components/Buttons/Bookmark'
-
-import DropdownActions from '../../DropdownActions'
 
 export const fragments = {
   article: {

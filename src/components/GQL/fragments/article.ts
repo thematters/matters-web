@@ -1,28 +1,8 @@
 import gql from 'graphql-tag'
 
-import { ArticleDigestDropdown, ArticleDigestSidebar } from '~/components'
+import { ArticleDigestDropdown } from '~/components/ArticleDigest'
 
 const fragments = {
-  editorCollection: gql`
-    fragment EditorCollection on Article {
-      id
-      collection(input: { first: null }) @connection(key: "editorCollection") {
-        pageInfo {
-          startCursor
-          endCursor
-          hasNextPage
-        }
-        totalCount
-        edges {
-          cursor
-          node {
-            ...ArticleDigestDropdownArticle
-          }
-        }
-      }
-    }
-    ${ArticleDigestDropdown.fragments.article}
-  `,
   articleCollection: gql`
     fragment ArticleCollection on Article {
       id
@@ -37,12 +17,13 @@ const fragments = {
         edges {
           cursor
           node {
-            ...ArticleDigestSidebarArticle
+            id
+            ...ArticleDigestDropdownArticle
           }
         }
       }
     }
-    ${ArticleDigestSidebar.fragments.article}
+    ${ArticleDigestDropdown.fragments.article}
   `,
 }
 

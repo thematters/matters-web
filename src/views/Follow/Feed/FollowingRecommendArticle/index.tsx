@@ -1,14 +1,9 @@
+import Link from 'next/link'
 import React from 'react'
 
 import { MAX_FEED_SUMMARY_LENGTH } from '~/common/enums'
 import { makeSummary, toPath } from '~/common/utils'
-import {
-  Card,
-  CardProps,
-  LinkWrapper,
-  ResponsiveImage,
-  UserDigest,
-} from '~/components'
+import { Card, CardProps, ResponsiveImage, UserDigest } from '~/components'
 import { FollowingFeedRecommendArticlePublicFragment } from '~/gql/graphql'
 
 import { fragments } from './gql'
@@ -42,9 +37,9 @@ const RecommendArticle = ({ article, ...cardProps }: Props) => {
         <section className={styles.head}>
           <section className={styles.wrap}>
             <p className={styles.title}>
-              <LinkWrapper textActiveColor="green" {...path}>
+              <Link className="u-link-active-green" {...path}>
                 {title}
-              </LinkWrapper>
+              </Link>
             </p>
 
             <section className={styles.author}>
