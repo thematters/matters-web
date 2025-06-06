@@ -59,6 +59,17 @@
   }
 }
 
+.u-link-active-green {
+  @mixin transition;
+
+  transition-property: color;
+
+  &:hover,
+  &:focus {
+    color: var(--color-matters-green);
+  }
+}
+
 /* text */
 .u-highlight {
   color: var(--color-matters-green);

@@ -1,10 +1,11 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
+import Link from 'next/link'
 import { FormattedMessage } from 'react-intl'
 
 import { TEST_ID } from '~/common/enums'
 import { capitalizeFirstLetter, toPath } from '~/common/utils'
-import { LinkWrapper, LinkWrapperProps, toast } from '~/components'
+import { toast } from '~/components'
 import { ArticleDigestTitleArticleFragment } from '~/gql/graphql'
 
 import styles from './styles.module.css'
@@ -26,7 +27,7 @@ type ArticleDigestTitleProps = {
 
   disabled?: boolean
   onClick?: () => void
-} & Pick<LinkWrapperProps, 'onClick'>
+}
 
 const fragments = {
   article: gql`
@@ -51,7 +52,7 @@ export const ArticleDigestTitle = ({
   textWeight = 'medium',
   lineClamp = true,
   is = 'h2',
-  textColor = 'greyDarker',
+  textColor,
   disabled,
   disabledArchived,
   onClick,
@@ -81,7 +82,8 @@ export const ArticleDigestTitle = ({
     [styles.lineClamp]: !!lineClamp,
     [styles[`lineClampLine${lineClamp}`]]: lineClamp === 1 || lineClamp === 3,
     [styles.archived]: isArchived && disabledArchived,
-    [styles[`textColor${capitalizeFirstLetter(textColor)}`]]: !!textColor,
+    [textColor ? styles[`textColor${capitalizeFirstLetter(textColor)}`] : '']:
+      !!textColor,
   })
   const isClickable = !disabled && !isBanned
 
@@ -118,17 +120,20 @@ export const ArticleDigestTitle = ({
     )
   }
 
+  if (!isClickable) {
+    return <Title />
+  }
+
   return (
-    <LinkWrapper
+    <Link
       {...path}
-      textActiveColor={isClickable ? 'green' : undefined}
-      disabled={!isClickable}
       onClick={onClick}
-      testId={TEST_ID.DIGEST_ARTICLE_TITLE}
+      data-test-id={TEST_ID.DIGEST_ARTICLE_TITLE}
       {...restProps}
+      className={isClickable ? 'u-link-active-green' : undefined}
     >
       <Title />
-    </LinkWrapper>
+    </Link>
   )
 }
 

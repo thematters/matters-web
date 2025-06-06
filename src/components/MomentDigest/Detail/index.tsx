@@ -1,7 +1,9 @@
+import Link from 'next/link'
+
 import IconTimes from '@/public/static/icons/24px/times.svg'
 import { TEST_ID } from '~/common/enums'
 import { captureClicks, toPath } from '~/common/utils'
-import { Button, DateTime, Icon, LinkWrapper } from '~/components'
+import { Button, DateTime, Icon } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
 import { MomentDigestDetailMomentFragment } from '~/gql/graphql'
 
@@ -47,15 +49,15 @@ export const MomentDigestDetail = ({
 
             <section className={styles.info}>
               <section className={styles.top}>
-                <LinkWrapper {...userProfilePath}>
+                <Link {...userProfilePath}>
                   <section className={styles.displayName}>
                     {author.displayName}
                   </section>
-                </LinkWrapper>
+                </Link>
               </section>
-              <LinkWrapper {...momentDetailPath}>
+              <Link {...momentDetailPath}>
                 <DateTime date={createdAt} color="grey" />
-              </LinkWrapper>
+              </Link>
             </section>
           </section>
         </section>

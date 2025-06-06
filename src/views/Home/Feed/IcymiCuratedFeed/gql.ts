@@ -1,6 +1,8 @@
 import gql from 'graphql-tag'
 
-import { ArticleDigestCurated, ArticleDigestFeed } from '~/components'
+import { ArticleDigestFeed } from '~/components'
+
+import { ArticleDigestCurated } from './ArticleDigestCurated'
 
 export const fragments = gql`
   fragment IcymiCuratedFeedRecommendation on Recommendation {

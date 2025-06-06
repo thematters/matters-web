@@ -74,6 +74,9 @@ const fragments = {
         parentComment {
           id
         }
+        dropdownComments: comments(input: { first: null }) {
+          totalCount
+        }
         node {
           ... on Article {
             id

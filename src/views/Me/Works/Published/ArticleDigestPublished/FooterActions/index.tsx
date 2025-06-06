@@ -7,10 +7,12 @@ import IconUser from '@/public/static/icons/24px/user.svg'
 import { TEST_ID } from '~/common/enums'
 import { numAbbr } from '~/common/utils'
 import { TextIcon } from '~/components'
+import DropdownActions, {
+  DropdownActionsControls,
+} from '~/components/ArticleDigest/DropdownActions'
 import { Icon } from '~/components/Icon'
 import { FooterActionsPublishedArticlePublicFragment } from '~/gql/graphql'
 
-import DropdownActions, { DropdownActionsControls } from '../../DropdownActions'
 import { fragments } from './gql'
 import styles from './styles.module.css'
 

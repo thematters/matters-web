@@ -13,8 +13,6 @@ const fragments = {
     fragment ArticleDigestDraftTitleArticle on Article {
       id
       title
-      state
-      articleState: state
     }
   `,
 }
