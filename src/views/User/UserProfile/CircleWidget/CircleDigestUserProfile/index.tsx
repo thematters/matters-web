@@ -1,10 +1,11 @@
 import classNames from 'classnames'
+import Link from 'next/link'
 import React from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { TEST_ID } from '~/common/enums'
 import { toPath } from '~/common/utils'
-import { Button, LinkWrapper } from '~/components'
+import { Button } from '~/components'
 import { DigestUserProfileCircleFragment } from '~/gql/graphql'
 
 import { fragments } from './gql'
@@ -16,7 +17,7 @@ export type CircleDigestUserProfileProps = {
   hasFooter?: boolean
 }
 
-const UserProfile = ({
+const CircleDigestUserProfile = ({
   circle,
   hasDescription = true,
   hasFooter = true,
@@ -55,7 +56,7 @@ const UserProfile = ({
 
       {hasFooter && (
         <section className={styles.footer}>
-          <LinkWrapper {...path}>
+          <Link {...path}>
             <Button textColor="greyDarker" textActiveColor="green">
               <FormattedMessage
                 defaultMessage="Enter Circle"
@@ -63,13 +64,13 @@ const UserProfile = ({
                 description="src/components/CircleDigest/UserProfile/index.tsx"
               />
             </Button>
-          </LinkWrapper>
+          </Link>
         </section>
       )}
     </section>
   )
 }
 
-UserProfile.fragments = fragments
+CircleDigestUserProfile.fragments = fragments
 
-export default UserProfile
+export default CircleDigestUserProfile

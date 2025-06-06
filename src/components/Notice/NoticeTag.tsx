@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
+import Link from 'next/link'
 
 import { toPath } from '~/common/utils'
-import { LinkWrapper } from '~/components'
 import { ListTag } from '~/components/Tag'
 import { NoticeTagFragment } from '~/gql/graphql'
 
@@ -20,11 +20,11 @@ const NoticeTag = ({ tag }: { tag: NoticeTagFragment | null }) => {
   })
 
   return (
-    <LinkWrapper {...path}>
+    <Link {...path}>
       <span className={styles.tagContent}>
         <span>#{tagName}</span>
       </span>
-    </LinkWrapper>
+    </Link>
   )
 }
 

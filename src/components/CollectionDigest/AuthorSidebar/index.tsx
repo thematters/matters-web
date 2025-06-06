@@ -1,9 +1,9 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
+import Link from 'next/link'
 import { FormattedMessage } from 'react-intl'
 
 import { capitalizeFirstLetter, toPath } from '~/common/utils'
-import { LinkWrapper } from '~/components'
 import { CollectionDigestAuthorSidebarCollectionFragment } from '~/gql/graphql'
 
 import styles from './styles.module.css'
@@ -54,10 +54,11 @@ export const CollectionDigestAuthorSidebar = ({
 
   return (
     <section className={containerClasses} onClick={clickEvent}>
-      <LinkWrapper {...path} textActiveColor="green">
+      <Link {...path} className="u-link-active-green">
         <header>{title}</header>
-      </LinkWrapper>
-      <LinkWrapper {...path} textActiveColor="green">
+      </Link>
+
+      <Link {...path} className="u-link-active-green">
         <section className={styles.totalCount}>
           <FormattedMessage
             defaultMessage="{totalCount} articles"
@@ -67,7 +68,7 @@ export const CollectionDigestAuthorSidebar = ({
             }}
           />
         </section>
-      </LinkWrapper>
+      </Link>
     </section>
   )
 }

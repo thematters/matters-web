@@ -1,15 +1,10 @@
 import classNames from 'classnames'
+import Link from 'next/link'
 import React from 'react'
 
 import { TEST_ID } from '~/common/enums'
 import { toPath } from '~/common/utils'
-import {
-  Card,
-  CardProps,
-  CircleAvatar,
-  CircleAvatarSize,
-  LinkWrapper,
-} from '~/components'
+import { Card, CardProps, CircleAvatar, CircleAvatarSize } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
 import {
   DigestRichCirclePrivateFragment,
@@ -80,14 +75,17 @@ const Rich = ({
 
           <header className={styles.header}>
             <h3 className={titleClasses}>
-              <LinkWrapper
-                {...path}
-                textActiveColor="green"
-                disabled={disabled}
-                testId={TEST_ID.DIGEST_CIRCLE_DISPLAY_NAME}
-              >
-                {displayName}
-              </LinkWrapper>
+              {disabled ? (
+                displayName
+              ) : (
+                <Link
+                  {...path}
+                  className={!disabled ? 'u-link-active-green' : undefined}
+                  data-test-id={TEST_ID.DIGEST_CIRCLE_DISPLAY_NAME}
+                >
+                  {displayName}
+                </Link>
+              )}
             </h3>
 
             {hasOwner && (

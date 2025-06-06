@@ -184,6 +184,10 @@ export const MOCK_PARENT_COMMENT = {
   state: 'active' as any,
   node: MOCK_ARTILCE,
   parentComment: null,
+  dropdownComments: {
+    __typename: 'CommentConnection' as any,
+    totalCount: 0,
+  },
   content:
     '中國傳統文學裡的「幽」傳統，對此的文論並不多，我聽說李歐梵教授在做此研究，蔡老師能否多講一些',
   author: MOCK_USER,
@@ -196,6 +200,10 @@ export const MOCK_COMMENT = {
   node: MOCK_ARTILCE,
   type: 'article' as any,
   parentComment: MOCK_PARENT_COMMENT,
+  dropdownComments: {
+    __typename: 'CommentConnection' as any,
+    totalCount: 0,
+  },
   createdAt: '2020-12-24T07:29:17.682Z',
   pinned: false,
   content:

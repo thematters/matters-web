@@ -1,16 +1,20 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
+import Link from 'next/link'
 
 import {
   ARTICLE_DIGEST_AUTHOR_SIDEBAR_ID_PREFIX,
   TEST_ID,
 } from '~/common/enums'
 import { capitalizeFirstLetter, toPath } from '~/common/utils'
-import { LinkWrapper, ResponsiveImage } from '~/components'
+import {
+  ArticleDigestTitle,
+  ArticleDigestTitleTextSize,
+  ResponsiveImage,
+} from '~/components'
 import { UserDigest } from '~/components/UserDigest'
 import { ArticleDigestAuthorSidebarArticleFragment } from '~/gql/graphql'
 
-import { ArticleDigestTitle, ArticleDigestTitleTextSize } from '../Title'
 import Placeholder from './Placeholder'
 import styles from './styles.module.css'
 
@@ -108,12 +112,17 @@ export const ArticleDigestAuthorSidebar = ({
         )}
       </section>
 
-      {showCover && cover && (
-        <LinkWrapper {...path} disabled={isBanned}>
-          <aside className={styles.cover}>
+      {showCover && cover && !isBanned && (
+        <Link {...path}>
+          <section className={styles.cover}>
             <ResponsiveImage url={cover} width={imgSize} height={imgSize} />
-          </aside>
-        </LinkWrapper>
+          </section>
+        </Link>
+      )}
+      {showCover && cover && isBanned && (
+        <section className={styles.cover}>
+          <ResponsiveImage url={cover} width={imgSize} height={imgSize} />
+        </section>
       )}
     </section>
   )

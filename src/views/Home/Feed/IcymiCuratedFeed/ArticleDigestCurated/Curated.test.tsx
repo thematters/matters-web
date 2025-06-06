@@ -3,24 +3,28 @@ import { describe, expect, it, vi } from 'vitest'
 
 import { TEST_ID } from '~/common/enums'
 import { fireEvent, render, screen } from '~/common/utils/test'
-import { ArticleDigestSidebar } from '~/components'
 import { MOCK_ARTILCE } from '~/stories/mocks'
 
-describe('<ArticleDigest.Sidebar>', () => {
-  it('should render an ArticleDigest.Sidebar', () => {
+import { ArticleDigestCurated } from './'
+
+describe('<ArticleDigest.Curated>', () => {
+  it('should render an ArticleDigest.Curated', () => {
     const handleClickDigest = vi.fn()
     const handleClickAuthor = vi.fn()
 
     render(
-      <ArticleDigestSidebar
+      <ArticleDigestCurated
         article={MOCK_ARTILCE}
         onClick={handleClickDigest}
         onClickAuthor={handleClickAuthor}
       />
     )
 
-    const $digest = screen.getByTestId(TEST_ID.DIGEST_ARTICLE_SIDEBAR)
+    const $digest = screen.getByTestId(TEST_ID.DIGEST_ARTICLE_CURATED)
     expect($digest).toBeInTheDocument()
+
+    const $cover = screen.getByTestId(TEST_ID.DIGEST_ARTICLE_FEED_COVER)
+    expect($cover).toBeInTheDocument()
 
     const $title = screen.getByRole('heading', { name: MOCK_ARTILCE.title })
     expect($title).toBeInTheDocument()

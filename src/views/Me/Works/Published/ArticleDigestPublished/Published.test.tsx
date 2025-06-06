@@ -3,8 +3,9 @@ import { describe, expect, it } from 'vitest'
 
 import { TEST_ID } from '~/common/enums'
 import { fireEvent, render, screen } from '~/common/utils/test'
-import { ArticleDigestPublished } from '~/components'
 import { MOCK_ARTILCE } from '~/stories/mocks'
+
+import { ArticleDigestPublished } from './'
 
 describe('<ArticleDigest.Published>', () => {
   it('should render an ArticleDigest.Published', () => {
