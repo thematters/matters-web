@@ -111,9 +111,7 @@ jobs:
       - name: Generate deployment package
         if: github.base_ref == 'develop' || github.base_ref == 'master' || github.base_ref == 'main'
         run: |
-          rm -rf node_modules \
-          && npm install --production \
-          && zip -r --symlinks deploy.zip . -x .git/\*
+          zip -r --symlinks deploy.zip . -x .git/\* node_modules/\*
 
       - name: Upload Assets (develop - R2)
         if: github.base_ref == 'develop' || github.base_ref == 'main'
@@ -121,7 +119,7 @@ jobs:
 
       - name: Deploy to EB (develop)
         if: github.base_ref == 'develop'
-        uses: einaregilsson/beanstalk-deploy@v19
+        uses: einaregilsson/beanstalk-deploy@v22
         with:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -140,7 +138,7 @@ jobs:
 
       - name: Deploy to EB (production)
         if: github.base_ref == 'master' || github.base_ref == 'main'
-        uses: einaregilsson/beanstalk-deploy@v19
+        uses: einaregilsson/beanstalk-deploy@v22
         with:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
