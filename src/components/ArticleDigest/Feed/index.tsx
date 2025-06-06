@@ -1,15 +1,10 @@
+import Link from 'next/link'
 import React from 'react'
 
 import IconDot from '@/public/static/icons/dot.svg'
 import { MAX_FEED_SUMMARY_LENGTH, TEST_ID } from '~/common/enums'
 import { makeSummary, toPath } from '~/common/utils'
-import {
-  DateTime,
-  Icon,
-  LinkWrapper,
-  Media,
-  ResponsiveImage,
-} from '~/components'
+import { DateTime, Icon, Media, ResponsiveImage } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
 import {
   ArticleDigestFeedArticlePrivateFragment,
@@ -113,9 +108,9 @@ const BaseArticleDigestFeed = ({
             </section>
           )}
           {!excludesTimeStamp && (
-            <LinkWrapper {...path}>
+            <Link {...path}>
               <DateTime date={article.createdAt} color="grey" minimal />
-            </LinkWrapper>
+            </Link>
           )}
         </header>
       )}
@@ -135,15 +130,15 @@ const BaseArticleDigestFeed = ({
           </section>
 
           {!(isArchived && disabledArchived) && (
-            <LinkWrapper {...path} onClick={onClick}>
+            <Link {...path} onClick={onClick}>
               <p className={styles.description}>{cleanedSummary}</p>
-            </LinkWrapper>
+            </Link>
           )}
 
           <Media greaterThanOrEqual="md">{footerActions}</Media>
         </section>
         {cover && (
-          <LinkWrapper {...path} onClick={onClick}>
+          <Link {...path} onClick={onClick}>
             <div
               className={styles.cover}
               data-test-id={TEST_ID.DIGEST_ARTICLE_FEED_COVER}
@@ -158,7 +153,7 @@ const BaseArticleDigestFeed = ({
                 fetchPriority={isFirstFold ? 'high' : 'low'}
               />
             </div>
-          </LinkWrapper>
+          </Link>
         )}
       </section>
       <Media lessThan="md">{footerActions}</Media>

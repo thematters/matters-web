@@ -1,6 +1,7 @@
 import gql from 'graphql-tag'
 
-import { ArticleDigestTitle } from '../Title'
+import { ArticleDigestTitle } from '~/components'
+
 import FooterActions from './FooterActions'
 
 export const fragments = {

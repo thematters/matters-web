@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-import DropdownActions from '../../DropdownActions'
+import DropdownActions from '~/components/ArticleDigest/DropdownActions'
 
 export const fragments = {
   article: gql`
