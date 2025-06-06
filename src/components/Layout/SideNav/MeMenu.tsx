@@ -2,6 +2,7 @@ import { useRouter } from 'next/router'
 import { useContext } from 'react'
 import baseToast from 'react-hot-toast'
 import { FormattedMessage } from 'react-intl'
+import { useAccount, useDisconnect } from 'wagmi'
 
 import IconCircle from '@/public/static/icons/24px/circle.svg'
 import IconData from '@/public/static/icons/24px/data.svg'
@@ -25,6 +26,9 @@ import USER_LOGOUT from '~/components/GQL/mutations/userLogout'
 import { UserLogoutMutation } from '~/gql/graphql'
 
 const MeMenu: React.FC = () => {
+  const { address } = useAccount()
+  const { disconnect } = useDisconnect()
+
   const router = useRouter()
   const viewer = useContext(ViewerContext)
   const viewerPath = toPath({
@@ -64,6 +68,10 @@ const MeMenu: React.FC = () => {
       await logout()
 
       removeCookies([COOKIE_TOKEN_NAME, COOKIE_USER_GROUP])
+
+      if (address) {
+        disconnect()
+      }
     } catch {
       toast.error({
         message: (
