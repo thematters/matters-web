@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { useCallback, useContext, useEffect, useRef, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { PATHS } from '~/common/enums'
+import { FEATUED_CHANNEL_SHORT_HASH, PATHS } from '~/common/enums'
 import { analytics } from '~/common/utils'
 import { useRoute, ViewerContext } from '~/components'
 import { useChannels } from '~/components/Context'
@@ -46,6 +46,10 @@ const SideChannelNav = () => {
       pageType: 'home',
     })
   }
+
+  const filteredChannels = channels.filter(
+    (c) => c.shortHash !== FEATUED_CHANNEL_SHORT_HASH
+  )
 
   return (
     <section className={styles.content} ref={contentRef}>
@@ -90,7 +94,7 @@ const SideChannelNav = () => {
           </span>
         </Link>
 
-        {channels.map((c) => (
+        {filteredChannels.map((c) => (
           <ChannelItem key={c.id} channel={c} />
         ))}
 
