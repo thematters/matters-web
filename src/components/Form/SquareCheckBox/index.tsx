@@ -65,7 +65,7 @@ const SquareCheckBox: React.FC<SquareCheckBoxBoxProps> = ({
       setLineClampable(true)
     }
     setFirstRender(false)
-  }, [])
+  }, [node.current])
 
   const labelClasses = classNames({
     [styles.label]: true,
