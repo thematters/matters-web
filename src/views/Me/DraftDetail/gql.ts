@@ -21,6 +21,17 @@ export const editMetaFragment = gql`
       ...Asset
     }
     tags
+    collections(input: { first: null }) {
+      edges {
+        node {
+          id
+          title
+          articles(input: { first: 0 }) {
+            totalCount
+          }
+        }
+      }
+    }
     connections(input: { first: null }) {
       edges {
         node {
@@ -75,6 +86,17 @@ export const DRAFT_DETAIL_VIEWER = gql`
       }
       displayName
       avatar
+      collections(input: { first: null }) {
+        edges {
+          node {
+            id
+            title
+            articles(input: { first: 0 }) {
+              totalCount
+            }
+          }
+        }
+      }
     }
   }
   ${CircleDigest.Rich.fragments.circle.public}
@@ -156,6 +178,26 @@ export const SET_CONNECTIONS = gql`
       input: {
         id: $id
         connections: $connections
+        lastUpdatedAt: $lastUpdatedAt
+      }
+    ) {
+      id
+      ...EditMetaDraft
+    }
+  }
+  ${editMetaFragment}
+`
+
+export const SET_COLLECTIONS = gql`
+  mutation SetDraftCollections(
+    $id: ID!
+    $collections: [ID!]
+    $lastUpdatedAt: DateTime
+  ) {
+    putDraft(
+      input: {
+        id: $id
+        collections: $collections
         lastUpdatedAt: $lastUpdatedAt
       }
     ) {

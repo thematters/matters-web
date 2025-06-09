@@ -219,6 +219,9 @@
     "defaultMessage": "No data yet",
     "description": "src/views/Me/History/index.tsx"
   },
+  "1eKD7S": {
+    "defaultMessage": "Help compile your stories into a book"
+  },
   "1exrSw": {
     "defaultMessage": "Welcome onboard!"
   },
@@ -1297,10 +1300,6 @@
     "defaultMessage": "Accepted",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
   },
-  "Jxr/TM": {
-    "defaultMessage": "FULL",
-    "description": "src/components/Dialogs/AddCollectionsArticleDialog/SelectDialogContent.tsx"
-  },
   "K+pFNS": {
     "defaultMessage": "Event period{tz}"
   },
@@ -2373,6 +2372,9 @@
     "defaultMessage": "Unable to disconnect the wallet because you have not added or associated another login (Email/Wallet/Social account).",
     "description": "src/components/Dialogs/RemoveWalletLoginDialog/Content.tsx"
   },
+  "dSx84k": {
+    "defaultMessage": "FULL"
+  },
   "dTOtPO": {
     "defaultMessage": "Top Up"
   },
@@ -2737,6 +2739,9 @@
   "l31hCd": {
     "defaultMessage": "Preview",
     "description": "src/components/Editor/MoreSettings/SupportSettingDialog/Content.tsx"
+  },
+  "lFi0TA": {
+    "defaultMessage": "Add to Collection"
   },
   "lI2l2/": {
     "defaultMessage": "Incorrect verification code. Please check your input, or try resend",

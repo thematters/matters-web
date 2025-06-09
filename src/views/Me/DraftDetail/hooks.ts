@@ -20,6 +20,7 @@ import {
   PublishState as PublishStateType,
   SetDraftAccessMutation,
   SetDraftCanCommentMutation,
+  SetDraftCollectionsMutation,
   SetDraftConnectionsMutation,
   SetDraftCoverMutation,
   SetDraftIndentMutation,
@@ -36,6 +37,7 @@ import {
   SET_ACCESS,
   SET_CAMPAIGN,
   SET_CAN_COMMENT,
+  SET_COLLECTIONS,
   SET_CONNECTIONS,
   SET_COVER,
   SET_INDENT,
@@ -230,6 +232,54 @@ export const useEditDraftConnections = () => {
   return {
     edit: async (newArticles: ArticleDigestDropdownArticleFragment[]) =>
       addRequest(() => createDraftAndEdit(newArticles)),
+    saving,
+  }
+}
+
+export const useEditDraftCollections = () => {
+  const { addRequest, createDraft, getDraftId, getDraftUpdatedAt } = useContext(
+    DraftDetailStateContext
+  )
+  const [setCollections, { loading: saving }] =
+    useMutation<SetDraftCollectionsMutation>(SET_COLLECTIONS)
+  const handleVersionConflict = useVersionConflictHandler()
+
+  const edit = async (
+    newCollections: string[],
+    newId?: string,
+    lastUpdatedAt?: string
+  ) => {
+    return handleVersionConflict(
+      setCollections({
+        variables: {
+          id: newId || getDraftId(),
+          collections: _uniq(newCollections.map((id) => id)),
+          lastUpdatedAt,
+        },
+      }),
+      () =>
+        setCollections({
+          variables: {
+            id: newId || getDraftId(),
+            collections: _uniq(newCollections.map((id) => id)),
+          },
+        })
+    )
+  }
+
+  const createDraftAndEdit = async (newCollections: string[]) => {
+    if (getDraftId()) {
+      return edit(newCollections, undefined, getDraftUpdatedAt())
+    }
+
+    return createDraft({
+      onCreate: (newDraftId) => edit(newCollections, newDraftId),
+    })
+  }
+
+  return {
+    edit: async (newCollections: string[]) =>
+      addRequest(() => createDraftAndEdit(newCollections)),
     saving,
   }
 }
@@ -632,6 +682,10 @@ export const EMPTY_DRAFT: DraftDetailQueryQuery['node'] = {
     edges: null,
     __typename: 'ArticleConnection',
   },
+  collections: {
+    edges: null,
+    __typename: 'CollectionConnection',
+  },
   access: {
     type: ArticleAccessType.Public,
     circle: null,
@@ -670,10 +724,14 @@ export const useDraftDetail = () => {
   const appliedCampaigns = viewerData?.viewer?.campaigns.edges?.map(
     (e) => e.node
   )
+  const ownCollections = viewerData?.viewer?.collections.edges?.map(
+    (e) => e.node
+  )
 
   return {
     draft,
     ownCircles,
+    ownCollections,
     appliedCampaigns,
     loading: (loading && !initNew) || viewerLoading,
     error,

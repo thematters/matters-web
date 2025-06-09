@@ -9,8 +9,15 @@ import { OptionContent } from '../OptionContent'
 import styles from './styles.module.css'
 
 const OptionsPage = () => {
-  const { draft, ownCircles, appliedCampaigns, loading, error, isNewDraft } =
-    useDraftDetail()
+  const {
+    draft,
+    ownCircles,
+    appliedCampaigns,
+    ownCollections,
+    loading,
+    error,
+    isNewDraft,
+  } = useDraftDetail()
 
   const goBack = () => {
     window.history.back()
@@ -45,6 +52,7 @@ const OptionsPage = () => {
           draft={draft}
           campaigns={appliedCampaigns}
           ownCircles={ownCircles}
+          ownCollections={ownCollections}
         />
       </section>
     </DraftLoadingStates>

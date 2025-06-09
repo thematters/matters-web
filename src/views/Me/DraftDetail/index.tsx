@@ -73,8 +73,14 @@ const BaseDraftDetail = () => {
   const { addRequest, createDraft, getDraftId, isNewDraft, getDraftUpdatedAt } =
     useContext(DraftDetailStateContext)
 
-  const { draft, ownCircles, appliedCampaigns, loading, error } =
-    useDraftDetail()
+  const {
+    draft,
+    ownCircles,
+    ownCollections,
+    appliedCampaigns,
+    loading,
+    error,
+  } = useDraftDetail()
 
   const [setContent] = useMutation<SetDraftContentMutation>(SET_CONTENT)
   const [singleFileUpload] =
@@ -355,6 +361,7 @@ const BaseDraftDetail = () => {
               draft={draft}
               campaigns={appliedCampaigns}
               ownCircles={ownCircles}
+              ownCollections={ownCollections}
             />
           </Media>
         </Layout.Main.Spacing>
