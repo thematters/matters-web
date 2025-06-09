@@ -97,6 +97,11 @@ const AppreciateButton: React.FC<AppreciateButtonProps> = ({
               {numAbbr(total)}
             </span>
           )}
+          {total === 0 && (
+            <span data-test-id={TEST_ID.ARTICLE_APPRECIATION_TOTAL}>
+              &nbsp;&nbsp;
+            </span>
+          )}
         </TextIcon>
       </Button>
     </span>
