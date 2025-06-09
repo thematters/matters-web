@@ -1,8 +1,8 @@
 import classNames from 'classnames'
+import Link from 'next/link'
 
 import { TEST_ID } from '~/common/enums'
 import { toPath } from '~/common/utils'
-import { LinkWrapper } from '~/components'
 import { UserDigestPlainUserFragment } from '~/gql/graphql'
 
 import { fragments } from './gql'
@@ -37,17 +37,20 @@ const Plain = ({
     [styles.hasUnderline]: hasUnderline,
   })
 
-  return (
-    <LinkWrapper
-      {...path}
-      disabled={disabled}
-      onClick={onClick}
-      testId={TEST_ID.DIGEST_USER_PLAIN}
-    >
+  if (disabled) {
+    return (
       <section className={containerClasses}>
         <span className={displayNameClasses}>{user.displayName}</span>
       </section>
-    </LinkWrapper>
+    )
+  }
+
+  return (
+    <Link {...path} onClick={onClick} data-test-id={TEST_ID.DIGEST_USER_PLAIN}>
+      <section className={containerClasses}>
+        <span className={displayNameClasses}>{user.displayName}</span>
+      </section>
+    </Link>
   )
 }
 

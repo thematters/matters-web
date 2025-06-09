@@ -156,8 +156,10 @@ const LatestComments = ({ id, lock }: { id: string; lock: boolean }) => {
             )}
             {comments.map(
               (comment) =>
-                !comment.pinned &&
-                comment.state !== 'archived' && (
+                ((!comment.pinned && comment.state !== 'archived') ||
+                  (comment.state === 'archived' &&
+                    comment.comments.edges?.length &&
+                    comment.comments.edges.length > 0)) && (
                   <List.Item key={comment.id}>
                     <CommentThreadComment
                       comment={comment}
