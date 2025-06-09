@@ -25,6 +25,7 @@ export const editMetaFragment = gql`
       edges {
         node {
           id
+          title
           articles(input: { first: 0 }) {
             totalCount
           }
@@ -85,7 +86,7 @@ export const DRAFT_DETAIL_VIEWER = gql`
       }
       displayName
       avatar
-      collections(input: { first: null }) {
+      collections(input: { first: 100 }) {
         edges {
           node {
             id

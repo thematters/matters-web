@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 import { useIntl } from 'react-intl'
 
-import IconDraft from '@/public/static/icons/24px/draft.svg'
+import IconBook2 from '@/public/static/icons/24px/book2.svg'
 import IconTimes from '@/public/static/icons/24px/times.svg'
 import { Icon, TextIcon } from '~/components'
 import { CollectionDigestCollectionPublicFragment } from '~/gql/graphql'
@@ -22,11 +22,13 @@ const fragments = {
 
 type CollectionDigestProps = {
   collection: CollectionDigestCollectionPublicFragment
+  onRemove: (collectionId: string) => void
   saving?: boolean
 }
 
 export const CollectionDigest = ({
   collection,
+  onRemove,
   saving,
 }: CollectionDigestProps) => {
   const intl = useIntl()
@@ -35,7 +37,7 @@ export const CollectionDigest = ({
     <section className={styles.container}>
       <section className={styles.left}>
         <TextIcon
-          icon={<Icon icon={IconDraft} color="greyDark" />}
+          icon={<Icon icon={IconBook2} color="greyDark" />}
           textLineClamp
           size={14}
           spacing={4}
@@ -46,7 +48,7 @@ export const CollectionDigest = ({
       <section className={styles.right}>
         <button
           type="button"
-          onClick={() => {}}
+          onClick={() => onRemove(collection.id)}
           aria-label={intl.formatMessage({
             defaultMessage: 'Remove',
             id: 'G/yZLu',

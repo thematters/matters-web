@@ -105,11 +105,11 @@ const EditDraftCollections = ({
 }: OptionItemProps) => {
   const { edit, saving } = useEditDraftCollections()
   const collections = ownCollections || []
-  const checked = draft.collections?.edges?.map(({ node }) => node.id) || []
-
+  const checkedCollections =
+    draft.collections?.edges?.map(({ node }) => node) || []
   return (
     <Sidebar.Collections
-      checked={checked}
+      checkedCollections={checkedCollections}
       collections={collections}
       editCollections={edit}
       collectionsSaving={saving}

@@ -3,7 +3,6 @@
   gap: var(--sp8);
   align-items: center;
   justify-content: space-between;
-  padding: var(--sp4) 0;
 
   & .left {
     display: flex;

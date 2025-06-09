@@ -5,11 +5,19 @@
 
 .content {
   flex-grow: 1;
+  max-height: 22.5rem;
   padding: var(--sp10) var(--sp16) 0 var(--sp16);
+  overflow-y: auto;
 
   /* FIXME: rendering issue when checkbox is checked */
   & :global(form) {
     position: relative;
+  }
+
+  &.checkedCollections {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp10);
   }
 }
 
