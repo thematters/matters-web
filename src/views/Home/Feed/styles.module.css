@@ -7,7 +7,7 @@
 
   @media (--xs-up) {
     flex-flow: row wrap;
-    gap: var(--sp12);
+    column-gap: var(--sp12);
     align-items: center;
   }
 
