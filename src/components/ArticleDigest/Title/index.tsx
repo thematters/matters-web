@@ -87,7 +87,7 @@ export const ArticleDigestTitle = ({
   })
   const isClickable = !disabled && !isBanned
 
-  const Title = () => (
+  const titleElement = (
     <>
       {is === 'h2' ? (
         <h2 className={titleClasses}>{title}</h2>
@@ -115,13 +115,13 @@ export const ArticleDigestTitle = ({
           })
         }}
       >
-        <Title />
+        {titleElement}
       </section>
     )
   }
 
   if (!isClickable) {
-    return <Title />
+    return titleElement
   }
 
   return (
@@ -132,7 +132,7 @@ export const ArticleDigestTitle = ({
       {...restProps}
       className={isClickable ? 'u-link-active-green' : undefined}
     >
-      <Title />
+      {titleElement}
     </Link>
   )
 }
