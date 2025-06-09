@@ -6,17 +6,27 @@
     align-items: center;
     justify-content: flex-start;
   }
+}
 
-  & .campaign {
-    display: inline-flex;
-    align-items: center;
-    justify-content: flex-start;
-    height: 1.125rem;
-    margin-left: var(--sp16);
+.campaign {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 1.125rem;
+  margin-left: var(--sp16);
+  font-size: var(--text12);
+  color: var(--color-campaign-blue);
 
-    @media (--sm-up) {
-      margin-bottom: var(--ar17-100);
-      margin-left: 0;
-    }
+  @media (--sm-up) {
+    margin-bottom: var(--ar17-100);
+    margin-left: 0;
+  }
+
+  & .campaignName {
+    @mixin line-clamp;
+  }
+
+  & .campaignStage {
+    flex-shrink: 0;
   }
 }
