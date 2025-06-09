@@ -12,7 +12,6 @@ import {
   ArticleDigestDropdownArticleFragment,
   ArticleLicenseType,
   AssetFragment,
-  CollectionDigestCollectionPublicFragment,
   DigestRichCirclePublicFragment,
   DigestTagFragment,
   DraftAssetsQuery,
@@ -246,7 +245,7 @@ export const useEditDraftCollections = () => {
   const handleVersionConflict = useVersionConflictHandler()
 
   const edit = async (
-    newCollections: CollectionDigestCollectionPublicFragment[],
+    newCollections: string[],
     newId?: string,
     lastUpdatedAt?: string
   ) => {
@@ -254,7 +253,7 @@ export const useEditDraftCollections = () => {
       setCollections({
         variables: {
           id: newId || getDraftId(),
-          collections: _uniq(newCollections.map(({ id }) => id)),
+          collections: _uniq(newCollections.map((id) => id)),
           lastUpdatedAt,
         },
       }),
@@ -262,15 +261,13 @@ export const useEditDraftCollections = () => {
         setCollections({
           variables: {
             id: newId || getDraftId(),
-            collections: _uniq(newCollections.map(({ id }) => id)),
+            collections: _uniq(newCollections.map((id) => id)),
           },
         })
     )
   }
 
-  const createDraftAndEdit = async (
-    newCollections: CollectionDigestCollectionPublicFragment[]
-  ) => {
+  const createDraftAndEdit = async (newCollections: string[]) => {
     if (getDraftId()) {
       return edit(newCollections, undefined, getDraftUpdatedAt())
     }
@@ -281,7 +278,7 @@ export const useEditDraftCollections = () => {
   }
 
   return {
-    edit: async (newCollections: CollectionDigestCollectionPublicFragment[]) =>
+    edit: async (newCollections: string[]) =>
       addRequest(() => createDraftAndEdit(newCollections)),
     saving,
   }

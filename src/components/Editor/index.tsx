@@ -25,7 +25,7 @@ export type SetConnectionsProps = {
 export type SetCollectionsProps = {
   collections: CollectionDigestCollectionPublicFragment[]
   editCollections: (
-    collections: CollectionDigestCollectionPublicFragment[]
+    collections: string[]
   ) => Promise<FetchResult<SetDraftCollectionsMutation> | void | unknown>
   collectionsSaving?: boolean
 }

@@ -4,5 +4,25 @@
 }
 
 .content {
+  flex-grow: 1;
   padding: var(--sp10) var(--sp16) 0 var(--sp16);
+
+  /* FIXME: rendering issue when checkbox is checked */
+  & :global(form) {
+    position: relative;
+  }
+}
+
+.item {
+  padding: var(--sp8) 0;
+}
+
+.full {
+  @mixin border-grey;
+
+  padding: var(--sp1) var(--sp6);
+  margin-right: var(--sp8);
+  font-size: var(--text12);
+  color: var(--color-grey);
+  border-radius: 0.25rem;
 }

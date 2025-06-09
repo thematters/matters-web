@@ -19,6 +19,7 @@ export const OptionDrawer: React.FC<OptionDrawerProps> = ({
   draft,
   campaigns,
   ownCircles,
+  ownCollections,
 }) => {
   const intl = useIntl()
 
@@ -39,6 +40,7 @@ export const OptionDrawer: React.FC<OptionDrawerProps> = ({
           draft={draft}
           campaigns={campaigns}
           ownCircles={ownCircles}
+          ownCollections={ownCollections}
         />
         {children}
       </Drawer.Content>

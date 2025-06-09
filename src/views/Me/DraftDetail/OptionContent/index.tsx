@@ -99,14 +99,17 @@ const EditDraftConnections = ({ draft, disabled }: OptionItemProps) => {
 }
 
 const EditDraftCollections = ({
+  draft,
   disabled,
   ownCollections,
 }: OptionItemProps) => {
   const { edit, saving } = useEditDraftCollections()
   const collections = ownCollections || []
+  const checked = draft.collections?.edges?.map(({ node }) => node.id) || []
 
   return (
     <Sidebar.Collections
+      checked={checked}
       collections={collections}
       editCollections={edit}
       collectionsSaving={saving}
@@ -126,6 +129,7 @@ export const OptionContent = (props: OptionContentProps) => {
   const isPending = props.draft.publishState === 'pending'
   const isPublished = props.draft.publishState === 'published'
   const disabled = isPending || isPublished
+  const hasOwnCollections = (props.ownCollections?.length || 0) > 0
 
   return (
     <section>
@@ -159,7 +163,9 @@ export const OptionContent = (props: OptionContentProps) => {
             <EditDraftCover {...props} disabled={disabled} />
             <EditDraftTags {...props} disabled={disabled} />
             <EditDraftConnections {...props} disabled={disabled} />
-            <EditDraftCollections {...props} disabled={disabled} />
+            {hasOwnCollections && (
+              <EditDraftCollections {...props} disabled={disabled} />
+            )}
           </>
         )}
       </section>
