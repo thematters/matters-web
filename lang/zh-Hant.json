@@ -1300,10 +1300,6 @@
     "defaultMessage": "已接受",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
   },
-  "Jxr/TM": {
-    "defaultMessage": "已滿",
-    "description": "src/components/Dialogs/AddCollectionsArticleDialog/SelectDialogContent.tsx"
-  },
   "K+pFNS": {
     "defaultMessage": "活動時間{tz}"
   },
@@ -2375,6 +2371,9 @@
   "dSjI7E": {
     "defaultMessage": "暫無法斷開錢包連結，因為你沒有其他可用於登錄的身份（電子郵件/數字錢包/社交帳號）。",
     "description": "src/components/Dialogs/RemoveWalletLoginDialog/Content.tsx"
+  },
+  "dSx84k": {
+    "defaultMessage": "已滿"
   },
   "dTOtPO": {
     "defaultMessage": "儲值"
