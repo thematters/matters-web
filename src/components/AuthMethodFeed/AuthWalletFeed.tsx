@@ -42,10 +42,10 @@ export const AuthWalletFeed: React.FC<Props> = ({
 
   useEffect(() => {
     ;(async () => {
-      const provider = await injectedConnector?.getProvider()
-      setInjectedReady(!!provider)
+      const injectedProvider = await injectedConnector?.getProvider()
+      setInjectedReady(!!injectedProvider)
     })()
-  }, [injectedConnector])
+  }, [injectedConnector?.id])
 
   // auto switch to next step if account is connected
   useEffect(() => {
