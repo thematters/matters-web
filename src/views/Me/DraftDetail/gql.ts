@@ -86,7 +86,7 @@ export const DRAFT_DETAIL_VIEWER = gql`
       }
       displayName
       avatar
-      collections(input: { first: 100 }) {
+      collections(input: { first: null }) {
         edges {
           node {
             id
