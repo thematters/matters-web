@@ -1,6 +1,7 @@
 import { FieldInputProps, FormikProvider, useFormik } from 'formik'
-import { useCallback, useId, useMemo, useState } from 'react'
+import { useCallback, useId, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
+import { useDebouncedCallback } from 'use-debounce'
 
 import IconDown from '@/public/static/icons/24px/down.svg'
 import IconUp from '@/public/static/icons/24px/up.svg'
@@ -89,15 +90,9 @@ const CollectionsEditForm = ({
     },
   })
 
-  const debouncedSubmit = useMemo(() => {
-    let timeoutId: NodeJS.Timeout
-    return () => {
-      clearTimeout(timeoutId)
-      timeoutId = setTimeout(() => {
-        formik.handleSubmit()
-      }, INPUT_DEBOUNCE)
-    }
-  }, [formik.handleSubmit])
+  const debouncedSubmit = useDebouncedCallback(() => {
+    formik.handleSubmit()
+  }, INPUT_DEBOUNCE)
 
   return (
     <div className={styles.content}>
@@ -176,10 +171,7 @@ const SidebarCollections = ({
 }: SidebarCollectionsProps) => {
   const [isEditing, setIsEditing] = useState(false)
 
-  const checkedIds = useMemo(
-    () => checkedCollections.map((collection) => collection.id),
-    [checkedCollections]
-  )
+  const checkedIds = checkedCollections.map((collection) => collection.id)
 
   const handleRemove = useCallback(
     (collectionId: string) => {
