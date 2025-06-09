@@ -1,13 +1,12 @@
-import { FieldInputProps, FormikProvider, useField, useFormik } from 'formik'
-import { useId, useState } from 'react'
+import { FieldInputProps, FormikProvider, useFormik } from 'formik'
+import { useCallback, useId, useMemo, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import IconDown from '@/public/static/icons/24px/down.svg'
 import IconUp from '@/public/static/icons/24px/up.svg'
-import { MAX_COLLECTION_ARTICLES_COUNT } from '~/common/enums'
+import { INPUT_DEBOUNCE, MAX_COLLECTION_ARTICLES_COUNT } from '~/common/enums'
 import { Form, Icon } from '~/components'
 import { SetCollectionsProps } from '~/components/Editor'
-import { SquareCheckBoxBoxProps } from '~/components/Form/SquareCheckBox'
 import { CollectionDigestCollectionPublicFragment } from '~/gql/graphql'
 
 import Box from '../Box'
@@ -23,9 +22,150 @@ interface FormValues {
   checked: string[]
 }
 
-const SquareCheckBoxField: React.FC<SquareCheckBoxBoxProps> = (props) => {
-  const [field] = useField({ name: props.name, type: 'checkbox' })
-  return <Form.SquareCheckBox {...field} {...props} />
+const CollectionItem = ({
+  collection,
+  isChecked,
+  getFieldProps,
+  disabled,
+}: {
+  collection: CollectionDigestCollectionPublicFragment
+  isChecked: boolean
+  getFieldProps: (name: string) => FieldInputProps<string[]>
+  disabled?: boolean
+}) => {
+  const isFull = collection.articles.totalCount >= MAX_COLLECTION_ARTICLES_COUNT
+  const isItemDisabled = disabled || isFull
+
+  return (
+    <section className={styles.item}>
+      <Form.SquareCheckBox
+        hasTooltip
+        checkedBoxColor="black"
+        checked={isChecked}
+        left={
+          isFull ? (
+            <span className={styles.full}>
+              <FormattedMessage defaultMessage="FULL" id="dSx84k" />
+            </span>
+          ) : undefined
+        }
+        hint={collection.title}
+        disabled={isItemDisabled}
+        {...getFieldProps('checked')}
+        value={collection.id}
+        contents={
+          isFull ? (
+            <span className={styles.collectionTitle}>{collection.title}</span>
+          ) : (
+            collection.title
+          )
+        }
+      />
+    </section>
+  )
+}
+
+const CollectionsEditForm = ({
+  collections,
+  initialChecked,
+  onSubmit,
+  disabled,
+}: {
+  collections: CollectionDigestCollectionPublicFragment[]
+  initialChecked: string[]
+  onSubmit: (checked: string[]) => void
+  disabled?: boolean
+}) => {
+  const formId = useId()
+
+  const formik = useFormik<FormValues>({
+    initialValues: { checked: initialChecked },
+    validateOnBlur: false,
+    validateOnChange: false,
+    onSubmit: async ({ checked }) => {
+      if (checked) {
+        onSubmit(checked)
+      }
+    },
+  })
+
+  const debouncedSubmit = useMemo(() => {
+    let timeoutId: NodeJS.Timeout
+    return () => {
+      clearTimeout(timeoutId)
+      timeoutId = setTimeout(() => {
+        formik.handleSubmit()
+      }, INPUT_DEBOUNCE)
+    }
+  }, [formik.handleSubmit])
+
+  return (
+    <div className={styles.content}>
+      <FormikProvider value={formik}>
+        <Form
+          id={formId}
+          onSubmit={formik.handleSubmit}
+          onChange={debouncedSubmit}
+          className={styles.listForm}
+        >
+          {collections.map((collection) => (
+            <CollectionItem
+              key={collection.id}
+              collection={collection}
+              isChecked={formik.values.checked.includes(collection.id)}
+              getFieldProps={formik.getFieldProps}
+              disabled={disabled}
+            />
+          ))}
+        </Form>
+      </FormikProvider>
+    </div>
+  )
+}
+
+const SelectedCollectionsList = ({
+  checkedCollections,
+  onRemove,
+}: {
+  checkedCollections: CollectionDigestCollectionPublicFragment[]
+  onRemove: (collectionId: string) => void
+}) => (
+  <div className={`${styles.content} ${styles.checkedCollections}`}>
+    {checkedCollections.map((collection) => (
+      <CollectionDigest
+        key={collection.id}
+        collection={collection}
+        onRemove={onRemove}
+      />
+    ))}
+  </div>
+)
+
+const ToggleButton = ({
+  isEditing,
+  onToggle,
+  disabled,
+}: {
+  isEditing: boolean
+  onToggle: () => void
+  disabled?: boolean
+}) => {
+  const intl = useIntl()
+
+  return (
+    <button
+      onClick={onToggle}
+      className={styles.rightButton}
+      disabled={disabled}
+      aria-label={intl.formatMessage(
+        isEditing
+          ? { defaultMessage: 'Close', id: 'rbrahO' }
+          : { defaultMessage: 'Add', id: '2/2yg+' }
+      )}
+    >
+      <Icon icon={isEditing ? IconUp : IconDown} size={24} color="black" />
+    </button>
+  )
 }
 
 const SidebarCollections = ({
@@ -34,34 +174,31 @@ const SidebarCollections = ({
   editCollections,
   disabled,
 }: SidebarCollectionsProps) => {
-  const intl = useIntl()
   const [isEditing, setIsEditing] = useState(false)
 
-  const formId = useId()
-  const checked = checkedCollections.map((collection) => collection.id)
+  const checkedIds = useMemo(
+    () => checkedCollections.map((collection) => collection.id),
+    [checkedCollections]
+  )
 
-  const formik = useFormik<FormValues>({
-    initialValues: {
-      checked,
+  const handleRemove = useCallback(
+    (collectionId: string) => {
+      const newChecked = checkedIds.filter((id) => id !== collectionId)
+      editCollections(newChecked)
     },
-    validateOnBlur: false,
-    validateOnChange: false,
-    onSubmit: async ({ checked }, {}) => {
-      if (!checked) {
-        return
-      }
+    [checkedIds, editCollections]
+  )
 
+  const handleFormSubmit = useCallback(
+    (checked: string[]) => {
       editCollections(checked)
     },
-  })
+    [editCollections]
+  )
 
-  const handleRemove = (collectionId: string) => {
-    editCollections(checked.filter((id) => id !== collectionId))
-    formik.setFieldValue(
-      'checked',
-      checked.filter((id) => id !== collectionId)
-    )
-  }
+  const handleToggleEdit = useCallback(() => {
+    setIsEditing((prev) => !prev)
+  }, [])
 
   return (
     <Box
@@ -77,97 +214,26 @@ const SidebarCollections = ({
         />
       }
       rightButton={
-        <>
-          {isEditing ? (
-            <button
-              onClick={() => setIsEditing(false)}
-              className={styles.rightButton}
-              aria-label={intl.formatMessage({
-                defaultMessage: 'Close',
-                id: 'rbrahO',
-              })}
-            >
-              <Icon icon={IconUp} size={24} color="black" />
-            </button>
-          ) : (
-            <button
-              onClick={() => setIsEditing(true)}
-              className={styles.rightButton}
-              aria-label={intl.formatMessage({
-                defaultMessage: 'Add',
-                id: '2/2yg+',
-              })}
-            >
-              <Icon icon={IconDown} size={24} color="black" />
-            </button>
-          )}
-        </>
+        <ToggleButton
+          isEditing={isEditing}
+          onToggle={handleToggleEdit}
+          disabled={disabled}
+        />
       }
       disabled={disabled}
     >
-      {isEditing && (
-        <div className={styles.content}>
-          <FormikProvider value={formik}>
-            <Form
-              id={formId}
-              onSubmit={formik.handleSubmit}
-              onChange={formik.handleSubmit}
-              className={styles.listForm}
-            >
-              {collections.map((collection) => (
-                <section key={collection.id} className={styles.item}>
-                  <SquareCheckBoxField
-                    hasTooltip={true}
-                    checkedBoxColor="black"
-                    checked={formik.values.checked.includes(collection.id)}
-                    left={
-                      collection.articles.totalCount >=
-                      MAX_COLLECTION_ARTICLES_COUNT ? (
-                        <span className={styles.full}>
-                          <FormattedMessage
-                            defaultMessage="FULL"
-                            id="Jxr/TM"
-                            description="src/components/Dialogs/AddCollectionsArticleDialog/SelectDialogContent.tsx"
-                          />
-                        </span>
-                      ) : undefined
-                    }
-                    hint={collection.title}
-                    disabled={
-                      collection.articles.totalCount >=
-                      MAX_COLLECTION_ARTICLES_COUNT
-                    }
-                    {...(formik.getFieldProps('checked') as FieldInputProps<
-                      string[]
-                    >)}
-                    value={collection.id}
-                    contents={
-                      collection.articles.totalCount >=
-                      MAX_COLLECTION_ARTICLES_COUNT ? (
-                        <span className={styles.collectionTitle}>
-                          {collection.title}
-                        </span>
-                      ) : (
-                        collection.title
-                      )
-                    }
-                  />
-                </section>
-              ))}
-            </Form>
-          </FormikProvider>
-        </div>
-      )}
-      {!isEditing && (
-        <div className={`${styles.content} ${styles.checkedCollections}`}>
-          {checkedCollections.map((collection) => (
-            <CollectionDigest
-              key={collection.id}
-              collection={collection}
-              onRemove={handleRemove}
-            />
-          ))}
-        </div>
+      {isEditing ? (
+        <CollectionsEditForm
+          collections={collections}
+          initialChecked={checkedIds}
+          onSubmit={handleFormSubmit}
+          disabled={disabled}
+        />
+      ) : (
+        <SelectedCollectionsList
+          checkedCollections={checkedCollections}
+          onRemove={handleRemove}
+        />
       )}
     </Box>
   )
