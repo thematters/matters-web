@@ -83,6 +83,8 @@
 .item {
   @mixin transition;
 
+  display: inline-flex;
+  justify-content: flex-start;
   width: 100%;
   font-size: var(--text14);
   line-height: 1.375rem;
@@ -90,6 +92,7 @@
   transition-property: color;
 
   @media (--sm-up) {
+    justify-content: flex-end;
     text-align: end;
   }
 
