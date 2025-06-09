@@ -118,6 +118,7 @@ const SidebarCollections = ({
                 <section key={collection.id} className={styles.item}>
                   <SquareCheckBoxField
                     hasTooltip={true}
+                    checkedBoxColor="black"
                     checked={formik.values.checked.includes(collection.id)}
                     left={
                       collection.articles.totalCount >=
@@ -140,6 +141,16 @@ const SidebarCollections = ({
                       string[]
                     >)}
                     value={collection.id}
+                    contents={
+                      collection.articles.totalCount >=
+                      MAX_COLLECTION_ARTICLES_COUNT ? (
+                        <span className={styles.collectionTitle}>
+                          {collection.title}
+                        </span>
+                      ) : (
+                        collection.title
+                      )
+                    }
                   />
                 </section>
               ))}

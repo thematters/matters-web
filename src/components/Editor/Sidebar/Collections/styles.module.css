@@ -23,6 +23,11 @@
 
 .item {
   padding: var(--sp8) 0;
+
+  & .collectionTitle {
+    font-size: var(--text14);
+    color: var(--color-grey);
+  }
 }
 
 .full {
