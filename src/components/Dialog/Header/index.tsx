@@ -22,7 +22,8 @@ export interface HeaderProps {
 const Title = ({
   title,
   titleLeft,
-}: Pick<HeaderProps, 'title' | 'titleLeft'>) => {
+  visuallyHidden = false,
+}: Pick<HeaderProps, 'title' | 'titleLeft'> & { visuallyHidden?: boolean }) => {
   const { visuallyHiddenProps } = useVisuallyHidden()
 
   return (
@@ -32,7 +33,7 @@ const Title = ({
         [styles.titleCenter]: !titleLeft,
         [styles.title]: true,
       })}
-      {...visuallyHiddenProps}
+      {...(visuallyHidden ? visuallyHiddenProps : {})}
     >
       {title}
     </h1>
@@ -73,7 +74,7 @@ const Header: React.FC<HeaderProps> = ({
             <Title title={title} />
           </header>
         ) : (
-          <Title title={title} />
+          <Title title={title} visuallyHidden />
         )}
       </Media>
     </>
