@@ -309,6 +309,7 @@ const BaseArticleDetail = ({
 
       <section className={styles.content}>
         <Header article={article} />
+
         <section className="u-article-title">
           <h1>{title}</h1>
 
