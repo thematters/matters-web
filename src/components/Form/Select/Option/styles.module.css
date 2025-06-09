@@ -1,6 +1,7 @@
 .container {
   @mixin flex-start-space-between;
 
+  gap: var(--sp4);
   padding: var(--sp16);
 }
 
