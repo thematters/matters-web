@@ -41,6 +41,24 @@ const Channel = ({ article }: { article: ChannelArticleFragment }) => {
   const topicChannel = article.classification?.topicChannel
   const hasTopicChannel = (topicChannel?.channels?.length ?? 0) > 0
 
+  const renderChannelNames = () => (
+    <>
+      {topicChannel?.channels?.map((channel, index) => (
+        <span key={channel.channel.id}>
+          <span className={styles.channelNames}>
+            {lang === 'zh_hans'
+              ? channel.channel.nameZhHans
+              : lang === 'zh_hant'
+                ? channel.channel.nameZhHant
+                : channel.channel.nameEn}
+          </span>
+          {index < (topicChannel?.channels?.length ?? 0) - 1 &&
+            (lang === 'zh_hans' || lang === 'zh_hant' ? '、' : ', ')}
+        </span>
+      ))}
+    </>
+  )
+
   if (!isAuthor && !hasTopicChannel) {
     return null
   }
@@ -63,23 +81,7 @@ const Channel = ({ article }: { article: ChannelArticleFragment }) => {
           defaultMessage="Recommended to channel: {channelNames}"
           id="0mQE3E"
           values={{
-            channelNames: (
-              <>
-                {topicChannel?.channels?.map((channel, index) => (
-                  <span key={channel.channel.id}>
-                    <span className={styles.channelNames}>
-                      {lang === 'zh_hans'
-                        ? channel.channel.nameZhHans
-                        : lang === 'zh_hant'
-                          ? channel.channel.nameZhHant
-                          : channel.channel.nameEn}
-                    </span>
-                    {index < (topicChannel?.channels?.length ?? 0) - 1 &&
-                      (lang === 'zh_hans' || lang === 'zh_hant' ? '、' : ', ')}
-                  </span>
-                ))}
-              </>
-            ),
+            channelNames: renderChannelNames(),
           }}
         />
       </section>
@@ -93,23 +95,7 @@ const Channel = ({ article }: { article: ChannelArticleFragment }) => {
           defaultMessage="Your work has been recommended to the channels: {channelNames}. Are you satisfied with the result?"
           id="dZlT9q"
           values={{
-            channelNames: (
-              <>
-                {topicChannel?.channels?.map((channel, index) => (
-                  <span key={channel.channel.id}>
-                    <span className={styles.channelNames}>
-                      {lang === 'zh_hans'
-                        ? channel.channel.nameZhHans
-                        : lang === 'zh_hant'
-                          ? channel.channel.nameZhHant
-                          : channel.channel.nameEn}
-                    </span>
-                    {index < (topicChannel?.channels?.length ?? 0) - 1 &&
-                      (lang === 'zh_hans' || lang === 'zh_hant' ? '、' : ', ')}
-                  </span>
-                ))}
-              </>
-            ),
+            channelNames: renderChannelNames(),
           }}
         />
       </section>
