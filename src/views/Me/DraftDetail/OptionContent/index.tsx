@@ -1,3 +1,4 @@
+import { ApolloQueryResult } from '@apollo/client'
 import { useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
@@ -8,6 +9,7 @@ import Sidebar from '~/components/Editor/Sidebar'
 import {
   CollectionDigestCollectionPublicFragment,
   DigestRichCirclePublicFragment,
+  DraftDetailViewerQueryQuery,
   EditorSelectCampaignFragment,
 } from '~/gql/graphql'
 import { EditMetaDraftFragment } from '~/gql/graphql'
@@ -23,9 +25,13 @@ import styles from './styles.module.css'
 
 export interface OptionContentProps {
   draft: EditMetaDraftFragment
+  draftViewer?: DraftDetailViewerQueryQuery
   campaigns?: EditorSelectCampaignFragment[]
   ownCircles?: DigestRichCirclePublicFragment[]
   ownCollections?: CollectionDigestCollectionPublicFragment[]
+  loadMoreCollections: () => Promise<
+    ApolloQueryResult<DraftDetailViewerQueryQuery>
+  >
 }
 
 type OptionItemProps = OptionContentProps & { disabled: boolean }
@@ -102,11 +108,15 @@ const EditDraftCollections = ({
   draft,
   disabled,
   ownCollections,
+  loadMoreCollections,
+  draftViewer,
 }: OptionItemProps) => {
   const { edit, saving } = useEditDraftCollections()
   const collections = ownCollections || []
   const checkedCollections =
     draft.collections?.edges?.map(({ node }) => node) || []
+  const hasMoreCollections =
+    !!draftViewer?.viewer?.collections?.pageInfo?.hasNextPage
   return (
     <Sidebar.Collections
       checkedCollections={checkedCollections}
@@ -114,6 +124,8 @@ const EditDraftCollections = ({
       editCollections={edit}
       collectionsSaving={saving}
       disabled={disabled}
+      loadMore={loadMoreCollections}
+      hasNextPage={hasMoreCollections}
     />
   )
 }

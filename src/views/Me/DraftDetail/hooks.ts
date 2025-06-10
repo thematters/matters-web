@@ -4,7 +4,7 @@ import { useContext, useState } from 'react'
 import { useIntl } from 'react-intl'
 
 import { ERROR_CODES, PATHS } from '~/common/enums'
-import { parseFormSubmitErrors } from '~/common/utils'
+import { mergeConnections, parseFormSubmitErrors } from '~/common/utils'
 import { DraftDetailStateContext, useRoute } from '~/components'
 import { useImperativeQuery, useMutation } from '~/components/GQL'
 import {
@@ -714,10 +714,13 @@ export const useDraftDetail = () => {
     }
   )
 
-  const { data: viewerData, loading: viewerLoading } =
-    useQuery<DraftDetailViewerQueryQuery>(DRAFT_DETAIL_VIEWER, {
-      fetchPolicy: 'network-only',
-    })
+  const {
+    data: viewerData,
+    loading: viewerLoading,
+    fetchMore,
+  } = useQuery<DraftDetailViewerQueryQuery>(DRAFT_DETAIL_VIEWER, {
+    fetchPolicy: 'network-only',
+  })
 
   const draft = (data?.node?.__typename === 'Draft' && data.node) || EMPTY_DRAFT
   const ownCircles = viewerData?.viewer?.ownCircles || undefined
@@ -728,8 +731,25 @@ export const useDraftDetail = () => {
     (e) => e.node
   )
 
+  const loadMoreCollections = () => {
+    const connectionPath = 'viewer.collections'
+    return fetchMore({
+      variables: {
+        collectionsAfter: viewerData?.viewer?.collections?.pageInfo?.endCursor,
+      },
+      updateQuery: (previousResult, { fetchMoreResult }) => {
+        return mergeConnections({
+          oldData: previousResult,
+          newData: fetchMoreResult,
+          path: connectionPath,
+        })
+      },
+    })
+  }
+
   return {
     draft,
+    viewerData,
     ownCircles,
     ownCollections,
     appliedCampaigns,
@@ -738,5 +758,6 @@ export const useDraftDetail = () => {
     isNewDraft: isNewDraft,
     getDraftId,
     initNew,
+    loadMoreCollections,
   }
 }
