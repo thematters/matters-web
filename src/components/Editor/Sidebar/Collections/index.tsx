@@ -116,7 +116,7 @@ const CollectionsEditForm = ({
           <InfiniteScroll
             hasNextPage={hasNextPage}
             loadMore={loadMore}
-            eof={undefined}
+            eof={false}
           >
             {collections.map((collection) => (
               <CollectionItem
