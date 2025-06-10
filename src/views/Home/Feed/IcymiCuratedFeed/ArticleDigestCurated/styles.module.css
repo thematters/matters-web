@@ -43,9 +43,7 @@
 }
 
 .title {
-  & > a {
-    padding-top: var(--sp8);
-  }
+  padding-top: var(--sp8);
 }
 
 .coverIcon {
