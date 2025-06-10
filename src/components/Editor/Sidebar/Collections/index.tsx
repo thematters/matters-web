@@ -1,3 +1,4 @@
+import { ApolloQueryResult } from '@apollo/client'
 import { FieldInputProps, FormikProvider, useFormik } from 'formik'
 import { useCallback, useId, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
@@ -6,9 +7,12 @@ import { useDebouncedCallback } from 'use-debounce'
 import IconDown from '@/public/static/icons/24px/down.svg'
 import IconUp from '@/public/static/icons/24px/up.svg'
 import { INPUT_DEBOUNCE, MAX_COLLECTION_ARTICLES_COUNT } from '~/common/enums'
-import { Form, Icon } from '~/components'
+import { Form, Icon, InfiniteScroll } from '~/components'
 import { SetCollectionsProps } from '~/components/Editor'
-import { CollectionDigestCollectionPublicFragment } from '~/gql/graphql'
+import {
+  CollectionDigestCollectionPublicFragment,
+  DraftDetailViewerQueryQuery,
+} from '~/gql/graphql'
 
 import Box from '../Box'
 import { CollectionDigest } from './CollectionDigest'
@@ -17,6 +21,8 @@ import styles from './styles.module.css'
 export type SidebarCollectionsProps = {
   checkedCollections: CollectionDigestCollectionPublicFragment[]
   disabled?: boolean
+  loadMore: () => Promise<ApolloQueryResult<DraftDetailViewerQueryQuery>>
+  hasNextPage: boolean
 } & SetCollectionsProps
 
 interface FormValues {
@@ -71,11 +77,15 @@ const CollectionsEditForm = ({
   initialChecked,
   onSubmit,
   disabled,
+  loadMore,
+  hasNextPage,
 }: {
   collections: CollectionDigestCollectionPublicFragment[]
   initialChecked: string[]
   onSubmit: (checked: string[]) => void
   disabled?: boolean
+  loadMore: () => Promise<ApolloQueryResult<DraftDetailViewerQueryQuery>>
+  hasNextPage: boolean
 }) => {
   const formId = useId()
 
@@ -103,15 +113,21 @@ const CollectionsEditForm = ({
           onChange={debouncedSubmit}
           className={styles.listForm}
         >
-          {collections.map((collection) => (
-            <CollectionItem
-              key={collection.id}
-              collection={collection}
-              isChecked={formik.values.checked.includes(collection.id)}
-              getFieldProps={formik.getFieldProps}
-              disabled={disabled}
-            />
-          ))}
+          <InfiniteScroll
+            hasNextPage={hasNextPage}
+            loadMore={loadMore}
+            eof={false}
+          >
+            {collections.map((collection) => (
+              <CollectionItem
+                key={collection.id}
+                collection={collection}
+                isChecked={formik.values.checked.includes(collection.id)}
+                getFieldProps={formik.getFieldProps}
+                disabled={disabled}
+              />
+            ))}
+          </InfiniteScroll>
         </Form>
       </FormikProvider>
     </div>
@@ -168,6 +184,8 @@ const SidebarCollections = ({
   collections,
   editCollections,
   disabled,
+  loadMore,
+  hasNextPage,
 }: SidebarCollectionsProps) => {
   const [isEditing, setIsEditing] = useState(false)
 
@@ -220,6 +238,8 @@ const SidebarCollections = ({
           initialChecked={checkedIds}
           onSubmit={handleFormSubmit}
           disabled={disabled}
+          loadMore={loadMore}
+          hasNextPage={hasNextPage}
         />
       ) : (
         <SelectedCollectionsList

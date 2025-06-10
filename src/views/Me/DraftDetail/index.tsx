@@ -75,11 +75,13 @@ const BaseDraftDetail = () => {
 
   const {
     draft,
+    viewerData,
     ownCircles,
     ownCollections,
     appliedCampaigns,
     loading,
     error,
+    loadMoreCollections,
   } = useDraftDetail()
 
   const [setContent] = useMutation<SetDraftContentMutation>(SET_CONTENT)
@@ -359,9 +361,11 @@ const BaseDraftDetail = () => {
               isOpen={isOpenOptionDrawer}
               onClose={toggleOptionDrawer}
               draft={draft}
+              draftViewer={viewerData}
               campaigns={appliedCampaigns}
               ownCircles={ownCircles}
               ownCollections={ownCollections}
+              loadMoreCollections={loadMoreCollections}
             />
           </Media>
         </Layout.Main.Spacing>

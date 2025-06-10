@@ -70,7 +70,7 @@ export const editMetaFragment = gql`
  * Fetch draft detail or assets only
  */
 export const DRAFT_DETAIL_VIEWER = gql`
-  query DraftDetailViewerQuery {
+  query DraftDetailViewerQuery($collectionsAfter: String) {
     viewer {
       id
       campaigns(input: { first: null }) {
@@ -86,7 +86,11 @@ export const DRAFT_DETAIL_VIEWER = gql`
       }
       displayName
       avatar
-      collections(input: { first: null }) {
+      collections(input: { first: 20, after: $collectionsAfter }) {
+        pageInfo {
+          hasNextPage
+          endCursor
+        }
         edges {
           node {
             id

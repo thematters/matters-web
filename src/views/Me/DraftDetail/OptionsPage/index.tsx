@@ -11,12 +11,14 @@ import styles from './styles.module.css'
 const OptionsPage = () => {
   const {
     draft,
+    viewerData,
     ownCircles,
     appliedCampaigns,
     ownCollections,
     loading,
     error,
     isNewDraft,
+    loadMoreCollections,
   } = useDraftDetail()
 
   const goBack = () => {
@@ -50,9 +52,11 @@ const OptionsPage = () => {
 
         <OptionContent
           draft={draft}
+          draftViewer={viewerData}
           campaigns={appliedCampaigns}
           ownCircles={ownCircles}
           ownCollections={ownCollections}
+          loadMoreCollections={loadMoreCollections}
         />
       </section>
     </DraftLoadingStates>
