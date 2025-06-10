@@ -170,6 +170,9 @@
     "defaultMessage": "Oops. Something went wrong. Please try again later.",
     "description": "INTERNAL_SERVER_ERROR"
   },
+  "0mQE3E": {
+    "defaultMessage": "Recommended to channel: {channelNames}"
+  },
   "0oLj/t": {
     "defaultMessage": "Expand"
   },
@@ -1695,6 +1698,9 @@
     "defaultMessage": "friends have not accepted your invitations.",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/Accepted/index.tsx"
   },
+  "S+D/hf": {
+    "defaultMessage": "Recommending channels for your work…"
+  },
   "S/hoJx": {
     "defaultMessage": "User not found",
     "description": "USER_NOT_FOUND"
@@ -2344,6 +2350,9 @@
   "dVbKzB": {
     "defaultMessage": "Comments and replies",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
+  },
+  "dZlT9q": {
+    "defaultMessage": "Your work has been recommended to the channels: {channelNames}. Are you satisfied with the result?"
   },
   "ddJbkg": {
     "defaultMessage": "Pin",

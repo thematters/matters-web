@@ -48,6 +48,7 @@ import {
 } from '~/gql/graphql'
 
 import { AuthorSidebar } from './AuthorSidebar'
+import Channel from './Channel'
 import type { CommentDrawerStep } from './CommentDrawer'
 import { CommentsDialog } from './Comments/CommentsDialog'
 import { Placeholder as CommentsPlaceholder } from './Comments/Placeholder'
@@ -111,6 +112,7 @@ const BaseArticleDetail = ({
   privateFetched: boolean
 }) => {
   const { parentId } = parseCommentHash()
+  console.log('article', article)
 
   const { routerLang } = useRoute()
   const viewer = useContext(ViewerContext)
@@ -348,6 +350,8 @@ const BaseArticleDetail = ({
         <TagList article={article} />
 
         <License license={article.license} />
+
+        <Channel article={article} />
 
         {features.payment && (
           <DynamicSupportWidget

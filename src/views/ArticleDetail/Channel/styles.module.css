@@ -1,0 +1,10 @@
+.content {
+  margin-top: var(--sp4);
+  font-size: var(--text14);
+  line-height: 1.125rem;
+  color: var(--color-grey-dark);
+}
+
+.channelNames {
+  color: var(--color-black);
+}

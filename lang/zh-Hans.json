@@ -170,6 +170,9 @@
     "defaultMessage": "服务器错误，请稍候重试",
     "description": "INTERNAL_SERVER_ERROR"
   },
+  "0mQE3E": {
+    "defaultMessage": "已推荐到频道：{channelNames}"
+  },
   "0oLj/t": {
     "defaultMessage": "展开"
   },
@@ -1695,6 +1698,9 @@
     "defaultMessage": "还没有任何用户回覆你的邀请喔！",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/Accepted/index.tsx"
   },
+  "S+D/hf": {
+    "defaultMessage": "正在为你的作品推荐频道..."
+  },
   "S/hoJx": {
     "defaultMessage": "用户不存在",
     "description": "USER_NOT_FOUND"
@@ -2344,6 +2350,9 @@
   "dVbKzB": {
     "defaultMessage": "评论和回复",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
+  },
+  "dZlT9q": {
+    "defaultMessage": "已推荐你的这篇作品到频道：{channelNames}，你对结果满意吗？"
   },
   "ddJbkg": {
     "defaultMessage": "置顶",
