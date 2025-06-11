@@ -3333,6 +3333,9 @@
     "defaultMessage": "Visa / Mastercard / American Express payment",
     "description": "src/components/Forms/PaymentForm/StripeCheckout/index.tsx"
   },
+  "wlQosy": {
+    "defaultMessage": ". Really appreciate it!"
+  },
   "wm9xNB": {
     "defaultMessage": "{type} disconnected",
     "description": "src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"

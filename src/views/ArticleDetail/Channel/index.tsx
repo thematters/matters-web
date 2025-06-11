@@ -1,45 +1,58 @@
-import { gql } from '@apollo/client'
-import { useContext } from 'react'
+import { useMutation } from '@apollo/client'
+import { useContext, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { LanguageContext, ViewerContext } from '~/components'
-import { ChannelArticleFragment } from '~/gql/graphql'
+import IconThumbsDown from '@/public/static/icons/24px/thumb-down.svg'
+import IconThumbsUp from '@/public/static/icons/24px/thumb-up.svg'
+import { Button, Icon, LanguageContext, ViewerContext } from '~/components'
+import {
+  ChannelArticleFragment,
+  SubmitTopicChannelFeedbackMutation,
+  TopicChannelFeedbackType,
+} from '~/gql/graphql'
 
+import { fragments, SUBMIT_TOPIC_CHANNEL_FEEDBACK } from './gql'
 import styles from './styles.module.css'
-
-const fragments = {
-  article: gql`
-    fragment ChannelArticle on Article {
-      author {
-        id
-      }
-      classification {
-        topicChannel {
-          channels {
-            channel {
-              id
-              nameZhHans: name(input: { language: zh_hans })
-              nameZhHant: name(input: { language: zh_hant })
-              nameEn: name(input: { language: en })
-            }
-          }
-          feedback {
-            id
-            type
-          }
-        }
-      }
-    }
-  `,
-}
 
 const Channel = ({ article }: { article: ChannelArticleFragment }) => {
   const viewer = useContext(ViewerContext)
   const { lang } = useContext(LanguageContext)
   const isAuthor = viewer?.id === article.author?.id
+  const [hasThumbsUp, setHasThumbsUp] = useState(false)
 
   const topicChannel = article.classification?.topicChannel
   const hasTopicChannel = (topicChannel?.channels?.length ?? 0) > 0
+  const hasFeedback = !!topicChannel?.feedback
+
+  const [submitTopicChannelFeedback] =
+    useMutation<SubmitTopicChannelFeedbackMutation>(
+      SUBMIT_TOPIC_CHANNEL_FEEDBACK
+    )
+
+  const thumbsUp = () => {
+    submitTopicChannelFeedback({
+      variables: {
+        article: article.id,
+        type: TopicChannelFeedbackType.Positive,
+        channels:
+          topicChannel?.channels?.map((channel) => channel.channel.id) ?? [],
+      },
+    }).then(() => {
+      setHasThumbsUp(true)
+    })
+  }
+
+  const thumbsDown = () => {
+    submitTopicChannelFeedback({
+      variables: {
+        article: article.id,
+        type: TopicChannelFeedbackType.Negative,
+        channels:
+          topicChannel?.channels?.map((channel) => channel.channel.id) ?? [],
+      },
+    })
+    setHasThumbsUp(true)
+  }
 
   const renderChannelNames = () => (
     <>
@@ -91,13 +104,52 @@ const Channel = ({ article }: { article: ChannelArticleFragment }) => {
   if (isAuthor && hasTopicChannel) {
     return (
       <section className={styles.content}>
-        <FormattedMessage
-          defaultMessage="Your work has been recommended to the channels: {channelNames}. Are you satisfied with the result?"
-          id="dZlT9q"
-          values={{
-            channelNames: renderChannelNames(),
-          }}
-        />
+        {!hasFeedback && !hasThumbsUp && (
+          <>
+            <FormattedMessage
+              defaultMessage="Your work has been recommended to the channels: {channelNames}. Are you satisfied with the result?"
+              id="dZlT9q"
+              values={{
+                channelNames: renderChannelNames(),
+              }}
+            />
+            <Button
+              aria-label="Thumbs up"
+              onClick={thumbsUp}
+              textColor="black"
+              textActiveColor="greyDarker"
+              size={['1.125rem', '1.125rem']}
+            >
+              <Icon icon={IconThumbsUp} size={12} />
+            </Button>
+            <Button
+              aria-label="Thumbs down"
+              onClick={thumbsDown}
+              textColor="black"
+              textActiveColor="greyDarker"
+              size={['1.125rem', '1.125rem']}
+            >
+              <Icon icon={IconThumbsDown} size={12} />
+            </Button>
+          </>
+        )}
+        {(hasFeedback || hasThumbsUp) && (
+          <>
+            <FormattedMessage
+              defaultMessage="Recommended to channel: {channelNames}"
+              id="0mQE3E"
+              values={{
+                channelNames: renderChannelNames(),
+              }}
+            />
+            {hasThumbsUp && (
+              <FormattedMessage
+                defaultMessage=". Really appreciate it!"
+                id="wlQosy"
+              />
+            )}
+          </>
+        )}
       </section>
     )
   }

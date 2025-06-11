@@ -1,4 +1,6 @@
 .content {
+  display: flex;
+  gap: var(--sp8);
   margin-top: var(--sp4);
   font-size: var(--text14);
   line-height: 1.125rem;

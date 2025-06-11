@@ -3333,6 +3333,9 @@
     "defaultMessage": "Visa / Mastercard / American Express 支付",
     "description": "src/components/Forms/PaymentForm/StripeCheckout/index.tsx"
   },
+  "wlQosy": {
+    "defaultMessage": "。 感謝鼓勵 ～"
+  },
   "wm9xNB": {
     "defaultMessage": "{type} 已解綁",
     "description": "src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
