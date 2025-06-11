@@ -26,7 +26,6 @@ import { storage } from './storage'
 import typeDefs from './types'
 
 const isLocal = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'local'
-const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
 
 const isServer = typeof window === 'undefined'
 const isClient = !isServer
@@ -282,15 +281,10 @@ export const createApolloClient = (
 
           return true
         },
-        attachBreadcrumbs: isProd
-          ? {
-              includeQuery: true,
-              includeVariables: false,
-            }
-          : {
-              includeQuery: true,
-              includeVariables: true,
-            },
+        attachBreadcrumbs: {
+          includeQuery: true,
+          includeVariables: false,
+        },
       }),
       agentHashLink,
       authLink,

@@ -198,10 +198,6 @@ const BaseAddCredit: React.FC<FormProps> = ({
           success: false,
           message: JSON.stringify(result.error),
         })
-
-        import('@sentry/browser').then((Sentry) => {
-          Sentry.captureException(result.error)
-        })
       } else {
         if (result.paymentIntent?.status === 'succeeded') {
           analytics.trackEvent('purchase', { amount, success: true })
