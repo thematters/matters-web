@@ -2,7 +2,7 @@ import { excludeGraphQLFetch } from 'apollo-link-sentry'
 
 import packageJson from '@/package.json'
 
-const isLocal = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'development'
+const isLocal = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'local'
 const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
 
 export const SENTRY_CONFIG = {
@@ -17,6 +17,7 @@ export const SENTRY_CONFIG = {
     // API
     'Timeout',
     'Network',
+    'PersistedQueryNotFound',
     'AbortError',
     // CSP
     'Blocked',

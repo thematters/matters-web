@@ -4,29 +4,28 @@
 
 import * as Sentry from '@sentry/nextjs'
 
-import packageJson from '@/package.json'
-
+// import packageJson from '@/package.json'
 import { SENTRY_CONFIG } from '../configs/sentry.config'
 
-const isLocal = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'development'
+const isLocal = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'local'
 
-const commonIntegrations = [
-  Sentry.thirdPartyErrorFilterIntegration({
-    // defined in `unstable_sentryWebpackPluginOptions` of next.config.ts
-    filterKeys: [packageJson.name],
-    behaviour: 'drop-error-if-contains-third-party-frames',
-  }),
-]
+// const commonIntegrations = [
+//   Sentry.thirdPartyErrorFilterIntegration({
+//     // defined in `unstable_sentryWebpackPluginOptions` of next.config.ts
+//     filterKeys: [packageJson.name],
+//     behaviour: 'drop-error-if-contains-third-party-frames',
+//   }),
+// ]
 
 Sentry.init({
   ...SENTRY_CONFIG,
   ...(isLocal
     ? {
-        integrations: [...commonIntegrations],
+        // integrations: [...commonIntegrations],
       }
     : {
         integrations: [
-          ...commonIntegrations,
+          // ...commonIntegrations,
           Sentry.browserTracingIntegration(),
         ],
         tracePropagationTargets: ['localhost', /graphql/],
