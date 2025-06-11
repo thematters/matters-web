@@ -2961,6 +2961,9 @@
   "r9LhcI": {
     "defaultMessage": "貼上 YouTube、Vimeo 或 bilibili 連結後，Enter 進行新增"
   },
+  "r9fhGr": {
+    "defaultMessage": "顯示原文 ({originalLang})"
+  },
   "rADhX5": {
     "defaultMessage": "不可用",
     "description": "FORBIDDEN_BY_STATE"
@@ -3176,9 +3179,6 @@
     "defaultMessage": "去綁定",
     "description": "src/components/Dialogs/BindEmailHintDialog/Content.tsx"
   },
-  "vEdCjn": {
-    "defaultMessage": "原文 {originalLang}"
-  },
   "vH8sCb": {
     "defaultMessage": "我的圍爐"
   },
@@ -3230,7 +3230,7 @@
     "defaultMessage": "評論"
   },
   "wCy/Tc": {
-    "defaultMessage": "翻譯"
+    "defaultMessage": "翻譯成繁中"
   },
   "wDX7zn": {
     "defaultMessage": "草稿不存在",
@@ -3440,9 +3440,6 @@
   "zllCbU": {
     "defaultMessage": "在 {circleName} 中留言",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
-  },
-  "zlug1R": {
-    "defaultMessage": "已翻譯成{targetLang}，顯示"
   },
   "zvNfwL": {
     "defaultMessage": "操作過於頻繁，請稍候重試",

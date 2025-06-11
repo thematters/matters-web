@@ -2961,6 +2961,9 @@
   "r9LhcI": {
     "defaultMessage": "Paste YouTube, Vimeo or bilibili link, and press enter"
   },
+  "r9fhGr": {
+    "defaultMessage": "Show Original ({originalLang})"
+  },
   "rADhX5": {
     "defaultMessage": "Unavailable",
     "description": "FORBIDDEN_BY_STATE"
@@ -3175,9 +3178,6 @@
   "vB45rC": {
     "defaultMessage": "Connect",
     "description": "src/components/Dialogs/BindEmailHintDialog/Content.tsx"
-  },
-  "vEdCjn": {
-    "defaultMessage": "Original {originalLang}"
   },
   "vH8sCb": {
     "defaultMessage": "Circle"
@@ -3440,9 +3440,6 @@
   "zllCbU": {
     "defaultMessage": "left a comment in {circleName}",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
-  },
-  "zlug1R": {
-    "defaultMessage": "Translated into {targetLang}, show"
   },
   "zvNfwL": {
     "defaultMessage": "Operation too frequent, please try again later.",

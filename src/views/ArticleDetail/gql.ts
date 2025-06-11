@@ -58,6 +58,7 @@ const articlePublicFragment = gql`
       title
       summary
       language
+      model
     }
     availableTranslations
     contents {
@@ -148,6 +149,7 @@ export const ARTICLE_TRANSLATION = gql`
         title
         summary
         language
+        model
       }
     }
   }
