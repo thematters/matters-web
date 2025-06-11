@@ -50,6 +50,7 @@ const NavListItemButton = forwardRef<
         </Button>
       )
     }
+
     return (
       <Tooltip
         content={name}
@@ -81,7 +82,12 @@ NavListItemButton.displayName = 'NavListItemButton'
 
 const NavListItem = forwardRef<HTMLLIElement, NavListItemProps>(
   (props, ref) => {
-    const { active, canScrollTop = true, onClick: baseOnClick } = props
+    const {
+      active,
+      canScrollTop = true,
+      onClick: baseOnClick,
+      ...restProps
+    } = props
     const onClick = (event?: React.MouseEvent<HTMLElement, MouseEvent>) => {
       if (baseOnClick) {
         baseOnClick()
@@ -95,7 +101,12 @@ const NavListItem = forwardRef<HTMLLIElement, NavListItemProps>(
 
     return (
       <li role="menuitem" className={styles.listItem}>
-        <NavListItemButton {...props} onClick={onClick} ref={ref} />
+        <NavListItemButton
+          {...restProps}
+          active={active}
+          onClick={onClick}
+          ref={ref}
+        />
       </li>
     )
   }

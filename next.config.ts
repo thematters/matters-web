@@ -1,3 +1,4 @@
+import { withSentryConfig } from '@sentry/nextjs'
 import type { NextConfig } from 'next'
 
 import {
@@ -7,6 +8,7 @@ import {
 } from './configs/csp'
 
 const isLocal = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'local'
+const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
 const nextAssetDomain = process.env.NEXT_PUBLIC_NEXT_ASSET_DOMAIN || ''
 
 const nextConfig: NextConfig = {
@@ -106,4 +108,32 @@ const withPWA = require('next-pwa')({
   dynamicStartUrl: true,
 })
 
-export default withPWA(withBundleAnalyzer(nextConfig))
+export default withSentryConfig(withPWA(withBundleAnalyzer(nextConfig)), {
+  // For all available options, see:
+  // https://www.npmjs.com/package/@sentry/webpack-plugin#options
+
+  org: 'matters-lab',
+  project: isProd ? 'matters-web-prod' : 'matters-web-develop',
+
+  // Only print logs for uploading source maps in CI
+  silent: !process.env.CI,
+
+  // For all available options, see:
+  // https://docs.sentry.io/platforms/javascript/guides/nextjs/manual-setup/
+
+  // Upload a larger set of source maps for prettier stack traces (increases build time)
+  widenClientFileUpload: true,
+
+  // Route browser requests to Sentry through a Next.js rewrite to circumvent ad-blockers.
+  // This can increase your server load as well as your hosting bill.
+  // Note: Check that the configured route will not match with your Next.js middleware, otherwise reporting of client-
+  // side errors will fail.
+  tunnelRoute: '/monitoring',
+
+  // Automatically tree-shake Sentry logger statements to reduce bundle size
+  disableLogger: true,
+
+  reactComponentAnnotation: {
+    enabled: true,
+  },
+})

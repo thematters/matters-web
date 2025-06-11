@@ -18,6 +18,7 @@ declare module 'wagmi' {
   }
 }
 
+const isServer = typeof window === 'undefined'
 const isTest = process.env.NODE_ENV === 'test'
 const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
 const alchemyId = process.env.NEXT_PUBLIC_ALCHEMY_KEY!
@@ -50,7 +51,7 @@ export const wagmiConfig = createConfig({
   },
   connectors: [
     injected(),
-    ...(isTest
+    ...(isTest || isServer
       ? []
       : [
           walletConnect({
