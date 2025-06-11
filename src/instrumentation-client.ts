@@ -4,12 +4,34 @@
 
 import * as Sentry from '@sentry/nextjs'
 
+import packageJson from '@/package.json'
+
 import { SENTRY_CONFIG } from '../configs/sentry.config'
+
+const isLocal = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'development'
+
+const commonIntegrations = [
+  Sentry.thirdPartyErrorFilterIntegration({
+    // defined in `unstable_sentryWebpackPluginOptions` of next.config.ts
+    filterKeys: [packageJson.name],
+    behaviour: 'drop-error-if-contains-third-party-frames',
+  }),
+]
 
 Sentry.init({
   ...SENTRY_CONFIG,
-  integrations: [Sentry.browserTracingIntegration()],
-  tracePropagationTargets: ['localhost', /graphql/],
+  ...(isLocal
+    ? {
+        integrations: [...commonIntegrations],
+      }
+    : {
+        integrations: [
+          ...commonIntegrations,
+          Sentry.browserTracingIntegration(),
+        ],
+        tracePropagationTargets: ['localhost', /graphql/],
+        tracesSampleRate: 0.1,
+      }),
 })
 
 export const onRouterTransitionStart = Sentry.captureRouterTransitionStart

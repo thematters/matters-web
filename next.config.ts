@@ -1,6 +1,8 @@
 import { withSentryConfig } from '@sentry/nextjs'
 import type { NextConfig } from 'next'
 
+import packageJson from '@/package.json'
+
 import {
   CSP_POLICY,
   SENTRY_CSP_REPORT_GROUP,
@@ -8,7 +10,6 @@ import {
 } from './configs/csp'
 
 const isLocal = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'local'
-const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
 const nextAssetDomain = process.env.NEXT_PUBLIC_NEXT_ASSET_DOMAIN || ''
 
 const nextConfig: NextConfig = {
@@ -109,17 +110,11 @@ const withPWA = require('next-pwa')({
 })
 
 export default withSentryConfig(withPWA(withBundleAnalyzer(nextConfig)), {
-  // For all available options, see:
-  // https://www.npmjs.com/package/@sentry/webpack-plugin#options
-
-  org: 'matters-lab',
-  project: isProd ? 'matters-web-prod' : 'matters-web-develop',
+  org: process.env.SENTRY_ORG,
+  project: process.env.SENTRY_PROJECT,
 
   // Only print logs for uploading source maps in CI
-  silent: !process.env.CI,
-
-  // For all available options, see:
-  // https://docs.sentry.io/platforms/javascript/guides/nextjs/manual-setup/
+  silent: !process.env.SENTRY_AUTH_TOKEN,
 
   // Upload a larger set of source maps for prettier stack traces (increases build time)
   widenClientFileUpload: true,
@@ -135,5 +130,9 @@ export default withSentryConfig(withPWA(withBundleAnalyzer(nextConfig)), {
 
   reactComponentAnnotation: {
     enabled: true,
+  },
+
+  unstable_sentryWebpackPluginOptions: {
+    applicationKey: packageJson.name,
   },
 })

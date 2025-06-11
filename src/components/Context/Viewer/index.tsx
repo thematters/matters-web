@@ -118,9 +118,12 @@ export const processViewer = (viewer: ViewerUser): Viewer => {
   Sentry.getCurrentScope()
     .setUser({
       id: viewer.id,
+      username: viewer.userName || undefined,
+    })
+    .setTags({
+      source: 'web',
       language: viewer.settings.language,
     })
-    .setTag('source', 'web')
 
   return {
     ...viewer,
