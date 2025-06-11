@@ -101,60 +101,56 @@ const Channel = ({ article }: { article: ChannelArticleFragment }) => {
     )
   }
 
-  if (isAuthor && hasTopicChannel) {
-    return (
-      <section className={styles.content}>
-        {!hasFeedback && !hasThumbsUp && (
-          <>
+  return (
+    <section className={styles.content}>
+      {!hasFeedback && !hasThumbsUp && (
+        <>
+          <FormattedMessage
+            defaultMessage="Your work has been recommended to the channels: {channelNames}. Are you satisfied with the result?"
+            id="dZlT9q"
+            values={{
+              channelNames: renderChannelNames(),
+            }}
+          />
+          <Button
+            aria-label="Thumbs up"
+            onClick={thumbsUp}
+            textColor="black"
+            textActiveColor="greyDarker"
+            size={['1.125rem', '1.125rem']}
+          >
+            <Icon icon={IconThumbsUp} size={12} />
+          </Button>
+          <Button
+            aria-label="Thumbs down"
+            onClick={thumbsDown}
+            textColor="black"
+            textActiveColor="greyDarker"
+            size={['1.125rem', '1.125rem']}
+          >
+            <Icon icon={IconThumbsDown} size={12} />
+          </Button>
+        </>
+      )}
+      {(hasFeedback || hasThumbsUp) && (
+        <>
+          <FormattedMessage
+            defaultMessage="Recommended to channel: {channelNames}"
+            id="0mQE3E"
+            values={{
+              channelNames: renderChannelNames(),
+            }}
+          />
+          {hasThumbsUp && (
             <FormattedMessage
-              defaultMessage="Your work has been recommended to the channels: {channelNames}. Are you satisfied with the result?"
-              id="dZlT9q"
-              values={{
-                channelNames: renderChannelNames(),
-              }}
+              defaultMessage=". Really appreciate it!"
+              id="wlQosy"
             />
-            <Button
-              aria-label="Thumbs up"
-              onClick={thumbsUp}
-              textColor="black"
-              textActiveColor="greyDarker"
-              size={['1.125rem', '1.125rem']}
-            >
-              <Icon icon={IconThumbsUp} size={12} />
-            </Button>
-            <Button
-              aria-label="Thumbs down"
-              onClick={thumbsDown}
-              textColor="black"
-              textActiveColor="greyDarker"
-              size={['1.125rem', '1.125rem']}
-            >
-              <Icon icon={IconThumbsDown} size={12} />
-            </Button>
-          </>
-        )}
-        {(hasFeedback || hasThumbsUp) && (
-          <>
-            <FormattedMessage
-              defaultMessage="Recommended to channel: {channelNames}"
-              id="0mQE3E"
-              values={{
-                channelNames: renderChannelNames(),
-              }}
-            />
-            {hasThumbsUp && (
-              <FormattedMessage
-                defaultMessage=". Really appreciate it!"
-                id="wlQosy"
-              />
-            )}
-          </>
-        )}
-      </section>
-    )
-  }
-
-  return <div>Channel</div>
+          )}
+        </>
+      )}
+    </section>
+  )
 }
 
 Channel.fragments = fragments
