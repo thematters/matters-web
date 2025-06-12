@@ -26,8 +26,8 @@ export const CONTENT_LANG_TEXT_MAP = {
     la: '拉丁',
   },
   en: {
-    zh_hant: 'TC',
-    zh_hans: 'SC',
+    zh_hant: 'Zh',
+    zh_hans: 'Zh',
     en: 'En',
     vi: 'Vi',
     ja: 'Ja',

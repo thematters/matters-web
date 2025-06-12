@@ -548,10 +548,6 @@
     "defaultMessage": "編輯",
     "description": "src/components/CircleComment/DropdownActions/EditButton.tsx"
   },
-  "70UCEy": {
-    "defaultMessage": "在行動裝置上使用問題，參考 ",
-    "description": "src/components/Forms/WalletAuthForm/Select.tsx"
-  },
   "73iajM": {
     "defaultMessage": "出錯了，請檢查你輸入的內容",
     "description": "BAD_USER_INPUT"
@@ -1040,10 +1036,6 @@
     "defaultMessage": "目前非 Optimism 網路，立即切換？",
     "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
   },
-  "FaTb0A": {
-    "defaultMessage": "安裝 MetaMask",
-    "description": "src/components/Forms/WalletAuthForm/Select.tsx"
-  },
   "Fe682o": {
     "defaultMessage": "下月預期營收",
     "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
@@ -1120,9 +1112,6 @@
   "H5+NAX": {
     "defaultMessage": "錢包餘額"
   },
-  "H8KGyc": {
-    "defaultMessage": "進入"
-  },
   "H8hiL/": {
     "defaultMessage": "編輯圍爐"
   },
@@ -1191,10 +1180,6 @@
   },
   "HwaiSE": {
     "defaultMessage": "開啟後，正文將被暫時遮蔽，只顯示標題與摘要，並由讀者選擇是否繼續閱讀（例如含有色情、暴力、血腥等內容）"
-  },
-  "HxcjQl": {
-    "defaultMessage": "Matters 將提供更多創作與區塊鏈結合的服務，接入錢包後即可在未來第一時間體驗新功能。",
-    "description": "src/components/Forms/WalletAuthForm/Select.tsx"
   },
   "HyjQns": {
     "defaultMessage": "教學指南",
@@ -1395,10 +1380,6 @@
   },
   "LphWYP": {
     "defaultMessage": "用戶協議與隱私政策"
-  },
-  "LqxIEU": {
-    "defaultMessage": "錢包地址將作為身份識別之一在個人頁公開顯示。",
-    "description": "src/components/Forms/WalletAuthForm/Select.tsx"
   },
   "LwFJTy": {
     "defaultMessage": "Matters ID 為用戶唯一標識，設置後無法修改。",
@@ -1842,10 +1823,6 @@
     "defaultMessage": "刷完啦",
     "description": "src/components/Interaction/"
   },
-  "UOdEqi": {
-    "defaultMessage": "原有透過電子信箱登入方式將為你保留。為維護你的帳戶安全，加密錢包連接後無法重設。",
-    "description": "src/components/Forms/WalletAuthForm/Select.tsx"
-  },
   "URljhZ": {
     "defaultMessage": "作品已移出",
     "description": "src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
@@ -1912,10 +1889,6 @@
   "VqdOGQ": {
     "defaultMessage": "相關推薦",
     "description": "src/views/ArticleDetail/AuthorSidebar/Tabs/index.tsx"
-  },
-  "VrOoVf": {
-    "defaultMessage": "Matters 不會透過任何渠道主動詢問你的錢包私鑰。",
-    "description": "src/components/Forms/WalletAuthForm/Select.tsx"
   },
   "VwuiYK": {
     "defaultMessage": "Oops！此網址已被使用了，換一個試試",
@@ -2279,6 +2252,10 @@
   },
   "cg1VJ2": {
     "defaultMessage": "連接加密錢包"
+  },
+  "cd8EmU": {
+    "defaultMessage": "的檢索結果",
+    "description": "src/views/Search/AggregateResults/index.tsx"
   },
   "cmtHjM": {
     "defaultMessage": "由於你尚未發布任何作品，這裡還沒有任何數據能與你分享哦！發布第一篇作品來介紹你自己，以此開啟你的創作之旅吧！",
@@ -2992,6 +2969,9 @@
   "r9LhcI": {
     "defaultMessage": "貼上 YouTube、Vimeo 或 bilibili 連結後，Enter 進行新增"
   },
+  "r9fhGr": {
+    "defaultMessage": "顯示原文 ({originalLang})"
+  },
   "rADhX5": {
     "defaultMessage": "不可用",
     "description": "FORBIDDEN_BY_STATE"
@@ -3193,10 +3173,6 @@
     "defaultMessage": "驗證碼逾期，請點擊重新發送",
     "description": "CODE_EXPIRED"
   },
-  "v6YjIn": {
-    "defaultMessage": "帳戶",
-    "description": "src/components/Forms/WalletAuthForm/Select.tsx"
-  },
   "v84cGN": {
     "defaultMessage": "這是什麼"
   },
@@ -3210,13 +3186,6 @@
   "vB45rC": {
     "defaultMessage": "去綁定",
     "description": "src/components/Dialogs/BindEmailHintDialog/Content.tsx"
-  },
-  "vCt85u": {
-    "defaultMessage": "剛接觸加密錢包？參考 ",
-    "description": "src/components/Forms/WalletAuthForm/Select.tsx"
-  },
-  "vEdCjn": {
-    "defaultMessage": "原文 {originalLang}"
   },
   "vH8sCb": {
     "defaultMessage": "我的圍爐"
@@ -3269,7 +3238,7 @@
     "defaultMessage": "評論"
   },
   "wCy/Tc": {
-    "defaultMessage": "翻譯"
+    "defaultMessage": "翻譯成繁中"
   },
   "wDX7zn": {
     "defaultMessage": "草稿不存在",
@@ -3483,9 +3452,6 @@
   "zllCbU": {
     "defaultMessage": "在 {circleName} 中留言",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
-  },
-  "zlug1R": {
-    "defaultMessage": "已翻譯成{targetLang}，顯示"
   },
   "zvNfwL": {
     "defaultMessage": "操作過於頻繁，請稍候重試",
