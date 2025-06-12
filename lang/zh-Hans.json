@@ -276,6 +276,9 @@
   "2D/X90": {
     "defaultMessage": "为什么采用 Optimism？"
   },
+  "2HzRMW": {
+    "defaultMessage": "Confirm to move the work to \"Latest\"? (This action is immediate and cannot be undone.)"
+  },
   "2J3mz4": {
     "defaultMessage": "加到活动精选"
   },
@@ -1255,9 +1258,6 @@
     "defaultMessage": "发布评论",
     "description": "src/components/Forms/CommentForm/index.tsx"
   },
-  "J4BUGe": {
-    "defaultMessage": "(the work will appear in “Latest”)"
-  },
   "J6f6iN": {
     "defaultMessage": "评论数量",
     "description": "src/components/ArticleDigest/Published/FooterActions/index.tsx"
@@ -1979,9 +1979,6 @@
   "WQT8ZA": {
     "defaultMessage": "编辑选集"
   },
-  "WVicCO": {
-    "defaultMessage": "Confirm to move the work to “Latest”? (This action is immediate and cannot be undone.)"
-  },
   "WpvsPu": {
     "defaultMessage": "订阅",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
@@ -2273,9 +2270,6 @@
   "cHDJyK": {
     "defaultMessage": "尚无作品"
   },
-  "cJ+M8n": {
-    "defaultMessage": "Your suggestion has been submitted to the editor. Once it’s approved, the channel will be updated : )"
-  },
   "cK3TLr": {
     "defaultMessage": "取消收藏",
     "description": "src/components/Buttons/Bookmark/Unbookmark.tsx"
@@ -2497,6 +2491,9 @@
     "defaultMessage": "动态",
     "description": "src/components/Dialogs/MomentDetailDialog/Content.tsx"
   },
+  "g39W4D": {
+    "defaultMessage": "(the work will appear in \"Latest\")"
+  },
   "g5pX+a": {
     "defaultMessage": "关于"
   },
@@ -2696,6 +2693,9 @@
   "kPylKK": {
     "defaultMessage": "围炉",
     "description": "src/views/Me/Settings/Notifications/index.tsx"
+  },
+  "kS/PMU": {
+    "defaultMessage": "Your suggestion has been submitted to the editor. Once it's approved, the channel will be updated : )"
   },
   "kS3vTS": {
     "defaultMessage": "Liker ID",
