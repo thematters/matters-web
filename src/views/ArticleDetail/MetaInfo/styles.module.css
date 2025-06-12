@@ -32,3 +32,20 @@
 .edited {
   white-space: break-spaces;
 }
+
+.translated {
+  @mixin inline-flex-center-all;
+
+  & .target {
+    padding: var(--sp2) var(--sp4);
+    margin-right: var(--sp4);
+    margin-left: var(--sp2);
+    color: var(--color-grey-darker);
+    background: var(--color-grey-lighter);
+    border-radius: var(--sp4);
+  }
+
+  & .origin {
+    color: var(--color-black);
+  }
+}
