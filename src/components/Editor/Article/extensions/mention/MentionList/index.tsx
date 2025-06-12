@@ -12,17 +12,20 @@ import { UserDigestMiniUserFragment } from '~/gql/graphql'
 import styles from './styles.module.css'
 
 export const MentionList = forwardRef(
-  ({
-    users,
-    onClick,
-    loading,
-    onHide,
-  }: {
-    users: UserDigestMiniUserFragment[]
-    onClick: (user: UserDigestMiniUserFragment) => void
-    loading?: boolean
-    onHide: () => void
-  }) => {
+  (
+    {
+      users,
+      onClick,
+      loading,
+      onHide,
+    }: {
+      users: UserDigestMiniUserFragment[]
+      onClick: (user: UserDigestMiniUserFragment) => void
+      loading?: boolean
+      onHide: () => void
+    },
+    ref
+  ) => {
     const [activeItem, setActiveItem] = useState('')
     const resetActiveItem = () => setActiveItem('')
     const items = users.map((user) => user.id)
@@ -80,7 +83,11 @@ export const MentionList = forwardRef(
     }
 
     return (
-      <section className={styles.mention} onKeyDown={handleKeyDown}>
+      <section
+        className={styles.mention}
+        onKeyDown={handleKeyDown}
+        ref={ref as React.RefObject<HTMLDivElement> | null}
+      >
         <Menu width="md">
           {users.map((user) => (
             <Menu.Item

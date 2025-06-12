@@ -1,4 +1,7 @@
+import { withSentryConfig } from '@sentry/nextjs'
 import type { NextConfig } from 'next'
+
+import packageJson from '@/package.json'
 
 import {
   CSP_POLICY,
@@ -106,4 +109,30 @@ const withPWA = require('next-pwa')({
   dynamicStartUrl: true,
 })
 
-export default withPWA(withBundleAnalyzer(nextConfig))
+export default withSentryConfig(withPWA(withBundleAnalyzer(nextConfig)), {
+  org: process.env.SENTRY_ORG,
+  project: process.env.SENTRY_PROJECT,
+
+  // Only print logs for uploading source maps in CI
+  silent: !process.env.SENTRY_AUTH_TOKEN,
+
+  // Upload a larger set of source maps for prettier stack traces (increases build time)
+  widenClientFileUpload: true,
+
+  // Route browser requests to Sentry through a Next.js rewrite to circumvent ad-blockers.
+  // This can increase your server load as well as your hosting bill.
+  // Note: Check that the configured route will not match with your Next.js middleware, otherwise reporting of client-
+  // side errors will fail.
+  // tunnelRoute: '/monitoring',
+
+  // Automatically tree-shake Sentry logger statements to reduce bundle size
+  disableLogger: true,
+
+  reactComponentAnnotation: {
+    enabled: true,
+  },
+
+  unstable_sentryWebpackPluginOptions: {
+    applicationKey: packageJson.name,
+  },
+})

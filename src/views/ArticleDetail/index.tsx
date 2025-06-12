@@ -236,6 +236,7 @@ const BaseArticleDetail = ({
     summary: translatedSummary,
     content: translatedContent,
     language: translatedLanguage,
+    model: translationModel,
   } = translationData?.article?.translation || autoTranslation || {}
   const title = translated && translatedTitle ? translatedTitle : article.title
   const summary =
@@ -309,6 +310,7 @@ const BaseArticleDetail = ({
 
       <section className={styles.content}>
         <Header article={article} />
+
         <section className="u-article-title">
           <h1>{title}</h1>
 
@@ -318,6 +320,7 @@ const BaseArticleDetail = ({
             translating={translating}
             canTranslate={canTranslate}
             toggleTranslate={toggleTranslate}
+            model={translationModel}
             canReadFullContent={canReadFullContent}
             editable={!lock}
           />

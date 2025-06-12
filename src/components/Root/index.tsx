@@ -1,12 +1,10 @@
 import { useQuery } from '@apollo/client'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { excludeGraphQLFetch } from 'apollo-link-sentry'
 import type { IncomingHttpHeaders } from 'http'
 import dynamic from 'next/dynamic'
 import React, { useEffect } from 'react'
 import { WagmiProvider } from 'wagmi'
 
-import packageJson from '@/package.json'
 import {
   REFERRAL_QUERY_REFERRAL_KEY,
   REFERRAL_STORAGE_REFERRAL_CODE,
@@ -31,9 +29,6 @@ import {
 } from '~/components'
 import { ChannelsProvider } from '~/components/Context'
 import { RootQueryPrivateQuery } from '~/gql/graphql'
-
-const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
-const isLocal = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'local'
 
 import { ROOT_QUERY_PRIVATE } from './gql'
 
@@ -64,23 +59,6 @@ const DynamicFingerprint = dynamic(() => import('~/components/Fingerprint'), {
  * `<Root>` contains components that depend on viewer
  *
  */
-// Sentry
-import('@sentry/browser').then((Sentry) => {
-  Sentry.init({
-    enabled: !isLocal && typeof window !== 'undefined',
-    dsn: `https://${process.env.NEXT_PUBLIC_SENTRY_PUBLIC_KEY}@${process.env.NEXT_PUBLIC_SENTRY_DOMAIN}/${process.env.NEXT_PUBLIC_SENTRY_PROJECT_ID}`,
-    debug: isLocal,
-    environment: isProd ? 'production' : 'development',
-    release: packageJson.version,
-    ignoreErrors: [/.*Timeout.*/, /.*Network.*/],
-    sampleRate: 0.1,
-    tracesSampleRate: 0.1,
-    beforeBreadcrumb: excludeGraphQLFetch,
-    integrations: [Sentry.browserTracingIntegration()],
-    tracePropagationTargets: ['localhost', /graphql/],
-  })
-})
-
 const queryClient = new QueryClient()
 
 const Root = ({

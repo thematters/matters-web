@@ -31,6 +31,8 @@
 .title {
   @mixin flex-center-space-between;
 
+  flex-wrap: wrap;
+  row-gap: var(--sp8);
   margin-top: var(--sp24);
 
   & .name {
@@ -46,6 +48,7 @@
 
   & .apply {
     display: none;
+    margin-left: auto;
 
     @media (--md-up) {
       display: block;
