@@ -18,7 +18,7 @@ import { fragments } from './gql'
 const isLocal = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'local'
 
 export type AnalyticsListenerProps = {
-  user: AnalyticsUserFragment | {}
+  user: AnalyticsUserFragment | object
 }
 
 const FIREBASE_CONFIG = process.env.NEXT_PUBLIC_FIREBASE_CONFIG
@@ -45,8 +45,8 @@ const handleAnalytics = async ({
   analytics,
 }: {
   detail: CustomEvent['detail']
-  user: AnalyticsUserFragment | {}
-  analytics?: Analytics
+  user: AnalyticsUserFragment | object
+  analytics?: Analytics | null
 }) => {
   let id
   if (user && 'id' in user) {
@@ -110,7 +110,7 @@ const handleAnalytics = async ({
 }
 
 export const AnalyticsListener = ({ user }: AnalyticsListenerProps) => {
-  const analyticsRef = useRef<Analytics>()
+  const analyticsRef = useRef<Analytics | null>(null)
 
   const initAnalytics = async () => {
     const app = initializeApp(FIREBASE_CONFIG)

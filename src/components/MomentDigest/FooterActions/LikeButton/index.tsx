@@ -3,8 +3,8 @@ import gql from 'graphql-tag'
 import { useContext, useState } from 'react'
 import { useIntl } from 'react-intl'
 
-import { ReactComponent as IconLike } from '@/public/static/icons/24px/like.svg'
-import { ReactComponent as IconLikeFill } from '@/public/static/icons/24px/like-fill.svg'
+import IconLike from '@/public/static/icons/24px/like.svg'
+import IconLikeFill from '@/public/static/icons/24px/like-fill.svg'
 import {
   OPEN_UNIVERSAL_AUTH_DIALOG,
   UNIVERSAL_AUTH_TRIGGER,

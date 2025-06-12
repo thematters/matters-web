@@ -10,7 +10,7 @@ export const useUnloadConfirm = ({
   block: boolean
   hint?: string
 }) => {
-  const blockRef = useRef<boolean>()
+  const blockRef = useRef<boolean>(false)
   const { router } = useRoute()
   const intl = useIntl()
 

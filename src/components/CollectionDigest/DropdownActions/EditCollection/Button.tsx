@@ -1,6 +1,6 @@
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconEdit } from '@/public/static/icons/24px/edit.svg'
+import IconEdit from '@/public/static/icons/24px/edit.svg'
 import { Icon, Menu } from '~/components'
 
 const EditCollectionButton = ({ openDialog }: { openDialog: () => void }) => {

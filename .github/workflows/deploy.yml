@@ -53,6 +53,16 @@ jobs:
           path: node_modules
           key: ${{ runner.os }}-v18-npm-v4-${{ hashFiles('package-lock.json') }}
 
+      - name: Cache Next.js
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.npm
+            ${{ github.workspace }}/.next/cache
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx') }}
+          restore-keys: |
+            ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-
+
       - name: Install Dependencies
         if: steps.node_modules_cache.outputs.cache-hit != 'true'
         run: npm ci
@@ -101,17 +111,15 @@ jobs:
       - name: Generate deployment package
         if: github.base_ref == 'develop' || github.base_ref == 'master' || github.base_ref == 'main'
         run: |
-          rm -rf node_modules \
-          && npm install --production \
-          && zip -r --symlinks deploy.zip . -x .git/\*
+          zip -r --symlinks deploy.zip . -x .git/\* node_modules/\*
 
       - name: Upload Assets (develop - R2)
         if: github.base_ref == 'develop' || github.base_ref == 'main'
-        run: rclone sync .next/static r2:matters-assets-next-develop/_next/static -P
+        run: rclone copy .next r2:matters-assets-next-develop/_next --include "/*" --include "/static/**" -P
 
       - name: Deploy to EB (develop)
         if: github.base_ref == 'develop'
-        uses: einaregilsson/beanstalk-deploy@v19
+        uses: einaregilsson/beanstalk-deploy@v22
         with:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -126,11 +134,11 @@ jobs:
 
       - name: Upload Assets (production - R2)
         if: github.base_ref == 'master' || github.base_ref == 'main'
-        run: rclone sync .next/static r2:matters-assets-next/_next/static -P
+        run: rclone copy .next r2:matters-assets-next/_next --include "/*" --include "/static/**" -P
 
       - name: Deploy to EB (production)
         if: github.base_ref == 'master' || github.base_ref == 'main'
-        uses: einaregilsson/beanstalk-deploy@v19
+        uses: einaregilsson/beanstalk-deploy@v22
         with:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}

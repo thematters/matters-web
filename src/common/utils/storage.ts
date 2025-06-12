@@ -9,7 +9,7 @@ const parseJSON = (data: string | null) => {
 
   try {
     returnData = JSON.parse(data)
-  } catch (e) {
+  } catch {
     returnData = data
   }
 
@@ -160,9 +160,11 @@ export const formStorage = {
     return type === 'session' ? sessionStorage.get<T>(key) : storage.get<T>(key)
   },
   set: <T>(key: FormStorageKey, value: T, type: FormStorageType) => {
-    type === 'session'
-      ? sessionStorage.set(key, value)
-      : storage.set(key, value)
+    if (type === 'session') {
+      sessionStorage.set(key, value)
+    } else {
+      storage.set(key, value)
+    }
   },
   remove: <T>(key: FormStorageKey, type: FormStorageType): T | null => {
     if (type === 'session') {

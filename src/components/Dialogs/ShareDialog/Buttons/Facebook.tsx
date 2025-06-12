@@ -1,11 +1,11 @@
 import { useContext } from 'react'
 
-import { ReactComponent as IconFacebook } from '@/public/static/icons/24px/facebook.svg'
+import IconFacebook from '@/public/static/icons/24px/facebook.svg'
 import { REFERRAL_QUERY_REFERRAL_KEY } from '~/common/enums'
 import { analytics } from '~/common/utils'
 import { Icon, TextIcon, ViewerContext } from '~/components'
 
-const Facebook = ({ title, link }: { title: string; link: string }) => {
+const Facebook = ({ link }: { link: string }) => {
   const viewer = useContext(ViewerContext)
 
   // append utm_source to link

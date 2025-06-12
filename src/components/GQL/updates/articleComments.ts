@@ -2,6 +2,7 @@ import { ApolloCache } from '@apollo/client/cache'
 
 import { COMMENTS_COUNT } from '~/common/enums'
 import {
+  CommentState,
   LatestCommentsPrivateQuery,
   LatestCommentsPublicQuery,
 } from '~/gql/graphql'
@@ -25,11 +26,17 @@ export const updateArticleComments = ({
   comment,
   type,
 }: {
-  cache: ApolloCache<any>
+  cache: ApolloCache<object>
   articleId: string
   commentId?: string
   comment?: Comment
-  type: 'pin' | 'unpin' | 'delete' | 'add' | 'addSecondaryComment'
+  type:
+    | 'pin'
+    | 'unpin'
+    | 'delete'
+    | 'add'
+    | 'addSecondaryComment'
+    | 'deleteSecondaryComment'
 }) => {
   // FIXME: circular dependencies
   const {
@@ -109,7 +116,16 @@ export const updateArticleComments = ({
         if (!commentId) {
           return
         }
-        updatedEdges = updatedEdges.filter(({ node }) => node.id !== commentId)
+        updatedEdges = updatedEdges.map((edge) => {
+          if (edge.node.id === commentId) {
+            return {
+              ...edge,
+              node: { ...edge.node, state: CommentState.Archived },
+            }
+          }
+          return edge
+        })
+
         if (
           updatedPinnedComments.length > 0 &&
           commentId === updatedPinnedComments[0].id
@@ -158,6 +174,10 @@ export const updateArticleComments = ({
             const updatedNode = {
               ...edge.node,
               comments: updatedComments,
+              dropdownComments: {
+                ...edge.node.dropdownComments,
+                totalCount: edge.node.dropdownComments.totalCount + 1,
+              },
             }
 
             // Create a new edge with the updated node
@@ -196,11 +216,41 @@ export const updateArticleComments = ({
           const updatedPinnedComment = {
             ...currentPinnedComment,
             comments: updatedPinnedCommentsObj,
+            dropdownComments: {
+              ...currentPinnedComment.dropdownComments,
+              totalCount: currentPinnedComment.dropdownComments.totalCount + 1,
+            },
           }
 
           // Update the pinned comments array
           updatedPinnedComments = [updatedPinnedComment]
         }
+        break
+
+      case 'deleteSecondaryComment':
+        if (!commentId) {
+          return
+        }
+        updatedEdges = updatedEdges.map((edge) => {
+          if (edge.node.comments.edges) {
+            const isIdInEdges = edge.node.comments.edges.some(
+              (comment) => comment.node.id === commentId
+            )
+            if (isIdInEdges) {
+              return {
+                ...edge,
+                node: {
+                  ...edge.node,
+                  dropdownComments: {
+                    ...edge.node.dropdownComments,
+                    totalCount: edge.node.dropdownComments.totalCount - 1,
+                  },
+                },
+              }
+            }
+          }
+          return edge
+        })
         break
     }
 

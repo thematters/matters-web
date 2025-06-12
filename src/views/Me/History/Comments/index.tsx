@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/client'
-import _flatten from 'lodash/flatten'
+import Link from 'next/link'
 import { useContext } from 'react'
 import { useIntl } from 'react-intl'
 
@@ -10,7 +10,7 @@ import {
   stripHtml,
   toPath,
 } from '~/common/utils'
-import { Head, Layout, LinkWrapper, UserDigest } from '~/components'
+import { Head, Layout, UserDigest } from '~/components'
 import {
   ArticleDigestTitle,
   EmptyComment,
@@ -112,7 +112,7 @@ const Comments = () => {
         eof
       >
         <List>
-          {articleEdges.map(({ cursor, node, comments }) => (
+          {articleEdges.map(({ node, comments }) => (
             <List.Item key={node.id}>
               <section className={styles.item}>
                 <section className={styles.user}>
@@ -126,7 +126,7 @@ const Comments = () => {
                 </section>
 
                 <section className={styles.title}>
-                  <LinkWrapper
+                  <Link
                     {...toPath({
                       page: 'articleDetail',
                       article: node,
@@ -138,14 +138,14 @@ const Comments = () => {
                       textSize={16}
                       lineClamp={1}
                     />
-                  </LinkWrapper>
+                  </Link>
                 </section>
 
                 <List hasBorder={false}>
                   {comments.map((comment) => (
                     <List.Item key={comment.id}>
                       <section className={styles.comment}>
-                        <LinkWrapper
+                        <Link
                           {...toPath({
                             page: 'commentDetail',
                             comment,
@@ -158,7 +158,7 @@ const Comments = () => {
                               __html: stripHtml(comment.content || ''),
                             }}
                           />
-                        </LinkWrapper>
+                        </Link>
                       </section>
                     </List.Item>
                   ))}

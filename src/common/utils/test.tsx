@@ -3,11 +3,12 @@
 
 import { ApolloClient, ApolloLink, ApolloProvider } from '@apollo/client'
 import { InMemoryCache } from '@apollo/client/cache'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { render, RenderOptions } from '@testing-library/react'
 import { MemoryRouterProvider } from 'next-router-mock/MemoryRouterProvider'
 import React, { ReactElement, useContext } from 'react'
 import { IntlProvider } from 'react-intl'
-import { WagmiConfig } from 'wagmi'
+import { WagmiProvider } from 'wagmi'
 
 import TRANSLATIONS_EN from '@/compiled-lang/en.json'
 import TRANSLATIONS_ZH_HANS from '@/compiled-lang/zh-Hans.json'
@@ -42,6 +43,8 @@ const TranslationsProvider = ({ children }: { children: React.ReactNode }) => {
   )
 }
 
+const queryClient = new QueryClient()
+
 // src/components/Root/index.tsx
 const wrapper = ({ children }: { children: React.ReactNode }) => {
   // src/common/utils/withApollo.ts
@@ -53,22 +56,24 @@ const wrapper = ({ children }: { children: React.ReactNode }) => {
   return (
     <MemoryRouterProvider>
       <ApolloProvider client={client}>
-        <WagmiConfig config={wagmiConfig}>
-          <ViewerProvider viewer={MOCK_USER}>
-            <LanguageProvider headers={undefined}>
-              <FeaturesProvider official={undefined}>
-                <MediaContextProvider>
-                  <TranslationsProvider>
-                    {children}
+        <WagmiProvider config={wagmiConfig}>
+          <QueryClientProvider client={queryClient}>
+            <ViewerProvider viewer={MOCK_USER}>
+              <LanguageProvider headers={undefined}>
+                <FeaturesProvider official={undefined}>
+                  <MediaContextProvider>
+                    <TranslationsProvider>
+                      {children}
 
-                    <Toaster />
-                    <GlobalDialogs />
-                  </TranslationsProvider>
-                </MediaContextProvider>
-              </FeaturesProvider>
-            </LanguageProvider>
-          </ViewerProvider>
-        </WagmiConfig>
+                      <Toaster />
+                      <GlobalDialogs />
+                    </TranslationsProvider>
+                  </MediaContextProvider>
+                </FeaturesProvider>
+              </LanguageProvider>
+            </ViewerProvider>
+          </QueryClientProvider>
+        </WagmiProvider>
       </ApolloProvider>
     </MemoryRouterProvider>
   )

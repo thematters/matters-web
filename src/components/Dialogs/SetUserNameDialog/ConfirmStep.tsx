@@ -1,4 +1,3 @@
-import _pickBy from 'lodash/pickBy'
 import React, { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 

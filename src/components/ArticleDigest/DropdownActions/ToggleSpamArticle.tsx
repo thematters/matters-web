@@ -1,8 +1,8 @@
 import { useQuery } from '@apollo/client'
 import gql from 'graphql-tag'
 
-import { ReactComponent as IconCircleMinus } from '@/public/static/icons/24px/circle-minus.svg'
-import { ReactComponent as IconNavCreate } from '@/public/static/icons/24px/nav-create.svg'
+import IconCircleMinus from '@/public/static/icons/24px/circle-minus.svg'
+import IconNavCreate from '@/public/static/icons/24px/nav-create.svg'
 import { Icon, Menu, Spinner, toast, useMutation } from '~/components'
 import {
   FetchArticleSpamStatusQuery,

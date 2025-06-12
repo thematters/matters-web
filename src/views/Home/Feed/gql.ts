@@ -1,15 +1,10 @@
 import gql from 'graphql-tag'
 
-import { ArticleDigestCurated, ArticleDigestFeed } from '~/components'
+import { ArticleDigestFeed } from '~/components'
 
 import { ChannelHeader } from './ChannelFeed/ChannelHeader'
 import { IcymiCuratedFeed } from './IcymiCuratedFeed'
-
-const articleFragments = gql`
-  ${ArticleDigestCurated.fragments.article}
-  ${ArticleDigestFeed.fragments.article.public}
-  ${ArticleDigestFeed.fragments.article.private}
-`
+import { ArticleDigestCurated } from './IcymiCuratedFeed/ArticleDigestCurated'
 
 const articleNodeFragment = gql`
   fragment ArticleNodeFragment on Article {
@@ -17,7 +12,9 @@ const articleNodeFragment = gql`
     ...ArticleDigestFeedArticlePublic
     ...ArticleDigestFeedArticlePrivate
   }
-  ${articleFragments}
+  ${ArticleDigestCurated.fragments.article}
+  ${ArticleDigestFeed.fragments.article.public}
+  ${ArticleDigestFeed.fragments.article.private}
 `
 
 const feedFragment = gql`
@@ -56,19 +53,6 @@ const channelArticleConnectionFragment = gql`
 `
 
 export const FEED_ARTICLES_PUBLIC = {
-  hottest: gql`
-    query HottestFeedPublic($after: String) {
-      viewer {
-        id
-        recommendation {
-          feed: hottest(input: { first: 20, after: $after }) {
-            ...FeedArticleConnection
-          }
-        }
-      }
-    }
-    ${feedFragment}
-  `,
   newest: gql`
     query NewestFeedPublic($after: String) {
       viewer {
@@ -107,13 +91,13 @@ export const FEED_ARTICLES_PUBLIC_CHANNEL = gql`
       id
       ... on TopicChannel {
         ...TopicChannelHeader
-        feed: articles(input: { first: 20, after: $after }) {
+        articles(input: { first: 20, after: $after }) {
           ...ChannelArticleConnectionFragment
         }
       }
       ... on CurationChannel {
         ...CurationChannelHeader
-        feed: articles(input: { first: 20, after: $after }) {
+        articles(input: { first: 20, after: $after }) {
           ...ChannelArticleConnectionFragment
         }
       }

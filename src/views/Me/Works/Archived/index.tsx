@@ -2,18 +2,12 @@ import { useQuery } from '@apollo/client'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import { mergeConnections } from '~/common/utils'
-import {
-  ArticleDigestArchived,
-  Head,
-  InfiniteScroll,
-  Layout,
-  List,
-  QueryError,
-} from '~/components'
+import { Head, InfiniteScroll, Layout, List, QueryError } from '~/components'
 import { MeWorksArchivedFeedQuery } from '~/gql/graphql'
 
 import Placeholder from '../Placeholder'
 import WorksTabs from '../WorksTabs'
+import { ArticleDigestArchived } from './ArticleDigestArchived'
 import { ME_WORKS_ARCHIVED_FEED } from './gql'
 
 export const BaseMeWorksArchived = () => {
@@ -54,7 +48,7 @@ export const BaseMeWorksArchived = () => {
       eof
     >
       <List>
-        {edges.map(({ node, cursor }) => (
+        {edges.map(({ node }) => (
           <List.Item key={node.id}>
             <ArticleDigestArchived article={node} />
           </List.Item>

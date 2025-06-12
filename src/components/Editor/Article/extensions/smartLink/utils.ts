@@ -37,7 +37,7 @@ export const makeSmartLinkOptions = ({
   client,
   lang,
 }: {
-  client: ApolloClient<{}>
+  client: ApolloClient<object>
   lang: UserLanguage
 }) => {
   return {

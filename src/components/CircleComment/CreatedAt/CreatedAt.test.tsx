@@ -1,7 +1,7 @@
 import mockRouter from 'next-router-mock'
 import { describe, expect, it } from 'vitest'
 
-import { render, screen } from '~/common/utils/test'
+import { fireEvent, render, screen } from '~/common/utils/test'
 import { MOCK_CIRCLE_COMMENT } from '~/stories/mocks'
 
 import CreatedAt from './'
@@ -12,7 +12,7 @@ describe('<Comemnt/CreatedAt>', () => {
     const $time = screen.getByRole('link')
     expect($time).toBeInTheDocument()
 
-    $time.click()
+    fireEvent.click($time)
     expect(mockRouter.asPath).toContain(MOCK_CIRCLE_COMMENT.id)
   })
 

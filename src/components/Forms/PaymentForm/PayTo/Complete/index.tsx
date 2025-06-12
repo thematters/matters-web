@@ -1,11 +1,9 @@
 import { useQuery } from '@apollo/client'
-import _random from 'lodash/random'
-import _range from 'lodash/range'
 import { useContext, useEffect } from 'react'
 import { FormattedMessage } from 'react-intl'
 import { useAccount } from 'wagmi'
 
-import { ReactComponent as IconCircleCheckFill } from '@/public/static/icons/24px/circle-check-fill.svg'
+import IconCircleCheckFill from '@/public/static/icons/24px/circle-check-fill.svg'
 import {
   PAYMENT_CURRENCY as CURRENCY,
   SUPPORT_SUCCESS,
@@ -25,7 +23,6 @@ interface Props {
   amount: number
   currency: CURRENCY
   recipient: UserDonationRecipientFragment
-  targetId: string
   callback?: () => void
   switchToBindWallet: () => void
 }
@@ -35,7 +32,6 @@ const Complete: React.FC<Props> = ({
   currency,
   callback,
   recipient,
-  targetId,
   switchToBindWallet,
 }) => {
   const viewer = useContext(ViewerContext)

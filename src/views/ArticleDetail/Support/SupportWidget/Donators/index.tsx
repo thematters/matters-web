@@ -38,15 +38,10 @@ const AvatarItem = ({ user }: AvatarItemPros) => {
 
 interface DonatorsProps {
   article: DonatorsArticleFragment
-  showAvatarAnimation?: boolean
   isAuthor?: boolean
 }
 
-const Donators = ({
-  article,
-  showAvatarAnimation = false,
-  isAuthor,
-}: DonatorsProps) => {
+const Donators = ({ article, isAuthor }: DonatorsProps) => {
   const maxAvatarNum = 49
   const edges = article.donations.edges
   const donatorsCount = article.donations.totalCount

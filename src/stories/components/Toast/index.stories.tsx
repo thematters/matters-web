@@ -1,23 +1,26 @@
 import { MockedProvider } from '@apollo/client/testing'
-import { ComponentMeta, ComponentStory } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react'
 import React from 'react'
 
 import { Toaster } from '~/components'
 
 import Toasts from './Toasts'
 
-export default {
+const meta = {
   title: 'Components/Toast',
   component: Toaster,
-} as ComponentMeta<typeof Toaster>
+} satisfies Meta<typeof Toaster>
 
-const Template: ComponentStory<typeof Toaster> = () => (
-  <MockedProvider>
-    <>
-      <Toasts />
-      <Toaster />
-    </>
-  </MockedProvider>
-)
+export default meta
+type Story = StoryObj<typeof meta>
 
-export const All = Template.bind({})
+export const All: Story = {
+  render: () => (
+    <MockedProvider>
+      <>
+        <Toasts />
+        <Toaster />
+      </>
+    </MockedProvider>
+  ),
+}

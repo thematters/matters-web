@@ -1,8 +1,8 @@
-export const deferTry = (fn: () => any, timesLeft = 10, defer = 2000) => {
+export const deferTry = (fn: () => void, timesLeft = 10, defer = 2000) => {
   if (timesLeft > 0) {
     try {
       fn()
-    } catch (err) {
+    } catch {
       setTimeout(() => deferTry(fn, timesLeft - 1, defer), defer)
     }
   }

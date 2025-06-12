@@ -1,16 +1,16 @@
 import _shuffle from 'lodash/shuffle'
 import dynamic from 'next/dynamic'
+import Link from 'next/link'
 import { useContext, useMemo, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconRight } from '@/public/static/icons/24px/right.svg'
+import IconRight from '@/public/static/icons/24px/right.svg'
 import { analytics, toPath } from '~/common/utils'
 import {
   Avatar,
   Button,
   DrawerProvider,
   Icon,
-  LinkWrapper,
   TextIcon,
   Tooltip,
   ViewerContext,
@@ -52,18 +52,18 @@ const Participant = ({
   })
   if (!user.displayName) {
     return (
-      <LinkWrapper {...path} onClick={onClick}>
+      <Link {...path} onClick={onClick}>
         <Avatar user={user} size={40} />
-      </LinkWrapper>
+      </Link>
     )
   }
 
   return (
     <Tooltip content={user.displayName} placement="top">
       <span>
-        <LinkWrapper {...path}>
+        <Link {...path}>
           <Avatar user={user} size={40} />
-        </LinkWrapper>
+        </Link>
       </span>
     </Tooltip>
   )

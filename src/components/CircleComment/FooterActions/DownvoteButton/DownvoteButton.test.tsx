@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest'
 
-import { render, screen } from '~/common/utils/test'
+import { fireEvent, render, screen } from '~/common/utils/test'
 import { MOCK_COMMENT } from '~/stories/mocks'
 
 import DownvoteButton from './'
@@ -24,7 +24,7 @@ describe('<Comemnt/FooterActions/DownvoteButton>', () => {
     const $button = screen.getByRole('button', { name: 'Downvote' })
     expect($button).toBeInTheDocument()
 
-    $button.click()
+    fireEvent.click($button)
     expect(onClick).toHaveBeenCalled()
   })
 
@@ -43,7 +43,7 @@ describe('<Comemnt/FooterActions/DownvoteButton>', () => {
     const $button = screen.getByRole('button', { name: 'Downvote' })
     expect($button).toBeInTheDocument()
 
-    $button.click()
+    fireEvent.click($button)
     expect(onClick).not.toHaveBeenCalled()
   })
 })

@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
-import { ReactComponent as IconDot } from '@/public/static/icons/dot.svg'
+import IconDot from '@/public/static/icons/dot.svg'
 import { render } from '~/common/utils/test'
 import { Icon, withIcon } from '~/components'
 

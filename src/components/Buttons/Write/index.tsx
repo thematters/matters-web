@@ -1,6 +1,6 @@
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { ReactComponent as IconNavCreate } from '@/public/static/icons/24px/nav-create.svg'
+import IconNavCreate from '@/public/static/icons/24px/nav-create.svg'
 import {
   BREAKPOINTS,
   ERROR_CODES,

@@ -1,6 +1,6 @@
-import { ReactComponent as IconCircleFeatureConnection } from '@/public/static/icons/circle-feature-connection.svg'
-import { ReactComponent as IconCircleFeatureDiscussion } from '@/public/static/icons/circle-feature-discussion.svg'
-import { ReactComponent as IconCircleFeatureReading } from '@/public/static/icons/circle-feature-reading.svg'
+import IconCircleFeatureConnection from '@/public/static/icons/circle-feature-connection.svg'
+import IconCircleFeatureDiscussion from '@/public/static/icons/circle-feature-discussion.svg'
+import IconCircleFeatureReading from '@/public/static/icons/circle-feature-reading.svg'
 import { formatAmount } from '~/common/utils'
 import { CircleDigest, Icon, TextIcon, Translate } from '~/components'
 import {

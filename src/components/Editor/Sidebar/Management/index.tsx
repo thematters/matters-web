@@ -1,6 +1,6 @@
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconSettings } from '@/public/static/icons/24px/settings.svg'
+import IconSettings from '@/public/static/icons/24px/settings.svg'
 import { Icon } from '~/components'
 
 import { SetPublishISCNProps } from '../..'

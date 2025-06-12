@@ -1,7 +1,7 @@
+import Link from 'next/link'
 import { FormattedMessage } from 'react-intl'
 
 import { PATHS } from '~/common/enums'
-import { LinkWrapper } from '~/components'
 
 import styles from './styles.module.css'
 
@@ -9,21 +9,21 @@ const SideFooter = () => {
   return (
     <footer className={styles.footer}>
       <section className={styles.links}>
-        <LinkWrapper href={PATHS.ABOUT}>
+        <Link href={PATHS.ABOUT}>
           <FormattedMessage defaultMessage="About" id="g5pX+a" />
-        </LinkWrapper>
+        </Link>
 
-        <LinkWrapper href={PATHS.GUIDE}>
+        <Link href={PATHS.GUIDE}>
           <FormattedMessage defaultMessage="Explore" id="7JlauX" />
-        </LinkWrapper>
+        </Link>
 
-        <LinkWrapper href={PATHS.TOS}>
+        <Link href={PATHS.TOS}>
           <FormattedMessage defaultMessage="Terms" id="xkr+zo" />
-        </LinkWrapper>
+        </Link>
 
-        <LinkWrapper href={PATHS.COMMUNITY}>
+        <Link href={PATHS.COMMUNITY}>
           <FormattedMessage defaultMessage="Community" id="4CrCbD" />
-        </LinkWrapper>
+        </Link>
       </section>
     </footer>
   )

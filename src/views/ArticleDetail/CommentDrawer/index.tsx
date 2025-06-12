@@ -2,7 +2,7 @@ import dynamic from 'next/dynamic'
 import { useEffect } from 'react'
 import { useIntl } from 'react-intl'
 
-import { ReactComponent as IconLeft } from '@/public/static/icons/24px/left.svg'
+import IconLeft from '@/public/static/icons/24px/left.svg'
 import { analytics } from '~/common/utils'
 import { Drawer, Icon, useCommentEditorContext } from '~/components'
 

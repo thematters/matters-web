@@ -36,7 +36,7 @@ const PublishState = ({ articleId, currVersionId }: PublishStateProps) => {
   useEffect(() => {
     startPolling(1000 * 2)
 
-    refetch && refetch()
+    refetch?.()
 
     return () => {
       stopPolling()

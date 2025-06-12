@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { ReactComponent as IconLogo } from '@/public/static/icons/logo.svg'
+import IconLogo from '@/public/static/icons/logo.svg'
 import { Icon, IconProps, Tooltip } from '~/components'
 
 import styles from './styles.module.css'

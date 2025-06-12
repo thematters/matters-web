@@ -1,4 +1,4 @@
-import { ReactComponent as IconNavNotifications } from '@/public/static/icons/24px/nav-notifications.svg'
+import IconNavNotifications from '@/public/static/icons/24px/nav-notifications.svg'
 import { Empty, Icon, Translate } from '~/components'
 
 export const EmptyNotice = () => (

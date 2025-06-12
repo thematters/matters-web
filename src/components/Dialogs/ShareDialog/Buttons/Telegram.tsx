@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 
-import { ReactComponent as IconTelegram } from '@/public/static/icons/24px/telegram.svg'
+import IconTelegram from '@/public/static/icons/24px/telegram.svg'
 import { REFERRAL_QUERY_REFERRAL_KEY } from '~/common/enums'
 import { analytics } from '~/common/utils'
 import { Icon, TextIcon, ViewerContext } from '~/components'

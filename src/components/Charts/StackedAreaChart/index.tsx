@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { extent as d3Extent, max as d3Max, min as d3Min } from 'd3-array'
 import {
   ScaleLinear,
@@ -7,7 +8,6 @@ import {
 } from 'd3-scale'
 import { select as d3Select } from 'd3-selection'
 import { Series, stack as d3Stack } from 'd3-shape'
-import _uniqBy from 'lodash/uniqBy'
 import { useEffect, useRef, useState } from 'react'
 
 import { useWindowResize } from '~/components'
@@ -72,6 +72,7 @@ export const StackedAreaChart: React.FC<StackedAreaChartProps> & {
   }
 
   // Data Transformation
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [_, ...stackedKeys] = Object.keys(data[0])
   const series = d3Stack().keys(stackedKeys)(data as any)
 

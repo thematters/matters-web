@@ -3,11 +3,11 @@ import _pickBy from 'lodash/pickBy'
 import { useContext } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { ReactComponent as IconData } from '@/public/static/icons/24px/data.svg'
-import { ReactComponent as IconEdit } from '@/public/static/icons/24px/edit.svg'
-import { ReactComponent as IconLogout } from '@/public/static/icons/24px/logout.svg'
-import { ReactComponent as IconMore } from '@/public/static/icons/24px/more.svg'
-import { ReactComponent as IconSettings } from '@/public/static/icons/24px/settings.svg'
+import IconData from '@/public/static/icons/24px/data.svg'
+import IconEdit from '@/public/static/icons/24px/edit.svg'
+import IconLogout from '@/public/static/icons/24px/logout.svg'
+import IconMore from '@/public/static/icons/24px/more.svg'
+import IconSettings from '@/public/static/icons/24px/settings.svg'
 import { toPath } from '~/common/utils'
 import {
   Button,

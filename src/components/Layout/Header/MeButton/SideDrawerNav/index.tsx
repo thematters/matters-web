@@ -1,7 +1,8 @@
-import { DialogContent, DialogOverlay } from '@reach/dialog'
 import { useRef } from 'react'
 import { useIntl } from 'react-intl'
 import { animated, useTransition } from 'react-spring'
+
+import { DialogContent, DialogOverlay } from '~/components/Dialog/vendors'
 
 import DrawerContent from './DrawerContent'
 import Overlay from './Overlay'
@@ -15,7 +16,7 @@ export interface SideDrawerNavProps {
 const SideDrawerNav: React.FC<SideDrawerNavProps> = ({ isOpen, onDismiss }) => {
   const intl = useIntl()
 
-  const closeButtonRef: React.RefObject<any> | null = useRef(null)
+  const closeButtonRef: React.RefObject<HTMLButtonElement> | null = useRef(null)
 
   const transition = useTransition(isOpen ? [true] : [], {
     from: {
@@ -41,7 +42,7 @@ const SideDrawerNav: React.FC<SideDrawerNavProps> = ({ isOpen, onDismiss }) => {
           className={styles.overlay}
           initialFocusRef={closeButtonRef}
         >
-          <AnimatedOverlay style={{ opacity: opacity as any }} />
+          <AnimatedOverlay style={{ opacity }} />
 
           <DialogContent
             className={styles.content}

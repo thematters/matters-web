@@ -1,4 +1,5 @@
 import { useQuery } from '@apollo/client'
+import { waitForTransactionReceipt } from '@wagmi/core'
 import { useFormik } from 'formik'
 import _get from 'lodash/get'
 import _pickBy from 'lodash/pickBy'
@@ -7,13 +8,13 @@ import {
   SetStateAction,
   useContext,
   useEffect,
+  useId,
   useRef,
   useState,
 } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 import { parseUnits } from 'viem'
 import { useAccount } from 'wagmi'
-import { waitForTransaction } from 'wagmi/actions'
 
 import {
   contract,
@@ -27,6 +28,7 @@ import {
   truncate,
   validateCurrency,
   validateDonationAmount,
+  wagmiConfig,
 } from '~/common/utils'
 import {
   Button,
@@ -105,8 +107,8 @@ const SetAmount: React.FC<FormProps> = ({
   setTx,
   targetId,
 }) => {
-  const formId = 'pay-to-set-amount-form'
-  const customInputRef: React.RefObject<any> | null = useRef(null)
+  const formId = useId()
+  const customInputRef: React.RefObject<HTMLInputElement> | null = useRef(null)
   const isUSDT = currency === CURRENCY.USDT
   const isHKD = currency === CURRENCY.HKD
   // const isLike = currency === CURRENCY.LIKE
@@ -151,8 +153,8 @@ const SetAmount: React.FC<FormProps> = ({
     error: allowanceError,
   } = useAllowanceUSDT(!recipient.info.ethAddress)
   const {
-    data: approveData,
-    isLoading: approving,
+    data: approveHash,
+    isPending: approving,
     write: approveWrite,
     error: approveError,
   } = useApproveUSDT(!recipient.info.ethAddress)
@@ -220,7 +222,7 @@ const SetAmount: React.FC<FormProps> = ({
         }
         setSubmitting(false)
         submitCallback({ amount: submitAmount, currency })
-      } catch (error) {
+      } catch {
         setSubmitting(false)
       }
     },
@@ -232,10 +234,12 @@ const SetAmount: React.FC<FormProps> = ({
     isUSDT &&
     allowanceUSDT >= 0n &&
     parseUnits(value + '', contract.Optimism.tokenDecimals) > allowanceUSDT
+  const needReauthorize = isExceededAllowance && allowanceUSDT > 0n
   const hasUSDTNetworkError =
-    isUSDT && (allowanceError || balanceUSDTError || approveError) // TODO: better error handling
+    isUSDT && (allowanceError || balanceUSDTError || approveError)
   const isUserRejectedError =
-    _get(hasUSDTNetworkError, 'cause.name') === 'UserRejectedRequestError'
+    hasUSDTNetworkError &&
+    hasUSDTNetworkError?.name === 'UserRejectedRequestError'
   const hasWalletBalanceError = walletBalanceError && !isUSDT
   const networkError = hasWalletBalanceError
     ? intl.formatMessage({
@@ -277,19 +281,19 @@ const SetAmount: React.FC<FormProps> = ({
   // USDT approval
   useEffect(() => {
     ;(async () => {
-      if (approveData) {
+      if (approveHash) {
         setApproveConfirming(true)
-        await waitForTransaction({ hash: approveData.hash })
+        await waitForTransactionReceipt(wagmiConfig, { hash: approveHash })
         refetchAllowanceData()
         setApproveConfirming(false)
       }
     })()
-  }, [approveData])
+  }, [approveHash])
 
   useEffect(() => {
     setFieldValue('amount', _amount, false)
     if (customInputRef.current) {
-      customInputRef.current.value = _amount <= 0 ? '' : _amount
+      customInputRef.current.value = _amount <= 0 ? '' : _amount.toString()
     }
   }, [currency])
 
@@ -325,7 +329,7 @@ const SetAmount: React.FC<FormProps> = ({
           e.target.blur()
 
           if (customInputRef.current) {
-            customInputRef.current.value = value
+            customInputRef.current.value = value.toString()
           }
         }}
         // custom input
@@ -352,14 +356,39 @@ const SetAmount: React.FC<FormProps> = ({
             const $el = customInputRef.current
             const rawValue = parseFloat(e.target.value)
             if ($el && rawValue !== value) {
-              $el.value = value <= 0 ? '' : value
+              $el.value = value <= 0 ? '' : value.toString()
               $el.type = 'text'
               $el.setSelectionRange($el.value.length, $el.value.length)
               $el.type = 'number'
             }
           },
           error: errors.amount,
-          hint: <ComposedAmountInputHint />,
+          hint: (
+            <>
+              <ComposedAmountInputHint />
+
+              <Spacer size="sp4" />
+              {isExceededAllowance && (
+                <section>
+                  {needReauthorize ? (
+                    <p>
+                      <FormattedMessage
+                        defaultMessage="Your authorized USDT limit for Matters is insufficient, please reauthorize it."
+                        id="AvRTYR"
+                      />
+                    </p>
+                  ) : (
+                    <p>
+                      <FormattedMessage
+                        defaultMessage="You need to authorize Matters to perform USDT transactions for you."
+                        id="tQCtdN"
+                      />
+                    </p>
+                  )}
+                </section>
+              )}
+            </>
+          ),
           ref: customInputRef,
         }}
         spacingTop="base"
@@ -379,6 +408,7 @@ const SetAmount: React.FC<FormProps> = ({
     isValid,
     isSubmitting,
     isExceededAllowance,
+    needReauthorize,
     isBalanceInsufficient,
     switchToAddCredit,
     approving,

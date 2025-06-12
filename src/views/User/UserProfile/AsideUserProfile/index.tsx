@@ -1,8 +1,9 @@
 import dynamic from 'next/dynamic'
+import Link from 'next/link'
 import { useContext, useEffect } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconCamera } from '@/public/static/icons/24px/camera.svg'
+import IconCamera from '@/public/static/icons/24px/camera.svg'
 import {
   OPEN_GRAND_BADGE_DIALOG,
   OPEN_NOMAD_BADGE_DIALOG,
@@ -17,7 +18,6 @@ import {
   Expandable,
   FollowUserButton,
   Icon,
-  LinkWrapper,
   usePublicQuery,
   useRoute,
   ViewerContext,
@@ -182,17 +182,17 @@ export const AsideUserProfile = () => {
         )}
         {isInUserPage && !isMe && (
           <section className={styles.avatar}>
-            <LinkWrapper {...userProfilePath}>
+            <Link {...userProfilePath}>
               <Avatar size={120} user={user} inProfile />
-            </LinkWrapper>
+            </Link>
           </section>
         )}
         {!isInUserPage && (
-          <LinkWrapper {...userProfilePath}>
+          <Link {...userProfilePath}>
             <section className={styles.avatar}>
               <Avatar size={88} user={user} inProfile />
             </section>
-          </LinkWrapper>
+          </Link>
         )}
       </header>
 
@@ -217,24 +217,24 @@ export const AsideUserProfile = () => {
             </EditProfileDialog>
           )}
           {isInUserPage && !isMe && (
-            <LinkWrapper {...userProfilePath}>
+            <Link {...userProfilePath}>
               <h1
                 className={styles.isInUserPageName}
                 data-test-id={TEST_ID.USER_PROFILE_DISPLAY_NAME}
               >
                 {user.displayName}
               </h1>
-            </LinkWrapper>
+            </Link>
           )}
           {!isInUserPage && (
-            <LinkWrapper {...userProfilePath}>
+            <Link {...userProfilePath}>
               <h1
                 className={styles.name}
                 data-test-id={TEST_ID.USER_PROFILE_DISPLAY_NAME}
               >
                 {user.displayName}
               </h1>
-            </LinkWrapper>
+            </Link>
           )}
         </section>
 
@@ -281,7 +281,7 @@ export const AsideUserProfile = () => {
             {isCivicLiker && <CivicLikerBadge hasTooltip />}
 
             {user?.info.ethAddress && (
-              <DynamicWalletLabel user={user} isMe={isMe} hasTooltip />
+              <DynamicWalletLabel user={user} hasTooltip />
             )}
           </section>
         )}

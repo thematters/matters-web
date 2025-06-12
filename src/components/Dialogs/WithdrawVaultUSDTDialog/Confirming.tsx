@@ -150,7 +150,7 @@ const Confirming: React.FC<ConfirmingProps> = ({ amount, closeDialog }) => {
       else {
         successToast()
       }
-    } catch (error) {
+    } catch {
       errorToast()
     }
   }

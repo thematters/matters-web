@@ -10,7 +10,7 @@ export const parseFormSubmitErrors = (
   error: ApolloError
 ): [ErrorMessages, ERROR_CODES[]] => {
   const codes = getErrorCodes(error)
-  const messages: ErrorMessages = {} as any
+  const messages: ErrorMessages = {} as ErrorMessages
 
   codes.forEach((code) => {
     messages[code] = ERROR_MESSAGES[code] as MessageDescriptor

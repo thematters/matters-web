@@ -2,7 +2,7 @@ import gql from 'graphql-tag'
 import React from 'react'
 import { useIntl } from 'react-intl'
 
-import { ReactComponent as IconClap } from '@/public/static/icons/24px/clap.svg'
+import IconClap from '@/public/static/icons/24px/clap.svg'
 import { ArticleDigestList, Icon, TextIcon } from '~/components'
 import { DigestAppreciationFragment } from '~/gql/graphql'
 

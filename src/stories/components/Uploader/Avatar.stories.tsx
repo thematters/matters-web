@@ -1,5 +1,5 @@
 import { MockedProvider } from '@apollo/client/testing'
-import { ComponentMeta, ComponentStory } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react'
 import React from 'react'
 
 import { AvatarUploader } from '~/components'
@@ -7,55 +7,58 @@ import { AvatarUploader } from '~/components'
 import { MOCK_CIRCLE, MOCK_USER } from '../../mocks'
 import styles from './styles.module.css'
 
-export default {
+const meta = {
   title: 'Components/Uploader',
   component: AvatarUploader,
-} as ComponentMeta<typeof AvatarUploader>
+} satisfies Meta<typeof AvatarUploader>
 
-const Template: ComponentStory<typeof AvatarUploader> = () => (
-  <MockedProvider>
-    <ul className={styles.avatarContainer}>
-      {/* User */}
-      <li>
-        <AvatarUploader
-          hasBorder
-          onUploaded={(assetId) => alert({ assetId })}
-          onUploadStart={() => null}
-          onUploadEnd={() => null}
-        />
-      </li>
-      <li>
-        <AvatarUploader
-          user={MOCK_USER}
-          hasBorder
-          onUploaded={(assetId) => alert({ assetId })}
-          onUploadStart={() => null}
-          onUploadEnd={() => null}
-        />
-      </li>
+export default meta
+type Story = StoryObj<typeof meta>
 
-      {/* Circle */}
-      <li>
-        <AvatarUploader
-          type="circle"
-          onUploaded={(assetId) => alert({ assetId })}
-          onUploadStart={() => null}
-          onUploadEnd={() => null}
-          entityId=""
-        />
-      </li>
-      <li>
-        <AvatarUploader
-          type="circle"
-          circle={MOCK_CIRCLE}
-          onUploaded={(assetId) => alert({ assetId })}
-          onUploadStart={() => null}
-          onUploadEnd={() => null}
-          entityId=""
-        />
-      </li>
-    </ul>
-  </MockedProvider>
-)
+export const Avatar: Partial<Story> = {
+  render: () => (
+    <MockedProvider>
+      <ul className={styles.avatarContainer}>
+        {/* User */}
+        <li>
+          <AvatarUploader
+            hasBorder
+            onUploaded={(assetId) => alert({ assetId })}
+            onUploadStart={() => null}
+            onUploadEnd={() => null}
+          />
+        </li>
+        <li>
+          <AvatarUploader
+            user={MOCK_USER}
+            hasBorder
+            onUploaded={(assetId) => alert({ assetId })}
+            onUploadStart={() => null}
+            onUploadEnd={() => null}
+          />
+        </li>
 
-export const Avatar = Template.bind({})
+        {/* Circle */}
+        <li>
+          <AvatarUploader
+            type="circle"
+            onUploaded={(assetId) => alert({ assetId })}
+            onUploadStart={() => null}
+            onUploadEnd={() => null}
+            entityId=""
+          />
+        </li>
+        <li>
+          <AvatarUploader
+            type="circle"
+            circle={MOCK_CIRCLE}
+            onUploaded={(assetId) => alert({ assetId })}
+            onUploadStart={() => null}
+            onUploadEnd={() => null}
+            entityId=""
+          />
+        </li>
+      </ul>
+    </MockedProvider>
+  ),
+}

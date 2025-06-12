@@ -147,7 +147,7 @@ export const Truncate = ({
     const ellipsisWidth = getEllipsisWidth(ellipsisRef.current) || 0
 
     let measuringLine = ''
-    let didTruncate = true
+    const didTruncate = true
     let index = 0
 
     while (index < chars.length) {

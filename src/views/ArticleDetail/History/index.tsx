@@ -173,7 +173,6 @@ const BaseArticleDetailHistory = ({
         {isSensitive && (
           <DynamicSensitiveWall
             sensitiveByAuthor={article.sensitiveByAuthor}
-            sensitiveByAdmin={article.sensitiveByAdmin}
             expandAll={() => setIsSensitive(false)}
           />
         )}

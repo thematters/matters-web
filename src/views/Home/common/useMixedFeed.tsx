@@ -1,13 +1,34 @@
 import { Media } from '~/components'
+import {
+  ArticleDigestFeedArticlePrivateFragment,
+  ArticleDigestFeedArticlePublicFragment,
+} from '~/gql/graphql'
 
+import { FeedType } from '../Feed'
 import Authors from '../Feed/Authors'
 import Billboard from '../Feed/Billboard'
 import Tags from '../Feed/Tags'
 
-export const defaultHorizontalFeeds: Record<
-  number,
-  React.FC<{ after?: string; first?: number }>
-> = {
+export type MixedFeedArticleEdge =
+  | {
+      __typename?: 'ArticleEdge'
+      cursor: string
+      node: ArticleDigestFeedArticlePublicFragment &
+        Partial<ArticleDigestFeedArticlePrivateFragment>
+    }
+  | {
+      __typename: 'ChannelArticleEdge'
+      cursor: string
+      pinned: boolean
+      node: ArticleDigestFeedArticlePublicFragment &
+        Partial<ArticleDigestFeedArticlePrivateFragment>
+    }
+  | {
+      __typename: 'HorizontalFeed'
+      Feed: React.FC
+    }
+
+const horizontalFeeds: Record<number, React.FC> = {
   3: () => (
     <Media lessThan="lg">
       <Billboard />
@@ -25,28 +46,43 @@ export const defaultHorizontalFeeds: Record<
   ),
 }
 
+const channelHorizontalFeeds: Record<number, React.FC> = {
+  11: () => (
+    <Media lessThan="lg">
+      <Authors />
+    </Media>
+  ),
+  17: () => (
+    <Media lessThan="lg">
+      <Tags />
+    </Media>
+  ),
+}
+
 export const useMixedFeed = (
-  edges: any[],
+  edges: MixedFeedArticleEdge[],
   shouldMix: boolean = true,
-  customHorizontalFeeds?: Record<
-    number,
-    React.FC<{ after?: string; first?: number }>
-  >
+  feedType: FeedType | 'channel'
 ) => {
   if (!edges || edges.length === 0 || !shouldMix) {
     return edges || []
   }
 
-  let mixFeed = JSON.parse(JSON.stringify(edges))
+  // get copy
+  const mixFeed = JSON.parse(JSON.stringify(edges)) as MixedFeedArticleEdge[]
 
-  const horizontalFeeds = customHorizontalFeeds || defaultHorizontalFeeds
+  // get insert entries
   const locs = Object.keys(horizontalFeeds).map((loc) => parseInt(loc, 10))
   locs.sort((a, b) => a - b)
 
+  // insert feed
   locs.forEach((loc) => {
     if (mixFeed.length >= loc) {
       mixFeed.splice(loc, 0, {
-        Feed: horizontalFeeds[loc],
+        Feed:
+          feedType === 'channel'
+            ? channelHorizontalFeeds[loc as keyof typeof channelHorizontalFeeds]
+            : horizontalFeeds[loc as keyof typeof horizontalFeeds],
         __typename: 'HorizontalFeed',
       })
     }
@@ -54,6 +90,3 @@ export const useMixedFeed = (
 
   return mixFeed
 }
-
-// For backward compatibility
-export const horizontalFeeds = defaultHorizontalFeeds

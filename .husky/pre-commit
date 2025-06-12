@@ -1,6 +1,3 @@
-#!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
-
 npm run format -- --list-different \
 && npm run i18n \
 && npm run lint \

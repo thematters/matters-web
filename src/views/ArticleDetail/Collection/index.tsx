@@ -37,8 +37,7 @@ const COLLECTION_LIST = gql`
 
 const Collection: React.FC<{
   article: NonNullable<ArticleDetailPublicQuery['article']>
-  collectionCount?: number
-}> = ({ article, collectionCount }) => {
+}> = ({ article }) => {
   const { data, loading, error, fetchMore } = useQuery<CollectionListQuery>(
     COLLECTION_LIST,
     { variables: { id: article.id, first: 3 } }

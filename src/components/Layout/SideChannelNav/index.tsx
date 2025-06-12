@@ -1,10 +1,11 @@
 import classnames from 'classnames'
+import Link from 'next/link'
 import { useCallback, useContext, useEffect, useRef, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { PATHS } from '~/common/enums'
+import { FEATUED_CHANNEL_SHORT_HASH, PATHS } from '~/common/enums'
 import { analytics } from '~/common/utils'
-import { LinkWrapper, useRoute, ViewerContext } from '~/components'
+import { useRoute, ViewerContext } from '~/components'
 import { useChannels } from '~/components/Context'
 
 import ChannelItem from './ChannelItem'
@@ -46,61 +47,75 @@ const SideChannelNav = () => {
     })
   }
 
+  const filteredChannels = channels.filter(
+    (c) => c.shortHash !== FEATUED_CHANNEL_SHORT_HASH
+  )
+
   return (
     <section className={styles.content} ref={contentRef}>
       <section
-        className={classnames(styles.sideChannelNav, {
+        className={classnames({
+          [styles.sideChannelNav]: true,
           [styles.showTopGradient]: showTopGradient,
           [styles.showBottomGradient]: showBottomGradient,
         })}
       >
         {isAuthed && (
-          <LinkWrapper
+          <Link
             href={PATHS.FOLLOW}
             className={classnames({
               [styles.item]: true,
-              [styles.selectedChannel]:
+              [styles.selected]:
                 (isAuthed && isInPath('HOME')) || isInPath('FOLLOW'),
             })}
             onClick={() => onTabClick('follow')}
           >
-            <span>
-              <FormattedMessage defaultMessage="My Page" id="enMIYK" />
+            <span className={styles.name}>
+              <span className={styles.inner}>
+                <FormattedMessage defaultMessage="My Page" id="enMIYK" />
+              </span>
             </span>
-          </LinkWrapper>
+          </Link>
         )}
-        <LinkWrapper
-          href={`${PATHS.FEATURED}`}
+
+        <Link
+          href={PATHS.FEATURED}
           className={classnames({
             [styles.item]: true,
-            [styles.selectedChannel]:
+            [styles.selected]:
               isInPath('FEATURED') || (!isAuthed && isInPath('HOME')),
           })}
           onClick={() => onTabClick('featured')}
         >
-          <span>
-            <FormattedMessage defaultMessage="Featured" id="CnPG8j" />
+          <span className={styles.name}>
+            <span className={styles.inner}>
+              <FormattedMessage defaultMessage="Featured" id="CnPG8j" />
+            </span>
           </span>
-        </LinkWrapper>
-        {channels.map((c) => (
+        </Link>
+
+        {filteredChannels.map((c) => (
           <ChannelItem key={c.id} channel={c} />
         ))}
-        <LinkWrapper
-          href={`${PATHS.NEWEST}`}
+
+        <Link
+          href={PATHS.NEWEST}
           className={classnames({
             [styles.item]: true,
-            [styles.selectedChannel]: isInPath('NEWEST'),
+            [styles.selected]: isInPath('NEWEST'),
           })}
           onClick={() => onTabClick('newest')}
         >
-          <span>
-            <FormattedMessage
-              defaultMessage="Latest"
-              id="gykfC8"
-              description="src/components/Layout/SideChannelNav/index.tsx"
-            />
+          <span className={styles.name}>
+            <span className={styles.inner}>
+              <FormattedMessage
+                defaultMessage="Latest"
+                id="gykfC8"
+                description="src/components/Layout/SideChannelNav/index.tsx"
+              />
+            </span>
           </span>
-        </LinkWrapper>
+        </Link>
       </section>
     </section>
   )

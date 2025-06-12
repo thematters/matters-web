@@ -25,7 +25,7 @@
     top: 0;
     left: 0;
     opacity: 1;
-    transition: transform 0.2s ease-in-out;
     transform: scale(1);
+    transition: transform 0.2s ease-in-out;
   }
 }

@@ -1,8 +1,8 @@
 import classNames from 'classnames'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { ReactComponent as IconTimes } from '@/public/static/icons/24px/times.svg'
-import { ReactComponent as IconLogo } from '@/public/static/icons/logo.svg'
+import IconTimes from '@/public/static/icons/24px/times.svg'
+import IconLogo from '@/public/static/icons/logo.svg'
 import { PATHS } from '~/common/enums'
 import { Button, Icon, Media, Tabs, useRoute } from '~/components'
 

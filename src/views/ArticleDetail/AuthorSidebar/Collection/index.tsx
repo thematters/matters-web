@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
@@ -11,9 +12,7 @@ import {
   unshiftConnections,
 } from '~/common/utils'
 import {
-  ArticleDigestAuthorSidebar,
   DualScroll,
-  LinkWrapper,
   List,
   QueryError,
   Throw404,
@@ -24,6 +23,7 @@ import {
   AuthorSidebarCollectionQuery,
 } from '~/gql/graphql'
 
+import { ArticleDigestAuthorSidebar } from '../ArticleDigestAuthorSidebar'
 import {
   ArticleDigestAuthorSidebarFeedPlaceholder,
   FeedPlaceholder,
@@ -61,9 +61,9 @@ const Collection = ({ article, collectionId }: CollectionProps) => {
     variables: { id: collectionId, after: cursor },
   })
 
-  const collection = prevData?.node!
-  const prevCollection = prevData?.node!
-  const afterCollection = afterData?.node!
+  const collection = prevData?.node
+  const prevCollection = prevData?.node
+  const afterCollection = afterData?.node
 
   useEffect(() => {
     if (!article) return
@@ -167,11 +167,11 @@ const Collection = ({ article, collectionId }: CollectionProps) => {
 
   return (
     <section className={styles.container}>
-      <LinkWrapper {...collectionDetailPath}>
+      <Link {...collectionDetailPath}>
         <title>{collection.title}</title>
-      </LinkWrapper>
+      </Link>
       {collection.articles.totalCount > 0 && (
-        <LinkWrapper {...collectionDetailPath}>
+        <Link {...collectionDetailPath}>
           <section className={styles.totalCount}>
             <FormattedMessage
               defaultMessage="{totalCount} articles"
@@ -181,7 +181,7 @@ const Collection = ({ article, collectionId }: CollectionProps) => {
               }}
             />
           </section>
-        </LinkWrapper>
+        </Link>
       )}
       <DualScroll
         hasPreviousPage={prevPageInfo?.hasPreviousPage}

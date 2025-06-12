@@ -1,4 +1,3 @@
-import _isNil from 'lodash/isNil'
 import NextHead from 'next/head'
 import type { NextSeoProps } from 'next-seo'
 import { NextSeo } from 'next-seo'
@@ -19,7 +18,7 @@ interface HeadProps {
   path?: string
   image?: string | null
   noSuffix?: boolean
-  jsonLdData?: Record<string, any> | null
+  jsonLdData?: Record<string, unknown> | null
   availableLanguages?: UserLanguage[]
   noindex?: boolean
 }

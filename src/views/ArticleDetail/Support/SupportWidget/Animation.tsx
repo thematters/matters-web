@@ -111,7 +111,11 @@ const Animation: React.FC<Props> = ({
           {...coinShipOptions}
           {...lottieProps}
           onComplete={() => {
-            playShipWaiting ? forward('shipWaiting') : forward('openHeart')
+            if (playShipWaiting) {
+              forward('shipWaiting')
+            } else {
+              forward('openHeart')
+            }
           }}
         />
       )}

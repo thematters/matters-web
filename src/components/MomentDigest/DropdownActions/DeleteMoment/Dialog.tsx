@@ -43,7 +43,11 @@ const DeleteMomentDialog = ({ moment, children }: DeleteMomentDialogProps) => {
             return {
               ...existingWritingsRefs,
               edges: existingWritingsRefs.edges.filter(
-                ({ node }: { node: any }) => readField('id', node) !== id
+                ({
+                  node,
+                }: {
+                  node: MomentDigestDropdownActionsMomentFragment
+                }) => readField('id', node) !== id
               ),
             }
           },

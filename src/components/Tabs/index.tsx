@@ -42,11 +42,9 @@ const Tab: React.FC<React.PropsWithChildren<TabProps>> = ({
         className={classes}
         onClick={onClick}
       >
-        <Link href={href || ''} legacyBehavior>
-          <a>
-            {children}
-            {count && <span className={styles.count}>&nbsp;{count}</span>}
-          </a>
+        <Link href={href || ''}>
+          {children}
+          {count && <span className={styles.count}>&nbsp;{count}</span>}
         </Link>
       </li>
     )

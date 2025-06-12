@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { ReactComponent as IconInfo } from '@/public/static/icons/24px/information.svg'
+import IconInfo from '@/public/static/icons/24px/information.svg'
 import { analytics, featureSupportedChains } from '~/common/utils'
 import {
   BillboardDialog,

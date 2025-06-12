@@ -1,5 +1,5 @@
-import { ReactComponent as IconAboutArrowRight } from '@/public/static/images/about/arrow-right.svg'
-import IMAGE_WAVE from '@/public/static/images/about/wave-join-us.svg'
+import IconAboutArrowRight from '@/public/static/images/about/arrow-right.svg'
+import IMAGE_WAVE from '@/public/static/images/about/wave-join-us.svg?url'
 import { captureClicks } from '~/common/utils'
 import { Icon, Translate } from '~/components'
 
@@ -12,7 +12,7 @@ const IconArrow = () => (
 
 const JoinUs = () => {
   const style = {
-    '--about-join-us-bg': `url(${IMAGE_WAVE})`,
+    '--about-join-us-bg': `url(${IMAGE_WAVE.src})`,
   } as React.CSSProperties
 
   return (

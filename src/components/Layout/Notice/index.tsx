@@ -1,4 +1,3 @@
-import { Alert } from '@reach/alert'
 import classNames from 'classnames'
 
 import styles from './styles.module.css'
@@ -32,18 +31,18 @@ const LayoutNotice = ({
     [styles[color]]: !!color,
     [styles.centerX]: !customButton,
   })
-  const alertType = color === 'red' ? 'assertive' : 'polite'
 
   return (
     <section>
       <section className={mainClasses}>
-        <section>
-          <Alert type={alertType}>
-            {content && <p className={styles.content}>{content}</p>}
-            {subDescription && (
-              <p className={styles.subDescription}>{subDescription}</p>
-            )}
-          </Alert>
+        <section
+          role="alert"
+          aria-live={color === 'red' ? 'assertive' : 'polite'}
+        >
+          {content && <p className={styles.content}>{content}</p>}
+          {subDescription && (
+            <p className={styles.subDescription}>{subDescription}</p>
+          )}
         </section>
 
         {customButton && (

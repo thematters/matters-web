@@ -4,7 +4,7 @@ import { Dialog } from '~/components'
 
 interface CompleteProps {
   closeDialog: () => void
-  callback?: () => any
+  callback?: () => void
   callbackText?: React.ReactNode
 }
 

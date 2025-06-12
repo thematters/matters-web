@@ -5,8 +5,8 @@ import { Editor, Node } from '@tiptap/core'
  */
 
 type CustomShortcutsOptions = {
-  onModEnter: ({ editor }: { editor: Editor }) => any
-  onShiftEnter: ({ editor }: { editor: Editor }) => any
+  onModEnter: ({ editor }: { editor: Editor }) => void
+  onShiftEnter: ({ editor }: { editor: Editor }) => void
 }
 
 const pluginName = 'customShortcuts'

@@ -1,4 +1,4 @@
-import { ReactComponent as IconEmptyFile } from '@/public/static/icons/empty-file.svg'
+import IconEmptyFile from '@/public/static/icons/empty-file.svg'
 import { Empty, Icon, Translate } from '~/components'
 
 export const EmptyTagArticles = () => (
