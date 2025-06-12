@@ -49,17 +49,15 @@ const ChannelDrawer = ({ isOpen, onClose: _onClose }: ChannelDrawerProps) => {
   }
 
   const onClose = () => {
-    setStep('select')
+    setTimeout(() => {
+      setStep('select')
+    }, 200)
     _onClose()
   }
 
   const handleConfirm = () => {
     // onConfirm(tempSelectedChannels)
     setStep('submitted')
-  }
-
-  const handleSubmitted = () => {
-    _onClose()
   }
 
   const getChannelName = (channel?: {
@@ -248,7 +246,7 @@ Once it’s approved, the channel will be updated : )"
             </section>
             <Dialog.RoundedButton
               color="black"
-              onClick={handleSubmitted}
+              onClick={onClose}
               borderColor="greyLight"
               borderWidth="sm"
               textWeight="normal"
