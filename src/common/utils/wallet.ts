@@ -18,6 +18,7 @@ declare module 'wagmi' {
   }
 }
 
+const isServer = typeof window === 'undefined'
 const isTest = process.env.NODE_ENV === 'test'
 const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
 const alchemyId = process.env.NEXT_PUBLIC_ALCHEMY_KEY!
@@ -39,7 +40,7 @@ export const explorers = {
 
 export const wagmiConfig = createConfig({
   ssr: false,
-  chains: isProd ? [mainnet, optimism] : [sepolia, optimismSepolia],
+  chains: [mainnet, optimism, sepolia, optimismSepolia],
   transports: {
     [mainnet.id]: http(`https://eth-mainnet.g.alchemy.com/v2/${alchemyId}`),
     [optimism.id]: http(`https://opt-mainnet.g.alchemy.com/v2/${alchemyId}`),
@@ -50,11 +51,12 @@ export const wagmiConfig = createConfig({
   },
   connectors: [
     injected(),
-    ...(isTest
+    ...(isTest || isServer
       ? []
       : [
           walletConnect({
             projectId: process.env.NEXT_PUBLIC_WALLETCONNECT_ID!,
+            qrModalOptions: { themeMode: 'light' },
           }),
         ]),
   ],

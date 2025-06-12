@@ -139,10 +139,6 @@ const BaseCardPayment: React.FC<CardPaymentProps> = ({
         success: false,
         message: JSON.stringify(result.error),
       })
-
-      import('@sentry/browser').then((Sentry) => {
-        Sentry.captureException(result.error)
-      })
     } else {
       if (result.setupIntent?.status === 'succeeded') {
         analytics.trackEvent('subscribe', { id: circle.id, success: true })

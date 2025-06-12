@@ -68,7 +68,7 @@
     "description": "ARTICLE_NOT_FOUND"
   },
   "+vVZ/G": {
-    "defaultMessage": "綁定"
+    "defaultMessage": "绑定"
   },
   "//QMqf": {
     "defaultMessage": "请输入标题…"
@@ -547,10 +547,6 @@
   "6vgoSf": {
     "defaultMessage": "编辑评论",
     "description": "src/components/CircleComment/DropdownActions/EditButton.tsx"
-  },
-  "70UCEy": {
-    "defaultMessage": "在行动装置上使用问题，参考 ",
-    "description": "src/components/Forms/WalletAuthForm/Select.tsx"
   },
   "73iajM": {
     "defaultMessage": "出错了，请检查你输入的内容",
@@ -1040,10 +1036,6 @@
     "defaultMessage": "目前非 Optimism 网络，立即切换？",
     "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
   },
-  "FaTb0A": {
-    "defaultMessage": "安装 MetaMask",
-    "description": "src/components/Forms/WalletAuthForm/Select.tsx"
-  },
   "Fe682o": {
     "defaultMessage": "下月预期营收",
     "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
@@ -1120,9 +1112,6 @@
   "H5+NAX": {
     "defaultMessage": "钱包余额"
   },
-  "H8KGyc": {
-    "defaultMessage": "进入"
-  },
   "H8hiL/": {
     "defaultMessage": "编辑围炉"
   },
@@ -1191,10 +1180,6 @@
   },
   "HwaiSE": {
     "defaultMessage": "开启后，正文将被暂时遮蔽，只显示标题与摘要，并由读者选择是否继续阅读（例如含有色情、暴力、血腥等内容）"
-  },
-  "HxcjQl": {
-    "defaultMessage": "Matters 将提供更多创作与区块链结合的服务，接入钱包后即可在未来第一时间体验新功能。",
-    "description": "src/components/Forms/WalletAuthForm/Select.tsx"
   },
   "HyjQns": {
     "defaultMessage": "教学指南",
@@ -1395,10 +1380,6 @@
   },
   "LphWYP": {
     "defaultMessage": "用户协议与隐私政策"
-  },
-  "LqxIEU": {
-    "defaultMessage": "钱包地址将作为身份识别之一在个人页公开显示。",
-    "description": "src/components/Forms/WalletAuthForm/Select.tsx"
   },
   "LwFJTy": {
     "defaultMessage": "Matters ID 为用户唯一标识，设置后无法修改。",
@@ -1842,10 +1823,6 @@
     "defaultMessage": "刷完啦",
     "description": "src/components/Interaction/"
   },
-  "UOdEqi": {
-    "defaultMessage": "原有透过电子信箱登录方式将为你保留。为维护你的帐户安全，加密钱包连接后无法重设。",
-    "description": "src/components/Forms/WalletAuthForm/Select.tsx"
-  },
   "URljhZ": {
     "defaultMessage": "作品已移出",
     "description": "src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
@@ -1912,10 +1889,6 @@
   "VqdOGQ": {
     "defaultMessage": "相关推荐",
     "description": "src/views/ArticleDetail/AuthorSidebar/Tabs/index.tsx"
-  },
-  "VrOoVf": {
-    "defaultMessage": "Matters 不会透过任何渠道主动询问你的钱包私钥。",
-    "description": "src/components/Forms/WalletAuthForm/Select.tsx"
   },
   "VwuiYK": {
     "defaultMessage": "Oops！此网址名称已被使用了，换一个试试",
@@ -2279,6 +2252,10 @@
   },
   "cg1VJ2": {
     "defaultMessage": "连接加密钱包"
+  },
+  "cd8EmU": {
+    "defaultMessage": "的搜索结果",
+    "description": "src/views/Search/AggregateResults/index.tsx"
   },
   "cmtHjM": {
     "defaultMessage": "由于你尚未发布任何作品，这裡还没有任何数据能与你分享哦！发布第一篇作品来介绍你自己，以此开启你的创作之旅吧！",
@@ -2992,6 +2969,9 @@
   "r9LhcI": {
     "defaultMessage": "贴上 YouTube、Vimeo 或 bilibili 链接后，Enter 进行新增"
   },
+  "r9fhGr": {
+    "defaultMessage": "显示原文 ({originalLang})"
+  },
   "rADhX5": {
     "defaultMessage": "不可用",
     "description": "FORBIDDEN_BY_STATE"
@@ -3193,10 +3173,6 @@
     "defaultMessage": "验证码逾期，请点击重新发送",
     "description": "CODE_EXPIRED"
   },
-  "v6YjIn": {
-    "defaultMessage": "账户",
-    "description": "src/components/Forms/WalletAuthForm/Select.tsx"
-  },
   "v84cGN": {
     "defaultMessage": "这是什么"
   },
@@ -3210,13 +3186,6 @@
   "vB45rC": {
     "defaultMessage": "去绑定",
     "description": "src/components/Dialogs/BindEmailHintDialog/Content.tsx"
-  },
-  "vCt85u": {
-    "defaultMessage": "刚接触加密钱包？参考 ",
-    "description": "src/components/Forms/WalletAuthForm/Select.tsx"
-  },
-  "vEdCjn": {
-    "defaultMessage": "原文{originalLang}"
   },
   "vH8sCb": {
     "defaultMessage": "我的围炉"
@@ -3269,7 +3238,7 @@
     "defaultMessage": "评论"
   },
   "wCy/Tc": {
-    "defaultMessage": "翻译"
+    "defaultMessage": "翻译成简中"
   },
   "wDX7zn": {
     "defaultMessage": "草稿不存在",
@@ -3483,9 +3452,6 @@
   "zllCbU": {
     "defaultMessage": "在 {circleName} 中留言",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
-  },
-  "zlug1R": {
-    "defaultMessage": "已翻译成{targetLang}，显示"
   },
   "zvNfwL": {
     "defaultMessage": "操作过于频繁，请稍候重试",
