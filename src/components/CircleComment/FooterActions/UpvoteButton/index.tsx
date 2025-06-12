@@ -1,8 +1,8 @@
 import gql from 'graphql-tag'
 import { useIntl } from 'react-intl'
 
-import { ReactComponent as IconVoteUp } from '@/public/static/icons/24px/vote-up.svg'
-import { ReactComponent as IconVoteUpFill } from '@/public/static/icons/24px/vote-up-fill.svg'
+import IconVoteUp from '@/public/static/icons/24px/vote-up.svg'
+import IconVoteUpFill from '@/public/static/icons/24px/vote-up-fill.svg'
 import { numAbbr } from '~/common/utils'
 import { Button, Icon, TextIcon, useMutation } from '~/components'
 import {
@@ -82,7 +82,11 @@ const UpvoteButton = ({
         spacing={[8, 8]}
         bgActiveColor={inCard ? 'greyLighterActive' : 'greyLighter'}
         onClick={() => {
-          onClick ? onClick() : unvote()
+          if (onClick) {
+            onClick()
+          } else {
+            unvote()
+          }
         }}
         disabled={disabled}
         aria-label={intl.formatMessage({
@@ -106,7 +110,11 @@ const UpvoteButton = ({
       spacing={[8, 8]}
       bgActiveColor={inCard ? 'greyLighterActive' : 'greyLighter'}
       onClick={() => {
-        onClick ? onClick() : upvote()
+        if (onClick) {
+          onClick()
+        } else {
+          upvote()
+        }
       }}
       disabled={disabled}
       aria-label={intl.formatMessage({

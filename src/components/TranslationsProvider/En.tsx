@@ -9,7 +9,13 @@ const TranslationsEnProvider = ({
     messages: Record<string, string>
   }) => React.ReactNode
 }) => {
-  return <>{children({ messages: TRANSLATIONS_EN as any })}</>
+  return (
+    <>
+      {children({
+        messages: TRANSLATIONS_EN as unknown as Record<string, string>,
+      })}
+    </>
+  )
 }
 
 export default TranslationsEnProvider

@@ -42,7 +42,6 @@ const BasePayoutDialog = ({
           back={back}
           currStep={currStep}
           prevStep={prevStep}
-          hasStripeAccount={hasStripeAccount}
         />
       </Dialog>
     </>

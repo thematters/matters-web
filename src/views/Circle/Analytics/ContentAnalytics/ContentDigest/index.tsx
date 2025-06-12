@@ -1,16 +1,10 @@
+import Link from 'next/link'
 import React from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconReadingTime } from '@/public/static/icons/24px/reading-time.svg'
+import IconReadingTime from '@/public/static/icons/24px/reading-time.svg'
 import { toPath } from '~/common/utils'
-import {
-  Card,
-  DateTime,
-  Icon,
-  LinkWrapper,
-  TextIcon,
-  Tooltip,
-} from '~/components'
+import { Card, DateTime, Icon, TextIcon, Tooltip } from '~/components'
 import { CircleContentAnalyticsArticleFragment } from '~/gql/graphql'
 
 import { fragments } from './gql'
@@ -59,9 +53,9 @@ const ContentDigest = ({
         <section className={styles.article}>
           <section className={styles.content}>
             <section className={styles.titleWrap}>
-              <LinkWrapper {...path} textActiveColor="green">
+              <Link {...path} className="u-link-active-green">
                 <h3 className={styles.title}>{title}</h3>
-              </LinkWrapper>
+              </Link>
             </section>
 
             <Count count={count} />

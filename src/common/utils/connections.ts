@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Base64 } from 'js-base64'
 import _get from 'lodash/get'
 import _set from 'lodash/set'

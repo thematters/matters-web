@@ -176,7 +176,7 @@ const CommentForm: React.FC<CommentFormProps> = ({
 
         // focus on end of the comment editor
         // ref: https://stackoverflow.com/a/69727327
-        let sel = window.getSelection()
+        const sel = window.getSelection()
         sel?.selectAllChildren(editor)
         sel?.collapseToEnd()
       }

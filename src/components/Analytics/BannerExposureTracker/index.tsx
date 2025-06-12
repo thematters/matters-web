@@ -11,7 +11,6 @@ export const BannerExposureTracker = ({
   title,
   link,
   lang,
-  horizontal = false,
 }: {
   id: string
   location: number | string
@@ -20,7 +19,6 @@ export const BannerExposureTracker = ({
   title: string
   link: string
   lang: Language
-  horizontal?: boolean
 }) => {
   const [timerId, setTimerId] = useState<number>()
   const [recorded, setRecorded] = useState(false)

@@ -139,13 +139,10 @@ const BaseArticleDetail = ({
   }
 
   // Quote comment from Text Selection Popover
-  useEventListener(
-    OPEN_COMMENT_LIST_DRAWER,
-    (payload: { [key: string]: any }) => {
-      setCommentDrawerStep('commentList')
-      setIsOpenComment(true)
-    }
-  )
+  useEventListener(OPEN_COMMENT_LIST_DRAWER, () => {
+    setCommentDrawerStep('commentList')
+    setIsOpenComment(true)
+  })
   // Donation
   const [isOpenDonationDrawer, setIsOpenDonationDrawer] = useState(false)
   const toggleDonationDrawer = () => {
@@ -331,7 +328,6 @@ const BaseArticleDetail = ({
         {isSensitive && (
           <DynamicSensitiveWall
             sensitiveByAuthor={article.sensitiveByAuthor}
-            sensitiveByAdmin={article.sensitiveByAdmin}
             expandAll={() => setIsSensitive(false)}
           />
         )}
@@ -391,10 +387,7 @@ const BaseArticleDetail = ({
 
         {collectionCount > 0 && (
           <section className={styles.block}>
-            <DynamicCollection
-              article={article}
-              collectionCount={collectionCount}
-            />
+            <DynamicCollection article={article} />
           </section>
         )}
 

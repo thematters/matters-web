@@ -1,9 +1,10 @@
+import { ApolloError } from '@apollo/client'
 import { Editor } from '@matters/matters-editor'
 import classNames from 'classnames'
 import { useContext, useEffect, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { ReactComponent as IconTimes } from '@/public/static/icons/24px/times.svg'
+import IconTimes from '@/public/static/icons/24px/times.svg'
 import { CLEAR_MOMENT_FORM, MAX_MOMENT_CONTENT_LENGTH } from '~/common/enums'
 import {
   formStorage,
@@ -116,7 +117,7 @@ const Edit = () => {
       window.dispatchEvent(new CustomEvent(CLEAR_MOMENT_FORM))
     } catch (error) {
       setSubmitting(false)
-      const [, codes] = parseFormSubmitErrors(error as any)
+      const [, codes] = parseFormSubmitErrors(error as ApolloError)
       codes.forEach((code) => {
         if (code === 'ACTION_LIMIT_EXCEEDED') {
           toast.success({

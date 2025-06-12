@@ -1,8 +1,8 @@
 import gql from 'graphql-tag'
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconPin } from '@/public/static/icons/24px/pin.svg'
-import { ReactComponent as IconUnpin } from '@/public/static/icons/24px/unpin.svg'
+import IconPin from '@/public/static/icons/24px/pin.svg'
+import IconUnpin from '@/public/static/icons/24px/unpin.svg'
 import { ERROR_CODES } from '~/common/enums'
 import { Icon, Menu, toast, useMutation } from '~/components'
 import { PinButtonArticleFragment, TogglePinMutation } from '~/gql/graphql'
@@ -51,7 +51,8 @@ const PinButton = ({ article }: PinButtonProps) => {
               if (article.pinned) {
                 // Unpin: remove from pinnedWorks
                 return existingPinnedWorks.filter(
-                  (work: any) => readField('id', work) !== article.id
+                  (work: PinButtonArticleFragment) =>
+                    readField('id', work) !== article.id
                 )
               } else {
                 // Pin: add to pinnedWorks

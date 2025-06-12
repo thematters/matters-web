@@ -5,7 +5,7 @@ import { KEYVALUE } from '~/common/enums'
 import { isUrl } from '~/common/utils'
 
 const Input: React.FC<NodeViewProps> = (props) => {
-  const inputRef: React.RefObject<any> = useRef(null)
+  const inputRef: React.RefObject<HTMLInputElement> = useRef(null)
 
   const { placeholder } = props.node.attrs
 
@@ -16,7 +16,9 @@ const Input: React.FC<NodeViewProps> = (props) => {
   }) => {
     try {
       props.deleteNode()
-    } catch (e) {}
+    } catch {
+      // do nothing
+    }
 
     // restore paragraph node
     if (isRestoreParagraph) {
@@ -31,7 +33,7 @@ const Input: React.FC<NodeViewProps> = (props) => {
   useEffect(() => {
     if (inputRef) {
       setTimeout(() => {
-        inputRef.current.focus()
+        inputRef.current?.focus()
       }, 0)
     }
   }, [])

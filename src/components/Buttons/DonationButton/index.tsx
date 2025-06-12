@@ -1,6 +1,6 @@
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { ReactComponent as IconMoney } from '@/public/static/icons/24px/money.svg'
+import IconMoney from '@/public/static/icons/24px/money.svg'
 import { TEST_ID } from '~/common/enums'
 import { Button, Icon, TextIcon } from '~/components'
 

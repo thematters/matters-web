@@ -236,9 +236,7 @@ export const UserProfile = () => {
                 )}
               </BadgesDialog>
 
-              {user?.info.ethAddress && (
-                <DynamicWalletLabel user={user} isMe={isMe} />
-              )}
+              {user?.info.ethAddress && <DynamicWalletLabel user={user} />}
             </section>
 
             <section className={styles.username}>

@@ -55,11 +55,12 @@ export const useAuthorsRecommendation = ({
     )
     const random = Math.floor(Math.min(randomMaxSize, size) * Math.random())
 
-    lastFetchRandom &&
+    if (lastFetchRandom) {
       client.cache.modify({
         id: client.cache.identify(lastFetchRandom.lastFetchRandom),
         fields: { [cacheField]: () => random },
       })
+    }
   }
 
   return {

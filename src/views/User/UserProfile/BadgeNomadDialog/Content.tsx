@@ -1,10 +1,10 @@
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconLeft } from '@/public/static/icons/24px/left.svg'
-import { ReactComponent as Nomad1Background } from '@/public/static/images/badge-nomad1-background.svg'
-import { ReactComponent as Nomad2Background } from '@/public/static/images/badge-nomad2-background.svg'
-import { ReactComponent as Nomad3Background } from '@/public/static/images/badge-nomad3-background.svg'
-import { ReactComponent as Nomad4Background } from '@/public/static/images/badge-nomad4-background.svg'
+import IconLeft from '@/public/static/icons/24px/left.svg'
+import IconNomad1Background from '@/public/static/images/badge-nomad1-background.svg'
+import IconNomad2Background from '@/public/static/images/badge-nomad2-background.svg'
+import IconNomad3Background from '@/public/static/images/badge-nomad3-background.svg'
+import IconNomad4Background from '@/public/static/images/badge-nomad4-background.svg'
 import { URL_USER_PROFILE } from '~/common/enums'
 import { toPath } from '~/common/utils'
 import { Button, CopyToClipboard, Dialog, Icon, useRoute } from '~/components'
@@ -54,13 +54,13 @@ const BadgeNomadDialogContent = ({
         <section className={styles.container}>
           <section className={styles.badgeIcon}>
             {nomadBadgeLevel === 4 ? (
-              <Nomad4Background />
+              <IconNomad4Background />
             ) : nomadBadgeLevel === 3 ? (
-              <Nomad3Background />
+              <IconNomad3Background />
             ) : nomadBadgeLevel === 2 ? (
-              <Nomad2Background />
+              <IconNomad2Background />
             ) : (
-              <Nomad1Background />
+              <IconNomad1Background />
             )}
           </section>
 

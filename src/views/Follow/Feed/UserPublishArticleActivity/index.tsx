@@ -5,9 +5,7 @@ import { UserPublishArticleActivityFragment } from '~/gql/graphql'
 import { fragments } from './gql'
 
 const UserPublishArticleActivity = ({
-  actor,
   nodeArticle: node,
-  createdAt,
   location,
   __typename,
 }: UserPublishArticleActivityFragment & { location: number }) => (

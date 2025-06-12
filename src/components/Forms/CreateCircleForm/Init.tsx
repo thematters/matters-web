@@ -1,6 +1,7 @@
+import { ApolloError } from '@apollo/client'
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
-import { useRef } from 'react'
+import { useId, useRef } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import {
@@ -45,10 +46,10 @@ const Init: React.FC<FormProps> = ({
   const [create] = useMutation<PutCircleMutation>(PUT_CIRCLE, undefined, {
     showToast: false,
   })
-  const inputRef: React.RefObject<any> | null = useRef(null)
+  const inputRef: React.RefObject<HTMLInputElement> | null = useRef(null)
   // const isInDialog = purpose === 'dialog'
   const isInPage = purpose === 'page'
-  const formId = 'create-circle-init-form'
+  const formId = useId()
 
   const {
     values,
@@ -93,7 +94,7 @@ const Init: React.FC<FormProps> = ({
       } catch (error) {
         setSubmitting(false)
 
-        const [messages, codes] = parseFormSubmitErrors(error as any)
+        const [messages, codes] = parseFormSubmitErrors(error as ApolloError)
         codes.forEach((code) => {
           if (code === 'NAME_EXISTS') {
             setFieldError(
@@ -210,7 +211,7 @@ const Init: React.FC<FormProps> = ({
 
           // remove extra left pad 0
           if (inputRef.current) {
-            inputRef.current.value = sanitizedAmount
+            inputRef.current.value = sanitizedAmount.toString()
           }
           setFieldValue('amount', sanitizedAmount)
         }}

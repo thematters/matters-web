@@ -15,9 +15,10 @@ const PageViewTracker = () => {
 
   // identify views from browser or pwa
   const detectMode = () => {
-    const navigator = window?.navigator as any
+    const navigator = window?.navigator
     const media = '(display-mode: standalone)'
-    return navigator?.standalone || window?.matchMedia(media).matches
+    return (navigator as Navigator & { standalone?: boolean })?.standalone ||
+      window?.matchMedia(media).matches
       ? 'standalone'
       : 'browser'
   }

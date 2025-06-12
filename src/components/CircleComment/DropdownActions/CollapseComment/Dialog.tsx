@@ -13,6 +13,7 @@ import {
 import {
   CircleCommentDropdownActionsCommentPublicFragment,
   CollapseCommentMutation,
+  CommentState,
 } from '~/gql/graphql'
 
 const COLLAPSE_COMMENT = gql`
@@ -46,7 +47,7 @@ const CollapseCommentDialog = ({
         updateCommentsState: [
           {
             id: commentId,
-            state: 'collapsed' as any,
+            state: CommentState.Collapsed,
             __typename: 'Comment',
           },
         ],

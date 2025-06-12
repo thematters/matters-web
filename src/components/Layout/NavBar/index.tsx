@@ -1,10 +1,10 @@
 import { useContext } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { ReactComponent as IconNavHome } from '@/public/static/icons/24px/nav-home.svg'
-import { ReactComponent as IconNavHomeActive } from '@/public/static/icons/24px/nav-home-active.svg'
-import { ReactComponent as IconNavSearch } from '@/public/static/icons/24px/nav-search.svg'
-import { ReactComponent as IconNavSearchActive } from '@/public/static/icons/24px/nav-search-active.svg'
+import IconNavHome from '@/public/static/icons/24px/nav-home.svg'
+import IconNavHomeActive from '@/public/static/icons/24px/nav-home-active.svg'
+import IconNavSearch from '@/public/static/icons/24px/nav-search.svg'
+import IconNavSearchActive from '@/public/static/icons/24px/nav-search-active.svg'
 import { PATHS } from '~/common/enums'
 import { toPath } from '~/common/utils'
 import {

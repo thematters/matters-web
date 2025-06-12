@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 
 import { TEST_ID } from '~/common/enums'
-import { cleanup, render, screen } from '~/common/utils/test'
+import { cleanup, fireEvent, render, screen } from '~/common/utils/test'
 import { ArticleState } from '~/gql/graphql'
 import { MOCK_ARTILCE } from '~/stories/mocks'
 
@@ -16,7 +16,7 @@ describe('<ArticleDigest/DropdownActions>', () => {
     expect($button).toBeInTheDocument()
 
     // open menu
-    $button.click()
+    fireEvent.click($button)
     const $menu = screen.getByRole('menu')
     expect($menu).toBeInTheDocument()
 
@@ -24,7 +24,7 @@ describe('<ArticleDigest/DropdownActions>', () => {
     expect($shareButton).toBeInTheDocument()
 
     // open dialog
-    $shareButton.click()
+    fireEvent.click($shareButton)
     const $shareDialog = screen.getByTestId(TEST_ID.DIALOG_SHARE)
     expect($shareDialog).toBeInTheDocument()
   })
@@ -33,7 +33,7 @@ describe('<ArticleDigest/DropdownActions>', () => {
     render(<DropdownActions article={MOCK_ARTILCE} inCard />)
     const $button = screen.getByLabelText('More Actions')
     expect($button).toBeInTheDocument()
-    $button.click()
+    fireEvent.click($button)
     const $menu = screen.getByRole('menu')
     expect($menu).toBeInTheDocument()
 
@@ -51,7 +51,7 @@ describe('<ArticleDigest/DropdownActions>', () => {
     expect($button).toBeInTheDocument()
 
     // open menu
-    $button.click()
+    fireEvent.click($button)
     const $menu = screen.getByRole('menu')
     expect($menu).toBeInTheDocument()
 
@@ -69,7 +69,7 @@ describe('<ArticleDigest/DropdownActions>', () => {
     expect($button).toBeInTheDocument()
 
     // open menu
-    $button.click()
+    fireEvent.click($button)
     const $menu = screen.getByRole('menu')
     expect($menu).toBeInTheDocument()
 
@@ -84,7 +84,7 @@ describe('<ArticleDigest/DropdownActions>', () => {
     render(<DropdownActions article={MOCK_ARTILCE} inUserArticles={false} />)
     const $button = screen.getByLabelText('More Actions')
     expect($button).toBeInTheDocument()
-    $button.click()
+    fireEvent.click($button)
     const $stickyButton = screen.queryByRole('menuitem', {
       name: /pin to profile/i,
     })
@@ -107,7 +107,7 @@ describe('<ArticleDigest/DropdownActions>', () => {
 
     const $button2 = screen.getByLabelText('More Actions')
     expect($button2).toBeInTheDocument()
-    $button2.click()
+    fireEvent.click($button2)
     const $menu2 = screen.getByRole('menu')
     expect($menu2).toBeInTheDocument()
     const $stickyButton2 = screen.queryByRole('menuitem', {
@@ -128,7 +128,7 @@ describe('<ArticleDigest/DropdownActions>', () => {
     )
     const $button3 = screen.getByLabelText('More Actions')
     expect($button3).toBeInTheDocument()
-    $button3.click()
+    fireEvent.click($button3)
     const $stickyButton3 = screen.queryByRole('menuitem', {
       name: /pin to profile/i,
     })
@@ -143,7 +143,7 @@ describe('<ArticleDigest/DropdownActions>', () => {
     expect($button).toBeInTheDocument()
 
     // open menu
-    $button.click()
+    fireEvent.click($button)
     const $menu = screen.getByRole('menu')
     expect($menu).toBeInTheDocument()
 
@@ -161,7 +161,7 @@ describe('<ArticleDigest/DropdownActions>', () => {
     expect($button).toBeInTheDocument()
 
     // open menu
-    $button.click()
+    fireEvent.click($button)
     const $menu = screen.getByRole('menu')
     expect($menu).toBeInTheDocument()
 
@@ -180,7 +180,7 @@ describe('<ArticleDigest/DropdownActions>', () => {
     expect($button).toBeInTheDocument()
 
     // open menu
-    $button.click()
+    fireEvent.click($button)
     const $menu = screen.getByRole('menu')
     expect($menu).toBeInTheDocument()
 
@@ -197,7 +197,7 @@ describe('<ArticleDigest/DropdownActions>', () => {
     expect($button).toBeInTheDocument()
 
     // open menu
-    $button.click()
+    fireEvent.click($button)
     const $menu = screen.getByRole('menu')
     expect($menu).toBeInTheDocument()
   })
@@ -223,7 +223,7 @@ describe('<ArticleDigest/DropdownActions>', () => {
     expect($button).toBeInTheDocument()
 
     // open menu
-    $button.click()
+    fireEvent.click($button)
     const $menu = screen.getByRole('menu')
     expect($menu).toBeInTheDocument()
 

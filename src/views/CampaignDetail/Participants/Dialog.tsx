@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic'
 import { useIntl } from 'react-intl'
 
-import { ReactComponent as IconTimes } from '@/public/static/icons/24px/times.svg'
+import IconTimes from '@/public/static/icons/24px/times.svg'
 import { Dialog, Icon, SpinnerBlock, useDialogSwitch } from '~/components'
 
 import styles from './styles.module.css'

@@ -1,6 +1,6 @@
 import { useIntl } from 'react-intl'
 
-import IMAGE_BANNER from '@/public/static/images/migration-banner.svg'
+import IMAGE_BANNER from '@/public/static/images/migration-banner.svg?url'
 import { ShareButton, TextIcon, Translate } from '~/components'
 
 import layoutStyles from '../../About/layout.module.css'
@@ -10,7 +10,7 @@ const Banner = () => {
   const intl = useIntl()
 
   const style = {
-    '--migration-banner-bg': `url(${IMAGE_BANNER})`,
+    '--migration-banner-bg': `url(${IMAGE_BANNER.src})`,
   } as React.CSSProperties
 
   return (
@@ -45,7 +45,6 @@ const Banner = () => {
             hasIcon={false}
             size={['7rem', '2.5rem']}
             spacing={[0, 0]}
-            inCard={false}
           >
             <TextIcon color="white" size={14} weight="medium">
               <Translate

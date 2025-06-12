@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest'
 
-import { render, screen } from '~/common/utils/test'
+import { fireEvent, render, screen } from '~/common/utils/test'
 import { Form } from '~/components'
 
 const options = [
@@ -14,8 +14,8 @@ const setup = ({ disabled }: { disabled: boolean }) => {
   const name = 'amount'
   const step = 1
   const hint = 'This is a hint'
-  const fieldId = `field-${name}`
-  const fieldMsgId = `field-msg-${name}`
+  const fieldId = `__use_id__`
+  const fieldMsgId = `__use_id__-msg`
 
   const handleOnChange = vi.fn()
   const handleOnBlur = vi.fn()
@@ -61,9 +61,9 @@ describe('<RadioGroup>', () => {
     expect(screen.getByText(hint)).toBeInTheDocument()
 
     // check and switch
-    $radios[0].click()
+    fireEvent.click($radios[0])
     expect($radios[0]).toBeChecked()
-    $radios[1].click()
+    fireEvent.click($radios[1])
     expect($radios[1]).toBeChecked()
     expect($radios[0]).not.toBeChecked()
   })

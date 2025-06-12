@@ -1,8 +1,8 @@
 import { useQuery } from '@apollo/client'
 import gql from 'graphql-tag'
 
-import { ReactComponent as IconLTime } from '@/public/static/icons/24px/l-time.svg'
-import { ReactComponent as IconReset } from '@/public/static/icons/24px/reset.svg'
+import IconLTime from '@/public/static/icons/24px/l-time.svg'
+import IconReset from '@/public/static/icons/24px/reset.svg'
 import { Icon, Menu, Spinner } from '~/components'
 import { ArticleRecommendAdminQuery } from '~/gql/graphql'
 

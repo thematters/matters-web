@@ -1,6 +1,7 @@
-import { VisuallyHidden } from '@reach/visually-hidden'
+import { useId } from 'react'
+import { useVisuallyHidden } from 'react-aria'
 
-import { ReactComponent as IconCircleCheckFill } from '@/public/static/icons/24px/circle-check-fill.svg'
+import IconCircleCheckFill from '@/public/static/icons/24px/circle-check-fill.svg'
 import { Icon, TextIcon } from '~/components'
 
 import Field, { FieldProps } from '../Field'
@@ -26,8 +27,10 @@ const CheckBox: React.FC<CheckBoxProps> = ({
 
   ...inputProps
 }) => {
-  const fieldId = `field-${name}`
-  const fieldMsgId = `field-msg-${name}`
+  const fieldId = useId()
+  const fieldMsgId = `${fieldId}-msg-${name}`
+
+  const { visuallyHiddenProps } = useVisuallyHidden()
 
   return (
     <Field spacingTop={spacingTop} spacingBottom={spacingBottom}>
@@ -46,15 +49,14 @@ const CheckBox: React.FC<CheckBoxProps> = ({
           <span>{hint}</span>
         </TextIcon>
 
-        <VisuallyHidden>
-          <input
-            {...inputProps}
-            id={fieldId}
-            type="checkbox"
-            aria-describedby={fieldMsgId}
-            name={name}
-          />
-        </VisuallyHidden>
+        <input
+          {...inputProps}
+          id={fieldId}
+          type="checkbox"
+          aria-describedby={fieldMsgId}
+          name={name}
+          {...visuallyHiddenProps}
+        />
       </label>
 
       <Field.Footer

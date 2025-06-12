@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { useContext } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { ReactComponent as IconCollection } from '@/public/static/icons/24px/collection.svg'
+import IconCollection from '@/public/static/icons/24px/collection.svg'
 import {
   ERROR_CODES,
   ERROR_MESSAGES,

@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 
 import { TEST_ID } from '~/common/enums'
-import { render, screen } from '~/common/utils/test'
+import { fireEvent, render, screen } from '~/common/utils/test'
 import { SignUpButton } from '~/components'
 
 describe('<SignUpButton>', () => {
@@ -11,7 +11,7 @@ describe('<SignUpButton>', () => {
     const button = screen.getByText('Register')
     expect(button).toBeDefined()
 
-    button.click()
+    fireEvent.click(button)
     const $authDialog = screen.getByTestId(TEST_ID.DIALOG_AUTH)
     expect($authDialog).toBeDefined()
   })
@@ -22,7 +22,7 @@ describe('<SignUpButton>', () => {
     const $button = screen.getByText('Click Me to Register')
     expect($button).toBeDefined()
 
-    $button.click()
+    fireEvent.click($button)
     const $authDialog = screen.getByTestId(TEST_ID.DIALOG_AUTH)
     expect($authDialog).toBeDefined()
   })

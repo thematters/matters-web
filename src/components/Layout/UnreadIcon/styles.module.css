@@ -13,8 +13,8 @@
     content: '';
     background: var(--color-new-palette-green);
     border-radius: 50%;
-    transition-property: transform;
     transform: scale(0);
+    transition-property: transform;
   }
 
   &.unread {

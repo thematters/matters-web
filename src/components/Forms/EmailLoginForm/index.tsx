@@ -1,10 +1,11 @@
+import { ApolloError } from '@apollo/client'
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
-import { useContext, useRef, useState } from 'react'
+import { useContext, useId, useRef, useState } from 'react'
 import baseToast from 'react-hot-toast'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { ReactComponent as IconLeft } from '@/public/static/icons/24px/left.svg'
+import IconLeft from '@/public/static/icons/24px/left.svg'
 import {
   COOKIE_LANGUAGE,
   COOKIE_TOKEN_NAME,
@@ -79,7 +80,6 @@ export const EmailLoginForm: React.FC<FormProps> = ({
   closeDialog,
   authFeedType,
   setAuthFeedType,
-  back,
 }) => {
   const [login, { client }] = useMutation<EmailLoginMutation>(
     EMAIL_LOGIN,
@@ -102,7 +102,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
     undefined
 
   const isInPage = purpose === 'page'
-  const formId = 'email-login-form'
+  const formId = useId()
 
   const isNormal = authFeedType === 'normal'
   const isWallet = authFeedType === 'wallet'
@@ -139,7 +139,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
     },
     validateOnBlur: false,
     validateOnChange: false,
-    validate: ({ email, password }) =>
+    validate: ({ email }) =>
       _pickBy({
         email: validateEmail(email, intl, { allowPlusSign: true }),
       }),
@@ -180,7 +180,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
           router.push(PATHS.HOME)
         }
       } catch (error) {
-        const [messages, codes] = parseFormSubmitErrors(error as any)
+        const [messages, codes] = parseFormSubmitErrors(error as ApolloError)
         setErrorCode(codes[0])
         setFieldError('email', '')
 
@@ -260,7 +260,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
         passwordRef.current.focus()
       }
     } catch (error) {
-      const [, codes] = parseFormSubmitErrors(error as any)
+      const [, codes] = parseFormSubmitErrors(error as ApolloError)
       codes.forEach((code) => {
         if (code.includes(ERROR_CODES.FORBIDDEN_BY_STATE)) {
           setFieldError(

@@ -25,12 +25,12 @@ describe('<Dropdown>', () => {
 
     // show dropdown
     const $openBtn = screen.getByRole('button', { name: 'Open' })
-    $openBtn.click()
+    fireEvent.click($openBtn)
     const $openedBtn = screen.getByRole('button', { name: 'Opened' })
     expect($openedBtn).toBeInTheDocument()
 
     // click dropdown content
-    $openedBtn.click()
+    fireEvent.click($openedBtn)
     expect(handleClick).toHaveBeenCalled()
 
     // click outside to hide dropdown
@@ -62,12 +62,12 @@ describe('<Dropdown>', () => {
 
     // open dropdown
     const $openBtn = screen.getByRole('button', { name: 'Open' })
-    $openBtn.click()
+    fireEvent.click($openBtn)
     const $openedBtn = screen.getByRole('button', { name: 'Opened' })
     expect($openedBtn).toBeInTheDocument()
 
     // click content and hide dropdown
-    $openedBtn.click()
+    fireEvent.click($openedBtn)
     expect(handleClick).toHaveBeenCalled()
     expect(
       screen.queryByRole('button', { name: 'Opened' })

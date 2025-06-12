@@ -1,18 +1,21 @@
 import { MockedProvider } from '@apollo/client/testing'
-import { ComponentMeta, ComponentStory } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react'
 import React from 'react'
 
 import SegmentedTabs from './Tabs'
 
-export default {
+const meta = {
   title: 'Components/SegmentedTabs',
   component: SegmentedTabs,
-} as ComponentMeta<typeof SegmentedTabs>
+} satisfies Meta<typeof SegmentedTabs>
 
-const Template: ComponentStory<typeof SegmentedTabs> = () => (
-  <MockedProvider>
-    <SegmentedTabs />
-  </MockedProvider>
-)
+export default meta
+type Story = StoryObj<typeof meta>
 
-export const Default = Template.bind({})
+export const Default: Story = {
+  render: () => (
+    <MockedProvider>
+      <SegmentedTabs />
+    </MockedProvider>
+  ),
+}

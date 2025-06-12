@@ -12,7 +12,6 @@ interface PayoutDialogContentProps {
   back: () => void
   currStep: Step
   prevStep: Step
-  hasStripeAccount: boolean
 }
 
 const DynamicPaymentResetPasswordForm = dynamic(
@@ -33,7 +32,6 @@ const DynamicConnectStripeAccountForm = dynamic(
 )
 
 const PayoutDialogContent = ({
-  hasStripeAccount,
   forward,
   back,
   currStep,

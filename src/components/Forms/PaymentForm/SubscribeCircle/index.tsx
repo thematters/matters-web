@@ -1,6 +1,4 @@
 import { useQuery } from '@apollo/client'
-import _get from 'lodash/get'
-import _pickBy from 'lodash/pickBy'
 import { useEffect, useState } from 'react'
 
 import { Dialog, SpinnerBlock } from '~/components'

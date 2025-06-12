@@ -2,7 +2,7 @@ import gql from 'graphql-tag'
 import { useContext } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { ReactComponent as IconMoney } from '@/public/static/icons/24px/money.svg'
+import IconMoney from '@/public/static/icons/24px/money.svg'
 import {
   ERROR_CODES,
   ERROR_MESSAGES,

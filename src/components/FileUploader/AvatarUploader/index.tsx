@@ -1,10 +1,10 @@
-import { VisuallyHidden } from '@reach/visually-hidden'
 import classNames from 'classnames'
 import _omit from 'lodash/omit'
-import { useEffect, useState } from 'react'
+import { useEffect, useId, useState } from 'react'
+import { useVisuallyHidden } from 'react-aria'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { ReactComponent as IconCamera } from '@/public/static/icons/24px/camera.svg'
+import IconCamera from '@/public/static/icons/24px/camera.svg'
 import {
   ACCEPTED_UPLOAD_IMAGE_TYPES,
   ASSET_TYPE,
@@ -75,7 +75,9 @@ export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
   const [localSrc, setLocalSrc] = useState<string | undefined>(undefined)
 
   const acceptTypes = ACCEPTED_UPLOAD_IMAGE_TYPES.join(',')
-  const fieldId = 'avatar-upload-form'
+  const fieldId = useId()
+
+  const { visuallyHiddenProps } = useVisuallyHidden()
 
   useEffect(() => {
     return () => {
@@ -142,7 +144,7 @@ export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
       } else {
         throw new Error()
       }
-    } catch (e) {
+    } catch {
       toast.error({
         message: (
           <FormattedMessage
@@ -182,20 +184,19 @@ export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
         )}
       </div>
 
-      <VisuallyHidden>
-        <input
-          id={fieldId}
-          type="file"
-          name="file"
-          aria-label={intl.formatMessage({
-            defaultMessage: 'Upload avatar',
-            id: 'mqa6CF',
-          })}
-          accept={acceptTypes}
-          multiple={false}
-          onChange={handleChange}
-        />
-      </VisuallyHidden>
+      <input
+        id={fieldId}
+        type="file"
+        name="file"
+        aria-label={intl.formatMessage({
+          defaultMessage: 'Upload avatar',
+          id: 'mqa6CF',
+        })}
+        accept={acceptTypes}
+        multiple={false}
+        onChange={handleChange}
+        {...visuallyHiddenProps}
+      />
     </label>
   )
 }

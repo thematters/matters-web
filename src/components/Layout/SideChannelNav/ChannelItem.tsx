@@ -1,10 +1,11 @@
 import classnames from 'classnames'
-import { useContext, useLayoutEffect } from 'react'
-import { useRef, useState } from 'react'
+import Link from 'next/link'
+import { useContext } from 'react'
+import { useRef } from 'react'
 
 import { CHANNEL_PATH_TYPES } from '~/common/enums'
 import { analytics } from '~/common/utils'
-import { LanguageContext, LinkWrapper, Tooltip } from '~/components'
+import { LanguageContext, Tooltip } from '~/components'
 import { useRoute } from '~/components/Hook/useRoute'
 import { RootQueryPrivateQuery } from '~/gql/graphql'
 
@@ -16,30 +17,9 @@ type ChannelItemProps = {
 
 const ChannelItem = ({ channel }: ChannelItemProps) => {
   const { getQuery } = useRoute()
-  const { lang } = useContext(LanguageContext)
-
   const shortHash = getQuery('shortHash')
-
-  const [lineClampable, setLineClampable] = useState(false)
-  const [firstRender, setFirstRender] = useState(true)
-  const node: React.RefObject<any> | null = useRef(null)
-
-  useLayoutEffect(() => {
-    if (!node || !node.current) {
-      return
-    }
-    let height = node.current.clientHeight || 0
-    const computedStyle = window.getComputedStyle(node.current, null)
-    height -=
-      parseInt(computedStyle.paddingTop, 10) +
-      parseInt(computedStyle.paddingBottom, 10)
-    const lineHeight = computedStyle.getPropertyValue('line-height')
-    const lines = Math.max(Math.ceil(height / parseInt(lineHeight, 10)), 0)
-    if (lines > 2) {
-      setLineClampable(true)
-    }
-    setFirstRender(false)
-  }, [])
+  const { lang } = useContext(LanguageContext)
+  const node: React.RefObject<HTMLAnchorElement> | null = useRef(null)
 
   if (
     !channel ||
@@ -68,19 +48,17 @@ const ChannelItem = ({ channel }: ChannelItemProps) => {
     <Tooltip
       content={channelName}
       zIndex={1000}
-      placement="auto-start"
+      placement="right"
       delay={[1000, null]}
       touch={['hold', 1000]}
-      disabled={!lineClampable}
     >
-      <LinkWrapper
+      <Link
         href={`/${pathType}/${channel.shortHash}`}
         ref={node}
         className={classnames({
           [styles.item]: true,
-          [styles.selectedChannel]: shortHash === channel.shortHash,
-          [styles.temporaryChannel]: isWritingChallenge || isCurationChannel,
-          [styles.lineClampable]: !firstRender && lineClampable,
+          [styles.selected]: shortHash === channel.shortHash,
+          [styles.temporary]: isWritingChallenge || isCurationChannel,
         })}
         onClick={() => {
           analytics.trackEvent('click_button', {
@@ -89,10 +67,10 @@ const ChannelItem = ({ channel }: ChannelItemProps) => {
           })
         }}
       >
-        <span>
-          <span className={styles.channelName}>{channelName}</span>
+        <span className={styles.name}>
+          <span className={styles.inner}>{channelName}</span>
         </span>
-      </LinkWrapper>
+      </Link>
     </Tooltip>
   )
 }

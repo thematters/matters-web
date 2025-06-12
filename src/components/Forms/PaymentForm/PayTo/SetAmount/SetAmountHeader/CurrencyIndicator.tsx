@@ -1,6 +1,6 @@
-import { ReactComponent as IconFiatCurrency } from '@/public/static/icons/24px/fiat-currency.svg'
-import { ReactComponent as IconLikeCoin } from '@/public/static/icons/24px/likecoin.svg'
-import { ReactComponent as IconTether } from '@/public/static/icons/24px/tether.svg'
+import IconFiatCurrency from '@/public/static/icons/24px/fiat-currency.svg'
+import IconLikeCoin from '@/public/static/icons/24px/likecoin.svg'
+import IconTether from '@/public/static/icons/24px/tether.svg'
 import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
 import { Button, Icon, TextIcon, Translate } from '~/components'
 

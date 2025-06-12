@@ -11,9 +11,9 @@ const mockTrackEvent = vi.hoisted(() => vi.fn())
 vi.mock('~/common/utils', async () => {
   const actual = await vi.importActual('~/common/utils')
   return {
-    ...(actual as any),
+    ...(actual as Record<string, unknown>),
     analytics: {
-      ...((actual as any).analytics || {}),
+      ...((actual as Record<string, unknown>).analytics || {}),
       trackEvent: mockTrackEvent,
     },
   }

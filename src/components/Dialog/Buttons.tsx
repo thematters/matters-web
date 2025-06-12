@@ -40,13 +40,6 @@ export const TextButton: React.FC<DialogTextButtonProps> = ({
         textActiveColor: 'redDark',
       }
       break
-    case 'red':
-      buttonProps = {
-        ...buttonProps,
-        textColor: 'black',
-        textActiveColor: 'greyDarker',
-      }
-      break
   }
 
   return (
@@ -72,9 +65,10 @@ export type DialogRoundedButtonProps = {
   loading?: boolean
 } & ButtonProps
 
-export const RoundedButton: React.FC<
+export const RoundedButton = forwardRef<
+  HTMLButtonElement | HTMLSpanElement | HTMLAnchorElement,
   React.PropsWithChildren<DialogRoundedButtonProps>
-> = forwardRef(
+>(
   (
     {
       text,

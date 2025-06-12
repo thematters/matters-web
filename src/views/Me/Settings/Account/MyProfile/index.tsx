@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconRight } from '@/public/static/icons/24px/right.svg'
+import IconRight from '@/public/static/icons/24px/right.svg'
 import {
   Avatar,
   EditProfileDialog,

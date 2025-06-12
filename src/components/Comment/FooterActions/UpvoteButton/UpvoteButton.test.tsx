@@ -1,13 +1,13 @@
 import { describe, expect, it, vi } from 'vitest'
 
-import { render, screen } from '~/common/utils/test'
+import { fireEvent, render, screen } from '~/common/utils/test'
 import { MOCK_COMMENT } from '~/stories/mocks'
 
 import UpvoteButton from './'
 
 describe('<Comment/FooterActions/UpvoteButton>', () => {
   it('should render a Comment/FooterActions/UpvoteButton', () => {
-    render(<UpvoteButton comment={MOCK_COMMENT} inCard />)
+    render(<UpvoteButton comment={MOCK_COMMENT} />)
 
     const $button = screen.getByRole('button', { name: 'Upvote' })
     expect($button).toBeInTheDocument()
@@ -19,26 +19,24 @@ describe('<Comment/FooterActions/UpvoteButton>', () => {
   it('should render a Comment/FooterActions/UpvoteButton with custom onClick', () => {
     const onClick = vi.fn()
 
-    render(<UpvoteButton comment={MOCK_COMMENT} onClick={onClick} inCard />)
+    render(<UpvoteButton comment={MOCK_COMMENT} onClick={onClick} />)
 
     const $button = screen.getByRole('button', { name: 'Upvote' })
     expect($button).toBeInTheDocument()
 
-    $button.click()
+    fireEvent.click($button)
     expect(onClick).toHaveBeenCalled()
   })
 
   it('should render a disabled Comment/FooterActions/UpvoteButton ', () => {
     const onClick = vi.fn()
 
-    render(
-      <UpvoteButton comment={MOCK_COMMENT} onClick={onClick} disabled inCard />
-    )
+    render(<UpvoteButton comment={MOCK_COMMENT} onClick={onClick} disabled />)
 
     const $button = screen.getByRole('button', { name: 'Upvote' })
     expect($button).toBeInTheDocument()
 
-    $button.click()
+    fireEvent.click($button)
     expect(onClick).not.toHaveBeenCalled()
   })
 })

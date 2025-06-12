@@ -1,7 +1,8 @@
+import Link from 'next/link'
 import React from 'react'
 
 import { toPath } from '~/common/utils'
-import { Card, CircleAvatar, DateTime, LinkWrapper } from '~/components'
+import { Card, CircleAvatar, DateTime } from '~/components'
 import { FollowingFeedCircleFragment } from '~/gql/graphql'
 
 import DropdownActions, { DropdownActionsControls } from '../DropdownActions'
@@ -12,7 +13,7 @@ export type CircleDigestFeedProps = {
   circle: FollowingFeedCircleFragment
   header?: React.ReactNode
   date: Date | string | number
-  onClick?: () => any
+  onClick?: () => void
 } & DropdownActionsControls
 
 const FeedCircle = ({
@@ -42,9 +43,9 @@ const FeedCircle = ({
       >
         <section className={styles.content}>
           <h3 className={styles.title}>
-            <LinkWrapper {...path} textActiveColor="green">
+            <Link {...path} className="u-link-active-green">
               {displayName}
-            </LinkWrapper>
+            </Link>
           </h3>
 
           {description && <p className={styles.description}>{description}</p>}

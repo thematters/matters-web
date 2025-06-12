@@ -1,21 +1,24 @@
 import { MockedProvider } from '@apollo/client/testing'
-import { ComponentMeta, ComponentStory } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react'
 import React from 'react'
 
 import NoticeList from './NoticeList'
 import styles from './styles.module.css'
 
-export default {
+const meta = {
   title: 'Components/Notice',
   component: NoticeList,
-} as ComponentMeta<typeof NoticeList>
+} satisfies Meta<typeof NoticeList>
 
-const Template: ComponentStory<typeof NoticeList> = (args) => (
-  <MockedProvider>
-    <div className={styles.container}>
-      <NoticeList {...(args as any)} />
-    </div>
-  </MockedProvider>
-)
+export default meta
+type Story = StoryObj<typeof meta>
 
-export const All = Template.bind({})
+export const All: Story = {
+  render: (args) => (
+    <MockedProvider>
+      <div className={styles.container}>
+        <NoticeList {...args} />
+      </div>
+    </MockedProvider>
+  ),
+}

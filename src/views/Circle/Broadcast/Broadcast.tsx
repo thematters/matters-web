@@ -1,6 +1,4 @@
 import jump from 'jump.js'
-import _differenceBy from 'lodash/differenceBy'
-import _get from 'lodash/get'
 import { useContext, useEffect } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
@@ -152,7 +150,7 @@ const CricleBroadcast = () => {
       } else {
         jumpToFragment()
       }
-    } catch (e) {
+    } catch {
       return
     }
   }, [circle?.id])

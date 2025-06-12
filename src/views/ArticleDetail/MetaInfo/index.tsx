@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconEdit } from '@/public/static/icons/24px/edit.svg'
+import IconEdit from '@/public/static/icons/24px/edit.svg'
 import { MAX_ARTICLE_REVISION_COUNT } from '~/common/enums'
 import { analytics, toPath } from '~/common/utils'
 import {
@@ -29,7 +29,7 @@ type MetaInfoProps = {
   translated: boolean
   translating: boolean
   canTranslate: boolean
-  toggleTranslate: () => any
+  toggleTranslate: () => void
   canReadFullContent: boolean
   editable?: boolean
 }
@@ -52,6 +52,7 @@ const MetaInfo = ({
   const isExceedRevision = article.revisionCount >= MAX_ARTICLE_REVISION_COUNT
 
   const { router, isInPath } = useRoute()
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { shortHash, ...qs } = router.query
   const isInArticleDetailHistory = isInPath('ARTICLE_DETAIL_HISTORY')
 

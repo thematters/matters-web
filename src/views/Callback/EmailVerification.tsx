@@ -71,7 +71,7 @@ const EmailVerification = () => {
           ),
           hasClose: false,
         })
-      } catch (error) {
+      } catch {
         setHasError(true)
       }
     })()

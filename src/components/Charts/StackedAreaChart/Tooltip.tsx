@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { bisector as d3Bisector, sum as d3Sum } from 'd3-array'
 import { select as d3Select } from 'd3-selection'
 import { useEffect, useRef, useState } from 'react'
@@ -56,8 +58,7 @@ const Tooltip: React.FC<TooltipProps> = ({
       interactive: false,
       allowHTML: true,
     })
-    // @ts-ignore
-    setTooltip(tippyInstance)
+    setTooltip(tippyInstance as any)
   }, [])
 
   const showTooltip = (event: MouseEvent | TouchEvent) => {

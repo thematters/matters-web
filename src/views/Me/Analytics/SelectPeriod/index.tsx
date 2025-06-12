@@ -1,6 +1,6 @@
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconDown } from '@/public/static/icons/24px/down.svg'
+import IconDown from '@/public/static/icons/24px/down.svg'
 import { Z_INDEX } from '~/common/enums'
 import { Button, Dropdown, Icon, Menu, TextIcon } from '~/components'
 
@@ -57,7 +57,7 @@ const SelectPeriod: React.FC<SelectProps> = ({ period, onChange }) => {
     },
   ]
 
-  const AnalyticsSelectContent = ({ dropdown }: { dropdown?: boolean }) => {
+  const AnalyticsSelectContent = () => {
     const isSevenDaysActive = period === options[0].value
     const isOneMonthActive = period === options[1].value
     const isThreeMonthsActive = period === options[2].value
@@ -92,10 +92,7 @@ const SelectPeriod: React.FC<SelectProps> = ({ period, onChange }) => {
     )
   }
   return (
-    <Dropdown
-      content={<AnalyticsSelectContent dropdown />}
-      zIndex={Z_INDEX.OVER_DIALOG}
-    >
+    <Dropdown content={<AnalyticsSelectContent />} zIndex={Z_INDEX.OVER_DIALOG}>
       {({ openDropdown, ref }) => (
         <Button
           onClick={openDropdown}

@@ -34,10 +34,10 @@
   flex-grow: 1;
   grid-area: description;
   margin-top: var(--sp8);
+  -webkit-line-clamp: 2;
   font-size: var(--text14);
   line-height: 1.375rem;
   color: var(--color-grey-dark);
-  -webkit-line-clamp: 2;
 }
 
 .cover {

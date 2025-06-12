@@ -1,33 +1,39 @@
 import { MockedProvider } from '@apollo/client/testing'
-import { ComponentMeta, ComponentStory } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react'
 import React from 'react'
 
 import { CircleDigest } from '~/components'
 
 import { MOCK_CIRCLE } from '../../mocks'
 
-export default {
+const meta = {
   title: 'Components/CircleDigest/Rich',
   component: CircleDigest.Rich,
-} as ComponentMeta<typeof CircleDigest.Rich>
+  decorators: [
+    (Story) => (
+      <MockedProvider>
+        <Story />
+      </MockedProvider>
+    ),
+  ],
+} satisfies Meta<typeof CircleDigest.Rich>
 
-const Template: ComponentStory<typeof CircleDigest.Rich> = (args) => (
-  <MockedProvider>
-    <CircleDigest.Rich {...args} />
-  </MockedProvider>
-)
+export default meta
+type Story = StoryObj<typeof meta>
 
-export const Default = Template.bind({})
-Default.args = {
-  circle: MOCK_CIRCLE,
-  hasFooter: true,
-  hasPrice: true,
+export const Default: Story = {
+  args: {
+    circle: MOCK_CIRCLE,
+    hasFooter: true,
+    hasPrice: true,
+  },
 }
 
-export const Simple = Template.bind({})
-Simple.args = {
-  circle: MOCK_CIRCLE,
-  hasFooter: false,
-  hasPrice: false,
-  hasOwner: false,
+export const Simple: Story = {
+  args: {
+    circle: MOCK_CIRCLE,
+    hasFooter: false,
+    hasPrice: false,
+    hasOwner: false,
+  },
 }

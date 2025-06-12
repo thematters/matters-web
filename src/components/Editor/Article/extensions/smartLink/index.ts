@@ -1,6 +1,5 @@
 import { type Editor, Extension, Range } from '@tiptap/core'
 import _debounce from 'lodash/debounce'
-import _uniq from 'lodash/uniq'
 
 import { INPUT_DEBOUNCE } from '~/common/enums'
 
@@ -40,7 +39,6 @@ const findAndReplace = ({
   editor,
   findRule,
   key,
-  type,
   replace,
 }: {
   editor: Editor

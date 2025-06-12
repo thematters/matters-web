@@ -42,8 +42,7 @@ const CountrySelect = (props: Omit<FormSelectProps<string>, 'options'>) => {
 describe('<Form.Select>', () => {
   it('should render a Select', async () => {
     const handleOnChange = vi.fn()
-    const name = 'name-test'
-    render(<CountrySelect name={name} onChange={handleOnChange} />)
+    render(<CountrySelect onChange={handleOnChange} />)
 
     const $select = screen.getByRole('button')
     expect($select).toBeInTheDocument()
@@ -53,7 +52,7 @@ describe('<Form.Select>', () => {
     fireEvent.click($select)
     const $list = screen.getByRole('listbox')
     expect($list).toBeInTheDocument()
-    expect($list).toHaveAttribute('aria-labelledby', `field-${name}`)
+    expect($list).toHaveAttribute('aria-labelledby', `__use_id__`)
 
     // options
     const $options = screen.getAllByRole('option')
@@ -71,7 +70,7 @@ describe('<Form.Select>', () => {
 
     // select another option
     expect(handleOnChange).not.toBeCalled()
-    $unselectedOptions[0].click()
+    fireEvent.click($unselectedOptions[0])
     expect(handleOnChange).toBeCalled()
 
     const $selectedOption = screen.getByRole('option', {

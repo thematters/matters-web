@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import { useEffect, useRef, useState } from 'react'
 
-import { ReactComponent as IconComment } from '@/public/static/icons/24px/comment.svg'
+import IconComment from '@/public/static/icons/24px/comment.svg'
 import { OPEN_COMMENT_LIST_DRAWER } from '~/common/enums'
 import { isElementInViewport } from '~/common/utils'
 import { analytics } from '~/common/utils'
@@ -31,7 +31,7 @@ const isSelectionCrossingParagraphs = (selection: Selection): boolean => {
 const isValidSelection = (
   selection: Selection | null,
   targetElement: HTMLElement,
-  ref: React.RefObject<HTMLDivElement>
+  ref: React.RefObject<HTMLDivElement | null>
 ): boolean => {
   if (!selection || !selection.toString() || !ref.current) {
     return false

@@ -1,9 +1,9 @@
 import classNames from 'classnames'
+import Link from 'next/link'
 import { FormattedMessage } from 'react-intl'
 
 import { TEST_ID } from '~/common/enums'
 import { capitalizeFirstLetter, toPath } from '~/common/utils'
-import { LinkWrapper } from '~/components'
 import { Avatar, AvatarProps, AvatarSize } from '~/components/Avatar'
 import { UserDigestMiniUserFragment } from '~/gql/graphql'
 
@@ -48,6 +48,7 @@ export const toUserDigestMiniPlaceholder = (displayName: string) =>
     displayName,
     status: null,
     avatar: null,
+
     liker: {
       __typename: 'Liker',
       civicLiker: false,
@@ -118,36 +119,39 @@ const Mini = ({
     userName: user.userName || '',
   })
 
-  return (
-    <LinkWrapper
-      {...path}
-      disabled={disabled}
-      onClick={onClick}
-      testId={TEST_ID.DIGEST_USER_MINI}
-    >
-      <section className={containerClasses}>
-        {hasAvatar && <Avatar size={avatarSize} user={user} />}
+  const Content = () => (
+    <section className={containerClasses}>
+      {hasAvatar && <Avatar size={avatarSize} user={user} />}
 
-        <span className={nameClasses}>
-          {hasDisplayName && (
-            <span
-              className={styles.displayname}
-              data-test-id={TEST_ID.DIGEST_USER_MINI_DISPLAY_NAME}
-            >
-              {user.displayName}
-            </span>
-          )}
-          {hasUserName && user.userName && (
-            <span
-              className={styles.username}
-              data-test-id={TEST_ID.DIGEST_USER_MINI_USER_NAME}
-            >
-              @{user.userName}
-            </span>
-          )}
-        </span>
-      </section>
-    </LinkWrapper>
+      <span className={nameClasses}>
+        {hasDisplayName && (
+          <span
+            className={styles.displayname}
+            data-test-id={TEST_ID.DIGEST_USER_MINI_DISPLAY_NAME}
+          >
+            {user.displayName}
+          </span>
+        )}
+        {hasUserName && user.userName && (
+          <span
+            className={styles.username}
+            data-test-id={TEST_ID.DIGEST_USER_MINI_USER_NAME}
+          >
+            @{user.userName}
+          </span>
+        )}
+      </span>
+    </section>
+  )
+
+  if (disabled) {
+    return <Content />
+  }
+
+  return (
+    <Link {...path} onClick={onClick} data-test-id={TEST_ID.DIGEST_USER_MINI}>
+      <Content />
+    </Link>
   )
 }
 

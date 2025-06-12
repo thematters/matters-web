@@ -156,7 +156,7 @@ const BaseTransactions = ({ currency, purpose }: BaseTransactionsProps) => {
   return (
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore} eof>
       <List>
-        {edges.map(({ node, cursor }) => (
+        {edges.map(({ node }) => (
           <List.Item key={node.id}>
             <Transaction tx={node} />
           </List.Item>

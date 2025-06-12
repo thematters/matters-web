@@ -1,6 +1,6 @@
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { ReactComponent as IconPlus } from '@/public/static/icons/24px/plus.svg'
+import IconPlus from '@/public/static/icons/24px/plus.svg'
 import { TEST_ID } from '~/common/enums'
 import { validateTagName } from '~/common/utils'
 import { Card, Icon, TextIcon, toast } from '~/components'

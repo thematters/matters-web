@@ -1,7 +1,4 @@
 import classNames from 'classnames'
-import _chunk from 'lodash/chunk'
-import _get from 'lodash/get'
-import _random from 'lodash/random'
 import { FormattedMessage } from 'react-intl'
 
 import { analytics } from '~/common/utils'
@@ -59,7 +56,7 @@ const RelatedTags: React.FC<RelatedTagsProps> = ({ tagId, inSidebar }) => {
       <RelatedTagsHeader />
       <section className={styles.tags}>
         {edges &&
-          edges?.map(({ node, cursor }, i) => (
+          edges?.map(({ node }, i) => (
             <ArticleTag
               key={node.id}
               tag={node}

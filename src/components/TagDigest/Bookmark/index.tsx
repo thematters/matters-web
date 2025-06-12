@@ -35,10 +35,8 @@ const Bookmark = ({ tag, onClick }: TagDigestBookmarkProps) => {
       className={styles.container}
       data-test-id={TEST_ID.DIGEST_TAG_BOOKMARK}
     >
-      <Link {...path} legacyBehavior onClick={onClick}>
-        <a className={styles.tag}>
-          <span className={styles.name}>{tag.content}</span>
-        </a>
+      <Link {...path} className={styles.tag} onClick={onClick}>
+        <span className={styles.name}>{tag.content}</span>
       </Link>
       <section className={styles.button}>
         <TagBookmarkButton tag={tag} />

@@ -1,7 +1,7 @@
 import { useIntl } from 'react-intl'
 
-import CIRCLE_DISCUSSION_WALL from '@/public/static/images/circle-discussion-wall.svg'
-import CIRCLE_DISCUSSION_WALL_SM from '@/public/static/images/circle-discussion-wall-sm.svg'
+import IMAGE_CIRCLE_DISCUSSION_WALL from '@/public/static/images/circle-discussion-wall.svg?url'
+import IMAGE_CIRCLE_DISCUSSION_WALL_SM from '@/public/static/images/circle-discussion-wall-sm.svg?url'
 import { Translate } from '~/components'
 import { DiscussionPublicQuery } from '~/gql/graphql'
 
@@ -25,9 +25,12 @@ const Wall = ({ circle }: WallProps) => {
       })}
     >
       <picture>
-        <source media="(min-width: 768px)" srcSet={CIRCLE_DISCUSSION_WALL} />
+        <source
+          media="(min-width: 768px)"
+          srcSet={IMAGE_CIRCLE_DISCUSSION_WALL.src}
+        />
 
-        <img src={CIRCLE_DISCUSSION_WALL_SM} alt="illustration" />
+        <img src={IMAGE_CIRCLE_DISCUSSION_WALL_SM.src} alt="illustration" />
       </picture>
 
       <section className={styles.brief}>

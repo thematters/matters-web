@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest'
 
-import { render, screen } from '~/common/utils/test'
+import { fireEvent, render, screen } from '~/common/utils/test'
 import { TableView } from '~/components'
 
 describe('<TableView>', () => {
@@ -66,8 +66,8 @@ describe('<TableView>', () => {
     expect(screen.getByText('Cell 1')).toBeInTheDocument()
     expect(screen.getByText('Cell 2')).toBeInTheDocument()
 
-    screen.getByText('Cell 1').click()
-    screen.getByText('Cell 2').click()
+    fireEvent.click(screen.getByText('Cell 1'))
+    fireEvent.click(screen.getByText('Cell 2'))
 
     expect(onClick).toHaveBeenCalledTimes(2)
   })

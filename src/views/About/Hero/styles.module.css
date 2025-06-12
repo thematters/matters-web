@@ -149,9 +149,9 @@
           & h3 {
             @mixin line-clamp;
 
+            -webkit-line-clamp: 2;
             font-size: var(--text16);
             font-weight: var(--font-semibold);
-            -webkit-line-clamp: 2;
           }
 
           & cite {

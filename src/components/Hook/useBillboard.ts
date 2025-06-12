@@ -1,11 +1,13 @@
 import { readContract } from '@wagmi/core'
 import { useEffect, useState } from 'react'
+import { mainnet, optimism, optimismSepolia, sepolia } from 'wagmi/chains'
 
 import { STORAGE_KEY_BILLBOARD } from '~/common/enums'
 import {
   BillboardOperatorABI,
   BillboardRegistryABI,
   storage,
+  wagmiConfig,
 } from '~/common/utils'
 
 // custom hook level enums
@@ -16,9 +18,19 @@ enum QueryStatus {
   ERROR = 'error',
 }
 
+type BillboardData = {
+  contentURI: string
+  redirectURI: string
+  expired: number
+}
+
 type Props = {
   id: number
-  chainId: number
+  chainId:
+    | typeof mainnet.id
+    | typeof optimism.id
+    | typeof sepolia.id
+    | typeof optimismSepolia.id
   operatorAddress: `0x${string}`
   registryAddress: `0x${string}`
 }
@@ -31,7 +43,7 @@ export const useBillboard = ({
 }: Props) => {
   const [status, setStatus] = useState<QueryStatus>(QueryStatus.IDLE)
 
-  const data = storage.get(STORAGE_KEY_BILLBOARD) as Record<string, any>
+  const data = storage.get(STORAGE_KEY_BILLBOARD) as BillboardData | null
   const ttl = 3 * 60 * 1000
 
   const isLoading = status === QueryStatus.LOADING
@@ -51,7 +63,7 @@ export const useBillboard = ({
       return
     }
 
-    if (data?.expired >= Date.now()) {
+    if (data?.expired && data.expired >= Date.now()) {
       return
     }
 
@@ -60,7 +72,7 @@ export const useBillboard = ({
         setStatus(QueryStatus.LOADING)
 
         const tokenId = BigInt(id)
-        const currEpoch = await readContract({
+        const currEpoch = await readContract(wagmiConfig, {
           abi: BillboardOperatorABI,
           address: operatorAddress,
           chainId,
@@ -73,14 +85,14 @@ export const useBillboard = ({
         }
 
         const epoch = currEpoch - 2n
-        const bidder = await readContract({
+        const bidder = await readContract(wagmiConfig, {
           abi: BillboardRegistryABI,
           address: registryAddress,
           chainId,
           functionName: 'highestBidder',
           args: [tokenId, epoch],
         })
-        const bid = await readContract({
+        const bid = await readContract(wagmiConfig, {
           abi: BillboardOperatorABI,
           address: operatorAddress,
           chainId,
@@ -100,7 +112,7 @@ export const useBillboard = ({
         }
 
         setStatus(QueryStatus.LOADED)
-      } catch (error) {
+      } catch {
         resetData()
         setStatus(QueryStatus.ERROR)
       }

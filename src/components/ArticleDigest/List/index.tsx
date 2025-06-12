@@ -18,7 +18,7 @@ export type ArticleDigestListProps = {
   article: ArticleDigestListArticleFragment
   user?: UserDigestMiniUserFragment
 
-  onClick?: () => any
+  onClick?: () => void
   onClickAuthor?: () => void
 
   userPlacement?: 'top' | 'bottom'

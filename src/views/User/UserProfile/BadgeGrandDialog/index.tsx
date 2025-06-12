@@ -8,9 +8,7 @@ import {
   useEventListener,
 } from '~/components'
 
-type BadgeGrandProps = {}
-
-type BadgeGrandDialogProps = BadgeGrandProps & {
+type BadgeGrandDialogProps = {
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
 

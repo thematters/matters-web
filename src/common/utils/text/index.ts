@@ -21,10 +21,10 @@ export const capitalizeFirstLetter = (str: string) => {
 // full-width char -> 2
 // half-width char -> 1
 export const countStrWidth = (str: string) => {
-  var l = str.length
-  var c = 0
-  var length = 0
-  for (var i = 0; i < l; i++) {
+  const l = str.length
+  let c = 0
+  let length = 0
+  for (let i = 0; i < l; i++) {
     c = str.charCodeAt(i)
     if (0x0000 <= c && c <= 0x0019) {
       length += 0

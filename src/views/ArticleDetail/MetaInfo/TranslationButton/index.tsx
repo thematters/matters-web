@@ -1,7 +1,7 @@
 import { FC, useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconTranslate } from '@/public/static/icons/24px/translate.svg'
+import IconTranslate from '@/public/static/icons/24px/translate.svg'
 import { CONTENT_LANG_TEXT_MAP } from '~/common/enums'
 import { analytics } from '~/common/utils'
 import { Button, Icon, LanguageContext, TextIcon } from '~/components'
