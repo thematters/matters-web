@@ -100,6 +100,13 @@ const FeedRenderer: React.FC<FeedRendererProps> = ({
     }
   }
 
+  const hasHorizontalFeed = (feedEdges: typeof edges) =>
+    feedEdges.some((edge) => edge.__typename === 'HorizontalFeed')
+
+  const startIndex = hasHorizontalFeed(edges.slice(0, numOfCards))
+    ? numOfCards + 1
+    : numOfCards
+
   return (
     <>
       {renderHeader && renderHeader()}
@@ -112,7 +119,7 @@ const FeedRenderer: React.FC<FeedRendererProps> = ({
         eof
       >
         <List>
-          {edges.slice(numOfCards).map((edge, i) => {
+          {edges.slice(startIndex).map((edge, i) => {
             if (edge?.__typename === 'HorizontalFeed' && 'Feed' in edge) {
               const { Feed } = edge
               return <Feed key={`${edge.__typename}-${i}`} />
