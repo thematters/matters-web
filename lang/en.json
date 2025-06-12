@@ -340,6 +340,9 @@
   "3KNMbJ": {
     "defaultMessage": "Articles"
   },
+  "3MZvMF": {
+    "defaultMessage": "Would you like to recommend your work to the channel: {channelName}?"
+  },
   "3Tg548": {
     "defaultMessage": "Sign In",
     "description": "src/components/Forms/SelectAuthMethodForm/AuthTabs.tsx"
@@ -722,6 +725,9 @@
   },
   "A3g33H": {
     "defaultMessage": "Archived articles can only be seen by you, and this operation cannot be undone. If this article has been added to collections, it will be removed. (IPFS version will not be effected)"
+  },
+  "A4P0al": {
+    "defaultMessage": "Channel suggestion"
   },
   "A6ozr9": {
     "defaultMessage": "Collection name"
@@ -1249,6 +1255,9 @@
     "defaultMessage": "Comment",
     "description": "src/components/Forms/CommentForm/index.tsx"
   },
+  "J4BUGe": {
+    "defaultMessage": "(the work will appear in “Latest”)"
+  },
   "J6f6iN": {
     "defaultMessage": "Number of comments",
     "description": "src/components/ArticleDigest/Published/FooterActions/index.tsx"
@@ -1338,6 +1347,9 @@
   "KlJEP9": {
     "defaultMessage": "Wallet connected",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
+  },
+  "Kt6f7U": {
+    "defaultMessage": "Do not recommend to any channel"
   },
   "Kwv1n3": {
     "defaultMessage": " registration is about 1 LIKE. During promotion period it is sponsored by Matters.News."
@@ -1967,6 +1979,9 @@
   "WQT8ZA": {
     "defaultMessage": "Edit collection"
   },
+  "WVicCO": {
+    "defaultMessage": "Confirm to move the work to “Latest”? (This action is immediate and cannot be undone.)"
+  },
   "WpvsPu": {
     "defaultMessage": "Subscribe",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
@@ -2072,6 +2087,9 @@
   },
   "Y8zV4A": {
     "defaultMessage": "Write a comment"
+  },
+  "Y9IYvj": {
+    "defaultMessage": "No suitable channels"
   },
   "YDMrKK": {
     "defaultMessage": "Users"
@@ -2255,6 +2273,9 @@
   "cHDJyK": {
     "defaultMessage": "No articles"
   },
+  "cJ+M8n": {
+    "defaultMessage": "Your suggestion has been submitted to the editor. Once it’s approved, the channel will be updated : )"
+  },
   "cK3TLr": {
     "defaultMessage": "Remove bookmark",
     "description": "src/components/Buttons/Bookmark/Unbookmark.tsx"
@@ -2406,6 +2427,9 @@
   "erE5/4": {
     "defaultMessage": "Followed",
     "description": "src/components/Buttons/FollowUser/FollowState.tsx"
+  },
+  "exG99K": {
+    "defaultMessage": "Submit Confirmation"
   },
   "exb/12": {
     "defaultMessage": "You can log in through your wallet next time!",
@@ -3036,6 +3060,9 @@
     "defaultMessage": "Verification code expired, try resend",
     "description": "CODE_EXPIRED"
   },
+  "raexxM": {
+    "defaultMessage": "Submitted"
+  },
   "rbrahO": {
     "defaultMessage": "Close"
   },
@@ -3447,6 +3474,9 @@
   },
   "yubNcI": {
     "defaultMessage": "Not support using punctuation marks alone."
+  },
+  "yx0LeF": {
+    "defaultMessage": "Select the channel you want to recommend (single choice)"
   },
   "yxMEo/": {
     "defaultMessage": "The article has been added to the featured of the event"

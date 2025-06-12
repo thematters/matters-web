@@ -47,6 +47,7 @@ export const ROOT_QUERY_PRIVATE = gql`
         nameZhHans: name(input: { language: zh_hans })
         nameZhHant: name(input: { language: zh_hant })
         nameEn: name(input: { language: en })
+        enabled
       }
       ... on CurationChannel {
         nameZhHans: name(input: { language: zh_hans })

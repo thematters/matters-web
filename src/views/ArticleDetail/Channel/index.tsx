@@ -11,14 +11,17 @@ import {
   TopicChannelFeedbackType,
 } from '~/gql/graphql'
 
+import ChannelDrawer from './ChannelDrawer'
 import { fragments, SUBMIT_TOPIC_CHANNEL_FEEDBACK } from './gql'
 import styles from './styles.module.css'
 
 const Channel = ({ article }: { article: ChannelArticleFragment }) => {
+  console.log({ article })
   const viewer = useContext(ViewerContext)
   const { lang } = useContext(LanguageContext)
   const isAuthor = viewer?.id === article.author?.id
   const [hasThumbsUp, setHasThumbsUp] = useState(false)
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false)
 
   const topicChannel = article.classification?.topicChannel
   const hasTopicChannel = (topicChannel?.channels?.length ?? 0) > 0
@@ -43,15 +46,20 @@ const Channel = ({ article }: { article: ChannelArticleFragment }) => {
   }
 
   const thumbsDown = () => {
-    submitTopicChannelFeedback({
-      variables: {
-        article: article.id,
-        type: TopicChannelFeedbackType.Negative,
-        channels:
-          topicChannel?.channels?.map((channel) => channel.channel.id) ?? [],
-      },
-    })
-    setHasThumbsUp(true)
+    // submitTopicChannelFeedback({
+    //   variables: {
+    //     article: article.id,
+    //     type: TopicChannelFeedbackType.Negative,
+    //     channels:
+    //       topicChannel?.channels?.map((channel) => channel.channel.id) ?? [],
+    //   },
+    // })
+    setIsDrawerOpen(true)
+  }
+
+  const handleChannelSelection = (selectedChannels: string[]) => {
+    // Handle channel selection logic here
+    console.log('Selected channels:', selectedChannels)
   }
 
   const renderChannelNames = () => (
@@ -102,54 +110,64 @@ const Channel = ({ article }: { article: ChannelArticleFragment }) => {
   }
 
   return (
-    <section className={styles.content}>
-      {!hasFeedback && !hasThumbsUp && (
-        <>
-          <FormattedMessage
-            defaultMessage="Your work has been recommended to the channels: {channelNames}. Are you satisfied with the result?"
-            id="dZlT9q"
-            values={{
-              channelNames: renderChannelNames(),
-            }}
-          />
-          <Button
-            aria-label="Thumbs up"
-            onClick={thumbsUp}
-            textColor="black"
-            textActiveColor="greyDarker"
-            size={['1.125rem', '1.125rem']}
-          >
-            <Icon icon={IconThumbsUp} size={12} />
-          </Button>
-          <Button
-            aria-label="Thumbs down"
-            onClick={thumbsDown}
-            textColor="black"
-            textActiveColor="greyDarker"
-            size={['1.125rem', '1.125rem']}
-          >
-            <Icon icon={IconThumbsDown} size={12} />
-          </Button>
-        </>
-      )}
-      {(hasFeedback || hasThumbsUp) && (
-        <>
-          <FormattedMessage
-            defaultMessage="Recommended to channel: {channelNames}"
-            id="0mQE3E"
-            values={{
-              channelNames: renderChannelNames(),
-            }}
-          />
-          {hasThumbsUp && (
+    <>
+      <section className={styles.content}>
+        {!hasFeedback && !hasThumbsUp && (
+          <>
             <FormattedMessage
-              defaultMessage=". Really appreciate it!"
-              id="wlQosy"
+              defaultMessage="Your work has been recommended to the channels: {channelNames}. Are you satisfied with the result?"
+              id="dZlT9q"
+              values={{
+                channelNames: renderChannelNames(),
+              }}
             />
-          )}
-        </>
-      )}
-    </section>
+            <Button
+              aria-label="Thumbs up"
+              onClick={thumbsUp}
+              textColor="black"
+              textActiveColor="greyDarker"
+              size={['1.125rem', '1.125rem']}
+            >
+              <Icon icon={IconThumbsUp} size={12} />
+            </Button>
+            <Button
+              aria-label="Thumbs down"
+              onClick={thumbsDown}
+              textColor="black"
+              textActiveColor="greyDarker"
+              size={['1.125rem', '1.125rem']}
+            >
+              <Icon icon={IconThumbsDown} size={12} />
+            </Button>
+          </>
+        )}
+        {(hasFeedback || hasThumbsUp) && (
+          <>
+            <FormattedMessage
+              defaultMessage="Recommended to channel: {channelNames}"
+              id="0mQE3E"
+              values={{
+                channelNames: renderChannelNames(),
+              }}
+            />
+            {hasThumbsUp && (
+              <FormattedMessage
+                defaultMessage=". Really appreciate it!"
+                id="wlQosy"
+              />
+            )}
+          </>
+        )}
+      </section>
+      <ChannelDrawer
+        isOpen={isDrawerOpen}
+        onClose={() => setIsDrawerOpen(false)}
+        onConfirm={handleChannelSelection}
+        selectedChannels={
+          topicChannel?.channels?.map((channel) => channel.channel.id) ?? []
+        }
+      />
+    </>
   )
 }
 

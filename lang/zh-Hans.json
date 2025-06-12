@@ -340,6 +340,9 @@
   "3KNMbJ": {
     "defaultMessage": "作品"
   },
+  "3MZvMF": {
+    "defaultMessage": "Would you like to recommend your work to the channel: {channelName}?"
+  },
   "3Tg548": {
     "defaultMessage": "登录",
     "description": "src/components/Forms/SelectAuthMethodForm/AuthTabs.tsx"
@@ -722,6 +725,9 @@
   },
   "A3g33H": {
     "defaultMessage": "归档的作品仅自己可见，且操作无法撤销。如文章已加入选集，将从选集中移除。（已发布到 IPFS 的版本不受影响）"
+  },
+  "A4P0al": {
+    "defaultMessage": "建议频道"
   },
   "A6ozr9": {
     "defaultMessage": "选集名称"
@@ -1249,6 +1255,9 @@
     "defaultMessage": "发布评论",
     "description": "src/components/Forms/CommentForm/index.tsx"
   },
+  "J4BUGe": {
+    "defaultMessage": "(the work will appear in “Latest”)"
+  },
   "J6f6iN": {
     "defaultMessage": "评论数量",
     "description": "src/components/ArticleDigest/Published/FooterActions/index.tsx"
@@ -1338,6 +1347,9 @@
   "KlJEP9": {
     "defaultMessage": "钱包已绑定",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
+  },
+  "Kt6f7U": {
+    "defaultMessage": "Do not recommend to any channel"
   },
   "Kwv1n3": {
     "defaultMessage": " 用以出版 Writing NFT，费用 ≈1 LIKE，推广期由平台补助"
@@ -1967,6 +1979,9 @@
   "WQT8ZA": {
     "defaultMessage": "编辑选集"
   },
+  "WVicCO": {
+    "defaultMessage": "Confirm to move the work to “Latest”? (This action is immediate and cannot be undone.)"
+  },
   "WpvsPu": {
     "defaultMessage": "订阅",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
@@ -2072,6 +2087,9 @@
   },
   "Y8zV4A": {
     "defaultMessage": "回复评论"
+  },
+  "Y9IYvj": {
+    "defaultMessage": "No suitable channels"
   },
   "YDMrKK": {
     "defaultMessage": "用户"
@@ -2255,6 +2273,9 @@
   "cHDJyK": {
     "defaultMessage": "尚无作品"
   },
+  "cJ+M8n": {
+    "defaultMessage": "Your suggestion has been submitted to the editor. Once it’s approved, the channel will be updated : )"
+  },
   "cK3TLr": {
     "defaultMessage": "取消收藏",
     "description": "src/components/Buttons/Bookmark/Unbookmark.tsx"
@@ -2406,6 +2427,9 @@
   "erE5/4": {
     "defaultMessage": "互相关注",
     "description": "src/components/Buttons/FollowUser/FollowState.tsx"
+  },
+  "exG99K": {
+    "defaultMessage": "Submit Confirmation"
   },
   "exb/12": {
     "defaultMessage": "之后就可以透过钱包快速登入啰！",
@@ -3036,6 +3060,9 @@
     "defaultMessage": "验证码已过期，请重新发送",
     "description": "CODE_EXPIRED"
   },
+  "raexxM": {
+    "defaultMessage": "Submitted"
+  },
   "rbrahO": {
     "defaultMessage": "关闭"
   },
@@ -3447,6 +3474,9 @@
   },
   "yubNcI": {
     "defaultMessage": "不支持单独使用标点符号"
+  },
+  "yx0LeF": {
+    "defaultMessage": "Select the channel you want to recommend (single choice)"
   },
   "yxMEo/": {
     "defaultMessage": "作品已添加至活动精选"
