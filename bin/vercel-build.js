@@ -47,6 +47,13 @@ if (gitCommitRef && gitCommitRef === 'release/next') {
   exec('npm run gen:type:prod')
   exec('cp -va .env.prod .env.local')
   setEnvLocal('NEXT_PUBLIC_SITE_DOMAIN', 'web-next.matters.town')
+} else if (gitCommitRef && gitCommitRef === 'release/next-beta') {
+  // Production release/next-beta branch
+  // Deployed to beta-new-home.matters.town
+  console.log('Configuring for beta-new-home (release/next-beta)')
+  exec('npm run gen:type:prod')
+  exec('cp -va .env.prod .env.local')
+  setEnvLocal('NEXT_PUBLIC_SITE_DOMAIN', 'beta-new-home.matters.town')
 } else if (gitCommitRef && gitCommitRef === 'release/next-dev') {
   // Development release/next-dev branch
   // Deployed to web-next.matters.icu
