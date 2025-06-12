@@ -39,7 +39,7 @@ export type SearchSelectFormProps = {
   closeDialog: () => void
 
   nodes?: SelectNode[]
-  onSave: (nodes: SelectNode[]) => Promise<any>
+  onSave: (nodes: SelectNode[]) => Promise<void>
   saving?: boolean
 
   searchType: SearchType

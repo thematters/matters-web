@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconEdit } from '@/public/static/icons/24px/edit.svg'
+import IconEdit from '@/public/static/icons/24px/edit.svg'
 import { MAX_ARTICLE_REVISION_COUNT } from '~/common/enums'
 import { analytics, toPath } from '~/common/utils'
 import {
@@ -17,6 +17,7 @@ import {
 import {
   MetaInfoArticleFragment,
   MetaInfoArticleVersionFragment,
+  TranslationModel,
 } from '~/gql/graphql'
 
 import { fragments } from './gql'
@@ -29,7 +30,8 @@ type MetaInfoProps = {
   translated: boolean
   translating: boolean
   canTranslate: boolean
-  toggleTranslate: () => any
+  toggleTranslate: () => void
+  model?: TranslationModel | null
   canReadFullContent: boolean
   editable?: boolean
 }
@@ -41,6 +43,7 @@ const MetaInfo = ({
   translating,
   canTranslate,
   toggleTranslate,
+  model,
   canReadFullContent,
   editable,
 }: MetaInfoProps) => {
@@ -52,6 +55,7 @@ const MetaInfo = ({
   const isExceedRevision = article.revisionCount >= MAX_ARTICLE_REVISION_COUNT
 
   const { router, isInPath } = useRoute()
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { shortHash, ...qs } = router.query
   const isInArticleDetailHistory = isInPath('ARTICLE_DETAIL_HISTORY')
 
@@ -143,6 +147,7 @@ const MetaInfo = ({
                 translating={translating}
                 toggleTranslate={toggleTranslate}
                 originalLanguage={originalLanguage}
+                model={model}
               />
             </>
           )}

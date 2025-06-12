@@ -2,8 +2,8 @@ import _omit from 'lodash/omit'
 import { memo, useContext, useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconCircleTimesFill } from '@/public/static/icons/24px/circle-times-fill.svg'
-import { ReactComponent as IconWarn } from '@/public/static/icons/24px/warn.svg'
+import IconCircleTimesFill from '@/public/static/icons/24px/circle-times-fill.svg'
+import IconWarn from '@/public/static/icons/24px/warn.svg'
 import { ASSET_TYPE, ENTITY_TYPE } from '~/common/enums/file'
 import { validateImage } from '~/common/utils'
 import { useDirectImageUpload, useMutation, ViewerContext } from '~/components'
@@ -40,7 +40,7 @@ export const Item = memo(function Item({
 }: ItemProps) {
   const viewer = useContext(ViewerContext)
   const [hoverAction, setHoverAction] = useState(false)
-  const [error, setError] = useState<any>(undefined)
+  const [error, setError] = useState<Error | undefined>(undefined)
   const [deleted, setDeleted] = useState(false)
 
   const [uploadedAsset, setUploadedAsset] = useState<UploadedAsset | undefined>(
@@ -122,7 +122,7 @@ export const Item = memo(function Item({
           throw new Error()
         }
       } catch (e) {
-        setError(e)
+        setError(e as Error)
       }
     }
 

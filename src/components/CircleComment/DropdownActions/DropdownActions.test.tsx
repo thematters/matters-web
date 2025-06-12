@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 
 import { TEST_ID } from '~/common/enums'
-import { cleanup, render, screen } from '~/common/utils/test'
+import { cleanup, fireEvent, render, screen } from '~/common/utils/test'
 import { CommentState } from '~/gql/graphql'
 import { MOCK_CIRCLE_COMMENT } from '~/stories/mocks'
 
@@ -36,7 +36,7 @@ describe('<CircleComment/DropdownActions>', () => {
     // open menu and check if pin button is rendered
     const $button = screen.getByLabelText('More Actions')
     expect($button).toBeInTheDocument()
-    $button.click()
+    fireEvent.click($button)
     const $pinButton = screen.getByRole('menuitem', { name: 'Pin Broadcast' })
     expect($pinButton).toBeInTheDocument()
 
@@ -53,7 +53,7 @@ describe('<CircleComment/DropdownActions>', () => {
     // open menu and check if pin button is rendered
     const $button2 = screen.getByLabelText('More Actions')
     expect($button2).toBeInTheDocument()
-    $button2.click()
+    fireEvent.click($button2)
     const $unpinButton = screen.getByRole('menuitem', {
       name: 'Unpin Broadcast',
     })
@@ -78,7 +78,7 @@ describe('<CircleComment/DropdownActions>', () => {
     )
     const $button = screen.getByLabelText('More Actions')
     expect($button).toBeInTheDocument()
-    $button.click()
+    fireEvent.click($button)
     const $pinButton = screen.queryByRole('menuitem', { name: 'Pin Broadcast' })
     expect($pinButton).not.toBeInTheDocument()
   })
@@ -95,7 +95,7 @@ describe('<CircleComment/DropdownActions>', () => {
     // open menu and check if edit button is rendered
     const $button = screen.getByLabelText('More Actions')
     expect($button).toBeInTheDocument()
-    $button.click()
+    fireEvent.click($button)
     const $editButton = screen.getByRole('menuitem', { name: 'Edit' })
     expect($editButton).toBeInTheDocument()
   })
@@ -113,7 +113,7 @@ describe('<CircleComment/DropdownActions>', () => {
     )
     const $button = screen.getByLabelText('More Actions')
     expect($button).toBeInTheDocument()
-    $button.click()
+    fireEvent.click($button)
     expect(
       screen.queryByRole('menuitem', { name: 'Edit' })
     ).not.toBeInTheDocument()
@@ -131,12 +131,12 @@ describe('<CircleComment/DropdownActions>', () => {
     // open menu and check if delete button is rendered
     const $button = screen.getByLabelText('More Actions')
     expect($button).toBeInTheDocument()
-    $button.click()
+    fireEvent.click($button)
     const $deleteButton = screen.getByRole('menuitem', { name: 'Delete' })
     expect($deleteButton).toBeInTheDocument()
 
     // open dialog
-    $deleteButton.click()
+    fireEvent.click($deleteButton)
     const $dialog = screen.getByTestId(TEST_ID.DIALOG_COMMENT_DELETE)
     expect($dialog).toBeInTheDocument()
   })
@@ -156,14 +156,14 @@ describe('<CircleComment/DropdownActions>', () => {
     // open menu and check if block user button is rendered
     const $button = screen.getByLabelText('More Actions')
     expect($button).toBeInTheDocument()
-    $button.click()
+    fireEvent.click($button)
     const $blockUserButton = screen.getByRole('menuitem', {
       name: 'Block User',
     })
     expect($blockUserButton).toBeInTheDocument()
 
     // open dialog
-    $blockUserButton.click()
+    fireEvent.click($blockUserButton)
     const $dialog = screen.getByTestId(TEST_ID.DIALOG_BLOCK_USER)
     expect($dialog).toBeInTheDocument()
   })
@@ -183,14 +183,14 @@ describe('<CircleComment/DropdownActions>', () => {
     // open menu and check if collapse button is rendered
     const $button = screen.getByLabelText('More Actions')
     expect($button).toBeInTheDocument()
-    $button.click()
+    fireEvent.click($button)
     const $collapseButton = screen.getByRole('menuitem', {
       name: 'Collapse',
     })
     expect($collapseButton).toBeInTheDocument()
 
     // open dialog
-    $collapseButton.click()
+    fireEvent.click($collapseButton)
     const $dialog = screen.getByTestId(TEST_ID.DIALOG_COMMENT_COLLAPSE)
     expect($dialog).toBeInTheDocument()
   })
@@ -211,7 +211,7 @@ describe('<CircleComment/DropdownActions>', () => {
     // open menu and check if uncollapse button is rendered
     const $button = screen.getByLabelText('More Actions')
     expect($button).toBeInTheDocument()
-    $button.click()
+    fireEvent.click($button)
     const $uncollapseButton = screen.getByRole('menuitem', {
       name: 'Uncollapse',
     })

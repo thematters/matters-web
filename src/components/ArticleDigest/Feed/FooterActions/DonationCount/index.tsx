@@ -1,6 +1,6 @@
 import { useIntl } from 'react-intl'
 
-import { ReactComponent as IconMoney } from '@/public/static/icons/24px/money.svg'
+import IconMoney from '@/public/static/icons/24px/money.svg'
 import { numAbbr } from '~/common/utils'
 import { Icon, TextIcon } from '~/components'
 import { ActionsDonationCountArticleFragment } from '~/gql/graphql'

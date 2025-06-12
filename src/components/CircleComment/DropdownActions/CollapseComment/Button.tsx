@@ -1,6 +1,6 @@
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconCollapse } from '@/public/static/icons/24px/collapse.svg'
+import IconCollapse from '@/public/static/icons/24px/collapse.svg'
 import { Icon, Menu } from '~/components'
 
 const CollapseCommentButton = ({ openDialog }: { openDialog: () => void }) => {

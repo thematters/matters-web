@@ -15,6 +15,13 @@
     --r: 0.25em; /* the radius */
     --c: var(--color-black);
 
+    background: var(--c);
+    border-radius: var(--r) var(--r)
+      min(var(--r), 100% - var(--p) - var(--b) / 2)
+      min(var(--r), var(--p) - var(--b) / 2) / var(--r);
+    border-image: conic-gradient(var(--c) 0 0) fill 0 / var(--r)
+      calc(100% - var(--p) - var(--b) / 2) 0 calc(var(--p) - var(--b) / 2) / 0 0
+      var(--h) 0;
     clip-path: polygon(
       0 100%,
       0 0,
@@ -24,13 +31,6 @@
       var(--p) calc(100% + var(--h)),
       max(0%, var(--p) - var(--b) / 2) 100%
     );
-    background: var(--c);
-    border-radius: var(--r) var(--r)
-      min(var(--r), 100% - var(--p) - var(--b) / 2)
-      min(var(--r), var(--p) - var(--b) / 2) / var(--r);
-    border-image: conic-gradient(var(--c) 0 0) fill 0 / var(--r)
-      calc(100% - var(--p) - var(--b) / 2) 0 calc(var(--p) - var(--b) / 2) / 0 0
-      var(--h) 0;
   }
 
   & .divider {

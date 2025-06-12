@@ -83,7 +83,7 @@ const Comments = ({ moment, editing }: CommentsProps) => {
 
   useEventListener(
     UPDATE_NEWEST_MOMENT_COMMENT,
-    (payload: { [key: string]: any }) => {
+    (payload: { comment: { id: string } }) => {
       const comment = payload?.comment
       setNewestCommentId(comment.id)
     }

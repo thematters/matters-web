@@ -1,11 +1,10 @@
-import _pickBy from 'lodash/pickBy'
 import dynamic from 'next/dynamic'
 
 import { Dialog, SpinnerBlock, useDialogSwitch } from '~/components'
 
 export interface SetVersionDescriptionDialogProps {
   description: string
-  editDescription: (description: string) => any
+  editDescription: (description: string) => void
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
 

@@ -12,7 +12,7 @@ describe('<ThreadComment>', () => {
         comment={{
           ...MOCK_COMMENT,
           comments: {
-            __typename: 'CommentConnection' as any,
+            __typename: 'CommentConnection',
             edges: [
               { node: MOCK_COMMENT, cursor: 'cursor-1' },
               { node: MOCK_COMMENT, cursor: 'cursor-2' },
@@ -45,7 +45,7 @@ describe('<ThreadComment>', () => {
         comment={{
           ...MOCK_COMMENT,
           comments: {
-            __typename: 'CommentConnection' as any,
+            __typename: 'CommentConnection',
             edges: [{ node: MOCK_COMMENT, cursor: 'cursor-1' }],
           },
         }}

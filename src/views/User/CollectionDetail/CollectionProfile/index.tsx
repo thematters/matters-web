@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
@@ -12,7 +13,6 @@ import {
   Book,
   Button,
   Expandable,
-  LinkWrapper,
   Media,
   toast,
   useRoute,
@@ -75,14 +75,14 @@ const CollectionProfile = ({ collection }: CollectionProfileProps) => {
                 <section className={styles.info}>
                   <h2 className={styles.title}>{title}</h2>
                   <p className={styles.author}>
-                    <LinkWrapper
+                    <Link
                       {...toPath({
                         page: 'userProfile',
                         userName: author.userName || '',
                       })}
                     >
                       {author.displayName}
-                    </LinkWrapper>
+                    </Link>
                   </p>
                   <div className={styles.like}>
                     <LikeButton collection={collection} onClick={onClick} />

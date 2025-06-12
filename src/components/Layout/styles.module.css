@@ -73,7 +73,7 @@
     flex-direction: column;
 
     & .top {
-      & :global(> *) {
+      & > :global(*) {
         margin-top: var(--sp32);
       }
     }

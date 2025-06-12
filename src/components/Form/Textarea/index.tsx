@@ -1,4 +1,5 @@
 import classNames from 'classnames'
+import { useId } from 'react'
 
 import Field, { FieldProps } from '../Field'
 import styles from './styles.module.css'
@@ -41,8 +42,8 @@ const Textarea: React.FC<TextareaProps> = ({
 
   ...textareaProps
 }) => {
-  const fieldId = `field-${name}`
-  const fieldMsgId = `field-msg-${name}`
+  const fieldId = useId()
+  const fieldMsgId = `${fieldId}-msg`
   const textareaClasses = classNames({
     [styles.textarea]: true,
     [styles.error]: error,

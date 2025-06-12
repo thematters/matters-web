@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 
-import { ReactComponent as IconLogo } from '@/public/static/icons/logo.svg'
+import IconLogo from '@/public/static/icons/logo.svg'
 import { PATHS } from '~/common/enums'
 import { Button, Icon, LanguageContext, TextIcon } from '~/components'
 import { UserLanguage } from '~/gql/graphql'

@@ -139,13 +139,10 @@ const BaseArticleDetail = ({
   }
 
   // Quote comment from Text Selection Popover
-  useEventListener(
-    OPEN_COMMENT_LIST_DRAWER,
-    (payload: { [key: string]: any }) => {
-      setCommentDrawerStep('commentList')
-      setIsOpenComment(true)
-    }
-  )
+  useEventListener(OPEN_COMMENT_LIST_DRAWER, () => {
+    setCommentDrawerStep('commentList')
+    setIsOpenComment(true)
+  })
   // Donation
   const [isOpenDonationDrawer, setIsOpenDonationDrawer] = useState(false)
   const toggleDonationDrawer = () => {
@@ -239,6 +236,7 @@ const BaseArticleDetail = ({
     summary: translatedSummary,
     content: translatedContent,
     language: translatedLanguage,
+    model: translationModel,
   } = translationData?.article?.translation || autoTranslation || {}
   const title = translated && translatedTitle ? translatedTitle : article.title
   const summary =
@@ -312,6 +310,7 @@ const BaseArticleDetail = ({
 
       <section className={styles.content}>
         <Header article={article} />
+
         <section className="u-article-title">
           <h1>{title}</h1>
 
@@ -321,6 +320,7 @@ const BaseArticleDetail = ({
             translating={translating}
             canTranslate={canTranslate}
             toggleTranslate={toggleTranslate}
+            model={translationModel}
             canReadFullContent={canReadFullContent}
             editable={!lock}
           />
@@ -331,7 +331,6 @@ const BaseArticleDetail = ({
         {isSensitive && (
           <DynamicSensitiveWall
             sensitiveByAuthor={article.sensitiveByAuthor}
-            sensitiveByAdmin={article.sensitiveByAdmin}
             expandAll={() => setIsSensitive(false)}
           />
         )}
@@ -391,10 +390,7 @@ const BaseArticleDetail = ({
 
         {collectionCount > 0 && (
           <section className={styles.block}>
-            <DynamicCollection
-              article={article}
-              collectionCount={collectionCount}
-            />
+            <DynamicCollection article={article} />
           </section>
         )}
 

@@ -1,4 +1,4 @@
-import IMG_PLACEHOLDER from '@/public/static/images/placeholder.svg'
+import IMAGE_PLACEHOLDER from '@/public/static/images/placeholder.svg?url'
 
 import placeholderStyles from './styles.module.css'
 
@@ -6,7 +6,7 @@ const Placeholder = () => {
   return (
     <section className={placeholderStyles.book}>
       <div className={placeholderStyles.cover}>
-        <img src={IMG_PLACEHOLDER} alt="" />
+        <img src={IMAGE_PLACEHOLDER.src} alt="" />
       </div>
     </section>
   )

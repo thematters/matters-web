@@ -1,4 +1,5 @@
-import { Chain, configureChains, createConfig } from 'wagmi'
+import { http } from 'viem'
+import { createConfig } from 'wagmi'
 import {
   mainnet,
   optimism,
@@ -7,12 +8,17 @@ import {
   polygonMumbai,
   sepolia,
 } from 'wagmi/chains'
-import { InjectedConnector } from 'wagmi/connectors/injected'
-import { WalletConnectConnector } from 'wagmi/connectors/walletConnect'
-import { alchemyProvider } from 'wagmi/providers/alchemy'
+import { injected, walletConnect } from 'wagmi/connectors'
 
 import { Chain as GQLChain } from '~/gql/graphql'
 
+declare module 'wagmi' {
+  interface Register {
+    config: typeof wagmiConfig
+  }
+}
+
+const isServer = typeof window === 'undefined'
 const isTest = process.env.NODE_ENV === 'test'
 const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
 const alchemyId = process.env.NEXT_PUBLIC_ALCHEMY_KEY!
@@ -25,45 +31,35 @@ export const featureSupportedChains = {
 
 export const explorers = {
   [GQLChain.Polygon]: isProd
-    ? polygon.blockExplorers.etherscan
-    : polygonMumbai.blockExplorers.etherscan,
+    ? polygon.blockExplorers.default
+    : polygonMumbai.blockExplorers.default,
   [GQLChain.Optimism]: isProd
-    ? optimism.blockExplorers.etherscan
-    : optimismSepolia.blockExplorers.default, // TODO: update to etherscan
+    ? optimism.blockExplorers.default
+    : optimismSepolia.blockExplorers.default,
 }
 
-const defaultChains: Chain[] = isProd
-  ? [mainnet, optimism]
-  : [sepolia, optimismSepolia]
-
-export const { publicClient, chains } = configureChains(defaultChains, [
-  alchemyProvider({ apiKey: alchemyId }),
-])
-
 export const wagmiConfig = createConfig({
-  autoConnect: true,
+  ssr: false,
+  chains: [mainnet, optimism, sepolia, optimismSepolia],
+  transports: {
+    [mainnet.id]: http(`https://eth-mainnet.g.alchemy.com/v2/${alchemyId}`),
+    [optimism.id]: http(`https://opt-mainnet.g.alchemy.com/v2/${alchemyId}`),
+    [sepolia.id]: http(`https://eth-sepolia.g.alchemy.com/v2/${alchemyId}`),
+    [optimismSepolia.id]: http(
+      `https://opt-sepolia.g.alchemy.com/v2/${alchemyId}`
+    ),
+  },
   connectors: [
-    new InjectedConnector({
-      chains,
-      options: {
-        // For disconnecting from metamask
-        shimDisconnect: true,
-        // UNSTABLE_shimOnConnectSelectAccount: true,
-      },
-    }),
-    ...(isTest
+    injected(),
+    ...(isTest || isServer
       ? []
       : [
-          new WalletConnectConnector({
-            chains,
-            options: {
-              projectId: process.env.NEXT_PUBLIC_WALLETCONNECT_ID!,
-              showQrModal: true,
-            },
+          walletConnect({
+            projectId: process.env.NEXT_PUBLIC_WALLETCONNECT_ID!,
+            qrModalOptions: { themeMode: 'light' },
           }),
         ]),
   ],
-  publicClient,
 })
 
 export const MaxUint256 = BigInt(

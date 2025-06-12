@@ -1,6 +1,7 @@
+import Link from 'next/link'
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconDot } from '@/public/static/icons/dot.svg'
+import IconDot from '@/public/static/icons/dot.svg'
 import { TEST_ID } from '~/common/enums'
 import { MOMENT_DIGEST_REFERRER } from '~/common/enums/moment'
 import { captureClicks, sessionStorage, toPath } from '~/common/utils'
@@ -8,7 +9,6 @@ import {
   DateTime,
   Expandable,
   Icon,
-  LinkWrapper,
   Media,
   MomentDetailDialog,
   UserDigest,
@@ -83,9 +83,9 @@ export const MomentDigestFeed = ({
             </section>
           )}
           <section>
-            <LinkWrapper {...momentDetailPath} onClick={handleClickDateTime}>
+            <Link {...momentDetailPath} onClick={handleClickDateTime}>
               <DateTime date={createdAt} color="grey" />
-            </LinkWrapper>
+            </Link>
           </section>
         </header>
         {!!content && (

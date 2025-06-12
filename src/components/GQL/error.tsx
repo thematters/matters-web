@@ -1,4 +1,5 @@
 import { ApolloError } from '@apollo/client'
+import * as Sentry from '@sentry/nextjs'
 import { GraphQLFormattedError } from 'graphql'
 import { FormattedMessage } from 'react-intl'
 
@@ -48,19 +49,13 @@ export const toastMutationErrors = (
   error: ApolloError,
   options?: ToastMutationErrorsOptions
 ) => {
-  let {
-    showToast,
-    showLoginToast,
-    toastType = 'error',
-    customErrors,
-  } = options || {}
+  let { showToast, showLoginToast } = options || {}
+  const { toastType = 'error', customErrors } = options || {}
   showToast = typeof showToast === 'undefined' ? true : showToast
   showLoginToast = typeof showLoginToast === 'undefined' ? true : showLoginToast
 
   // Add info to Sentry
-  import('@sentry/browser').then((Sentry) => {
-    Sentry.captureException(error)
-  })
+  Sentry.captureException(error)
 
   if (typeof window === 'undefined') {
     throw error
@@ -130,9 +125,7 @@ export const toastMutationErrors = (
  */
 export const QueryError = ({ error }: { error: ApolloError }) => {
   // Add info to Sentry
-  import('@sentry/browser').then((Sentry) => {
-    Sentry.captureException(error)
-  })
+  Sentry.captureException(error)
 
   // const errorCodes = getErrorCodes(error)
 

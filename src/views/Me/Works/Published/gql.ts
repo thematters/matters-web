@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-import { ArticleDigestPublished } from '~/components'
+import { ArticleDigestPublished } from './ArticleDigestPublished'
 
 export const ME_WORKS_PUBLISHED_FEED = gql`
   query MeWorksPublishedFeed($after: String, $sort: UserArticlesSort) {

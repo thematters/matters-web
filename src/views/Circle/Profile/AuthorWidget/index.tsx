@@ -1,4 +1,4 @@
-import { ReactComponent as IconLatest } from '@/public/static/icons/24px/latest.svg'
+import IconLatest from '@/public/static/icons/24px/latest.svg'
 import { toPath } from '~/common/utils'
 import { Card, Icon, UserDigest } from '~/components'
 import { CircleCommentContent } from '~/components/CircleComment/Content'

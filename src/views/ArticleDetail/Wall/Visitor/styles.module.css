@@ -7,8 +7,8 @@
     bottom: 0;
     z-index: var(--z-index-over-bottom-bar);
     opacity: 0;
-    transition-property: transform;
     transform: translateY(100%);
+    transition-property: transform;
   }
 
   &.show {

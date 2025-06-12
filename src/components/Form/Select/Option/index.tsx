@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import { forwardRef } from 'react'
 
-import { ReactComponent as IconDown } from '@/public/static/icons/24px/down.svg'
+import IconDown from '@/public/static/icons/24px/down.svg'
 import { Card, CardProps, Icon, TextIcon } from '~/components'
 
 import styles from './styles.module.css'
@@ -20,7 +20,7 @@ type OptionProps = {
 
   role?: 'button' | 'option'
 
-  ref?: any
+  ref?: React.RefObject<HTMLLIElement>
 } & CardProps
 
 const Option: React.FC<OptionProps> = forwardRef(

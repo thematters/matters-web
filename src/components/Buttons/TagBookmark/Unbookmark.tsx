@@ -1,7 +1,7 @@
 import _isNil from 'lodash/isNil'
 import { useIntl } from 'react-intl'
 
-import { ReactComponent as IconSave2 } from '@/public/static/icons/24px/save2.svg'
+import IconSave2 from '@/public/static/icons/24px/save2.svg'
 import { Button, Icon, toast, useMutation } from '~/components'
 import TOGGLE_BOOKMARK_TAG from '~/components/GQL/mutations/toggleBookmarkTag'
 import {

@@ -7,7 +7,7 @@ import FieldHeader from './'
 describe('<Form.Field.Header>', () => {
   it('should render a Form.Field.Header', () => {
     const name = 'userName'
-    const fieldId = `field-${name}`
+    const fieldId = `__use_id__`
 
     render(
       <FieldHeader

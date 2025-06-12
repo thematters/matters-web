@@ -1,8 +1,8 @@
 import gql from 'graphql-tag'
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconPin } from '@/public/static/icons/24px/pin.svg'
-import { ReactComponent as IconUnpin } from '@/public/static/icons/24px/unpin.svg'
+import IconPin from '@/public/static/icons/24px/pin.svg'
+import IconUnpin from '@/public/static/icons/24px/unpin.svg'
 import { REFETCH_CIRCLE_DETAIL } from '~/common/enums'
 import { CircleCommentFormType, Icon, Menu, useMutation } from '~/components'
 import { TOGGLE_CIRCLE_PIN_COMMENT } from '~/components/GQL/mutations/togglePinComment'

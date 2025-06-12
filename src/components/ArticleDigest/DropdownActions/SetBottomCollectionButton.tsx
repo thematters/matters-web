@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconArrowLDown } from '@/public/static/icons/24px/arrow-l-down.svg'
+import IconArrowLDown from '@/public/static/icons/24px/arrow-l-down.svg'
 import { Icon, Menu, useMutation } from '~/components'
 import { updateUserCollectionDetail } from '~/components/GQL'
 import { SetBottomCollectionMutation } from '~/gql/graphql'

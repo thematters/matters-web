@@ -1,6 +1,6 @@
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconHashTag } from '@/public/static/icons/24px/hashtag.svg'
+import IconHashTag from '@/public/static/icons/24px/hashtag.svg'
 import { ERROR_CODES, ERROR_MESSAGES } from '~/common/enums'
 import { Empty, Icon } from '~/components'
 

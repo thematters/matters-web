@@ -7,7 +7,7 @@ import { IconProps, withIcon, WrappedIcon } from './withIcon'
  *
  * ```tsx
  * import { Icon, withIcon } from '~/components'
- * import { ReactComponent as IconLike } from '@/public/static/icons/like.svg'
+ * import IconLike from '@/public/static/icons/like.svg'
  *
  * <Icon icon={IconLike} size={24} />
  *

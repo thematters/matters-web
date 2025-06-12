@@ -1,17 +1,17 @@
-import { VisuallyHidden } from '@reach/visually-hidden'
 import useEmblaCarousel from 'embla-carousel-react'
 import Link from 'next/link'
 import { useCallback, useEffect, useState } from 'react'
+import { useVisuallyHidden } from 'react-aria'
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconLogo } from '@/public/static/icons/logo.svg'
-import { ReactComponent as IconButtonLeft } from '@/public/static/images/about/button-left.svg'
-import { ReactComponent as IconButtonRight } from '@/public/static/images/about/button-right.svg'
-import SLIDE_CURSOR from '@/public/static/images/about/cursor.svg'
+import IconLogo from '@/public/static/icons/logo.svg'
+import IconButtonLeft from '@/public/static/images/about/button-left.svg'
+import IconButtonRight from '@/public/static/images/about/button-right.svg'
+import IMAGE_SLIDE_CURSOR from '@/public/static/images/about/cursor.svg?url'
 import IMAGE_ILLUSTRATION_1 from '@/public/static/images/about/hero-illustration-1.png'
 import IMAGE_ILLUSTRATION_2 from '@/public/static/images/about/hero-illustration-2.png'
-import IMAGE_WAVE_1 from '@/public/static/images/about/wave-hero-1.svg'
-import IMAGE_WAVE_2 from '@/public/static/images/about/wave-hero-2.svg'
+import IMAGE_WAVE_1 from '@/public/static/images/about/wave-hero-1.svg?url'
+import IMAGE_WAVE_2 from '@/public/static/images/about/wave-hero-2.svg?url'
 import { PATHS } from '~/common/enums'
 import { Button, Icon, Media, TextIcon, Translate } from '~/components'
 
@@ -19,9 +19,10 @@ import layoutStyles from '../layout.module.css'
 import styles from './styles.module.css'
 
 const Hero = () => {
+  const { visuallyHiddenProps } = useVisuallyHidden()
+
   const [emblaRef, emblaApi] = useEmblaCarousel({
     dragFree: true,
-    draggable: true,
     loop: false,
     containScroll: 'trimSnaps',
   })
@@ -50,7 +51,7 @@ const Hero = () => {
   }, [emblaApi, onSelect])
 
   const style = {
-    '--about-hero-bg': `url(${IMAGE_ILLUSTRATION_1.src}), url(${IMAGE_WAVE_1}), url(${IMAGE_WAVE_2})`,
+    '--about-hero-bg': `url(${IMAGE_ILLUSTRATION_1.src}), url(${IMAGE_WAVE_1.src}), url(${IMAGE_WAVE_2.src})`,
     '--about-city-bg': `url(${IMAGE_ILLUSTRATION_2.src})`,
   } as React.CSSProperties
 
@@ -59,15 +60,11 @@ const Hero = () => {
       <header className={styles.logo}>
         <div className={layoutStyles.container}>
           <div className={layoutStyles.content}>
-            <Link href={PATHS.HOME} legacyBehavior>
-              <a>
-                <VisuallyHidden>
-                  <span>
-                    <FormattedMessage defaultMessage="Discover" id="cE4Hfw" />
-                  </span>
-                </VisuallyHidden>
-                <Icon icon={IconLogo} style={{ width: 120, height: 24.75 }} />
-              </a>
+            <Link href={PATHS.HOME}>
+              <span {...visuallyHiddenProps}>
+                <FormattedMessage defaultMessage="Discover" id="cE4Hfw" />
+              </span>
+              <Icon icon={IconLogo} style={{ width: 120, height: 24.75 }} />
             </Link>
           </div>
         </div>
@@ -129,7 +126,7 @@ const Hero = () => {
           <section
             className={styles.emblaViewport}
             ref={emblaRef}
-            style={{ cursor: `url(${SLIDE_CURSOR}), auto` }}
+            style={{ cursor: `url(${IMAGE_SLIDE_CURSOR.src}), auto` }}
           >
             <ul className={styles.emblaContainer}>
               <li>

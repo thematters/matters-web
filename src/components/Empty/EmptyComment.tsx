@@ -1,6 +1,6 @@
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconEmptyComment } from '@/public/static/icons/empty-comment.svg'
+import IconEmptyComment from '@/public/static/icons/empty-comment.svg'
 import { Empty, Icon } from '~/components'
 
 export const EmptyComment = ({

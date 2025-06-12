@@ -1,7 +1,7 @@
-import { act, renderHook } from '@testing-library/react-hooks'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
 import { WINDOW_RESIZE_DEBOUNCE } from '~/common/enums'
+import { act, renderHook } from '~/common/utils/test'
 
 import { useWindowResize } from './useWindowResize'
 
@@ -33,7 +33,11 @@ describe('components/Hook/useWindowResize', () => {
       window.dispatchEvent(new Event('resize'))
     })
     // Debounce time needs to be waited out
-    vi.advanceTimersByTime(WINDOW_RESIZE_DEBOUNCE)
+
+    act(() => {
+      vi.advanceTimersByTime(WINDOW_RESIZE_DEBOUNCE)
+    })
+
     expect(result.current).toEqual([500, 500])
   })
 

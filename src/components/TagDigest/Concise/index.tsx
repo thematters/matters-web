@@ -1,10 +1,11 @@
 import gql from 'graphql-tag'
+import Link from 'next/link'
 
-import { ReactComponent as IconDraft } from '@/public/static/icons/24px/draft.svg'
-import { ReactComponent as IconHashTag } from '@/public/static/icons/24px/hashtag.svg'
+import IconDraft from '@/public/static/icons/24px/draft.svg'
+import IconHashTag from '@/public/static/icons/24px/hashtag.svg'
 import { TEST_ID } from '~/common/enums'
 import { numAbbr, toPath } from '~/common/utils'
-import { Icon, LinkWrapper, TextIcon } from '~/components'
+import { Icon, TextIcon } from '~/components'
 import { TagDigestConciseTagFragment } from '~/gql/graphql'
 
 import styles from './styles.module.css'
@@ -43,11 +44,7 @@ const Concise = ({
     tag,
   })
   return (
-    <LinkWrapper
-      {...path}
-      testId={TEST_ID.DIGEST_TAG_CONCISE}
-      onClick={onClick}
-    >
+    <Link {...path} data-test-id={TEST_ID.DIGEST_TAG_CONCISE} onClick={onClick}>
       <section className={styles.content}>
         <TextIcon
           icon={<Icon icon={IconHashTag} color="grey" size={iconSize} />}
@@ -71,7 +68,7 @@ const Concise = ({
           </TextIcon>
         )}
       </section>
-    </LinkWrapper>
+    </Link>
   )
 }
 

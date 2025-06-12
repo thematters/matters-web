@@ -1,9 +1,8 @@
 import { useQuery } from '@apollo/client'
 import { sum as d3Sum } from 'd3-array'
-import _get from 'lodash/get'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { ReactComponent as IconAnalyticsSubscriber24 } from '@/public/static/icons/24px/analytics-subscriber.svg'
+import IconAnalyticsSubscriber24 from '@/public/static/icons/24px/analytics-subscriber.svg'
 import { CHART_COLOR } from '~/common/enums'
 import {
   Button,
@@ -78,6 +77,7 @@ const Content = () => {
   }
 
   const tooltipFormatter = (datum: Datum) => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { time, ...values } = datum
 
     return [

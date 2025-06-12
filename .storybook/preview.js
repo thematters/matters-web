@@ -51,3 +51,4 @@ export const decorators = [
     </IntlProvider>
   ),
 ]
+export const tags = ['autodocs']

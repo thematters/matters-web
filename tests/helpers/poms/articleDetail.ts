@@ -1,7 +1,7 @@
 import { Locator, Page } from '@playwright/test'
 import _range from 'lodash/range'
 
-import { TEST_ID } from '~/common/enums'
+import { FIELD_ID_STRIPE_CHECKOUT, TEST_ID } from '~/common/enums'
 import { stripSpaces } from '~/common/utils/text'
 
 import { waitForAPIResponse } from '../api'
@@ -47,7 +47,7 @@ export class ArticleDetailPage {
   readonly drawer: Locator
   readonly drawerCommentInput: Locator
 
-  constructor(page: Page, isMobile?: boolean) {
+  constructor(page: Page) {
     this.page = page
 
     // header
@@ -207,22 +207,22 @@ export class ArticleDetailPage {
     await this.drawer
       .getByLabel('Enter amount')
       .fill(Math.max(20, amount).toString())
-    await this.drawer.locator('#field-checkout').click() // activate form to fillable
+    await this.drawer.locator(`#${FIELD_ID_STRIPE_CHECKOUT}`).click() // activate form to fillable
     await this.drawer
-      .frameLocator('iframe')
-      .first()
-      .getByPlaceholder('Card number')
+      .locator('iframe')
+      .contentFrame()
+      .getByRole('textbox', { name: 'Credit or debit card number' })
       .fill('4242424242424242')
     const YY = new Date(Date.now()).getFullYear() - 2000 + 1
     await this.drawer
-      .frameLocator('iframe')
-      .first()
-      .getByPlaceholder('MM / YY')
+      .locator('iframe')
+      .contentFrame()
+      .getByRole('textbox', { name: 'Credit or debit card expiration date' })
       .fill(`12${YY}`)
     await this.drawer
-      .frameLocator('iframe')
-      .first()
-      .getByPlaceholder('CVC')
+      .locator('iframe')
+      .contentFrame()
+      .getByRole('textbox', { name: 'Credit or debit card CVC/CVV' })
       .fill('123')
     await this.drawer.getByRole('button', { name: 'Confirm' }).click()
     await this.page.waitForLoadState('networkidle')

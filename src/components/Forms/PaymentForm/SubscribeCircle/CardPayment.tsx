@@ -1,12 +1,13 @@
+import { ApolloError } from '@apollo/client'
 import {
   CardElement,
   Elements,
   useElements,
   useStripe,
 } from '@stripe/react-stripe-js'
-import { loadStripe, StripeCardElementChangeEvent } from '@stripe/stripe-js'
+import type { StripeCardElementChangeEvent } from '@stripe/stripe-js'
+import { loadStripe } from '@stripe/stripe-js'
 import _get from 'lodash/get'
-import _pickBy from 'lodash/pickBy'
 import { useContext, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
@@ -101,7 +102,7 @@ const BaseCardPayment: React.FC<CardPaymentProps> = ({
       })
       data = subscribeResult.data
     } catch (error) {
-      const [messages, codes] = parseFormSubmitErrors(error as any)
+      const [messages, codes] = parseFormSubmitErrors(error as ApolloError)
       codes.forEach((code) => {
         setCheckoutError(intl.formatMessage(messages[code]))
       })
@@ -137,10 +138,6 @@ const BaseCardPayment: React.FC<CardPaymentProps> = ({
         id: circle.id,
         success: false,
         message: JSON.stringify(result.error),
-      })
-
-      import('@sentry/browser').then((Sentry) => {
-        Sentry.captureException(result.error)
       })
     } else {
       if (result.setupIntent?.status === 'succeeded') {

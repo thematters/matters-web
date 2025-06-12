@@ -1,17 +1,13 @@
 import gql from 'graphql-tag'
 
 import { analytics } from '~/common/utils'
-import {
-  ArticleDigestAuthorSidebar,
-  ArticleDigestSidebar,
-  List,
-  usePublicQuery,
-} from '~/components'
+import { List, usePublicQuery } from '~/components'
 import {
   ArticleDetailPublicQuery,
   AuthorSidebarRelatedArticlesQuery,
 } from '~/gql/graphql'
 
+import { ArticleDigestAuthorSidebar } from '../ArticleDigestAuthorSidebar'
 import { FeedPlaceholder } from '../Placeholder'
 
 type RelatedArticlesProps = {
@@ -27,12 +23,12 @@ const fragments = {
         edges {
           cursor
           node {
-            ...ArticleDigestSidebarArticle
+            ...ArticleDigestAuthorSidebarArticle
           }
         }
       }
     }
-    ${ArticleDigestSidebar.fragments.article}
+    ${ArticleDigestAuthorSidebar.fragments.article}
   `,
 }
 

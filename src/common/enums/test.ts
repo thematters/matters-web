@@ -1,3 +1,5 @@
+export const FIELD_ID_STRIPE_CHECKOUT = 'field-checkout'
+
 export enum TEST_ID {
   // layout
   LAYOUT_HEADER = 'layout/header',

@@ -1,6 +1,6 @@
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconDelete } from '@/public/static/icons/24px/delete.svg'
+import IconDelete from '@/public/static/icons/24px/delete.svg'
 import { Icon, Menu } from '~/components'
 
 const DeleteMomentButton = ({ openDialog }: { openDialog: () => void }) => (

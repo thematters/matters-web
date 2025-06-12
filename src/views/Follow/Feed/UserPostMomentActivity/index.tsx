@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconDown } from '@/public/static/icons/24px/down.svg'
+import IconDown from '@/public/static/icons/24px/down.svg'
 import { toPath } from '~/common/utils'
 import {
   Button,
@@ -18,9 +18,7 @@ import { fragments } from './gql'
 import styles from './styles.module.css'
 
 const UserPostMomentActivity = ({
-  actor,
   nodeMoment: node,
-  createdAt,
   location,
   more,
   __typename,

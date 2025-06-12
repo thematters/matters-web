@@ -6,7 +6,7 @@ import {
 } from 'react-beautiful-dnd'
 import { useIntl } from 'react-intl'
 
-import { ReactComponent as IconDrag } from '@/public/static/icons/24px/drag.svg'
+import IconDrag from '@/public/static/icons/24px/drag.svg'
 import { Icon } from '~/components'
 
 import { SelectNode } from '../SearchingArea'

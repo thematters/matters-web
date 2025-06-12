@@ -1,41 +1,47 @@
 import { MockedProvider } from '@apollo/client/testing'
-import { ComponentMeta, ComponentStory } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react'
 import React from 'react'
 
 import { Book } from '~/components'
 
 import { MOCK_ARTILCE } from '../../mocks'
 
-export default {
+const meta = {
   title: 'Components/Book/Collection',
   component: Book.Collection,
-} as ComponentMeta<typeof Book.Collection>
+  decorators: [
+    (Story) => (
+      <MockedProvider>
+        <Story />
+      </MockedProvider>
+    ),
+  ],
+} satisfies Meta<typeof Book.Collection>
 
-const Template: ComponentStory<typeof Book.Collection> = (args) => {
-  return (
-    <MockedProvider>
-      <Book.Collection {...args} />
-    </MockedProvider>
-  )
+export default meta
+type Story = StoryObj<typeof meta>
+
+export const TitleOnly: Story = {
+  args: {
+    title: MOCK_ARTILCE.title,
+  },
 }
 
-export const TitleOnly = Template.bind({})
-TitleOnly.args = {
-  title: MOCK_ARTILCE.title,
+export const TitleMdOnly: Story = {
+  args: {
+    title: 'Qui amet anim',
+  },
 }
 
-export const TitleMdOnly = Template.bind({})
-TitleMdOnly.args = {
-  title: 'Qui amet anim',
+export const TitleLgOnly: Story = {
+  args: {
+    title: 'Short',
+  },
 }
 
-export const TitleLgOnly = Template.bind({})
-TitleLgOnly.args = {
-  title: 'Short',
-}
-
-export const Cover = Template.bind({})
-Cover.args = {
-  title: MOCK_ARTILCE.title,
-  cover: MOCK_ARTILCE.cover,
+export const Cover: Story = {
+  args: {
+    title: MOCK_ARTILCE.title,
+    cover: MOCK_ARTILCE.cover,
+  },
 }

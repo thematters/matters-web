@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { ReactComponent as IconMore } from '@/public/static/icons/24px/more.svg'
+import IconMore from '@/public/static/icons/24px/more.svg'
 import { ERROR_CODES, ERROR_MESSAGES } from '~/common/enums'
 import { Dropdown, Icon, Menu, toast, ViewerContext } from '~/components'
 import { DropdownActionsCollectionFragment } from '~/gql/graphql'

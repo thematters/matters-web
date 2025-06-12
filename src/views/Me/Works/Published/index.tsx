@@ -4,7 +4,6 @@ import { FormattedMessage, useIntl } from 'react-intl'
 
 import { mergeConnections } from '~/common/utils'
 import {
-  ArticleDigestPublished,
   EmptyArticle,
   Head,
   InfiniteScroll,
@@ -16,6 +15,7 @@ import { MeWorksPublishedFeedQuery, UserArticlesSort } from '~/gql/graphql'
 
 import Placeholder from '../Placeholder'
 import WorksTabs from '../WorksTabs'
+import { ArticleDigestPublished } from './ArticleDigestPublished'
 import { ME_WORKS_PUBLISHED_FEED } from './gql'
 import { SortTabs } from './SortTabs'
 
@@ -80,7 +80,7 @@ export const BaseMeWorksPublished = () => {
           eof
         >
           <List>
-            {articleEdges.map(({ node, cursor }) => (
+            {articleEdges.map(({ node }) => (
               <List.Item key={node.id}>
                 <ArticleDigestPublished article={node} />
               </List.Item>

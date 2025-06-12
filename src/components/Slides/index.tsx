@@ -13,7 +13,7 @@ interface SlidesProps {
 
 interface SlideItemProps {
   size?: 'xs' | 'sm' | 'md'
-  onClick?: () => any
+  onClick?: () => void
 }
 
 const SlideItem: React.FC<React.PropsWithChildren<SlideItemProps>> = ({
@@ -40,7 +40,6 @@ export const Slides: React.FC<React.PropsWithChildren<SlidesProps>> & {
 
   const [emblaRef, emblaApi] = useEmblaCarousel({
     dragFree: true,
-    draggable: true,
     loop: false,
     containScroll: 'trimSnaps',
   })
@@ -59,14 +58,14 @@ export const Slides: React.FC<React.PropsWithChildren<SlidesProps>> & {
 
   useEffect(() => {
     if (emblaApi) {
-      emblaApi.on('scroll', (event) => {
+      emblaApi.on('scroll', () => {
         if (!scrolling && settled) {
           setScrolling(true)
           setSettled(false)
         }
       })
 
-      emblaApi.on('settle', (event) => {
+      emblaApi.on('settle', () => {
         setScrolling(false)
         setSettled(true)
       })

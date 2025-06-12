@@ -121,17 +121,17 @@ button {
   line-height: 1.15;
   color: inherit;
   appearance: none;
+  outline: 0;
   border: 0;
   border-radius: 0;
-  outline: 0;
 }
 
 button {
   display: inline-block;
   width: auto;
+  vertical-align: middle;
   text-align: center;
   white-space: nowrap;
-  vertical-align: middle;
   touch-action: manipulation;
   cursor: pointer;
   user-select: none;
@@ -213,7 +213,7 @@ textarea {
 
 ::-webkit-file-upload-button {
   font: inherit;
-  appearance: button;
+  appearance: auto;
 }
 
 /* Interactive

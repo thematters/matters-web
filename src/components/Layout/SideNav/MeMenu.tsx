@@ -2,16 +2,17 @@ import { useRouter } from 'next/router'
 import { useContext } from 'react'
 import baseToast from 'react-hot-toast'
 import { FormattedMessage } from 'react-intl'
+import { useAccount, useDisconnect } from 'wagmi'
 
-import { ReactComponent as IconCircle } from '@/public/static/icons/24px/circle.svg'
-import { ReactComponent as IconData } from '@/public/static/icons/24px/data.svg'
-import { ReactComponent as IconDraft } from '@/public/static/icons/24px/draft.svg'
-import { ReactComponent as IconHistory } from '@/public/static/icons/24px/history.svg'
-import { ReactComponent as IconLogout } from '@/public/static/icons/24px/logout.svg'
-import { ReactComponent as IconProfile } from '@/public/static/icons/24px/profile.svg'
-import { ReactComponent as IconSave } from '@/public/static/icons/24px/save.svg'
-import { ReactComponent as IconSettings } from '@/public/static/icons/24px/settings.svg'
-import { ReactComponent as IconWallet } from '@/public/static/icons/24px/wallet.svg'
+import IconCircle from '@/public/static/icons/24px/circle.svg'
+import IconData from '@/public/static/icons/24px/data.svg'
+import IconDraft from '@/public/static/icons/24px/draft.svg'
+import IconHistory from '@/public/static/icons/24px/history.svg'
+import IconLogout from '@/public/static/icons/24px/logout.svg'
+import IconProfile from '@/public/static/icons/24px/profile.svg'
+import IconSave from '@/public/static/icons/24px/save.svg'
+import IconSettings from '@/public/static/icons/24px/settings.svg'
+import IconWallet from '@/public/static/icons/24px/wallet.svg'
 import {
   COOKIE_TOKEN_NAME,
   COOKIE_USER_GROUP,
@@ -25,6 +26,9 @@ import USER_LOGOUT from '~/components/GQL/mutations/userLogout'
 import { UserLogoutMutation } from '~/gql/graphql'
 
 const MeMenu: React.FC = () => {
+  const { address } = useAccount()
+  const { disconnect } = useDisconnect()
+
   const router = useRouter()
   const viewer = useContext(ViewerContext)
   const viewerPath = toPath({
@@ -64,7 +68,11 @@ const MeMenu: React.FC = () => {
       await logout()
 
       removeCookies([COOKIE_TOKEN_NAME, COOKIE_USER_GROUP])
-    } catch (e) {
+
+      if (address) {
+        disconnect()
+      }
+    } catch {
       toast.error({
         message: (
           <FormattedMessage

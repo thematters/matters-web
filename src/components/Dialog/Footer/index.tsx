@@ -11,7 +11,7 @@ type FooterProps = {
   btns?: React.ReactNode
   smUpBtns?: React.ReactNode
   closeText?: React.ReactNode
-  closeDialog?: () => any
+  closeDialog?: () => void
 }
 
 const Footer: React.FC<FooterProps> = ({

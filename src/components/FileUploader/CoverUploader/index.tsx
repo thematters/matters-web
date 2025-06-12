@@ -1,11 +1,11 @@
-import { VisuallyHidden } from '@reach/visually-hidden'
 import classNames from 'classnames'
 import _omit from 'lodash/omit'
-import { useEffect, useState } from 'react'
+import { useEffect, useId, useState } from 'react'
+import { useVisuallyHidden } from 'react-aria'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { ReactComponent as IconCamera } from '@/public/static/icons/24px/camera.svg'
-import { ReactComponent as IconTimes } from '@/public/static/icons/24px/times.svg'
+import IconCamera from '@/public/static/icons/24px/camera.svg'
+import IconTimes from '@/public/static/icons/24px/times.svg'
 import {
   ACCEPTED_COVER_UPLOAD_IMAGE_TYPES,
   ASSET_TYPE,
@@ -109,7 +109,9 @@ export const CoverUploader = ({
   const [localSrc, setLocalSrc] = useState<string | undefined>(undefined)
 
   const acceptTypes = ACCEPTED_COVER_UPLOAD_IMAGE_TYPES.join(',')
-  const fieldId = 'cover-upload-form'
+  const fieldId = useId()
+
+  const { visuallyHiddenProps } = useVisuallyHidden()
 
   useEffect(() => {
     return () => {
@@ -170,7 +172,7 @@ export const CoverUploader = ({
       } else {
         throw new Error()
       }
-    } catch (e) {
+    } catch {
       toast.error({
         message: (
           <FormattedMessage
@@ -186,8 +188,8 @@ export const CoverUploader = ({
     }
   }
 
-  const removeCover = (event: any) => {
-    event.preventDefault()
+  const removeCover = (event?: React.MouseEvent<HTMLElement, MouseEvent>) => {
+    event?.preventDefault()
     setCover(undefined)
     setLocalSrc(undefined)
 
@@ -261,20 +263,19 @@ export const CoverUploader = ({
         </section>
       )}
 
-      <VisuallyHidden>
-        <input
-          id={fieldId}
-          type="file"
-          name="file"
-          aria-label={intl.formatMessage({
-            defaultMessage: 'Upload Cover',
-            id: 'QvPc1q',
-          })}
-          accept={acceptTypes}
-          multiple={false}
-          onChange={handleChange}
-        />
-      </VisuallyHidden>
+      <input
+        id={fieldId}
+        type="file"
+        name="file"
+        aria-label={intl.formatMessage({
+          defaultMessage: 'Upload Cover',
+          id: 'QvPc1q',
+        })}
+        accept={acceptTypes}
+        multiple={false}
+        onChange={handleChange}
+        {...visuallyHiddenProps}
+      />
     </label>
   )
 }

@@ -1,6 +1,6 @@
 import { useDisconnect } from 'wagmi'
 
-import { ReactComponent as IconInfo } from '@/public/static/icons/24px/information.svg'
+import IconInfo from '@/public/static/icons/24px/information.svg'
 import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
 import { Button, Icon, TextIcon, Translate } from '~/components'
 

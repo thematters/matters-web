@@ -1,6 +1,5 @@
 import { useQuery } from '@apollo/client'
 import _chunk from 'lodash/chunk'
-import _random from 'lodash/random'
 import { useContext, useEffect } from 'react'
 
 import { analytics } from '~/common/utils'
@@ -53,11 +52,12 @@ const Authors = () => {
     )
     const random = Math.floor(Math.min(randomMaxSize, size) * Math.random()) // in range [0..50) not including 50
 
-    lastFetchRandom &&
+    if (lastFetchRandom) {
       client.cache.modify({
         id: client.cache.identify(lastFetchRandom.lastFetchRandom),
         fields: { feedAuthors: () => random },
       })
+    }
   }
 
   useEffect(() => {
@@ -109,7 +109,7 @@ const Authors = () => {
           _chunk(edges, perColumn).map((chunks, edgeIndex) => (
             <Slides.Item size="md" key={edgeIndex}>
               <section>
-                {chunks.map(({ node, cursor }, nodeIndex) => (
+                {chunks.map(({ node }, nodeIndex) => (
                   <UserDigest.Rich
                     is="link"
                     key={node.id}

@@ -59,7 +59,7 @@ const BaseShareDialog = ({
 function tryDecodeUrl(url: string) {
   try {
     return decodeURIComponent(url)
-  } catch (err) {
+  } catch {
     return url
   }
 }
@@ -78,7 +78,7 @@ export const ShareDialog = (props: ShareDialogProps) => {
     title || (typeof window !== 'undefined' ? window.document.title || '' : '')
 
   const onShare = async (fallbackShare: () => void) => {
-    const navigator = window.navigator as any
+    const navigator = window.navigator
 
     analytics.trackEvent('share_dialog', { step: 'open_share' })
 

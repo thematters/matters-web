@@ -1,5 +1,5 @@
-import { VisuallyHidden } from '@reach/visually-hidden'
 import jump from 'jump.js'
+import { useVisuallyHidden } from 'react-aria'
 
 import { Button, ButtonProps } from '~/components'
 
@@ -19,6 +19,8 @@ const NavListItem = ({
   active,
   ...props
 }: NavListItemProps) => {
+  const { visuallyHiddenProps } = useVisuallyHidden()
+
   const { onClick: baseOnClick } = props
   const onClick = (event?: React.MouseEvent<HTMLElement, MouseEvent>) => {
     if (baseOnClick) {
@@ -41,9 +43,7 @@ const NavListItem = ({
       >
         {active ? activeIcon : icon}
 
-        <VisuallyHidden>
-          <span>{name}</span>
-        </VisuallyHidden>
+        <span {...visuallyHiddenProps}>{name}</span>
       </Button>
     </li>
   )

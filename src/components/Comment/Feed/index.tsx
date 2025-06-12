@@ -1,4 +1,5 @@
 import classNames from 'classnames'
+import Link from 'next/link'
 import React from 'react'
 
 import {
@@ -7,13 +8,7 @@ import {
   TEST_ID,
 } from '~/common/enums'
 import { sessionStorage, toPath } from '~/common/utils'
-import {
-  Avatar,
-  AvatarSize,
-  CommentThreadCommentType,
-  DateTime,
-  LinkWrapper,
-} from '~/components'
+import { Avatar, CommentThreadCommentType, DateTime } from '~/components'
 import {
   CommentFeedCommentPrivateFragment,
   CommentFeedCommentPublicFragment,
@@ -29,8 +24,6 @@ import Placeholder from './Placeholder'
 import styles from './styles.module.css'
 
 export type CommentControls = {
-  avatarSize?: AvatarSize
-  hasUserName?: boolean
   spacingLeft?: boolean
 } & FooterActionsControls &
   DropdownActionsControls
@@ -44,8 +37,6 @@ export type CommentProps = {
 const BaseCommentFeed = ({
   comment,
   pinnedComment,
-  avatarSize = 32,
-  hasUserName,
   spacingLeft,
   replySubmitCallback,
   ...actionControls
@@ -113,12 +104,12 @@ const BaseCommentFeed = ({
             className={styles.author}
             data-test-id={TEST_ID.ARTICLE_COMMENT_FEED_AUTHOR}
           >
-            <LinkWrapper {...userProfilePath}>
+            <Link {...userProfilePath}>
               <Avatar user={author} />
-            </LinkWrapper>
+            </Link>
             <section className={styles.info}>
               <section className={styles.top}>
-                <LinkWrapper {...userProfilePath}>
+                <Link {...userProfilePath}>
                   <section
                     className={styles.displayName}
                     data-test-id={
@@ -127,12 +118,12 @@ const BaseCommentFeed = ({
                   >
                     {author.displayName}
                   </section>
-                </LinkWrapper>
+                </Link>
                 <RoleLabel comment={comment} />
               </section>
-              <LinkWrapper {...commentDetailPath}>
+              <Link {...commentDetailPath}>
                 <DateTime date={comment.createdAt} color="grey" />
-              </LinkWrapper>
+              </Link>
             </section>
           </section>
         </section>
@@ -192,7 +183,9 @@ export const CommentFeed = React.memo(
       prevComment.author.isBlocked === comment.author.isBlocked &&
       prevDisabled === disabled &&
       prevPinnedComment?.id === pinnedComment?.id &&
-      prevComment.fromDonator === comment.fromDonator
+      prevComment.fromDonator === comment.fromDonator &&
+      prevComment.dropdownComments.totalCount ===
+        comment.dropdownComments.totalCount
     )
   }
 ) as MemoizedCommentFeed

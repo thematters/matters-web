@@ -1,8 +1,8 @@
 import classNames from 'classnames'
 
-import { ReactComponent as IconPlus } from '@/public/static/icons/24px/plus.svg'
-import { ReactComponent as IconRight } from '@/public/static/icons/24px/right.svg'
-import { ReactComponent as IconSquareChecked } from '@/public/static/icons/square-checked.svg'
+import IconPlus from '@/public/static/icons/24px/plus.svg'
+import IconRight from '@/public/static/icons/24px/right.svg'
+import IconSquareChecked from '@/public/static/icons/square-checked.svg'
 import { toSizedImageURL } from '~/common/utils'
 import { Card, Icon } from '~/components'
 
@@ -12,7 +12,7 @@ type ListItemProps = {
   title: string | React.ReactNode
   subTitle?: string | React.ReactNode
   hint?: boolean
-  onClick?: () => any
+  onClick?: () => void
 }
 
 const CoverIndicator = ({ cover }: { cover?: string | null }) => (

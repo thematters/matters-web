@@ -1,11 +1,10 @@
 import { useQuery } from '@apollo/client'
-import { excludeGraphQLFetch } from 'apollo-link-sentry'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import type { IncomingHttpHeaders } from 'http'
 import dynamic from 'next/dynamic'
 import React, { useEffect } from 'react'
-import { WagmiConfig } from 'wagmi'
+import { WagmiProvider } from 'wagmi'
 
-import packageJson from '@/package.json'
 import {
   REFERRAL_QUERY_REFERRAL_KEY,
   REFERRAL_STORAGE_REFERRAL_CODE,
@@ -29,9 +28,6 @@ import {
   ViewerProvider,
 } from '~/components'
 import { RootQueryPrivateQuery } from '~/gql/graphql'
-
-const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
-const isLocal = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'local'
 
 import { ROOT_QUERY_PRIVATE } from './gql'
 
@@ -62,22 +58,7 @@ const DynamicFingerprint = dynamic(() => import('~/components/Fingerprint'), {
  * `<Root>` contains components that depend on viewer
  *
  */
-// Sentry
-import('@sentry/browser').then((Sentry) => {
-  Sentry.init({
-    enabled: !isLocal && typeof window !== 'undefined',
-    dsn: `https://${process.env.NEXT_PUBLIC_SENTRY_PUBLIC_KEY}@${process.env.NEXT_PUBLIC_SENTRY_DOMAIN}/${process.env.NEXT_PUBLIC_SENTRY_PROJECT_ID}`,
-    debug: !isProd,
-    environment: isProd ? 'production' : 'development',
-    release: packageJson.version,
-    ignoreErrors: [/.*Timeout.*/, /.*Network.*/],
-    sampleRate: 0.1,
-    tracesSampleRate: 0.1,
-    beforeBreadcrumb: excludeGraphQLFetch,
-    integrations: [Sentry.browserTracingIntegration()],
-    tracePropagationTargets: ['localhost', /graphql/],
-  })
-})
+const queryClient = new QueryClient()
 
 const Root = ({
   headers,
@@ -142,26 +123,28 @@ const Root = ({
   }
 
   return (
-    <WagmiConfig config={wagmiConfig}>
-      <ViewerProvider viewer={viewer}>
-        <LanguageProvider headers={headers}>
-          <FeaturesProvider official={official}>
-            <MediaContextProvider>
-              <TranslationsProvider>
-                {shouldApplyLayout ? <Layout>{children}</Layout> : children}
+    <WagmiProvider config={wagmiConfig}>
+      <QueryClientProvider client={queryClient}>
+        <ViewerProvider viewer={viewer}>
+          <LanguageProvider headers={headers}>
+            <FeaturesProvider official={official}>
+              <MediaContextProvider>
+                <TranslationsProvider>
+                  {shouldApplyLayout ? <Layout>{children}</Layout> : children}
 
-                <DynamicToaster />
-                <DynamicAnalyticsInitilizer user={viewer || {}} />
-                <DynamicGlobalDialogs />
-                <DynamicGlobalToasts />
-                <DynamicProgressBar />
-                <DynamicFingerprint />
-              </TranslationsProvider>
-            </MediaContextProvider>
-          </FeaturesProvider>
-        </LanguageProvider>
-      </ViewerProvider>
-    </WagmiConfig>
+                  <DynamicToaster />
+                  <DynamicAnalyticsInitilizer user={viewer || {}} />
+                  <DynamicGlobalDialogs />
+                  <DynamicGlobalToasts />
+                  <DynamicProgressBar />
+                  <DynamicFingerprint />
+                </TranslationsProvider>
+              </MediaContextProvider>
+            </FeaturesProvider>
+          </LanguageProvider>
+        </ViewerProvider>
+      </QueryClientProvider>
+    </WagmiProvider>
   )
 }
 

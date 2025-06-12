@@ -1,4 +1,3 @@
-import _isNil from 'lodash/isNil'
 import NextHead from 'next/head'
 import type { NextSeoProps } from 'next-seo'
 import { NextSeo } from 'next-seo'
@@ -19,7 +18,7 @@ interface HeadProps {
   path?: string
   image?: string | null
   noSuffix?: boolean
-  jsonLdData?: Record<string, any> | null
+  jsonLdData?: Record<string, unknown> | null
   availableLanguages?: UserLanguage[]
   noindex?: boolean
 }
@@ -36,7 +35,7 @@ export const Head: React.FC<HeadProps> = (props) => {
   const { lang } = useContext(LanguageContext)
   const title = props.title
 
-  const siteDomain = process.env.NEXT_PUBLIC_SITE_DOMAIN || 'matters.town'
+  const siteDomain = process.env.NEXT_PUBLIC_SITE_DOMAIN || ''
   const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
 
   // seo base metadata
@@ -54,7 +53,11 @@ export const Head: React.FC<HeadProps> = (props) => {
     ? `https://${siteDomain}${props.path}`
     : `https://${siteDomain}${router.asPath || '/'}`
 
-  const noindex = props.noindex || !isProd
+  const noindex =
+    props.noindex ||
+    !isProd ||
+    siteDomain.includes('web-next') ||
+    siteDomain.includes('vercel.app')
 
   const i18nUrl = (language: string) => {
     return props.path
@@ -118,10 +121,8 @@ export const Head: React.FC<HeadProps> = (props) => {
       {
         name: 'keywords',
         content: props.keywords
-          ? `${props.keywords.join(',')},matters,${
-              process.env.NEXT_PUBLIC_SITE_DOMAIN
-            },創作有價`
-          : `matters,${process.env.NEXT_PUBLIC_SITE_DOMAIN},創作有價`,
+          ? `${props.keywords.join(',')},matters,創作有價`
+          : `matters,創作有價`,
       },
       {
         name: 'viewport',

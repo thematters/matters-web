@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import classNames from 'classnames'
 import { forwardRef } from 'react'
 
@@ -22,7 +23,7 @@ type ItemProps = {
 const Item = forwardRef(
   (
     { error, onPaste, onChange, onBackspace, ...inputProps }: ItemProps,
-    ref: any
+    ref
   ) => {
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       event.preventDefault()
@@ -34,7 +35,7 @@ const Item = forwardRef(
         return
       }
 
-      const val = ref?.current?.value
+      const val = (ref as React.RefObject<HTMLInputElement>)?.current?.value
 
       if (!val || !val.length) {
         onBackspace()
@@ -59,7 +60,7 @@ const Item = forwardRef(
           onChange={handleChange}
           onKeyDown={handleKeydown}
           onPaste={onPaste}
-          ref={ref}
+          ref={ref as React.RefObject<HTMLInputElement> | null}
           required
           {...inputProps}
           value={value}

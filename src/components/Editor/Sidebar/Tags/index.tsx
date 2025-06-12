@@ -1,6 +1,7 @@
+import type { FetchResult } from '@apollo/client'
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconHashtag } from '@/public/static/icons/24px/hashtag.svg'
+import IconHashtag from '@/public/static/icons/24px/hashtag.svg'
 import { analytics } from '~/common/utils'
 import {
   EditorSearchSelectDialog,
@@ -9,7 +10,7 @@ import {
   // SearchSelectNode,
 } from '~/components'
 import { SearchSelectNode } from '~/components/Forms/SearchSelectForm'
-import { DigestTagFragment } from '~/gql/graphql'
+import { DigestTagFragment, SetDraftTagsMutation } from '~/gql/graphql'
 
 import TagCustomStagingArea from '../../TagCustomStagingArea'
 import Box from '../Box'
@@ -17,7 +18,9 @@ import styles from './styles.module.css'
 
 export interface SidebarTagsProps {
   tags: DigestTagFragment[]
-  editTags: (tag: DigestTagFragment[]) => any
+  editTags: (
+    tag: DigestTagFragment[]
+  ) => Promise<FetchResult<SetDraftTagsMutation> | void | unknown>
   saving?: boolean
   disabled?: boolean
 }

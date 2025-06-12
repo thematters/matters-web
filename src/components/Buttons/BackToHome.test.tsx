@@ -2,7 +2,7 @@ import mockRouter from 'next-router-mock'
 import { describe, expect, it } from 'vitest'
 
 import { PATHS } from '~/common/enums'
-import { render, screen } from '~/common/utils/test'
+import { fireEvent, render, screen } from '~/common/utils/test'
 import { BackToHomeButton } from '~/components'
 
 describe('<BackToHomeButton>', () => {
@@ -10,7 +10,7 @@ describe('<BackToHomeButton>', () => {
     render(<BackToHomeButton />)
 
     const button = screen.getByText('Back to discovery')
-    button.click()
+    fireEvent.click(button)
 
     expect(mockRouter.asPath).toEqual(PATHS.HOME)
   })

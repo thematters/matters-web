@@ -83,7 +83,11 @@ export const MentionList = forwardRef(
     }
 
     return (
-      <section className={styles.mention} onKeyDown={handleKeyDown}>
+      <section
+        className={styles.mention}
+        onKeyDown={handleKeyDown}
+        ref={ref as React.RefObject<HTMLDivElement> | null}
+      >
         <Menu width="md">
           {users.map((user) => (
             <Menu.Item

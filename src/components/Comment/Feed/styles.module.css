@@ -123,10 +123,6 @@
     margin-left: var(--sp48);
   }
 
-  &.descendant {
-    width:;
-  }
-
   & .contentPlaceholder {
     width: calc(100% - 48px);
     height: 1rem;

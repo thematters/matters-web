@@ -186,7 +186,7 @@ const CricleDiscussion = () => {
       } else {
         jumpToFragment()
       }
-    } catch (e) {
+    } catch {
       return
     }
   }, [error, privateFetched, discussionLoading, hasPermission, circle?.id])

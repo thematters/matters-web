@@ -1,5 +1,3 @@
-import _get from 'lodash/get'
-
 import { toLocale } from '~/common/utils'
 import { UserLanguage } from '~/gql/graphql'
 
@@ -34,10 +32,8 @@ interface TranslateStrings {
 export type TranslateArgs = TranslateStrings
 
 export const translate = ({ lang, ...props }: TranslateArgs): string => {
-  let translations: { zh_hant: string; zh_hans?: string; en?: string }
-
   const { zh_hant, zh_hans, en } = props
-  translations = { zh_hant, zh_hans, en }
+  const translations = { zh_hant, zh_hans, en }
 
   const translation = translations[lang || 'zh_hant']
 
@@ -49,7 +45,7 @@ export async function loadTranslations(lang: UserLanguage) {
     return import(`@/compiled-lang/${toLocale(lang)}.json`).then(
       (module) => module.default
     )
-  } catch (error) {
+  } catch {
     throw new Error(
       'Could not load compiled language files. Please run "npm run i18n:compile" first"'
     )

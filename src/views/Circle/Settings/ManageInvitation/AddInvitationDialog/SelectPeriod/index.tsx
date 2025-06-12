@@ -12,7 +12,6 @@ const SelectPeriod = ({ period, onChange }: Props) => {
 
   return (
     <Form.Select<number>
-      name="select-period"
       label={
         <FormattedMessage defaultMessage="Free trial period" id="FmWYRt" />
       }
