@@ -2,7 +2,7 @@ import { useFormik } from 'formik'
 import { useContext, useId, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import IconCircleCheckFill from '@/public/static/icons/24px/circle-check-fill.svg'
+import IconCircleCheck from '@/public/static/icons/24px/circle-check.svg'
 import {
   Dialog,
   Drawer,
@@ -225,7 +225,7 @@ const ChannelDrawer = ({ isOpen, onClose: _onClose }: ChannelDrawerProps) => {
 
       <section className={styles.submittedContent}>
         <section className={styles.submittedIcon}>
-          <Icon icon={IconCircleCheckFill} size={40} color="green" />
+          <Icon icon={IconCircleCheck} size={40} color="green" />
         </section>
         <section className={styles.submittedText}>
           <FormattedMessage
@@ -260,7 +260,7 @@ const ChannelDrawer = ({ isOpen, onClose: _onClose }: ChannelDrawerProps) => {
 
       <section className={styles.submittedContent}>
         <section className={styles.submittedIcon}>
-          <Icon icon={IconCircleCheckFill} size={40} color="green" />
+          <Icon icon={IconCircleCheck} size={40} color="green" />
         </section>
       </section>
 
