@@ -22,10 +22,22 @@ const Channel = ({ article }: { article: ChannelArticleFragment }) => {
   const isAuthor = viewer?.id === article.author?.id
   const [hasThumbsUp, setHasThumbsUp] = useState(false)
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
+  const toggleDrawer = () => setIsDrawerOpen(!isDrawerOpen)
 
   const topicChannel = article.classification?.topicChannel
-  const hasTopicChannel = (topicChannel?.channels?.length ?? 0) > 0
+  const hasTopicChannel = Array.isArray(topicChannel?.channels)
   const hasFeedback = !!topicChannel?.feedback
+  const allChannelsDisabled = topicChannel?.channels?.every(
+    (channel) => !channel.enabled
+  )
+  const feedbackToLatestChannel =
+    hasFeedback &&
+    topicChannel?.feedback?.type === TopicChannelFeedbackType.Negative &&
+    allChannelsDisabled
+  const isInLatestChannel =
+    (hasTopicChannel && topicChannel?.channels?.length === 0) ||
+    (hasTopicChannel && allChannelsDisabled)
+  console.log({ feedbackToLatestChannel })
 
   const [submitTopicChannelFeedback] =
     useMutation<SubmitTopicChannelFeedbackMutation>(
@@ -45,7 +57,7 @@ const Channel = ({ article }: { article: ChannelArticleFragment }) => {
   }
 
   const thumbsDown = () => {
-    setIsDrawerOpen(true)
+    toggleDrawer()
   }
 
   const handleThumbsDown = async (channels: string[]) => {
@@ -60,24 +72,43 @@ const Channel = ({ article }: { article: ChannelArticleFragment }) => {
 
   const renderChannelNames = () => (
     <>
-      {topicChannel?.channels?.map((channel, index) => (
-        <span key={channel.channel.id}>
-          <span className={styles.channelNames}>
-            {lang === 'zh_hans'
-              ? channel.channel.nameZhHans
-              : lang === 'zh_hant'
-                ? channel.channel.nameZhHant
-                : channel.channel.nameEn}
+      {topicChannel?.channels?.map((channel, index) => {
+        if (!channel.enabled) {
+          return null
+        }
+        return (
+          <span key={channel.channel.id} className={styles.channelNames}>
+            <span className={styles.channelNames}>
+              {lang === 'zh_hans'
+                ? channel.channel.nameZhHans
+                : lang === 'zh_hant'
+                  ? channel.channel.nameZhHant
+                  : channel.channel.nameEn}
+            </span>
+            {index < (topicChannel?.channels?.length ?? 0) - 1 &&
+              (lang === 'zh_hans' || lang === 'zh_hant' ? '、' : ', ')}
           </span>
-          {index < (topicChannel?.channels?.length ?? 0) - 1 &&
-            (lang === 'zh_hans' || lang === 'zh_hant' ? '、' : ', ')}
-        </span>
-      ))}
+        )
+      })}
     </>
   )
 
-  if (!isAuthor && !hasTopicChannel) {
+  if (!isAuthor && (!hasTopicChannel || isInLatestChannel)) {
     return null
+  }
+
+  if (!isAuthor && hasTopicChannel && !isInLatestChannel) {
+    return (
+      <section className={styles.content}>
+        <FormattedMessage
+          defaultMessage="Recommended to channel: {channelNames}"
+          id="0mQE3E"
+          values={{
+            channelNames: renderChannelNames(),
+          }}
+        />
+      </section>
+    )
   }
 
   if (isAuthor && !hasTopicChannel) {
@@ -91,17 +122,40 @@ const Channel = ({ article }: { article: ChannelArticleFragment }) => {
     )
   }
 
-  if (!isAuthor && hasTopicChannel) {
+  if (isAuthor && isInLatestChannel && !hasFeedback) {
     return (
-      <section className={styles.content}>
-        <FormattedMessage
-          defaultMessage="Recommended to channel: {channelNames}"
-          id="0mQE3E"
-          values={{
-            channelNames: renderChannelNames(),
-          }}
+      <>
+        <section className={styles.content}>
+          <span>
+            <FormattedMessage
+              defaultMessage="We couldn’t find a suitable channel to recommend this work. {SuggestButton}?"
+              id="pY7XQ+"
+              values={{
+                SuggestButton: (
+                  <Button
+                    onClick={toggleDrawer}
+                    textColor="black"
+                    textActiveColor="greyDarker"
+                  >
+                    <FormattedMessage
+                      defaultMessage="Suggest one"
+                      id="Jv9SoD"
+                    />
+                  </Button>
+                ),
+              }}
+            />
+          </span>
+        </section>
+        <ChannelDrawer
+          isOpen={isDrawerOpen}
+          onClose={() => setIsDrawerOpen(false)}
+          onConfirm={handleThumbsDown}
+          selectedChannels={
+            topicChannel?.channels?.map((channel) => channel.channel.id) ?? []
+          }
         />
-      </section>
+      </>
     )
   }
 

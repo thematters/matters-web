@@ -2,7 +2,7 @@
   display: flex;
   gap: var(--sp8);
   margin-top: var(--sp4);
-  font-size: var(--text14);
+  font-size: var(--text12);
   line-height: 1.125rem;
   color: var(--color-grey-dark);
 }

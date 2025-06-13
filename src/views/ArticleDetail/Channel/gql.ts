@@ -10,6 +10,7 @@ export const fragments = {
       classification {
         topicChannel {
           channels {
+            enabled
             channel {
               id
               nameZhHans: name(input: { language: zh_hans })
@@ -20,6 +21,9 @@ export const fragments = {
           feedback {
             id
             type
+            channels {
+              id
+            }
           }
         }
       }

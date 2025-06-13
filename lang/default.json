@@ -1301,6 +1301,9 @@
     "defaultMessage": "Accepted",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
   },
+  "Jv9SoD": {
+    "defaultMessage": "Suggest one"
+  },
   "Jxr/TM": {
     "defaultMessage": "FULL",
     "description": "src/components/Dialogs/AddCollectionsArticleDialog/SelectDialogContent.tsx"
@@ -2939,6 +2942,9 @@
   "pHg5Ju": {
     "defaultMessage": "Set password succeed",
     "description": "src/components/Dialogs/SetPasswordDialog/Content.tsx"
+  },
+  "pY7XQ+": {
+    "defaultMessage": "We couldn’t find a suitable channel to recommend this work. {SuggestButton}?"
   },
   "pZ1keA": {
     "defaultMessage": "The article has been removed from the featured of the event"

@@ -10,7 +10,7 @@
     "description": "src/views/Me/Settings/Settings/Password/index.tsx"
   },
   "+5O5ev": {
-    "defaultMessage": "\"{circleName}\"",
+    "defaultMessage": "{circleName}",
     "description": "src/views/ArticleDetail/Wall/Circle/index.tsx"
   },
   "+5sU+5": {
@@ -218,7 +218,7 @@
     "description": "src/components/Dialogs/SetUserNameDialog/ConfirmStep.tsx"
   },
   "1U/MPD": {
-    "defaultMessage": "Balance: ",
+    "defaultMessage": "Balance:",
     "description": "src/components/Balance/index.tsx"
   },
   "1Z1M77": {
@@ -360,7 +360,7 @@
     "defaultMessage": "The event starts on {date}, and details can be found in the announcement."
   },
   "3phEFL": {
-    "defaultMessage": "Continued use indicates your agreement to ",
+    "defaultMessage": "Continued use indicates your agreement to",
     "description": "src/components/Forms/SelectAuthMethodForm/NormalFeed.tsx"
   },
   "3raREe": {
@@ -599,7 +599,7 @@
     "description": "src/components/Dialogs/AddArticlesCollectionDialog/SearchingDialogContent.tsx"
   },
   "7oytv9": {
-    "defaultMessage": " (edited) "
+    "defaultMessage": "(edited)"
   },
   "7ykJ+l": {
     "defaultMessage": "Still quiet here. {br}Be the first one to say hello!",
@@ -801,7 +801,7 @@
     "defaultMessage": "Yes, apply"
   },
   "BHFHeY": {
-    "defaultMessage": " commented in {commentCircle}",
+    "defaultMessage": "commented in {commentCircle}",
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
   },
   "BM0Xw3": {
@@ -1301,6 +1301,9 @@
     "defaultMessage": "Accepted",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
   },
+  "Jv9SoD": {
+    "defaultMessage": "Suggest one"
+  },
   "Jxr/TM": {
     "defaultMessage": "FULL",
     "description": "src/components/Dialogs/AddCollectionsArticleDialog/SelectDialogContent.tsx"
@@ -1358,7 +1361,7 @@
     "defaultMessage": "Do not recommend to any channel"
   },
   "Kwv1n3": {
-    "defaultMessage": " registration is about 1 LIKE. During promotion period it is sponsored by Matters.News."
+    "defaultMessage": "registration is about 1 LIKE. During promotion period it is sponsored by Matters.News."
   },
   "L0J61B": {
     "defaultMessage": "Free",
@@ -1610,7 +1613,7 @@
     "description": "src/views/ArticleDetail/Edit/Header/index.tsx"
   },
   "PliM8z": {
-    "defaultMessage": "Please go to the relevant page to resend the link. You can also ",
+    "defaultMessage": "Please go to the relevant page to resend the link. You can also",
     "description": "src/views/Callback/UI.tsx"
   },
   "PmLGMc": {
@@ -2147,7 +2150,7 @@
     "defaultMessage": "You can edit the article four times after publishing it. You can also archive the original and republish.."
   },
   "ZUPQzl": {
-    "defaultMessage": " ",
+    "defaultMessage": "comment",
     "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
   },
   "ZVoJan": {
@@ -2501,7 +2504,7 @@
     "description": "src/components/Dialogs/MomentDetailDialog/Content.tsx"
   },
   "g39W4D": {
-    "defaultMessage": " (the work will appear in \"Latest\")"
+    "defaultMessage": "(the work will appear in \"Latest\")"
   },
   "g3NgLw": {
     "defaultMessage": "Confirm to move the work to \"Latest\"?"
@@ -2577,7 +2580,7 @@
     "defaultMessage": "Subscribe Circle"
   },
   "hWq/ii": {
-    "defaultMessage": "Insufficient: ",
+    "defaultMessage": "Insufficient:",
     "description": "src/components/Balance/index.tsx"
   },
   "hgtWIO": {
@@ -2940,6 +2943,9 @@
     "defaultMessage": "Set password succeed",
     "description": "src/components/Dialogs/SetPasswordDialog/Content.tsx"
   },
+  "pY7XQ+": {
+    "defaultMessage": "We couldn’t find a suitable channel to recommend this work. {SuggestButton}?"
+  },
   "pZ1keA": {
     "defaultMessage": "The article has been removed from the featured of the event"
   },
@@ -2947,7 +2953,7 @@
     "defaultMessage": "Collection"
   },
   "pjunBi": {
-    "defaultMessage": "1MB maximum",
+    "defaultMessage": "1 MB maximum",
     "description": "MIGRATION_REACH_LIMIT"
   },
   "ptTHBL": {
@@ -3246,7 +3252,7 @@
     "defaultMessage": "What is this"
   },
   "v8dGSd": {
-    "defaultMessage": "This wallet is linked to a different account",
+    "defaultMessage": "Wallet is linked to a different account",
     "description": "CRYPTO_WALLET_EXISTS"
   },
   "vAc1Bw": {
