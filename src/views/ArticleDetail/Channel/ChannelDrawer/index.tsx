@@ -19,7 +19,7 @@ type Step = 'select' | 'confirm' | 'submitted' | 'completed'
 interface ChannelDrawerProps {
   isOpen: boolean
   onClose: () => void
-  onConfirm?: (selectedChannels: string[]) => void
+  onConfirm?: (channels: string[]) => Promise<void>
   selectedChannels?: string[]
 }
 
@@ -45,7 +45,11 @@ const getChannelDisplayName = (
   }
 }
 
-const ChannelDrawer = ({ isOpen, onClose: _onClose }: ChannelDrawerProps) => {
+const ChannelDrawer = ({
+  isOpen,
+  onClose: _onClose,
+  onConfirm,
+}: ChannelDrawerProps) => {
   const intl = useIntl()
   const formId = useId()
   const { channels } = useChannels()
@@ -77,7 +81,10 @@ const ChannelDrawer = ({ isOpen, onClose: _onClose }: ChannelDrawerProps) => {
   }
 
   const handleNextStep = () => setStep('confirm')
-  const handleConfirm = () => {
+  const handleConfirm = async () => {
+    const channels =
+      values.selectedChannel === '' ? [] : [values.selectedChannel]
+    await onConfirm?.(channels)
     if (values.selectedChannel === '') {
       setStep('completed')
     } else {

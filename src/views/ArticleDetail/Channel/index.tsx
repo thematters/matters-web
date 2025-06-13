@@ -45,20 +45,17 @@ const Channel = ({ article }: { article: ChannelArticleFragment }) => {
   }
 
   const thumbsDown = () => {
-    // submitTopicChannelFeedback({
-    //   variables: {
-    //     article: article.id,
-    //     type: TopicChannelFeedbackType.Negative,
-    //     channels:
-    //       topicChannel?.channels?.map((channel) => channel.channel.id) ?? [],
-    //   },
-    // })
     setIsDrawerOpen(true)
   }
 
-  const handleChannelSelection = (selectedChannels: string[]) => {
-    // Handle channel selection logic here
-    console.log('Selected channels:', selectedChannels)
+  const handleThumbsDown = async (channels: string[]) => {
+    await submitTopicChannelFeedback({
+      variables: {
+        article: article.id,
+        type: TopicChannelFeedbackType.Negative,
+        channels,
+      },
+    })
   }
 
   const renderChannelNames = () => (
@@ -165,7 +162,7 @@ const Channel = ({ article }: { article: ChannelArticleFragment }) => {
       <ChannelDrawer
         isOpen={isDrawerOpen}
         onClose={() => setIsDrawerOpen(false)}
-        onConfirm={handleChannelSelection}
+        onConfirm={handleThumbsDown}
         selectedChannels={
           topicChannel?.channels?.map((channel) => channel.channel.id) ?? []
         }
