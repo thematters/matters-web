@@ -677,6 +677,9 @@
     "defaultMessage": "已关注",
     "description": "src/components/Buttons/FollowUser/Unfollow.tsx"
   },
+  "95stPq": {
+    "defaultMessage": "已完成"
+  },
   "99OtWT": {
     "defaultMessage": "写入中…"
   },

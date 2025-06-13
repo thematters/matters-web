@@ -14,7 +14,7 @@ import {
 
 import styles from './styles.module.css'
 
-type Step = 'select' | 'confirm' | 'submitted'
+type Step = 'select' | 'confirm' | 'submitted' | 'completed'
 
 interface ChannelDrawerProps {
   isOpen: boolean
@@ -77,7 +77,13 @@ const ChannelDrawer = ({ isOpen, onClose: _onClose }: ChannelDrawerProps) => {
   }
 
   const handleNextStep = () => setStep('confirm')
-  const handleConfirm = () => setStep('submitted')
+  const handleConfirm = () => {
+    if (values.selectedChannel === '') {
+      setStep('completed')
+    } else {
+      setStep('submitted')
+    }
+  }
 
   const handleClose = () => {
     setTimeout(() => setStep('select'), 200)
@@ -246,6 +252,30 @@ const ChannelDrawer = ({ isOpen, onClose: _onClose }: ChannelDrawerProps) => {
     </>
   )
 
+  const renderCompletedStep = () => (
+    <>
+      <section className={styles.confirmTitle}>
+        <FormattedMessage defaultMessage="Completed" id="95stPq" />
+      </section>
+
+      <section className={styles.submittedContent}>
+        <section className={styles.submittedIcon}>
+          <Icon icon={IconCircleCheckFill} size={40} color="green" />
+        </section>
+      </section>
+
+      <Dialog.RoundedButton
+        color="black"
+        onClick={handleClose}
+        borderColor="greyLight"
+        borderWidth="sm"
+        textWeight="normal"
+        borderActiveColor="grey"
+        text={<FormattedMessage defaultMessage="Got it" id="NYTGIb" />}
+      />
+    </>
+  )
+
   const renderStepContent = () => {
     switch (step) {
       case 'select':
@@ -254,6 +284,8 @@ const ChannelDrawer = ({ isOpen, onClose: _onClose }: ChannelDrawerProps) => {
         return renderConfirmStep()
       case 'submitted':
         return renderSubmittedStep()
+      case 'completed':
+        return renderCompletedStep()
       default:
         return null
     }

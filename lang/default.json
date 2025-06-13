@@ -677,6 +677,9 @@
     "defaultMessage": "Followed",
     "description": "src/components/Buttons/FollowUser/Unfollow.tsx"
   },
+  "95stPq": {
+    "defaultMessage": "Completed"
+  },
   "99OtWT": {
     "defaultMessage": "Pending..."
   },
