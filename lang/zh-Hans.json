@@ -2250,13 +2250,6 @@
   "cd/II9": {
     "defaultMessage": "{totalCount, plural, =1 {篇文章} other {篇文章}}"
   },
-  "cg1VJ2": {
-    "defaultMessage": "连接加密钱包"
-  },
-  "cd8EmU": {
-    "defaultMessage": "的搜索结果",
-    "description": "src/views/Search/AggregateResults/index.tsx"
-  },
   "cmtHjM": {
     "defaultMessage": "由于你尚未发布任何作品，这裡还没有任何数据能与你分享哦！发布第一篇作品来介绍你自己，以此开启你的创作之旅吧！",
     "description": "src/views/Me/Analytics/EmptyAnalytics/index.tsx"

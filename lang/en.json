@@ -2250,13 +2250,6 @@
   "cd/II9": {
     "defaultMessage": "{totalCount, plural, =1 {article} other {articles}}"
   },
-  "cg1VJ2": {
-    "defaultMessage": "Connect Wallet"
-  },
-  "cd8EmU": {
-    "defaultMessage": "",
-    "description": "src/views/Search/AggregateResults/index.tsx"
-  },
   "cmtHjM": {
     "defaultMessage": "You haven‘t published any articles yet, so there is no data available. Create one now to introduce yourself!",
     "description": "src/views/Me/Analytics/EmptyAnalytics/index.tsx"
