@@ -37,8 +37,7 @@ const Channel = ({ article }: { article: ChannelArticleFragment }) => {
       variables: {
         article: article.id,
         type: TopicChannelFeedbackType.Positive,
-        channels:
-          topicChannel?.channels?.map((channel) => channel.channel.id) ?? [],
+        channels: [],
       },
     }).then(() => {
       setHasThumbsUp(true)
@@ -114,13 +113,15 @@ const Channel = ({ article }: { article: ChannelArticleFragment }) => {
       <section className={styles.content}>
         {!hasFeedback && !hasThumbsUp && (
           <>
-            <FormattedMessage
-              defaultMessage="Your work has been recommended to the channels: {channelNames}. Are you satisfied with the result?"
-              id="dZlT9q"
-              values={{
-                channelNames: renderChannelNames(),
-              }}
-            />
+            <span>
+              <FormattedMessage
+                defaultMessage="Your work has been recommended to the channels: {channelNames}. Are you satisfied with the result?"
+                id="dZlT9q"
+                values={{
+                  channelNames: renderChannelNames(),
+                }}
+              />
+            </span>
             <Button
               aria-label="Thumbs up"
               onClick={thumbsUp}
@@ -143,13 +144,15 @@ const Channel = ({ article }: { article: ChannelArticleFragment }) => {
         )}
         {(hasFeedback || hasThumbsUp) && (
           <>
-            <FormattedMessage
-              defaultMessage="Recommended to channel: {channelNames}"
-              id="0mQE3E"
-              values={{
-                channelNames: renderChannelNames(),
-              }}
-            />
+            <span>
+              <FormattedMessage
+                defaultMessage="Recommended to channel: {channelNames}"
+                id="0mQE3E"
+                values={{
+                  channelNames: renderChannelNames(),
+                }}
+              />
+            </span>
             {hasThumbsUp && (
               <FormattedMessage
                 defaultMessage=". Really appreciate it!"
