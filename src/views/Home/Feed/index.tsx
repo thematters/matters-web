@@ -26,6 +26,7 @@ const HomeFeed = () => {
   return (
     <Layout.Main>
       {!isInChannel && !isInFeatured && <Spacer size="sp20" />}
+
       {isInChannel || (isBetaEnv && isInFeatured) ? (
         <ChannelFeed
           shortHash={isInFeatured ? FEATUED_CHANNEL_SHORT_HASH : ''}
