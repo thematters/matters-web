@@ -82,14 +82,10 @@ const ChannelDrawer = ({
 
   const handleNextStep = () => setStep('confirm')
   const handleConfirm = async () => {
-    const channels =
-      values.selectedChannel === '' ? [] : [values.selectedChannel]
+    const isEmpty = values.selectedChannel === ''
+    const channels = isEmpty ? [] : [values.selectedChannel]
     await onConfirm?.(channels)
-    if (values.selectedChannel === '') {
-      setStep('completed')
-    } else {
-      setStep('submitted')
-    }
+    setStep(isEmpty ? 'completed' : 'submitted')
   }
 
   const handleClose = () => {
