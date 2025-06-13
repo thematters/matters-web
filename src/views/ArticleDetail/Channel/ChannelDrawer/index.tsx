@@ -185,10 +185,17 @@ const ChannelDrawer = ({ isOpen, onClose: _onClose }: ChannelDrawerProps) => {
             }}
           />
         ) : (
-          <FormattedMessage
-            defaultMessage='Confirm to move the work to "Latest"? (This action is immediate and cannot be undone.)'
-            id="2HzRMW"
-          />
+          <>
+            <FormattedMessage
+              defaultMessage='Confirm to move the work to "Latest"?'
+              id="g3NgLw"
+            />
+            <br />
+            <FormattedMessage
+              defaultMessage="(This action is immediate and cannot be undone.)"
+              id="fpLpPO"
+            />
+          </>
         )}
       </section>
 
@@ -216,8 +223,13 @@ const ChannelDrawer = ({ isOpen, onClose: _onClose }: ChannelDrawerProps) => {
         </section>
         <section className={styles.submittedText}>
           <FormattedMessage
-            defaultMessage="Your suggestion has been submitted to the editor. Once it's approved, the channel will be updated : )"
-            id="kS/PMU"
+            defaultMessage="Your suggestion has been submitted to the editor. "
+            id="KhbWu2"
+          />
+          <br />
+          <FormattedMessage
+            defaultMessage="Once it's approved, the channel will be updated : )"
+            id="HJhf1Q"
           />
         </section>
       </section>

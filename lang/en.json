@@ -276,9 +276,6 @@
   "2D/X90": {
     "defaultMessage": "Why Optimism?"
   },
-  "2HzRMW": {
-    "defaultMessage": "Confirm to move the work to \"Latest\"? (This action is immediate and cannot be undone.)"
-  },
   "2J3mz4": {
     "defaultMessage": "Add to event featured"
   },
@@ -1154,6 +1151,9 @@
   "HJ0iZJ": {
     "defaultMessage": "Confirm Archiving"
   },
+  "HJhf1Q": {
+    "defaultMessage": "Once it's approved, the channel will be updated : )"
+  },
   "HJsl78": {
     "defaultMessage": "An issue occurred while claiming USDT. Please retry or contact ask@matters.town"
   },
@@ -1343,6 +1343,9 @@
   "KgVypx": {
     "defaultMessage": "Topics",
     "description": "src/components/Dialogs/TagListDialog/index.tsx"
+  },
+  "KhbWu2": {
+    "defaultMessage": "Your suggestion has been submitted to the editor."
   },
   "KlJEP9": {
     "defaultMessage": "Wallet connected",
@@ -2477,6 +2480,9 @@
   "fnv5rD": {
     "defaultMessage": "like article (current {total} likes)"
   },
+  "fpLpPO": {
+    "defaultMessage": "(This action is immediate and cannot be undone.)"
+  },
   "fsB/4p": {
     "defaultMessage": "Saved"
   },
@@ -2492,7 +2498,10 @@
     "description": "src/components/Dialogs/MomentDetailDialog/Content.tsx"
   },
   "g39W4D": {
-    "defaultMessage": "(the work will appear in \"Latest\")"
+    "defaultMessage": " (the work will appear in \"Latest\")"
+  },
+  "g3NgLw": {
+    "defaultMessage": "Confirm to move the work to \"Latest\"?"
   },
   "g5pX+a": {
     "defaultMessage": "About"
@@ -2693,9 +2702,6 @@
   "kPylKK": {
     "defaultMessage": "Circle",
     "description": "src/views/Me/Settings/Notifications/index.tsx"
-  },
-  "kS/PMU": {
-    "defaultMessage": "Your suggestion has been submitted to the editor. Once it's approved, the channel will be updated : )"
   },
   "kS3vTS": {
     "defaultMessage": "Liker ID",

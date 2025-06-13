@@ -276,9 +276,6 @@
   "2D/X90": {
     "defaultMessage": "为什么采用 Optimism？"
   },
-  "2HzRMW": {
-    "defaultMessage": "Confirm to move the work to \"Latest\"? (This action is immediate and cannot be undone.)"
-  },
   "2J3mz4": {
     "defaultMessage": "加到活动精选"
   },
@@ -344,7 +341,7 @@
     "defaultMessage": "作品"
   },
   "3MZvMF": {
-    "defaultMessage": "Would you like to recommend your work to the channel: {channelName}?"
+    "defaultMessage": "希望将作品推荐到频道：{channelName}？"
   },
   "3Tg548": {
     "defaultMessage": "登录",
@@ -1154,6 +1151,9 @@
   "HJ0iZJ": {
     "defaultMessage": "确认归档"
   },
+  "HJhf1Q": {
+    "defaultMessage": "编辑确认后频道将会改变 : )"
+  },
   "HJsl78": {
     "defaultMessage": "提领支持金额时遇到问题，请重试或联系 ask@matters.town"
   },
@@ -1344,12 +1344,15 @@
     "defaultMessage": "标签",
     "description": "src/components/Dialogs/TagListDialog/index.tsx"
   },
+  "KhbWu2": {
+    "defaultMessage": "已将你的建议提交给编辑"
+  },
   "KlJEP9": {
     "defaultMessage": "钱包已绑定",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
   },
   "Kt6f7U": {
-    "defaultMessage": "Do not recommend to any channel"
+    "defaultMessage": "不参与频道推荐"
   },
   "Kwv1n3": {
     "defaultMessage": " 用以出版 Writing NFT，费用 ≈1 LIKE，推广期由平台补助"
@@ -2086,7 +2089,7 @@
     "defaultMessage": "回复评论"
   },
   "Y9IYvj": {
-    "defaultMessage": "No suitable channels"
+    "defaultMessage": "没有适合的频道"
   },
   "YDMrKK": {
     "defaultMessage": "用户"
@@ -2423,7 +2426,7 @@
     "description": "src/components/Buttons/FollowUser/FollowState.tsx"
   },
   "exG99K": {
-    "defaultMessage": "Submit Confirmation"
+    "defaultMessage": "提交确认"
   },
   "exb/12": {
     "defaultMessage": "之后就可以透过钱包快速登入啰！",
@@ -2477,6 +2480,9 @@
   "fnv5rD": {
     "defaultMessage": "赞赏作品（当前 {total} 次赞赏）"
   },
+  "fpLpPO": {
+    "defaultMessage": "（该操作会即刻生效且无法撤销）"
+  },
   "fsB/4p": {
     "defaultMessage": "保存成功"
   },
@@ -2492,7 +2498,10 @@
     "description": "src/components/Dialogs/MomentDetailDialog/Content.tsx"
   },
   "g39W4D": {
-    "defaultMessage": "(the work will appear in \"Latest\")"
+    "defaultMessage": "（文章将出现在「还有」中）"
+  },
+  "g3NgLw": {
+    "defaultMessage": "确认将作品移到「还有」？"
   },
   "g5pX+a": {
     "defaultMessage": "关于"
@@ -2693,9 +2702,6 @@
   "kPylKK": {
     "defaultMessage": "围炉",
     "description": "src/views/Me/Settings/Notifications/index.tsx"
-  },
-  "kS/PMU": {
-    "defaultMessage": "Your suggestion has been submitted to the editor. Once it's approved, the channel will be updated : )"
   },
   "kS3vTS": {
     "defaultMessage": "Liker ID",
@@ -3061,7 +3067,7 @@
     "description": "CODE_EXPIRED"
   },
   "raexxM": {
-    "defaultMessage": "Submitted"
+    "defaultMessage": "已提交"
   },
   "rbrahO": {
     "defaultMessage": "关闭"
@@ -3476,7 +3482,7 @@
     "defaultMessage": "不支持单独使用标点符号"
   },
   "yx0LeF": {
-    "defaultMessage": "Select the channel you want to recommend (single choice)"
+    "defaultMessage": "选择希望推荐到的频道（单选）"
   },
   "yxMEo/": {
     "defaultMessage": "作品已添加至活动精选"
