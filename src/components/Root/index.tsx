@@ -27,7 +27,7 @@ import {
   useRoute,
   ViewerProvider,
 } from '~/components'
-import { ChannelsProvider } from '~/components/Context'
+import { ChannelsProvider, FetchPolicyProvider } from '~/components/Context'
 import { RootQueryPrivateQuery } from '~/gql/graphql'
 
 import { ROOT_QUERY_PRIVATE } from './gql'
@@ -53,6 +53,13 @@ const DynamicGlobalToasts = dynamic(() => import('~/components/GlobalToasts'), {
 const DynamicFingerprint = dynamic(() => import('~/components/Fingerprint'), {
   ssr: false,
 })
+const DynamicFetchPolicyOnRouteChange = dynamic(
+  () =>
+    import('~/components/Context/FetchPolicy').then(
+      (mod) => mod.FetchPolicyOnRouteChange
+    ),
+  { ssr: false }
+)
 
 /**
  * `<Root>` contains components that depend on viewer
@@ -131,16 +138,23 @@ const Root = ({
             <FeaturesProvider official={official}>
               <MediaContextProvider>
                 <TranslationsProvider>
-                  <ChannelsProvider channels={channels || []}>
-                    {shouldApplyLayout ? <Layout>{children}</Layout> : children}
+                  <FetchPolicyProvider>
+                    <ChannelsProvider channels={channels || []}>
+                      {shouldApplyLayout ? (
+                        <Layout>{children}</Layout>
+                      ) : (
+                        children
+                      )}
 
-                    <DynamicToaster />
-                    <DynamicAnalyticsInitilizer user={viewer || {}} />
-                    <DynamicGlobalDialogs />
-                    <DynamicGlobalToasts />
-                    <DynamicProgressBar />
-                    <DynamicFingerprint />
-                  </ChannelsProvider>
+                      <DynamicToaster />
+                      <DynamicAnalyticsInitilizer user={viewer || {}} />
+                      <DynamicGlobalDialogs />
+                      <DynamicGlobalToasts />
+                      <DynamicProgressBar />
+                      <DynamicFingerprint />
+                      <DynamicFetchPolicyOnRouteChange />
+                    </ChannelsProvider>
+                  </FetchPolicyProvider>
                 </TranslationsProvider>
               </MediaContextProvider>
             </FeaturesProvider>
