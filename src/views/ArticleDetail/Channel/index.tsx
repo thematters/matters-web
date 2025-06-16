@@ -70,28 +70,30 @@ const Channel = ({ article }: { article: ChannelArticleFragment }) => {
     })
   }
 
-  const renderChannelNames = () => (
-    <>
-      {topicChannel?.channels?.map((channel, index) => {
-        if (!channel.enabled) {
-          return null
-        }
-        return (
-          <span key={channel.channel.id} className={styles.channelNames}>
-            <span className={styles.channelNames}>
-              {lang === 'zh_hans'
-                ? channel.channel.nameZhHans
-                : lang === 'zh_hant'
-                  ? channel.channel.nameZhHant
-                  : channel.channel.nameEn}
+  const renderChannelNames = () => {
+    const enabledChannels = topicChannel?.channels?.filter(
+      (channel) => channel.enabled
+    )
+    return (
+      <>
+        {enabledChannels?.map((channel, index) => {
+          return (
+            <span key={channel.channel.id} className={styles.channelNames}>
+              <span className={styles.channelNames}>
+                {lang === 'zh_hans'
+                  ? channel.channel.nameZhHans
+                  : lang === 'zh_hant'
+                    ? channel.channel.nameZhHant
+                    : channel.channel.nameEn}
+              </span>
+              {index < (enabledChannels?.length ?? 0) - 1 &&
+                (lang === 'zh_hans' || lang === 'zh_hant' ? '、' : ', ')}
             </span>
-            {index < (topicChannel?.channels?.length ?? 0) - 1 &&
-              (lang === 'zh_hans' || lang === 'zh_hant' ? '、' : ', ')}
-          </span>
-        )
-      })}
-    </>
-  )
+          )
+        })}
+      </>
+    )
+  }
 
   if (!isAuthor && (!hasTopicChannel || isInLatestChannel)) {
     return null
