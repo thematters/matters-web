@@ -185,7 +185,7 @@ const Channel = ({ article }: ChannelProps) => {
     </>
   )
 
-  const ChannelDrawerComponent = () => (
+  const ChannelDrawerComponent = (
     <ChannelDrawer
       isOpen={state.isDrawerOpen}
       onClose={() => setState((prev) => ({ ...prev, isDrawerOpen: false }))}
@@ -260,7 +260,7 @@ const Channel = ({ article }: ChannelProps) => {
             </span>
           </section>
           <AntiFloodedNotice />
-          <ChannelDrawerComponent />
+          {ChannelDrawerComponent}
         </>
       )
     }
@@ -314,7 +314,7 @@ const Channel = ({ article }: ChannelProps) => {
           )}
         </section>
         <AntiFloodedNotice />
-        <ChannelDrawerComponent />
+        {ChannelDrawerComponent}
       </>
     )
   }
