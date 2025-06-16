@@ -17,6 +17,7 @@ import {
 import {
   MetaInfoArticleFragment,
   MetaInfoArticleVersionFragment,
+  TranslationModel,
 } from '~/gql/graphql'
 
 import { fragments } from './gql'
@@ -30,6 +31,7 @@ type MetaInfoProps = {
   translating: boolean
   canTranslate: boolean
   toggleTranslate: () => void
+  model?: TranslationModel | null
   canReadFullContent: boolean
   editable?: boolean
 }
@@ -41,6 +43,7 @@ const MetaInfo = ({
   translating,
   canTranslate,
   toggleTranslate,
+  model,
   canReadFullContent,
   editable,
 }: MetaInfoProps) => {
@@ -144,6 +147,7 @@ const MetaInfo = ({
                 translating={translating}
                 toggleTranslate={toggleTranslate}
                 originalLanguage={originalLanguage}
+                model={model}
               />
             </>
           )}

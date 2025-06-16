@@ -2,6 +2,7 @@ import { useRouter } from 'next/router'
 import { useContext } from 'react'
 import baseToast from 'react-hot-toast'
 import { FormattedMessage } from 'react-intl'
+import { useAccount, useDisconnect } from 'wagmi'
 
 import IconCircle from '@/public/static/icons/24px/circle.svg'
 import IconData from '@/public/static/icons/24px/data.svg'
@@ -111,6 +112,9 @@ const Top: React.FC = () => {
 
 const Bottom = () => {
   const router = useRouter()
+  const { address } = useAccount()
+  const { disconnect } = useDisconnect()
+
   const [logout, { client }] = useMutation<UserLogoutMutation>(
     USER_LOGOUT,
     {
@@ -135,6 +139,10 @@ const Bottom = () => {
       await logout()
 
       removeCookies([COOKIE_TOKEN_NAME, COOKIE_USER_GROUP])
+
+      if (address) {
+        disconnect()
+      }
     } catch {
       toast.error({
         message: (

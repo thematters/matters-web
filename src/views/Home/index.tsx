@@ -19,6 +19,7 @@ const Home = () => {
       }
     >
       <Head image={IMAGE_INTRO.src} />
+
       <Feed />
     </Layout.Main>
   )

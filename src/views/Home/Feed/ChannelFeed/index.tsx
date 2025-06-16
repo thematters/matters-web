@@ -2,7 +2,13 @@ import React, { useContext, useEffect, useRef } from 'react'
 import { useIntl } from 'react-intl'
 
 import { analytics, mergeConnections } from '~/common/utils'
-import { EmptyWork, Media, usePublicQuery, ViewerContext } from '~/components'
+import {
+  EmptyWork,
+  Media,
+  useFetchPolicy,
+  usePublicQuery,
+  ViewerContext,
+} from '~/components'
 import { useRoute } from '~/components'
 import { FeedArticlesPublicChannelQuery } from '~/gql/graphql'
 
@@ -13,18 +19,24 @@ import { ArticleDigestCurated } from '../IcymiCuratedFeed/ArticleDigestCurated'
 import feedStyles from '../styles.module.css'
 import { ChannelHeader } from './ChannelHeader'
 
-const ChannelFeed = () => {
+type ChannelFeedProps = {
+  shortHash: string
+}
+
+const ChannelFeed = ({ shortHash: _shortHash }: ChannelFeedProps) => {
   const intl = useIntl()
   const viewer = useContext(ViewerContext)
   const { getQuery } = useRoute()
-  const shortHash = getQuery('shortHash')
+  const shortHash = _shortHash || getQuery('shortHash')
   const feedType = 'channel'
   const numOfCards = 6
+
+  const { fetchPolicy } = useFetchPolicy()
 
   const { data, error, loading, fetchMore, client } =
     usePublicQuery<FeedArticlesPublicChannelQuery>(
       FEED_ARTICLES_PUBLIC_CHANNEL,
-      { variables: { shortHash } }
+      { fetchPolicy, variables: { shortHash } }
     )
 
   const connectionPath = 'channel.articles'

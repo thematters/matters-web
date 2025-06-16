@@ -1,3 +1,4 @@
+import * as Sentry from '@sentry/nextjs'
 import gql from 'graphql-tag'
 import React from 'react'
 
@@ -114,14 +115,15 @@ export const processViewer = (viewer: ViewerUser): Viewer => {
   const shouldSetupLikerID = isAuthed && !viewer.liker.likerId
 
   // Add user info for Sentry
-  import('@sentry/browser').then((Sentry) => {
-    Sentry.getCurrentScope()
-      .setUser({
-        id: viewer.id,
-        language: viewer.settings.language,
-      })
-      .setTag('source', 'web')
-  })
+  Sentry.getCurrentScope()
+    .setUser({
+      id: viewer.id,
+      username: viewer.userName || undefined,
+    })
+    .setTags({
+      source: 'web',
+      language: viewer.settings.language,
+    })
 
   return {
     ...viewer,
