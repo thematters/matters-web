@@ -1076,6 +1076,9 @@
   "FuYW4i": {
     "defaultMessage": "成为围炉一员，一起谈天说地"
   },
+  "FujwCx": {
+    "defaultMessage": "{SuggestButton}？"
+  },
   "FxrSCh": {
     "defaultMessage": "ID 设置后无法修改，确认使用 {id} 作为 Matters ID 吗？",
     "description": "src/components/Dialogs/SetUserNameDialog/ConfirmStep.tsx"
@@ -1300,6 +1303,9 @@
   "JpS59y": {
     "defaultMessage": "已接受",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
+  },
+  "Jv9SoD": {
+    "defaultMessage": "建议频道"
   },
   "Jxr/TM": {
     "defaultMessage": "已满",
@@ -2469,6 +2475,9 @@
   },
   "fPcF7H": {
     "defaultMessage": "添加适合标签，帮助读者找到你的作品"
+  },
+  "fUGPBI": {
+    "defaultMessage": "未能帮你为此作品找到合适的推荐频道。"
   },
   "fWDtpq": {
     "defaultMessage": "邀请中",
