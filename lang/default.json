@@ -786,6 +786,10 @@
     "defaultMessage": "Please set your transcation password.",
     "description": "PAYMENT_PASSWORD_NOT_SET"
   },
+  "B1UqZN": {
+    "defaultMessage": "Translation quota exhausted. Try later.",
+    "description": "TRANSLATION_INSUFFICIENT_CREDITS"
+  },
   "B9IFMF": {
     "defaultMessage": "Yes, apply"
   },
