@@ -30,6 +30,7 @@ const Channel = ({ article }: { article: ChannelArticleFragment }) => {
   const allChannelsDisabled = topicChannel?.channels?.every(
     (channel) => !channel.enabled
   )
+
   const feedbackToLatestChannel =
     hasFeedback &&
     topicChannel?.feedback?.type === TopicChannelFeedbackType.Negative &&
@@ -38,6 +39,10 @@ const Channel = ({ article }: { article: ChannelArticleFragment }) => {
     (hasTopicChannel && topicChannel?.channels?.length === 0) ||
     (hasTopicChannel && allChannelsDisabled)
   console.log({ feedbackToLatestChannel })
+
+  const hasAntiFlooded = topicChannel?.channels?.some(
+    (channel) => channel.antiFlooded
+  )
 
   const [submitTopicChannelFeedback] =
     useMutation<SubmitTopicChannelFeedbackMutation>(
@@ -68,6 +73,20 @@ const Channel = ({ article }: { article: ChannelArticleFragment }) => {
         channels,
       },
     })
+  }
+
+  const AntiFlooded = () => {
+    // if (!hasAntiFlooded) {
+    //   return null
+    // }
+    return (
+      <section className={styles.content}>
+        <FormattedMessage
+          defaultMessage={`We’ve detected that several of your recent works have been recommended to related channels. They may not appear at the same time`}
+          id="DtO278"
+        />
+      </section>
+    )
   }
 
   const renderChannelNames = () => {
@@ -101,6 +120,7 @@ const Channel = ({ article }: { article: ChannelArticleFragment }) => {
 
   if (!isAuthor && hasTopicChannel && !isInLatestChannel) {
     return (
+      <>
       <section className={styles.content}>
         <FormattedMessage
           defaultMessage="Recommended to channel: {channelNames}"
@@ -110,17 +130,22 @@ const Channel = ({ article }: { article: ChannelArticleFragment }) => {
           }}
         />
       </section>
+      <AntiFlooded />
+      </>
     )
   }
 
   if (isAuthor && !hasTopicChannel) {
     return (
+      <>
       <section className={styles.content}>
         <FormattedMessage
           defaultMessage="Recommending channels for your work…"
           id="S+D/hf"
         />
       </section>
+      <AntiFlooded />
+      </>
     )
   }
 
@@ -153,6 +178,7 @@ const Channel = ({ article }: { article: ChannelArticleFragment }) => {
             />
           </span>
         </section>
+        <AntiFlooded />
         <ChannelDrawer
           isOpen={isDrawerOpen}
           onClose={() => setIsDrawerOpen(false)}
@@ -176,6 +202,7 @@ const Channel = ({ article }: { article: ChannelArticleFragment }) => {
             />
           </span>
         </section>
+        <AntiFlooded />
       </>
     )
   }
@@ -234,6 +261,7 @@ const Channel = ({ article }: { article: ChannelArticleFragment }) => {
           </>
         )}
       </section>
+      <AntiFlooded />
       <ChannelDrawer
         isOpen={isDrawerOpen}
         onClose={() => setIsDrawerOpen(false)}

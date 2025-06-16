@@ -11,6 +11,7 @@ export const fragments = {
         topicChannel {
           channels {
             enabled
+            antiFlooded
             channel {
               id
               nameZhHans: name(input: { language: zh_hans })

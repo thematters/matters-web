@@ -966,6 +966,9 @@
     "defaultMessage": "Unpin Broadcast",
     "description": "src/components/CircleComment/DropdownActions/PinButton.tsx"
   },
+  "DtO278": {
+    "defaultMessage": "We’ve detected that several of your recent works have been recommended to related channels. They may not appear at the same time"
+  },
   "DyuHBH": {
     "defaultMessage": "Unpin from profile",
     "description": "src/components/CollectionDigest/DropdownActions/PinButton.tsx"

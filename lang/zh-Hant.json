@@ -966,6 +966,9 @@
     "defaultMessage": "取消置頂",
     "description": "src/components/CircleComment/DropdownActions/PinButton.tsx"
   },
+  "DtO278": {
+    "defaultMessage": "檢測到近期你的多篇文章被推薦到相關頻道，它們有可能不會同時出現"
+  },
   "DyuHBH": {
     "defaultMessage": "取消代表作",
     "description": "src/components/CollectionDigest/DropdownActions/PinButton.tsx"
