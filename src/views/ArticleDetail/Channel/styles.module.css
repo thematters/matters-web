@@ -10,3 +10,9 @@
 .channelNames {
   color: var(--color-black);
 }
+
+.feedbackButtons {
+  display: flex;
+  gap: var(--sp8);
+  margin-top: var(--sp4);
+}

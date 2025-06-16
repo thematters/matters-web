@@ -308,14 +308,35 @@ const Channel = ({ article }: ChannelProps) => {
             <section className={styles.content}>
               {!channelData.hasFeedback && !state.hasThumbsUp ? (
                 <>
-                  <span>
-                    <FormattedMessage
-                      defaultMessage="Your work has been recommended to the channels: {channelNames}. Are you satisfied with the result?"
-                      id="dZlT9q"
-                      values={{ channelNames: renderChannelNames() }}
-                    />
-                  </span>
-                  <FeedbackButtons openDialog={openDialog} />
+                  <Media lessThan="md">
+                    <span>
+                      <FormattedMessage
+                        defaultMessage="Your work has been recommended to the channels: {channelNames}"
+                        id="eNv3Wm"
+                        values={{ channelNames: renderChannelNames() }}
+                      />
+                    </span>
+                    <br />
+                    <section className={styles.feedbackButtons}>
+                      <span>
+                        <FormattedMessage
+                          defaultMessage="Are you satisfied with the result?"
+                          id="GvHgNX"
+                        />
+                      </span>
+                      <FeedbackButtons openDialog={openDialog} />
+                    </section>
+                  </Media>
+                  <Media greaterThanOrEqual="md">
+                    <span>
+                      <FormattedMessage
+                        defaultMessage="Your work has been recommended to the channels: {channelNames}. Are you satisfied with the result?"
+                        id="dZlT9q"
+                        values={{ channelNames: renderChannelNames() }}
+                      />
+                    </span>
+                    <FeedbackButtons openDialog={openDialog} />
+                  </Media>
                 </>
               ) : (
                 <>

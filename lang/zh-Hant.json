@@ -1127,6 +1127,9 @@
     "defaultMessage": "本月新增追蹤人數",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
   },
+  "GvHgNX": {
+    "defaultMessage": "你對結果滿意嗎？"
+  },
   "H0JBH6": {
     "defaultMessage": "登出"
   },
@@ -2383,6 +2386,9 @@
   },
   "eKVBm/": {
     "defaultMessage": "Optimism 是獨立運行的區塊鏈，若你在其他鏈上已有 USDT 貨幣，需要將它們轉移到 Optimism 網絡才能使用，詳情參考{link}。"
+  },
+  "eNv3Wm": {
+    "defaultMessage": "已推薦你的這篇作品到頻道：{channelNames}"
   },
   "eTpiYa": {
     "defaultMessage": "尚無支持數據"

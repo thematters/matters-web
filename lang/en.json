@@ -1127,6 +1127,9 @@
     "defaultMessage": "New Followers This Month",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
   },
+  "GvHgNX": {
+    "defaultMessage": "Are you satisfied with the result?"
+  },
   "H0JBH6": {
     "defaultMessage": "Log Out"
   },
@@ -2383,6 +2386,9 @@
   },
   "eKVBm/": {
     "defaultMessage": "Optimism is a standalone blockchain. If you have USDT on other chains, you need to transfer them to Optimism. See details in the {link}."
+  },
+  "eNv3Wm": {
+    "defaultMessage": "Your work has been recommended to the channels: {channelNames}"
   },
   "eTpiYa": {
     "defaultMessage": "No data yet."
