@@ -1,5 +1,12 @@
 import IMAGE_INTRO from '@/public/static/images/intro.jpg'
-import { Announcements, Head, Layout, Spacer } from '~/components'
+import {
+  Announcements,
+  FetchPolicyOnRouteChange,
+  FetchPolicyProvider,
+  Head,
+  Layout,
+  Spacer,
+} from '~/components'
 
 import Feed from './Feed'
 import Sidebar from './Sidebar'
@@ -19,7 +26,12 @@ const Home = () => {
       }
     >
       <Head image={IMAGE_INTRO.src} />
-      <Feed />
+
+      <FetchPolicyProvider>
+        <Feed />
+
+        <FetchPolicyOnRouteChange />
+      </FetchPolicyProvider>
     </Layout.Main>
   )
 }
