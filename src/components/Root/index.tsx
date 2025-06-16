@@ -47,7 +47,6 @@ const DynamicGlobalDialogs = dynamic(
   () => import('~/components/GlobalDialogs'),
   { ssr: false }
 )
-
 const DynamicGlobalToasts = dynamic(() => import('~/components/GlobalToasts'), {
   ssr: false,
 })
