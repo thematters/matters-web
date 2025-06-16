@@ -4,7 +4,13 @@ import { FormattedMessage } from 'react-intl'
 
 import IconThumbsDown from '@/public/static/icons/24px/thumb-down.svg'
 import IconThumbsUp from '@/public/static/icons/24px/thumb-up.svg'
-import { Button, Icon, LanguageContext, Media, ViewerContext } from '~/components'
+import {
+  Button,
+  Icon,
+  LanguageContext,
+  Media,
+  ViewerContext,
+} from '~/components'
 import {
   ChannelArticleFragment,
   SubmitTopicChannelFeedbackMutation,

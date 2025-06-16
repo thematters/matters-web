@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { Dialog, useDialogSwitch } from '~/components'
+import IconTimes from '@/public/static/icons/24px/times.svg'
+import { Dialog, Icon, useDialogSwitch } from '~/components'
 
 import Content, { Step } from '../Content'
 interface ChannelDialogProps {
@@ -10,20 +11,19 @@ interface ChannelDialogProps {
   selectedChannels?: string[]
 }
 
-const BaseChannelDialog = ({
-  children,
-  onConfirm,
-}: ChannelDialogProps) => {
+const BaseChannelDialog = ({ children, onConfirm }: ChannelDialogProps) => {
   const [step, setStep] = useState<Step>('select')
-  const { show, openDialog, closeDialog } = useDialogSwitch(true)
+  const { show, openDialog, closeDialog: _closeDialog } = useDialogSwitch(true)
+
+  const closeDialog = () => {
+    setTimeout(() => setStep('select'), 200)
+    _closeDialog()
+  }
 
   return (
     <>
       {children({ openDialog })}
-      <Dialog
-        isOpen={show}
-        onDismiss={closeDialog}
-      >
+      <Dialog isOpen={show} onDismiss={closeDialog}>
         <Dialog.Header
           title={
             <FormattedMessage defaultMessage="Channel suggestion" id="A4P0al" />
@@ -31,8 +31,8 @@ const BaseChannelDialog = ({
           titleLeft
           rightBtn={
             <Dialog.TextButton
-              text={<FormattedMessage defaultMessage="Close" id="rbrahO" />}
-              color="greyDarker"
+              text={<Icon icon={IconTimes} size={24} />}
+              color="black"
               onClick={closeDialog}
             />
           }
