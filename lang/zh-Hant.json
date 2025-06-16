@@ -1,2712 +1,2709 @@
 {
   "+12veD": {
-    "defaultMessage": "Allow Responses"
+    "defaultMessage": "開啟評論"
   },
   "+3ny7b": {
-    "defaultMessage": "{totalCount} people have liked the article."
+    "defaultMessage": "{totalCount} 人讚賞了作品"
   },
   "+51DoZ": {
-    "defaultMessage": "Please verify email first",
+    "defaultMessage": "請驗證電子郵件地址",
     "description": "src/views/Me/Settings/Settings/Password/index.tsx"
   },
   "+5O5ev": {
-    "defaultMessage": "{circleName}",
+    "defaultMessage": "「{circleName}」所有作品",
     "description": "src/views/ArticleDetail/Wall/Circle/index.tsx"
   },
   "+5sU+5": {
-    "defaultMessage": "Tort"
+    "defaultMessage": "侵權"
   },
   "+63O1f": {
-    "defaultMessage": "Incorrect email or password",
+    "defaultMessage": "郵件地址或密碼錯誤",
     "description": "USER_PASSWORD_INVALID"
   },
   "+7SAix": {
-    "defaultMessage": "Must be between 2-12 characters long."
+    "defaultMessage": "2-12 個字元"
   },
   "+EHtpH": {
-    "defaultMessage": "No updates yet"
+    "defaultMessage": "暫無更新"
   },
   "+GAaxB": {
-    "defaultMessage": "The article has been archived due to violation of terms"
+    "defaultMessage": "作品因違反社區約章被封存"
   },
   "+IYfVH": {
-    "defaultMessage": "Remove from event featured"
+    "defaultMessage": "移除活動精選"
   },
   "+OStJM": {
-    "defaultMessage": "Reset Payment Password"
+    "defaultMessage": "重置交易密碼"
   },
   "+OtV6h": {
-    "defaultMessage": "Failed to save"
+    "defaultMessage": "保存失敗"
   },
   "+S8mxW": {
-    "defaultMessage": "Move to top",
+    "defaultMessage": "移至頂部",
     "description": "src/components/ArticleDigest/DropdownActions/SetTopCollectionButton.tsx"
   },
   "+a+2ug": {
-    "defaultMessage": "Members"
+    "defaultMessage": "成員"
   },
   "+aMAeT": {
-    "defaultMessage": "Address copied"
+    "defaultMessage": "地址已複製"
   },
   "+cS08C": {
-    "defaultMessage": "Are you sure you want to remove ‘{article}’ from this collection?",
+    "defaultMessage": "確認要將「{article}」從選集中移出嗎？",
     "description": "src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
   },
   "+ixiPI": {
-    "defaultMessage": "Delete moment"
+    "defaultMessage": "刪除動態"
   },
   "+jt4rV": {
-    "defaultMessage": "Claim USDT support",
+    "defaultMessage": "提領支持",
     "description": "src/components/Transaction/index.tsx"
   },
   "+o9W2T": {
-    "defaultMessage": "File upload failed, please verify the file link is valid, or manually download and upload again.",
+    "defaultMessage": "檔案上傳失敗，請確認檔案連結是否有效，或手動下載後再上傳",
     "description": "UNABLE_TO_UPLOAD_FROM_URL"
   },
   "+rB5Am": {
-    "defaultMessage": "Article not found",
+    "defaultMessage": "作品不存在",
     "description": "ARTICLE_NOT_FOUND"
   },
   "+vVZ/G": {
-    "defaultMessage": "Connect"
+    "defaultMessage": "綁定"
   },
   "//QMqf": {
-    "defaultMessage": "Enter title ..."
+    "defaultMessage": "請輸入標題…"
   },
   "/5OvMK": {
-    "defaultMessage": "liked your moment"
+    "defaultMessage": "喜歡你的動態"
   },
   "/5jk3i": {
-    "defaultMessage": "Circle successfully subscribed."
+    "defaultMessage": "訂閱成功！🎉"
   },
   "/BQWEh": {
-    "defaultMessage": "Last 1 month",
+    "defaultMessage": "最近 1 個月",
     "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
   },
   "/GCoTA": {
-    "defaultMessage": "Clear"
+    "defaultMessage": "清空"
   },
   "/GyMKa": {
-    "defaultMessage": "Share Article"
+    "defaultMessage": "分享作品"
   },
   "/IMR+8": {
-    "defaultMessage": "Top Supporters"
+    "defaultMessage": "支持排行榜"
   },
   "/TXBJR": {
-    "defaultMessage": "Unknown error. Please try again later.",
+    "defaultMessage": "不知道哪裏出錯了，過幾分鐘看看",
     "description": "UNKNOWN_ERROR"
   },
   "/ZmvO+": {
-    "defaultMessage": "Divider",
+    "defaultMessage": "分隔線",
     "description": "src/components/Editor"
   },
   "/dKzfc": {
-    "defaultMessage": "This work is archived due to violation of community guidelines."
+    "defaultMessage": "該作品因違反社區約章，已被站方強制歸檔。"
   },
   "/faseS": {
-    "defaultMessage": "Share link copied"
+    "defaultMessage": "已複製分享連結"
   },
   "/jJLYy": {
-    "defaultMessage": "Transactions"
+    "defaultMessage": "交易紀錄"
   },
   "/kUr1+": {
-    "defaultMessage": "Unpin",
+    "defaultMessage": "取消置頂",
     "description": "src/components/ArticleComment/DropdownActions/PinButton.tsx"
   },
   "/pnYHM": {
-    "defaultMessage": "Circle not found",
+    "defaultMessage": "圍爐不存在",
     "description": "CIRCLE_NOT_FOUND"
   },
   "/podGX": {
-    "defaultMessage": "Public",
+    "defaultMessage": "公開",
     "description": "src/views/Circle/Analytics/ContentAnalytics/ContentTabs/index.tsx"
   },
   "/wKyxw": {
-    "defaultMessage": "Failed to republish"
+    "defaultMessage": "發布失敗"
   },
   "/wbyoV": {
-    "defaultMessage": "The article has been removed from the event"
+    "defaultMessage": "作品已從活動移除"
   },
   "0/gRer": {
-    "defaultMessage": "I am migrating to Matters, and I invite you to come along"
+    "defaultMessage": "我正在搬家到 Matters，邀請你一起來"
   },
   "06XHBC": {
-    "defaultMessage": "Add to Circle"
+    "defaultMessage": "加入圍爐"
   },
   "0CyECR": {
-    "defaultMessage": "Matters ID has been set up. More account info can be found in Settings",
+    "defaultMessage": "Matters ID 已設置，更多帳號相關設置可前往設定頁修改",
     "description": "src/components/Dialogs/SetUserNameDialog/ConfirmStep.tsx"
   },
   "0JlaP1": {
-    "defaultMessage": "Oops！This link has expired",
+    "defaultMessage": "Oops！連結已失效",
     "description": "src/views/Callback/UI.tsx"
   },
   "0Om2Kl": {
-    "defaultMessage": "Remove from collection"
+    "defaultMessage": "移出選集"
   },
   "0PpH2v": {
-    "defaultMessage": "Authorize in Wallet"
+    "defaultMessage": "去錢包授權"
   },
   "0SQatS": {
-    "defaultMessage": "View all",
+    "defaultMessage": "看全部",
     "description": "src/views/CampaignDetail/SideParticipants/index.tsx"
   },
   "0ThOw1": {
-    "defaultMessage": "Create collection",
+    "defaultMessage": "新建選集",
     "description": "src/views/User/Collections/UserCollections.tsx"
   },
   "0bTlm4": {
-    "defaultMessage": "Are you sure you want to delete this moment?"
+    "defaultMessage": "確認要刪除該動態嗎？"
   },
   "0e1xjL": {
-    "defaultMessage": "Email can be modified up to {count} times per day.",
+    "defaultMessage": "郵件地址每天最多可修改 {count} 次",
     "description": "src/components/Dialogs/SetEmailDialog/Content.tsx"
   },
   "0iyH+q": {
-    "defaultMessage": "Last 7 days",
+    "defaultMessage": "最近 7 日",
     "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
   },
   "0jvbdb": {
-    "defaultMessage": "Oops. Something went wrong. Please try again later.",
+    "defaultMessage": "伺服器錯誤，請稍候重試",
     "description": "INTERNAL_SERVER_ERROR"
   },
   "0mQE3E": {
-    "defaultMessage": "Recommended to channel: {channelNames}"
+    "defaultMessage": "已推薦到頻道：{channelNames}"
   },
   "0oLj/t": {
-    "defaultMessage": "Expand"
+    "defaultMessage": "展開"
   },
   "0qagOO": {
-    "defaultMessage": "Circle Subscription",
+    "defaultMessage": "圍爐訂閱",
     "description": "src/components/Transaction/index.tsx"
   },
   "0r2yd+": {
-    "defaultMessage": "Paragraph indent"
+    "defaultMessage": "首行縮排"
   },
   "0tHLRn": {
-    "defaultMessage": "Insufficient Balance"
+    "defaultMessage": "錢包餘額不足"
   },
   "0tRUjd": {
-    "defaultMessage": "This comment has been hidden due to violation of community terms of services"
+    "defaultMessage": "因違反社區約章，評論已被隱藏"
   },
   "0zZd0T": {
-    "defaultMessage": "Article successfully published. Share it on different platforms to receive more likes and donations!",
+    "defaultMessage": "作品發布成功，快把作品分享到不同渠道，吸引更多人為你拍手！",
     "description": "src/views/Me/DraftDetail/PublishState/PublishedState.tsx"
   },
   "16zJ3o": {
-    "defaultMessage": "Enter summary…"
+    "defaultMessage": "自定義摘要…"
   },
   "18HJlm": {
-    "defaultMessage": "Tag"
+    "defaultMessage": "標籤"
   },
   "1COpAA": {
-    "defaultMessage": "Failed",
+    "defaultMessage": "失敗",
     "description": "src/components/Transaction/State/index.tsx"
   },
   "1DNHwi": {
-    "defaultMessage": "Your work will be stored in IPFS network. Currently the fee is covered by Matters."
+    "defaultMessage": "你的作品即將存儲在星際文件系統（IPFS）分佈式節點中。在 IPFS 的存儲費用目前由 Matters 平台支付。"
   },
   "1EYCdR": {
-    "defaultMessage": "Tags"
+    "defaultMessage": "標籤"
   },
   "1PORwh": {
-    "defaultMessage": "Archived article.",
+    "defaultMessage": "僅作者本人可見封存作品，",
     "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
   },
   "1QrwIl": {
-    "defaultMessage": "Take a look",
+    "defaultMessage": "去看看",
     "description": "src/components/Dialogs/SetUserNameDialog/ConfirmStep.tsx"
   },
   "1U/MPD": {
-    "defaultMessage": "Balance:",
+    "defaultMessage": "餘額：",
     "description": "src/components/Balance/index.tsx"
   },
   "1Z1M77": {
-    "defaultMessage": "No data yet",
+    "defaultMessage": "尚無閱讀紀錄",
     "description": "src/views/Me/History/index.tsx"
   },
   "1exrSw": {
-    "defaultMessage": "Welcome onboard!"
+    "defaultMessage": "歡迎上船！"
   },
   "1hyiZ8": {
-    "defaultMessage": "Confirm Matters ID",
+    "defaultMessage": "確認 Matters ID",
     "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
   },
   "1lWarA": {
-    "defaultMessage": "Bold",
+    "defaultMessage": "粗體",
     "description": "src/components/Editor"
   },
   "1qQzV0": {
-    "defaultMessage": "Invitees",
+    "defaultMessage": "免費邀請",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
   "1y1U9f": {
-    "defaultMessage": "Liker ID is already taken.",
+    "defaultMessage": "Liker ID 已被其他人使用",
     "description": "LIKER_USER_ID_EXISTS"
   },
   "1zVIWy": {
-    "defaultMessage": "mentioned you in a comment at {commentArticle}",
+    "defaultMessage": "在 {commentArticle} 評論提到了你",
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
   },
   "202PEj": {
-    "defaultMessage": "Confirm Matters ID",
+    "defaultMessage": "確認 Matters ID",
     "description": "src/components/Dialogs/SetUserNameDialog/ConfirmStep.tsx"
   },
   "20bImY": {
-    "defaultMessage": "Discussion"
+    "defaultMessage": "眾聊"
   },
   "20yT4t": {
-    "defaultMessage": "Response",
+    "defaultMessage": "評論設置",
     "description": "src/components/Editor/Sidebar/Response/index.tsx"
   },
   "24jhEp": {
-    "defaultMessage": "Failed to republish {articleTitle}",
+    "defaultMessage": "你的編輯作品 {articleTitle} 發布失敗",
     "description": "src/components/Notice/ArticleNotice/RevisedArticleNotPublishedNotice.tsx"
   },
   "25oM9Q": {
-    "defaultMessage": "Sort"
+    "defaultMessage": "排序"
   },
   "2C42E7": {
-    "defaultMessage": "Translating..."
+    "defaultMessage": "翻譯中..."
   },
   "2CqWQE": {
-    "defaultMessage": "Total",
+    "defaultMessage": "總數",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
   "2D/X90": {
-    "defaultMessage": "Why Optimism?"
+    "defaultMessage": "為什麼採用 Optimism？"
   },
   "2J3mz4": {
-    "defaultMessage": "Add to event featured"
+    "defaultMessage": "加到活動精選"
   },
   "2P5JII": {
-    "defaultMessage": "Disconnect",
+    "defaultMessage": "解綁",
     "description": "src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
   },
   "2Sgvfr": {
-    "defaultMessage": "USDT {amount} pending claim"
+    "defaultMessage": "USDT {amount} 待提領"
   },
   "2U8rTr": {
-    "defaultMessage": "Blockquote",
+    "defaultMessage": "引用",
     "description": "src/components/Editor"
   },
   "2W0f9h": {
-    "defaultMessage": "Bio"
+    "defaultMessage": "個人簡介"
   },
   "2bG/gP": {
-    "defaultMessage": "Edit",
+    "defaultMessage": "修改",
     "description": "src/views/ArticleDetail/MetaInfo/index.tsx"
   },
   "2ef/Xl": {
-    "defaultMessage": "Block",
+    "defaultMessage": "封鎖",
     "description": "src/views/Me/Settings/Blocked/ToggleBlockButton.tsx"
   },
   "2kpUZD": {
-    "defaultMessage": "Submission successful"
+    "defaultMessage": "提交成功"
   },
   "2lAxMG": {
-    "defaultMessage": "Fiat Currency"
+    "defaultMessage": "法幣"
   },
   "2oxLHg": {
-    "defaultMessage": "Up to 3 articles/collections can be pinned"
+    "defaultMessage": "最多可設置 3 個代表作"
   },
   "2qbSh8": {
-    "defaultMessage": "Registering ISCN allows you to publish Writing NFT. The cost of"
+    "defaultMessage": "發布時註冊 "
   },
   "2slIPX": {
-    "defaultMessage": "Likes"
+    "defaultMessage": "讚賞"
   },
   "2vpUYs": {
-    "defaultMessage": "New replies to discussions",
+    "defaultMessage": "回覆留言",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
   },
   "2w2mhG": {
-    "defaultMessage": "User blocked. User now can't reply to your articles and user's comments have been hidden from you."
+    "defaultMessage": "已封鎖。該用戶無法評論你的作品和圍爐，他的評論對你闔上。"
   },
   "32bml8": {
-    "defaultMessage": "Following",
+    "defaultMessage": "追蹤",
     "description": "src/components/Layout/SideNav/index.tsx"
   },
   "34OLoD": {
-    "defaultMessage": "Moment",
+    "defaultMessage": "發動態",
     "description": "src/views/MomentDetail/Edit/index.tsx"
   },
   "39AHJm": {
-    "defaultMessage": "Sign Up"
+    "defaultMessage": "註冊"
   },
   "3EeDnu": {
-    "defaultMessage": "Paste JSFiddle or CodePen link, and press enter"
+    "defaultMessage": "貼上 JSFiddle 或 CodePen 連結後，Enter 進行新增"
   },
   "3KNMbJ": {
-    "defaultMessage": "Articles"
+    "defaultMessage": "作品"
   },
   "3MZvMF": {
-    "defaultMessage": "Would you like to recommend your work to the channel: {channelName}?"
+    "defaultMessage": "希望將作品推薦到頻道：{channelName}？ "
   },
   "3Tg548": {
-    "defaultMessage": "Sign In",
+    "defaultMessage": "登入",
     "description": "src/components/Forms/SelectAuthMethodForm/AuthTabs.tsx"
   },
   "3WUBfC": {
-    "defaultMessage": "Only articles"
+    "defaultMessage": "只看文章"
   },
   "3YAasP": {
-    "defaultMessage": "What is Liker ID?"
+    "defaultMessage": "什麼是 Liker ID？"
   },
   "3kbIhS": {
-    "defaultMessage": "Untitled"
+    "defaultMessage": "未命名"
   },
   "3n9nqJ": {
-    "defaultMessage": "The event starts on {date}, and details can be found in the announcement."
+    "defaultMessage": "活動於 {date}開始，細則可查看公告。"
   },
   "3phEFL": {
-    "defaultMessage": "Continued use indicates your agreement to",
+    "defaultMessage": "繼續使用表示您同意",
     "description": "src/components/Forms/SelectAuthMethodForm/NormalFeed.tsx"
   },
   "3raREe": {
-    "defaultMessage": "Comment",
+    "defaultMessage": "留言",
     "description": "src/components/Dialogs/MomentDetailDialog/Comments.tsx"
   },
   "3yQyYm": {
-    "defaultMessage": "Minimum amount is HKD {min}"
+    "defaultMessage": "最小金額爲 HKD {min}"
   },
   "3yVvk4": {
-    "defaultMessage": "Please continue in Liker Land."
+    "defaultMessage": "請在 Liker Land 繼續操作"
   },
   "3yk8fB": {
-    "defaultMessage": "Wallet"
+    "defaultMessage": "我的錢包"
   },
   "4118K3": {
-    "defaultMessage": "Optimism is a Layer 2 scaling solution based on Ethereum that can provide faster and cheaper transactions, while ensuring security, making it easier for you to support creators."
+    "defaultMessage": "Optimism 是基於以太坊的第二層（Layer2）擴容方案，能提升交易速度，並降低手續費，同時確保安全性，讓你更輕鬆地支持創作者。"
   },
   "43qbTk": {
-    "defaultMessage": "{amount} likes"
+    "defaultMessage": "{amount} 次讚賞"
   },
   "47FYwb": {
-    "defaultMessage": "Cancel"
+    "defaultMessage": "取消"
   },
   "4CrCbD": {
-    "defaultMessage": "Community"
+    "defaultMessage": "自治"
   },
   "4KuZ0o": {
-    "defaultMessage": "Asset not found",
+    "defaultMessage": "資源不存在",
     "description": "ASSET_NOT_FOUND"
   },
   "4OMGUj": {
-    "defaultMessage": "Comment Details"
+    "defaultMessage": "評論詳情"
   },
   "4RpVDe": {
-    "defaultMessage": "Delete Draft"
+    "defaultMessage": "刪除草稿"
   },
   "4km7Yc": {
-    "defaultMessage": "Breaking through history! The torch you've ignited will be the most dazzling support on the Nomad's journey. The Firebolt badge signifies your participation in the Nomad Matters and earning the highest-level Firebolt badge.",
+    "defaultMessage": "突破歷史！你點燃的火炬是遊牧者路途上最耀眼的支持。火閃電徽章紀念你曾參與「遊牧者計畫」並達到最高等級。",
     "description": "src/views/User/UserProfile/BadgeNomadLabel/index.tsx"
   },
   "4l6vz1": {
-    "defaultMessage": "Copy"
+    "defaultMessage": "複製"
   },
   "4nHH2x": {
-    "defaultMessage": "Applied successfully"
+    "defaultMessage": "報名成功"
   },
   "4wOWfp": {
-    "defaultMessage": "What's this?",
+    "defaultMessage": "這是什麼？",
     "description": "src/components/Billboard/index.tsx"
   },
   "50cquj": {
-    "defaultMessage": "No discussion yet",
+    "defaultMessage": "還沒有眾聊",
     "description": "src/views/Circle/Discussion/Discussion.tsx"
   },
   "5CcjZy": {
-    "defaultMessage": "Do you want to disconnect from {type}?",
+    "defaultMessage": "確認要解綁 {type} 嗎？",
     "description": "src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
   },
   "5IGdjy": {
-    "defaultMessage": "Not using tags yet, add tags now to improve discoverability!"
+    "defaultMessage": "目前尚無標籤，立即添加提高作品曝光度！"
   },
   "5IS+ui": {
-    "defaultMessage": "Support Setting"
+    "defaultMessage": "支持設置"
   },
   "5JN+nl": {
-    "defaultMessage": "Check your inbox",
+    "defaultMessage": "請檢查郵件",
     "description": "src/components/Forms/Verification/LinkSent.tsx"
   },
   "5MDA6O": {
-    "defaultMessage": "This tag is already taken",
+    "defaultMessage": "標籤名稱已被使用",
     "description": "DUPLICATE_TAG"
   },
   "5RPoaZ": {
-    "defaultMessage": "liked your deleted moment",
+    "defaultMessage": "喜歡你已刪除的動態",
     "description": "src/components/Notice/MomentNotice/MomentLiked.tsx"
   },
   "5UglrB": {
-    "defaultMessage": "Successfully delivered"
+    "defaultMessage": "送出成功"
   },
   "5XFd/5": {
-    "defaultMessage": "Manage Circle"
+    "defaultMessage": "管理圍爐"
   },
   "5iii3x": {
-    "defaultMessage": "Circle：",
+    "defaultMessage": "圍爐：",
     "description": "src/components/CircleDigest/UserProfile/index.tsx"
   },
   "5jlQTx": {
-    "defaultMessage": "Manage Invitation"
+    "defaultMessage": "邀請管理"
   },
   "5rxHb7": {
-    "defaultMessage": "May contain pornography, violence, gore, etc. Click here to expand all.",
+    "defaultMessage": "可能包含色情、暴力、血腥等，點此展開全部",
     "description": "src/views/ArticleDetail/Wall/Sensitive/index.tsx"
   },
   "5sWnog": {
-    "defaultMessage": "Liker ID email is already taken.",
+    "defaultMessage": "Liker ID 電子信箱已被其他人使用",
     "description": "LIKER_EMAIL_EXISTS"
   },
   "5sg7KC": {
-    "defaultMessage": "Password"
+    "defaultMessage": "密碼"
   },
   "6+eeJ4": {
-    "defaultMessage": "Lowercase letters, numbers and underscores",
+    "defaultMessage": "可使用小寫英文、數字及下劃線",
     "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
   },
   "6/kgzs": {
-    "defaultMessage": "Unsubscribed"
+    "defaultMessage": "退訂成功"
   },
   "62nsdy": {
-    "defaultMessage": "Retry"
+    "defaultMessage": "重試"
   },
   "69+D96": {
-    "defaultMessage": "Start Creating"
+    "defaultMessage": "開始創作"
   },
   "6B+QXo": {
-    "defaultMessage": "Response",
+    "defaultMessage": "評論設置",
     "description": "src/components/Editor/ToggleResponse/index.tsx"
   },
   "6BXcdo": {
-    "defaultMessage": "Set threshold for circle (per month)",
+    "defaultMessage": "設定圍爐門檻（每月）",
     "description": "src/components/Forms/CreateCircleForm/Init.tsx"
   },
   "6BbPcY": {
-    "defaultMessage": "The comment has been forcibly hidden"
+    "defaultMessage": "因違反社區約章，評論已被隱藏"
   },
   "6Bxl4S": {
-    "defaultMessage": "Claim {amount} USDT failed. Click here to retry or contact ask@matters.town"
+    "defaultMessage": "提領支持金額（{amount} USDT）時遇到問題，點此重試或聯繫 ask@matters.town"
   },
   "6CQaLH": {
-    "defaultMessage": "Please select or enter amount"
+    "defaultMessage": "請選擇或輸入金額"
   },
   "6D7u/C": {
-    "defaultMessage": "Works"
+    "defaultMessage": "作品"
   },
   "6E7VKR": {
-    "defaultMessage": "My transaction history"
+    "defaultMessage": "我的交易紀錄"
   },
   "6KmKvZ": {
-    "defaultMessage": "Please enter new transaction password again",
+    "defaultMessage": "請再次輸入新交易密碼",
     "description": "src/components/Forms/PaymentForm/ResetPassword/Confirm.tsx"
   },
   "6N2LKY": {
-    "defaultMessage": "Please log in again.",
+    "defaultMessage": "授權信息已失效，請重新登入",
     "description": "OAUTH_TOKEN_INVALID"
   },
   "6OBAOi": {
-    "defaultMessage": "subscribers_empty",
+    "defaultMessage": "目前總訂閱人數",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
   "6Sj2lN": {
-    "defaultMessage": "Claim"
+    "defaultMessage": "提領支持"
   },
   "6Vznnt": {
-    "defaultMessage": "left a comment in your circle",
+    "defaultMessage": "在你的圍爐中留言",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
   "6XIcxZ": {
-    "defaultMessage": "ID can only contain lowercase letters, numbers and underscores"
+    "defaultMessage": "ID 只允許包含小寫英文字母、數字及下劃線"
   },
   "6aE6hr": {
-    "defaultMessage": "All",
+    "defaultMessage": "全部",
     "description": "src/views/Me/Transactions/index.tsx"
   },
   "6e8teX": {
-    "defaultMessage": "Notifications",
+    "defaultMessage": "通知",
     "description": "src/views/Me/Settings/Settings/SettingsTabs/index.tsx"
   },
   "6kMb9Z": {
-    "defaultMessage": "On-chain records"
+    "defaultMessage": "鏈上紀錄"
   },
   "6lwWCu": {
-    "defaultMessage": "Misc",
+    "defaultMessage": "其他",
     "description": "src/views/Me/Settings/Settings/SettingsTabs/index.tsx"
   },
   "6mbNSp": {
-    "defaultMessage": "Audio",
+    "defaultMessage": "音檔",
     "description": "src/components/Editor"
   },
   "6oOCCL": {
-    "defaultMessage": "Upload file"
+    "defaultMessage": "上傳檔案"
   },
   "6q0G5e": {
-    "defaultMessage": "Successfully added",
+    "defaultMessage": "加入成功",
     "description": "src/components/Dialogs/CollectionSelectDialog/index.tsx"
   },
   "6uavsa": {
-    "defaultMessage": "Cancelled",
+    "defaultMessage": "已取消",
     "description": "src/components/Transaction/State/index.tsx"
   },
   "6vgoSf": {
-    "defaultMessage": "Edit",
+    "defaultMessage": "編輯",
     "description": "src/components/CircleComment/DropdownActions/EditButton.tsx"
   },
   "70UCEy": {
-    "defaultMessage": "Have wallet questions on mobile device ? Click the",
+    "defaultMessage": "在行動裝置上使用問題，參考 ",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
   },
   "73iajM": {
-    "defaultMessage": "Oops. Something went wrong. Please try again later.",
+    "defaultMessage": "出錯了，請檢查你輸入的內容",
     "description": "BAD_USER_INPUT"
   },
   "76yoL6": {
-    "defaultMessage": "Moonlight Dream"
+    "defaultMessage": "月之夢"
   },
   "79Ydsg": {
-    "defaultMessage": "Payout Canceled",
+    "defaultMessage": "提現撤銷",
     "description": "src/components/Transaction/index.tsx"
   },
   "7JlauX": {
-    "defaultMessage": "Explore"
+    "defaultMessage": "指南"
   },
   "7UqcsO": {
-    "defaultMessage": "Forgot transaction password?",
+    "defaultMessage": "忘記交易密碼？",
     "description": "src/components/Forms/PaymentForm/PayTo/Confirm/index.tsx"
   },
   "7VSfs3": {
-    "defaultMessage": "Select amount",
+    "defaultMessage": "選擇支持金額",
     "description": "src/components/Forms/PaymentForm/PayTo/SetAmount/SetAmountBalance/index.tsx"
   },
   "7WXDhH": {
-    "defaultMessage": "Are you sure you want to delete draft?",
+    "defaultMessage": "確認要刪除草稿嗎？",
     "description": "src/components/DraftDigest/Feed/DeleteButton.tsx"
   },
   "7XWzvD": {
-    "defaultMessage": "No works here yet",
+    "defaultMessage": "這裡還沒有任何作品",
     "description": "src/components/Empty/EmptyWork.tsx"
   },
   "7Y9hwb": {
-    "defaultMessage": "Oops! Setup failed."
+    "defaultMessage": "哎呀，設置失敗了。"
   },
   "7cwoRo": {
-    "defaultMessage": "The author has disabled comments for this article"
+    "defaultMessage": "因爲作者設置，你無法參與討論。"
   },
   "7jjWxF": {
-    "defaultMessage": "No results",
+    "defaultMessage": "無結果",
     "description": "src/components/Dialogs/AddArticlesCollectionDialog/SearchingDialogContent.tsx"
   },
   "7oytv9": {
-    "defaultMessage": "(edited)"
+    "defaultMessage": "（修改過）"
   },
   "7ykJ+l": {
-    "defaultMessage": "Still quiet here. {br}Be the first one to say hello!",
+    "defaultMessage": "暫無評論",
     "description": "src/components/Empty/EmptyComment.tsx"
   },
   "7zn5ig": {
-    "defaultMessage": "Comment deleted",
+    "defaultMessage": "評論已刪除",
     "description": "src/components/Notice/NoticeComment.tsx/article"
   },
   "8+Z5E9": {
-    "defaultMessage": "The badge signifies your participation and completion in the \"Free Write in 7 days\"."
+    "defaultMessage": "紀念你參與「七日書」並完成七天書寫"
   },
   "80bF0W": {
-    "defaultMessage": "No comments",
+    "defaultMessage": "暫無留言",
     "description": "src/components/Forms/MomentCommentForm/index.tsx"
   },
   "84VOdX": {
-    "defaultMessage": "Unpin from profile",
+    "defaultMessage": "取消代表作",
     "description": "src/views/User/Articles/PinBoard/UnPinButton/index.tsx"
   },
   "8KFsZN": {
-    "defaultMessage": "Read Counts"
+    "defaultMessage": "閱讀次數"
   },
   "8MeJ4b": {
-    "defaultMessage": "Nimbus Ferry"
+    "defaultMessage": "光輪號"
   },
   "8UWUW8": {
-    "defaultMessage": "Collect Article",
+    "defaultMessage": "關聯作品",
     "description": "src/components/ArticleDigest/DropdownActions/ExtendButton.tsx"
   },
   "8YgVvt": {
-    "defaultMessage": "Like collection"
+    "defaultMessage": "喜歡選集"
   },
   "8ZyDQJ": {
-    "defaultMessage": "Bookmark removed"
+    "defaultMessage": "收藏已取消"
   },
   "8cv9D4": {
-    "defaultMessage": "Next Step"
+    "defaultMessage": "下一步"
   },
   "8gRHks": {
-    "defaultMessage": "Pin Broadcast",
+    "defaultMessage": "置頂",
     "description": "src/components/CircleComment/DropdownActions/PinButton.tsx"
   },
   "8iciCA": {
-    "defaultMessage": "Entity not found",
+    "defaultMessage": "實體不存在",
     "description": "ENTITY_NOT_FOUND"
   },
   "8rMZWb": {
-    "defaultMessage": "replied to your discussion on",
+    "defaultMessage": "回覆了你在圍爐 ",
     "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
   },
   "8t6Cs8": {
-    "defaultMessage": "Matters Daily Report",
+    "defaultMessage": "Matters 日報",
     "description": "src/views/Me/Settings/Notifications/Email.tsx"
   },
   "8w3GEA": {
-    "defaultMessage": "mentioned you in {article}",
+    "defaultMessage": "在作品 {article} 中提及你",
     "description": "src/components/Notice/ArticleNotice/ArticleMentionedYouNotice.tsx"
   },
   "8xPi0N": {
-    "defaultMessage": "Unsubscribe Circle",
+    "defaultMessage": "離開圍爐",
     "description": "src/views/Circle/Profile/DropdownActions/index.tsx"
   },
   "9+Ddtu": {
-    "defaultMessage": "Next"
+    "defaultMessage": "下一步"
   },
   "9+vzKn": {
-    "defaultMessage": "Edit",
+    "defaultMessage": "編輯",
     "description": "src/components/CircleComment/DropdownActions/index.tsx"
   },
   "91AzwP": {
-    "defaultMessage": "Only JPEG, PNG, and GIF and WebP images are supported."
+    "defaultMessage": "僅支持 JPEG、PNG、GIF 和 WebP 圖片"
   },
   "91IQdk": {
-    "defaultMessage": "Followed",
+    "defaultMessage": "已追蹤",
     "description": "src/components/Buttons/FollowUser/Unfollow.tsx"
   },
   "95stPq": {
-    "defaultMessage": "Completed"
+    "defaultMessage": "已完成"
   },
   "99OtWT": {
-    "defaultMessage": "Pending..."
+    "defaultMessage": "寫入中…"
   },
   "9EABqX": {
-    "defaultMessage": "Like my work? Don't forget to support and clap, let me know that you are with me on the road of creation. Keep this enthusiasm together!"
+    "defaultMessage": "喜歡我的作品嗎？別忘了給予支持與讚賞，讓我知道在創作的路上有你陪伴，一起延續這份熱忱！"
   },
   "9HU8vw": {
-    "defaultMessage": "Reply"
+    "defaultMessage": "回覆"
   },
   "9J0iCw": {
-    "defaultMessage": "Deleted user"
+    "defaultMessage": "已註銷用戶"
   },
   "9OPnTz": {
-    "defaultMessage": "System or connection abnormality, please refresh the page and click “Join” again."
+    "defaultMessage": "系統或連線異常，請刷新頁面後重新點擊晚鳥參與"
   },
   "9UNFGm": {
-    "defaultMessage": "Transaction Password"
+    "defaultMessage": "設置交易密碼"
   },
   "9Vkz9W": {
-    "defaultMessage": "Maximum image area is limited to 100 megapixels (for example, 10,000×10,000 pixels)."
+    "defaultMessage": "圖片面積不得超過 1 億像素（如 10,000x10,000 像素）"
   },
   "9WMs5q": {
-    "defaultMessage": "Connect",
+    "defaultMessage": "綁定錢包",
     "description": "src/views/Me/Wallet/Balance"
   },
   "9WRlF4": {
-    "defaultMessage": "Send"
+    "defaultMessage": "送出"
   },
   "9aorag": {
-    "defaultMessage": "Unlike collection"
+    "defaultMessage": "取消喜歡選集"
   },
   "9mfw9c": {
-    "defaultMessage": "Wallet address",
+    "defaultMessage": "錢包地址",
     "description": "src/components/UserProfile/WalletLabel/WalletDialog/index.tsx"
   },
   "9nNpKP": {
-    "defaultMessage": "Discussion sent",
+    "defaultMessage": "討論已送出",
     "description": "src/views/Circle/Discussion/Discussion.tsx"
   },
   "A0KB7s": {
-    "defaultMessage": "New replies to broadcast",
+    "defaultMessage": "廣播留言",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
   },
   "A0MNSc": {
-    "defaultMessage": "CC BY-NC-ND 2.0"
+    "defaultMessage": "CC BY-NC-ND 2.0 授權"
   },
   "A3g33H": {
-    "defaultMessage": "Archived articles can only be seen by you, and this operation cannot be undone. If this article has been added to collections, it will be removed. (IPFS version will not be effected)"
+    "defaultMessage": "封存作品僅自己可見，且操作無法撤銷。如文章已加入選集，將從選集中移除。（已發佈到 IPFS 的版本不受影響）"
   },
   "A4P0al": {
-    "defaultMessage": "Channel suggestion"
+    "defaultMessage": "建議頻道"
   },
   "A6ozr9": {
-    "defaultMessage": "Collection name"
+    "defaultMessage": "選集名稱"
   },
   "A6r2p1": {
-    "defaultMessage": "Enter Matters"
+    "defaultMessage": "進入 Matters"
   },
   "A7ugfn": {
-    "defaultMessage": "More Actions"
+    "defaultMessage": "更多操作"
   },
   "AA5PkU": {
-    "defaultMessage": "Most claps",
+    "defaultMessage": "最多拍手",
     "description": "src/views/Me/Works/Published/SortTabs.tsx"
   },
   "AB5rDl": {
-    "defaultMessage": "Payment suspended or returned by card issuer when there are doubts about the transaction",
+    "defaultMessage": "信用卡交易內容有疑慮時，發卡機構暫停或退回的款項",
     "description": "src/components/Transaction/index.tsx"
   },
   "AEiogR": {
-    "defaultMessage": "This Google account is connected to a Matters account. Sign in to that account to disconnect it then try again",
+    "defaultMessage": "該 Google 帳號已關聯至其他 Matters 帳號，請登入該帳號解綁後再試",
     "description": "USER_SOCIAL_ACCOUNT_EXISTS"
   },
   "AGDFGs": {
-    "defaultMessage": "Discrimination, insult, or hatred"
+    "defaultMessage": "歧視、侮辱或仇恨"
   },
   "AQL1ME": {
-    "defaultMessage": "Ordered List",
+    "defaultMessage": "編號列表",
     "description": "src/components/Editor"
   },
   "AVpR3Q": {
-    "defaultMessage": "Wallet linked",
+    "defaultMessage": "已綁定錢包",
     "description": "src/components/UserProfile/WalletLabel/index.tsx"
   },
   "AYTnjk": {
-    "defaultMessage": "Followers",
+    "defaultMessage": "追蹤",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
   },
   "AeVndq": {
-    "defaultMessage": "mentioned you in a comment at {commentMoment}"
+    "defaultMessage": "在動態留言中提及了你 {commentMoment}"
   },
   "Ajc5SE": {
-    "defaultMessage": "Articles",
+    "defaultMessage": "作品",
     "description": "src/views/Me/Bookmarks/Tabs.tsx"
   },
   "AlHYvk": {
-    "defaultMessage": "{type} edited"
+    "defaultMessage": "{type}已編輯"
   },
   "At8Qd2": {
-    "defaultMessage": "Account",
+    "defaultMessage": "帳號",
     "description": "src/views/Me/Settings/Settings/SettingsTabs/index.tsx"
   },
   "AtjJEA": {
-    "defaultMessage": "Post",
+    "defaultMessage": "發布",
     "description": "src/views/MomentDetail/Edit/index.tsx"
   },
   "AvRTYR": {
-    "defaultMessage": "Your authorized USDT limit for Matters is insufficient, please reauthorize it."
+    "defaultMessage": "您授權 Matters 可使用的 USDT 額度不足，請重新設置"
   },
   "Avukw5": {
-    "defaultMessage": "The payment amount is too small, please re-enter.",
+    "defaultMessage": "支付金額太少，請重新輸入",
     "description": "PAYMENT_AMOUNT_TOO_SMALL"
   },
   "AwQHHA": {
-    "defaultMessage": "Please set your transcation password.",
+    "defaultMessage": "請先設定交易密碼",
     "description": "PAYMENT_PASSWORD_NOT_SET"
   },
   "B9IFMF": {
-    "defaultMessage": "Yes, apply"
+    "defaultMessage": "好的，我報名"
   },
   "BHFHeY": {
-    "defaultMessage": "commented in {commentCircle}",
+    "defaultMessage": " 在圍爐 {commentCircle}",
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
   },
   "BM0Xw3": {
-    "defaultMessage": "Bookmark",
+    "defaultMessage": "收藏",
     "description": "src/components/Buttons/Bookmark/Bookmark.tsx"
   },
   "BMGZE2": {
-    "defaultMessage": "Mention me",
+    "defaultMessage": "提及我",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
   "BNupBu": {
-    "defaultMessage": "Set as cover"
+    "defaultMessage": "設置為封面"
   },
   "BW89hS": {
-    "defaultMessage": "{upvotes} upvotes"
+    "defaultMessage": "{upvotes} 點讚"
   },
   "BY343C": {
-    "defaultMessage": "Change"
+    "defaultMessage": "修改"
   },
   "BaQj20": {
-    "defaultMessage": "Report issues"
+    "defaultMessage": "報告問題"
   },
   "Bb2R0G": {
-    "defaultMessage": "Create",
+    "defaultMessage": "創作",
     "description": "src/components/Buttons/Write/index.tsx"
   },
   "Bc20la": {
-    "defaultMessage": "days"
+    "defaultMessage": "天"
   },
   "BhRxYr": {
-    "defaultMessage": "Free Write Badge"
+    "defaultMessage": "自由寫紀念徽章"
   },
   "Bjdw71": {
-    "defaultMessage": "followers_empty",
+    "defaultMessage": "目前總追蹤人數",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
   },
   "BnMru1": {
-    "defaultMessage": "Language",
+    "defaultMessage": "語言",
     "description": "src/views/Me/Settings/Misc/Language.tsx"
   },
   "BoN8lF": {
-    "defaultMessage": "Provide support funds to",
+    "defaultMessage": "遞出支持資金給",
     "description": "src/components/Forms/PaymentForm/PaymentInfo/index.tsx"
   },
   "C/4nS6": {
-    "defaultMessage": "Connect and claim"
+    "defaultMessage": "綁定並提領"
   },
   "C3NKBg": {
-    "defaultMessage": "Connected to {type}",
+    "defaultMessage": "{type} 已綁定",
     "description": "src/views/Me/Settings/Settings/Socials/index.tsx"
   },
   "C9jbHn": {
-    "defaultMessage": "Number of claps",
+    "defaultMessage": "拍手數量",
     "description": "src/components/ArticleDigest/Published/FooterActions/index.tsx"
   },
   "CBDDR5": {
-    "defaultMessage": "Must be between 2-20 characters long. Only lowercase letters, numbers and underline are allowed."
+    "defaultMessage": "2-20 個字元，僅支持英文小写字母、數字或下劃線"
   },
   "CD688y": {
-    "defaultMessage": "bookmarked",
+    "defaultMessage": "收藏了",
     "description": "src/components/Notice/ArticleNotice/ArticleNewSubscriberNotice.tsx"
   },
   "CNMDU5": {
-    "defaultMessage": "ID must be between {MIN_USER_NAME_LENGTH} and {MAX_USER_NAME_LENGTH} characters long"
+    "defaultMessage": "字符數須介於 {MIN_USER_NAME_LENGTH} 到 {MAX_USER_NAME_LENGTH} 之間"
   },
   "CNrhz9": {
-    "defaultMessage": "What is Billboard?",
+    "defaultMessage": "什麼是社區公告欄（Billboard）？",
     "description": "src/components/Dialogs/BillboardDialog/Content.tsx"
   },
   "CPvyYN": {
-    "defaultMessage": "Incorrect password"
+    "defaultMessage": "密碼錯誤"
   },
   "CTJk3m": {
-    "defaultMessage": "Copy comment",
+    "defaultMessage": "複製留言",
     "description": "src/components/Comment/DropdownActions/index.tsx"
   },
   "CcVXhc": {
-    "defaultMessage": "Matters is sending {amount} to your connected wallet {address} via a contract transaction (Matters will temporarily cover the transaction fee). For assistance, please contact ask@matters.town"
+    "defaultMessage": "Matters 正在通過合約交易將 {amount} 發送至你綁定的錢包 {address}（Matters 將暫時承擔交易手續費）。如需幫助請聯繫 ask@matters.town"
   },
   "CgPGAu": {
-    "defaultMessage": ", connect your wallet to claim"
+    "defaultMessage": "，綁定錢包後可領取"
   },
   "Ci7dxf": {
-    "defaultMessage": "Comment deleted",
+    "defaultMessage": "留言已刪除",
     "description": "src/components/Notice/NoticeComment.tsx/moment"
   },
   "CjKqYk": {
-    "defaultMessage": "Share a story from your life"
+    "defaultMessage": "分享今天開心或難過的小故事吧"
   },
   "CnPG8j": {
-    "defaultMessage": "Featured"
+    "defaultMessage": "精選"
   },
   "CoF9qv": {
-    "defaultMessage": "Are you sure you want to disconnect from this?",
+    "defaultMessage": "確認要解綁錢包？",
     "description": "src/components/Dialogs/RemoveWalletLoginDialog/Content.tsx"
   },
   "Cu3Cty": {
-    "defaultMessage": "month"
+    "defaultMessage": "月"
   },
   "CxYcYR": {
-    "defaultMessage": "Recommended square image."
+    "defaultMessage": "建議使用正方形圖片"
   },
   "D+N1Q6": {
-    "defaultMessage": "This {type} account is connected to a Matters account. Sign in to that account to disconnect it then try again",
+    "defaultMessage": "該 {type} 帳號已關聯至其他 Matters 帳號，請登入該帳號解綁後再試",
     "description": "src/views/Me/Settings/Settings/Socials/index.tsx"
   },
   "D+uyeZ": {
-    "defaultMessage": "Unsubscribe circle will immediately lose your membership, The next billing date (the 1st of each month) will not incur any charges."
+    "defaultMessage": "選擇離開圍爐，你將馬上失去成員資格。下一個賬單日（每月 1 日）將不會扣除費用。"
   },
   "D3idYv": {
-    "defaultMessage": "Settings"
+    "defaultMessage": "設定"
   },
   "D9R/ol": {
-    "defaultMessage": "Add articles to your circle"
+    "defaultMessage": "將作品加入圍爐，讓更多人一起參與討論"
   },
   "D9tEst": {
-    "defaultMessage": "Matters Architect"
+    "defaultMessage": "馬特市建築師"
   },
   "DP3yqI": {
-    "defaultMessage": "Donation count"
+    "defaultMessage": "支持人數"
   },
   "DUoV1W": {
-    "defaultMessage": "Over 140 words, current {numbers}",
+    "defaultMessage": "已超過 140 字，目前 {numbers} 字",
     "description": "src/components/Dialogs/EditProfileDialog/Content.tsx"
   },
   "DUvMii": {
-    "defaultMessage": "Customize your call-to-support prompt to audience, or thank-you card for those who supported you."
+    "defaultMessage": "可自訂號召支持的內容，以及收到支持後的感謝文字"
   },
   "DX0YH3": {
-    "defaultMessage": "Wallet successfully bound",
+    "defaultMessage": "已成功綁定錢包",
     "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
   },
   "DYrDcG": {
-    "defaultMessage": "Badges",
+    "defaultMessage": "徽章",
     "description": "src/components/UserProfile/index.tsx"
   },
   "DZaTBr": {
-    "defaultMessage": "Supporter",
+    "defaultMessage": "支持者",
     "description": "src/components/ArticleComment/RoleLabel/index.tsx"
   },
   "DjIpR6": {
-    "defaultMessage": "Set Cover"
+    "defaultMessage": "設置封面"
   },
   "Dom0EF": {
-    "defaultMessage": "Verification successful",
+    "defaultMessage": "驗證成功",
     "description": "src/components/GlobalToast/index.tsx"
   },
   "DpbBcd": {
-    "defaultMessage": "Select Activity..."
+    "defaultMessage": "選擇活動⋯"
   },
   "DqQvtL": {
-    "defaultMessage": "Unblock",
+    "defaultMessage": "解除封鎖",
     "description": "src/views/Me/Settings/Blocked/ToggleBlockButton.tsx"
   },
   "DrBuEI": {
-    "defaultMessage": "Unpin Broadcast",
+    "defaultMessage": "取消置頂",
     "description": "src/components/CircleComment/DropdownActions/PinButton.tsx"
   },
   "DyuHBH": {
-    "defaultMessage": "Unpin from profile",
+    "defaultMessage": "取消代表作",
     "description": "src/components/CollectionDigest/DropdownActions/PinButton.tsx"
   },
   "E+dEI9": {
-    "defaultMessage": "With your support, I will be able to accumulate more energy to create."
+    "defaultMessage": "有了你的支持，我將能夠蓄積更多能量創作"
   },
   "E048/V": {
-    "defaultMessage": "Save as Draft"
+    "defaultMessage": "存至草稿"
   },
   "E0xjVb": {
-    "defaultMessage": "commented on a deleted moment",
+    "defaultMessage": "在已刪除動態中留言",
     "description": "src/components/Notice/CommentNotice/MomentNewCommentNotice.tsx"
   },
   "E1M4vK": {
-    "defaultMessage": "Translation error. Please try again."
+    "defaultMessage": "翻譯失敗，請稍後再試"
   },
   "E3uFyt": {
-    "defaultMessage": "Moment",
+    "defaultMessage": "動態",
     "description": "src/components/Forms/MomentForm/index.tsx"
   },
   "E7vGxB": {
-    "defaultMessage": "Balance loading..."
+    "defaultMessage": "餘額加載中⋯"
   },
   "E8W3qa": {
-    "defaultMessage": "Must be between 2-20 characters long. Chinese characters, letters, numbers and underscores are allowed."
+    "defaultMessage": "2-20 個字元"
   },
   "EBEwaP": {
-    "defaultMessage": "Please fill in a valid email address"
+    "defaultMessage": "請填寫有效郵件地址"
   },
   "EPx6uM": {
-    "defaultMessage": "Open Menu",
+    "defaultMessage": "開啟選單",
     "description": "src/components/Editor"
   },
   "EQeKnO": {
-    "defaultMessage": "Manage Invitation",
+    "defaultMessage": "邀請管理",
     "description": "src/views/Circle/Settings/index.tsx"
   },
   "ESn43O": {
-    "defaultMessage": "Create Circle"
+    "defaultMessage": "創建圍爐"
   },
   "EW5R4p": {
-    "defaultMessage": "Request an update, ask, share and discuss",
+    "defaultMessage": "催更、提問、分享、討論…",
     "description": "src/views/Circle/Discussion/Discussion.tsx"
   },
   "EZMrtJ": {
-    "defaultMessage": "commented broadcast in {circleName}",
+    "defaultMessage": "在 {circleName} 的廣播中留言 ",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
   },
   "Eb1U+/": {
-    "defaultMessage": "Topped up successfully"
+    "defaultMessage": "儲值成功"
   },
   "EcglP9": {
-    "defaultMessage": "Key"
+    "defaultMessage": "密鑰"
   },
   "EiENui": {
-    "defaultMessage": "Related Tags"
+    "defaultMessage": "相關標籤"
   },
   "El+nq2": {
-    "defaultMessage": "Must be between {MIN_COLLECTION_TITLE_LENGTH}-{MAX_COLLECTION_TITLE_LENGTH} characters long."
+    "defaultMessage": "輸入字數過短，僅供輸入 {MIN_COLLECTION_TITLE_LENGTH}-{MAX_COLLECTION_TITLE_LENGTH} 個字元"
   },
   "EmZFry": {
-    "defaultMessage": "Please continue within your crypto wallet.",
+    "defaultMessage": "請在加密錢包內繼續操作",
     "description": "src/components/Forms/PaymentForm/Processing/index.tsx"
   },
   "EoeUjA": {
-    "defaultMessage": "You do not have permission to perform this operation",
+    "defaultMessage": "你無權限進行該操作",
     "description": "FORBIDDEN_BY_STATE"
   },
   "ErV/vT": {
-    "defaultMessage": "Confirm to join"
+    "defaultMessage": "晚鳥參與七日書"
   },
   "F3zk7E": {
-    "defaultMessage": "(This action cannot be undone)",
+    "defaultMessage": " （草稿刪除後無法恢復）",
     "description": "src/components/DraftDigest/Feed/DeleteButton.tsx"
   },
   "FEI5Fv": {
-    "defaultMessage": "Email address",
+    "defaultMessage": "郵件地址",
     "description": "src/components/Dialogs/SetEmailDialog/Content.tsx"
   },
   "FMIIAZ": {
-    "defaultMessage": "Revision history and IPFS entry,",
+    "defaultMessage": "此為歷史版本和 IPFS 入口查閱區，",
     "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
   },
   "FOOymB": {
-    "defaultMessage": "No members yet",
+    "defaultMessage": "還沒有成員",
     "description": "src/views/Circle/Profile/MembersDialog/Content.tsx"
   },
   "FWCa4O": {
-    "defaultMessage": "Switch to Optimism network now?",
+    "defaultMessage": "目前非 Optimism 網路，立即切換？",
     "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
   },
   "FaTb0A": {
-    "defaultMessage": "Install MetaMask",
+    "defaultMessage": "安裝 MetaMask",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
   },
   "Fe682o": {
-    "defaultMessage": "Next Month (Estimation)",
+    "defaultMessage": "下月預期營收",
     "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
   },
   "FgydNe": {
-    "defaultMessage": "View"
+    "defaultMessage": "查看"
   },
   "FhWC22": {
-    "defaultMessage": "Matters Community"
+    "defaultMessage": "共建協作"
   },
   "FmWYRt": {
-    "defaultMessage": "Free trial period"
+    "defaultMessage": "免費資格時長"
   },
   "Ft76YC": {
-    "defaultMessage": "Collection is deleted",
+    "defaultMessage": "選集已刪除",
     "description": "src/components/CollectionDigest/DropdownActions/DeleteCollection/Dialog.tsx"
   },
   "FuYW4i": {
-    "defaultMessage": "Subscribe circle and chat together!"
+    "defaultMessage": "成為圍爐一員，一起談天說地"
   },
   "FxrSCh": {
-    "defaultMessage": "This ID cannot be modified. Are you sure you want to use {id} as your Matters ID?",
+    "defaultMessage": "ID 設置後無法修改，確認使用 {id} 作為 Matters ID 嗎？",
     "description": "src/components/Dialogs/SetUserNameDialog/ConfirmStep.tsx"
   },
   "G/yZLu": {
-    "defaultMessage": "Remove"
+    "defaultMessage": "移除"
   },
   "G4KR8j": {
-    "defaultMessage": "Image",
+    "defaultMessage": "影像",
     "description": "src/components/Editor"
   },
   "GHxtae": {
-    "defaultMessage": "Wallet",
+    "defaultMessage": "數字錢包",
     "description": "src/components/Forms/SelectAuthMethodForm/AuthTabs.tsx"
   },
   "GRrsEH": {
-    "defaultMessage": "View published article"
+    "defaultMessage": "查看作品"
   },
   "GU6vV0": {
-    "defaultMessage": "No collection created yet",
+    "defaultMessage": "尚未創建選集",
     "description": "src/components/Empty/EmptyCollection.tsx"
   },
   "GUW//c": {
-    "defaultMessage": "Add Tag"
+    "defaultMessage": "添加標籤"
   },
   "GVes61": {
-    "defaultMessage": "published in {circleName}",
+    "defaultMessage": "在 {circleName} 發布新作品",
     "description": "src/components/Notice/ArticleNotice/CircleNewArticle.tsx"
   },
   "GZJpDf": {
-    "defaultMessage": "Analytics"
+    "defaultMessage": "數據"
   },
   "GclYG/": {
-    "defaultMessage": "Anonymous User"
+    "defaultMessage": "匿名支持用戶"
   },
   "GcvLBC": {
-    "defaultMessage": "Understood"
+    "defaultMessage": "我知道了"
   },
   "GhogWq": {
-    "defaultMessage": "Subscription cancellations",
+    "defaultMessage": "退訂",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
   },
   "Gt7K6r": {
-    "defaultMessage": "Wallet address",
+    "defaultMessage": "錢包地址",
     "description": "src/views/Me/Settings/Settings/Wallet/index.tsx"
   },
   "GugBCe": {
-    "defaultMessage": "New Followers This Month",
+    "defaultMessage": "本月新增追蹤人數",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
   },
   "H0JBH6": {
-    "defaultMessage": "Log Out"
+    "defaultMessage": "登出"
   },
   "H5+NAX": {
-    "defaultMessage": "Balance"
+    "defaultMessage": "錢包餘額"
   },
   "H8KGyc": {
-    "defaultMessage": "Enter"
+    "defaultMessage": "進入"
   },
   "H8hiL/": {
-    "defaultMessage": "Edit Circle"
+    "defaultMessage": "編輯圍爐"
   },
   "HAlOn1": {
-    "defaultMessage": "Name"
+    "defaultMessage": "用戶名"
   },
   "HBdVkS": {
-    "defaultMessage": "Claiming in progress"
+    "defaultMessage": "正在提領支持"
   },
   "HBxXD/": {
-    "defaultMessage": "License"
+    "defaultMessage": "版權聲明"
   },
   "HFVDeB": {
-    "defaultMessage": "Related Tags",
+    "defaultMessage": "相關標籤",
     "description": "src/views/TagDetail/RelatedTags/index.tsx"
   },
   "HJ0iZJ": {
-    "defaultMessage": "Confirm Archiving"
+    "defaultMessage": "確認封存"
   },
   "HJhf1Q": {
-    "defaultMessage": "Once it's approved, the channel will be updated : )"
+    "defaultMessage": "編輯確認後頻道將會改變 : )"
   },
   "HJsl78": {
-    "defaultMessage": "An issue occurred while claiming USDT. Please retry or contact ask@matters.town"
+    "defaultMessage": "提領支持金額時遇到問題，請重試或聯繫 ask@matters.town"
   },
   "HPVOw/": {
-    "defaultMessage": "Wallet",
+    "defaultMessage": "數字錢包",
     "description": "src/views/Me/Settings/Settings/index.tsx"
   },
   "HQusql": {
-    "defaultMessage": "Readers can directly transfer USDT and other currencies to you through their wallet address.",
+    "defaultMessage": "讀者可以直接透過錢包地址轉 USDT 等幣種給你",
     "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
   },
   "HR599l": {
-    "defaultMessage": "Back to my works",
+    "defaultMessage": "回到我的創作",
     "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
   },
   "HUf/E+": {
-    "defaultMessage": "Move out of the event"
+    "defaultMessage": "移出活動"
   },
   "HYW0fI": {
-    "defaultMessage": "After publication, your work cannot be deleted."
+    "defaultMessage": "上鏈後，作品不可刪除，去中心化保存"
   },
   "HbEL82": {
-    "defaultMessage": "Comment has been deleted"
+    "defaultMessage": "評論已刪除"
   },
   "HbwwAe": {
-    "defaultMessage": "Updated {date}",
+    "defaultMessage": "{date}更新",
     "description": "src/components/CollectionDigest/Feed/index.tsx"
   },
   "HgY+72": {
-    "defaultMessage": "Apply",
+    "defaultMessage": "報名參加",
     "description": "src/views/CampaignDetail/Apply/Button/index.tsx"
   },
   "HkozYU": {
-    "defaultMessage": "Switch wallet",
+    "defaultMessage": "更換錢包",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
   },
   "HnxG15": {
-    "defaultMessage": "Set"
+    "defaultMessage": "設定"
   },
   "Hpmiif": {
-    "defaultMessage": "Collection",
+    "defaultMessage": "選集",
     "description": "src/views/ArticleDetail/AuthorSidebar/Tabs/index.tsx"
   },
   "HvgNHV": {
-    "defaultMessage": "Paste the URL and press Enter",
+    "defaultMessage": "輸入連結網址，按 Enter 完成",
     "description": "src/components/Editor"
   },
   "HwaiSE": {
-    "defaultMessage": "Upon activation, the main text will be temporarily obscured, displaying only the title and summary. Readers can choose whether to continue reading. (Contains explicit content, violence, gore, etc.)"
+    "defaultMessage": "開啟後，正文將被暫時遮蔽，只顯示標題與摘要，並由讀者選擇是否繼續閱讀（例如含有色情、暴力、血腥等內容）"
   },
   "HxcjQl": {
-    "defaultMessage": "Matters continues to provide services that combine creativity with blockchain technology. You will be the first to experience them after completing connecting wallet.",
+    "defaultMessage": "Matters 將提供更多創作與區塊鏈結合的服務，接入錢包後即可在未來第一時間體驗新功能。",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
   },
   "HyjQns": {
-    "defaultMessage": "tutorial",
+    "defaultMessage": "教學指南",
     "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
   },
   "Hyr5ET": {
-    "defaultMessage": "Supporter",
+    "defaultMessage": "支持者",
     "description": "src/components/Dialogs/SupportersDialog/Content.tsx"
   },
   "HzB4Lk": {
-    "defaultMessage": "Tell readers why you edited this time..."
+    "defaultMessage": "告知讀者你此次編輯的更動有哪些⋯"
   },
   "IJ9YcQ": {
-    "defaultMessage": "Unlink",
+    "defaultMessage": "取消連結",
     "description": "src/components/Editor"
   },
   "IKPYe9": {
-    "defaultMessage": "View",
+    "defaultMessage": "查看",
     "description": "src/components/Dialogs/CollectionSelectDialog/index.tsx"
   },
   "IPqNCS": {
-    "defaultMessage": "Confirm use",
+    "defaultMessage": "確認使用",
     "description": "src/components/Dialogs/SetUserNameDialog/ConfirmStep.tsx"
   },
   "ISly67": {
-    "defaultMessage": "Agree"
+    "defaultMessage": "同意"
   },
   "IUS82d": {
-    "defaultMessage": "Tag active authors",
+    "defaultMessage": "標籤活躍作者",
     "description": "src/views/TagDetail/RecommendedAuthors/index.tsx"
   },
   "IXycMo": {
-    "defaultMessage": "Resend"
+    "defaultMessage": "重新發送"
   },
   "Ihwz5K": {
-    "defaultMessage": "Unpinned from profile"
+    "defaultMessage": "代表作已取消"
   },
   "IjNYll": {
-    "defaultMessage": "Let me think about it"
+    "defaultMessage": "等等再說"
   },
   "IpMWC4": {
-    "defaultMessage": "You’ve posted several times in a short period. Please take a break."
+    "defaultMessage": "短時間內已發布多條動態，請先休息一會吧～"
   },
   "ItUuuX": {
-    "defaultMessage": "invites you to join the circle {circleName} , and you can experience it for {freePeriod} days for free",
+    "defaultMessage": "邀你加入圍爐 {circleName} ，你可以免費體驗 {freePeriod} 天",
     "description": "src/components/Notice/CircleNotice/CircleInvitationNotice.tsx"
   },
   "Ix3e3Q": {
-    "defaultMessage": "Comment",
+    "defaultMessage": "發布評論",
     "description": "src/components/Forms/CommentForm/index.tsx"
   },
   "J6f6iN": {
-    "defaultMessage": "Number of comments",
+    "defaultMessage": "評論數量",
     "description": "src/components/ArticleDigest/Published/FooterActions/index.tsx"
   },
   "J7hiLV": {
-    "defaultMessage": "The author has not bound the LikeCoin wallet yet"
+    "defaultMessage": "作者尚未綁定 LikeCoin 錢包"
   },
   "JCZFqh": {
-    "defaultMessage": "Sign up now and start writing the annual questionnaire. Please check the announcement for event details."
+    "defaultMessage": "現在報名，即可開始書寫年度問卷，活動細則可查看公告"
   },
   "JD0T8w": {
-    "defaultMessage": "Close Menu",
+    "defaultMessage": "關閉選單",
     "description": "src/components/Editor"
   },
   "JTWayV": {
-    "defaultMessage": "Add description",
+    "defaultMessage": "添加描述",
     "description": "src/views/User/CollectionDetail/Content.tsx"
   },
   "JXdbo8": {
-    "defaultMessage": "Done"
+    "defaultMessage": "完成"
   },
   "JaLEXz": {
-    "defaultMessage": "Enter Circle",
+    "defaultMessage": "進入圍爐",
     "description": "src/components/CircleDigest/UserProfile/index.tsx"
   },
   "JkWLg6": {
-    "defaultMessage": "New followers",
+    "defaultMessage": "被追蹤",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
   "Jmg5do": {
-    "defaultMessage": "Archived Work"
+    "defaultMessage": "作品已封存"
   },
   "JpAsUV": {
-    "defaultMessage": "More moments",
+    "defaultMessage": "更多動態",
     "description": "src/views/Follow/Feed/UserPostMomentActivity"
   },
   "JpS59y": {
-    "defaultMessage": "Accepted",
+    "defaultMessage": "已接受",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
   },
-  "Jv9SoD": {
-    "defaultMessage": "Suggest one"
-  },
   "Jxr/TM": {
-    "defaultMessage": "FULL",
+    "defaultMessage": "已滿",
     "description": "src/components/Dialogs/AddCollectionsArticleDialog/SelectDialogContent.tsx"
   },
   "K+pFNS": {
-    "defaultMessage": "Event period{tz}"
+    "defaultMessage": "活動時間{tz}"
   },
   "K2/mHF": {
-    "defaultMessage": "Unable to disconnect from {type} temporarily because you do not have any other log in methods (Email/Crypto wallet/Social account).",
+    "defaultMessage": "暫時無法解綁 {type}，因為你沒有其他登入方式（電子郵件/數字錢包/社交帳號）。",
     "description": "src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
   },
   "K2ec8y": {
-    "defaultMessage": "Please verify email"
+    "defaultMessage": "請先驗證電子郵件"
   },
   "K3r6DQ": {
-    "defaultMessage": "Delete"
+    "defaultMessage": "刪除"
   },
   "KAuIWb": {
-    "defaultMessage": "Unordered List",
+    "defaultMessage": "項目列表",
     "description": "src/components/Editor"
   },
   "KBeSFM": {
-    "defaultMessage": "Support author (current {donationCount} supports)"
+    "defaultMessage": "支持作者（當前 {donationCount} 次支持）"
   },
   "KG9vIx": {
-    "defaultMessage": "Strikethrough",
+    "defaultMessage": "刪除線",
     "description": "src/components/Editor"
   },
   "KIQUHo": {
-    "defaultMessage": "Login password",
+    "defaultMessage": "登入密碼",
     "description": "src/components/Dialogs/SetPasswordDialog/Content.tsx"
   },
   "KLQ1/z": {
-    "defaultMessage": "Circle successfully created",
+    "defaultMessage": "圍爐創建成功",
     "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
   },
   "KQi/UZ": {
-    "defaultMessage": "Archive works"
+    "defaultMessage": "封存作品"
   },
   "KWDSxB": {
-    "defaultMessage": "Save revisions"
+    "defaultMessage": "保存編輯"
   },
   "KgVypx": {
-    "defaultMessage": "Topics",
+    "defaultMessage": "標籤",
     "description": "src/components/Dialogs/TagListDialog/index.tsx"
   },
   "KhbWu2": {
-    "defaultMessage": "Your suggestion has been submitted to the editor."
+    "defaultMessage": "已將你的建議提交給編輯"
   },
   "KlJEP9": {
-    "defaultMessage": "Wallet connected",
+    "defaultMessage": "錢包已綁定",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
   },
   "Kt6f7U": {
-    "defaultMessage": "Do not recommend to any channel"
+    "defaultMessage": "不參與頻道推薦"
   },
   "Kwv1n3": {
-    "defaultMessage": "registration is about 1 LIKE. During promotion period it is sponsored by Matters.News."
+    "defaultMessage": " 用以出版 Writing NFT，費用 ≈1 LIKE，推廣期由平台補助"
   },
   "L0J61B": {
-    "defaultMessage": "Free",
+    "defaultMessage": "免費",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
   "L34EMG": {
-    "defaultMessage": "No account?",
+    "defaultMessage": "沒有帳號？",
     "description": "src/components/Forms/SelectAuthMethodForm/NormalFeed.tsx"
   },
   "L4Fcr8": {
-    "defaultMessage": "New Collection"
+    "defaultMessage": "新建選集"
   },
   "L4NXXh": {
-    "defaultMessage": "Total",
+    "defaultMessage": "目前總營收",
     "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
   },
   "L79o74": {
-    "defaultMessage": "Expand",
+    "defaultMessage": "展開",
     "description": "src/components/Expandable/index.tsx"
   },
   "LETb4b": {
-    "defaultMessage": "Collections allow up to {count} articles currently",
+    "defaultMessage": "選集暫時不允許超過 {count} 篇",
     "description": "src/views/User/CollectionDetail/CollectionArticles/ViewerArticles.tsx"
   },
   "LGox1K": {
-    "defaultMessage": "Followed"
+    "defaultMessage": "已追蹤"
   },
   "LOefol": {
-    "defaultMessage": "Paywalled",
+    "defaultMessage": "上鎖",
     "description": "src/views/Circle/Analytics/ContentAnalytics/ContentTabs/index.tsx"
   },
   "LUWKnn": {
-    "defaultMessage": "Wings have sprouted on the badge, and the halo of dreams is beginning to spin. The Nimbus Ferry badge signifies your participation in the Nomad Matters.",
+    "defaultMessage": "徽章長出了羽翼，夢想的光輪正開始轉動。光輪號徽章紀念你曾參與「遊牧者計畫」。",
     "description": "src/views/User/UserProfile/BadgeNomadLabel/index.tsx"
   },
   "LWE7oq": {
-    "defaultMessage": "Saving draft, are you sure you want to leave?"
+    "defaultMessage": "草稿保存中，確定要離開嗎？"
   },
   "Lb0JsC": {
-    "defaultMessage": "You have blocked that user"
+    "defaultMessage": "你封鎖了該用戶"
   },
   "LgbKvU": {
-    "defaultMessage": "Comment"
+    "defaultMessage": "評論"
   },
   "Lhhi5l": {
-    "defaultMessage": "Article published",
+    "defaultMessage": "作品已發布",
     "description": "src/views/Me/DraftDetail/PublishState/PublishedState.tsx"
   },
   "LmiUWG": {
-    "defaultMessage": "You do not have permissionn to perform this operation",
+    "defaultMessage": "你無法對此對象進行該操作",
     "description": "FORBIDDEN_BY_TARGET_STATE"
   },
   "LoQ3BF": {
-    "defaultMessage": "This badge represents your completion of Free Write in 7 days. Congratulations on finishing this meaningful writing journey!"
+    "defaultMessage": "這枚徽章代表你完成了七天寫作，恭喜走完這趟意義非凡的寫作之旅！"
   },
   "LphWYP": {
-    "defaultMessage": "Terms and Privacy Policy"
+    "defaultMessage": "用戶協議與隱私政策"
   },
   "LqxIEU": {
-    "defaultMessage": "Wallet address will be part of your digital identity and shown in your profile page.",
+    "defaultMessage": "錢包地址將作為身份識別之一在個人頁公開顯示。",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
   },
   "LwFJTy": {
-    "defaultMessage": "Matters ID is your unique identifier, and cannot be modified once set.",
+    "defaultMessage": "Matters ID 為用戶唯一標識，設置後無法修改。",
     "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
   },
   "M05PcB": {
-    "defaultMessage": "says:"
+    "defaultMessage": "想對你說："
   },
   "MDNaxs": {
-    "defaultMessage": "followers",
+    "defaultMessage": "人",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
   },
   "MP6xe/": {
-    "defaultMessage": "Billboard is an open and rentable on-chain NFT advertising protocol. Once a rental is completed, the content can be displayed for 14 days. The rental fee is calculated based on the concept of the Harberger tax, and the generated rental income is distributed to the community creators through quadratic funding. Please check out our {announcements}.",
+    "defaultMessage": "Billboard 是一個公開且可付費租借的鏈上 NFT 廣告協議。租借成功後，可進行 14 天的內容投放。租借費用基於哈柏格稅概念計算，產生的租借收入將以二次方配捐方式回饋給社區創作者。更多詳情請查看{announcements}。",
     "description": "src/components/Dialogs/BillboardDialog/Content.tsx"
   },
   "MPEeBy": {
-    "defaultMessage": "Operation failed, please try again later.",
+    "defaultMessage": "操作失敗，請稍候重試",
     "description": "ACTION_FAILED"
   },
   "MRn08S": {
-    "defaultMessage": "Reply",
+    "defaultMessage": "回覆",
     "description": "src/components/CircleComment/FooterActions/ReplyButton/index.tsx"
   },
   "MV0JlP": {
-    "defaultMessage": "to receive more support"
+    "defaultMessage": "吸引更多人為你拍手！"
   },
   "Me5cJu": {
-    "defaultMessage": "Connect wallet",
+    "defaultMessage": "綁定錢包",
     "description": "src/components/Dialogs/AddWalletLoginDialog/Content.tsx"
   },
   "Mgl1bT": {
-    "defaultMessage": "OAuth authorize"
+    "defaultMessage": "應用授權"
   },
   "Mn7GEf": {
-    "defaultMessage": "Selected activities related to you in the past 24 hours",
+    "defaultMessage": "精選過去 24 小時與你有關的消息",
     "description": "src/views/Me/Settings/Notifications/Email.tsx"
   },
   "Myrqtn": {
-    "defaultMessage": "🎉 Thank you for support!"
+    "defaultMessage": "🎉 感謝支持！"
   },
   "N2IrpM": {
-    "defaultMessage": "Confirm"
+    "defaultMessage": "確認"
   },
   "N6PWfU": {
-    "defaultMessage": "Forget Password"
+    "defaultMessage": "忘記密碼"
   },
   "N6Yp+k": {
-    "defaultMessage": "Confirm in Wallet",
+    "defaultMessage": "去錢包確認",
     "description": "src/components/Forms/PaymentForm/PayTo/Confirm/index.tsx"
   },
   "NACY16": {
-    "defaultMessage": "Why need to set up a wallet?",
+    "defaultMessage": "為什麼需要設定錢包 ?",
     "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
   },
   "NAidKb": {
-    "defaultMessage": "Notifications"
+    "defaultMessage": "通知"
   },
   "NCBtyI": {
-    "defaultMessage": "Supports",
+    "defaultMessage": "支持",
     "description": "src/views/Me/Transactions/index.tsx"
   },
   "NEKHMm": {
-    "defaultMessage": "Email",
+    "defaultMessage": "電子郵件",
     "description": "src/views/Me/Settings/Notifications/Email.tsx"
   },
   "NFIbLb": {
-    "defaultMessage": "Used up edit quota"
+    "defaultMessage": "已用完修改次數"
   },
   "NNF+3f": {
-    "defaultMessage": "Tag not found",
+    "defaultMessage": "標籤不存在",
     "description": "TAG_NOT_FOUND"
   },
   "NSyuEP": {
-    "defaultMessage": "Enter verification code"
+    "defaultMessage": "請輸入驗證碼"
   },
   "NUEvfQ": {
-    "defaultMessage": "mentioned you in a deleted moment",
+    "defaultMessage": "在已删除動態的留言中提及了你",
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
   },
   "NYTGIb": {
-    "defaultMessage": "Got it"
+    "defaultMessage": "知道了"
   },
   "NdtzIs": {
-    "defaultMessage": "The email verification link has been sent to {email}",
+    "defaultMessage": "郵件地址驗證連結已發送至 {email}",
     "description": "src/components/GlobalToast/index.tsx"
   },
   "NfCbnZ": {
-    "defaultMessage": "Number of supporters",
+    "defaultMessage": "支持者數量",
     "description": "src/components/ArticleDigest/Published/FooterActions/index.tsx"
   },
   "NlX31w": {
-    "defaultMessage": "After deletion, the {commentType} will be removed immediately",
+    "defaultMessage": "確認刪除後，{commentType}會立即消失。",
     "description": "src/components/CircleComment/DropdownActions/DeleteComment/Dialog.tsx"
   },
   "NmhF45": {
-    "defaultMessage": "Adding tags helps readers find your articles. Add or create new tags."
+    "defaultMessage": "通過添加標籤幫助讀者更好地找到你的作品。如果沒有合適的標籤，你可以創建新的。"
   },
   "O0MQs/": {
-    "defaultMessage": "Please add email first",
+    "defaultMessage": "請先綁定郵箱",
     "description": "src/views/Me/Settings/Settings/Password/index.tsx"
   },
   "O0QB1v": {
-    "defaultMessage": "Friends will receive free trial invitations to Circle. Set up your invitations now!",
+    "defaultMessage": "用戶將收到你的圍爐免費資格邀請函，設置免費的時限，邀請他們一起加入吧！",
     "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/PreSend.tsx"
   },
   "O2Nqk8": {
-    "defaultMessage": "Forgot password?",
+    "defaultMessage": "忘記密碼？",
     "description": "src/components/Forms/EmailLoginForm/Buttons.tsx"
   },
   "O7ozeo": {
-    "defaultMessage": "Update profile"
+    "defaultMessage": "修改個人資料"
   },
   "ODncRd": {
-    "defaultMessage": "Claiming..."
+    "defaultMessage": "提領中..."
   },
   "OIj8pQ": {
-    "defaultMessage": "Invitation Sent",
+    "defaultMessage": "成功發送邀請",
     "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/Sent.tsx"
   },
   "OJmFke": {
-    "defaultMessage": "Tell readers why you edited this time"
+    "defaultMessage": "告知讀者你此次編輯的更動"
   },
   "OK2u69": {
-    "defaultMessage": "You have not connected your email yet. For security, email is required for top-up."
+    "defaultMessage": "你尚未綁定電子郵件。 基於資金安全考慮，儲值需綁定電子郵件。"
   },
   "OKcHPP": {
-    "defaultMessage": "Your Liker ID is ready!"
+    "defaultMessage": "你的專屬 Liker ID 已就位！"
   },
   "OKhRC6": {
-    "defaultMessage": "Share"
+    "defaultMessage": "分享"
   },
   "OjC4aZ": {
-    "defaultMessage": "Author",
+    "defaultMessage": "作者",
     "description": "src/components/ArticleComment/RoleLabel/index.tsx"
   },
   "Opaa0R": {
-    "defaultMessage": "New likes",
+    "defaultMessage": "拍手和喜歡",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
   "OpeFTV": {
-    "defaultMessage": "Enter a 6-digit payment password."
+    "defaultMessage": "輸入六位數字交易密碼"
   },
   "OsX3KM": {
-    "defaultMessage": "Comment",
+    "defaultMessage": "評論",
     "description": "src/views/ArticleDetail/index.tsx"
   },
   "OwtCWk": {
-    "defaultMessage": "Must be between {MIN_CIRCLE_DISPLAY_NAME_LENGTH}-{MAX_CIRCLE_DISPLAY_NAME_LENGTH} characters long."
+    "defaultMessage": "僅供輸入 {MIN_CIRCLE_DISPLAY_NAME_LENGTH}-{MAX_CIRCLE_DISPLAY_NAME_LENGTH} 個字元"
   },
   "OxGicx": {
-    "defaultMessage": "Please select a currency"
+    "defaultMessage": "請選擇一種幣別"
   },
   "OxLyC5": {
-    "defaultMessage": "Connect your own Liker ID"
+    "defaultMessage": "綁定現有 Liker ID"
   },
   "P+sWM0": {
-    "defaultMessage": "guide",
+    "defaultMessage": "教學指南",
     "description": "src/components/Forms/PaymentForm/PayTo/SetAmount/SetAmountHeader/WhyOptimismDialog/index.tsx"
   },
   "P/7t1k": {
-    "defaultMessage": "Please select a date of activity"
+    "defaultMessage": "請選定參與活動的投稿日程"
   },
   "P3y9Bo": {
-    "defaultMessage": "Go to sign",
+    "defaultMessage": "前往簽署",
     "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
   },
   "PB/iK6": {
-    "defaultMessage": "Published",
+    "defaultMessage": "留言已發布",
     "description": "src/components/Forms/MomentCommentForm/index.tsx"
   },
   "PLBmDT": {
-    "defaultMessage": "Password",
+    "defaultMessage": "登入密碼",
     "description": "src/views/Me/Settings/Settings/Password/index.tsx"
   },
   "PXAur5": {
-    "defaultMessage": "Withdraw"
+    "defaultMessage": "提現"
   },
   "PesLat": {
-    "defaultMessage": "Publishing..."
+    "defaultMessage": "正在發布，馬上就好"
   },
   "PhzTJa": {
-    "defaultMessage": "commented",
+    "defaultMessage": "留言了",
     "description": "src/components/MomentDigest/FooterActions/CommentedFollowees/index.tsx"
   },
   "PkUihI": {
-    "defaultMessage": "Saved",
+    "defaultMessage": "編輯已保存",
     "description": "src/views/ArticleDetail/Edit/Header/index.tsx"
   },
   "PliM8z": {
-    "defaultMessage": "Please go to the relevant page to resend the link. You can also",
+    "defaultMessage": "請移步相關頁面重新獲取連結，您也可以",
     "description": "src/views/Callback/UI.tsx"
   },
   "PmLGMc": {
-    "defaultMessage": "No drafts yet",
+    "defaultMessage": "尚無草稿",
     "description": "src/components/Empty/EmptyDraft.tsx"
   },
   "Pp/0po": {
-    "defaultMessage": "Shuffle"
+    "defaultMessage": "換一批"
   },
   "Pq/7m5": {
-    "defaultMessage": "Reviewing...",
+    "defaultMessage": "晚鳥參與處理中⋯",
     "description": "type:join"
   },
   "PtV68+": {
-    "defaultMessage": "Incorrect email or password",
+    "defaultMessage": "郵件地址或密碼錯誤",
     "description": "USER_EMAIL_NOT_FOUND"
   },
   "Q8Qw5B": {
-    "defaultMessage": "Description"
+    "defaultMessage": "描述"
   },
   "QKJWqd": {
-    "defaultMessage": "Bookmark",
+    "defaultMessage": "收藏",
     "description": "src/components/Buttons/TagBookmark/Bookmark.tsx"
   },
   "QKo4ol": {
-    "defaultMessage": "Title",
+    "defaultMessage": "主標題",
     "description": "src/components/Editor"
   },
   "QQSdHP": {
-    "defaultMessage": "View More"
+    "defaultMessage": "查看更多"
   },
   "QUqfbW": {
-    "defaultMessage": "Describe more about your Circle",
+    "defaultMessage": "說說圍爐的有趣之處，吸引支持者加入",
     "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
   },
   "QXJQ5G": {
-    "defaultMessage": "Please log in again.",
+    "defaultMessage": "授權信息已失效，請重新登入",
     "description": "TOKEN_INVALID"
   },
   "QZXKhG": {
-    "defaultMessage": "Set the Circle URL (cannot be modified after creation)",
+    "defaultMessage": "設置圍爐網址（創建後不可修改）",
     "description": "src/components/Forms/CreateCircleForm/Init.tsx"
   },
   "QbjADp": {
-    "defaultMessage": "Seed User"
+    "defaultMessage": "種子用戶"
   },
   "QfrKA6": {
-    "defaultMessage": "Back",
+    "defaultMessage": "上一步",
     "description": "src/components/Forms/PaymentForm"
   },
   "Qlzm0s": {
-    "defaultMessage": "mentioned you in a moment at"
+    "defaultMessage": "在動態中提及了你"
   },
   "QvPc1q": {
-    "defaultMessage": "Upload Cover"
+    "defaultMessage": "上傳封面"
   },
   "R410ei": {
-    "defaultMessage": "Incorrect verification code",
+    "defaultMessage": "驗證碼錯誤",
     "description": "CODE_INVALID"
   },
   "R7yHDl": {
-    "defaultMessage": "Circle Revenue",
+    "defaultMessage": "圍爐營收",
     "description": "src/components/Transaction/index.tsx"
   },
   "REQGgU": {
-    "defaultMessage": "Notice",
+    "defaultMessage": "發布須知",
     "description": "src/views/Me/DraftDetail/SettingsButton/ConfirmPublishDialogContent/index.tsx"
   },
   "RGEpvx": {
-    "defaultMessage": "Support setting",
+    "defaultMessage": "修改文案",
     "description": "src/views/ArticleDetail/SupportWidget/EditCopyButton/index.tsx"
   },
   "RM17b4": {
-    "defaultMessage": "Author",
+    "defaultMessage": "來自作者",
     "description": "src/views/ArticleDetail/AuthorSidebar/Tabs/index.tsx"
   },
   "RMV4wt": {
-    "defaultMessage": "Top-up successful",
+    "defaultMessage": "儲值成功",
     "description": "src/components/Forms/PaymentForm/AddCredit/index.tsx"
   },
   "ROPCC0": {
-    "defaultMessage": "Please add email first",
+    "defaultMessage": "請先綁定郵箱",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/Email.tsx"
   },
   "RPH69U": {
-    "defaultMessage": "The author has disabled comments for this circle"
+    "defaultMessage": "作者已關閉評論區"
   },
   "RU5NDB": {
-    "defaultMessage": "Please confirm transaction password",
+    "defaultMessage": "請再次輸入交易密碼",
     "description": "src/components/Forms/PaymentForm/SetPassword/index.tsx"
   },
   "Rc4Oij": {
-    "defaultMessage": "Firebolt"
+    "defaultMessage": "火閃電"
   },
   "RnKPVm": {
-    "defaultMessage": "{articleCount} articles"
+    "defaultMessage": "{articleCount} 篇文章"
   },
   "Ro0CuW": {
-    "defaultMessage": "You do not have permission to perform this operation",
+    "defaultMessage": "你尚無權限進行該操作",
     "description": "FORBIDDEN"
   },
   "RxiHr/": {
-    "defaultMessage": "friends have not accepted your invitations.",
+    "defaultMessage": "還沒有任何用戶回覆你的邀請喔！",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/Accepted/index.tsx"
   },
   "S+D/hf": {
-    "defaultMessage": "Recommending channels for your work…"
+    "defaultMessage": "正在為你的作品推薦頻道..."
   },
   "S/hoJx": {
-    "defaultMessage": "User not found",
+    "defaultMessage": "用戶不存在",
     "description": "USER_NOT_FOUND"
   },
   "S15KFb": {
-    "defaultMessage": "{totalCount} articles"
+    "defaultMessage": "{totalCount} 篇作品"
   },
   "S8PcQf": {
-    "defaultMessage": "Unpin from profile",
+    "defaultMessage": "取消代表作",
     "description": "src/components/ArticleDigest/DropdownActions/PinButton.tsx"
   },
   "SFsQ1E": {
-    "defaultMessage": "View responses"
+    "defaultMessage": "查看評論"
   },
   "SHWkv8": {
-    "defaultMessage": "Why use Optimism network first?",
+    "defaultMessage": "為什麼採用 Optimism？",
     "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
   },
   "SIgm0x": {
-    "defaultMessage": "Articles have been bookmarked",
+    "defaultMessage": "作品被收藏",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
   "SNh1n0": {
-    "defaultMessage": "View Members",
+    "defaultMessage": "查看名單",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
   "SPTRiT": {
-    "defaultMessage": "Latest",
+    "defaultMessage": "最新",
     "description": "src/views/Me/Works/Published/SortTabs.tsx"
   },
   "SYfw+k": {
-    "defaultMessage": "Confirm",
+    "defaultMessage": "確認儲值",
     "description": "src/components/Forms/PaymentForm/AddCredit/index.tsx"
   },
   "SYyBFF": {
-    "defaultMessage": "Copied successful"
+    "defaultMessage": "複製成功"
   },
   "SaV7mi": {
-    "defaultMessage": "{articleCount, plural, =1 {1 article} other {{articleCount} articles}}",
+    "defaultMessage": "{articleCount, plural, =1 {1 篇文章} other {{articleCount} 篇文章}}",
     "description": "src/components/CollectionDigest/Feed/index.tsx"
   },
   "SdXoXI": {
-    "defaultMessage": "Invitations have been sent. You can check invitation status on the invitation management page.",
+    "defaultMessage": "你已寄出邀請給朋友們，快去已邀請管理查看他們加入的進度吧！",
     "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/Sent.tsx"
   },
   "Seanpx": {
-    "defaultMessage": "Required"
+    "defaultMessage": "必填欄位"
   },
   "SebPdz": {
-    "defaultMessage": "Transaction in progress, please wait"
+    "defaultMessage": "交易進行中，請稍候"
   },
   "Sep44m": {
-    "defaultMessage": "Payout",
+    "defaultMessage": "提現",
     "description": "src/components/Transaction/index.tsx"
   },
   "Sfql0+": {
-    "defaultMessage": "Congratulations! You've got the Grand Badge!"
+    "defaultMessage": "恭喜獲得七日書大滿貫"
   },
   "Sj+TN8": {
-    "defaultMessage": "Announcement"
+    "defaultMessage": "公告"
   },
   "SuRTsQ": {
-    "defaultMessage": "Register for ISCN"
+    "defaultMessage": "註冊 ISCN"
   },
   "SwoXPI": {
-    "defaultMessage": "Content hash and gateway addresses will be public, and can be used for sharing."
+    "defaultMessage": "指紋與節點隨之公開可見，皆可用於分享作品。"
   },
   "Szd1tH": {
-    "defaultMessage": "Failed to log out, please try again."
+    "defaultMessage": "登出失敗，請重試"
   },
   "SzrjpI": {
-    "defaultMessage": "Article revision content is invalid",
+    "defaultMessage": "作品正文編輯距離超出上限",
     "description": "ARTICLE_REVISION_CONTENT_INVALID"
   },
   "T2kMnM": {
-    "defaultMessage": "Each user can only create one circle.",
+    "defaultMessage": "每個帳號只允許創建一個圍爐",
     "description": "CIRCLE_CREATION_REACH_LIMIT"
   },
   "T73SwS": {
-    "defaultMessage": "Subscriptions",
+    "defaultMessage": "訂閱",
     "description": "src/views/Me/Transactions/index.tsx"
   },
   "T9oZC8": {
-    "defaultMessage": "Are you sure you want to delete this collection ‘{collection}’?"
+    "defaultMessage": "確認要刪除該選集「{collection}」嗎？"
   },
   "TF1OhT": {
-    "defaultMessage": "This login code has expired, please try to resend"
+    "defaultMessage": "臨時密碼已過期，請嘗試重新發送"
   },
   "TInwt3": {
-    "defaultMessage": "Disable Responses"
+    "defaultMessage": "關閉評論"
   },
   "TKsfIS": {
-    "defaultMessage": "Meteor Canoe"
+    "defaultMessage": "流星號"
   },
   "TPEQMa": {
-    "defaultMessage": "CC BY-NC-ND 4.0"
+    "defaultMessage": "CC BY-NC-ND 4.0 授權"
   },
   "TSDiqB": {
-    "defaultMessage": "Subscribers",
+    "defaultMessage": "付費人數",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
   "TWZ1AK": {
-    "defaultMessage": "Clear",
+    "defaultMessage": "清除",
     "description": "src/components/Editor"
   },
   "TX5UzL": {
-    "defaultMessage": "Payment will be processed by Stripe, allowing your support to be unrestricted by region.",
+    "defaultMessage": "付款將由 Stripe 處理，讓你的支持不受地域限制",
     "description": "src/components/Forms/PaymentForm/PayTo/SetAmount/index.tsx"
   },
   "TZgskS": {
-    "defaultMessage": "No one has published yet, check back later!"
+    "defaultMessage": "還沒有人投稿，晚點再來瞧瞧吧！"
   },
   "TcTp+J": {
-    "defaultMessage": "Image uploaded"
+    "defaultMessage": "圖片上傳成功"
   },
   "TgU+Mf": {
-    "defaultMessage": "Optimism is a standalone blockchain. If you have USDT on other chains, you need to transfer them to Optimism. See details in the {tutorial}.",
+    "defaultMessage": "Optimism 是獨立運行的區塊鏈，若你在其他鏈上已有 USDT 貨幣，需要將它們轉移到 Optimism 網絡才能使用，詳情參考 {tutorial}.",
     "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
   },
   "TjWWxF": {
-    "defaultMessage": "Broadcast sent",
+    "defaultMessage": "廣播已送出",
     "description": "src/views/Circle/Broadcast/Broadcast.tsx"
   },
   "U+qEBM": {
-    "defaultMessage": "Switch Network",
+    "defaultMessage": "切換網路",
     "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
   },
   "U4+4Rb": {
-    "defaultMessage": "Must be between {MIN_CIRCLE_NAME_LENGTH}-{MAX_CIRCLE_NAME_LENGTH} characters long."
+    "defaultMessage": "僅供輸入 {MIN_CIRCLE_NAME_LENGTH}-{MAX_CIRCLE_NAME_LENGTH} 個字元"
   },
   "U5/rZd": {
-    "defaultMessage": "Civic Liker is a movement to reward good content and encourage openness. Like = reward. Liker ID is your account to become a civic liker, you have to log into Liker ID in order to turn your “Like” to LikeCoin reward to the creators. Creators also need to register for a Liker ID to get the reward. Note: Matters ID and Liker ID are different and independent IDs. Learn more {link}"
+    "defaultMessage": "讚賞公民是一場化讚為賞，回饋創作的運動，目標是做到讀者按讚，作者獲賞。Liker ID 是你的讚賞公民帳戶，讀者須登入 Liker ID 按讚，才可為作者帶來收入；作者也須擁有 Liker ID 才能獲取奬賞。注意：Matters ID 跟 Liker ID 是不同、獨立的 ID。了解更多 {link}"
   },
   "U5FZL6": {
-    "defaultMessage": "Video",
+    "defaultMessage": "影片",
     "description": "src/components/Editor"
   },
   "U7o9Ba": {
-    "defaultMessage": "Accumulated read time"
+    "defaultMessage": "累計閱讀時數"
   },
   "U86B6w": {
-    "defaultMessage": "Stats"
+    "defaultMessage": "數據"
   },
   "UMCQ4G": {
-    "defaultMessage": "Done",
+    "defaultMessage": "刷完啦",
     "description": "src/components/Interaction/"
   },
   "UOdEqi": {
-    "defaultMessage": "The original login via email will be kept for you. Please note that your wallet cannot be reset once it is connected because of your account security.",
+    "defaultMessage": "原有透過電子信箱登入方式將為你保留。為維護你的帳戶安全，加密錢包連接後無法重設。",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
   },
   "URljhZ": {
-    "defaultMessage": "Successfully removed",
+    "defaultMessage": "作品已移出",
     "description": "src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
   },
   "USOHRK": {
-    "defaultMessage": "Failed to edit, please try again."
+    "defaultMessage": "修改失敗，請稍候重試"
   },
   "UUJzml": {
-    "defaultMessage": "Logbook 2.0 has just launched. If you are an owner of Traveloggers, and haven't claimed, you may claim one from the new Logbook page:"
+    "defaultMessage": "Logbook 2.0 剛剛推出。如果你是 Traveloggers 的所有者，且尚未領取，你可以從新的日誌頁面領取："
   },
   "Ub+AGc": {
-    "defaultMessage": "Sign In"
+    "defaultMessage": "登入"
   },
   "Udp4Bm": {
-    "defaultMessage": "Move to bottom",
+    "defaultMessage": "移至底部",
     "description": "src/components/ArticleDigest/DropdownActions/SetBottomCollectionButton.tsx"
   },
   "UfvCjD": {
-    "defaultMessage": "Submit to {dayName}",
+    "defaultMessage": "投稿{dayName}",
     "description": "src/views/CampaignDetail/Apply/Button/index.tsx"
   },
   "Up5U7K": {
-    "defaultMessage": "Block"
+    "defaultMessage": "封鎖"
   },
   "Upe8I6": {
-    "defaultMessage": "mentioned you in a deleted moment",
+    "defaultMessage": "在已刪除動態中提及了你",
     "description": "src/components/Notice/MomentNotice/MomentMentionedYou.tsx"
   },
   "Uq6tfM": {
-    "defaultMessage": "Add caption…"
+    "defaultMessage": "添加說明文字…"
   },
   "UxAA/V": {
-    "defaultMessage": "Optimism is a Layer 2 scaling solution based on Ethereum that can provide faster and cheaper transactions, while ensuring security, making it easier for you to support creators.",
+    "defaultMessage": "Optimism 是基於以太坊的第二層（Layer2）擴容方案，能提升交易速度，並降低手續費，同時確保安全性，讓你更輕鬆地支持創作者。",
     "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
   },
   "V5OMr4": {
-    "defaultMessage": "What is a digital wallet?",
+    "defaultMessage": "什麼是數字錢包？",
     "description": "src/components/Forms/SelectAuthMethodForm/WalletFeed.tsx"
   },
   "V8msLJ": {
-    "defaultMessage": "left comments and mentioned you in your circle",
+    "defaultMessage": "在你的圍爐中留言並提及你",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
   "VBve8d": {
-    "defaultMessage": "Settled in Matters"
+    "defaultMessage": "搬家到 Matters"
   },
   "VKxanK": {
-    "defaultMessage": "Moment Feature is Live"
+    "defaultMessage": "短動態上線囉！"
   },
   "VZsE96": {
-    "defaultMessage": "Collection Name"
+    "defaultMessage": "選集名稱"
   },
   "VdxjkY": {
-    "defaultMessage": "After deletion, the comment will be removed immediately",
+    "defaultMessage": "確認刪除後，留言會立即消失。",
     "description": "Moment"
   },
   "VeEfHm": {
-    "defaultMessage": "Drafts",
+    "defaultMessage": "草稿",
     "description": "src/views/Me/Works/WorksTabs/index.tsx"
   },
   "VmYzLr": {
-    "defaultMessage": "{total} members"
+    "defaultMessage": "{total} 個成員"
   },
   "VqdOGQ": {
-    "defaultMessage": "More",
+    "defaultMessage": "相關推薦",
     "description": "src/views/ArticleDetail/AuthorSidebar/Tabs/index.tsx"
   },
   "VrOoVf": {
-    "defaultMessage": "Matters will never ask your wallet key through any channel.",
+    "defaultMessage": "Matters 不會透過任何渠道主動詢問你的錢包私鑰。",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
   },
   "VwuiYK": {
-    "defaultMessage": "This URL name has already been used, try another one",
+    "defaultMessage": "Oops！此網址已被使用了，換一個試試",
     "description": "src/components/Forms/CreateCircleForm/Init.tsx"
   },
   "VzzYJk": {
-    "defaultMessage": "Create"
+    "defaultMessage": "新建"
   },
   "W/V6+Y": {
-    "defaultMessage": "Collapse"
+    "defaultMessage": "收合"
   },
   "W0sZaX": {
-    "defaultMessage": "Last 3 months",
+    "defaultMessage": "最近 3 個月",
     "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
   },
   "W3hNBA": {
-    "defaultMessage": "Free Write in 7 days Grand Badge"
+    "defaultMessage": "七日書大滿貫"
   },
   "W3tqQO": {
-    "defaultMessage": "[image]"
+    "defaultMessage": "[圖]"
   },
   "W66Eyq": {
-    "defaultMessage": "Password must be at least 8 characters long, support letter, numbers and symbols.",
+    "defaultMessage": "密碼需至少 8 位，支持字母、數字及符號的組合。",
     "description": "src/components/Dialogs/SetPasswordDialog/Content.tsx"
   },
   "W8OZ3G": {
-    "defaultMessage": "Confirm Deletion"
+    "defaultMessage": "確認刪除"
   },
   "WDZndZ": {
-    "defaultMessage": "Please sign message in your wallet",
+    "defaultMessage": "請在錢包中完成簽名",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
   },
   "WFCO2w": {
-    "defaultMessage": "Set Collection"
+    "defaultMessage": "關聯作品"
   },
   "WIOxG+": {
-    "defaultMessage": "Collapse",
+    "defaultMessage": "闔上",
     "description": "src/components/CircleComment/DropdownActions/CollapseComment/Button.tsx"
   },
   "WNxQX0": {
-    "defaultMessage": "Add Tags"
+    "defaultMessage": "添加標籤"
   },
   "WQT8ZA": {
-    "defaultMessage": "Edit collection"
+    "defaultMessage": "編輯選集"
   },
   "WpvsPu": {
-    "defaultMessage": "Subscribe",
+    "defaultMessage": "訂閱",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
   "WsPbZT": {
-    "defaultMessage": "Continue payout"
+    "defaultMessage": "繼續提現"
   },
   "WuvE8X": {
-    "defaultMessage": "Followers of {circleName}",
+    "defaultMessage": "{circleName} 的追蹤者",
     "description": "src/views/Circle/Profile/FollowersDialog/index.tsx"
   },
   "WxhsrG": {
-    "defaultMessage": "Please connect email"
+    "defaultMessage": "請先綁定電子郵件"
   },
   "XH1s8E": {
-    "defaultMessage": "Delete {commentType}",
+    "defaultMessage": "刪除{commentType}",
     "description": "src/components/CircleComment/DropdownActions/DeleteComment/Dialog.tsx"
   },
   "XHMco9": {
-    "defaultMessage": "subscribers",
+    "defaultMessage": "人",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
   "XMpFQE": {
-    "defaultMessage": "Connection abnormality, please make sure the connection is stable and retry"
+    "defaultMessage": "網路連線異常，請確保連線暢通後重試"
   },
   "XOEFDf": {
-    "defaultMessage": "{total} articles"
+    "defaultMessage": "{total} 篇作品"
   },
   "XOtg99": {
-    "defaultMessage": "Edit",
+    "defaultMessage": "編輯",
     "description": "src/components/Editor"
   },
   "XQ9bi3": {
-    "defaultMessage": "More",
+    "defaultMessage": "詳情",
     "description": "src/components/Dialogs/WithdrawVaultUSDTDialog/Content.tsx"
   },
   "XQTBu6": {
-    "defaultMessage": "mentioned you in your circle broadcast comment",
+    "defaultMessage": "在你的圍爐廣播中留言提及你",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
   },
   "XTRqqT": {
-    "defaultMessage": "Add to event"
+    "defaultMessage": "參與活動"
   },
   "XTyKFR": {
-    "defaultMessage": "Adding articles to a collection helps readers find your articles."
+    "defaultMessage": "精挑細選作品，幫助讀者更容易發現優質內容"
   },
   "XVYrS/": {
-    "defaultMessage": "No followers yet"
+    "defaultMessage": "還沒有追蹤者"
   },
   "XYUhx0": {
-    "defaultMessage": "Disconnect from {type}",
+    "defaultMessage": "解綁 {type}",
     "description": "src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
   },
   "XZ8IJ3": {
-    "defaultMessage": "After the modification is completed, the new version will be released to IPFS again. You can view the historical version from \"IPFS\" under the article title."
+    "defaultMessage": "完成修改後，新版會再次發佈到 IPFS，你可以從文章標題下的「IPFS」進入查看歷史版本。"
   },
   "XdLnXf": {
-    "defaultMessage": "Insufficient wallet balance.",
+    "defaultMessage": "錢包餘額不足",
     "description": "PAYMENT_BALANCE_INSUFFICIENT"
   },
   "XgdZSb": {
-    "defaultMessage": "Authors"
+    "defaultMessage": "值得追蹤"
   },
   "Xh/txo": {
-    "defaultMessage": "Content Hash"
+    "defaultMessage": "作品指紋"
   },
   "Xi40U9": {
-    "defaultMessage": "This action cannot be undone. Are you sure you want to delete this collection?"
+    "defaultMessage": "操作無法撤銷，確認刪除選集嗎？"
   },
   "XlfiKR": {
-    "defaultMessage": "Must be between 2-20 characters long. Only letters letters, numbers and underline are allowed."
+    "defaultMessage": "2-20 個字元，僅支持英文小寫字母、數字或下劃線"
   },
   "XmnzQT": {
-    "defaultMessage": "Maximum 4 editors allowed for each tag",
+    "defaultMessage": "一個標籤最多僅可有 4 名協作者共同管理",
     "description": "TAG_EDITORS_REACH_LIMIT"
   },
   "XnEruT": {
-    "defaultMessage": "Binding failed. Please retry later."
+    "defaultMessage": "綁定失敗，請稍後再試"
   },
   "Xq7h6o": {
-    "defaultMessage": "Upload Moment Assets"
+    "defaultMessage": "上傳動態圖片"
   },
   "XqTMgg": {
-    "defaultMessage": "Authorize in Wallet",
+    "defaultMessage": "去錢包設置",
     "description": "REAUTHORIZE"
   },
   "XuYhBC": {
-    "defaultMessage": "Pinned to profile"
+    "defaultMessage": "代表作已設置"
   },
   "Xz/AHp": {
-    "defaultMessage": "broadcast and mentioned you",
+    "defaultMessage": " 广播提及你",
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
   },
   "Y+spJC": {
-    "defaultMessage": "commented in your circle broadcast",
+    "defaultMessage": "在你的圍爐中留言",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
   },
   "Y47aYU": {
-    "defaultMessage": "Top up"
+    "defaultMessage": "儲值"
   },
   "Y7N/Jg": {
-    "defaultMessage": "Maximum image dimension is 12,000 pixels."
+    "defaultMessage": "圖片邊長不得超過 12,000 像素"
   },
   "Y8zV4A": {
-    "defaultMessage": "Write a comment"
+    "defaultMessage": "回覆評論"
   },
   "Y9IYvj": {
-    "defaultMessage": "No suitable channels"
+    "defaultMessage": "沒有適合的頻道"
   },
   "YDMrKK": {
-    "defaultMessage": "Users"
+    "defaultMessage": "用戶"
   },
   "YPMn9n": {
-    "defaultMessage": "Please log in.",
+    "defaultMessage": "請先登入再進行操作",
     "description": "UNAUTHENTICATED"
   },
   "YS8YSV": {
-    "defaultMessage": "Account Archived"
+    "defaultMessage": "已註銷用戶"
   },
   "YUXRsM": {
-    "defaultMessage": "Blocked Users",
+    "defaultMessage": "已封鎖用戶",
     "description": "src/views/Me/Settings/Blocked/index.tsx"
   },
   "YWQTXE": {
-    "defaultMessage": "View article",
+    "defaultMessage": "查看作品",
     "description": "src/views/Me/DraftDetail/PublishState/PublishedState.tsx"
   },
   "YjW2MT": {
-    "defaultMessage": "Comment has been hidden"
+    "defaultMessage": "評論已隱藏"
   },
   "YlPCRU": {
-    "defaultMessage": "connected",
+    "defaultMessage": "關聯了",
     "description": "src/components/Notice/ArticleArticleNotice/ArticleNewCollectedNotice.tsx"
   },
   "Z2iL9Z": {
-    "defaultMessage": "Start writing",
+    "defaultMessage": "開始創作",
     "description": "src/components/Buttons/StartWriting/index.tsx"
   },
   "Z39z+x": {
-    "defaultMessage": "{displayName} won't be able to comment your article. Besides, he or she can't @ you and subscribe your circle. You can manage blocked list in settings."
+    "defaultMessage": "封鎖之後，{displayName} 將無法評論你的作品，不能 @ 你，並且不能加入你的圍爐。你可以在設置裏管理你的封鎖用戶列表。`"
   },
   "Z7JXlF": {
-    "defaultMessage": "Archived for violation.",
+    "defaultMessage": "因違反用戶協定而被封存，",
     "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
   },
   "ZAs170": {
-    "defaultMessage": "Profile",
+    "defaultMessage": "基本資料",
     "description": "src/views/Circle/Settings/index.tsx"
   },
   "ZD+vm/": {
-    "defaultMessage": "Upvote"
+    "defaultMessage": "點讚"
   },
   "ZEMcZ6": {
-    "defaultMessage": "Article Management"
+    "defaultMessage": "作品管理"
   },
   "ZNK0I9": {
-    "defaultMessage": "liked your comment"
+    "defaultMessage": "喜歡你的評論"
   },
   "ZOW313": {
-    "defaultMessage": "You can edit the article four times after publishing it. You can also archive the original and republish.."
+    "defaultMessage": "首次發布作品後有四次正文編輯機會，你也可以歸檔原文重新發布作品。"
   },
   "ZUPQzl": {
-    "defaultMessage": "comment",
+    "defaultMessage": "回覆了你",
     "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
   },
   "ZVoJan": {
-    "defaultMessage": "Edit",
+    "defaultMessage": "修改",
     "description": "src/components/ArticleDigest/DropdownActions/EditButton.tsx"
   },
   "ZZ9zIR": {
-    "defaultMessage": "Downvote"
+    "defaultMessage": "點踩"
   },
   "ZjDH42": {
-    "defaultMessage": "About Us"
+    "defaultMessage": "關於我們"
   },
   "ZxgUKj": {
-    "defaultMessage": "Likes Received"
+    "defaultMessage": "讚賞我的"
   },
   "a/YQ1Z": {
-    "defaultMessage": "Archived",
+    "defaultMessage": "作品已封存",
     "description": "src/components/ArticleDigest/DropdownActions/ArchiveArticle/Dialog.tsx"
   },
   "a/xacb": {
-    "defaultMessage": "(Articles in this collection will not be deleted)"
+    "defaultMessage": "（不會刪除選集內文章）"
   },
   "a1+ca6": {
-    "defaultMessage": "Number of readers: unique registered users plus number of anonymous IP addresses visited the article (Data will be updated periodically and may be delayed)",
+    "defaultMessage": "讀者數量：訪問過作品頁的不重複的登入用戶數加匿名 IP 數（數據週期更新，可能存在延遲）",
     "description": "src/views/Me/Works/Published/SortTabs.tsx"
   },
   "aCTmEO": {
-    "defaultMessage": "I don't have a wallet yet",
+    "defaultMessage": "我還沒有錢包",
     "description": "src/components/Forms/SelectAuthMethodForm/WalletFeed.tsx"
   },
   "aE5Qq+": {
-    "defaultMessage": "Resend",
+    "defaultMessage": "重新發送",
     "description": "src/components/Forms/Verification/ResendCodeButton/index.tsx"
   },
   "aKEiNd": {
-    "defaultMessage": "You missed the registration period, you can still join as a latecomer. Apply earlier next time for the chance to get the badge."
+    "defaultMessage": "錯過報名期沒關係，仍然可以用晚鳥身份參與，一起書寫人生故事。下次早點報名，就有機會獲得大滿貫徽章！"
   },
   "aOFCqL": {
-    "defaultMessage": "Most comments",
+    "defaultMessage": "最多評論",
     "description": "src/views/Me/Works/Published/SortTabs.tsx"
   },
   "aPxJXi": {
-    "defaultMessage": "{type} sent"
+    "defaultMessage": "{type}已送出"
   },
   "aTmmkr": {
-    "defaultMessage": "You have unsubscribed the circle."
+    "defaultMessage": "你已經與圍爐告別，感謝曾經的付出與參與。"
   },
   "aaUBvF": {
-    "defaultMessage": "comment_circle",
+    "defaultMessage": " 中的發言",
     "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
   },
   "aacIz8": {
-    "defaultMessage": "Email",
+    "defaultMessage": "電子郵件",
     "description": "src/views/Me/Settings/Settings/Email/index.tsx"
   },
   "adThp5": {
-    "defaultMessage": "Latest"
+    "defaultMessage": "最新"
   },
   "afLdf2": {
-    "defaultMessage": "Moment"
+    "defaultMessage": "發動態"
   },
   "ai7kS4": {
-    "defaultMessage": "My Works"
+    "defaultMessage": "我的創作"
   },
   "al5/yQ": {
-    "defaultMessage": "Joined successfully"
+    "defaultMessage": "晚鳥參與通過"
   },
   "aqX2Bt": {
-    "defaultMessage": "go to the homepage",
+    "defaultMessage": "前往首頁",
     "description": "src/views/Callback/UI.tsx"
   },
   "awW+lk": {
-    "defaultMessage": "Processing",
+    "defaultMessage": "進行中…",
     "description": "src/components/Transaction/State/index.tsx"
   },
   "az8n8W": {
-    "defaultMessage": "Invite friends to join your circle"
+    "defaultMessage": "添加站內或站外朋友加入圍爐"
   },
   "b/mswY": {
-    "defaultMessage": "Say something...",
+    "defaultMessage": "聊幾句？",
     "description": "src/components/Forms/MomentCommentForm/index.tsx"
   },
   "b0RNGM": {
-    "defaultMessage": "Your article {articleTitle} has been listed as a feature of event in 7 days. Come and view more wonderful articles!",
+    "defaultMessage": "你的作品 {articleTitle} 已被列為活動精選，快來看看更多精彩好文！",
     "description": "src/components/Notice/CampaignArticleNotice/CampaignArticleFeaturedNotice.tsx"
   },
   "b8ogKp": {
-    "defaultMessage": "Add Invitation",
+    "defaultMessage": "新增邀請",
     "description": "src/views/Circle/Settings/ManageInvitation/AddButton/index.tsx"
   },
   "bBYO6x": {
-    "defaultMessage": "Unblock",
+    "defaultMessage": "取消封鎖",
     "description": "src/components/BlockUser/Button/index.tsx"
   },
   "bQ5vZC": {
-    "defaultMessage": "This article has been marked as restricted content by the {actor}.",
+    "defaultMessage": "此文已被{actor}標示為限制級內容",
     "description": "src/views/ArticleDetail/Wall/Sensitive/index.tsx"
   },
   "bSqeXm": {
-    "defaultMessage": "{ext, select, gif {GIF format i} other {I} }mages have a {sizeInMB} megabyte (MB) size limit."
+    "defaultMessage": "{ext, select, gif {GIF 格式} other {} }圖片大小不得超過 {sizeInMB}MB"
   },
   "bTNYGv": {
-    "defaultMessage": "Comment",
+    "defaultMessage": "評論",
     "description": "src/components/Forms/ArticleCommentForm/index.tsx"
   },
   "beLe/F": {
-    "defaultMessage": "Broadcast"
+    "defaultMessage": "廣播"
   },
   "c/z318": {
-    "defaultMessage": "Incorrect email or password",
+    "defaultMessage": "郵件地址或密碼錯誤",
     "description": "src/components/Forms/EmailLoginForm/index.tsx"
   },
   "cAP9g5": {
-    "defaultMessage": "pinned your comment in {commentArticle}",
+    "defaultMessage": "將你的評論在 {commentArticle} 中置頂",
     "description": "src/components/Notice/CommentNotice/CommentPinnedNotice.tsx"
   },
   "cCpbBu": {
-    "defaultMessage": "Popular Channel Authors"
+    "defaultMessage": "頻道熱門作者"
   },
   "cCsxxw": {
-    "defaultMessage": "This {type} has been archived due to a violation of the user agreement"
+    "defaultMessage": "此 {type} 因違反用戶協定而被歸檔"
   },
   "cE4Hfw": {
-    "defaultMessage": "Discover"
+    "defaultMessage": "發現"
   },
   "cHDJyK": {
-    "defaultMessage": "No articles"
+    "defaultMessage": "尚無作品"
   },
   "cK3TLr": {
-    "defaultMessage": "Remove bookmark",
+    "defaultMessage": "取消收藏",
     "description": "src/components/Buttons/Bookmark/Unbookmark.tsx"
   },
   "cPIKU2": {
-    "defaultMessage": "Following"
+    "defaultMessage": "追蹤"
   },
   "cPSexq": {
-    "defaultMessage": "Let's go check out the other circles."
+    "defaultMessage": "去看看其他圍爐吧，希望你早日找到下一個心之所屬。"
   },
   "cPXsvZ": {
-    "defaultMessage": "Article cannot be added to event or circle at the same time"
+    "defaultMessage": "作品暫不可同時投稿活動及加入圍爐"
   },
   "cQ+Lyq": {
-    "defaultMessage": "Nomad Matters Badge",
+    "defaultMessage": "遊牧者計畫紀念徽章",
     "description": "src/views/User/UserProfile/Badges/index.tsx"
   },
   "cQYXjl": {
-    "defaultMessage": "Currency",
+    "defaultMessage": "匯率幣別",
     "description": "src/views/Me/Settings/Misc/Currency/index.tsx"
   },
   "cYvIpp": {
-    "defaultMessage": "Already subscribed to this circle.",
+    "defaultMessage": "無需重複訂閱此圍爐",
     "description": "DUPLICATE_CIRCLE_SUBSCRIPTION"
   },
   "cd/II9": {
-    "defaultMessage": "{totalCount, plural, =1 {article} other {articles}}"
+    "defaultMessage": "{totalCount, plural, =1 {篇文章} other {篇文章}}"
   },
   "cg1VJ2": {
-    "defaultMessage": "Connect Wallet"
+    "defaultMessage": "連接加密錢包"
   },
   "cmtHjM": {
-    "defaultMessage": "You haven‘t published any articles yet, so there is no data available. Create one now to introduce yourself!",
+    "defaultMessage": "由於你尚未發布任何作品，這裡還沒有任何數據能與你分享哦！發布第一篇作品來介紹你自己，以此開啟你的創作之旅吧！",
     "description": "src/views/Me/Analytics/EmptyAnalytics/index.tsx"
   },
   "ctl5tq": {
-    "defaultMessage": "New articles",
+    "defaultMessage": "新作品",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
   },
   "cufo9X": {
-    "defaultMessage": "The daily limit is 5000 HKD",
+    "defaultMessage": "已達到單日支付上限（5000 HKD）",
     "description": "PAYMENT_REACH_MAXIMUM_LIMIT"
   },
   "cv6yHm": {
-    "defaultMessage": "Menu: Me"
+    "defaultMessage": "菜單 - 我的"
   },
   "cyR7Kh": {
-    "defaultMessage": "Back"
+    "defaultMessage": "返回"
   },
   "d1mBsg": {
-    "defaultMessage": "Following circles",
+    "defaultMessage": "追蹤的圍爐",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
   },
   "d4waan": {
-    "defaultMessage": "Income",
+    "defaultMessage": "營收",
     "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
   },
   "d5+b8r": {
-    "defaultMessage": "Restricted content"
+    "defaultMessage": "限制級內容"
   },
   "d5bM8A": {
-    "defaultMessage": "Select Date..."
+    "defaultMessage": "投稿日程⋯"
   },
   "dAPUJp": {
-    "defaultMessage": "The dazzling light of a meteor shower is enough to illuminate the night sky. The Meteor Canoe badge signifies your participation in the Nomad Matters.",
+    "defaultMessage": "流星雨的絢爛光芒足以點亮夜空。流星號徽章紀念你曾參與「遊牧者計畫」。",
     "description": "src/views/User/UserProfile/BadgeNomadLabel/index.tsx"
   },
   "dAvP6d": {
-    "defaultMessage": "No blocked users yet",
+    "defaultMessage": "尚無封鎖紀錄",
     "description": "src/views/Me/Settings/Blocked/SettingsBlocked.tsx"
   },
   "dE4mlL": {
-    "defaultMessage": "Submit",
+    "defaultMessage": "投稿",
     "description": "src/views/CampaignDetail/Apply/Button/index.tsx"
   },
   "dK7Dnj": {
-    "defaultMessage": "🔥 Claim for free"
+    "defaultMessage": "🔥 免費提領"
   },
   "dQhNbF": {
-    "defaultMessage": "Payment will be processed by Stripe, allowing your support to be unrestricted by region.",
+    "defaultMessage": "付款將由 Stripe 處理，讓你的支持不受地域限制",
     "description": "src/components/Forms/PaymentForm/StripeCheckout/index.tsx"
   },
   "dSjI7E": {
-    "defaultMessage": "Unable to disconnect the wallet because you have not added or associated another login (Email/Wallet/Social account).",
+    "defaultMessage": "暫無法斷開錢包連結，因為你沒有其他可用於登錄的身份（電子郵件/數字錢包/社交帳號）。",
     "description": "src/components/Dialogs/RemoveWalletLoginDialog/Content.tsx"
   },
   "dTOtPO": {
-    "defaultMessage": "Top Up"
+    "defaultMessage": "儲值"
   },
   "dUkC8R": {
-    "defaultMessage": "Claim USDT"
+    "defaultMessage": "提領支持"
   },
   "dVbKzB": {
-    "defaultMessage": "Comments and replies",
+    "defaultMessage": "評論和回覆",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
   "dZlT9q": {
-    "defaultMessage": "Your work has been recommended to the channels: {channelNames}. Are you satisfied with the result?"
+    "defaultMessage": "已推薦你的這篇作品到頻道：{channelNames}，你對結果滿意嗎？"
   },
   "ddJbkg": {
-    "defaultMessage": "Pin",
+    "defaultMessage": "置頂",
     "description": "src/components/ArticleComment/DropdownActions/PinButton.tsx"
   },
   "deEeEI": {
-    "defaultMessage": "Register"
+    "defaultMessage": "註冊"
   },
   "djJp6c": {
-    "defaultMessage": "History"
+    "defaultMessage": "我的足跡"
   },
   "dk+TLh": {
-    "defaultMessage": "The wallet address will be publicly displayed on the personal page as personal identification.",
+    "defaultMessage": "錢包地址將公開顯示於個人頁作為個人身份識別",
     "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
   },
   "dzF4ci": {
-    "defaultMessage": "Resend",
+    "defaultMessage": "重新發送",
     "description": "src/components/Forms/EmailLoginForm/index.tsx"
   },
   "e3qUqn": {
-    "defaultMessage": "Pornography involving minors"
+    "defaultMessage": "涉及未成年人的色情"
   },
   "eIlMHB": {
-    "defaultMessage": "Allow readers to respond to this article (can NOT be disabled afterwards)"
+    "defaultMessage": "允許讀者評論本文（開啟後無法關閉）"
   },
   "eKVBm/": {
-    "defaultMessage": "Optimism is a standalone blockchain. If you have USDT on other chains, you need to transfer them to Optimism. See details in the {link}."
+    "defaultMessage": "Optimism 是獨立運行的區塊鏈，若你在其他鏈上已有 USDT 貨幣，需要將它們轉移到 Optimism 網絡才能使用，詳情參考{link}。"
   },
   "eTpiYa": {
-    "defaultMessage": "No data yet."
+    "defaultMessage": "尚無支持數據"
   },
   "eWXgsZ": {
-    "defaultMessage": "Clear Content"
+    "defaultMessage": "清空内容"
   },
   "eY3YIa": {
-    "defaultMessage": "Copy comment"
+    "defaultMessage": "複製評論"
   },
   "eZ0m39": {
-    "defaultMessage": "Enter the amount"
+    "defaultMessage": "或輸入自定義金額"
   },
   "enMIYK": {
-    "defaultMessage": "My Page"
+    "defaultMessage": "我的"
   },
   "eoQN04": {
-    "defaultMessage": "More",
+    "defaultMessage": "詳情",
     "description": "src/components/MomentDigest/index.tsx"
   },
   "eov+J2": {
-    "defaultMessage": "Custom URL Name"
+    "defaultMessage": "自定義網址名稱"
   },
   "erE5/4": {
-    "defaultMessage": "Followed",
+    "defaultMessage": "互相追蹤",
     "description": "src/components/Buttons/FollowUser/FollowState.tsx"
   },
   "exG99K": {
-    "defaultMessage": "Submit Confirmation"
+    "defaultMessage": "提交確認"
   },
   "exb/12": {
-    "defaultMessage": "You can log in through your wallet next time!",
+    "defaultMessage": "之後就可以透過錢包快速登入囉！",
     "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
   },
   "ezYuE2": {
-    "defaultMessage": "Support Author"
+    "defaultMessage": "支持作者"
   },
   "f24jaP": {
-    "defaultMessage": "Credit card support requires emails related to financial information, please verify your email address first."
+    "defaultMessage": "信用卡支持需發送財務信息相關郵件，請您先驗證電子郵件地址。"
   },
   "f5jWMJ": {
-    "defaultMessage": "Confirm",
+    "defaultMessage": "確認參加",
     "description": "src/views/CampaignDetail/Apply/Dialog/index.tsx"
   },
   "fBzH+2": {
-    "defaultMessage": "Disallow readers to respond to this article (you can enable responses later by editing this article)"
+    "defaultMessage": "不允許讀者評論本文（可通過編輯打開評論功能）"
   },
   "fDdcbi": {
-    "defaultMessage": "This {type} has been deleted by the author"
+    "defaultMessage": "{type}已被原作者刪除"
   },
   "fJB38x": {
-    "defaultMessage": "Trial ends in {remainDays} days"
+    "defaultMessage": "剩餘 {remainDays} 天"
   },
   "fJVe7H": {
-    "defaultMessage": "IPFS",
+    "defaultMessage": "IPFS 指紋",
     "description": "src/views/ArticleDetail/History/InfoHeader/index.tsx"
   },
   "fK6ptv": {
-    "defaultMessage": "Sending failed. Please retry later."
+    "defaultMessage": "送出失敗，請稍後再試"
   },
   "fKkBPz": {
-    "defaultMessage": "Support Again"
+    "defaultMessage": "再次支持"
   },
   "fLvbqA": {
-    "defaultMessage": "To protect the security of your assets, please set a six-digit transaction password first."
+    "defaultMessage": "為了保護你的資產安全，請先設置六位數字交易密碼"
   },
   "fPcF7H": {
-    "defaultMessage": "Adding tags helps readers find your articles."
+    "defaultMessage": "添加合適標籤，讓站內外讀者找到你的作品"
   },
   "fWDtpq": {
-    "defaultMessage": "Pending",
+    "defaultMessage": "邀請中",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
   },
   "fWZYP5": {
-    "defaultMessage": "Pinned"
+    "defaultMessage": "置頂"
   },
   "fko+MR": {
-    "defaultMessage": "Retry claiming"
+    "defaultMessage": "重試提領"
   },
   "fnv5rD": {
-    "defaultMessage": "like article (current {total} likes)"
+    "defaultMessage": "讚賞作品（當前 {total} 次讚賞）"
   },
   "fpLpPO": {
-    "defaultMessage": "(This action is immediate and cannot be undone.)"
+    "defaultMessage": "（該操作會即刻生效且無法撤銷）"
   },
   "fsB/4p": {
-    "defaultMessage": "Saved"
+    "defaultMessage": "儲存成功"
   },
   "fxhue9": {
-    "defaultMessage": "Article will be published to IPFS, others can not tamper with it, and you own the copyright."
+    "defaultMessage": "作品將發布至 IPFS，無法被他人刪改，創作權歸你所有。"
   },
   "g//2O2": {
-    "defaultMessage": "Uncollapse",
+    "defaultMessage": "取消闔上",
     "description": "src/components/CircleComment/DropdownActions/UncollapseButton.tsx"
   },
   "g/IDCs": {
-    "defaultMessage": "Moment",
+    "defaultMessage": "動態",
     "description": "src/components/Dialogs/MomentDetailDialog/Content.tsx"
   },
   "g39W4D": {
-    "defaultMessage": "(the work will appear in \"Latest\")"
+    "defaultMessage": "（文章將出現在「還有」中）"
   },
   "g3NgLw": {
-    "defaultMessage": "Confirm to move the work to \"Latest\"?"
+    "defaultMessage": "確認將作品移到「還有」？"
   },
   "g5pX+a": {
-    "defaultMessage": "About"
+    "defaultMessage": "關於"
   },
   "gCafm/": {
-    "defaultMessage": "Join",
+    "defaultMessage": "晚鳥參與",
     "description": "src/views/CampaignDetail/Apply/Button/index.tsx"
   },
   "gK6OxL": {
-    "defaultMessage": "Leave a comment?",
+    "defaultMessage": "留個友善的評論？",
     "description": "src/views/ArticleDetail/Toolbar/FixedToolbar/index.tsx"
   },
   "gN4jLB": {
-    "defaultMessage": "Your work {articleTitle} has been republished to decentralized network",
+    "defaultMessage": "你對 {articleTitle} 的修改已發佈到 IPFS",
     "description": "src/components/Notice/ArticleNotice/RevisedArticlePublishedNotice.tsx"
   },
   "gS1u3d": {
-    "defaultMessage": "{left} modifications available"
+    "defaultMessage": "你還可以修改 {left} 次"
   },
   "gczcC5": {
-    "defaultMessage": "Subscribe"
+    "defaultMessage": "訂閱"
   },
   "ggS9L7": {
-    "defaultMessage": "The payment amount is invalid, please re-enter.",
+    "defaultMessage": "支付金額無效，請重新輸入",
     "description": "PAYMENT_AMOUNT_INVALID"
   },
   "gvTltk": {
-    "defaultMessage": "Draft - {title}"
+    "defaultMessage": "草稿 - {title}"
   },
   "gykfC8": {
-    "defaultMessage": "Latest",
+    "defaultMessage": "還有",
     "description": "src/components/Layout/SideChannelNav/index.tsx"
   },
   "gzJEFb": {
-    "defaultMessage": "Verify your Liker ID through like.co"
+    "defaultMessage": "跳轉到 like.co 驗證已有 Liker ID"
   },
   "h+punE": {
-    "defaultMessage": "Updated {date}",
+    "defaultMessage": "{date}更新",
     "description": "src/views/User/CollectionDetail/Content.tsx"
   },
   "h74kLA": {
-    "defaultMessage": "Failed to Donate"
+    "defaultMessage": "支持失敗"
   },
   "h7sMQs": {
-    "defaultMessage": "New followers",
+    "defaultMessage": "新追蹤者",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
   },
   "h9A6AT": {
-    "defaultMessage": "For security, we will {resetHint} for this. You can set your password again after verifying new email address.",
+    "defaultMessage": "為確保帳號安全，修改郵件地址將{resetHint}，你可在驗證郵箱後再次設定密碼。",
     "description": "src/components/Dialogs/SetEmailDialog/Content.tsx"
   },
   "h9CB9m": {
-    "defaultMessage": "The result is mainly based on the records on the chain and will be synchronized to Matters later."
+    "defaultMessage": "結果以鏈上紀錄為主，稍後同步至 Matters"
   },
   "hASeng": {
-    "defaultMessage": "Blocked Users",
+    "defaultMessage": "已封鎖用戶",
     "description": "src/views/Me/Settings/Misc/BlockedUsers.tsx"
   },
   "hAyhzq": {
-    "defaultMessage": "Top up",
+    "defaultMessage": "去儲值",
     "description": "SUPPORT_HKD"
   },
   "hBLCwn": {
-    "defaultMessage": "other amount"
+    "defaultMessage": "其他金額"
   },
   "hDDFgp": {
-    "defaultMessage": "Matters will send {amount} to your connected wallet {address} via a contract transaction (Matters will temporarily cover the transaction fee). For assistance, please contact ask@matters.town"
+    "defaultMessage": "Matters 會通過合約交易將 {amount} 發送至你綁定的錢包 {address}（Matters 將暫時承擔交易手續費）。如需幫助請聯繫 ask@matters.town"
   },
   "hG2cBH": {
-    "defaultMessage": "Subscribe Circle"
+    "defaultMessage": "訂閱圍爐"
   },
   "hWq/ii": {
-    "defaultMessage": "Insufficient:",
+    "defaultMessage": "餘額不足：",
     "description": "src/components/Balance/index.tsx"
   },
   "hgtWIO": {
-    "defaultMessage": "Articles have been collected",
+    "defaultMessage": "作品被關聯",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
   "hk2aiz": {
-    "defaultMessage": "followed your circle",
+    "defaultMessage": "追蹤了你的圍爐",
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
   },
   "hl9bd4": {
-    "defaultMessage": "Cover"
+    "defaultMessage": "封面"
   },
   "hpIFGj": {
-    "defaultMessage": "Are you sure you want to delete draft ‘{title}’?",
+    "defaultMessage": "確認要刪除草稿「{title}」嗎？",
     "description": "src/components/DraftDigest/Feed/DeleteButton.tsx"
   },
   "hrgo+E": {
-    "defaultMessage": "Archive"
+    "defaultMessage": "封存"
   },
   "hv1iYZ": {
-    "defaultMessage": "Number of readers",
+    "defaultMessage": "讀者數量",
     "description": "src/components/ArticleDigest/Published/FooterActions/index.tsx"
   },
   "i4OBEw": {
-    "defaultMessage": "\"{name}\" is invalid."
+    "defaultMessage": "不能使用「{name}」"
   },
   "iEJeQH": {
-    "defaultMessage": "Liker ID"
+    "defaultMessage": "設置 Liker ID"
   },
   "iIitRg": {
-    "defaultMessage": "Tag not bookmarked yet"
+    "defaultMessage": "尚未收藏標籤"
   },
   "iNZdM/": {
-    "defaultMessage": "Switch to support creators with the Optimism network {br} Make support more convenient and affordable",
+    "defaultMessage": "切換後即可支持創作者，採用 Optimism 網路{br}讓支持更方便且費用低廉",
     "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
   },
   "iSM+et": {
-    "defaultMessage": "All rights reserved"
+    "defaultMessage": "作者保留所有權利"
   },
   "iTcMqz": {
-    "defaultMessage": "Under the moonlight, dreams are about to come true. The Moonlight Dream badge signifies your participation in the Nomad Matters.",
+    "defaultMessage": "月色之下，夢想即將實現。月之夢徽章紀念你曾參與「遊牧者計畫」。",
     "description": "src/views/User/UserProfile/BadgeNomadLabel/index.tsx"
   },
   "iYk6P9": {
-    "defaultMessage": "Result not found"
+    "defaultMessage": "不好意思，什麼都沒搜到"
   },
   "icdrwy": {
-    "defaultMessage": "Followed You",
+    "defaultMessage": "追蹤了你",
     "description": "src/components/Buttons/FollowUser/FollowState.tsx"
   },
   "ieGrWo": {
-    "defaultMessage": "Follow"
+    "defaultMessage": "追蹤"
   },
   "imXsmo": {
-    "defaultMessage": "back to latest",
+    "defaultMessage": "回到作品頁",
     "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
   },
   "itPgxd": {
-    "defaultMessage": "Profile"
+    "defaultMessage": "個人主頁"
   },
   "iu3XKs": {
-    "defaultMessage": "Wallet disconnected",
+    "defaultMessage": "錢包已解綁",
     "description": "src/components/Dialogs/RemoveWalletLoginDialog/Content.tsx"
   },
   "ivXY6L": {
-    "defaultMessage": "All Authors"
+    "defaultMessage": "全部作者"
   },
   "izWS4J": {
-    "defaultMessage": "Unfollow"
+    "defaultMessage": "取消追蹤"
   },
   "j8oldW": {
-    "defaultMessage": "Maximum {maxLength} characters, current {current} characters."
+    "defaultMessage": "已超過 {maxLength} 字，目前 {current} 字"
   },
   "jBx/nm": {
-    "defaultMessage": "Sign up with email",
+    "defaultMessage": "電子郵件註冊",
     "description": "src/components/Forms/SelectAuthMethodForm/NormalFeed.tsx"
   },
   "jLkKbI": {
-    "defaultMessage": "Reviewing...",
+    "defaultMessage": "報名處理中⋯",
     "description": "type:apply"
   },
   "jiB0Z2": {
-    "defaultMessage": "Unable to bind wallet",
+    "defaultMessage": "無法綁定錢包",
     "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
   },
   "jtdQHR": {
-    "defaultMessage": "Gateways"
+    "defaultMessage": "公共節點"
   },
   "jx7Hn3": {
-    "defaultMessage": "Article"
+    "defaultMessage": "寫文章"
   },
   "jy3tx0": {
-    "defaultMessage": "broadcast in {circlename}",
+    "defaultMessage": "在 {circlename} 發布廣播",
     "description": "src/components/Notice/CommentNotice/CircleNewBroadcastNotice.tsx"
   },
   "k0fraU": {
-    "defaultMessage": "Bookmarked"
+    "defaultMessage": "收藏成功"
   },
   "k2veDA": {
-    "defaultMessage": "Write"
+    "defaultMessage": "創作"
   },
   "k5NnNF": {
-    "defaultMessage": "followed you",
+    "defaultMessage": "追蹤了你",
     "description": "src/components/Notice/UserNotice/UserNewFollowerNotice.tsx"
   },
   "k6pcz/": {
-    "defaultMessage": "Check the wallet status and confirm your network."
+    "defaultMessage": "請確認網路和錢包是否正常運行"
   },
   "k97/u7": {
-    "defaultMessage": "Add Articles"
+    "defaultMessage": "添加作品"
   },
   "kCPl0r": {
-    "defaultMessage": "Collect"
+    "defaultMessage": "關聯"
   },
   "kEDrXh": {
-    "defaultMessage": "liked your collection"
+    "defaultMessage": "喜歡你的選集"
   },
   "kEfk9g": {
-    "defaultMessage": "The draft has been updated on another device or tab. Click OK to continue editing and overwrite this version."
+    "defaultMessage": "草稿於其他設備或頁籤已更新，點擊確認將繼續編輯並覆蓋該版本。"
   },
   "kHMa3H": {
-    "defaultMessage": "The new password and confirmation password do not match."
+    "defaultMessage": "密碼不一致"
   },
   "kPylKK": {
-    "defaultMessage": "Circle",
+    "defaultMessage": "圍爐",
     "description": "src/views/Me/Settings/Notifications/index.tsx"
   },
   "kS3vTS": {
@@ -2714,842 +2711,839 @@
     "description": "src/views/Me/Settings/Misc/LikerID.tsx"
   },
   "kc79d3": {
-    "defaultMessage": "Topics"
+    "defaultMessage": "熱門標籤"
   },
   "kkZioy": {
-    "defaultMessage": "Remove",
+    "defaultMessage": "確認移出",
     "description": "src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
   },
   "ksIL/T": {
-    "defaultMessage": "Kind reminder: This wallet address is different from the wallet address you use to log in to Matters"
+    "defaultMessage": "貼心提醒：此錢包位址不同於您用於登入 Matters 的錢包位址"
   },
   "ksvOGO": {
-    "defaultMessage": "Send the verification code",
+    "defaultMessage": "發送驗證碼",
     "description": "src/components/Forms/Verification/SendCodeButton/index.tsx"
   },
   "kvUs/6": {
-    "defaultMessage": "Please enter new transaction password",
+    "defaultMessage": "請輸入新交易密碼",
     "description": "src/components/Forms/PaymentForm/ResetPassword/Confirm.tsx"
   },
   "l/f7bu": {
-    "defaultMessage": "Want to know more? Check the",
+    "defaultMessage": "想了解更多？詳見 ",
     "description": "src/views/Me/Analytics/EmptyAnalytics/index.tsx"
   },
   "l0/EvT": {
-    "defaultMessage": "Last step: Set Matters ID",
+    "defaultMessage": "最後一步：設置 Matters ID",
     "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
   },
   "l2eEyp": {
-    "defaultMessage": "Transaction Password successfully changed."
+    "defaultMessage": "交易密碼重置成功"
   },
   "l31hCd": {
-    "defaultMessage": "Preview",
+    "defaultMessage": "效果預覽",
     "description": "src/components/Editor/MoreSettings/SupportSettingDialog/Content.tsx"
   },
   "lI2l2/": {
-    "defaultMessage": "Incorrect verification code. Please check your input, or try resend",
+    "defaultMessage": "驗證碼不正確，請檢查輸入內容或重新發送",
     "description": "CODE_INVALID"
   },
   "lIPOh3": {
-    "defaultMessage": "Create Stripe Account"
+    "defaultMessage": "創建 Stripe 帳戶"
   },
   "lIir/P": {
-    "defaultMessage": "I see"
+    "defaultMessage": "我知道了"
   },
   "lNWFnL": {
-    "defaultMessage": "Share this article in translated version"
+    "defaultMessage": "分享這篇文章的翻譯版本"
   },
   "lNjDPr": {
-    "defaultMessage": "You have not invited anyone yet! Invite friends to join your circle by clicking 'invite friends'.",
+    "defaultMessage": "你還沒有邀請任何用戶喔！點擊新增邀請，添加站內或站外朋友加入圍爐贈與對方免費資格的固定時長",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/Pending/index.tsx"
   },
   "lO7wKc": {
-    "defaultMessage": "Not yet"
+    "defaultMessage": "再想想"
   },
   "lZukEr": {
-    "defaultMessage": "commented",
+    "defaultMessage": "評論了",
     "description": "src/components/Notice/CommentNotice/ArticleNewCommentNotice.tsx"
   },
   "lfiBVR": {
-    "defaultMessage": "CIVIC LIKER"
+    "defaultMessage": "讚賞公民"
   },
   "liBHHE": {
-    "defaultMessage": "Any thoughts? Leave a kind comment~"
+    "defaultMessage": "什麼看法，都可以留個友善的評論～"
   },
   "ll/ufR": {
-    "defaultMessage": "Trending"
+    "defaultMessage": "熱門"
   },
   "lqdpsm": {
-    "defaultMessage": "Back to subscribe"
+    "defaultMessage": "回到訂閱"
   },
   "m+cdhC": {
-    "defaultMessage": "Recently used"
+    "defaultMessage": "近期使用"
   },
   "m/Wg7b": {
-    "defaultMessage": "Circle Description",
+    "defaultMessage": "圍爐描述",
     "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
   },
   "m4GG4b": {
-    "defaultMessage": "Delete collection"
+    "defaultMessage": "刪除選集"
   },
   "m4KtjK": {
-    "defaultMessage": "New subscribers",
+    "defaultMessage": "新訂閱者",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
   },
   "mBkZcw": {
-    "defaultMessage": "Like moment"
+    "defaultMessage": "喜歡動態"
   },
   "mBmmr+": {
-    "defaultMessage": "Subscribed",
+    "defaultMessage": "訂閱",
     "description": "src/views/User/UserProfile/FollowingDialog/CirclesFeed/CirclesTabs/index.tsx"
   },
   "mCAIcg": {
-    "defaultMessage": "Hottest",
+    "defaultMessage": "站內閱讀熱門排行",
     "description": "src/views/Circle/Analytics/ContentAnalytics/index.tsx"
   },
   "mJEqC/": {
-    "defaultMessage": "Go to {href}"
+    "defaultMessage": "跳轉至 {href}"
   },
   "mKp9t/": {
-    "defaultMessage": "Remove bookmark",
+    "defaultMessage": "取消收藏",
     "description": "src/components/Buttons/TagBookmark/Unbookmark.tsx"
   },
   "mPe6DK": {
-    "defaultMessage": "subscribed your circle",
+    "defaultMessage": "訂閱了你的圍爐",
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
   },
   "mSAY3/": {
-    "defaultMessage": "User unblocked. User can now comment on your articles.",
+    "defaultMessage": "已取消封鎖。該用戶現在可以評論你的作品和圍爐。",
     "description": "src/components/BlockUser/Button/index.tsx"
   },
   "mThL4h": {
-    "defaultMessage": "Processing... Don't leave the page."
+    "defaultMessage": "請在新頁面完成綁定，不要關閉本窗口"
   },
   "mWcca9": {
-    "defaultMessage": "Are you sure you want to archive ‘{article}’?"
+    "defaultMessage": "確認要將「{article}」封存嗎？"
   },
   "mWjpk9": {
-    "defaultMessage": "No broadcast yet.",
+    "defaultMessage": "還沒有廣播",
     "description": "src/views/Circle/Broadcast/Broadcast.tsx"
   },
   "mbHf/6": {
-    "defaultMessage": "Ended",
+    "defaultMessage": "已結束",
     "description": "src/views/CampaignDetail/Apply/Button/index.tsx"
   },
   "me1nR+": {
-    "defaultMessage": "Copy Address"
+    "defaultMessage": "複製地址"
   },
   "ml3SZN": {
-    "defaultMessage": "Minimum 8 characters. Uppercase/lowercase letters, numbers and symbols are allowed"
+    "defaultMessage": "至少 8 個字元，支持英文大小寫字母、數字和特殊符號"
   },
   "mm2UAM": {
-    "defaultMessage": "Connect wallet and claim USDT"
+    "defaultMessage": "綁定錢包並提領支持"
   },
   "mp9SBo": {
-    "defaultMessage": "Circle notifications",
+    "defaultMessage": "圍爐通知",
     "description": "src/views/Me/Settings/Notifications/index.tsx"
   },
   "mqa6CF": {
-    "defaultMessage": "Upload avatar"
+    "defaultMessage": "上傳頭像"
   },
   "mu01Gw": {
-    "defaultMessage": "Verification code is no longer valid. Please use the latest code we sent, or try resend",
+    "defaultMessage": "驗證碼已失效，請使用最新驗證碼或重新發送",
     "description": "CODE_INACTIVE"
   },
   "myB890": {
-    "defaultMessage": "Pass and ask me next time",
+    "defaultMessage": "先不要，下次再說",
     "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
   },
   "n/w6lW": {
-    "defaultMessage": "Most Supporters",
+    "defaultMessage": "最多支持",
     "description": "src/views/Me/Works/Published/SortTabs.tsx"
   },
   "n2Sc6g": {
-    "defaultMessage": "My profile",
+    "defaultMessage": "個人資料",
     "description": "src/views/Me/Settings/Settings/MyProfile/index.tsx"
   },
   "n3SsO1": {
-    "defaultMessage": "The contract has sent {amount} to the linked wallet. Click here for details."
+    "defaultMessage": "交易合約已將金額 {amount} 發送至綁定錢包，點此查看詳情"
   },
   "n3shsQ": {
-    "defaultMessage": "Invalid name",
+    "defaultMessage": "名稱不正確",
     "description": "NAME_INVALID"
   },
   "n6ZdqD": {
-    "defaultMessage": "This circle is already taken.",
+    "defaultMessage": "圍爐名稱已被使用",
     "description": "DUPLICATE_CIRCLE"
   },
   "nGBrvw": {
-    "defaultMessage": "Bookmarks"
+    "defaultMessage": "我的收藏"
   },
   "nNB7KU": {
-    "defaultMessage": "replied your comment in",
+    "defaultMessage": "在",
     "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
   },
   "nVoVnb": {
-    "defaultMessage": "Followed",
+    "defaultMessage": "追蹤",
     "description": "src/views/User/UserProfile/FollowingDialog/CirclesFeed/CirclesTabs/index.tsx"
   },
   "nWhqw9": {
-    "defaultMessage": "Publish Now"
+    "defaultMessage": "立即發布"
   },
   "ng6TX/": {
-    "defaultMessage": "Published",
+    "defaultMessage": "發表成功",
     "description": "src/views/MomentDetail/Edit/index.tsx"
   },
   "nhkx3t": {
-    "defaultMessage": "IPFS is a decentralized storage technology that has the advantages of being decentralized, easy to survive, and difficult to be censored. Every article published on Matters is uploaded to IPFS. IPFS will incur certain storage fees, which are currently borne by Matters. (Go to the IPFS official website ipfs.com to learn more)"
+    "defaultMessage": "IPFS 是一種分散式儲存技術，具有去中心、易存續、不易被審查等優點。 每一篇在 Matters 發佈的文章都會上傳到 IPFS。 IPFS 會產生一定儲存費用，目前暫時由 Matters 承擔。 （到 IPFS 官網 ipfs.com 可以了解更多）"
   },
   "no7l8z": {
-    "defaultMessage": "Disconnect wallet",
+    "defaultMessage": "解綁錢包",
     "description": "src/components/Dialogs/RemoveWalletLoginDialog/Content.tsx"
   },
   "nozN+j": {
-    "defaultMessage": "Invalid Email",
+    "defaultMessage": "電子信箱不正確",
     "description": "USER_EMAIL_INVALID"
   },
   "ob+HDS": {
-    "defaultMessage": "View Circle"
+    "defaultMessage": "馬上逛逛"
   },
   "ohbnFU": {
-    "defaultMessage": "Social Login",
+    "defaultMessage": "社交登入",
     "description": "src/views/Me/Settings/Settings/index.tsx"
   },
   "ohgTH4": {
-    "defaultMessage": "Following",
+    "defaultMessage": "追蹤中",
     "description": "src/components/UserProfile/index.tsx"
   },
   "on+DYO": {
-    "defaultMessage": "Confirm application"
+    "defaultMessage": "確認報名"
   },
   "onDesU": {
-    "defaultMessage": "Congratulations! Now you can browse all works within the circle for free and chat with everyone."
+    "defaultMessage": "恭喜成為圍爐一員。現在你可以免費瀏覽圍爐內作品，還可以去圍爐與大家談天說地。"
   },
   "orIq4X": {
-    "defaultMessage": "More than 100 supports"
+    "defaultMessage": "支持超過 100 次"
   },
   "p5qZnJ": {
-    "defaultMessage": "liked",
+    "defaultMessage": "讚賞了",
     "description": "src/components/Notice/ArticleNotice/ArticleNewAppreciationNotice.tsx"
   },
   "p9gEZh": {
-    "defaultMessage": "Up to 3 images can be uploaded"
+    "defaultMessage": "動態最多支持 3 張圖片"
   },
   "pAQR0S": {
-    "defaultMessage": "Published",
+    "defaultMessage": "已發布",
     "description": "src/views/Me/Works/WorksTabs/index.tsx"
   },
   "pHg5Ju": {
-    "defaultMessage": "Set password succeed",
+    "defaultMessage": "登入密碼已設定",
     "description": "src/components/Dialogs/SetPasswordDialog/Content.tsx"
   },
-  "pY7XQ+": {
-    "defaultMessage": "We couldn’t find a suitable channel to recommend this work. {SuggestButton}?"
-  },
   "pZ1keA": {
-    "defaultMessage": "The article has been removed from the featured of the event"
+    "defaultMessage": "作品已從活動精選中移除"
   },
   "phAZoj": {
-    "defaultMessage": "Collection"
+    "defaultMessage": "選集"
   },
   "pjunBi": {
-    "defaultMessage": "1 MB maximum",
+    "defaultMessage": "導入作品累計超過 1MB",
     "description": "MIGRATION_REACH_LIMIT"
   },
   "ptTHBL": {
-    "defaultMessage": "Call-to-Support"
+    "defaultMessage": "支持號召"
   },
   "pzTOmv": {
-    "defaultMessage": "Followers"
+    "defaultMessage": "追蹤者"
   },
   "q+N5Wd": {
-    "defaultMessage": "Manage Circle",
+    "defaultMessage": "管理圍爐",
     "description": "src/views/Circle/Profile/DropdownActions/index.tsx"
   },
   "q192Fl": {
-    "defaultMessage": "Delete comment",
+    "defaultMessage": "刪除留言",
     "description": "Moment"
   },
   "q9oMKE": {
-    "defaultMessage": "Circle Name"
+    "defaultMessage": "圍爐名稱"
   },
   "qBOEDo": {
-    "defaultMessage": "Maximum amount is HKD {max}"
+    "defaultMessage": "最大金額爲 HKD {max}"
   },
   "qCotH5": {
-    "defaultMessage": "commented in your moment",
+    "defaultMessage": "在動態中留言",
     "description": "src/components/Notice/CommentNotice/MomentNewCommentNotice.tsx"
   },
   "qNuRmA": {
-    "defaultMessage": "Send login code",
+    "defaultMessage": "發送臨時密碼",
     "description": "src/components/Forms/EmailLoginForm/Buttons.tsx"
   },
   "qPqap+": {
-    "defaultMessage": "Archived",
+    "defaultMessage": "已封存",
     "description": "src/views/Me/Works/WorksTabs/index.tsx"
   },
   "qRYMPk": {
-    "defaultMessage": "Problems logging in, please wait or close Ad Blocker and try again"
+    "defaultMessage": "登入遇到問題，請稍候或關閉 Ad Blocker 後再次嘗試"
   },
   "qS19ij": {
-    "defaultMessage": "Reset successful",
+    "defaultMessage": "交易密碼重置成功",
     "description": "src/components/Forms/PaymentForm/ResetPassword/Confirm.tsx"
   },
   "qTHZmd": {
-    "defaultMessage": "Only one comment can be pinned to the top",
+    "defaultMessage": "僅能置頂一則評論",
     "description": "src/components/ArticleComment/DropdownActions/PinButton.tsx"
   },
   "qVhxp5": {
-    "defaultMessage": "Enter",
+    "defaultMessage": "進入",
     "description": "src/components/Buttons/UniversalAuth/index.tsx"
   },
   "qYzBk8": {
-    "defaultMessage": "unsubscribed your circle",
+    "defaultMessage": "退訂了你的圍爐",
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
   },
   "qcAuPU": {
-    "defaultMessage": "Draft - Untitled"
+    "defaultMessage": "草稿 - 未命名"
   },
   "qfi4cg": {
-    "defaultMessage": "Failed to upload, please try again."
+    "defaultMessage": "圖片上傳失敗"
   },
   "qgPR68": {
-    "defaultMessage": "Pin to profile",
+    "defaultMessage": "設為代表作",
     "description": "src/components/ArticleDigest/DropdownActions/PinButton.tsx"
   },
   "qhVSGI": {
-    "defaultMessage": "Hmm... It seems the author has hidden this work. Go see something else"
+    "defaultMessage": "吶，作者親手掩蓋了這篇作品的痕跡，看看別的吧"
   },
   "qlxeW+": {
-    "defaultMessage": "Undo downvote"
+    "defaultMessage": "取消點踩"
   },
   "quRPwZ": {
-    "defaultMessage": "Payment request has been sent"
+    "defaultMessage": "支付請求已送出"
   },
   "qw7tLA": {
-    "defaultMessage": "liked your comment on a deleted moment",
+    "defaultMessage": "喜歡你在已刪除動態中的留言",
     "description": "src/components/Notice/CommentNotice/CommentLikedNotice.tsx"
   },
   "r5pj/5": {
-    "defaultMessage": "Drag"
+    "defaultMessage": "拖拽"
   },
   "r66dXx": {
-    "defaultMessage": "mentioned you in broadcast comment in {circleName}",
+    "defaultMessage": "在 {circleName} 的廣播留言中提及你",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
   },
   "r9LhcI": {
-    "defaultMessage": "Paste YouTube, Vimeo or bilibili link, and press enter"
+    "defaultMessage": "貼上 YouTube、Vimeo 或 bilibili 連結後，Enter 進行新增"
   },
   "rADhX5": {
-    "defaultMessage": "Unavailable",
+    "defaultMessage": "不可用",
     "description": "FORBIDDEN_BY_STATE"
   },
   "rAFb3E": {
-    "defaultMessage": "Matters will send {amount} to your connected wallet via a contract transaction (Matters will temporarily cover the transaction fee)."
+    "defaultMessage": "Matters 會通過合約交易將 {amount} 發送至你綁定的錢包（Matters 將暫時承擔交易手續費）。"
   },
   "rDX3h6": {
-    "defaultMessage": "Version Description"
+    "defaultMessage": "版本簡述"
   },
   "rE7sE3": {
-    "defaultMessage": "CC0 License"
+    "defaultMessage": "CC0 公眾領域貢獻宣告"
   },
   "rG2xmp": {
-    "defaultMessage": "Claim successful"
+    "defaultMessage": "提領成功"
   },
   "rHi+cL": {
-    "defaultMessage": "Most readers",
+    "defaultMessage": "最多讀者",
     "description": "src/views/Me/Works/Published/SortTabs.tsx"
   },
   "rJSVni": {
-    "defaultMessage": "Follow",
+    "defaultMessage": "追蹤",
     "description": "src/components/Buttons/FollowUser/Follow.tsx"
   },
   "rJqgwV": {
-    "defaultMessage": "Edit",
+    "defaultMessage": "開始修改",
     "description": "src/components/Dialogs/ReviseArticleDialog/index.tsx"
   },
   "rXnmeE": {
-    "defaultMessage": "Confirm and Send"
+    "defaultMessage": "確認發送"
   },
   "rZyVay": {
-    "defaultMessage": "Verification code expired, try resend",
+    "defaultMessage": "驗證碼已過期，請重新發送",
     "description": "CODE_EXPIRED"
   },
   "raexxM": {
-    "defaultMessage": "Submitted"
+    "defaultMessage": "已提交"
   },
   "rbrahO": {
-    "defaultMessage": "Close"
+    "defaultMessage": "關閉"
   },
   "rdxgu4": {
-    "defaultMessage": "Email",
+    "defaultMessage": "請輸入電子信箱",
     "description": "src/components/Forms/PaymentForm/ResetPassword/Request.tsx"
   },
   "rfz/fN": {
-    "defaultMessage": "Recommended size: 1600px x 900px"
+    "defaultMessage": "建議尺寸 1600 x 900 像素"
   },
   "rqS2aA": {
-    "defaultMessage": "Sign in to that account to unlink it then try again",
+    "defaultMessage": "請登入該帳戶解綁錢包後再試",
     "description": "src/components/AuthMethodFeed/AuthWalletFeed.tsx"
   },
   "rsdUz2": {
-    "defaultMessage": "liked your comment",
+    "defaultMessage": "喜歡你的留言",
     "description": "MOMENT"
   },
   "ruZqtT": {
-    "defaultMessage": "Must be between {MIN_USER_DISPLAY_NAME_LENGTH}-{MAX_USER_DISPLAY_NAME_LENGTH} characters long."
+    "defaultMessage": "僅供輸入 {MIN_USER_DISPLAY_NAME_LENGTH}-{MAX_USER_DISPLAY_NAME_LENGTH} 個字元"
   },
   "sFJ/Is": {
-    "defaultMessage": "Are you sure you want to clear the current content?"
+    "defaultMessage": "確認清空當前編輯的内容嗎？"
   },
   "sPgUkN": {
-    "defaultMessage": "This Month",
+    "defaultMessage": "本月營收",
     "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
   },
   "sfj+KG": {
-    "defaultMessage": "The results are mainly based on the records on the chain and will be synchronized to Matters later.",
+    "defaultMessage": "結果以鏈上紀錄為主，稍後同步至 Matters",
     "description": "src/components/Forms/PaymentForm/Processing/index.tsx"
   },
   "sg3nVO": {
-    "defaultMessage": "This email has been used, please go to login or try another one",
+    "defaultMessage": "郵箱已被使用，請前往登入或嘗試另一個",
     "description": "USER_EMAIL_EXISTS"
   },
   "sjdyQ0": {
-    "defaultMessage": "Invitation sent"
+    "defaultMessage": "邀請已送出"
   },
   "skbUBl": {
-    "defaultMessage": "Log in",
+    "defaultMessage": "登入",
     "description": "src/components/Buttons/Login/index.tsx"
   },
   "stTITI": {
-    "defaultMessage": "announcements",
+    "defaultMessage": "社區公告",
     "description": "src/components/Dialogs/BillboardDialog/Content.tsx"
   },
   "sy+pv5": {
-    "defaultMessage": "Email"
+    "defaultMessage": "電子郵件"
   },
   "syBMnY": {
-    "defaultMessage": "writers",
+    "defaultMessage": "位寫作者",
     "description": "src/views/CampaignDetail/InfoHeader/Participants/index.tsx"
   },
   "syEQFE": {
-    "defaultMessage": "Publish"
+    "defaultMessage": "發布"
   },
   "t1wXVG": {
-    "defaultMessage": "Say something? Someone might listen.",
+    "defaultMessage": "說說看？也許有人聽",
     "description": "MOMENT_FORM"
   },
   "t2EpN/": {
-    "defaultMessage": "Request on {network} network will be confirmed and synced to Matters in a bit"
+    "defaultMessage": "持續與 {network} 網絡同步，稍後更新至 Matters"
   },
   "tBt9u0": {
-    "defaultMessage": "Sign in",
+    "defaultMessage": "登入",
     "description": "src/components/Forms/EmailLoginForm/index.tsx"
   },
   "tEeEJT": {
-    "defaultMessage": "Your work {articleTitle} has been published to decentralized network",
+    "defaultMessage": "你的作品 {articleTitle} 已發布到 IPFS",
     "description": "src/components/Notice/ArticleNotice/ArticlePublishedNotice.tsx"
   },
   "tFeVR6": {
-    "defaultMessage": "The summary text limit is {maxLength} characters"
+    "defaultMessage": "摘要文字上限為 {maxLength} 字"
   },
   "tIDG14": {
-    "defaultMessage": "Illegal advertising"
+    "defaultMessage": "非法廣告"
   },
   "tQ3+Xo": {
-    "defaultMessage": "Add up to 5 tags",
+    "defaultMessage": "標籤添加最多至 5 個",
     "description": "TOO_MANY_TAGS_FOR_ARTICLE"
   },
   "tQCtdN": {
-    "defaultMessage": "You need to authorize Matters to perform USDT transactions for you."
+    "defaultMessage": "需要先授權 Matters 為你進行 USDT 交易"
   },
   "tQV8l8": {
-    "defaultMessage": "Unknown Error"
+    "defaultMessage": "未知錯誤"
   },
   "tZKvnZ": {
-    "defaultMessage": "Unlike moment"
+    "defaultMessage": "取消喜歡動態"
   },
   "tqEGfa": {
-    "defaultMessage": "Your work has been published. Share it on different platforms"
+    "defaultMessage": "作品發佈成功，快把作品分享到不同渠道，"
   },
   "tzq2+W": {
-    "defaultMessage": "Send",
+    "defaultMessage": "寄出邀請",
     "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/PreSend.tsx"
   },
   "u+cgOo": {
-    "defaultMessage": "My circle",
+    "defaultMessage": "我的圍爐",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
   },
   "u5aHb4": {
-    "defaultMessage": "Copy Link"
+    "defaultMessage": "複製連結"
   },
   "u9LYjQ": {
-    "defaultMessage": "Comment has been deleted",
+    "defaultMessage": "留言已刪除",
     "description": "Moment"
   },
   "uM5qZr": {
-    "defaultMessage": "Likes Given"
+    "defaultMessage": "我讚賞的"
   },
   "uME1sk": {
-    "defaultMessage": "View supporters",
+    "defaultMessage": "查看支持者名單",
     "description": "src/views/ArticleDetail/SupportWidget/Donators/index.tsx"
   },
   "uQHRvx": {
-    "defaultMessage": "Please select the type of issues:"
+    "defaultMessage": "請選擇問題類型："
   },
   "uQrkG8": {
-    "defaultMessage": "3 steps, migrate to Matters immediately"
+    "defaultMessage": "三個步驟，立即搬家到 Matters"
   },
   "uVCg1l": {
-    "defaultMessage": "Explore Matters"
+    "defaultMessage": "玩轉 Matters 實用指南"
   },
   "uYwH7j": {
-    "defaultMessage": "Article published"
+    "defaultMessage": "作品已發佈"
   },
   "uaFED8": {
-    "defaultMessage": "After binding, in addition to the original login method, a wallet login channel will be added.",
+    "defaultMessage": "綁定後除原有登入方式，增加錢包登入管道",
     "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
   },
   "ub1kHa": {
-    "defaultMessage": "Add to collection"
+    "defaultMessage": "加入選集"
   },
   "ucxFlV": {
-    "defaultMessage": "The withdrawal process has started."
+    "defaultMessage": "提現流程已啟動"
   },
   "ulh3kf": {
-    "defaultMessage": "Collections"
+    "defaultMessage": "選集"
   },
   "up6Uh/": {
-    "defaultMessage": "Dispute Refund",
+    "defaultMessage": "爭議款退回",
     "description": "src/components/Transaction/index.tsx"
   },
   "us5QHt": {
-    "defaultMessage": "This {type} has been collapsed by the author"
+    "defaultMessage": "{type} 被創作者闔上"
   },
   "utMaM0": {
-    "defaultMessage": "Verification code has been sent via email and is valid for 20 minutes.",
+    "defaultMessage": "驗證碼已通過郵件發送，有效期為 20 分鐘",
     "description": "src/components/Forms/Verification/SendCodeButton/index.tsx"
   },
   "uw32VR": {
-    "defaultMessage": "tutorial"
+    "defaultMessage": "教學指南"
   },
   "v+hbfO": {
-    "defaultMessage": "fixed amount"
+    "defaultMessage": "固定金額"
   },
   "v4ddaP": {
-    "defaultMessage": "Bind your wallet immediately, and link it to your personal account",
+    "defaultMessage": "立即綁定錢包，與個人帳戶連結",
     "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
   },
   "v5MunN": {
-    "defaultMessage": "Verification code has expired, please resend.",
+    "defaultMessage": "驗證碼逾期，請點擊重新發送",
     "description": "CODE_EXPIRED"
   },
   "v6YjIn": {
-    "defaultMessage": "Account",
+    "defaultMessage": "帳戶",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
   },
   "v84cGN": {
-    "defaultMessage": "What is this"
+    "defaultMessage": "這是什麼"
   },
   "v8dGSd": {
-    "defaultMessage": "Wallet is linked to a different account",
+    "defaultMessage": "該錢包已關聯至其他帳號",
     "description": "CRYPTO_WALLET_EXISTS"
   },
   "vAc1Bw": {
-    "defaultMessage": "Block User"
+    "defaultMessage": "封鎖用戶"
   },
   "vB45rC": {
-    "defaultMessage": "Connect",
+    "defaultMessage": "去綁定",
     "description": "src/components/Dialogs/BindEmailHintDialog/Content.tsx"
   },
   "vCt85u": {
-    "defaultMessage": "Don't have a wallet yet? Check the",
+    "defaultMessage": "剛接觸加密錢包？參考 ",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
   },
   "vEdCjn": {
-    "defaultMessage": "Original {originalLang}"
+    "defaultMessage": "原文 {originalLang}"
   },
   "vH8sCb": {
-    "defaultMessage": "Circle"
+    "defaultMessage": "我的圍爐"
   },
   "vJd1we": {
-    "defaultMessage": "Comment not found",
+    "defaultMessage": "評論不存在",
     "description": "COMMENT_NOT_FOUND"
   },
   "vLEnrs": {
-    "defaultMessage": "supported",
+    "defaultMessage": "支持了",
     "description": "src/components/Notice/TransactionNotice/PaymentReceivedDonationNotice.tsx"
   },
   "vRCDr8": {
-    "defaultMessage": "You can quickly log in to your account after binding.{br}Readers can also freely transfer money through other channels to support you!",
+    "defaultMessage": "綁定後可以快速登入帳戶{br}讀者也能夠透過其他管道自由轉錢支持你！",
     "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
   },
   "vX2bDy": {
-    "defaultMessage": "Collect Article"
+    "defaultMessage": "關聯作品"
   },
   "va8Rnw": {
-    "defaultMessage": "The author has closed the comment section"
+    "defaultMessage": "作者已關閉評論區"
   },
   "viMrzF": {
-    "defaultMessage": "New broadcasts",
+    "defaultMessage": "廣播",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
   },
   "vlEBHB": {
-    "defaultMessage": "Link",
+    "defaultMessage": "連結",
     "description": "src/components/Editor"
   },
   "vmx+TU": {
-    "defaultMessage": "Credit card",
+    "defaultMessage": "信用卡",
     "description": "src/views/ArticleDetail/SupportAuthor/Tabs/index.tsx"
   },
   "vsD2wm": {
-    "defaultMessage": "reset your login password",
+    "defaultMessage": "重置你的登入密碼",
     "description": "src/components/Dialogs/SetEmailDialog/Content.tsx"
   },
   "w+6UiO": {
-    "defaultMessage": "Add Invitation"
+    "defaultMessage": "新增邀請"
   },
   "wAccv4": {
-    "defaultMessage": "{commentType} has been deleted",
+    "defaultMessage": "{commentType}已刪除",
     "description": "src/components/CircleComment/DropdownActions/DeleteComment/Dialog.tsx"
   },
   "wC7v0l": {
-    "defaultMessage": "Application period{tz}: {period}"
+    "defaultMessage": "報名期{tz}：{period}"
   },
   "wCgTu5": {
-    "defaultMessage": "Comments"
+    "defaultMessage": "評論"
   },
   "wCy/Tc": {
-    "defaultMessage": "Translate"
+    "defaultMessage": "翻譯"
   },
   "wDX7zn": {
-    "defaultMessage": "Draft not found",
+    "defaultMessage": "草稿不存在",
     "description": "DRAFT_NOT_FOUND"
   },
   "wEQDC6": {
-    "defaultMessage": "Edit"
+    "defaultMessage": "編輯資料"
   },
   "wER32z": {
-    "defaultMessage": "left a comment in {circleName} and mentioned you",
+    "defaultMessage": "在 {circleName} 中留言提及你",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
   "wK4kLf": {
-    "defaultMessage": "Continue",
+    "defaultMessage": "註冊",
     "description": "src/components/Forms/EmailSignUpForm/Init.tsx"
   },
   "wLSBAX": {
-    "defaultMessage": "After deletion, the comment will be removed immediately"
+    "defaultMessage": "確認刪除後，評論會立即消失。"
   },
   "wMNZJa": {
-    "defaultMessage": "Notification not found",
+    "defaultMessage": "通知不存在",
     "description": "NOTICE_NOT_FOUND"
   },
   "wNJjR5": {
-    "defaultMessage": "Support setting updated"
+    "defaultMessage": "支持反饋設置成功"
   },
   "wOYX42": {
-    "defaultMessage": "Code Block",
+    "defaultMessage": "程式碼",
     "description": "src/components/Editor"
   },
   "wOZRKW": {
-    "defaultMessage": "Delete comment"
+    "defaultMessage": "刪除評論"
   },
   "wSZR47": {
-    "defaultMessage": "Submit"
+    "defaultMessage": "提交"
   },
   "wXzTZ0": {
-    "defaultMessage": "Enter the name of your Circle"
+    "defaultMessage": "给围炉取一个吸引人的名字吧"
   },
   "wbIHgJ": {
-    "defaultMessage": "The login code has been sent to your inbox",
+    "defaultMessage": "臨時密碼已通過郵件發送",
     "description": "src/components/Forms/EmailLoginForm/OtherOptions.tsx"
   },
   "wbcwKd": {
-    "defaultMessage": "View All"
+    "defaultMessage": "查看全部"
   },
   "wdz6Pf": {
-    "defaultMessage": "Learn more",
+    "defaultMessage": "瞭解更多",
     "description": "src/components/Dialogs/BillboardDialog/Content.tsx"
   },
   "wicnP9": {
-    "defaultMessage": "Visa / Mastercard / American Express payment",
+    "defaultMessage": "Visa / Mastercard / American Express 支付",
     "description": "src/components/Forms/PaymentForm/StripeCheckout/index.tsx"
   },
   "wlQosy": {
-    "defaultMessage": ". Really appreciate it!"
+    "defaultMessage": "。 感謝鼓勵 ～"
   },
   "wm9xNB": {
-    "defaultMessage": "{type} disconnected",
+    "defaultMessage": "{type} 已解綁",
     "description": "src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
   },
   "x7O1/5": {
-    "defaultMessage": "This ID has been taken, please try another one",
+    "defaultMessage": "ID 已被使用，請修改後再試",
     "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
   },
   "x7kxvC": {
-    "defaultMessage": "Subscribe to unlock all articles of",
+    "defaultMessage": "訂閱解鎖",
     "description": "src/views/ArticleDetail/Wall/Circle/index.tsx"
   },
   "xDhqHi": {
-    "defaultMessage": "Confirm",
+    "defaultMessage": "確認送出",
     "description": "src/components/Forms/PaymentForm/PayTo/Confirm/index.tsx"
   },
   "xEJN39": {
-    "defaultMessage": "Featured",
+    "defaultMessage": "編輯精選",
     "description": "Channel feed featured article"
   },
   "xMaFCO": {
-    "defaultMessage": "Articles",
+    "defaultMessage": "閱讀",
     "description": "src/views/Me/History/HistoryTabs.tsx"
   },
   "xOUZu2": {
-    "defaultMessage": "Pin to profile",
+    "defaultMessage": "設為代表作",
     "description": "src/components/CollectionDigest/DropdownActions/PinButton.tsx"
   },
   "xQNq3I": {
-    "defaultMessage": "Thank-you card"
+    "defaultMessage": "支持後回覆"
   },
   "xWZr13": {
-    "defaultMessage": "{follower, plural, =1 {follower} other {followers}}",
+    "defaultMessage": "{follower, plural, =1 {人} other {人}}",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
   },
   "xafreT": {
-    "defaultMessage": "New discussions",
+    "defaultMessage": "留言",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
   },
   "xjHiYx": {
-    "defaultMessage": "Article revision count reach limit",
+    "defaultMessage": "作品編輯次數超出上限",
     "description": "ARTICLE_REVISION_REACH_LIMIT"
   },
   "xkr+zo": {
-    "defaultMessage": "Terms"
+    "defaultMessage": "協議"
   },
   "xl95XN": {
-    "defaultMessage": "Writers",
+    "defaultMessage": "作者",
     "description": "src/views/CampaignDetail/SideParticipants/index.tsx"
   },
   "xmcVZ0": {
-    "defaultMessage": "Search"
+    "defaultMessage": "搜尋"
   },
   "xxDjET": {
-    "defaultMessage": "Invalid display name",
+    "defaultMessage": "名稱不正確",
     "description": "DISPLAYNAME_INVALID"
   },
   "y0b6Kp": {
-    "defaultMessage": "Pay",
+    "defaultMessage": "付費",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
   "y4Lyf1": {
-    "defaultMessage": "This name is already taken.",
+    "defaultMessage": "該名稱已被其他使用者使用",
     "description": "NAME_EXISTS"
   },
   "yAflVX": {
-    "defaultMessage": "Draft has been deleted"
+    "defaultMessage": "草稿已刪除"
   },
   "yBUiiy": {
-    "defaultMessage": "This operation cannot be undone, confirm archiving?"
+    "defaultMessage": "操作無法撤銷，確認封存嗎？"
   },
   "yCTXXb": {
-    "defaultMessage": "Enter content…"
+    "defaultMessage": "請輸入正文…"
   },
   "yIlC0R": {
-    "defaultMessage": "No published articles yet",
+    "defaultMessage": "尚未發布作品",
     "description": "src/components/Empty/EmptyArticle.tsx"
   },
   "yOKEVx": {
-    "defaultMessage": "Top Up",
+    "defaultMessage": "儲值",
     "description": "src/components/Transaction/index.tsx"
   },
   "yOhatg": {
-    "defaultMessage": "Other malicious behavior"
+    "defaultMessage": "其他惡意行為"
   },
   "ySSF/a": {
-    "defaultMessage": "In order to ensure the identity security of the citizens of Matters City, we've upgraded some security settings. Please confirm your Matters ID (cannot be modified once confirmation).",
+    "defaultMessage": "爲了保障馬特市市民的身份安全，我們升級了管理設定。請確認您的 Matters ID（確認後不可再次修改）",
     "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
   },
   "yToCTn": {
-    "defaultMessage": "Please refresh the page and try again.",
+    "defaultMessage": "網路錯誤，請刷新頁面",
     "description": "NETWORK_ERROR"
   },
   "yZfKI4": {
-    "defaultMessage": "discussion and mentioned you",
+    "defaultMessage": " 众聊提及你",
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
   },
   "ydQPbv": {
-    "defaultMessage": "Enter",
+    "defaultMessage": "進入圍爐",
     "description": "src/components/CircleDigest/Price/index.tsx"
   },
   "yoRaUc": {
-    "defaultMessage": "Refund",
+    "defaultMessage": "退款",
     "description": "src/components/Transaction/index.tsx"
   },
   "yp0PiU": {
-    "defaultMessage": "Subtitle",
+    "defaultMessage": "副標題",
     "description": "src/components/Editor"
   },
   "yubNcI": {
-    "defaultMessage": "Not support using punctuation marks alone."
+    "defaultMessage": "不支持單獨使用標點符號"
   },
   "yx0LeF": {
-    "defaultMessage": "Select the channel you want to recommend (single choice)"
+    "defaultMessage": "選擇希望推薦到的頻道（單選）"
   },
   "yxMEo/": {
-    "defaultMessage": "The article has been added to the featured of the event"
+    "defaultMessage": "作品已添加至活動精選"
   },
   "z1ucgb": {
-    "defaultMessage": "Articles added"
+    "defaultMessage": "作品已添加至圍爐"
   },
   "z3uIHQ": {
-    "defaultMessage": "Undo upvote"
+    "defaultMessage": "取消點讚"
   },
   "z91BKe": {
-    "defaultMessage": "Archived Work",
+    "defaultMessage": "已封存作品",
     "description": "src/components/Notice/NoticeArticleTitle.tsx"
   },
   "zAK5G+": {
-    "defaultMessage": "The login link has been sent to {email}",
+    "defaultMessage": "登入連結已發送至 {email}",
     "description": "src/components/Forms/Verification/LinkSent.tsx"
   },
   "zE51j6": {
-    "defaultMessage": "Failed to publish, please try again."
+    "defaultMessage": "發布失敗"
   },
   "zKOr2x": {
-    "defaultMessage": "Conversion Rate of Followers",
+    "defaultMessage": "已追蹤用戶佔總觀看人數比例",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
   },
   "zOXvqB": {
-    "defaultMessage": "Insufficient balance, please make sure you have enough balance and retry"
+    "defaultMessage": "錢包餘額不足，請確認餘額後重試"
   },
   "zOZ77e": {
-    "defaultMessage": "the User Agreement and Privacy Policy.",
+    "defaultMessage": "用戶協議及隱私條款",
     "description": "src/components/Forms/SelectAuthMethodForm/NormalFeed.tsx"
   },
   "zQvVDJ": {
-    "defaultMessage": "All"
+    "defaultMessage": "全部"
   },
   "zWXgmM": {
-    "defaultMessage": "Return and continue"
+    "defaultMessage": "請回到原頁面繼續操作"
   },
   "zaY8Cu": {
-    "defaultMessage": "Enter transaction password",
+    "defaultMessage": "輸入交易密碼",
     "description": "src/components/Forms/PaymentForm/PayTo/Confirm/index.tsx"
   },
   "zb8Kx1": {
-    "defaultMessage": "Announcement, reminder, chattering..."
+    "defaultMessage": "公告、提醒、碎碎念…"
   },
   "zllCbU": {
-    "defaultMessage": "left a comment in {circleName}",
+    "defaultMessage": "在 {circleName} 中留言",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
   "zlug1R": {
-    "defaultMessage": "Translated into {targetLang}, show"
+    "defaultMessage": "已翻譯成{targetLang}，顯示"
   },
   "zvNfwL": {
-    "defaultMessage": "Operation too frequent, please try again later.",
+    "defaultMessage": "操作過於頻繁，請稍候重試",
     "description": "ACTION_LIMIT_EXCEEDED"
   },
   "zxy15q": {
-    "defaultMessage": "{subscriber, plural, =1 {subscriber} other {subscribers}}",
+    "defaultMessage": "{subscriber, plural, =1 {人} other {人}}",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   }
 }
