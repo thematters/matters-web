@@ -4,13 +4,14 @@ import { FormattedMessage } from 'react-intl'
 
 import IconThumbsDown from '@/public/static/icons/24px/thumb-down.svg'
 import IconThumbsUp from '@/public/static/icons/24px/thumb-up.svg'
-import { Button, Icon, LanguageContext, ViewerContext } from '~/components'
+import { Button, Icon, LanguageContext, Media, ViewerContext } from '~/components'
 import {
   ChannelArticleFragment,
   SubmitTopicChannelFeedbackMutation,
   TopicChannelFeedbackType,
 } from '~/gql/graphql'
 
+import { ChannelDialog } from './ChannelDialog'
 import ChannelDrawer from './ChannelDrawer'
 import { fragments, SUBMIT_TOPIC_CHANNEL_FEEDBACK } from './gql'
 import styles from './styles.module.css'
@@ -162,7 +163,7 @@ const Channel = ({ article }: ChannelProps) => {
     </Button>
   )
 
-  const FeedbackButtons = () => (
+  const FeedbackButtons = ({ openDialog }: { openDialog: () => void }) => (
     <>
       <Button
         aria-label="Thumbs up"
@@ -173,15 +174,28 @@ const Channel = ({ article }: ChannelProps) => {
       >
         <Icon icon={IconThumbsUp} size={12} />
       </Button>
-      <Button
-        aria-label="Thumbs down"
-        onClick={toggleDrawer}
-        textColor="black"
-        textActiveColor="greyDarker"
-        size={['1.125rem', '1.125rem']}
-      >
-        <Icon icon={IconThumbsDown} size={12} />
-      </Button>
+      <Media lessThan="md">
+        <Button
+          aria-label="Thumbs down"
+          onClick={openDialog}
+          textColor="black"
+          textActiveColor="greyDarker"
+          size={['1.125rem', '1.125rem']}
+        >
+          <Icon icon={IconThumbsDown} size={12} />
+        </Button>
+      </Media>
+      <Media greaterThanOrEqual="md">
+        <Button
+          aria-label="Thumbs down"
+          onClick={toggleDrawer}
+          textColor="black"
+          textActiveColor="greyDarker"
+          size={['1.125rem', '1.125rem']}
+        >
+          <Icon icon={IconThumbsDown} size={12} />
+        </Button>
+      </Media>
     </>
   )
 
@@ -282,40 +296,44 @@ const Channel = ({ article }: ChannelProps) => {
 
     // Author with channel recommendations - show feedback interface
     return (
-      <>
-        <section className={styles.content}>
-          {!channelData.hasFeedback && !state.hasThumbsUp ? (
-            <>
-              <span>
-                <FormattedMessage
-                  defaultMessage="Your work has been recommended to the channels: {channelNames}. Are you satisfied with the result?"
-                  id="dZlT9q"
-                  values={{ channelNames: renderChannelNames() }}
-                />
-              </span>
-              <FeedbackButtons />
-            </>
-          ) : (
-            <>
-              <span>
-                <FormattedMessage
-                  defaultMessage="Recommended to channel: {channelNames}"
-                  id="0mQE3E"
-                  values={{ channelNames: renderChannelNames() }}
-                />
-              </span>
-              {state.hasThumbsUp && (
-                <FormattedMessage
-                  defaultMessage=". Really appreciate it!"
-                  id="wlQosy"
-                />
+      <ChannelDialog onConfirm={handleThumbsDown}>
+        {({ openDialog }) => (
+          <>
+            <section className={styles.content}>
+              {!channelData.hasFeedback && !state.hasThumbsUp ? (
+                <>
+                  <span>
+                    <FormattedMessage
+                      defaultMessage="Your work has been recommended to the channels: {channelNames}. Are you satisfied with the result?"
+                      id="dZlT9q"
+                      values={{ channelNames: renderChannelNames() }}
+                    />
+                  </span>
+                  <FeedbackButtons openDialog={openDialog} />
+                </>
+              ) : (
+                <>
+                  <span>
+                    <FormattedMessage
+                      defaultMessage="Recommended to channel: {channelNames}"
+                      id="0mQE3E"
+                      values={{ channelNames: renderChannelNames() }}
+                    />
+                  </span>
+                  {state.hasThumbsUp && (
+                    <FormattedMessage
+                      defaultMessage=". Really appreciate it!"
+                      id="wlQosy"
+                    />
+                  )}
+                </>
               )}
-            </>
-          )}
-        </section>
-        <AntiFloodedNotice />
-        {ChannelDrawerComponent}
-      </>
+            </section>
+            <AntiFloodedNotice />
+            {ChannelDrawerComponent}
+          </>
+        )}
+      </ChannelDialog>
     )
   }
 
