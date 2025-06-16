@@ -56,9 +56,7 @@ const Content = ({ step, setStep, onClose, onConfirm }: ContentProps) => {
     initialValues: { selectedChannel: '' },
     validateOnBlur: false,
     validateOnChange: true,
-    onSubmit: async ({ selectedChannel }) => {
-      console.log('selectedChannel', selectedChannel)
-    },
+    onSubmit: () => {},
   })
 
   const handleChannelChange = async (
