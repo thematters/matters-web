@@ -3,12 +3,17 @@ import dynamic from 'next/dynamic'
 import { useContext, useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { MAX_META_SUMMARY_LENGTH } from '~/common/enums'
+import {
+  ERROR_CODES,
+  ERROR_MESSAGES,
+  MAX_META_SUMMARY_LENGTH,
+} from '~/common/enums'
 import { makeSummary, toPath } from '~/common/utils'
 import {
   BackToHomeButton,
   EmptyLayout,
   Error,
+  getErrorCodes,
   Head,
   LanguageContext,
   Layout,
@@ -102,6 +107,20 @@ const BaseArticleDetailHistory = ({
 
       if (error) {
         setTranslate(false)
+
+        const errorCodes = getErrorCodes(error)
+        if (errorCodes.includes(ERROR_CODES.TRANSLATION_INSUFFICIENT_CREDITS)) {
+          toast.error({
+            message: (
+              <FormattedMessage
+                {...ERROR_MESSAGES[
+                  ERROR_CODES.TRANSLATION_INSUFFICIENT_CREDITS
+                ]}
+              />
+            ),
+          })
+          return
+        }
 
         toast.error({
           message: (
