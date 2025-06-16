@@ -392,6 +392,9 @@
     "defaultMessage": "Asset not found",
     "description": "ASSET_NOT_FOUND"
   },
+  "4M9oG6": {
+    "defaultMessage": "We couldn’t find a suitable channel to recommend this work"
+  },
   "4OMGUj": {
     "defaultMessage": "Comment Details"
   },
@@ -568,6 +571,9 @@
   "79Ydsg": {
     "defaultMessage": "Payout Canceled",
     "description": "src/components/Transaction/index.tsx"
+  },
+  "7HPPqs": {
+    "defaultMessage": ". {SuggestButton}?"
   },
   "7JlauX": {
     "defaultMessage": "Explore"
@@ -1075,9 +1081,6 @@
   },
   "FuYW4i": {
     "defaultMessage": "Subscribe circle and chat together!"
-  },
-  "FujwCx": {
-    "defaultMessage": "{SuggestButton}?"
   },
   "FxrSCh": {
     "defaultMessage": "This ID cannot be modified. Are you sure you want to use {id} as your Matters ID?",
@@ -2475,9 +2478,6 @@
   },
   "fPcF7H": {
     "defaultMessage": "Adding tags helps readers find your articles."
-  },
-  "fUGPBI": {
-    "defaultMessage": "We couldn’t find a suitable channel to recommend this work."
   },
   "fWDtpq": {
     "defaultMessage": "Pending",

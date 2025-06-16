@@ -392,6 +392,9 @@
     "defaultMessage": "资源不存在",
     "description": "ASSET_NOT_FOUND"
   },
+  "4M9oG6": {
+    "defaultMessage": "未能帮你为此作品找到合适的推荐频道"
+  },
   "4OMGUj": {
     "defaultMessage": "评论详情"
   },
@@ -568,6 +571,9 @@
   "79Ydsg": {
     "defaultMessage": "提现撤销",
     "description": "src/components/Transaction/index.tsx"
+  },
+  "7HPPqs": {
+    "defaultMessage": "。{SuggestButton}?"
   },
   "7JlauX": {
     "defaultMessage": "指南"
@@ -1075,9 +1081,6 @@
   },
   "FuYW4i": {
     "defaultMessage": "成为围炉一员，一起谈天说地"
-  },
-  "FujwCx": {
-    "defaultMessage": "{SuggestButton}？"
   },
   "FxrSCh": {
     "defaultMessage": "ID 设置后无法修改，确认使用 {id} 作为 Matters ID 吗？",
@@ -2475,9 +2478,6 @@
   },
   "fPcF7H": {
     "defaultMessage": "添加适合标签，帮助读者找到你的作品"
-  },
-  "fUGPBI": {
-    "defaultMessage": "未能帮你为此作品找到合适的推荐频道。"
   },
   "fWDtpq": {
     "defaultMessage": "邀请中",

@@ -128,26 +128,12 @@ const Channel = ({ article }: { article: ChannelArticleFragment }) => {
         <section className={styles.content}>
           <span>
             <FormattedMessage
-              defaultMessage="We couldn’t find a suitable channel to recommend this work."
-              id="fUGPBI"
-              values={{
-                SuggestButton: (
-                  <Button
-                    onClick={toggleDrawer}
-                    textColor="black"
-                    textActiveColor="greyDarker"
-                  >
-                    <FormattedMessage
-                      defaultMessage="Suggest one"
-                      id="Jv9SoD"
-                    />
-                  </Button>
-                ),
-              }}
+              defaultMessage="We couldn’t find a suitable channel to recommend this work"
+              id="4M9oG6"
             />
             <FormattedMessage
-              defaultMessage="{SuggestButton}?"
-              id="FujwCx"
+              defaultMessage=". {SuggestButton}?"
+              id="7HPPqs"
               values={{
                 SuggestButton: (
                   <Button
@@ -183,8 +169,8 @@ const Channel = ({ article }: { article: ChannelArticleFragment }) => {
         <section className={styles.content}>
           <span>
             <FormattedMessage
-              defaultMessage="We couldn’t find a suitable channel to recommend this work."
-              id="fUGPBI"
+              defaultMessage="We couldn’t find a suitable channel to recommend this work"
+              id="4M9oG6"
             />
           </span>
         </section>
