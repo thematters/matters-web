@@ -2,7 +2,13 @@ import React, { useContext, useEffect, useRef } from 'react'
 import { useIntl } from 'react-intl'
 
 import { analytics, mergeConnections } from '~/common/utils'
-import { EmptyWork, Media, usePublicQuery, ViewerContext } from '~/components'
+import {
+  EmptyWork,
+  Media,
+  useFetchPolicy,
+  usePublicQuery,
+  ViewerContext,
+} from '~/components'
 import { useRoute } from '~/components'
 import { FeedArticlesPublicChannelQuery } from '~/gql/graphql'
 
@@ -25,10 +31,12 @@ const ChannelFeed = ({ shortHash: _shortHash }: ChannelFeedProps) => {
   const feedType = 'channel'
   const numOfCards = 6
 
+  const { fetchPolicy } = useFetchPolicy()
+
   const { data, error, loading, fetchMore, client } =
     usePublicQuery<FeedArticlesPublicChannelQuery>(
       FEED_ARTICLES_PUBLIC_CHANNEL,
-      { variables: { shortHash } }
+      { fetchPolicy, variables: { shortHash } }
     )
 
   const connectionPath = 'channel.articles'

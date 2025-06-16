@@ -6,6 +6,7 @@ import {
   Announcements,
   Media,
   Spacer,
+  useFetchPolicy,
   usePublicQuery,
   ViewerContext,
 } from '~/components'
@@ -27,11 +28,14 @@ type FeedArticlesPublic = NewestFeedPublicQuery | IcymiFeedPublicQuery
 const MainFeed: React.FC<MainFeedProps> = ({ feedType }) => {
   const viewer = useContext(ViewerContext)
 
-  const isIcymiFeed = feedType === 'icymi'
+  const { fetchPolicy } = useFetchPolicy()
 
   const { data, error, loading, fetchMore, client } =
-    usePublicQuery<FeedArticlesPublic>(FEED_ARTICLES_PUBLIC[feedType])
+    usePublicQuery<FeedArticlesPublic>(FEED_ARTICLES_PUBLIC[feedType], {
+      fetchPolicy,
+    })
 
+  const isIcymiFeed = feedType === 'icymi'
   const connectionPath = 'viewer.recommendation.feed'
   const recommendation = data?.viewer?.recommendation
   const result = recommendation?.feed
