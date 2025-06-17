@@ -1,9 +1,11 @@
 import { useMutation } from '@apollo/client'
+import Link from 'next/link'
 import { useContext, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import IconThumbsDown from '@/public/static/icons/24px/thumb-down.svg'
 import IconThumbsUp from '@/public/static/icons/24px/thumb-up.svg'
+import { toPath } from '~/common/utils'
 import {
   Button,
   Icon,
@@ -135,9 +137,19 @@ const Channel = ({ article }: ChannelProps) => {
                 : ', '
               : ''
 
+          const path = toPath({
+            page: 'channelDetail',
+            channel: {
+              id: channel.channel.id,
+              shortHash: channel.channel.shortHash,
+            },
+          })
+
           return (
             <span key={channel.channel.id} className={styles.channelNames}>
-              {channelName}
+              <Link {...path} className={styles.channelName}>
+                {channelName}
+              </Link>
               {separator}
             </span>
           )
@@ -328,14 +340,16 @@ const Channel = ({ article }: ChannelProps) => {
                     </section>
                   </Media>
                   <Media greaterThanOrEqual="md">
-                    <span>
-                      <FormattedMessage
-                        defaultMessage="Your work has been recommended to the channels: {channelNames}. Are you satisfied with the result?"
-                        id="dZlT9q"
-                        values={{ channelNames: renderChannelNames() }}
-                      />
-                    </span>
-                    <FeedbackButtons openDialog={openDialog} />
+                    <section className={styles.feedbackButtons}>
+                      <span>
+                        <FormattedMessage
+                          defaultMessage="Your work has been recommended to the channels: {channelNames}. Are you satisfied with the result?"
+                          id="dZlT9q"
+                          values={{ channelNames: renderChannelNames() }}
+                        />
+                      </span>
+                      <FeedbackButtons openDialog={openDialog} />
+                    </section>
                   </Media>
                 </>
               ) : (

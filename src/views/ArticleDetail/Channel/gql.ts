@@ -17,6 +17,7 @@ export const fragments = {
               nameZhHans: name(input: { language: zh_hans })
               nameZhHant: name(input: { language: zh_hant })
               nameEn: name(input: { language: en })
+              shortHash
             }
           }
           feedback {
