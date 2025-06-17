@@ -177,10 +177,16 @@ const EditorSearchingArea: React.FC<SearchingAreaProps> = ({
       ) || []
   const listNodeIds = listNodes.map((n) => n.id).join(',')
   const search = (key: string) => {
-    // Used to match links of the format like👇
     // https://matters.town/a/{shortHash} or https://*.matters.town/a/{shortHash}
+    // Extract the root domain from NEXT_PUBLIC_SITE_DOMAIN
+    // e.g., web-next.matters.town -> matters.town, matters.town -> matters.town
+    const domainParts = process.env.NEXT_PUBLIC_SITE_DOMAIN?.split('.') || []
+    const rootDomain =
+      domainParts.length >= 2
+        ? domainParts.slice(-2).join('.')
+        : process.env.NEXT_PUBLIC_SITE_DOMAIN
     const regex = new RegExp(
-      `^https://(?:[a-zA-Z0-9-]+\\.)?${process.env.NEXT_PUBLIC_SITE_DOMAIN}/a/[a-zA-Z0-9]+`
+      `^https://(?:[a-zA-Z0-9-]+\\.)?${rootDomain}/a/[a-zA-Z0-9]+`
     )
     if (searchType === 'Article' && isUrl(key) && regex.test(key)) {
       const urlObj = parseURL(key)
