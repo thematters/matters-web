@@ -182,6 +182,14 @@ const EditorSearchingArea: React.FC<SearchingAreaProps> = ({
     const regex = new RegExp(
       `^https://(?:[a-zA-Z0-9-]+\\.)?${process.env.NEXT_PUBLIC_SITE_DOMAIN}/a/[a-zA-Z0-9]+`
     )
+    console.log('key', key)
+    console.log(
+      'process.env.NEXT_PUBLIC_SITE_DOMAIN',
+      process.env.NEXT_PUBLIC_SITE_DOMAIN
+    )
+    console.log('regex', regex)
+    console.log('isUrl(key)', isUrl(key))
+    console.log('regex.test(key)', regex.test(key))
     if (searchType === 'Article' && isUrl(key) && regex.test(key)) {
       const urlObj = parseURL(key)
       const shortHash = urlObj.pathname.split('/a/')[1].split('?')[0]
