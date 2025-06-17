@@ -181,9 +181,10 @@ const EditorSearchingArea: React.FC<SearchingAreaProps> = ({
     // Extract the root domain from NEXT_PUBLIC_SITE_DOMAIN
     // e.g., web-next.matters.town -> matters.town, matters.town -> matters.town
     const domainParts = process.env.NEXT_PUBLIC_SITE_DOMAIN?.split('.') || []
-    const rootDomain = domainParts.length >= 2
-      ? domainParts.slice(-2).join('.')
-      : process.env.NEXT_PUBLIC_SITE_DOMAIN
+    const rootDomain =
+      domainParts.length >= 2
+        ? domainParts.slice(-2).join('.')
+        : process.env.NEXT_PUBLIC_SITE_DOMAIN
     const regex = new RegExp(
       `^https://(?:[a-zA-Z0-9-]+\\.)?${rootDomain}/a/[a-zA-Z0-9]+`
     )
