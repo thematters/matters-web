@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import IconInfo from '@/public/static/icons/24px/information.svg'
-import { analytics, featureSupportedChains } from '~/common/utils'
+import { featureSupportedChains } from '~/common/utils'
 import {
   BillboardDialog,
   BillboardExposureTracker,
@@ -57,7 +57,7 @@ export const Billboard = ({ tokenId, type }: BillboardProps) => {
       {({ openDialog: openBillboardDialog }) => {
         return (
           <div className={styles.billboard}>
-            <a
+            {/* <a
               href={data.redirectURI}
               target="_blank"
               onClick={() =>
@@ -69,7 +69,18 @@ export const Billboard = ({ tokenId, type }: BillboardProps) => {
               }
             >
               <img src={data.contentURI} alt="ad" loading="lazy" />
-            </a>
+            </a> */}
+            <ins
+              className="adsbygoogle"
+              style={{
+                display: 'inline-block',
+                width: '264px',
+                height: '150px',
+              }}
+              data-ad-client="ca-pub-4792129775270382"
+              data-ad-slot="7854208749"
+            ></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 
             <button
               className={styles.button}
