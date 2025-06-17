@@ -112,7 +112,6 @@ const BaseArticleDetail = ({
   privateFetched: boolean
 }) => {
   const { parentId } = parseCommentHash()
-  console.log('article', article)
 
   const { routerLang } = useRoute()
   const viewer = useContext(ViewerContext)
