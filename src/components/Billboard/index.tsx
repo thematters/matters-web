@@ -5,7 +5,7 @@ import IconInfo from '@/public/static/icons/24px/information.svg'
 import { featureSupportedChains } from '~/common/utils'
 import {
   BillboardDialog,
-  BillboardExposureTracker,
+  // BillboardExposureTracker,
   Icon,
   TextIcon,
   useBillboard,
@@ -19,7 +19,7 @@ type BillboardProps = {
   type: string
 }
 
-export const Billboard = ({ tokenId, type }: BillboardProps) => {
+export const Billboard = ({ tokenId }: BillboardProps) => {
   const [mount, setMount] = useState(false)
 
   // The current version of wagmi does not support SSR, leading to dehydration
@@ -38,7 +38,9 @@ export const Billboard = ({ tokenId, type }: BillboardProps) => {
   const network = featureSupportedChains.billboard[0]
 
   const intl = useIntl()
-  const { data, isError, isLoading } = useBillboard({
+  // Note: useBillboard hook is kept for potential future use, but we don't need its return values
+  // since AdSenseUnit doesn't depend on legacy billboard data
+  useBillboard({
     id,
     chainId: network.id,
     operatorAddress,
@@ -49,9 +51,10 @@ export const Billboard = ({ tokenId, type }: BillboardProps) => {
     return null
   }
 
-  if (!id || isError || isLoading || !data || !data.contentURI) {
-    return null
-  }
+  // Only check for essential conditions since AdSenseUnit doesn't depend on legacy billboard data
+  // if (!id) {
+  //   return null
+  // }
 
   return (
     <BillboardDialog>
@@ -98,7 +101,7 @@ export const Billboard = ({ tokenId, type }: BillboardProps) => {
               </TextIcon>
             </button>
 
-            <BillboardExposureTracker id={id} type={type} />
+            {/* <BillboardExposureTracker id={id} type={type} /> */}
           </div>
         )
       }}
