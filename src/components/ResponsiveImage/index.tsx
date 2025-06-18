@@ -44,12 +44,7 @@ const BaseResponsiveImage = ({
   // Fallback to the raw `url` if manually disable or responsive image is failed to load
   if (disabled || error) {
     return (
-      <img
-        src={url}
-        loading={loading}
-        alt=""
-        {...(fetchPriority ? { fetchpriority: fetchPriority } : {})}
-      />
+      <img src={url} loading={loading} fetchPriority={fetchPriority} alt="" />
     )
   }
 
@@ -88,8 +83,8 @@ const BaseResponsiveImage = ({
           enableAnimation: !loaded || !enableAnimation, // use true until loaded
         })}
         loading={loading}
+        fetchPriority={fetchPriority}
         alt=""
-        {...(fetchPriority ? { fetchpriority: fetchPriority } : {})}
         onLoad={() => {
           setLoaded(true)
         }}
