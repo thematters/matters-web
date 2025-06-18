@@ -2,15 +2,16 @@ import { useEffect, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import IconInfo from '@/public/static/icons/24px/information.svg'
-import { analytics, featureSupportedChains } from '~/common/utils'
+import { featureSupportedChains } from '~/common/utils'
 import {
   BillboardDialog,
-  BillboardExposureTracker,
+  // BillboardExposureTracker,
   Icon,
   TextIcon,
   useBillboard,
 } from '~/components'
 
+import { AdSenseUnit } from './AdSense'
 import styles from './styles.module.css'
 
 type BillboardProps = {
@@ -18,7 +19,7 @@ type BillboardProps = {
   type: string
 }
 
-export const Billboard = ({ tokenId, type }: BillboardProps) => {
+export const Billboard = ({ tokenId }: BillboardProps) => {
   const [mount, setMount] = useState(false)
 
   // The current version of wagmi does not support SSR, leading to dehydration
@@ -37,7 +38,9 @@ export const Billboard = ({ tokenId, type }: BillboardProps) => {
   const network = featureSupportedChains.billboard[0]
 
   const intl = useIntl()
-  const { data, isError, isLoading } = useBillboard({
+  // Note: useBillboard hook is kept for potential future use, but we don't need its return values
+  // since AdSenseUnit doesn't depend on legacy billboard data
+  useBillboard({
     id,
     chainId: network.id,
     operatorAddress,
@@ -48,16 +51,17 @@ export const Billboard = ({ tokenId, type }: BillboardProps) => {
     return null
   }
 
-  if (!id || isError || isLoading || !data || !data.contentURI) {
-    return null
-  }
+  // Only check for essential conditions since AdSenseUnit doesn't depend on legacy billboard data
+  // if (!id) {
+  //   return null
+  // }
 
   return (
     <BillboardDialog>
       {({ openDialog: openBillboardDialog }) => {
         return (
           <div className={styles.billboard}>
-            <a
+            {/* <a
               href={data.redirectURI}
               target="_blank"
               onClick={() =>
@@ -69,7 +73,14 @@ export const Billboard = ({ tokenId, type }: BillboardProps) => {
               }
             >
               <img src={data.contentURI} alt="ad" loading="lazy" />
-            </a>
+            </a> */}
+            <AdSenseUnit
+              style={{
+                display: 'inline-block',
+                width: '264px',
+                height: '150px',
+              }}
+            />
 
             <button
               className={styles.button}
@@ -90,7 +101,7 @@ export const Billboard = ({ tokenId, type }: BillboardProps) => {
               </TextIcon>
             </button>
 
-            <BillboardExposureTracker id={id} type={type} />
+            {/* <BillboardExposureTracker id={id} type={type} /> */}
           </div>
         )
       }}
