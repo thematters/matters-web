@@ -162,8 +162,8 @@ const Carousel = ({ items }: CarouselProps) => {
                   <div className={styles.content}>
                     <ResponsiveImage
                       url={item.cover}
-                      width={1376}
-                      loading={isFirstFold ? undefined : 'lazy'}
+                      width={896}
+                      loading={isFirstFold ? 'eager' : 'lazy'}
                       fetchPriority={isFirstFold ? 'high' : 'low'}
                     />
                     <h3>{title}</h3>

@@ -1,5 +1,6 @@
 import { useQuery } from '@apollo/client'
 import _get from 'lodash/get'
+import { memo } from 'react'
 
 import { useRoute } from '~/components'
 import { VisibleAnnouncementsQuery } from '~/gql/graphql'
@@ -7,7 +8,7 @@ import { VisibleAnnouncementsQuery } from '~/gql/graphql'
 import Carousel from './Carousel'
 import { VISIBLE_ANNOUNCEMENTS } from './gql'
 
-export const Announcements = () => {
+export const Announcements = memo(() => {
   const { isInPath, getQuery } = useRoute()
   const isInChannel = isInPath('CHANNEL')
   const shortHash = getQuery('shortHash')
@@ -38,4 +39,8 @@ export const Announcements = () => {
   }
 
   return <Carousel items={items} />
-}
+})
+
+Announcements.displayName = 'Announcements'
+
+export default Announcements
