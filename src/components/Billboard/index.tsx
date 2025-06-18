@@ -11,6 +11,7 @@ import {
   useBillboard,
 } from '~/components'
 
+import { AdSenseUnit } from './AdSense'
 import styles from './styles.module.css'
 
 type BillboardProps = {
@@ -70,17 +71,13 @@ export const Billboard = ({ tokenId, type }: BillboardProps) => {
             >
               <img src={data.contentURI} alt="ad" loading="lazy" />
             </a> */}
-            <ins
-              className="adsbygoogle"
+            <AdSenseUnit
               style={{
                 display: 'inline-block',
                 width: '264px',
                 height: '150px',
               }}
-              data-ad-client="ca-pub-4792129775270382"
-              data-ad-slot="7854208749"
-            ></ins>
-            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+            />
 
             <button
               className={styles.button}
