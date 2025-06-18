@@ -248,11 +248,13 @@ const Channel = ({ article }: ChannelProps) => {
       return (
         <>
           <section className={styles.content}>
-            <FormattedMessage
-              defaultMessage="Recommended to channel: {channelNames}"
-              id="0mQE3E"
-              values={{ channelNames: renderChannelNames() }}
-            />
+            <span>
+              <FormattedMessage
+                defaultMessage="Recommended to channel: {channelNames}"
+                id="0mQE3E"
+                values={{ channelNames: renderChannelNames() }}
+              />
+            </span>
           </section>
           <AntiFloodedNotice />
         </>
