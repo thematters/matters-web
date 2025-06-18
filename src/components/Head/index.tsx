@@ -225,12 +225,12 @@ export const Head: React.FC<HeadProps> = (props) => {
           <>
             <link
               rel="preconnect"
-              href={process.env.NEXT_PUBLIC_CF_IMAGE_URL}
+              href={new URL(process.env.NEXT_PUBLIC_CF_IMAGE_URL).origin}
               key="preconnect-cf-image"
             />
             <link
               rel="dns-prefetch"
-              href={process.env.NEXT_PUBLIC_CF_IMAGE_URL}
+              href={new URL(process.env.NEXT_PUBLIC_CF_IMAGE_URL).origin}
               key="dns-prefetch-cf-image"
             />
           </>
@@ -240,12 +240,12 @@ export const Head: React.FC<HeadProps> = (props) => {
           <>
             <link
               rel="preconnect"
-              href={process.env.NEXT_PUBLIC_EMBED_ASSET_DOMAIN}
+              href={`https://${process.env.NEXT_PUBLIC_EMBED_ASSET_DOMAIN}`}
               key="preconnect-embed-asset-domain"
             />
             <link
               rel="dns-prefetch"
-              href={process.env.NEXT_PUBLIC_EMBED_ASSET_DOMAIN}
+              href={`https://${process.env.NEXT_PUBLIC_EMBED_ASSET_DOMAIN}`}
               key="dns-prefetch-embed-asset-domain"
             />
           </>
