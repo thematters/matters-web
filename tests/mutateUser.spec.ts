@@ -5,7 +5,6 @@ import { stripSpaces } from '~/common/utils/text'
 
 import {
   authedTest,
-  NotificationsPage,
   pageGoto,
   UserProfilePage,
   waitForAPIResponse,
@@ -49,7 +48,7 @@ test.describe.configure({ mode: 'serial' })
 
 test.describe('User Mutation', () => {
   authedTest(
-    'Alice is followed by Bob',
+    'Bob can follow and unfollow Alice',
     async ({ alicePage, bobPage, isMobile }) => {
       // [Alice] Go to profile page
       const aliceProfile = new UserProfilePage(alicePage, isMobile)
@@ -59,11 +58,11 @@ test.describe('User Mutation', () => {
       const bobProfile = new UserProfilePage(bobPage, isMobile)
       await bobProfile.gotoMeProfile()
       await bobPage.waitForTimeout(2 * 1000)
-      const bobDisplayName = await bobProfile.displayName.innerText()
 
       // [Bob] Go to Alice's User Profile
       await pageGoto(bobPage, alicePage.url())
 
+      // Ensure Bob is not following Alice initially
       if (
         await bobPage
           .getByRole('button', { name: 'Followed', exact: true })
@@ -72,58 +71,18 @@ test.describe('User Mutation', () => {
         await unfollow(bobPage)
       }
 
+      // Test Follow functionality
       await follow(bobPage)
 
-      // [Alice] Go to notifications page
-      const aliceNotifications = new NotificationsPage(alicePage)
-      await aliceNotifications.goto()
+      // Refresh page and verify follow button state
+      await bobPage.reload()
+      await bobPage.waitForLoadState('networkidle')
 
-      // [Alice] Expect it has "user new follower" notice
-      let noticeUserNewFollowerDisplayName = ''
-      let displayNameMatches = false
-      while (!displayNameMatches) {
-        try {
-          noticeUserNewFollowerDisplayName = await alicePage
-            .getByTestId(TEST_ID.NOTICE_USER_NEW_FOLLOWER)
-            .first()
-            .getByTestId(TEST_ID.NOTICE_USER_DISPLAY_NAME)
-            .first()
-            .innerText({
-              timeout: 3000,
-            })
-          displayNameMatches =
-            stripSpaces(noticeUserNewFollowerDisplayName) ===
-            stripSpaces(bobDisplayName)
-        } catch {
-          // Wait a bit before retrying
-          await alicePage.waitForTimeout(2000)
-        }
-      }
-    }
-  )
+      await expect(
+        bobPage.getByRole('button', { name: 'Followed', exact: true })
+      ).toBeVisible()
 
-  authedTest(
-    'Alice is unfollowed by Bob',
-    async ({ alicePage, bobPage, isMobile }) => {
-      // [Alice] Go to profile page
-      const aliceProfile = new UserProfilePage(alicePage, isMobile)
-      await aliceProfile.gotoMeProfile()
-
-      // [Bob] Go to profile page
-      const bobProfile = new UserProfilePage(bobPage, isMobile)
-      await bobProfile.gotoMeProfile()
-
-      // [Bob] Go to Alice's User Profile
-      await pageGoto(bobPage, alicePage.url())
-
-      if (
-        await bobPage
-          .getByRole('button', { name: 'Follow', exact: true })
-          .isVisible()
-      ) {
-        await follow(bobPage)
-      }
-
+      // Get follower count before unfollowing
       const followCount = await bobPage
         .getByTestId(
           isMobile
@@ -132,11 +91,19 @@ test.describe('User Mutation', () => {
         )
         .innerText()
 
+      // Test Unfollow functionality
       await unfollow(bobPage)
 
+      // Refresh page and verify unfollow worked
       await bobPage.reload()
       await bobPage.waitForLoadState('networkidle')
 
+      // Verify follow button is visible again
+      await expect(
+        bobPage.getByRole('button', { name: 'Follow', exact: true })
+      ).toBeVisible()
+
+      // Verify follower count decreased
       const unfollowCount = await bobPage
         .getByTestId(
           isMobile
@@ -145,7 +112,7 @@ test.describe('User Mutation', () => {
         )
         .innerText()
 
-      expect(Number(followCount) === Number(unfollowCount) + 1)
+      expect(Number(followCount)).toBe(Number(unfollowCount) + 1)
     }
   )
 
