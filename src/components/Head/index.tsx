@@ -220,6 +220,36 @@ export const Head: React.FC<HeadProps> = (props) => {
         {noindex && (
           <meta name="googlebot" content="noindex, nofollow" key="googlebot" />
         )}
+
+        {process.env.NEXT_PUBLIC_CF_IMAGE_URL && (
+          <>
+            <link
+              rel="preconnect"
+              href={process.env.NEXT_PUBLIC_CF_IMAGE_URL}
+              key="preconnect-cf-image"
+            />
+            <link
+              rel="dns-prefetch"
+              href={process.env.NEXT_PUBLIC_CF_IMAGE_URL}
+              key="dns-prefetch-cf-image"
+            />
+          </>
+        )}
+
+        {process.env.NEXT_PUBLIC_EMBED_ASSET_DOMAIN && (
+          <>
+            <link
+              rel="preconnect"
+              href={process.env.NEXT_PUBLIC_EMBED_ASSET_DOMAIN}
+              key="preconnect-embed-asset-domain"
+            />
+            <link
+              rel="dns-prefetch"
+              href={process.env.NEXT_PUBLIC_EMBED_ASSET_DOMAIN}
+              key="dns-prefetch-embed-asset-domain"
+            />
+          </>
+        )}
       </NextHead>
     </>
   )
