@@ -16,7 +16,7 @@
     @media (--sm-up) {
       & iframe {
         width: 16.5rem;
-        height: 148px;
+        height: auto;
 
         & img {
           width: 100%;

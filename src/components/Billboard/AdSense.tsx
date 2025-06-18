@@ -35,7 +35,7 @@ export const AdSenseUnit = ({
       style={style}
       data-ad-client={adClient}
       data-ad-slot={adSlot}
-      data-ad-format="rectangle"
+      data-ad-format="auto"
     />
   )
 }
