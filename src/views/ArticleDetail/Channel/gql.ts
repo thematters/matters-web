@@ -1,36 +1,54 @@
 import { gql } from '@apollo/client'
 
 export const fragments = {
-  article: gql`
-    fragment ChannelArticle on Article {
-      id
-      author {
+  article: {
+    public: gql`
+      fragment ChannelArticlePublic on Article {
         id
-      }
-      classification {
-        topicChannel {
-          channels {
-            enabled
-            antiFlooded
-            channel {
-              id
-              nameZhHans: name(input: { language: zh_hans })
-              nameZhHant: name(input: { language: zh_hant })
-              nameEn: name(input: { language: en })
-              shortHash
-            }
-          }
-          feedback {
-            id
-            type
+        author {
+          id
+        }
+        classification {
+          topicChannel {
             channels {
+              enabled
+              antiFlooded
+              channel {
+                id
+                nameZhHans: name(input: { language: zh_hans })
+                nameZhHant: name(input: { language: zh_hant })
+                nameEn: name(input: { language: en })
+                shortHash
+              }
+            }
+            feedback {
               id
+              type
+              channels {
+                id
+              }
             }
           }
         }
       }
-    }
-  `,
+    `,
+    private: gql`
+      fragment ChannelArticlePrivate on Article {
+        id
+        classification {
+          topicChannel {
+            feedback {
+              id
+              type
+              channels {
+                id
+              }
+            }
+          }
+        }
+      }
+    `,
+  },
 }
 
 export const SUBMIT_TOPIC_CHANNEL_FEEDBACK = gql`
@@ -45,9 +63,11 @@ export const SUBMIT_TOPIC_CHANNEL_FEEDBACK = gql`
       id
       type
       article {
-        ...ChannelArticle
+        ...ChannelArticlePublic
+        ...ChannelArticlePrivate
       }
     }
   }
-  ${fragments.article}
+  ${fragments.article.public}
+  ${fragments.article.private}
 `

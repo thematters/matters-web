@@ -75,7 +75,8 @@ const articlePublicFragment = gql`
     ...ToolbarArticlePrivate
     ...SupportWidgetArticlePublic
     ...SupportWidgetArticlePrivate
-    ...ChannelArticle
+    ...ChannelArticlePublic
+    ...ChannelArticlePrivate
   }
   ${Header.fragments.article}
   ${AuthorSidebar.fragments.article}
@@ -90,7 +91,8 @@ const articlePublicFragment = gql`
   ${supportWidgetFragments.article.private}
   ${circleWallFragments.circle.public}
   ${circleWallFragments.circle.private}
-  ${Channel.fragments.article}
+  ${Channel.fragments.article.public}
+  ${Channel.fragments.article.private}
 `
 
 export const ARTICLE_AVAILABLE_TRANSLATIONS = gql`
@@ -135,12 +137,14 @@ export const ARTICLE_DETAIL_PRIVATE = gql`
       }
       ...ToolbarArticlePrivate
       ...SupportWidgetArticlePrivate
+      ...ChannelArticlePrivate
     }
   }
   ${UserDigest.Rich.fragments.user.private}
   ${Toolbar.fragments.article.private}
   ${supportWidgetFragments.article.private}
   ${circleWallFragments.circle.private}
+  ${Channel.fragments.article.private}
 `
 
 export const ARTICLE_TRANSLATION = gql`

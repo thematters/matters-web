@@ -14,7 +14,7 @@ import {
   ViewerContext,
 } from '~/components'
 import {
-  ChannelArticleFragment,
+  ChannelArticlePublicFragment,
   SubmitTopicChannelFeedbackMutation,
   TopicChannelFeedbackType,
 } from '~/gql/graphql'
@@ -25,7 +25,7 @@ import { fragments, SUBMIT_TOPIC_CHANNEL_FEEDBACK } from './gql'
 import styles from './styles.module.css'
 
 interface ChannelProps {
-  article: ChannelArticleFragment
+  article: ChannelArticlePublicFragment
 }
 
 interface ChannelState {
@@ -34,13 +34,13 @@ interface ChannelState {
 }
 
 interface ChannelData {
-  topicChannel: ChannelArticleFragment['classification']['topicChannel']
+  topicChannel: ChannelArticlePublicFragment['classification']['topicChannel']
   hasTopicChannel: boolean
   hasFeedback: boolean
   isInLatestChannel: boolean
   hasAntiFlooded: boolean
   enabledChannels: NonNullable<
-    ChannelArticleFragment['classification']['topicChannel']['channels']
+    ChannelArticlePublicFragment['classification']['topicChannel']['channels']
   >
 }
 
