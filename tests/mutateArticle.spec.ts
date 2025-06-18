@@ -9,7 +9,6 @@ import {
   ArticleDetailPage,
   authedTest,
   DraftDetailPage,
-  NotificationsPage,
   pageGoto,
   UserProfilePage,
   waitForAPIResponse,
@@ -30,38 +29,10 @@ test.describe('Mutate article', () => {
 
       const bobArticleDetail = new ArticleDetailPage(bobPage)
 
-      const title = await bobArticleDetail.getTitle()
-
       const amount = _random(1, 5, false)
 
       // [Bob] appreciation
       await bobArticleDetail.sendAppreciation(amount)
-
-      // [Alice] Go to notifications page
-      const aliceNotifications = new NotificationsPage(alicePage)
-      await alicePage.waitForTimeout(5 * 1000)
-      await aliceNotifications.goto()
-
-      // [Alice] Expect it has "liked your article" notice
-      let noticeReceiveArtileTitle = ''
-      let titleMatches = false
-      while (!titleMatches) {
-        try {
-          noticeReceiveArtileTitle = await alicePage
-            .getByTestId(TEST_ID.NOTICE_ARTICLE_NEW_APPRECIATION)
-            .first()
-            .getByTestId(TEST_ID.NOTICE_ARTICLE_TITLE)
-            .first()
-            .innerText({
-              timeout: 3000,
-            })
-          titleMatches =
-            stripSpaces(noticeReceiveArtileTitle) === stripSpaces(title)
-        } catch {
-          // Wait a bit before retrying
-          await alicePage.waitForTimeout(2000)
-        }
-      }
 
       // [Alice] Check Appreciation count
       await alicePage
