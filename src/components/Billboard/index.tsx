@@ -77,8 +77,8 @@ export const Billboard = ({ tokenId }: BillboardProps) => {
             <AdSenseUnit
               style={{
                 display: 'inline-block',
-                width: '264px',
-                height: '148px',
+                width: '200px',
+                height: '200px',
               }}
             />
 
