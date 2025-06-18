@@ -1,12 +1,13 @@
 import { useQuery } from '@apollo/client'
 import _get from 'lodash/get'
+import { memo } from 'react'
 
 import { VisibleAnnouncementsQuery } from '~/gql/graphql'
 
 import Carousel from './Carousel'
 import { VISIBLE_ANNOUNCEMENTS } from './gql'
 
-const Announcements = () => {
+const Announcements = memo(() => {
   const { data, error, loading } = useQuery<VisibleAnnouncementsQuery>(
     VISIBLE_ANNOUNCEMENTS,
     { variables: { input: { visible: true } } }
@@ -27,6 +28,8 @@ const Announcements = () => {
   }
 
   return <Carousel items={items} />
-}
+})
+
+Announcements.displayName = 'Announcements'
 
 export default Announcements
