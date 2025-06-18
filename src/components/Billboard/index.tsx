@@ -77,10 +77,10 @@ export const Billboard = ({ tokenId }: BillboardProps) => {
             <AdSenseUnit
               style={{
                 display: 'inline-block',
-                width: '250px',
-                height: '250px',
-                maxWidth: '250px',
-                maxHeight: '250px',
+                width: '264px',
+                height: '148px',
+                maxWidth: '264px',
+                maxHeight: '148px',
                 overflow: 'hidden',
               }}
             />
