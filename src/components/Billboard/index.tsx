@@ -78,7 +78,7 @@ export const Billboard = ({ tokenId }: BillboardProps) => {
               style={{
                 display: 'inline-block',
                 width: '264px',
-                height: '150px',
+                height: '148px',
               }}
             />
 

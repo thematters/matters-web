@@ -14,7 +14,7 @@ declare global {
 }
 
 export const AdSenseUnit = ({
-  adSlot = '7854208749',
+  adSlot = '5156934195',
   adClient = 'ca-pub-4792129775270382',
   style = { display: 'block' },
 }: AdSenseProps) => {
