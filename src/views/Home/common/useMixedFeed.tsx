@@ -46,18 +46,18 @@ const horizontalFeeds: Record<number, React.FC> = {
   ),
 }
 
-const channelHorizontalFeeds: Record<number, React.FC> = {
-  11: () => (
-    <Media lessThan="lg">
-      <Authors />
-    </Media>
-  ),
-  17: () => (
-    <Media lessThan="lg">
-      <Tags />
-    </Media>
-  ),
-}
+// const channelHorizontalFeeds: Record<number, React.FC> = {
+//   11: () => (
+//     <Media lessThan="lg">
+//       <Authors />
+//     </Media>
+//   ),
+//   17: () => (
+//     <Media lessThan="lg">
+//       <Tags />
+//     </Media>
+//   ),
+// }
 
 export const useMixedFeed = (
   edges: MixedFeedArticleEdge[],
@@ -81,7 +81,7 @@ export const useMixedFeed = (
       mixFeed.splice(loc, 0, {
         Feed:
           feedType === 'channel'
-            ? channelHorizontalFeeds[loc as keyof typeof channelHorizontalFeeds]
+            ? horizontalFeeds[loc as keyof typeof horizontalFeeds]
             : horizontalFeeds[loc as keyof typeof horizontalFeeds],
         __typename: 'HorizontalFeed',
       })

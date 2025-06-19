@@ -20,7 +20,7 @@ export const AdSenseUnit = ({
   adClient = 'ca-pub-4792129775270382',
   style = { display: 'block' },
   adFormat = 'rectangle',
-  isResponsive = false
+  isResponsive = false,
 }: AdSenseProps) => {
   useEffect(() => {
     try {
