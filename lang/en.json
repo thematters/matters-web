@@ -1030,6 +1030,10 @@
     "defaultMessage": "Please continue within your crypto wallet.",
     "description": "src/components/Forms/PaymentForm/Processing/index.tsx"
   },
+  "EnAfl8": {
+    "defaultMessage": "Your channel suggestion for {articleTitle} has been accepted by the editor. Thank you for supporting Matters!",
+    "description": "src/components/Notice/ArticleNotice/TopicChannelFeedbackAcceptedNotice.tsx"
+  },
   "EoeUjA": {
     "defaultMessage": "You do not have permission to perform this operation",
     "description": "FORBIDDEN_BY_STATE"
