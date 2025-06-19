@@ -1030,6 +1030,10 @@
     "defaultMessage": "請在加密錢包內繼續操作",
     "description": "src/components/Forms/PaymentForm/Processing/index.tsx"
   },
+  "EnAfl8": {
+    "defaultMessage": "你對 {articleTitle} 的頻道建議已被編輯採納，感謝你對 Matters 的支持 ～",
+    "description": "src/components/Notice/ArticleNotice/TopicChannelFeedbackAcceptedNotice.tsx"
+  },
   "EoeUjA": {
     "defaultMessage": "你無權限進行該操作",
     "description": "FORBIDDEN_BY_STATE"
