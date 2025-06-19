@@ -1,5 +1,7 @@
 import { useEffect } from 'react'
 
+import { Media } from '~/components'
+
 interface AdSenseProps {
   adSlot?: string
   adClient?: string
@@ -16,7 +18,6 @@ declare global {
 }
 
 export const AdSenseUnit = ({
-  adSlot = '5156934195',
   adClient = 'ca-pub-4792129775270382',
   style = { display: 'block' },
   adFormat = 'rectangle',
@@ -34,13 +35,27 @@ export const AdSenseUnit = ({
   }, [])
 
   return (
-    <ins
-      className="adsbygoogle"
-      style={style}
-      data-ad-client={adClient}
-      data-ad-slot={adSlot}
-      data-ad-format={adFormat}
-      {...(isResponsive && { 'data-full-width-responsive': 'true' })}
-    />
+    <>
+      <Media lessThan="md">
+        <ins
+          className="adsbygoogle"
+          style={{ display: 'block' }}
+          data-ad-format="fluid"
+          data-ad-layout-key="-eo-12+91+49-159"
+          data-ad-client={adClient}
+          data-ad-slot="6282066188"
+        ></ins>
+      </Media>
+      <Media greaterThanOrEqual="md">
+        <ins
+          className="adsbygoogle"
+          style={style}
+          data-ad-client={adClient}
+          data-ad-slot="5156934195"
+          data-ad-format={adFormat}
+          {...(isResponsive && { 'data-full-width-responsive': 'true' })}
+        />
+      </Media>
+    </>
   )
 }
