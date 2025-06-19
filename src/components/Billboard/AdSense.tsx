@@ -4,6 +4,8 @@ interface AdSenseProps {
   adSlot?: string
   adClient?: string
   style?: React.CSSProperties
+  adFormat?: string
+  isResponsive?: boolean
 }
 
 // Extend Window interface to include adsbygoogle
@@ -17,6 +19,8 @@ export const AdSenseUnit = ({
   adSlot = '5156934195',
   adClient = 'ca-pub-4792129775270382',
   style = { display: 'block' },
+  adFormat = 'rectangle',
+  isResponsive = false
 }: AdSenseProps) => {
   useEffect(() => {
     try {
@@ -35,7 +39,8 @@ export const AdSenseUnit = ({
       style={style}
       data-ad-client={adClient}
       data-ad-slot={adSlot}
-      data-ad-format="rectangle"
+      data-ad-format={adFormat}
+      {...(isResponsive && { 'data-full-width-responsive': 'true' })}
     />
   )
 }

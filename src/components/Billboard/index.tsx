@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
@@ -21,6 +22,7 @@ type BillboardProps = {
 
 export const Billboard = ({ tokenId }: BillboardProps) => {
   const [mount, setMount] = useState(false)
+  const router = useRouter()
 
   // The current version of wagmi does not support SSR, leading to dehydration
   // warnings since the SSR and CSR are out-of-sync. The `useEffect` ensure
@@ -38,6 +40,14 @@ export const Billboard = ({ tokenId }: BillboardProps) => {
   const network = featureSupportedChains.billboard[0]
 
   const intl = useIntl()
+
+  // Get ad dimensions, format and responsive from query string with defaults
+  const adWidth = (router.query.width as string) || '264px'
+  const adHeight = (router.query.height as string) || '148px'
+  const adMaxWidth = (router.query.maxWidth as string) || adWidth
+  const adMaxHeight = (router.query.maxHeight as string) || adHeight
+  const adFormat = (router.query.adFormat as string) || 'rectangle'
+  const isResponsive = router.query.responsive === 'true'
   // Note: useBillboard hook is kept for potential future use, but we don't need its return values
   // since AdSenseUnit doesn't depend on legacy billboard data
   useBillboard({
@@ -75,12 +85,14 @@ export const Billboard = ({ tokenId }: BillboardProps) => {
               <img src={data.contentURI} alt="ad" loading="lazy" />
             </a> */}
             <AdSenseUnit
+              adFormat={adFormat}
+              isResponsive={isResponsive}
               style={{
                 display: 'inline-block',
-                width: '264px',
-                height: '148px',
-                maxWidth: '264px',
-                maxHeight: '148px',
+                width: adWidth,
+                height: adHeight,
+                maxWidth: adMaxWidth,
+                maxHeight: adMaxHeight,
                 overflow: 'hidden',
               }}
             />
