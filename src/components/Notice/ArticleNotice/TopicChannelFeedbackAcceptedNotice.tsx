@@ -3,7 +3,6 @@ import { FormattedMessage } from 'react-intl'
 
 import { TopicChannelFeedbackAcceptedNoticeFragment } from '~/gql/graphql'
 
-import NoticeArticleCard from '../NoticeArticleCard'
 import NoticeArticleTitle from '../NoticeArticleTitle'
 import NoticeDate from '../NoticeDate'
 import styles from '../styles.module.css'
@@ -39,10 +38,10 @@ TopicChannelFeedbackAcceptedNotice.fragments = {
       id
       ...NoticeDate
       article: target {
-        ...NoticeArticleCard
+        ...NoticeArticleTitle
       }
     }
-    ${NoticeArticleCard.fragments.article}
+    ${NoticeArticleTitle.fragments.article}
     ${NoticeDate.fragments.notice}
   `,
 }
