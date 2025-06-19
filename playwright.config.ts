@@ -16,6 +16,9 @@ const config = defineConfig({
   testIgnore: ['mutateArticle.spec.ts'],
   outputDir: 'test-results/',
   timeout: 60e3,
+  expect: {
+    timeout: 20e3,
+  },
   fullyParallel: isCI ? false : true,
   forbidOnly: !!isCI,
   retries: isCI ? 3 : 1,
@@ -45,54 +48,6 @@ const config = defineConfig({
       },
       dependencies: ['setup'],
     },
-    // ...(isLocal
-    //   ? []
-    //   : [
-    //       {
-    //         name: 'firefox',
-    //         use: {
-    //           ...devices['Desktop Firefox'],
-    //           locale: LOCALE,
-    //         },
-    //       },
-    //       // {
-    //       //   name: 'webkit',
-    //       //   use: {
-    //       //     ...devices['Desktop Safari'],
-    //       //     locale: LOCALE,
-    //       //   },
-    //       // },
-    //     ]),
-
-    /* Test against mobile viewports. */
-    // {
-    //   name: 'Mobile Chrome',
-    //   use: {
-    //     ...devices['Pixel 5'],
-    //     locale: LOCALE,
-    //   },
-    // },
-    // {
-    //   name: 'Mobile Safari',
-    //   use: {
-    //     ...devices['iPhone 12'],
-    //     locale: LOCALE,
-    //   },
-    // },
-
-    /* Test against branded browsers. */
-    // {
-    //   name: 'Microsoft Edge',
-    //   use: {
-    //     channel: 'msedge',
-    //   },
-    // },
-    // {
-    //   name: 'Google Chrome',
-    //   use: {
-    //     channel: 'chrome',
-    //   },
-    // },
   ],
 })
 
