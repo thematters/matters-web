@@ -170,6 +170,9 @@
     "defaultMessage": "伺服器錯誤，請稍候重試",
     "description": "INTERNAL_SERVER_ERROR"
   },
+  "0mQE3E": {
+    "defaultMessage": "已推薦到頻道：{channelNames}"
+  },
   "0oLj/t": {
     "defaultMessage": "展開"
   },
@@ -337,6 +340,9 @@
   "3KNMbJ": {
     "defaultMessage": "作品"
   },
+  "3MZvMF": {
+    "defaultMessage": "希望將作品推薦到頻道：{channelName}？ "
+  },
   "3Tg548": {
     "defaultMessage": "登入",
     "description": "src/components/Forms/SelectAuthMethodForm/AuthTabs.tsx"
@@ -385,6 +391,9 @@
   "4KuZ0o": {
     "defaultMessage": "資源不存在",
     "description": "ASSET_NOT_FOUND"
+  },
+  "4M9oG6": {
+    "defaultMessage": "未能幫你為此作品找到合適的推薦頻道"
   },
   "4OMGUj": {
     "defaultMessage": "評論詳情"
@@ -559,6 +568,9 @@
     "defaultMessage": "提現撤銷",
     "description": "src/components/Transaction/index.tsx"
   },
+  "7HPPqs": {
+    "defaultMessage": "。{SuggestButton}?"
+  },
   "7JlauX": {
     "defaultMessage": "指南"
   },
@@ -667,6 +679,9 @@
     "defaultMessage": "已追蹤",
     "description": "src/components/Buttons/FollowUser/Unfollow.tsx"
   },
+  "95stPq": {
+    "defaultMessage": "已完成"
+  },
   "99OtWT": {
     "defaultMessage": "寫入中…"
   },
@@ -715,6 +730,9 @@
   },
   "A3g33H": {
     "defaultMessage": "封存作品僅自己可見，且操作無法撤銷。如文章已加入選集，將從選集中移除。（已發佈到 IPFS 的版本不受影響）"
+  },
+  "A4P0al": {
+    "defaultMessage": "建議頻道"
   },
   "A6ozr9": {
     "defaultMessage": "選集名稱"
@@ -944,6 +962,9 @@
     "defaultMessage": "取消置頂",
     "description": "src/components/CircleComment/DropdownActions/PinButton.tsx"
   },
+  "DtO278": {
+    "defaultMessage": "檢測到近期你的多篇文章被推薦到相關頻道，它們有可能不會同時出現"
+  },
   "DyuHBH": {
     "defaultMessage": "取消代表作",
     "description": "src/components/CollectionDigest/DropdownActions/PinButton.tsx"
@@ -1008,6 +1029,10 @@
   "EmZFry": {
     "defaultMessage": "請在加密錢包內繼續操作",
     "description": "src/components/Forms/PaymentForm/Processing/index.tsx"
+  },
+  "EnAfl8": {
+    "defaultMessage": "你對 {articleTitle} 的頻道建議已被編輯採納，感謝你對 Matters 的支持 ～",
+    "description": "src/components/Notice/ArticleNotice/TopicChannelFeedbackAcceptedNotice.tsx"
   },
   "EoeUjA": {
     "defaultMessage": "你無權限進行該操作",
@@ -1106,6 +1131,9 @@
     "defaultMessage": "本月新增追蹤人數",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
   },
+  "GvHgNX": {
+    "defaultMessage": "你對結果滿意嗎？"
+  },
   "H0JBH6": {
     "defaultMessage": "登出"
   },
@@ -1130,6 +1158,9 @@
   },
   "HJ0iZJ": {
     "defaultMessage": "確認封存"
+  },
+  "HJhf1Q": {
+    "defaultMessage": "編輯確認後頻道將會改變 : )"
   },
   "HJsl78": {
     "defaultMessage": "提領支持金額時遇到問題，請重試或聯繫 ask@matters.town"
@@ -1271,6 +1302,9 @@
     "defaultMessage": "已接受",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
   },
+  "Jv9SoD": {
+    "defaultMessage": "建議頻道"
+  },
   "Jxr/TM": {
     "defaultMessage": "已滿",
     "description": "src/components/Dialogs/AddCollectionsArticleDialog/SelectDialogContent.tsx"
@@ -1317,9 +1351,15 @@
     "defaultMessage": "標籤",
     "description": "src/components/Dialogs/TagListDialog/index.tsx"
   },
+  "KhbWu2": {
+    "defaultMessage": "已將你的建議提交給編輯"
+  },
   "KlJEP9": {
     "defaultMessage": "錢包已綁定",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
+  },
+  "Kt6f7U": {
+    "defaultMessage": "不參與頻道推薦"
   },
   "Kwv1n3": {
     "defaultMessage": " 用以出版 Writing NFT，費用 ≈1 LIKE，推廣期由平台補助"
@@ -1675,6 +1715,9 @@
   "RxiHr/": {
     "defaultMessage": "還沒有任何用戶回覆你的邀請喔！",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/Accepted/index.tsx"
+  },
+  "S+D/hf": {
+    "defaultMessage": "正在為你的作品推薦頻道..."
   },
   "S/hoJx": {
     "defaultMessage": "用戶不存在",
@@ -2040,6 +2083,9 @@
   "Y8zV4A": {
     "defaultMessage": "回覆評論"
   },
+  "Y9IYvj": {
+    "defaultMessage": "沒有適合的頻道"
+  },
   "YDMrKK": {
     "defaultMessage": "用戶"
   },
@@ -2315,6 +2361,9 @@
     "defaultMessage": "評論和回覆",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
+  "dZlT9q": {
+    "defaultMessage": "已推薦你的這篇作品到頻道：{channelNames}，你對結果滿意嗎？"
+  },
   "ddJbkg": {
     "defaultMessage": "置頂",
     "description": "src/components/ArticleComment/DropdownActions/PinButton.tsx"
@@ -2342,6 +2391,9 @@
   "eKVBm/": {
     "defaultMessage": "Optimism 是獨立運行的區塊鏈，若你在其他鏈上已有 USDT 貨幣，需要將它們轉移到 Optimism 網絡才能使用，詳情參考{link}。"
   },
+  "eNv3Wm": {
+    "defaultMessage": "已推薦你的這篇作品到頻道：{channelNames}"
+  },
   "eTpiYa": {
     "defaultMessage": "尚無支持數據"
   },
@@ -2367,6 +2419,9 @@
   "erE5/4": {
     "defaultMessage": "互相追蹤",
     "description": "src/components/Buttons/FollowUser/FollowState.tsx"
+  },
+  "exG99K": {
+    "defaultMessage": "提交確認"
   },
   "exb/12": {
     "defaultMessage": "之後就可以透過錢包快速登入囉！",
@@ -2420,6 +2475,9 @@
   "fnv5rD": {
     "defaultMessage": "讚賞作品（當前 {total} 次讚賞）"
   },
+  "fpLpPO": {
+    "defaultMessage": "（該操作會即刻生效且無法撤銷）"
+  },
   "fsB/4p": {
     "defaultMessage": "儲存成功"
   },
@@ -2433,6 +2491,12 @@
   "g/IDCs": {
     "defaultMessage": "動態",
     "description": "src/components/Dialogs/MomentDetailDialog/Content.tsx"
+  },
+  "g39W4D": {
+    "defaultMessage": "（文章將出現在「還有」中）"
+  },
+  "g3NgLw": {
+    "defaultMessage": "確認將作品移到「還有」？"
   },
   "g5pX+a": {
     "defaultMessage": "關於"
@@ -3000,6 +3064,9 @@
     "defaultMessage": "驗證碼已過期，請重新發送",
     "description": "CODE_EXPIRED"
   },
+  "raexxM": {
+    "defaultMessage": "已提交"
+  },
   "rbrahO": {
     "defaultMessage": "關閉"
   },
@@ -3286,6 +3353,9 @@
     "defaultMessage": "Visa / Mastercard / American Express 支付",
     "description": "src/components/Forms/PaymentForm/StripeCheckout/index.tsx"
   },
+  "wlQosy": {
+    "defaultMessage": "。 感謝鼓勵 ～"
+  },
   "wm9xNB": {
     "defaultMessage": "{type} 已解綁",
     "description": "src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
@@ -3397,6 +3467,9 @@
   },
   "yubNcI": {
     "defaultMessage": "不支持單獨使用標點符號"
+  },
+  "yx0LeF": {
+    "defaultMessage": "選擇希望推薦到的頻道（單選）"
   },
   "yxMEo/": {
     "defaultMessage": "作品已添加至活動精選"

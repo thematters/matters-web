@@ -1,0 +1,30 @@
+.content {
+  display: flex;
+  gap: var(--sp8);
+  margin-top: var(--sp4);
+  font-size: var(--text12);
+  line-height: 1.125rem;
+  color: var(--color-grey-dark);
+}
+
+.channelNames {
+  color: var(--color-black);
+
+  & .channelName {
+    @mixin transition;
+
+    color: var(--color-black);
+    transition-property: color;
+
+    &:hover {
+      color: var(--color-grey-darker);
+    }
+  }
+}
+
+.feedbackButtons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp8);
+  margin-top: var(--sp4);
+}
