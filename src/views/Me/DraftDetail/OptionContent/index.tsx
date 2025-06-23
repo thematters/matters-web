@@ -20,6 +20,7 @@ import {
   useEditDraftConnections,
   useEditDraftCover,
   useEditDraftTags,
+  useEditIndent,
 } from '../hooks'
 import styles from './styles.module.css'
 
@@ -130,6 +131,19 @@ const EditDraftCollections = ({
   )
 }
 
+const EditDraftIndent = ({ draft }: OptionItemProps) => {
+  const { edit: toggleIndent, saving: indentSaving } = useEditIndent()
+  const indented = draft.indentFirstLine
+
+  return (
+    <Sidebar.Indent
+      indented={indented}
+      toggleIndent={toggleIndent}
+      indentSaving={indentSaving}
+    />
+  )
+}
+
 export const OptionContent = (props: OptionContentProps) => {
   const [type, setType] = useState<'contentAndLayout' | 'settings'>(
     'contentAndLayout'
@@ -178,6 +192,7 @@ export const OptionContent = (props: OptionContentProps) => {
             {hasOwnCollections && (
               <EditDraftCollections {...props} disabled={disabled} />
             )}
+            <EditDraftIndent {...props} disabled={disabled} />
           </>
         )}
       </section>

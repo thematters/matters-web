@@ -2318,6 +2318,9 @@
     "defaultMessage": "由于你尚未发布任何作品，这裡还没有任何数据能与你分享哦！发布第一篇作品来介绍你自己，以此开启你的创作之旅吧！",
     "description": "src/views/Me/Analytics/EmptyAnalytics/index.tsx"
   },
+  "cpYr3r": {
+    "defaultMessage": "正文段落开头自动缩进"
+  },
   "ctl5tq": {
     "defaultMessage": "新作品",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
@@ -3187,6 +3190,9 @@
   "uME1sk": {
     "defaultMessage": "查看支持者名单",
     "description": "src/views/ArticleDetail/SupportWidget/Donators/index.tsx"
+  },
+  "uOUCWK": {
+    "defaultMessage": "段首缩进"
   },
   "uQHRvx": {
     "defaultMessage": "请选择问题类型："
