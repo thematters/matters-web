@@ -23,6 +23,7 @@ export const fragments = {
             }
             feedback {
               id
+              state
               type
               channels {
                 id
@@ -39,6 +40,7 @@ export const fragments = {
           topicChannel {
             feedback {
               id
+              state
               type
               channels {
                 id
