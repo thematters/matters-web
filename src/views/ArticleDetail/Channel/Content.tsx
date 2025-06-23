@@ -67,9 +67,14 @@ const Content = ({ step, setStep, onClose, onConfirm }: ContentProps) => {
     e.target.blur()
   }
 
-  const handleNextStep = () => setStep('confirm')
+  const latestValue = 'latest'
+
+  const handleNextStep = () => {
+    setStep('confirm')
+  }
   const handleConfirm = async () => {
-    const isEmpty = values.selectedChannel === ''
+    const isEmpty =
+      values.selectedChannel === latestValue || values.selectedChannel === ''
     const channels = isEmpty ? [] : [values.selectedChannel]
     await onConfirm?.(channels)
     setStep(isEmpty ? 'completed' : 'submitted')
@@ -140,7 +145,7 @@ const Content = ({ step, setStep, onClose, onConfirm }: ContentProps) => {
                     </span>
                   </span>
                 ),
-                value: '',
+                value: latestValue,
               },
             ]}
             currentValue={values.selectedChannel}
@@ -157,6 +162,7 @@ const Content = ({ step, setStep, onClose, onConfirm }: ContentProps) => {
         textWeight="normal"
         borderActiveColor="grey"
         text={<FormattedMessage defaultMessage="Next Step" id="8cv9D4" />}
+        disabled={values.selectedChannel === ''}
       />
     </>
   )
@@ -168,7 +174,7 @@ const Content = ({ step, setStep, onClose, onConfirm }: ContentProps) => {
       </section>
 
       <section className={styles.confirmContent}>
-        {values.selectedChannel !== '' ? (
+        {values.selectedChannel !== latestValue ? (
           <FormattedMessage
             defaultMessage="Would you like to recommend your work to the channel: {channelName}?"
             id="3MZvMF"

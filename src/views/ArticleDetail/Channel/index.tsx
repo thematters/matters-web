@@ -362,13 +362,13 @@ const Channel = ({ article }: ChannelProps) => {
                       id="0mQE3E"
                       values={{ channelNames: renderChannelNames() }}
                     />
+                    {state.hasThumbsUp && (
+                      <FormattedMessage
+                        defaultMessage=". Really appreciate it!"
+                        id="wlQosy"
+                      />
+                    )}
                   </span>
-                  {state.hasThumbsUp && (
-                    <FormattedMessage
-                      defaultMessage=". Really appreciate it!"
-                      id="wlQosy"
-                    />
-                  )}
                 </>
               )}
             </section>
