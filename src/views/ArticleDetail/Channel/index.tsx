@@ -225,19 +225,6 @@ const Channel = ({ article }: ChannelProps) => {
     </>
   )
 
-  const ChannelDrawerComponent = (
-    <ChannelDrawer
-      isOpen={state.isDrawerOpen}
-      onClose={() => setState((prev) => ({ ...prev, isDrawerOpen: false }))}
-      onConfirm={handleThumbsDown}
-      selectedChannels={
-        channelData.topicChannel?.channels?.map(
-          (channel) => channel.channel.id
-        ) ?? []
-      }
-    />
-  )
-
   const renderContent = () => {
     // Non-author and no channel or in latest channel - hide
     if (
@@ -317,7 +304,6 @@ const Channel = ({ article }: ChannelProps) => {
             </span>
           </section>
           <AntiFloodedNotice />
-          {ChannelDrawerComponent}
         </>
       )
     }
@@ -396,14 +382,27 @@ const Channel = ({ article }: ChannelProps) => {
               )}
             </section>
             <AntiFloodedNotice />
-            {ChannelDrawerComponent}
           </>
         )}
       </ChannelDialog>
     )
   }
 
-  return renderContent()
+  return (
+    <>
+      {renderContent()}
+      <ChannelDrawer
+        isOpen={state.isDrawerOpen}
+        onClose={() => setState((prev) => ({ ...prev, isDrawerOpen: false }))}
+        onConfirm={handleThumbsDown}
+        selectedChannels={
+          channelData.topicChannel?.channels?.map(
+            (channel) => channel.channel.id
+          ) ?? []
+        }
+      />
+    </>
+  )
 }
 
 Channel.fragments = fragments
