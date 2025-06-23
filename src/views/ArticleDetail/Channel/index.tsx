@@ -179,12 +179,8 @@ const Channel = ({ article }: ChannelProps) => {
     )
   }
 
-  const SuggestChannelButton = () => (
-    <Button
-      onClick={toggleDrawer}
-      textColor="black"
-      textActiveColor="greyDarker"
-    >
+  const SuggestChannelButton = ({ openDialog }: { openDialog: () => void }) => (
+    <Button onClick={openDialog} textColor="black" textActiveColor="greyDarker">
       <FormattedMessage defaultMessage="Suggest one" id="Jv9SoD" />
     </Button>
   )
@@ -225,7 +221,7 @@ const Channel = ({ article }: ChannelProps) => {
     </>
   )
 
-  const renderContent = () => {
+  const renderContent = ({ openDialog }: { openDialog: () => void }) => {
     // Non-author and no channel or in latest channel - hide
     if (
       !isAuthor &&
@@ -291,17 +287,40 @@ const Channel = ({ article }: ChannelProps) => {
       return (
         <>
           <section className={styles.content}>
-            <span>
-              <FormattedMessage
-                defaultMessage="We couldn’t find a suitable channel to recommend this work"
-                id="4M9oG6"
-              />
-              <FormattedMessage
-                defaultMessage=". {SuggestButton}?"
-                id="7HPPqs"
-                values={{ SuggestButton: <SuggestChannelButton /> }}
-              />
-            </span>
+            <Media lessThan="md">
+              <span>
+                <FormattedMessage
+                  defaultMessage="We couldn’t find a suitable channel to recommend this work"
+                  id="4M9oG6"
+                />
+                <FormattedMessage
+                  defaultMessage=". {SuggestButton}?"
+                  id="7HPPqs"
+                  values={{
+                    SuggestButton: (
+                      <SuggestChannelButton openDialog={openDialog} />
+                    ),
+                  }}
+                />
+              </span>
+            </Media>
+            <Media greaterThanOrEqual="md">
+              <span>
+                <FormattedMessage
+                  defaultMessage="We couldn’t find a suitable channel to recommend this work"
+                  id="4M9oG6"
+                />
+                <FormattedMessage
+                  defaultMessage=". {SuggestButton}?"
+                  id="7HPPqs"
+                  values={{
+                    SuggestButton: (
+                      <SuggestChannelButton openDialog={toggleDrawer} />
+                    ),
+                  }}
+                />
+              </span>
+            </Media>
           </section>
           <AntiFloodedNotice />
         </>
@@ -325,83 +344,85 @@ const Channel = ({ article }: ChannelProps) => {
 
     // Author with channel recommendations - show feedback interface
     return (
-      <ChannelDialog onConfirm={handleThumbsDown}>
-        {({ openDialog }) => (
-          <>
-            <section className={styles.content}>
-              {!channelData.hasFeedback && !state.hasThumbsUp ? (
-                <>
-                  <Media lessThan="md">
-                    <span>
-                      <FormattedMessage
-                        defaultMessage="Your work has been recommended to the channels: {channelNames}"
-                        id="eNv3Wm"
-                        values={{ channelNames: renderChannelNames() }}
-                      />
-                    </span>
-                    <br />
-                    <section className={styles.feedbackButtons}>
-                      <span>
-                        <FormattedMessage
-                          defaultMessage="Are you satisfied with the result?"
-                          id="GvHgNX"
-                        />
-                      </span>
-                      <FeedbackButtons openDialog={openDialog} />
-                    </section>
-                  </Media>
-                  <Media greaterThanOrEqual="md">
-                    <section className={styles.feedbackButtons}>
-                      <span>
-                        <FormattedMessage
-                          defaultMessage="Your work has been recommended to the channels: {channelNames}. Are you satisfied with the result?"
-                          id="dZlT9q"
-                          values={{ channelNames: renderChannelNames() }}
-                        />
-                      </span>
-                      <FeedbackButtons openDialog={openDialog} />
-                    </section>
-                  </Media>
-                </>
-              ) : (
-                <>
+      <>
+        <section className={styles.content}>
+          {!channelData.hasFeedback && !state.hasThumbsUp ? (
+            <>
+              <Media lessThan="md">
+                <span>
+                  <FormattedMessage
+                    defaultMessage="Your work has been recommended to the channels: {channelNames}"
+                    id="eNv3Wm"
+                    values={{ channelNames: renderChannelNames() }}
+                  />
+                </span>
+                <br />
+                <section className={styles.feedbackButtons}>
                   <span>
                     <FormattedMessage
-                      defaultMessage="Recommended to channel: {channelNames}"
-                      id="0mQE3E"
+                      defaultMessage="Are you satisfied with the result?"
+                      id="GvHgNX"
+                    />
+                  </span>
+                  <FeedbackButtons openDialog={openDialog} />
+                </section>
+              </Media>
+              <Media greaterThanOrEqual="md">
+                <section className={styles.feedbackButtons}>
+                  <span>
+                    <FormattedMessage
+                      defaultMessage="Your work has been recommended to the channels: {channelNames}. Are you satisfied with the result?"
+                      id="dZlT9q"
                       values={{ channelNames: renderChannelNames() }}
                     />
-                    {state.hasThumbsUp && (
-                      <FormattedMessage
-                        defaultMessage=". Really appreciate it!"
-                        id="wlQosy"
-                      />
-                    )}
                   </span>
-                </>
-              )}
-            </section>
-            <AntiFloodedNotice />
-          </>
-        )}
-      </ChannelDialog>
+                  <FeedbackButtons openDialog={openDialog} />
+                </section>
+              </Media>
+            </>
+          ) : (
+            <>
+              <span>
+                <FormattedMessage
+                  defaultMessage="Recommended to channel: {channelNames}"
+                  id="0mQE3E"
+                  values={{ channelNames: renderChannelNames() }}
+                />
+                {state.hasThumbsUp && (
+                  <FormattedMessage
+                    defaultMessage=". Really appreciate it!"
+                    id="wlQosy"
+                  />
+                )}
+              </span>
+            </>
+          )}
+        </section>
+        <AntiFloodedNotice />
+      </>
     )
   }
 
   return (
-    <>
-      {renderContent()}
-      <ChannelDrawer
-        isOpen={state.isDrawerOpen}
-        onClose={() => setState((prev) => ({ ...prev, isDrawerOpen: false }))}
-        onConfirm={handleThumbsDown}
-        selectedChannels={
-          channelData.topicChannel?.channels?.map(
-            (channel) => channel.channel.id
-          ) ?? []
-        }
-      />
-    </>
+    <ChannelDialog onConfirm={handleThumbsDown}>
+      {({ openDialog }) => (
+        <>
+          {renderContent({ openDialog })}
+          <ChannelDrawer
+            isOpen={state.isDrawerOpen}
+            onClose={() =>
+              setState((prev) => ({ ...prev, isDrawerOpen: false }))
+            }
+            onConfirm={handleThumbsDown}
+            selectedChannels={
+              channelData.topicChannel?.channels?.map(
+                (channel) => channel.channel.id
+              ) ?? []
+            }
+          />
+        </>
+      )}
+    </ChannelDialog>
   )
 }
 
