@@ -13,13 +13,8 @@ import IconProfile from '@/public/static/icons/24px/profile.svg'
 import IconSave from '@/public/static/icons/24px/save.svg'
 import IconSettings from '@/public/static/icons/24px/settings.svg'
 import IconWallet from '@/public/static/icons/24px/wallet.svg'
-import {
-  COOKIE_TOKEN_NAME,
-  COOKIE_USER_GROUP,
-  PATHS,
-  PROTECTED_ROUTES,
-} from '~/common/enums'
-import { toPath } from '~/common/utils'
+import { COOKIE_USER_GROUP, PATHS, PROTECTED_ROUTES } from '~/common/enums'
+import { clearAuthTokens, toPath } from '~/common/utils'
 import { removeCookies } from '~/common/utils'
 import { Icon, Menu, toast, useMutation, ViewerContext } from '~/components'
 import USER_LOGOUT from '~/components/GQL/mutations/userLogout'
@@ -138,7 +133,8 @@ const Bottom = () => {
     try {
       await logout()
 
-      removeCookies([COOKIE_TOKEN_NAME, COOKIE_USER_GROUP])
+      clearAuthTokens()
+      removeCookies([COOKIE_USER_GROUP])
 
       if (address) {
         disconnect()

@@ -4,11 +4,10 @@ import { FormattedMessage } from 'react-intl'
 import {
   CHANNEL_VERIFIED_EMAIL,
   COOKIE_LANGUAGE,
-  COOKIE_TOKEN_NAME,
   COOKIE_USER_GROUP,
   PATHS,
 } from '~/common/enums'
-import { setCookies } from '~/common/utils'
+import { setAuthTokens, setCookies } from '~/common/utils'
 import { toast, useMutation, useRoute, ViewerContext } from '~/components'
 import { VerifyEmailMutation } from '~/gql/graphql'
 
@@ -42,13 +41,16 @@ const EmailVerification = () => {
         // Set cookies and redirect
         if (data?.verifyEmail.auth) {
           if (isLocal || process.env.NEXT_PUBLIC_VERCEL) {
-            const token = data?.verifyEmail.token || ''
+            const accessToken = data?.verifyEmail.accessToken || ''
+            const refreshToken = data?.verifyEmail.refreshToken || ''
             const language = data?.verifyEmail.user?.settings.language || ''
             const group = data?.verifyEmail.user?.info.group || ''
+
+            setAuthTokens(accessToken, refreshToken)
+
             setCookies({
               [COOKIE_LANGUAGE]: language,
               [COOKIE_USER_GROUP]: group,
-              [COOKIE_TOKEN_NAME]: token,
             })
           }
 

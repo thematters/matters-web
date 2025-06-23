@@ -3,12 +3,16 @@ import baseToast from 'react-hot-toast'
 
 import {
   COOKIE_LANGUAGE,
-  COOKIE_TOKEN_NAME,
   COOKIE_USER_GROUP,
   REFERRAL_QUERY_REFERRAL_KEY,
   REFERRAL_STORAGE_REFERRAL_CODE,
 } from '~/common/enums'
-import { redirectToTarget, setCookies, storage } from '~/common/utils'
+import {
+  redirectToTarget,
+  setAuthTokens,
+  setCookies,
+  storage,
+} from '~/common/utils'
 import { LanguageContext, useMutation, useRoute } from '~/components'
 import { EMAIL_LOGIN } from '~/components/GQL/mutations/emailLogin'
 import { EmailLoginMutation } from '~/gql/graphql'
@@ -57,13 +61,16 @@ const LoginCallback = () => {
         })
 
         if (isLocal || process.env.NEXT_PUBLIC_VERCEL) {
-          const token = data?.emailLogin.token || ''
+          const accessToken = data?.emailLogin.accessToken || ''
+          const refreshToken = data?.emailLogin.refreshToken || ''
           const language = data?.emailLogin.user?.settings.language || ''
           const group = data?.emailLogin.user?.info.group || ''
+
+          setAuthTokens(accessToken, refreshToken)
+
           setCookies({
             [COOKIE_LANGUAGE]: language,
             [COOKIE_USER_GROUP]: group,
-            [COOKIE_TOKEN_NAME]: token,
           })
         }
 

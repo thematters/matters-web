@@ -33,6 +33,7 @@ import { getApollo } from '~/common/utils/apollo'
 import { ErrorBoundary } from '~/components'
 import { ClientUpdater } from '~/components/ClientUpdater'
 import Root from '~/components/Root'
+import TokenExpirationChecker from '~/components/TokenExpirationChecker'
 
 type AppOwnProps = {
   apolloClient?: ApolloClient<NormalizedCacheObject>
@@ -63,6 +64,7 @@ function MattersApp({
         <Root headers={headers}>
           <Component {...pageProps} />
           <ClientUpdater />
+          <TokenExpirationChecker />
         </Root>
       </ApolloProvider>
     </ErrorBoundary>

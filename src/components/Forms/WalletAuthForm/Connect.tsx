@@ -10,7 +10,6 @@ import IconMetaMask from '@/public/static/icons/24px/metamask.svg'
 import IconWalletConnect from '@/public/static/icons/24px/walletconnect.svg'
 import {
   COOKIE_LANGUAGE,
-  COOKIE_TOKEN_NAME,
   COOKIE_USER_GROUP,
   ERROR_CODES,
   REFERRAL_QUERY_REFERRAL_KEY,
@@ -19,6 +18,7 @@ import {
 } from '~/common/enums'
 import {
   parseFormSubmitErrors,
+  setAuthTokens,
   setCookies,
   storage,
   truncate,
@@ -221,15 +221,16 @@ const Connect: React.FC<FormProps> = ({
           })
 
           if (isLocal || process.env.NEXT_PUBLIC_VERCEL) {
-            const token = loginData?.walletLogin.token || ''
+            const accessToken = loginData?.walletLogin.accessToken || ''
+            const refreshToken = loginData?.walletLogin.refreshToken || ''
             const language =
               loginData?.walletLogin.user?.settings.language || ''
             const group = loginData?.walletLogin.user?.info.group || ''
             setCookies({
               [COOKIE_LANGUAGE]: language,
               [COOKIE_USER_GROUP]: group,
-              [COOKIE_TOKEN_NAME]: token,
             })
+            setAuthTokens(accessToken, refreshToken)
           }
 
           if (

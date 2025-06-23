@@ -1,11 +1,12 @@
 import gql from 'graphql-tag'
 
-export const EMAIL_LOGIN = gql`
-  mutation EmailLogin($input: EmailLoginInput!) {
-    emailLogin(input: $input) {
+export const REFRESH_TOKEN = gql`
+  mutation RefreshToken {
+    refreshToken {
       auth
       accessToken
       refreshToken
+      type
       user {
         id
         settings {

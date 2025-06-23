@@ -8,7 +8,6 @@ import { FormattedMessage, useIntl } from 'react-intl'
 import IconLeft from '@/public/static/icons/24px/left.svg'
 import {
   COOKIE_LANGUAGE,
-  COOKIE_TOKEN_NAME,
   COOKIE_USER_GROUP,
   ERROR_CODES,
   PATHS,
@@ -19,6 +18,7 @@ import {
 import {
   getTarget,
   parseFormSubmitErrors,
+  setAuthTokens,
   setCookies,
   signinCallbackUrl,
   storage,
@@ -159,13 +159,16 @@ export const EmailLoginForm: React.FC<FormProps> = ({
         })
 
         if (isLocal || process.env.NEXT_PUBLIC_VERCEL) {
-          const token = data?.emailLogin.token || ''
+          const accessToken = data?.emailLogin.accessToken || ''
+          const refreshToken = data?.emailLogin.refreshToken || ''
           const language = data?.emailLogin.user?.settings.language || ''
           const group = data?.emailLogin.user?.info.group || ''
+
+          setAuthTokens(accessToken, refreshToken)
+
           setCookies({
             [COOKIE_LANGUAGE]: language,
             [COOKIE_USER_GROUP]: group,
-            [COOKIE_TOKEN_NAME]: token,
           })
         }
 

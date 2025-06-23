@@ -3,7 +3,8 @@ import gql from 'graphql-tag'
 export const WALLET_LOGIN = gql`
   mutation WalletLogin($input: WalletLoginInput!) {
     walletLogin(input: $input) {
-      token
+      accessToken
+      refreshToken
       auth
       type
       user {
