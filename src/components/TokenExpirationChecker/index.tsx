@@ -1,17 +1,14 @@
 import { useEffect, useRef } from 'react'
 
-import { COOKIE_LANGUAGE, COOKIE_USER_GROUP, MINUTE } from '~/common/enums'
+import { MINUTE } from '~/common/enums'
 import {
-  clearAuthTokens,
+  clearAuthCookies,
   getAccessTokenExpiration,
-  setAuthTokens,
-  setCookies,
+  setAuthCookies,
 } from '~/common/utils'
 import { useMutation } from '~/components'
 import { REFRESH_TOKEN } from '~/components/GQL/mutations/refreshToken'
 import { RefreshTokenMutation } from '~/gql/graphql'
-
-const isLocal = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'local'
 
 const REFRESH_THRESHOLD = 10 * MINUTE // 10 minutes
 const CHECK_INTERVAL = MINUTE // 1 minute
@@ -28,30 +25,27 @@ export const TokenExpirationChecker = () => {
           return
         }
 
-        const { accessToken: newAccessToken, refreshToken: newRefreshToken } =
-          data.refreshToken
+        const newAccessToken = data.refreshToken.accessToken || ''
+        const newRefreshToken = data.refreshToken.refreshToken || ''
+        const language = data.refreshToken.user?.settings.language || ''
+        const group = data.refreshToken.user?.info.group || ''
 
-        if (newAccessToken && newRefreshToken) {
-          if (isLocal || process.env.NEXT_PUBLIC_VERCEL) {
-            setAuthTokens(newAccessToken, newRefreshToken)
+        setAuthCookies({
+          accessToken: newAccessToken,
+          refreshToken: newRefreshToken,
+          language,
+          group,
+        })
 
-            setCookies({
-              [COOKIE_LANGUAGE]:
-                data.refreshToken.user?.settings.language || '',
-              [COOKIE_USER_GROUP]: data.refreshToken.user?.info.group || '',
-            })
-          }
+        isRefreshingRef.current = false
 
-          isRefreshingRef.current = false
-
-          console.log('[TokenExpirationChecker] Tokens refreshed successfully')
-        }
+        console.log('[TokenExpirationChecker] Tokens refreshed successfully')
       },
       onError: (error) => {
         console.error('[TokenExpirationChecker] Token refresh failed:', error)
 
         // Clear tokens on refresh failure
-        clearAuthTokens()
+        clearAuthCookies()
 
         isRefreshingRef.current = false
       },

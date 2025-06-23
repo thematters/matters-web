@@ -7,8 +7,6 @@ import { FormattedMessage, useIntl } from 'react-intl'
 
 import IconLeft from '@/public/static/icons/24px/left.svg'
 import {
-  COOKIE_LANGUAGE,
-  COOKIE_USER_GROUP,
   ERROR_CODES,
   PATHS,
   REFERRAL_QUERY_REFERRAL_KEY,
@@ -18,8 +16,7 @@ import {
 import {
   getTarget,
   parseFormSubmitErrors,
-  setAuthTokens,
-  setCookies,
+  setAuthCookies,
   signinCallbackUrl,
   storage,
   validateEmail,
@@ -51,8 +48,6 @@ import { EmailLoginMutation, SendVerificationCodeMutation } from '~/gql/graphql'
 import Field from '../../Form/Field'
 import OtherOptions from './OtherOptions'
 import styles from './styles.module.css'
-
-const isLocal = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'local'
 
 interface FormProps {
   purpose: 'dialog' | 'page'
@@ -158,19 +153,17 @@ export const EmailLoginForm: React.FC<FormProps> = ({
           },
         })
 
-        if (isLocal || process.env.NEXT_PUBLIC_VERCEL) {
-          const accessToken = data?.emailLogin.accessToken || ''
-          const refreshToken = data?.emailLogin.refreshToken || ''
-          const language = data?.emailLogin.user?.settings.language || ''
-          const group = data?.emailLogin.user?.info.group || ''
+        const accessToken = data?.emailLogin.accessToken || ''
+        const refreshToken = data?.emailLogin.refreshToken || ''
+        const language = data?.emailLogin.user?.settings.language || ''
+        const group = data?.emailLogin.user?.info.group || ''
 
-          setAuthTokens(accessToken, refreshToken)
-
-          setCookies({
-            [COOKIE_LANGUAGE]: language,
-            [COOKIE_USER_GROUP]: group,
-          })
-        }
+        setAuthCookies({
+          accessToken,
+          refreshToken,
+          language,
+          group,
+        })
 
         if (submitCallback) {
           submitCallback()

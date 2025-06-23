@@ -1,20 +1,13 @@
 import { useContext, useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import {
-  CHANNEL_VERIFIED_EMAIL,
-  COOKIE_LANGUAGE,
-  COOKIE_USER_GROUP,
-  PATHS,
-} from '~/common/enums'
-import { setAuthTokens, setCookies } from '~/common/utils'
+import { CHANNEL_VERIFIED_EMAIL, PATHS } from '~/common/enums'
+import { setAuthCookies } from '~/common/utils'
 import { toast, useMutation, useRoute, ViewerContext } from '~/components'
 import { VerifyEmailMutation } from '~/gql/graphql'
 
 import { VERIFY_EMAIL } from './gql'
 import UI from './UI'
-
-const isLocal = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'local'
 
 const EmailVerification = () => {
   const viewer = useContext(ViewerContext)
@@ -40,19 +33,17 @@ const EmailVerification = () => {
 
         // Set cookies and redirect
         if (data?.verifyEmail.auth) {
-          if (isLocal || process.env.NEXT_PUBLIC_VERCEL) {
-            const accessToken = data?.verifyEmail.accessToken || ''
-            const refreshToken = data?.verifyEmail.refreshToken || ''
-            const language = data?.verifyEmail.user?.settings.language || ''
-            const group = data?.verifyEmail.user?.info.group || ''
+          const accessToken = data?.verifyEmail.accessToken || ''
+          const refreshToken = data?.verifyEmail.refreshToken || ''
+          const language = data?.verifyEmail.user?.settings.language || ''
+          const group = data?.verifyEmail.user?.info.group || ''
 
-            setAuthTokens(accessToken, refreshToken)
-
-            setCookies({
-              [COOKIE_LANGUAGE]: language,
-              [COOKIE_USER_GROUP]: group,
-            })
-          }
+          setAuthCookies({
+            accessToken,
+            refreshToken,
+            language,
+            group,
+          })
 
           // refresh page if user is not authed
           if (!viewer.isAuthed) {

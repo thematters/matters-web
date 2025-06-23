@@ -13,9 +13,9 @@ import IconProfile from '@/public/static/icons/24px/profile.svg'
 import IconSave from '@/public/static/icons/24px/save.svg'
 import IconSettings from '@/public/static/icons/24px/settings.svg'
 import IconWallet from '@/public/static/icons/24px/wallet.svg'
-import { COOKIE_USER_GROUP, PATHS, PROTECTED_ROUTES } from '~/common/enums'
+import { PATHS, PROTECTED_ROUTES } from '~/common/enums'
 import { toPath } from '~/common/utils'
-import { clearAuthTokens, removeCookies } from '~/common/utils'
+import { clearAuthCookies } from '~/common/utils'
 import { Icon, Menu, toast, useMutation, ViewerContext } from '~/components'
 import USER_LOGOUT from '~/components/GQL/mutations/userLogout'
 import { UserLogoutMutation } from '~/gql/graphql'
@@ -62,8 +62,7 @@ const MeMenu: React.FC = () => {
     try {
       await logout()
 
-      clearAuthTokens()
-      removeCookies([COOKIE_USER_GROUP])
+      clearAuthCookies()
 
       if (address) {
         disconnect()

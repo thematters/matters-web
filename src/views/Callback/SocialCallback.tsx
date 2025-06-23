@@ -3,8 +3,6 @@ import { useContext, useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import {
-  COOKIE_LANGUAGE,
-  COOKIE_USER_GROUP,
   ERROR_CODES,
   OAUTH_SESSSION_STORAGE_OAUTH_TOKEN,
   OAUTH_SESSSION_STORAGE_OAUTH_TYPE,
@@ -21,12 +19,7 @@ import {
   REFERRAL_QUERY_REFERRAL_KEY,
   REFERRAL_STORAGE_REFERRAL_CODE,
 } from '~/common/enums'
-import {
-  sessionStorage,
-  setAuthTokens,
-  setCookies,
-  storage,
-} from '~/common/utils'
+import { sessionStorage, setAuthCookies, storage } from '~/common/utils'
 import {
   getErrorCodes,
   LanguageContext,
@@ -42,8 +35,6 @@ import {
 
 import { ADD_SOCIAL_LOGIN, SOCIAL_LOGIN } from './gql'
 import UI from './UI'
-
-const isLocal = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'local'
 
 interface Props {
   type: SocialAccountType
@@ -136,20 +127,17 @@ const SocialCallback = ({ type }: Props) => {
             },
           })
 
-          if (isLocal || process.env.NEXT_PUBLIC_VERCEL) {
-            const accessToken = loginData?.socialLogin.accessToken || ''
-            const refreshToken = loginData?.socialLogin.refreshToken || ''
-            const language =
-              loginData?.socialLogin.user?.settings.language || ''
-            const group = loginData?.socialLogin.user?.info.group || ''
+          const accessToken = loginData?.socialLogin.accessToken || ''
+          const refreshToken = loginData?.socialLogin.refreshToken || ''
+          const language = loginData?.socialLogin.user?.settings.language || ''
+          const group = loginData?.socialLogin.user?.info.group || ''
 
-            setAuthTokens(accessToken, refreshToken)
-
-            setCookies({
-              [COOKIE_LANGUAGE]: language,
-              [COOKIE_USER_GROUP]: group,
-            })
-          }
+          setAuthCookies({
+            accessToken,
+            refreshToken,
+            language,
+            group,
+          })
 
           if (localPath) {
             window.location.href = localPath
