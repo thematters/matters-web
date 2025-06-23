@@ -16,6 +16,7 @@ import {
 import {
   ChannelArticlePublicFragment,
   SubmitTopicChannelFeedbackMutation,
+  TopicChannelFeedbackState,
   TopicChannelFeedbackType,
 } from '~/gql/graphql'
 
@@ -42,6 +43,8 @@ interface ChannelData {
   enabledChannels: NonNullable<
     ChannelArticlePublicFragment['classification']['topicChannel']['channels']
   >
+  feedbackState: TopicChannelFeedbackState | null | undefined
+  isFeedbackToLatest: boolean
 }
 
 const Channel = ({ article }: ChannelProps) => {
@@ -69,6 +72,9 @@ const Channel = ({ article }: ChannelProps) => {
     const allChannelsDisabled = topicChannel?.channels?.every(
       (channel) => !channel.enabled
     )
+    const feedback = topicChannel?.feedback
+    const feedbackState = feedback?.state
+    const isFeedbackToLatest = feedback?.channels?.length === 0
     const isInLatestChannel =
       (hasTopicChannel && topicChannel?.channels?.length === 0) ||
       (hasTopicChannel && !!allChannelsDisabled)
@@ -85,6 +91,8 @@ const Channel = ({ article }: ChannelProps) => {
       isInLatestChannel,
       hasAntiFlooded,
       enabledChannels,
+      feedbackState,
+      isFeedbackToLatest,
     }
   }
 
@@ -259,6 +267,21 @@ const Channel = ({ article }: ChannelProps) => {
           <AntiFloodedNotice />
         </>
       )
+    }
+
+    // Author with feedback to latest channel - hide
+    if (isAuthor && channelData.hasFeedback && channelData.isFeedbackToLatest) {
+      return null
+    }
+
+    // Author in latest channel with feedback rejected - hide
+    if (
+      isAuthor &&
+      channelData.isInLatestChannel &&
+      channelData.hasFeedback &&
+      channelData.feedbackState === TopicChannelFeedbackState.Rejected
+    ) {
+      return null
     }
 
     // Author with no channel data - recommending
