@@ -27,6 +27,7 @@ import styles from './styles.module.css'
 
 interface ChannelProps {
   article: ChannelArticlePublicFragment
+  privateFetched: boolean
 }
 
 interface ChannelState {
@@ -47,7 +48,7 @@ interface ChannelData {
   isFeedbackToLatest: boolean
 }
 
-const Channel = ({ article }: ChannelProps) => {
+const Channel = ({ article, privateFetched }: ChannelProps) => {
   const viewer = useContext(ViewerContext)
   const { lang } = useContext(LanguageContext)
   const isAuthor = viewer?.id === article.author?.id
@@ -250,6 +251,10 @@ const Channel = ({ article }: ChannelProps) => {
           <AntiFloodedNotice />
         </>
       )
+    }
+
+    if (!privateFetched) {
+      return null
     }
 
     // Author with feedback to latest channel - hide

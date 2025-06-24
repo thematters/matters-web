@@ -353,7 +353,7 @@ const BaseArticleDetail = ({
 
         <License license={article.license} />
 
-        <Channel article={article} />
+        <Channel article={article} privateFetched={privateFetched} />
 
         {features.payment && (
           <DynamicSupportWidget
