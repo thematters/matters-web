@@ -1,7 +1,5 @@
 import { Base64 } from 'js-base64'
 
-import { STORAGE_ACCESS_TOKEN_EXPIRES_AT } from '../enums/storage'
-
 /**
  * JWT utilities for client-side token handling
  * Note: These functions do NOT verify JWT signatures - they only decode for metadata
@@ -60,12 +58,4 @@ export const isTokenExpired = (token: string): boolean | null => {
   }
 
   return Date.now() >= expiration
-}
-
-/**
- * Get access token expiration from localStorage
- */
-export const getAccessTokenExpiration = (): number | null => {
-  const expiration = localStorage.getItem(STORAGE_ACCESS_TOKEN_EXPIRES_AT)
-  return expiration ? parseInt(expiration, 10) : null
 }

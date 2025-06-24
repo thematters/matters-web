@@ -3,12 +3,13 @@ import { NextRequest, NextResponse } from 'next/server'
 
 import {
   COOKIE_ACCESS_TOKEN,
+  COOKIE_ACCESS_TOKEN_EXPIRES_AT,
   COOKIE_LANGUAGE,
   COOKIE_REFRESH_TOKEN,
   COOKIE_USER_GROUP,
 } from '~/common/enums/cookie'
 import { USER_COOKIE_EXPIRES_IN_MS } from '~/common/enums/time'
-import { isTokenExpired } from '~/common/utils/token'
+import { getTokenExpiration, isTokenExpired } from '~/common/utils/token'
 import { REFRESH_TOKEN } from '~/components/GQL/mutations/refreshToken'
 
 import { RefreshTokenMutation } from './gql/graphql'
@@ -81,6 +82,16 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next({ request })
   }
 
+  // Prepare cookie options
+  const tld = extractRootDomain(request.url)
+  const cookieOptions = {
+    httpOnly: true,
+    secure: true,
+    sameSite: 'lax' as const,
+    domain: tld,
+    expires: new Date(Date.now() + USER_COOKIE_EXPIRES_IN_MS),
+  }
+
   // Attempt to refresh tokens
   const newTokens = await refreshTokens(accessToken, refreshToken)
 
@@ -97,32 +108,39 @@ export async function middleware(request: NextRequest) {
     const response = NextResponse.next({ request })
 
     // Reset cookies for outgoing response
-    response.cookies.delete(COOKIE_ACCESS_TOKEN)
-    response.cookies.delete(COOKIE_REFRESH_TOKEN)
+    response.cookies.delete({ name: COOKIE_ACCESS_TOKEN, ...cookieOptions })
+    response.cookies.delete({ name: COOKIE_REFRESH_TOKEN, ...cookieOptions })
+    response.cookies.delete({
+      name: COOKIE_ACCESS_TOKEN_EXPIRES_AT,
+      ...cookieOptions,
+      httpOnly: false,
+    })
     return response
   }
 
-  // Refresh succeeded, set new tokens in response
-  const response = NextResponse.next()
+  // Refresh succeeded, update request cookies with new tokens
+  request.cookies.set(COOKIE_ACCESS_TOKEN, newTokens.accessToken)
+  request.cookies.set(COOKIE_REFRESH_TOKEN, newTokens.refreshToken)
+  request.cookies.set(COOKIE_LANGUAGE, newTokens.user.settings.language)
+  request.cookies.set(COOKIE_USER_GROUP, newTokens.user.info.group)
 
-  const tld = extractRootDomain(request.url)
-  const cookieOptions = {
-    httpOnly: true,
-    secure: true,
-    sameSite: 'lax' as const,
-    domain: tld,
-    maxAge: USER_COOKIE_EXPIRES_IN_MS,
-  }
+  const response = NextResponse.next({ request })
 
+  // Set new tokens in response
+  const accessTokenExpiration = getTokenExpiration(newTokens.accessToken)
+  const refreshTokenExpiration = getTokenExpiration(newTokens.refreshToken)
+  response.cookies.set(COOKIE_ACCESS_TOKEN, newTokens.accessToken, {
+    ...cookieOptions,
+    expires: new Date(Date.now() + accessTokenExpiration!),
+  })
+  response.cookies.set(COOKIE_REFRESH_TOKEN, newTokens.refreshToken, {
+    ...cookieOptions,
+    expires: new Date(Date.now() + refreshTokenExpiration!),
+  })
   response.cookies.set(
-    COOKIE_ACCESS_TOKEN,
-    newTokens.accessToken,
-    cookieOptions
-  )
-  response.cookies.set(
-    COOKIE_REFRESH_TOKEN,
-    newTokens.refreshToken,
-    cookieOptions
+    COOKIE_ACCESS_TOKEN_EXPIRES_AT,
+    accessTokenExpiration!.toString(),
+    { ...cookieOptions, httpOnly: false }
   )
   response.cookies.set(
     COOKIE_LANGUAGE,
@@ -143,11 +161,11 @@ export const config = {
     /*
      * Match all request paths except for the ones starting with:
      * - api (API routes)
-     * - _next/static (static files)
+     * - _next/static, static (static files)
      * - _next/image (image optimization files)
-     * - favicon.ico, ads.txt, sitemap.xml, robots.txt, .well-known (metadata files)
+     * - favicon.ico, ads.txt, sitemap.xml, robots.txt, .well-known, manifest.json (metadata files)
      * - server-worker.js,workbox-*.js (server worker file)
      */
-    '/((?!api|_next/static|_next/image|favicon.ico|ads.txt|sitemap.xml|robots.txt|.well-known|server-worker.js|workbox-*.js).*)',
+    '/((?!api|_next/static|static|manifest.json|_next/image|favicon.ico|ads.txt|sitemap.xml|robots.txt|.well-known(?:/|$)|server-worker.js|workbox-*.js).*)',
   ],
 }

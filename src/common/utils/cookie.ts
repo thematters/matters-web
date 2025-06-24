@@ -2,23 +2,23 @@ import Cookie, { CookieAttributes } from 'js-cookie'
 
 import {
   COOKIE_ACCESS_TOKEN,
+  COOKIE_ACCESS_TOKEN_EXPIRES_AT,
   COOKIE_LANGUAGE,
   COOKIE_REFRESH_TOKEN,
   COOKIE_USER_GROUP,
-  STORAGE_ACCESS_TOKEN_EXPIRES_AT,
   USER_COOKIE_EXPIRES_IN_MS,
 } from '~/common/enums'
 
-import { decodeJWT } from './token'
+import { getTokenExpiration } from './token'
 
 const isLocal = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'local'
 
-export const getCookieOptions = () => {
+export const getCookieOptions = (): CookieAttributes => {
   return {
-    expires: USER_COOKIE_EXPIRES_IN_MS,
+    expires: new Date(Date.now() + USER_COOKIE_EXPIRES_IN_MS),
     secure: window.location.href.includes('https://'),
     sameSite: 'Lax',
-  } as CookieAttributes
+  }
 }
 
 export const getIsomorphicCookie = (cookie: string, name: string) => {
@@ -76,8 +76,17 @@ export const setAuthCookies = ({
   language: string
   group: string
 }) => {
+  // Store expiration metadata for client-side checking
+  const accessTokenExpiration = getTokenExpiration(accessToken)
+  if (accessTokenExpiration) {
+    setCookies({
+      [COOKIE_ACCESS_TOKEN_EXPIRES_AT]: accessTokenExpiration.toString(),
+    })
+  }
+
+  // Set local cookies (httpOnly=false) for SSR server
+  // since cookies from API server is not same-site
   if (isLocal || process.env.NEXT_PUBLIC_VERCEL) {
-    // Set access token and refresh token cookie
     setCookies({
       [COOKIE_ACCESS_TOKEN]: accessToken,
       [COOKIE_REFRESH_TOKEN]: refreshToken,
@@ -85,29 +94,16 @@ export const setAuthCookies = ({
       [COOKIE_USER_GROUP]: group,
     })
   }
-
-  // Store expiration metadata in localStorage for client-side checking
-  const accessTokenPayload = decodeJWT(accessToken)
-
-  if (accessTokenPayload?.exp) {
-    localStorage.setItem(
-      STORAGE_ACCESS_TOKEN_EXPIRES_AT,
-      (accessTokenPayload.exp * 1000).toString()
-    )
-  }
 }
 
 /**
  * Clear all authentication tokens and metadata
  */
 export const clearAuthCookies = () => {
-  if (isLocal) {
-    console.log('[auth:CLEAR_TOKENS]')
-  }
-
-  // Remove cookies
-  removeCookies([COOKIE_ACCESS_TOKEN, COOKIE_REFRESH_TOKEN, COOKIE_USER_GROUP])
-
-  // Clear localStorage metadata
-  localStorage.removeItem(STORAGE_ACCESS_TOKEN_EXPIRES_AT)
+  removeCookies([
+    COOKIE_ACCESS_TOKEN,
+    COOKIE_REFRESH_TOKEN,
+    COOKIE_USER_GROUP,
+    COOKIE_ACCESS_TOKEN_EXPIRES_AT,
+  ])
 }

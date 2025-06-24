@@ -220,12 +220,7 @@ const Connect: React.FC<FormProps> = ({
           const language = loginData?.walletLogin.user?.settings.language || ''
           const group = loginData?.walletLogin.user?.info.group || ''
 
-          setAuthCookies({
-            accessToken,
-            refreshToken,
-            language,
-            group,
-          })
+          setAuthCookies({ accessToken, refreshToken, language, group })
 
           if (
             loginData?.walletLogin.type === AuthResultType.Login ||

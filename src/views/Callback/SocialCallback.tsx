@@ -132,12 +132,7 @@ const SocialCallback = ({ type }: Props) => {
           const language = loginData?.socialLogin.user?.settings.language || ''
           const group = loginData?.socialLogin.user?.info.group || ''
 
-          setAuthCookies({
-            accessToken,
-            refreshToken,
-            language,
-            group,
-          })
+          setAuthCookies({ accessToken, refreshToken, language, group })
 
           if (localPath) {
             window.location.href = localPath

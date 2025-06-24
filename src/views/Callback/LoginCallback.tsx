@@ -56,12 +56,7 @@ const LoginCallback = () => {
         const language = data?.emailLogin.user?.settings.language || ''
         const group = data?.emailLogin.user?.info.group || ''
 
-        setAuthCookies({
-          accessToken,
-          refreshToken,
-          language,
-          group,
-        })
+        setAuthCookies({ accessToken, refreshToken, language, group })
 
         redirectToTarget({ fallback: 'homepage' })
       } catch {

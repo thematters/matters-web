@@ -38,12 +38,7 @@ const EmailVerification = () => {
           const language = data?.verifyEmail.user?.settings.language || ''
           const group = data?.verifyEmail.user?.info.group || ''
 
-          setAuthCookies({
-            accessToken,
-            refreshToken,
-            language,
-            group,
-          })
+          setAuthCookies({ accessToken, refreshToken, language, group })
 
           // refresh page if user is not authed
           if (!viewer.isAuthed) {

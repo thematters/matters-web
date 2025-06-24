@@ -1,11 +1,7 @@
 import { useEffect, useRef } from 'react'
 
-import { MINUTE } from '~/common/enums'
-import {
-  clearAuthCookies,
-  getAccessTokenExpiration,
-  setAuthCookies,
-} from '~/common/utils'
+import { COOKIE_ACCESS_TOKEN_EXPIRES_AT, MINUTE } from '~/common/enums'
+import { clearAuthCookies, getCookie, setAuthCookies } from '~/common/utils'
 import { useMutation } from '~/components'
 import { REFRESH_TOKEN } from '~/components/GQL/mutations/refreshToken'
 import { RefreshTokenMutation } from '~/gql/graphql'
@@ -59,7 +55,8 @@ export const TokenExpirationChecker = () => {
       return
     }
 
-    const expirationTime = getAccessTokenExpiration()
+    const expiration = getCookie(COOKIE_ACCESS_TOKEN_EXPIRES_AT)
+    const expirationTime = expiration ? parseInt(expiration, 10) : null
     if (!expirationTime) {
       // No token expiration found, skip check
       return
@@ -76,19 +73,14 @@ export const TokenExpirationChecker = () => {
   }
 
   useEffect(() => {
-    // Initial check
-    checkTokenExpiration()
-
-    // Set up interval
     intervalRef.current = setInterval(checkTokenExpiration, CHECK_INTERVAL)
 
-    // Cleanup on unmount
     return () => {
       if (intervalRef.current) {
         clearInterval(intervalRef.current)
       }
     }
-  })
+  }, [])
 
   // Add visibility change listener to check tokens when page becomes visible
   useEffect(() => {

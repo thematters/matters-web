@@ -158,12 +158,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
         const language = data?.emailLogin.user?.settings.language || ''
         const group = data?.emailLogin.user?.info.group || ''
 
-        setAuthCookies({
-          accessToken,
-          refreshToken,
-          language,
-          group,
-        })
+        setAuthCookies({ accessToken, refreshToken, language, group })
 
         if (submitCallback) {
           submitCallback()
