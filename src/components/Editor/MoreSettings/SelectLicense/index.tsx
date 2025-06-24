@@ -13,7 +13,7 @@ interface Props {
   onChange: (license: ArticleLicenseType) => void
 }
 
-const SelectLicense = ({ isInCircle, license, onChange }: Props) => {
+const SelectLicense = ({ license, onChange }: Props) => {
   const { lang } = useContext(LanguageContext)
 
   const options = [
@@ -28,14 +28,14 @@ const SelectLicense = ({ isInCircle, license, onChange }: Props) => {
       label={<FormattedMessage defaultMessage="License" id="HBxXD/" />}
       onChange={(option) => onChange(option.value)}
       options={options.map((value) => {
-        const extraDesc = LICENSE_TEXT[isInCircle ? 1 : 0][value].extra[lang]
+        const extraDesc = LICENSE_TEXT[value].extra[lang]
         let extra: string | React.ReactNode = ''
         if (extraDesc) {
           extra = <About desc={extraDesc} url={cc4link} />
         }
         return {
-          name: LICENSE_TEXT[isInCircle ? 1 : 0][value].title[lang],
-          subtitle: LICENSE_TEXT[isInCircle ? 1 : 0][value].subtitle[lang],
+          name: LICENSE_TEXT[value].title[lang],
+          subtitle: LICENSE_TEXT[value].subtitle[lang],
           extra,
           value,
           selected: license === value,

@@ -84,8 +84,8 @@ const SidebarLicense: React.FC<SidebarLicenseProps> = ({
   }, [])
 
   const options = LICENSE_TYPES.map((value) => ({
-    name: LICENSE_TEXT[isInCircle ? 1 : 0][value].title[lang],
-    subtitle: LICENSE_TEXT[isInCircle ? 1 : 0][value].subtitle[lang],
+    name: LICENSE_TEXT[value].title[lang],
+    subtitle: LICENSE_TEXT[value].subtitle[lang],
     value,
     selected: license === value,
   }))
@@ -134,10 +134,10 @@ const SidebarLicense: React.FC<SidebarLicenseProps> = ({
               id: 'B7QJw1',
             },
             {
-              license: LICENSE_TEXT[isInCircle ? 1 : 0][license].title[lang],
+              license: LICENSE_TEXT[license].title[lang],
             }
           )}
-          subtitle={LICENSE_TEXT[isInCircle ? 1 : 0][license].subtitle[lang]}
+          subtitle={LICENSE_TEXT[license].subtitle[lang]}
           rightButton={
             <ToggleButton
               isEditing={isEditing}
