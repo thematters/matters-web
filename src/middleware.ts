@@ -131,11 +131,11 @@ export async function middleware(request: NextRequest) {
   const refreshTokenExpiration = getTokenExpiration(newTokens.refreshToken)
   response.cookies.set(COOKIE_ACCESS_TOKEN, newTokens.accessToken, {
     ...cookieOptions,
-    expires: new Date(Date.now() + accessTokenExpiration!),
+    expires: new Date(accessTokenExpiration!),
   })
   response.cookies.set(COOKIE_REFRESH_TOKEN, newTokens.refreshToken, {
     ...cookieOptions,
-    expires: new Date(Date.now() + refreshTokenExpiration!),
+    expires: new Date(refreshTokenExpiration!),
   })
   response.cookies.set(
     COOKIE_ACCESS_TOKEN_EXPIRES_AT,
