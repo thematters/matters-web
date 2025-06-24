@@ -802,6 +802,9 @@
     "defaultMessage": "请先设定交易密码",
     "description": "PAYMENT_PASSWORD_NOT_SET"
   },
+  "B7QJw1": {
+    "defaultMessage": "版权声明：{license}"
+  },
   "B9IFMF": {
     "defaultMessage": "好的，我报名"
   },

@@ -8,6 +8,7 @@
   & .top {
     @mixin flex-center-space-between;
 
+    gap: var(--sp24);
     padding: 0 var(--sp16);
   }
 }
