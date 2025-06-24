@@ -2318,6 +2318,9 @@
     "defaultMessage": "You haven‘t published any articles yet, so there is no data available. Create one now to introduce yourself!",
     "description": "src/views/Me/Analytics/EmptyAnalytics/index.tsx"
   },
+  "cpYr3r": {
+    "defaultMessage": "Indent the beginning of paragraph text"
+  },
   "ctl5tq": {
     "defaultMessage": "New articles",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
@@ -3187,6 +3190,9 @@
   "uME1sk": {
     "defaultMessage": "View supporters",
     "description": "src/views/ArticleDetail/SupportWidget/Donators/index.tsx"
+  },
+  "uOUCWK": {
+    "defaultMessage": "Paragraph Indent"
   },
   "uQHRvx": {
     "defaultMessage": "Please select the type of issues:"
