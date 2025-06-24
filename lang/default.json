@@ -802,6 +802,9 @@
     "defaultMessage": "Please set your transcation password.",
     "description": "PAYMENT_PASSWORD_NOT_SET"
   },
+  "B7QJw1": {
+    "defaultMessage": "License: {license}"
+  },
   "B9IFMF": {
     "defaultMessage": "Yes, apply"
   },

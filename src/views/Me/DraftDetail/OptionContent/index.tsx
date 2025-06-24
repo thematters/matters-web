@@ -15,6 +15,7 @@ import {
 import { EditMetaDraftFragment } from '~/gql/graphql'
 
 import {
+  useEditDraftAccess,
   useEditDraftCampaign,
   useEditDraftCollections,
   useEditDraftConnections,
@@ -144,6 +145,20 @@ const EditDraftIndent = ({ draft }: OptionItemProps) => {
   )
 }
 
+const EditDraftLicense = ({ draft }: OptionItemProps) => {
+  const { edit, saving } = useEditDraftAccess()
+  const license = draft.license
+  const circle = draft.access?.circle
+  return (
+    <Sidebar.License
+      license={license}
+      circle={circle}
+      editAccess={edit}
+      saving={saving}
+    />
+  )
+}
+
 export const OptionContent = (props: OptionContentProps) => {
   const [type, setType] = useState<'contentAndLayout' | 'settings'>(
     'contentAndLayout'
@@ -195,6 +210,7 @@ export const OptionContent = (props: OptionContentProps) => {
             <EditDraftIndent {...props} disabled={disabled} />
           </>
         )}
+        {isSettings && <EditDraftLicense {...props} disabled={disabled} />}
       </section>
     </section>
   )

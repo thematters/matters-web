@@ -802,6 +802,9 @@
     "defaultMessage": "請先設定交易密碼",
     "description": "PAYMENT_PASSWORD_NOT_SET"
   },
+  "B7QJw1": {
+    "defaultMessage": "版權聲明：{license}"
+  },
   "B9IFMF": {
     "defaultMessage": "好的，我報名"
   },
