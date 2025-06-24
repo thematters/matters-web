@@ -288,7 +288,7 @@ const Channel = ({ article }: ChannelProps) => {
         <>
           <section className={styles.content}>
             <Media lessThan="md">
-              <span>
+              <span className={styles.suggestion}>
                 <FormattedMessage
                   defaultMessage="We couldn’t find a suitable channel to recommend this work"
                   id="4M9oG6"
@@ -305,7 +305,7 @@ const Channel = ({ article }: ChannelProps) => {
               </span>
             </Media>
             <Media greaterThanOrEqual="md">
-              <span>
+              <span className={styles.suggestion}>
                 <FormattedMessage
                   defaultMessage="We couldn’t find a suitable channel to recommend this work"
                   id="4M9oG6"

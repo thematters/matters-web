@@ -22,6 +22,12 @@
   }
 }
 
+.suggestion {
+  display: inline-flex;
+  align-items: baseline;
+  white-space: pre-wrap;
+}
+
 .feedbackButtons {
   display: flex;
   flex-wrap: wrap;
