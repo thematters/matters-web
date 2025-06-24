@@ -27,6 +27,17 @@ export type SidebarLicenseProps = {
   saving: boolean
 }
 
+const LICENSE_TYPES = [
+  ArticleLicenseType.CcByNcNd_4,
+  ArticleLicenseType.Cc_0,
+  ArticleLicenseType.Arr,
+] as const
+
+const getCompatibleLicense = (license: ArticleLicenseType) =>
+  license === ArticleLicenseType.CcByNcNd_2
+    ? ArticleLicenseType.CcByNcNd_4
+    : license
+
 const ToggleButton = React.forwardRef<
   HTMLButtonElement,
   {
@@ -36,7 +47,6 @@ const ToggleButton = React.forwardRef<
   }
 >(({ isEditing, onToggle, disabled }, ref) => {
   const intl = useIntl()
-
   return (
     <button
       onClick={onToggle}
@@ -53,82 +63,66 @@ const ToggleButton = React.forwardRef<
     </button>
   )
 })
-
 ToggleButton.displayName = 'ToggleButton'
 
-const SidebarLicense = ({
-  license: _license,
+const SidebarLicense: React.FC<SidebarLicenseProps> = ({
+  license: rawLicense,
   circle,
   editAccess,
   saving,
-}: SidebarLicenseProps) => {
+}) => {
   const intl = useIntl()
   const fieldId = useId()
   const selectedOptionId = `${fieldId}-selected`
   const { lang } = useContext(LanguageContext)
   const [isEditing, setIsEditing] = useState(false)
-  const license =
-    _license === ArticleLicenseType.CcByNcNd_2
-      ? ArticleLicenseType.CcByNcNd_4
-      : _license
+  const isInCircle = !!circle
+  const license = getCompatibleLicense(rawLicense)
+
   const handleToggleEdit = useCallback(() => {
     setIsEditing((prev) => !prev)
   }, [])
 
-  const isInCircle = !!circle
+  const options = LICENSE_TYPES.map((value) => ({
+    name: LICENSE_TEXT[isInCircle ? 1 : 0][value].title[lang],
+    subtitle: LICENSE_TEXT[isInCircle ? 1 : 0][value].subtitle[lang],
+    value,
+    selected: license === value,
+  }))
 
-  const types = [
-    ArticleLicenseType.CcByNcNd_4,
-    ArticleLicenseType.Cc_0,
-    ArticleLicenseType.Arr,
-  ] as const
-
-  const options = types.map((value) => {
-    return {
-      name: LICENSE_TEXT[isInCircle ? 1 : 0][value].title[lang],
-      subtitle: LICENSE_TEXT[isInCircle ? 1 : 0][value].subtitle[lang],
-      value,
-      selected: license === value,
-    }
-  })
-
-  const Options = ({ dropdown }: { dropdown?: boolean }) => {
-    const optionsClasses = classNames({
-      [styles.list]: true,
-      [styles.options]: true,
-      [styles.dropdown]: dropdown,
-    })
-
-    return (
-      <ul
-        tabIndex={0}
-        className={optionsClasses}
-        role="listbox"
-        aria-labelledby={fieldId}
-        aria-activedescendant={selectedOptionId}
-      >
-        {options.map((option, index) => (
-          <Option
-            id={option.selected ? selectedOptionId : `${fieldId}-${index}`}
-            name={option.name}
-            subtitle={option.subtitle}
-            onClick={() => {
-              editAccess(
-                isInCircle,
-                isInCircle && option.value === ArticleLicenseType.Arr,
-                option.value
-              )
-              handleToggleEdit()
-            }}
-            selected={option.selected}
-            expanded
-            size={14}
-            key={index}
-          />
-        ))}
-      </ul>
+  const handleOptionClick = (optionValue: ArticleLicenseType) => {
+    editAccess(
+      isInCircle,
+      isInCircle && optionValue === ArticleLicenseType.Arr,
+      optionValue
     )
+    setIsEditing(false)
   }
+
+  const Options = ({ dropdown }: { dropdown?: boolean }) => (
+    <ul
+      tabIndex={0}
+      className={classNames(styles.list, styles.options, {
+        [styles.dropdown]: dropdown,
+      })}
+      role="listbox"
+      aria-labelledby={fieldId}
+      aria-activedescendant={selectedOptionId}
+    >
+      {options.map((option, index) => (
+        <Option
+          id={option.selected ? selectedOptionId : `${fieldId}-${index}`}
+          name={option.name}
+          subtitle={option.subtitle}
+          onClick={() => handleOptionClick(option.value)}
+          selected={option.selected}
+          expanded
+          size={14}
+          key={index}
+        />
+      ))}
+    </ul>
+  )
 
   return (
     <Dropdown content={<Options dropdown />} zIndex={Z_INDEX.OVER_DIALOG}>
@@ -156,7 +150,7 @@ const SidebarLicense = ({
             />
           }
           disabled={saving}
-        ></Box>
+        />
       )}
     </Dropdown>
   )
