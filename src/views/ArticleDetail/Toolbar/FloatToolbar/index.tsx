@@ -125,6 +125,7 @@ const FloatToolbar = ({
           />
 
           <span className={styles.divider} />
+
           <CommentButton
             article={articleDetails}
             disabled={!articleDetails.canComment}
@@ -132,7 +133,9 @@ const FloatToolbar = ({
             onClick={toggleCommentDrawer}
             {...buttonProps}
           />
+
           <span className={styles.divider} />
+
           <DonationButton
             articleDetail={articleDetails}
             disabled={lock || isAuthor}
