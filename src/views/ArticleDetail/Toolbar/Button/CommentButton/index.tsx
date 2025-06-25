@@ -4,6 +4,7 @@ import { FormattedMessage, useIntl } from 'react-intl'
 
 import IconComment from '@/public/static/icons/24px/comment.svg'
 import {
+  BREAKPOINTS,
   ERROR_CODES,
   ERROR_MESSAGES,
   OPEN_UNIVERSAL_AUTH_DIALOG,
@@ -20,12 +21,15 @@ import {
   TextIcon,
   toast,
   Tooltip,
+  useMediaQuery,
   ViewerContext,
 } from '~/components'
 import {
   CommentButtonArticlePrivateFragment,
   CommentButtonArticlePublicFragment,
 } from '~/gql/graphql'
+
+import styles from '../styles.module.css'
 
 type CommentButtonArticle = CommentButtonArticlePublicFragment &
   Partial<CommentButtonArticlePrivateFragment>
@@ -60,21 +64,29 @@ const fragments = {
 }
 
 const Content = ({
+  tooltip,
   article,
   iconSize = 20,
   textWeight = 'medium',
   textIconSpacing = 8,
   ...props
 }: (CardProps | ButtonProps) & {
+  tooltip?: React.ReactNode
   article: CommentButtonArticle
   iconSize?: 20 | 24
   textWeight?: 'medium' | 'normal'
   textIconSpacing?: 4 | 6 | 8
 }) => {
   const intl = useIntl()
+  const isMdUp = useMediaQuery(`(min-width: ${BREAKPOINTS.LG}px)`)
 
   return (
-    <>
+    <Tooltip
+      disabled={!!tooltip && !isMdUp}
+      content={tooltip}
+      placement="top"
+      delay={[500, null]}
+    >
       <Button
         spacing={[8, 12]}
         aria-label={`${intl.formatMessage({
@@ -94,7 +106,7 @@ const Content = ({
           {article.commentCount > 0 ? numAbbr(article.commentCount) : undefined}
         </TextIcon>
       </Button>
-    </>
+    </Tooltip>
   )
 }
 
@@ -114,27 +126,20 @@ const CommentButton = ({
 
   if (disabled) {
     return (
-      <Tooltip
-        content={
+      <Content
+        tooltip={
           <FormattedMessage
             defaultMessage="The author has closed the comment section"
             id="va8Rnw"
           />
         }
-        placement="top"
-      >
-        {/* FIXME: Need a wrapper(<section>) to make <Tooltip> work */}
-        <section>
-          <Content
-            article={article}
-            disabled
-            iconSize={iconSize}
-            textWeight={textWeight}
-            textIconSpacing={textIconSpacing}
-            {...buttonProps}
-          />
-        </section>
-      </Tooltip>
+        article={article}
+        disabled
+        iconSize={iconSize}
+        textWeight={textWeight}
+        textIconSpacing={textIconSpacing}
+        {...buttonProps}
+      />
     )
   }
 
@@ -214,6 +219,17 @@ const CommentButton = ({
     >
       {({ openDialog }) => (
         <Content
+          tooltip={
+            <span className={styles.hotKeyTooltip}>
+              <FormattedMessage
+                defaultMessage="Comments"
+                id="7uYW+U"
+                description="src/views/ArticleDetail/Toolbar/FixedToolbar/index.tsx"
+              />
+              &nbsp;
+              <span className={styles.key}>(c)</span>
+            </span>
+          }
           article={article}
           aria-haspopup="dialog"
           onClick={openDialog}

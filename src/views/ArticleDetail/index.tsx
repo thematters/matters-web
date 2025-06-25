@@ -314,7 +314,7 @@ const BaseArticleDetail = ({
           isOpen={isOpenComment}
           onClose={toggleCommentDrawer}
           step={commentDrawerStep}
-          id={article.id}
+          article={article}
           lock={!canReadFullContent}
           switchToCommentList={() => setCommentDrawerStep('commentList')}
         />
