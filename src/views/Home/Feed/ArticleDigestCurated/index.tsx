@@ -101,12 +101,17 @@ export const ArticleDigestCurated = ({
           data-test-id={TEST_ID.DIGEST_ARTICLE_FEED_COVER}
         >
           {cover && <ResponsiveImage url={cover} width={384} />}
-          <Media lessThan="sm">
-            {!cover && <CoverIcon shortHash={article.shortHash} size="sm" />}
-          </Media>
-          <Media greaterThanOrEqual="sm">
-            {!cover && <CoverIcon shortHash={article.shortHash} size="lg" />}
-          </Media>
+
+          {!cover && (
+            <>
+              <Media lessThan="sm">
+                <CoverIcon shortHash={article.shortHash} size="sm" />
+              </Media>
+              <Media greaterThanOrEqual="sm">
+                <CoverIcon shortHash={article.shortHash} size="lg" />
+              </Media>
+            </>
+          )}
 
           {pinned && (
             <Tooltip
