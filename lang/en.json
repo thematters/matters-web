@@ -323,10 +323,6 @@
   "2w2mhG": {
     "defaultMessage": "User blocked. User now can't reply to your articles and user's comments have been hidden from you."
   },
-  "32bml8": {
-    "defaultMessage": "Following",
-    "description": "src/components/Layout/SideNav/index.tsx"
-  },
   "34OLoD": {
     "defaultMessage": "Moment",
     "description": "src/views/MomentDetail/Edit/index.tsx"
@@ -893,9 +889,6 @@
   "Ci7dxf": {
     "defaultMessage": "Comment deleted",
     "description": "src/components/Notice/NoticeComment.tsx/moment"
-  },
-  "CjKqYk": {
-    "defaultMessage": "Share a story from your life"
   },
   "CnPG8j": {
     "defaultMessage": "Featured"
@@ -1915,9 +1908,6 @@
   },
   "VBve8d": {
     "defaultMessage": "Settled in Matters"
-  },
-  "VKxanK": {
-    "defaultMessage": "Moment Feature is Live"
   },
   "VZsE96": {
     "defaultMessage": "Collection Name"

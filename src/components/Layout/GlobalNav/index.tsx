@@ -24,12 +24,12 @@ import { Icon } from '~/components/Icon'
 import { SearchBar } from '~/components/Search'
 
 import MeAvatar from '../MeAvatar'
-import SideFooter from '../SideFooter'
-import ActivityPopover from '../SideNav/Activity'
-import MeMenu from '../SideNav/MeMenu'
-import { NavListItemButton } from '../SideNav/NavListItem'
-import UnreadIcon from '../UnreadIcon'
+import ActivityPopover from './ActivityPopover'
+import MeMenu from './MeMenu'
+import NavButton from './NavButton'
+import SideFooter from './SideFooter'
 import styles from './styles.module.css'
+import UnreadIcon from './UnreadIcon'
 
 const Logo = () => {
   const intl = useIntl()
@@ -55,67 +55,52 @@ const UnauthenticatedNav = () => (
     <UniversalAuthButton resideIn="sideNav" />
   </>
 )
+
 interface CreateButtonProps {
   openDropdown: () => void
   buttonRef?: React.ForwardedRef<HTMLButtonElement>
+  iconSize: 26 | 30
 }
 
-const CreateButton = ({ openDropdown, buttonRef }: CreateButtonProps) => (
-  <>
-    <Media lessThan="md">
-      <NavListItemButton
-        onClick={openDropdown}
-        name={<FormattedMessage defaultMessage="Create" id="VzzYJk" />}
-        icon={<Icon icon={IconNavCreate} size={26} />}
-        activeIcon={<Icon icon={IconNavCreate} size={26} />}
-        active={false}
-        canScrollTop={false}
-        showTooltip={false}
-        aria-haspopup="menu"
-        ref={buttonRef}
-      />
-    </Media>
-    <Media greaterThanOrEqual="md">
-      <NavListItemButton
-        onClick={openDropdown}
-        name={<FormattedMessage defaultMessage="Create" id="VzzYJk" />}
-        icon={<Icon icon={IconNavCreate} size={30} />}
-        activeIcon={<Icon icon={IconNavCreate} size={30} />}
-        active={false}
-        canScrollTop={false}
-        showTooltip={false}
-        aria-haspopup="menu"
-        ref={buttonRef}
-      />
-    </Media>
-  </>
-)
+const CreateButton = ({
+  openDropdown,
+  buttonRef,
+  iconSize,
+}: CreateButtonProps) => {
+  return (
+    <NavButton
+      icon={<Icon icon={IconNavCreate} size={iconSize} />}
+      activeIcon={<Icon icon={IconNavCreate} size={iconSize} />}
+      onClick={openDropdown}
+      name={<FormattedMessage defaultMessage="Create" id="VzzYJk" />}
+      active={false}
+      canScrollTop={false}
+      showTooltip={false}
+      aria-haspopup="menu"
+      ref={buttonRef}
+    />
+  )
+}
 
 interface NotificationButtonProps {
   isInNotification: boolean
+  iconSize: 26 | 30
 }
 
-const NotificationButton = ({ isInNotification }: NotificationButtonProps) => (
-  <NavListItemButton
+const NotificationButton = ({
+  isInNotification,
+  iconSize,
+}: NotificationButtonProps) => (
+  <NavButton
     name={<FormattedMessage defaultMessage="Notifications" id="NAidKb" />}
     icon={
       <section className={styles.notificationIcon}>
-        <Media lessThan="md">
-          <UnreadIcon.Notification iconSize={26} />
-        </Media>
-        <Media greaterThanOrEqual="md">
-          <UnreadIcon.Notification iconSize={30} />
-        </Media>
+        <UnreadIcon.Notification iconSize={iconSize} />
       </section>
     }
     activeIcon={
       <section className={styles.notificationIcon}>
-        <Media lessThan="md">
-          <UnreadIcon.Notification iconSize={26} active />
-        </Media>
-        <Media greaterThanOrEqual="md">
-          <UnreadIcon.Notification active iconSize={30} />
-        </Media>
+        <UnreadIcon.Notification iconSize={iconSize} active />
       </section>
     }
     active={isInNotification}
@@ -126,9 +111,10 @@ const NotificationButton = ({ isInNotification }: NotificationButtonProps) => (
 
 interface UserMenuProps {
   viewer: Viewer
+  avatarSize: 26 | 30
 }
 
-const UserMenu = ({ viewer }: UserMenuProps) => {
+const UserMenu = ({ viewer, avatarSize }: UserMenuProps) => {
   const intl = useIntl()
   const { visuallyHiddenProps } = useVisuallyHidden()
 
@@ -156,12 +142,7 @@ const UserMenu = ({ viewer }: UserMenuProps) => {
             id: 'enMIYK',
           })}
         >
-          <Media lessThan="md">
-            <MeAvatar user={viewer} size={26} />
-          </Media>
-          <Media greaterThanOrEqual="md">
-            <MeAvatar user={viewer} size={30} />
-          </Media>
+          <MeAvatar user={viewer} size={avatarSize} />
         </Button>
       )}
     </Dropdown>
@@ -177,36 +158,38 @@ const MobileSearchButton = ({
   isInSearch,
   router,
 }: MobileSearchButtonProps) => (
-  <Media lessThan="md">
-    <NavListItemButton
-      name={<FormattedMessage defaultMessage="Search" id="xmcVZ0" />}
-      showTooltip={false}
-      icon={<Icon icon={IconNavSearch} size={26} />}
-      activeIcon={<Icon icon={IconNavSearchActive} size={26} />}
-      active={isInSearch}
-      onClick={() => {
-        const path = toPath({
-          page: 'search',
-        })
+  <NavButton
+    name={<FormattedMessage defaultMessage="Search" id="xmcVZ0" />}
+    showTooltip={false}
+    icon={<Icon icon={IconNavSearch} size={26} />}
+    activeIcon={<Icon icon={IconNavSearchActive} size={26} />}
+    active={isInSearch}
+    onClick={() => {
+      const path = toPath({
+        page: 'search',
+      })
 
-        if (isInSearch) {
-          router.replace(path.href)
-        } else {
-          router.push(path.href)
-        }
-      }}
-    />
-  </Media>
+      if (isInSearch) {
+        router.replace(path.href)
+      } else {
+        router.push(path.href)
+      }
+    }}
+  />
 )
 
 interface AuthenticatedNavProps {
   viewer: Viewer
   isInNotification: boolean
+  iconSize: 26 | 30
+  avatarSize: 26 | 30
 }
 
 const AuthenticatedNav = ({
   viewer,
   isInNotification,
+  iconSize,
+  avatarSize,
 }: AuthenticatedNavProps) => (
   <>
     <Dropdown
@@ -221,16 +204,33 @@ const AuthenticatedNav = ({
       placement="bottom-start"
     >
       {({ openDropdown, ref }) => (
-        <CreateButton openDropdown={openDropdown} buttonRef={ref} />
+        <CreateButton
+          openDropdown={openDropdown}
+          buttonRef={ref}
+          iconSize={iconSize}
+        />
       )}
     </Dropdown>
 
-    <NotificationButton isInNotification={isInNotification} />
-    <UserMenu viewer={viewer} />
+    <NotificationButton
+      isInNotification={isInNotification}
+      iconSize={iconSize}
+    />
+    <UserMenu viewer={viewer} avatarSize={avatarSize} />
   </>
 )
 
-export const GlobalNav = () => {
+interface BaseGlobalNavProps {
+  showSearchBar?: boolean
+  iconSize: 26 | 30
+  avatarSize: 26 | 30
+}
+
+const BaseGlobalNav = ({
+  showSearchBar = false,
+  iconSize,
+  avatarSize,
+}: BaseGlobalNavProps) => {
   const { router, isInPath } = useRoute()
   const viewer = useContext(ViewerContext)
   const isInNotification = isInPath('ME_NOTIFICATIONS')
@@ -241,23 +241,42 @@ export const GlobalNav = () => {
     <div className={styles.container}>
       <section className={styles.left}>
         <Logo />
-        <Media greaterThanOrEqual="md">
+
+        {showSearchBar && (
           <div className={styles.search}>
             <SearchBar />
           </div>
-        </Media>
+        )}
       </section>
       <section className={styles.right}>
-        <MobileSearchButton isInSearch={isInSearch} router={router} />
+        {!showSearchBar && (
+          <MobileSearchButton isInSearch={isInSearch} router={router} />
+        )}
+
         {!isAuthed ? (
           <UnauthenticatedNav />
         ) : (
           <AuthenticatedNav
             viewer={viewer}
             isInNotification={isInNotification}
+            iconSize={iconSize}
+            avatarSize={avatarSize}
           />
         )}
       </section>
     </div>
+  )
+}
+
+export const GlobalNav = () => {
+  return (
+    <>
+      <Media lessThan="md">
+        <BaseGlobalNav showSearchBar={false} iconSize={26} avatarSize={26} />
+      </Media>
+      <Media greaterThanOrEqual="md">
+        <BaseGlobalNav showSearchBar={true} iconSize={30} avatarSize={30} />
+      </Media>
+    </>
   )
 }

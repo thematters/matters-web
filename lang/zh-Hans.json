@@ -323,10 +323,6 @@
   "2w2mhG": {
     "defaultMessage": "已屏蔽。该用户无法评论你的作品和围炉，他的评论对你折叠。"
   },
-  "32bml8": {
-    "defaultMessage": "关注",
-    "description": "src/components/Layout/SideNav/index.tsx"
-  },
   "34OLoD": {
     "defaultMessage": "发动态",
     "description": "src/views/MomentDetail/Edit/index.tsx"
@@ -893,9 +889,6 @@
   "Ci7dxf": {
     "defaultMessage": "留言已删除",
     "description": "src/components/Notice/NoticeComment.tsx/moment"
-  },
-  "CjKqYk": {
-    "defaultMessage": "分享今天开心或难过的小故事吧"
   },
   "CnPG8j": {
     "defaultMessage": "精选"
@@ -1915,9 +1908,6 @@
   },
   "VBve8d": {
     "defaultMessage": "搬家到 Matters"
-  },
-  "VKxanK": {
-    "defaultMessage": "短动态上线喽！"
   },
   "VZsE96": {
     "defaultMessage": "选集名称"
