@@ -106,7 +106,7 @@ const NotificationButton = ({
     active={isInNotification}
     href={PATHS.ME_NOTIFICATIONS}
     showTooltip={false}
-    data-test-id={TEST_ID.GLOBAL_NAV_NOTIFICATIONS}
+    testId={TEST_ID.GLOBAL_NAV_NOTIFICATIONS}
   />
 )
 
@@ -142,7 +142,7 @@ const UserMenu = ({ viewer, avatarSize }: UserMenuProps) => {
             defaultMessage: 'My Page',
             id: 'enMIYK',
           })}
-          data-test-id={TEST_ID.GLOBAL_NAV_MY_PAGE}
+          testId={TEST_ID.GLOBAL_NAV_MY_PAGE}
         >
           <MeAvatar user={viewer} size={avatarSize} />
         </Button>
