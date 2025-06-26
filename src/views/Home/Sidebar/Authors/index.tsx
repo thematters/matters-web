@@ -3,7 +3,7 @@ import { List, QueryError, ShuffleButton, UserDigest } from '~/components'
 
 import { useAuthorsRecommendation } from '../../common'
 import SectionHeader from '../../SectionHeader'
-import { AuthorsPlaceholder } from './placeholder'
+import Placeholder from './Placeholder'
 import styles from './styles.module.css'
 
 const Authors = () => {
@@ -29,7 +29,7 @@ const Authors = () => {
       />
 
       {loading ? (
-        <AuthorsPlaceholder />
+        <Placeholder />
       ) : (
         <List hasBorder={false}>
           {edges &&
@@ -60,5 +60,7 @@ const Authors = () => {
     </section>
   )
 }
+
+Authors.Placeholder = Placeholder
 
 export default Authors

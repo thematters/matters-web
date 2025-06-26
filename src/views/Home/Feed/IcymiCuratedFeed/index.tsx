@@ -11,8 +11,8 @@ import {
 } from '~/components'
 import { IcymiCuratedFeedRecommendationFragment } from '~/gql/graphql'
 
+import { ArticleDigestCurated } from '../ArticleDigestCurated'
 import { FEED_ARTICLES_PRIVATE } from '../gql'
-import { ArticleDigestCurated } from './ArticleDigestCurated'
 import { fragments } from './gql'
 import styles from './styles.module.css'
 

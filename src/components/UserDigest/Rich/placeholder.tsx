@@ -1,6 +1,6 @@
 import styles from './styles.module.css'
 
-export const UserDigestRichPlaceholder = () => {
+const Placeholder = () => {
   return (
     <section className={styles.placeholder}>
       <section className={styles.avatar}></section>
@@ -8,3 +8,5 @@ export const UserDigestRichPlaceholder = () => {
     </section>
   )
 }
+
+export default Placeholder

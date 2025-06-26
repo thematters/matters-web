@@ -2,9 +2,9 @@ import gql from 'graphql-tag'
 
 import { ArticleDigestFeed } from '~/components'
 
+import { ArticleDigestCurated } from './ArticleDigestCurated'
 import { ChannelHeader } from './ChannelFeed/ChannelHeader'
 import { IcymiCuratedFeed } from './IcymiCuratedFeed'
-import { ArticleDigestCurated } from './IcymiCuratedFeed/ArticleDigestCurated'
 
 const articleNodeFragment = gql`
   fragment ArticleNodeFragment on Article {

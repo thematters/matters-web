@@ -20,6 +20,7 @@ import { ArticleDigestCuratedArticleFragment, AssetType } from '~/gql/graphql'
 
 import CoverIcon from './CoverIcon'
 import FooterActions from './FooterActions'
+import Placeholder from './Placeholder'
 import styles from './styles.module.css'
 export type ArticleDigestCuratedProps = {
   article: ArticleDigestCuratedArticleFragment
@@ -99,12 +100,11 @@ export const ArticleDigestCurated = ({
           className={coverClasses}
           data-test-id={TEST_ID.DIGEST_ARTICLE_FEED_COVER}
         >
+          {cover && <ResponsiveImage url={cover} width={384} />}
           <Media lessThan="sm">
-            {cover && <ResponsiveImage url={cover} width={334} height={167} />}
             {!cover && <CoverIcon shortHash={article.shortHash} size="sm" />}
           </Media>
           <Media greaterThanOrEqual="sm">
-            {cover && <ResponsiveImage url={cover} width={404} height={404} />}
             {!cover && <CoverIcon shortHash={article.shortHash} size="lg" />}
           </Media>
 
@@ -154,5 +154,7 @@ export const ArticleDigestCurated = ({
     </Card>
   )
 }
+
+ArticleDigestCurated.Placeholder = Placeholder
 
 ArticleDigestCurated.fragments = fragments
