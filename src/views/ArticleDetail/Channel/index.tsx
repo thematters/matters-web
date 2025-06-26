@@ -5,12 +5,14 @@ import { FormattedMessage } from 'react-intl'
 
 import IconThumbsDown from '@/public/static/icons/24px/thumb-down.svg'
 import IconThumbsUp from '@/public/static/icons/24px/thumb-up.svg'
+import { BREAKPOINTS } from '~/common/enums'
 import { toPath } from '~/common/utils'
 import {
   Button,
   Icon,
   LanguageContext,
   Media,
+  useMediaQuery,
   ViewerContext,
 } from '~/components'
 import {
@@ -57,6 +59,8 @@ const Channel = ({ article, privateFetched }: ChannelProps) => {
     hasThumbsUp: false,
     isDrawerOpen: false,
   })
+
+  const isSmUp = useMediaQuery(`(min-width: ${BREAKPOINTS.MD}px)`)
 
   const toggleDrawer = () =>
     setState((prev) => ({ ...prev, isDrawerOpen: !prev.isDrawerOpen }))
@@ -186,41 +190,31 @@ const Channel = ({ article, privateFetched }: ChannelProps) => {
     </Button>
   )
 
-  const FeedbackButtons = ({ openDialog }: { openDialog: () => void }) => (
-    <>
-      <Button
-        aria-label="Thumbs up"
-        onClick={handleThumbsUp}
-        textColor="black"
-        textActiveColor="greyDarker"
-        size={['1.125rem', '1.125rem']}
-      >
-        <Icon icon={IconThumbsUp} size={12} />
-      </Button>
-      <Media lessThan="md">
+  const FeedbackButtons = ({ openDialog }: { openDialog: () => void }) => {
+    return (
+      <>
+        <Button
+          aria-label="Thumbs up"
+          onClick={handleThumbsUp}
+          textColor="black"
+          textActiveColor="greyDarker"
+          size={['1.125rem', '1.125rem']}
+        >
+          <Icon icon={IconThumbsUp} size={12} />
+        </Button>
+
         <Button
           aria-label="Thumbs down"
-          onClick={openDialog}
+          onClick={isSmUp ? toggleDrawer : openDialog}
           textColor="black"
           textActiveColor="greyDarker"
           size={['1.125rem', '1.125rem']}
         >
           <Icon icon={IconThumbsDown} size={12} />
         </Button>
-      </Media>
-      <Media greaterThanOrEqual="md">
-        <Button
-          aria-label="Thumbs down"
-          onClick={toggleDrawer}
-          textColor="black"
-          textActiveColor="greyDarker"
-          size={['1.125rem', '1.125rem']}
-        >
-          <Icon icon={IconThumbsDown} size={12} />
-        </Button>
-      </Media>
-    </>
-  )
+      </>
+    )
+  }
 
   const renderContent = ({ openDialog }: { openDialog: () => void }) => {
     // Non-author and no channel or in latest channel - hide
@@ -292,40 +286,23 @@ const Channel = ({ article, privateFetched }: ChannelProps) => {
       return (
         <>
           <section className={styles.content}>
-            <Media lessThan="md">
-              <span className={styles.suggestion}>
-                <FormattedMessage
-                  defaultMessage="We couldn’t find a suitable channel to recommend this work"
-                  id="4M9oG6"
-                />
-                <FormattedMessage
-                  defaultMessage=". {SuggestButton}?"
-                  id="7HPPqs"
-                  values={{
-                    SuggestButton: (
-                      <SuggestChannelButton openDialog={openDialog} />
-                    ),
-                  }}
-                />
-              </span>
-            </Media>
-            <Media greaterThanOrEqual="md">
-              <span className={styles.suggestion}>
-                <FormattedMessage
-                  defaultMessage="We couldn’t find a suitable channel to recommend this work"
-                  id="4M9oG6"
-                />
-                <FormattedMessage
-                  defaultMessage=". {SuggestButton}?"
-                  id="7HPPqs"
-                  values={{
-                    SuggestButton: (
-                      <SuggestChannelButton openDialog={toggleDrawer} />
-                    ),
-                  }}
-                />
-              </span>
-            </Media>
+            <span className={styles.suggestion}>
+              <FormattedMessage
+                defaultMessage="We couldn’t find a suitable channel to recommend this work"
+                id="4M9oG6"
+              />
+              <FormattedMessage
+                defaultMessage=". {SuggestButton}?"
+                id="7HPPqs"
+                values={{
+                  SuggestButton: (
+                    <SuggestChannelButton
+                      openDialog={isSmUp ? toggleDrawer : openDialog}
+                    />
+                  ),
+                }}
+              />
+            </span>
           </section>
           <AntiFloodedNotice />
         </>
