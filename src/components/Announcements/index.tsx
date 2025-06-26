@@ -25,7 +25,11 @@ export const Announcements = memo(() => {
     }
   )
 
-  if (loading || error) {
+  if (error) {
+    return null
+  }
+
+  if (loading) {
     return <Placeholder />
   }
 
