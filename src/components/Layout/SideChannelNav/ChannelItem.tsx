@@ -60,6 +60,7 @@ const ChannelItem = ({ channel }: ChannelItemProps) => {
           [styles.selected]: shortHash === channel.shortHash,
           [styles.temporary]: isWritingChallenge || isCurationChannel,
         })}
+        aria-selected={shortHash === channel.shortHash}
         onClick={() => {
           analytics.trackEvent('click_button', {
             type: `channel_tab_${channel.id}` as `channel_tab_${string}`,

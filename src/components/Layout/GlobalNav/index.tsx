@@ -7,7 +7,7 @@ import IconNavCreate from '@/public/static/icons/24px/nav-create.svg'
 import IconNavSearch from '@/public/static/icons/24px/nav-search.svg'
 import IconNavSearchActive from '@/public/static/icons/24px/nav-search-active.svg'
 import IconLogo from '@/public/static/icons/logo.svg'
-import { PATHS, Z_INDEX } from '~/common/enums'
+import { PATHS, TEST_ID, Z_INDEX } from '~/common/enums'
 import { toPath } from '~/common/utils'
 import {
   Button,
@@ -106,6 +106,7 @@ const NotificationButton = ({
     active={isInNotification}
     href={PATHS.ME_NOTIFICATIONS}
     showTooltip={false}
+    data-test-id={TEST_ID.GLOBAL_NAV_NOTIFICATIONS}
   />
 )
 
@@ -141,6 +142,7 @@ const UserMenu = ({ viewer, avatarSize }: UserMenuProps) => {
             defaultMessage: 'My Page',
             id: 'enMIYK',
           })}
+          data-test-id={TEST_ID.GLOBAL_NAV_MY_PAGE}
         >
           <MeAvatar user={viewer} size={avatarSize} />
         </Button>
