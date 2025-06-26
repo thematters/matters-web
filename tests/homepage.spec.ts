@@ -5,7 +5,7 @@ import { stripSpaces } from '~/common/utils/text'
 import { HomePage } from './helpers'
 
 test.describe('Homepage', () => {
-  test('has paginated article feed', async ({ page }) => {
+  test('has article feed in latest feed', async ({ page }) => {
     const home = new HomePage(page)
     await home.goto()
 
@@ -18,22 +18,21 @@ test.describe('Homepage', () => {
     await expect(home.feedArticles.first()).toBeVisible()
   })
 
-  test('has article feed and can switch to latest feed', async ({ page }) => {
+  test('can switch to trending feed', async ({ page }) => {
     const home = new HomePage(page)
     await home.goto()
 
+    // Expect home feed is a "Latest" feed
+    expect(await home.tabLatest.getAttribute('aria-selected')).toBe('true')
+
+    // Switch to "Trending" feed
+    await home.tabTrending.click()
+
     // Expect home feed is a "Trending" feed
     expect(await home.tabTrending.getAttribute('aria-selected')).toBe('true')
-
-    // Switch to "Latest" feed
-    await home.tabLatest.click()
-
-    // Expect home feed is a "Latest" feed and has articles
-    expect(await home.tabLatest.getAttribute('aria-selected')).toBe('true')
-    await expect(home.feedArticles.first()).toBeVisible()
   })
 
-  test('sidebar tags and users can be shuffled', async ({ page }) => {
+  test('sidebar users can be shuffled', async ({ page }) => {
     const home = new HomePage(page)
     await home.goto()
 

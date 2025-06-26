@@ -32,6 +32,9 @@ test.describe('Authentication', () => {
     await login({ page, fillMode: true })
     await expect(page).toHaveURL('/')
 
+    // Wait for the page to fully load after login
+    await page.waitForLoadState('networkidle')
+
     // Expect homepage has "Notification" button on the left side
     await expect(page.getByTestId(TEST_ID.SIDE_NAV_NOTIFICATIONS)).toBeVisible()
   })

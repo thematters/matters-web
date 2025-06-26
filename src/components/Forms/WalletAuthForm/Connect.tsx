@@ -125,7 +125,7 @@ const Connect: React.FC<FormProps> = ({
     }
   )
 
-  const { disconnect } = useDisconnect()
+  const { disconnect, disconnectAsync } = useDisconnect()
   const { address: account } = useAccount()
   const { signMessageAsync } = useSignMessage()
 
@@ -140,8 +140,8 @@ const Connect: React.FC<FormProps> = ({
   }, [account])
 
   // disconnect before go back to previous step
-  const onBack = () => {
-    disconnect()
+  const onBack = async () => {
+    await disconnectAsync()
 
     if (back) {
       back()

@@ -6,6 +6,8 @@ import { FormattedMessage } from 'react-intl'
 
 import IMAGE_INTRO from '@/public/static/images/intro.jpg'
 import {
+  ERROR_CODES,
+  ERROR_MESSAGES,
   MAX_META_SUMMARY_LENGTH,
   OPEN_COMMENT_DETAIL_DIALOG,
   OPEN_COMMENT_LIST_DRAWER,
@@ -23,6 +25,7 @@ import {
   DrawerProvider,
   EmptyLayout,
   Error,
+  getErrorCodes,
   Head,
   LanguageContext,
   Layout,
@@ -184,6 +187,20 @@ const BaseArticleDetail = ({
       if (error) {
         setTranslate(false)
 
+        const errorCodes = getErrorCodes(error)
+        if (errorCodes.includes(ERROR_CODES.TRANSLATION_INSUFFICIENT_CREDITS)) {
+          toast.error({
+            message: (
+              <FormattedMessage
+                {...ERROR_MESSAGES[
+                  ERROR_CODES.TRANSLATION_INSUFFICIENT_CREDITS
+                ]}
+              />
+            ),
+          })
+          return
+        }
+
         toast.error({
           message: (
             <FormattedMessage
@@ -236,6 +253,7 @@ const BaseArticleDetail = ({
     summary: translatedSummary,
     content: translatedContent,
     language: translatedLanguage,
+    model: translationModel,
   } = translationData?.article?.translation || autoTranslation || {}
   const title = translated && translatedTitle ? translatedTitle : article.title
   const summary =
@@ -309,6 +327,7 @@ const BaseArticleDetail = ({
 
       <section className={styles.content}>
         <Header article={article} />
+
         <section className="u-article-title">
           <h1>{title}</h1>
 
@@ -318,6 +337,7 @@ const BaseArticleDetail = ({
             translating={translating}
             canTranslate={canTranslate}
             toggleTranslate={toggleTranslate}
+            model={translationModel}
             canReadFullContent={canReadFullContent}
             editable={!lock}
           />

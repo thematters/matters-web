@@ -1,3 +1,4 @@
+import * as Sentry from '@sentry/nextjs'
 import { NextPage } from 'next'
 import React from 'react'
 
@@ -18,10 +19,9 @@ const ErrorPage: NextPage<ErrorProps> = ({ statusCode }) => {
 }
 
 ErrorPage.getInitialProps = async (contextData) => {
-  // await Sentry.captureUnderscoreErrorException(contextData)
-  import('@sentry/browser').then((Sentry) => {
-    Sentry.captureException(contextData)
-  })
+  // In case this is running in a serverless function, await this in order to give Sentry
+  // time to send the error before the lambda exits
+  await Sentry.captureUnderscoreErrorException(contextData)
 
   const { res, err } = contextData
   const statusCode = res ? res.statusCode : err ? err.statusCode : 404

@@ -554,10 +554,6 @@
     "defaultMessage": "Edit",
     "description": "src/components/CircleComment/DropdownActions/EditButton.tsx"
   },
-  "70UCEy": {
-    "defaultMessage": "Have wallet questions on mobile device ? Click the",
-    "description": "src/components/Forms/WalletAuthForm/Select.tsx"
-  },
   "73iajM": {
     "defaultMessage": "Oops. Something went wrong. Please try again later.",
     "description": "BAD_USER_INPUT"
@@ -801,6 +797,10 @@
   "AwQHHA": {
     "defaultMessage": "Please set your transcation password.",
     "description": "PAYMENT_PASSWORD_NOT_SET"
+  },
+  "B1UqZN": {
+    "defaultMessage": "Translation quota exhausted. Try later.",
+    "description": "TRANSLATION_INSUFFICIENT_CREDITS"
   },
   "B7QJw1": {
     "defaultMessage": "License: {license}"
@@ -1057,10 +1057,6 @@
     "defaultMessage": "Switch to Optimism network now?",
     "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
   },
-  "FaTb0A": {
-    "defaultMessage": "Install MetaMask",
-    "description": "src/components/Forms/WalletAuthForm/Select.tsx"
-  },
   "Fe682o": {
     "defaultMessage": "Next Month (Estimation)",
     "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
@@ -1137,9 +1133,6 @@
   "H5+NAX": {
     "defaultMessage": "Balance"
   },
-  "H8KGyc": {
-    "defaultMessage": "Enter"
-  },
   "H8hiL/": {
     "defaultMessage": "Edit Circle"
   },
@@ -1208,10 +1201,6 @@
   },
   "HwaiSE": {
     "defaultMessage": "Upon activation, the main text will be temporarily obscured, displaying only the title and summary. Readers can choose whether to continue reading. (Contains explicit content, violence, gore, etc.)"
-  },
-  "HxcjQl": {
-    "defaultMessage": "Matters continues to provide services that combine creativity with blockchain technology. You will be the first to experience them after completing connecting wallet.",
-    "description": "src/components/Forms/WalletAuthForm/Select.tsx"
   },
   "HyjQns": {
     "defaultMessage": "tutorial",
@@ -1408,10 +1397,6 @@
   },
   "LphWYP": {
     "defaultMessage": "Terms and Privacy Policy"
-  },
-  "LqxIEU": {
-    "defaultMessage": "Wallet address will be part of your digital identity and shown in your profile page.",
-    "description": "src/components/Forms/WalletAuthForm/Select.tsx"
   },
   "LwFJTy": {
     "defaultMessage": "Matters ID is your unique identifier, and cannot be modified once set.",
@@ -1865,10 +1850,6 @@
     "defaultMessage": "Done",
     "description": "src/components/Interaction/"
   },
-  "UOdEqi": {
-    "defaultMessage": "The original login via email will be kept for you. Please note that your wallet cannot be reset once it is connected because of your account security.",
-    "description": "src/components/Forms/WalletAuthForm/Select.tsx"
-  },
   "URljhZ": {
     "defaultMessage": "Successfully removed",
     "description": "src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
@@ -1935,10 +1916,6 @@
   "VqdOGQ": {
     "defaultMessage": "More",
     "description": "src/views/ArticleDetail/AuthorSidebar/Tabs/index.tsx"
-  },
-  "VrOoVf": {
-    "defaultMessage": "Matters will never ask your wallet key through any channel.",
-    "description": "src/components/Forms/WalletAuthForm/Select.tsx"
   },
   "VwuiYK": {
     "defaultMessage": "This URL name has already been used, try another one",
@@ -2313,9 +2290,6 @@
   "cd8EmU": {
     "defaultMessage": "of search results",
     "description": "src/views/Search/AggregateResults/index.tsx"
-  },
-  "cg1VJ2": {
-    "defaultMessage": "Connect Wallet"
   },
   "cmtHjM": {
     "defaultMessage": "You haven‘t published any articles yet, so there is no data available. Create one now to introduce yourself!",
@@ -3040,6 +3014,9 @@
   "r9LhcI": {
     "defaultMessage": "Paste YouTube, Vimeo or bilibili link, and press enter"
   },
+  "r9fhGr": {
+    "defaultMessage": "Show Original ({originalLang})"
+  },
   "rADhX5": {
     "defaultMessage": "Unavailable",
     "description": "FORBIDDEN_BY_STATE"
@@ -3253,10 +3230,6 @@
     "defaultMessage": "Verification code has expired, please resend.",
     "description": "CODE_EXPIRED"
   },
-  "v6YjIn": {
-    "defaultMessage": "Account",
-    "description": "src/components/Forms/WalletAuthForm/Select.tsx"
-  },
   "v84cGN": {
     "defaultMessage": "What is this"
   },
@@ -3270,13 +3243,6 @@
   "vB45rC": {
     "defaultMessage": "Connect",
     "description": "src/components/Dialogs/BindEmailHintDialog/Content.tsx"
-  },
-  "vCt85u": {
-    "defaultMessage": "Don't have a wallet yet? Check the",
-    "description": "src/components/Forms/WalletAuthForm/Select.tsx"
-  },
-  "vEdCjn": {
-    "defaultMessage": "Original {originalLang}"
   },
   "vH8sCb": {
     "defaultMessage": "Circle"
@@ -3542,9 +3508,6 @@
   "zllCbU": {
     "defaultMessage": "left a comment in {circleName}",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
-  },
-  "zlug1R": {
-    "defaultMessage": "Translated into {targetLang}, show"
   },
   "znN84l": {
     "defaultMessage": "Help readers discover articles more easily"

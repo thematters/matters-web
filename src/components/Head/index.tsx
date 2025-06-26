@@ -35,7 +35,7 @@ export const Head: React.FC<HeadProps> = (props) => {
   const { lang } = useContext(LanguageContext)
   const title = props.title
 
-  const siteDomain = process.env.NEXT_PUBLIC_SITE_DOMAIN || 'matters.town'
+  const siteDomain = process.env.NEXT_PUBLIC_SITE_DOMAIN || ''
   const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
 
   // seo base metadata
@@ -53,7 +53,11 @@ export const Head: React.FC<HeadProps> = (props) => {
     ? `https://${siteDomain}${props.path}`
     : `https://${siteDomain}${router.asPath || '/'}`
 
-  const noindex = props.noindex || !isProd
+  const noindex =
+    props.noindex ||
+    !isProd ||
+    siteDomain.includes('web-next') ||
+    siteDomain.includes('vercel.app')
 
   const i18nUrl = (language: string) => {
     return props.path
@@ -117,10 +121,8 @@ export const Head: React.FC<HeadProps> = (props) => {
       {
         name: 'keywords',
         content: props.keywords
-          ? `${props.keywords.join(',')},matters,${
-              process.env.NEXT_PUBLIC_SITE_DOMAIN
-            },創作有價`
-          : `matters,${process.env.NEXT_PUBLIC_SITE_DOMAIN},創作有價`,
+          ? `${props.keywords.join(',')},matters,創作有價`
+          : `matters,創作有價`,
       },
       {
         name: 'viewport',
@@ -217,6 +219,36 @@ export const Head: React.FC<HeadProps> = (props) => {
         )}
         {noindex && (
           <meta name="googlebot" content="noindex, nofollow" key="googlebot" />
+        )}
+
+        {process.env.NEXT_PUBLIC_CF_IMAGE_URL && (
+          <>
+            <link
+              rel="preconnect"
+              href={new URL(process.env.NEXT_PUBLIC_CF_IMAGE_URL).origin}
+              key="preconnect-cf-image"
+            />
+            <link
+              rel="dns-prefetch"
+              href={new URL(process.env.NEXT_PUBLIC_CF_IMAGE_URL).origin}
+              key="dns-prefetch-cf-image"
+            />
+          </>
+        )}
+
+        {process.env.NEXT_PUBLIC_EMBED_ASSET_DOMAIN && (
+          <>
+            <link
+              rel="preconnect"
+              href={`https://${process.env.NEXT_PUBLIC_EMBED_ASSET_DOMAIN}`}
+              key="preconnect-embed-asset-domain"
+            />
+            <link
+              rel="dns-prefetch"
+              href={`https://${process.env.NEXT_PUBLIC_EMBED_ASSET_DOMAIN}`}
+              key="dns-prefetch-embed-asset-domain"
+            />
+          </>
         )}
       </NextHead>
     </>
