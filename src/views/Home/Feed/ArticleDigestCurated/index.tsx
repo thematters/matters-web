@@ -135,8 +135,7 @@ export const ArticleDigestCurated = ({
           user={article.author}
           avatarSize={20}
           textSize={13}
-          nameColor="black"
-          spacing={4}
+          spacing={6}
           hasAvatar
           hasDisplayName
           onClick={onClickAuthor}
