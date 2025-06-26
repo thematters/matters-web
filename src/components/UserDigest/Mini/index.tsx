@@ -30,7 +30,7 @@ export type UserDigestMiniProps = {
   textWeight?: 'medium' | 'semibold'
   nameColor?: 'black' | 'white' | 'grey' | 'greyDarker' | 'green'
   direction?: 'row' | 'column'
-  spacing?: 4 | 8
+  spacing?: 4 | 6 | 8
 
   hasAvatar?: boolean
   hasDisplayName?: boolean

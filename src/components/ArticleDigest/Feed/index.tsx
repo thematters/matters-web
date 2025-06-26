@@ -98,6 +98,7 @@ const BaseArticleDigestFeed = ({
                 nameColor={
                   author.status?.state === 'archived' ? 'grey' : undefined
                 }
+                spacing={6}
                 hasAvatar
                 hasDisplayName
                 onClick={onClickAuthor}
