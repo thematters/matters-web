@@ -15,6 +15,7 @@ import {
 
 import type { MixedFeedArticleEdge } from '../common/useMixedFeed'
 import type { FeedType } from './'
+import ChannelFeedPlaceholder from './ChannelFeed/Placeholder'
 
 interface FeedRendererProps {
   loading: boolean
@@ -61,11 +62,7 @@ const FeedRenderer: React.FC<FeedRendererProps> = ({
       window.scrollTo(0, 0)
       document.body.focus()
     }
-    return (
-      <>
-        <ArticleFeedPlaceholder />
-      </>
-    )
+    return <ChannelFeedPlaceholder />
   }
 
   if (error) {

@@ -7,6 +7,7 @@ import { VisibleAnnouncementsQuery } from '~/gql/graphql'
 
 import Carousel from './Carousel'
 import { VISIBLE_ANNOUNCEMENTS } from './gql'
+import Placeholder from './Placeholder'
 
 export const Announcements = memo(() => {
   const { isInPath, getQuery } = useRoute()
@@ -25,7 +26,7 @@ export const Announcements = memo(() => {
   )
 
   if (loading || error) {
-    return null
+    return <Placeholder />
   }
 
   const items = _get(

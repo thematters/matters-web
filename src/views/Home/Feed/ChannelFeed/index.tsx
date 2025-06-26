@@ -13,9 +13,9 @@ import { useRoute } from '~/components'
 import { FeedArticlesPublicChannelQuery } from '~/gql/graphql'
 
 import { MixedFeedArticleEdge, useMixedFeed } from '../../common'
+import { ArticleDigestCurated } from '../ArticleDigestCurated'
 import FeedRenderer from '../FeedRenderer'
 import { FEED_ARTICLES_PRIVATE, FEED_ARTICLES_PUBLIC_CHANNEL } from '../gql'
-import { ArticleDigestCurated } from '../IcymiCuratedFeed/ArticleDigestCurated'
 import feedStyles from '../styles.module.css'
 import { ChannelHeader } from './ChannelHeader'
 

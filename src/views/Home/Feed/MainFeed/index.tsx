@@ -110,6 +110,7 @@ const MainFeed: React.FC<MainFeedProps> = ({ feedType }) => {
           <Spacer size="sp20" />
           <Announcements />
         </Media>
+
         <section className={styles.header}>
           <h1>
             <FormattedMessage defaultMessage="Featured" id="CnPG8j" />
