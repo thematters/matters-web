@@ -49,6 +49,10 @@
     "defaultMessage": "Are you sure you want to remove ‘{article}’ from this collection?",
     "description": "src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
   },
+  "+grX8J": {
+    "defaultMessage": "Allow Comments",
+    "description": "src/components/Editor/Sidebar/CanComment/index.tsx"
+  },
   "+ixiPI": {
     "defaultMessage": "Delete moment"
   },
@@ -2511,6 +2515,10 @@
   "ggS9L7": {
     "defaultMessage": "The payment amount is invalid, please re-enter.",
     "description": "PAYMENT_AMOUNT_INVALID"
+  },
+  "gsZ/aj": {
+    "defaultMessage": "Comments allowed, cannot be closed once published",
+    "description": "src/components/Editor/Sidebar/CanComment/index.tsx"
   },
   "gvTltk": {
     "defaultMessage": "Draft - {title}"

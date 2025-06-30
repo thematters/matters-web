@@ -1,4 +1,5 @@
 import Campaign from './Campaign'
+import CanComment from './CanComment'
 import Collections from './Collections'
 import Connections from './Connections'
 import Cover from './Cover'
@@ -7,8 +8,8 @@ import License from './License'
 import Management from './Management'
 import Response from './Response'
 import Tags from './Tags'
-
 const Sidebar = {
+  CanComment,
   Cover,
   Tags,
   Connections,
