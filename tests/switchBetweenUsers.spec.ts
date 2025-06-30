@@ -14,7 +14,7 @@ import {
 test.describe('Switch between multiple users', () => {
   authedTest('Same context', async ({ alicePage: page, isMobile }) => {
     test.skip(!!isMobile, 'Desktop only!')
-    await pageGoto(page, '/?type=newest')
+    await pageGoto(page, '/newest')
     let i = 0
     let articleLink
     while (true) {
@@ -77,7 +77,7 @@ test.describe('Switch between multiple users', () => {
     const alicePage = await aliceContext.newPage()
     const bobPage = await bobContext.newPage()
 
-    await pageGoto(alicePage, '/?type=newest')
+    await pageGoto(alicePage, '/newest')
     let i = 0
     let articleLink
     while (true) {

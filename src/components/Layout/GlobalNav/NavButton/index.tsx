@@ -1,13 +1,10 @@
-import jump from 'jump.js'
 import _omit from 'lodash/omit'
 import { forwardRef } from 'react'
 
 import { Z_INDEX } from '~/common/enums'
 import { Button, ButtonProps, TextIcon, Tooltip } from '~/components'
 
-import styles from './styles.module.css'
-
-type NavListItemProps = {
+type NavButtonProps = {
   name: React.ReactNode
   icon: React.ReactNode
   activeIcon: React.ReactNode
@@ -16,9 +13,9 @@ type NavListItemProps = {
   showTooltip?: boolean
 } & ButtonProps
 
-export const NavListItemButton = forwardRef<
+const NavButton = forwardRef<
   HTMLButtonElement | HTMLAnchorElement | HTMLSpanElement,
-  NavListItemProps
+  NavButtonProps
 >(
   (
     {
@@ -29,7 +26,7 @@ export const NavListItemButton = forwardRef<
       onClick,
       showTooltip = true,
       ...props
-    }: NavListItemProps,
+    }: NavButtonProps,
     ref
   ) => {
     if (!showTooltip) {
@@ -79,40 +76,6 @@ export const NavListItemButton = forwardRef<
   }
 )
 
-NavListItemButton.displayName = 'NavListItemButton'
+NavButton.displayName = 'NavButton'
 
-const NavListItem = forwardRef<HTMLLIElement, NavListItemProps>(
-  (props, ref) => {
-    const {
-      active,
-      canScrollTop = true,
-      onClick: baseOnClick,
-      ...restProps
-    } = props
-    const onClick = (event?: React.MouseEvent<HTMLElement, MouseEvent>) => {
-      if (baseOnClick) {
-        baseOnClick()
-      }
-
-      if (active && canScrollTop) {
-        event?.preventDefault()
-        jump(document.body)
-      }
-    }
-
-    return (
-      <li role="menuitem" className={styles.listItem}>
-        <NavListItemButton
-          {...restProps}
-          active={active}
-          onClick={onClick}
-          ref={ref}
-        />
-      </li>
-    )
-  }
-)
-
-NavListItem.displayName = 'NavListItem'
-
-export default NavListItem
+export default NavButton

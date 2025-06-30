@@ -52,11 +52,9 @@
 }
 
 .notificationIcon {
-  & div {
-    height: 1.5rem;
+  height: 1.5rem;
 
-    @media (--sm-up) {
-      height: 1.75rem;
-    }
+  @media (--sm-up) {
+    height: 1.75rem;
   }
 }

@@ -210,7 +210,9 @@ export const Layout: React.FC<LayoutProps> & {
   return (
     <>
       <Head description={null} />
+
       {!isInMomentDetail && !isInMomentDetailEdit && <GlobalNav />}
+
       <div className={layoutClasses}>
         <main className={mainClasses}>
           {isThreeColumnLayout && (

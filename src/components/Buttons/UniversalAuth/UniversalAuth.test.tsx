@@ -43,9 +43,8 @@ describe('UniversalAuthButton', () => {
 
       // Check both mobile and desktop buttons
       const buttons = screen.getAllByText('Enter')
-      expect(buttons.length).toBe(2)
+      expect(buttons.length).toBe(1)
       expect(buttons[0]).toBeInTheDocument()
-      expect(buttons[1]).toBeInTheDocument()
     })
   })
 

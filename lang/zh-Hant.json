@@ -323,10 +323,6 @@
   "2w2mhG": {
     "defaultMessage": "已封鎖。該用戶無法評論你的作品和圍爐，他的評論對你闔上。"
   },
-  "32bml8": {
-    "defaultMessage": "追蹤",
-    "description": "src/components/Layout/SideNav/index.tsx"
-  },
   "34OLoD": {
     "defaultMessage": "發動態",
     "description": "src/views/MomentDetail/Edit/index.tsx"
@@ -893,9 +889,6 @@
   "Ci7dxf": {
     "defaultMessage": "留言已刪除",
     "description": "src/components/Notice/NoticeComment.tsx/moment"
-  },
-  "CjKqYk": {
-    "defaultMessage": "分享今天開心或難過的小故事吧"
   },
   "CnPG8j": {
     "defaultMessage": "精選"
@@ -1915,9 +1908,6 @@
   },
   "VBve8d": {
     "defaultMessage": "搬家到 Matters"
-  },
-  "VKxanK": {
-    "defaultMessage": "短動態上線囉！"
   },
   "VZsE96": {
     "defaultMessage": "選集名稱"

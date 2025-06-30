@@ -68,6 +68,7 @@ const SideChannelNav = () => {
               [styles.selected]:
                 (isAuthed && isInPath('HOME')) || isInPath('FOLLOW'),
             })}
+            aria-selected={(isAuthed && isInPath('HOME')) || isInPath('FOLLOW')}
             onClick={() => onTabClick('follow')}
           >
             <span className={styles.name}>
@@ -85,6 +86,9 @@ const SideChannelNav = () => {
             [styles.selected]:
               isInPath('FEATURED') || (!isAuthed && isInPath('HOME')),
           })}
+          aria-selected={
+            isInPath('FEATURED') || (!isAuthed && isInPath('HOME'))
+          }
           onClick={() => onTabClick('featured')}
         >
           <span className={styles.name}>
@@ -104,6 +108,7 @@ const SideChannelNav = () => {
             [styles.item]: true,
             [styles.selected]: isInPath('NEWEST'),
           })}
+          aria-selected={isInPath('NEWEST')}
           onClick={() => onTabClick('newest')}
         >
           <span className={styles.name}>
