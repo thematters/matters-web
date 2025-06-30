@@ -585,6 +585,10 @@
   "7oytv9": {
     "defaultMessage": " (edited) "
   },
+  "7uYW+U": {
+    "defaultMessage": "Comments",
+    "description": "src/views/ArticleDetail/Toolbar/FixedToolbar/index.tsx"
+  },
   "7ykJ+l": {
     "defaultMessage": "Still quiet here. {br}Be the first one to say hello!",
     "description": "src/components/Empty/EmptyComment.tsx"
@@ -2566,6 +2570,10 @@
   "imXsmo": {
     "defaultMessage": "back to latest",
     "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
+  },
+  "iqS81J": {
+    "defaultMessage": "Support Author",
+    "description": "src/views/ArticleDetail/Toolbar/FixedToolbar/index.tsx"
   },
   "itPgxd": {
     "defaultMessage": "Profile"
