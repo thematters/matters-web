@@ -17,6 +17,7 @@ import { EditMetaDraftFragment } from '~/gql/graphql'
 import {
   useEditDraftAccess,
   useEditDraftCampaign,
+  useEditDraftCanComment,
   useEditDraftCollections,
   useEditDraftConnections,
   useEditDraftCover,
@@ -159,6 +160,18 @@ const EditDraftLicense = ({ draft }: OptionItemProps) => {
   )
 }
 
+const EditDraftCanComment = ({ draft }: OptionItemProps) => {
+  const { edit, saving } = useEditDraftCanComment()
+  const canComment = draft.canComment
+  return (
+    <Sidebar.CanComment
+      canComment={canComment}
+      editCanComment={edit}
+      saving={saving}
+    />
+  )
+}
+
 export const OptionContent = (props: OptionContentProps) => {
   const [type, setType] = useState<'contentAndLayout' | 'settings'>(
     'contentAndLayout'
@@ -210,7 +223,12 @@ export const OptionContent = (props: OptionContentProps) => {
             <EditDraftIndent {...props} disabled={disabled} />
           </>
         )}
-        {isSettings && <EditDraftLicense {...props} disabled={disabled} />}
+        {isSettings && (
+          <>
+            <EditDraftLicense {...props} disabled={disabled} />
+            <EditDraftCanComment {...props} disabled={disabled} />
+          </>
+        )}
       </section>
     </section>
   )

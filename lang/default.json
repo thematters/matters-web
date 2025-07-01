@@ -49,6 +49,10 @@
     "defaultMessage": "Are you sure you want to remove ‘{article}’ from this collection?",
     "description": "src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
   },
+  "+grX8J": {
+    "defaultMessage": "Allow Comments",
+    "description": "src/components/Editor/Sidebar/CanComment/index.tsx"
+  },
   "+ixiPI": {
     "defaultMessage": "Delete moment"
   },
@@ -596,6 +600,10 @@
   },
   "7oytv9": {
     "defaultMessage": "(edited)"
+  },
+  "7uYW+U": {
+    "defaultMessage": "Comments",
+    "description": "src/views/ArticleDetail/Toolbar/FixedToolbar/index.tsx"
   },
   "7ykJ+l": {
     "defaultMessage": "Still quiet here. {br}Be the first one to say hello!",
@@ -2512,6 +2520,10 @@
     "defaultMessage": "The payment amount is invalid, please re-enter.",
     "description": "PAYMENT_AMOUNT_INVALID"
   },
+  "gsZ/aj": {
+    "defaultMessage": "Comments allowed, cannot be closed once published",
+    "description": "src/components/Editor/Sidebar/CanComment/index.tsx"
+  },
   "gvTltk": {
     "defaultMessage": "Draft - {title}"
   },
@@ -2612,6 +2624,10 @@
   "imXsmo": {
     "defaultMessage": "back to latest",
     "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
+  },
+  "iqS81J": {
+    "defaultMessage": "Support Author",
+    "description": "src/views/ArticleDetail/Toolbar/FixedToolbar/index.tsx"
   },
   "itPgxd": {
     "defaultMessage": "Profile"

@@ -49,6 +49,10 @@
     "defaultMessage": "确认要将“{article}”从选集中移出吗？",
     "description": "src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
   },
+  "+grX8J": {
+    "defaultMessage": "允许评论",
+    "description": "src/components/Editor/Sidebar/CanComment/index.tsx"
+  },
   "+ixiPI": {
     "defaultMessage": "删除动态"
   },
@@ -596,6 +600,10 @@
   },
   "7oytv9": {
     "defaultMessage": "（修改过）"
+  },
+  "7uYW+U": {
+    "defaultMessage": "打开评论",
+    "description": "src/views/ArticleDetail/Toolbar/FixedToolbar/index.tsx"
   },
   "7ykJ+l": {
     "defaultMessage": "暂无评论",
@@ -2512,6 +2520,10 @@
     "defaultMessage": "支付金额无效，请重新输入",
     "description": "PAYMENT_AMOUNT_INVALID"
   },
+  "gsZ/aj": {
+    "defaultMessage": "允许评论后，一经发布后无法关闭",
+    "description": "src/components/Editor/Sidebar/CanComment/index.tsx"
+  },
   "gvTltk": {
     "defaultMessage": "草稿 - {title}"
   },
@@ -2612,6 +2624,10 @@
   "imXsmo": {
     "defaultMessage": "回到作品页",
     "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
+  },
+  "iqS81J": {
+    "defaultMessage": "支持作者",
+    "description": "src/views/ArticleDetail/Toolbar/FixedToolbar/index.tsx"
   },
   "itPgxd": {
     "defaultMessage": "个人主页"
