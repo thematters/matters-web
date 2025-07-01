@@ -31,7 +31,7 @@ const SidebarCanComment: React.FC<SidebarCanCommentProps> = (props) => {
       }
       rightButton={
         <Switch
-          name="indent"
+          name="allow-comment"
           label={intl.formatMessage({
             defaultMessage: 'Allow Comments',
             description: 'src/components/Editor/Sidebar/CanComment/index.tsx',
