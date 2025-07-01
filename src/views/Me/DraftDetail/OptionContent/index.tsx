@@ -4,6 +4,7 @@ import { FormattedMessage } from 'react-intl'
 
 import { ENTITY_TYPE } from '~/common/enums'
 import { Tabs, toDigestTagPlaceholder } from '~/components'
+import SupportSettingDialog from '~/components/Editor/MoreSettings/SupportSettingDialog'
 import { getSelectCampaigns } from '~/components/Editor/SelectCampaign'
 import Sidebar from '~/components/Editor/Sidebar'
 import {
@@ -23,6 +24,7 @@ import {
   useEditDraftCover,
   useEditDraftTags,
   useEditIndent,
+  useEditSupportSetting,
 } from '../hooks'
 import styles from './styles.module.css'
 
@@ -172,6 +174,22 @@ const EditDraftCanComment = ({ draft }: OptionItemProps) => {
   )
 }
 
+const EditDraftSupportSetting = ({ draft }: OptionItemProps) => {
+  const { edit: editSupport, saving: supportSaving } = useEditSupportSetting()
+
+  return (
+    <SupportSettingDialog
+      draft={draft}
+      editSupportSetting={editSupport}
+      supportSettingSaving={supportSaving}
+    >
+      {({ openDialog }) => (
+        <Sidebar.SupportSetting openSupportSetting={openDialog} />
+      )}
+    </SupportSettingDialog>
+  )
+}
+
 export const OptionContent = (props: OptionContentProps) => {
   const [type, setType] = useState<'contentAndLayout' | 'settings'>(
     'contentAndLayout'
@@ -227,6 +245,7 @@ export const OptionContent = (props: OptionContentProps) => {
           <>
             <EditDraftLicense {...props} disabled={disabled} />
             <EditDraftCanComment {...props} disabled={disabled} />
+            <EditDraftSupportSetting {...props} disabled={disabled} />
           </>
         )}
       </section>
