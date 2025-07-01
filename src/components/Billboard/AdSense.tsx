@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 
 import { Media } from '~/components'
 
@@ -8,6 +8,7 @@ interface AdSenseProps {
   style?: React.CSSProperties
   adFormat?: string
   isResponsive?: boolean
+  onAdFilled?: () => void
 }
 
 // Extend Window interface to include adsbygoogle
@@ -22,12 +23,51 @@ export const AdSenseUnit = ({
   style = { display: 'block' },
   adFormat = 'rectangle',
   isResponsive = false,
+  onAdFilled,
 }: AdSenseProps) => {
+  const mobileRef = useRef<HTMLModElement>(null)
+  const desktopRef = useRef<HTMLModElement>(null)
+
   useEffect(() => {
+    // Helper to observe a given ins element
+    const observeAdStatus = (ins: HTMLElement | null) => {
+      if (!ins) return undefined
+      const observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+          if (
+            mutation.type === 'attributes' &&
+            mutation.attributeName === 'data-ad-status' &&
+            (mutation.target as Element).getAttribute('data-ad-status') ===
+              'filled'
+          ) {
+            onAdFilled?.()
+          }
+        })
+      })
+      observer.observe(ins, { attributes: true })
+      return observer
+    }
+
+    // Wait for ins elements to be rendered
+    const mobileIns = mobileRef.current as HTMLElement | null
+    const desktopIns = desktopRef.current as HTMLElement | null
+    const observers: MutationObserver[] = []
+    if (mobileIns) {
+      observers.push(observeAdStatus(mobileIns)!)
+    }
+    if (desktopIns) {
+      observers.push(observeAdStatus(desktopIns)!)
+    }
+
+    return () => {
+      observers.forEach((observer) => observer && observer.disconnect())
+    }
+  }, [mobileRef.current, desktopRef.current])
+
+  useEffect(() => {
+    // Initialize adsbygoogle
     try {
-      // Initialize adsbygoogle array if it doesn't exist
       window.adsbygoogle = window.adsbygoogle || []
-      // Push the ad unit to be rendered
       window.adsbygoogle.push({})
     } catch (error) {
       console.error('Error loading AdSense:', error)
@@ -44,6 +84,7 @@ export const AdSenseUnit = ({
           data-ad-layout-key="-eo-12+91+49-159"
           data-ad-client={adClient}
           data-ad-slot="6282066188"
+          ref={mobileRef}
         ></ins>
       </Media>
       <Media greaterThanOrEqual="md">
@@ -54,6 +95,7 @@ export const AdSenseUnit = ({
           data-ad-slot="5156934195"
           data-ad-format={adFormat}
           {...(isResponsive && { 'data-full-width-responsive': 'true' })}
+          ref={desktopRef}
         />
       </Media>
     </>

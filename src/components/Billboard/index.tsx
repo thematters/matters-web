@@ -6,7 +6,7 @@ import IconInfo from '@/public/static/icons/24px/information.svg'
 import { featureSupportedChains } from '~/common/utils'
 import {
   BillboardDialog,
-  // BillboardExposureTracker,
+  BillboardExposureTracker,
   Icon,
   TextIcon,
   useBillboard,
@@ -20,8 +20,9 @@ type BillboardProps = {
   type: string
 }
 
-export const Billboard = ({ tokenId }: BillboardProps) => {
+export const Billboard = ({ tokenId, type }: BillboardProps) => {
   const [mount, setMount] = useState(false)
+  const [adsenseFilled, setAdsenseFilled] = useState(false)
   const router = useRouter()
 
   // The current version of wagmi does not support SSR, leading to dehydration
@@ -95,28 +96,32 @@ export const Billboard = ({ tokenId }: BillboardProps) => {
                 maxHeight: adMaxHeight,
                 overflow: 'hidden',
               }}
+              onAdFilled={() => setAdsenseFilled(true)}
             />
 
-            <button
-              className={styles.button}
-              type="button"
-              aria-label={intl.formatMessage({
-                defaultMessage: "What's this?",
-                id: '4wOWfp',
-                description: 'src/components/Billboard/index.tsx',
-              })}
-              onClick={openBillboardDialog}
-            >
-              <TextIcon icon={<Icon icon={IconInfo} />} size={12}>
-                <FormattedMessage
-                  defaultMessage="What's this?"
-                  id="4wOWfp"
-                  description="src/components/Billboard/index.tsx"
-                />
-              </TextIcon>
-            </button>
-
-            {/* <BillboardExposureTracker id={id} type={type} /> */}
+            {adsenseFilled && (
+              <>
+                <button
+                  className={styles.button}
+                  type="button"
+                  aria-label={intl.formatMessage({
+                    defaultMessage: "What's this?",
+                    id: '4wOWfp',
+                    description: 'src/components/Billboard/index.tsx',
+                  })}
+                  onClick={openBillboardDialog}
+                >
+                  <TextIcon icon={<Icon icon={IconInfo} />} size={12}>
+                    <FormattedMessage
+                      defaultMessage="What's this?"
+                      id="4wOWfp"
+                      description="src/components/Billboard/index.tsx"
+                    />
+                  </TextIcon>
+                </button>
+                <BillboardExposureTracker id={id} type={type} />
+              </>
+            )}
           </div>
         )
       }}
