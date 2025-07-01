@@ -1,0 +1,7 @@
+.hotKeyTooltip {
+  @mixin inline-flex-center-all;
+
+  & .key {
+    color: rgb(255 255 255 / 60%);
+  }
+}

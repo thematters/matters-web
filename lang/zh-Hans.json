@@ -597,6 +597,10 @@
   "7oytv9": {
     "defaultMessage": "（修改过）"
   },
+  "7uYW+U": {
+    "defaultMessage": "打开评论",
+    "description": "src/views/ArticleDetail/Toolbar/FixedToolbar/index.tsx"
+  },
   "7ykJ+l": {
     "defaultMessage": "暂无评论",
     "description": "src/components/Empty/EmptyComment.tsx"
@@ -2612,6 +2616,10 @@
   "imXsmo": {
     "defaultMessage": "回到作品页",
     "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
+  },
+  "iqS81J": {
+    "defaultMessage": "支持作者",
+    "description": "src/views/ArticleDetail/Toolbar/FixedToolbar/index.tsx"
   },
   "itPgxd": {
     "defaultMessage": "个人主页"
