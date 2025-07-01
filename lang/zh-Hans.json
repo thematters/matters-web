@@ -1053,6 +1053,9 @@
     "defaultMessage": "邮箱",
     "description": "src/components/Dialogs/SetEmailDialog/Content.tsx"
   },
+  "FLGK+W": {
+    "defaultMessage": "自定义支持号召、支持后回复给读者的话"
+  },
   "FMIIAZ": {
     "defaultMessage": "此为历史版本和 IPFS 入口查阅区，",
     "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
@@ -3531,6 +3534,9 @@
   "zvNfwL": {
     "defaultMessage": "操作过于频繁，请稍候重试",
     "description": "ACTION_LIMIT_EXCEEDED"
+  },
+  "zw4KNU": {
+    "defaultMessage": "支持设置"
   },
   "zxy15q": {
     "defaultMessage": "{subscriber, plural, =1 {人} other {人}}",

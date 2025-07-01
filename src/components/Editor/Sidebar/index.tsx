@@ -7,6 +7,7 @@ import Indent from './Indent'
 import License from './License'
 import Management from './Management'
 import Response from './Response'
+import SupportSetting from './SupportSetting'
 import Tags from './Tags'
 const Sidebar = {
   CanComment,
@@ -19,6 +20,7 @@ const Sidebar = {
   Indent,
   Collections,
   License,
+  SupportSetting,
 }
 
 export default Sidebar

@@ -1053,6 +1053,9 @@
     "defaultMessage": "Email address",
     "description": "src/components/Dialogs/SetEmailDialog/Content.tsx"
   },
+  "FLGK+W": {
+    "defaultMessage": "Custom Call-to-Support and Thank-you card"
+  },
   "FMIIAZ": {
     "defaultMessage": "Revision history and IPFS entry,",
     "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
@@ -3531,6 +3534,9 @@
   "zvNfwL": {
     "defaultMessage": "Operation too frequent, please try again later.",
     "description": "ACTION_LIMIT_EXCEEDED"
+  },
+  "zw4KNU": {
+    "defaultMessage": "Support Settings"
   },
   "zxy15q": {
     "defaultMessage": "{subscriber, plural, =1 {subscriber} other {subscribers}}",
