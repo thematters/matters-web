@@ -25,10 +25,13 @@
 }
 
 .publishButtons {
+  @mixin transition;
+
   display: flex;
   align-items: center;
   background-color: var(--color-black);
   border-radius: 0.75rem;
+  transition-property: opacity;
 
   &:hover {
     opacity: 0.85;
@@ -38,6 +41,6 @@
 .divider {
   display: inline-block;
   width: 1px;
-  height: 14px;
+  height: 0.875rem;
   background-color: var(--color-grey-scale-white-60);
 }

@@ -1,14 +1,14 @@
 import { FormattedMessage } from 'react-intl'
 
 import IconPublishFill from '@/public/static/icons/24px/publish-fill.svg'
-import { ENTITY_TYPE } from '~/common/enums'
+import { BREAKPOINTS, ENTITY_TYPE } from '~/common/enums'
 import {
   Button,
   Icon,
-  Media,
   TextIcon,
   toast,
   toDigestTagPlaceholder,
+  useMediaQuery,
 } from '~/components'
 import {
   MoreSettingsProps,
@@ -54,46 +54,31 @@ const ConfirmButton = ({
 }: {
   openDialog: () => void
   disabled?: boolean
-}) => (
-  <>
-    <Media at="sm">
-      <Button
-        size={[null, '2.125rem']}
-        spacing={[0, 14]}
-        borderRadius={'0.75rem'}
-        bgColor="black"
-        onClick={openDialog}
-        disabled={disabled}
-        aria-haspopup="dialog"
+}) => {
+  const isSmUp = useMediaQuery(`(min-width: ${BREAKPOINTS.MD}px)`)
+
+  return (
+    <Button
+      size={[null, isSmUp ? '2.375rem' : '2.125rem']}
+      spacing={[0, 14]}
+      borderRadius={'0.75rem'}
+      bgColor="black"
+      onClick={openDialog}
+      disabled={disabled}
+      aria-haspopup="dialog"
+    >
+      <TextIcon
+        color="white"
+        size={14}
+        weight="medium"
+        icon={isSmUp ? <Icon icon={IconPublishFill} size={18} /> : undefined}
+        spacing={8}
       >
-        <TextIcon color="white" size={14} weight="medium" spacing={8}>
-          <FormattedMessage defaultMessage="Publish" id="syEQFE" />
-        </TextIcon>
-      </Button>
-    </Media>
-    <Media greaterThan="sm">
-      <Button
-        size={[null, '2.375rem']}
-        spacing={[0, 14]}
-        borderRadius={'0.75rem'}
-        bgColor="black"
-        onClick={openDialog}
-        disabled={disabled}
-        aria-haspopup="dialog"
-      >
-        <TextIcon
-          color="white"
-          size={14}
-          weight="medium"
-          icon={<Icon icon={IconPublishFill} size={18} />}
-          spacing={8}
-        >
-          <FormattedMessage defaultMessage="Publish" id="syEQFE" />
-        </TextIcon>
-      </Button>
-    </Media>
-  </>
-)
+        <FormattedMessage defaultMessage="Publish" id="syEQFE" />
+      </TextIcon>
+    </Button>
+  )
+}
 
 const SettingsButton = ({
   draft,

@@ -886,6 +886,9 @@
     "defaultMessage": "复制留言",
     "description": "src/components/Comment/DropdownActions/index.tsx"
   },
+  "CbRvzm": {
+    "defaultMessage": "定时发布"
+  },
   "CcVXhc": {
     "defaultMessage": "Matters 正在通过合约交易将 {amount} 发送至你绑定的钱包 {address}（Matters 将暂时承担交易手续费）。如需帮助请联系 ask@matters.town"
   },
@@ -1231,6 +1234,9 @@
   "IUS82d": {
     "defaultMessage": "标签活跃作者",
     "description": "src/views/TagDetail/RecommendedAuthors/index.tsx"
+  },
+  "IW6zQv": {
+    "defaultMessage": "选择时间"
   },
   "IXycMo": {
     "defaultMessage": "重新发送"
@@ -2476,6 +2482,9 @@
   "fsB/4p": {
     "defaultMessage": "保存成功"
   },
+  "ftg7GK": {
+    "defaultMessage": "选择日期"
+  },
   "fxhue9": {
     "defaultMessage": "作品将发布至 IPFS，无法被他人删改，创作权归你所有。"
   },
@@ -3082,6 +3091,9 @@
   "sPgUkN": {
     "defaultMessage": "本月营收",
     "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
+  },
+  "sbhWw+": {
+    "defaultMessage": "定时发布"
   },
   "sfj+KG": {
     "defaultMessage": "结果以链上记录为主，稍后同步至 Matters",

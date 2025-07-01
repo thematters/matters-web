@@ -886,6 +886,9 @@
     "defaultMessage": "Copy comment",
     "description": "src/components/Comment/DropdownActions/index.tsx"
   },
+  "CbRvzm": {
+    "defaultMessage": "Schedule publish"
+  },
   "CcVXhc": {
     "defaultMessage": "Matters is sending {amount} to your connected wallet {address} via a contract transaction (Matters will temporarily cover the transaction fee). For assistance, please contact ask@matters.town"
   },
@@ -1231,6 +1234,9 @@
   "IUS82d": {
     "defaultMessage": "Tag active authors",
     "description": "src/views/TagDetail/RecommendedAuthors/index.tsx"
+  },
+  "IW6zQv": {
+    "defaultMessage": "Select Time"
   },
   "IXycMo": {
     "defaultMessage": "Resend"
@@ -2476,6 +2482,9 @@
   "fsB/4p": {
     "defaultMessage": "Saved"
   },
+  "ftg7GK": {
+    "defaultMessage": "Select Date"
+  },
   "fxhue9": {
     "defaultMessage": "Article will be published to IPFS, others can not tamper with it, and you own the copyright."
   },
@@ -3082,6 +3091,9 @@
   "sPgUkN": {
     "defaultMessage": "This Month",
     "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
+  },
+  "sbhWw+": {
+    "defaultMessage": "Schedule publication"
   },
   "sfj+KG": {
     "defaultMessage": "The results are mainly based on the records on the chain and will be synchronized to Matters later.",

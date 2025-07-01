@@ -1,0 +1,9 @@
+.select {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--sp16);
+
+  @media (--sm-up) {
+    grid-template-columns: 1fr 1fr;
+  }
+}

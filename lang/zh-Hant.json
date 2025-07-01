@@ -886,6 +886,9 @@
     "defaultMessage": "複製留言",
     "description": "src/components/Comment/DropdownActions/index.tsx"
   },
+  "CbRvzm": {
+    "defaultMessage": "排程發布"
+  },
   "CcVXhc": {
     "defaultMessage": "Matters 正在通過合約交易將 {amount} 發送至你綁定的錢包 {address}（Matters 將暫時承擔交易手續費）。如需幫助請聯繫 ask@matters.town"
   },
@@ -1231,6 +1234,9 @@
   "IUS82d": {
     "defaultMessage": "標籤活躍作者",
     "description": "src/views/TagDetail/RecommendedAuthors/index.tsx"
+  },
+  "IW6zQv": {
+    "defaultMessage": "選擇時間"
   },
   "IXycMo": {
     "defaultMessage": "重新發送"
@@ -2476,6 +2482,9 @@
   "fsB/4p": {
     "defaultMessage": "儲存成功"
   },
+  "ftg7GK": {
+    "defaultMessage": "選擇日期"
+  },
   "fxhue9": {
     "defaultMessage": "作品將發布至 IPFS，無法被他人刪改，創作權歸你所有。"
   },
@@ -3082,6 +3091,9 @@
   "sPgUkN": {
     "defaultMessage": "本月營收",
     "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
+  },
+  "sbhWw+": {
+    "defaultMessage": "排程發布"
   },
   "sfj+KG": {
     "defaultMessage": "結果以鏈上紀錄為主，稍後同步至 Matters",

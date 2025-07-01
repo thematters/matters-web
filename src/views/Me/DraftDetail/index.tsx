@@ -315,11 +315,7 @@ const BaseDraftDetail = () => {
                       publishable={!!publishable}
                     />
                     <span className={styles.divider} />
-                    <MoreButton
-                      draft={draft}
-                      publishable={!!publishable}
-                      onClick={() => console.log('click more button')}
-                    />
+                    <MoreButton draft={draft} publishable={!!publishable} />
                   </section>
                 )}
               </section>
