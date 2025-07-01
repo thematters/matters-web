@@ -14,9 +14,3 @@ declare module '*.svg?url' {
   }
   export default content
 }
-
-declare namespace React {
-  interface ImgHTMLAttributes<T> extends HTMLAttributes<T> {
-    fetchpriority?: 'high' | 'low' | 'auto'
-  }
-}

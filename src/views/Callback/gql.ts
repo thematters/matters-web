@@ -4,7 +4,8 @@ export const SOCIAL_LOGIN = gql`
   mutation SocialLogin($input: SocialLoginInput!) {
     socialLogin(input: $input) {
       auth
-      token
+      accessToken
+      refreshToken
       user {
         id
         settings {
@@ -30,7 +31,8 @@ export const VERIFY_EMAIL = gql`
   mutation VerifyEmail($input: VerifyEmailInput!) {
     verifyEmail(input: $input) {
       auth
-      token
+      accessToken
+      refreshToken
       user {
         id
         settings {

@@ -57,7 +57,7 @@ export const login = async ({
   await Promise.all([
     waitForAPIResponse({
       page,
-      path: 'data.emailLogin.token',
+      path: 'data.emailLogin.accessToken',
     }),
     page.getByRole('button', { name: 'Sign in' }).click(),
     waitForNavigation ? page.waitForNavigation() : undefined,

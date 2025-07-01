@@ -9,9 +9,6 @@ import IconLeft from '@/public/static/icons/24px/left.svg'
 import IconMetaMask from '@/public/static/icons/24px/metamask.svg'
 import IconWalletConnect from '@/public/static/icons/24px/walletconnect.svg'
 import {
-  COOKIE_LANGUAGE,
-  COOKIE_TOKEN_NAME,
-  COOKIE_USER_GROUP,
   ERROR_CODES,
   REFERRAL_QUERY_REFERRAL_KEY,
   REFERRAL_STORAGE_REFERRAL_CODE,
@@ -19,7 +16,7 @@ import {
 } from '~/common/enums'
 import {
   parseFormSubmitErrors,
-  setCookies,
+  setAuthCookies,
   storage,
   truncate,
   WalletType,
@@ -50,8 +47,6 @@ import {
 } from '~/gql/graphql'
 
 import styles from './styles.module.css'
-
-const isLocal = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'local'
 
 interface FormProps {
   type: 'login' | 'connect'
@@ -220,17 +215,12 @@ const Connect: React.FC<FormProps> = ({
             },
           })
 
-          if (isLocal || process.env.NEXT_PUBLIC_VERCEL) {
-            const token = loginData?.walletLogin.token || ''
-            const language =
-              loginData?.walletLogin.user?.settings.language || ''
-            const group = loginData?.walletLogin.user?.info.group || ''
-            setCookies({
-              [COOKIE_LANGUAGE]: language,
-              [COOKIE_USER_GROUP]: group,
-              [COOKIE_TOKEN_NAME]: token,
-            })
-          }
+          const accessToken = loginData?.walletLogin.accessToken || ''
+          const refreshToken = loginData?.walletLogin.refreshToken || ''
+          const language = loginData?.walletLogin.user?.settings.language || ''
+          const group = loginData?.walletLogin.user?.info.group || ''
+
+          setAuthCookies({ accessToken, refreshToken, language, group })
 
           if (
             loginData?.walletLogin.type === AuthResultType.Login ||
