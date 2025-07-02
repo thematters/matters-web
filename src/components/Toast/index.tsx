@@ -20,6 +20,7 @@ type ToastActionsProps = {
 type ToastProps = {
   message: string | React.ReactNode
   hasClose?: boolean
+  duration?: number
 } & Partial<Pick<ToastActionsProps, 'actions'>>
 
 const ToastActions: React.FC<ToastActionsProps> = ({
@@ -130,22 +131,22 @@ const Toast: React.FC<
 Toast.displayName = 'Toast'
 
 export const toast = {
-  success: ({ duration, ...props }: ToastProps & { duration?: number }) => {
+  success: ({ duration, ...props }: ToastProps) => {
     return baseToast.custom(
       (toast) => <Toast {...props} toast={toast} type="success" />,
       { duration: !!duration ? duration : props.actions ? 5000 : 3000 }
     )
   },
-  warning: (props: ToastProps) => {
+  warning: ({ duration, ...props }: ToastProps) => {
     return baseToast.custom(
       (toast) => <Toast {...props} toast={toast} type="warning" />,
-      { duration: props.actions ? 5000 : 3000 }
+      { duration: !!duration ? duration : props.actions ? 5000 : 3000 }
     )
   },
-  error: (props: ToastProps) => {
+  error: ({ duration, ...props }: ToastProps) => {
     return baseToast.custom(
       (toast) => <Toast {...props} toast={toast} type="error" />,
-      { duration: props.actions ? 5000 : 3000 }
+      { duration: !!duration ? duration : props.actions ? 5000 : 3000 }
     )
   },
 }

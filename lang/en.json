@@ -186,19 +186,12 @@
   "0xVT+0": {
     "defaultMessage": "Curated"
   },
-  "0zZd0T": {
-    "defaultMessage": "Article successfully published. Share it on different platforms to receive more likes and donations!",
-    "description": "src/views/Me/DraftDetail/PublishState/PublishedState.tsx"
-  },
   "18HJlm": {
     "defaultMessage": "Tag"
   },
   "1COpAA": {
     "defaultMessage": "Failed",
     "description": "src/components/Transaction/State/index.tsx"
-  },
-  "1DNHwi": {
-    "defaultMessage": "Your work will be stored in IPFS network. Currently the fee is covered by Matters."
   },
   "1EYCdR": {
     "defaultMessage": "Tags"
@@ -221,9 +214,6 @@
   },
   "1eKD7S": {
     "defaultMessage": "Help compile your stories into a book"
-  },
-  "1exrSw": {
-    "defaultMessage": "Welcome onboard!"
   },
   "1hyiZ8": {
     "defaultMessage": "Confirm Matters ID",
@@ -886,9 +876,6 @@
     "defaultMessage": "Copy comment",
     "description": "src/components/Comment/DropdownActions/index.tsx"
   },
-  "CbRvzm": {
-    "defaultMessage": "Schedule publish"
-  },
   "CcVXhc": {
     "defaultMessage": "Matters is sending {amount} to your connected wallet {address} via a contract transaction (Matters will temporarily cover the transaction fee). For assistance, please contact ask@matters.town"
   },
@@ -1344,6 +1331,9 @@
     "defaultMessage": "Wallet connected",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
   },
+  "Km6eJ2": {
+    "defaultMessage": "Schedule Publish"
+  },
   "Kwv1n3": {
     "defaultMessage": " registration is about 1 LIKE. During promotion period it is sponsored by Matters.News."
   },
@@ -1389,10 +1379,6 @@
   },
   "LgbKvU": {
     "defaultMessage": "Comment"
-  },
-  "Lhhi5l": {
-    "defaultMessage": "Article published",
-    "description": "src/views/Me/DraftDetail/PublishState/PublishedState.tsx"
   },
   "LmiUWG": {
     "defaultMessage": "You do not have permissionn to perform this operation",
@@ -1665,10 +1651,6 @@
     "defaultMessage": "Circle Revenue",
     "description": "src/components/Transaction/index.tsx"
   },
-  "REQGgU": {
-    "defaultMessage": "Notice",
-    "description": "src/views/Me/DraftDetail/SettingsButton/ConfirmPublishDialogContent/index.tsx"
-  },
   "RGEpvx": {
     "defaultMessage": "Support setting",
     "description": "src/views/ArticleDetail/SupportWidget/EditCopyButton/index.tsx"
@@ -1772,9 +1754,6 @@
   },
   "SuRTsQ": {
     "defaultMessage": "Register for ISCN"
-  },
-  "SwoXPI": {
-    "defaultMessage": "Content hash and gateway addresses will be public, and can be used for sharing."
   },
   "Szd1tH": {
     "defaultMessage": "Failed to log out, please try again."
@@ -1918,6 +1897,9 @@
   },
   "VmYzLr": {
     "defaultMessage": "{total} members"
+  },
+  "Vp5L/O": {
+    "defaultMessage": "Publishing, please wait..."
   },
   "VqdOGQ": {
     "defaultMessage": "More",
@@ -2094,10 +2076,6 @@
     "defaultMessage": "Blocked Users",
     "description": "src/views/Me/Settings/Blocked/index.tsx"
   },
-  "YWQTXE": {
-    "defaultMessage": "View article",
-    "description": "src/views/Me/DraftDetail/PublishState/PublishedState.tsx"
-  },
   "YjW2MT": {
     "defaultMessage": "Comment has been hidden"
   },
@@ -2128,9 +2106,6 @@
   },
   "ZNK0I9": {
     "defaultMessage": "liked your comment"
-  },
-  "ZOW313": {
-    "defaultMessage": "You can edit the article four times after publishing it. You can also archive the original and republish.."
   },
   "ZUPQzl": {
     "defaultMessage": " ",
@@ -2484,9 +2459,6 @@
   },
   "ftg7GK": {
     "defaultMessage": "Select Date"
-  },
-  "fxhue9": {
-    "defaultMessage": "Article will be published to IPFS, others can not tamper with it, and you own the copyright."
   },
   "g//2O2": {
     "defaultMessage": "Uncollapse",
@@ -3084,6 +3056,9 @@
   },
   "ruZqtT": {
     "defaultMessage": "Must be between {MIN_USER_DISPLAY_NAME_LENGTH}-{MAX_USER_DISPLAY_NAME_LENGTH} characters long."
+  },
+  "s2s6tx": {
+    "defaultMessage": "The article has been successfully published and will be synced to IPFS soon."
   },
   "sFJ/Is": {
     "defaultMessage": "Are you sure you want to clear the current content?"

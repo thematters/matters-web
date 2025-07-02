@@ -6,10 +6,15 @@ import { Dialog, Spacer, useDialogSwitch } from '~/components'
 import SelectDate from './SelectDate'
 
 interface SchedulePublishDialogProps {
+  onConfirm: (date: Date) => void
+  confirmButtonText?: React.ReactNode
+
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
 
 const BaseSchedulePublishDialog = ({
+  onConfirm,
+  confirmButtonText,
   children,
 }: SchedulePublishDialogProps) => {
   const { show, openDialog, closeDialog } = useDialogSwitch(true)
@@ -18,11 +23,17 @@ const BaseSchedulePublishDialog = ({
 
   const SubmitButton = (
     <Dialog.TextButton
-      text={<FormattedMessage defaultMessage="Next Step" id="8cv9D4" />}
+      text={
+        confirmButtonText || (
+          <FormattedMessage defaultMessage="Next Step" id="8cv9D4" />
+        )
+      }
       disabled={!selectedDate}
       color="greyDarker"
       onClick={() => {
-        console.log(selectedDate)
+        if (selectedDate) {
+          onConfirm(selectedDate)
+        }
       }}
     />
   )

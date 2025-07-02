@@ -6,7 +6,6 @@ import { MAX_ARTICLE_CONTENT_LENGTH } from '~/common/enums'
 import { containsFigureTag, stripHtml, toPath } from '~/common/utils'
 import { Button, TextIcon, toast, useMutation } from '~/components'
 import {
-  ConfirmStepContentProps,
   EditorSettingsDialog,
   EditorSettingsDialogProps,
 } from '~/components/Editor/SettingsDialog'
@@ -17,7 +16,6 @@ import {
   QueryEditArticleQuery,
 } from '~/gql/graphql'
 
-import ConfirmRevisedPublishDialogContent from './ConfirmRevisedPublishDialogContent'
 import { EDIT_ARTICLE } from './gql'
 import styles from './styles.module.css'
 
@@ -48,7 +46,6 @@ type EditModeHeaderProps = {
   | 'confirmButtonText'
   | 'cancelButtonText'
   | 'onConfirm'
-  | 'ConfirmStepContent'
   | 'children'
 > &
   SidebarIndentProps // no need to show indent setting on EditorSettingsDialog
@@ -225,10 +222,6 @@ const EditModeHeader = ({
     }
   }
 
-  const ConfirmStepContent = (props: ConfirmStepContentProps) => (
-    <ConfirmRevisedPublishDialogContent onSave={onSave} {...props} />
-  )
-
   const disabled =
     !isRevised ||
     loading ||
@@ -286,16 +279,11 @@ const EditModeHeader = ({
           cancelButtonText={
             <FormattedMessage defaultMessage="Cancel" id="47FYwb" />
           }
-          onConfirm={
-            needRepublish
-              ? undefined
-              : () => {
-                  if (validateArticleSettings()) {
-                    onSave()
-                  }
-                }
-          }
-          ConfirmStepContent={ConfirmStepContent}
+          onConfirm={() => {
+            if (validateArticleSettings()) {
+              onSave()
+            }
+          }}
         >
           {({ openDialog: openEditorSettingsDialog }) => (
             <Button

@@ -1,7 +1,9 @@
+import gql from 'graphql-tag'
+import { useContext, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import IconPublishFill from '@/public/static/icons/24px/publish-fill.svg'
-import { BREAKPOINTS, ENTITY_TYPE } from '~/common/enums'
+import { BREAKPOINTS, ENTITY_TYPE, PATHS } from '~/common/enums'
 import {
   Button,
   Icon,
@@ -9,6 +11,9 @@ import {
   toast,
   toDigestTagPlaceholder,
   useMediaQuery,
+  useMutation,
+  useRoute,
+  ViewerContext,
 } from '~/components'
 import {
   MoreSettingsProps,
@@ -26,6 +31,7 @@ import {
   DigestRichCirclePublicFragment,
   EditMetaDraftFragment,
   EditorSelectCampaignFragment,
+  PublishArticleMutation,
 } from '~/gql/graphql'
 
 import {
@@ -39,53 +45,81 @@ import {
   useEditDraftTags,
   useEditSupportSetting,
 } from '../hooks'
-import ConfirmPublishDialogContent from './ConfirmPublishDialogContent'
+import { MoreButton } from './MoreButton'
+import styles from './styles.module.css'
 
-interface SettingsButtonProps {
+interface PublishButtonProps {
   draft: EditMetaDraftFragment
   ownCircles?: DigestRichCirclePublicFragment[]
   campaigns?: EditorSelectCampaignFragment[]
   publishable?: boolean
 }
 
-const ConfirmButton = ({
-  openDialog,
+const PUBLISH_ARTICLE = gql`
+  mutation PublishArticle($id: ID!, $publishAt: DateTime) {
+    publishArticle(input: { id: $id, publishAt: $publishAt }) {
+      id
+      publishState
+    }
+  }
+`
+
+const Buttons = ({
   disabled,
+  openSettingsDialog,
+  setPublishAt,
 }: {
-  openDialog: () => void
   disabled?: boolean
+  openSettingsDialog: () => void
+  setPublishAt: (date: Date) => void
 }) => {
   const isSmUp = useMediaQuery(`(min-width: ${BREAKPOINTS.MD}px)`)
 
+  const onConfirmSchedulePublish = (date: Date) => {
+    setPublishAt(date)
+    openSettingsDialog()
+  }
+
   return (
-    <Button
-      size={[null, isSmUp ? '2.375rem' : '2.125rem']}
-      spacing={[0, 14]}
-      borderRadius={'0.75rem'}
-      bgColor="black"
-      onClick={openDialog}
-      disabled={disabled}
-      aria-haspopup="dialog"
-    >
-      <TextIcon
-        color="white"
-        size={14}
-        weight="medium"
-        icon={isSmUp ? <Icon icon={IconPublishFill} size={18} /> : undefined}
-        spacing={8}
+    <section className={styles.buttons}>
+      <Button
+        size={[null, isSmUp ? '2.375rem' : '2.125rem']}
+        spacing={[0, 14]}
+        borderRadius={'0.75rem'}
+        bgColor="black"
+        onClick={openSettingsDialog}
+        disabled={disabled}
+        aria-haspopup="dialog"
       >
-        <FormattedMessage defaultMessage="Publish" id="syEQFE" />
-      </TextIcon>
-    </Button>
+        <TextIcon
+          color="white"
+          size={14}
+          weight="medium"
+          icon={isSmUp ? <Icon icon={IconPublishFill} size={18} /> : undefined}
+          spacing={8}
+        >
+          <FormattedMessage defaultMessage="Publish" id="syEQFE" />
+        </TextIcon>
+      </Button>
+
+      <span className={styles.divider} />
+
+      <MoreButton
+        disabled={disabled}
+        onConfirmSchedulePublish={onConfirmSchedulePublish}
+      />
+    </section>
   )
 }
 
-const SettingsButton = ({
+const PublishButton = ({
   draft,
   ownCircles,
   campaigns,
   publishable,
-}: SettingsButtonProps) => {
+}: PublishButtonProps) => {
+  const { router } = useRoute()
+
   const { edit: editConnections, saving: connectionsSaving } =
     useEditDraftConnections()
   const { edit: editCover, saving: coverSaving, refetch } = useEditDraftCover()
@@ -104,6 +138,8 @@ const SettingsButton = ({
   const { edit: toggleComment, saving: canCommentSaving } =
     useEditDraftCanComment()
   const canComment = draft.canComment
+
+  const [publishAt, setPublishAt] = useState<Date>()
 
   const hasOwnCircle = ownCircles && ownCircles.length >= 1
   const tags = (draft.tags || []).map(toDigestTagPlaceholder)
@@ -171,6 +207,32 @@ const SettingsButton = ({
     toggleComment,
   }
 
+  const schedulePublishProps = {
+    publishAt,
+  }
+
+  const viewer = useContext(ViewerContext)
+  const [publish] = useMutation<PublishArticleMutation>(PUBLISH_ARTICLE, {
+    update(cache) {
+      cache.evict({ id: cache.identify(viewer), fieldName: 'articles' })
+      cache.evict({ id: cache.identify(viewer), fieldName: 'writings' })
+      cache.gc()
+    },
+    onQueryUpdated(observableQuery) {
+      return observableQuery.refetch()
+    },
+  })
+
+  const onPublish = async ({ closeDialog }: { closeDialog: () => void }) => {
+    publish({ variables: { id: draft.id, publishAt } })
+
+    closeDialog()
+
+    if (publishAt) {
+      router.push(PATHS.ME_DRAFTS)
+    }
+  }
+
   return (
     <EditorSettingsDialog
       saving={false}
@@ -182,22 +244,29 @@ const SettingsButton = ({
         canCommentSaving
       }
       confirmButtonText={
-        <FormattedMessage defaultMessage="Publish Now" id="nWhqw9" />
+        publishAt ? (
+          <FormattedMessage defaultMessage="Schedule Publish" id="Km6eJ2" />
+        ) : (
+          <FormattedMessage defaultMessage="Publish Now" id="nWhqw9" />
+        )
       }
       cancelButtonText={
         <FormattedMessage defaultMessage="Save as Draft" id="E048/V" />
       }
-      ConfirmStepContent={ConfirmPublishDialogContent}
+      onConfirm={onPublish}
       {...coverProps}
       {...tagsProps}
       {...connectionProps}
       {...accessProps}
       {...responseProps}
       {...campaignProps}
+      {...schedulePublishProps}
     >
       {({ openDialog: openEditorSettingsDialog }) => (
-        <ConfirmButton
-          openDialog={() => {
+        <Buttons
+          disabled={disabled}
+          setPublishAt={setPublishAt}
+          openSettingsDialog={() => {
             const hasCampaign = !!selectedCampaign
             const hasCircle = !!draft.access.circle
 
@@ -215,11 +284,10 @@ const SettingsButton = ({
 
             openEditorSettingsDialog()
           }}
-          disabled={disabled}
         />
       )}
     </EditorSettingsDialog>
   )
 }
 
-export default SettingsButton
+export default PublishButton

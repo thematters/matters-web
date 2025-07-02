@@ -186,19 +186,12 @@
   "0xVT+0": {
     "defaultMessage": "已關聯"
   },
-  "0zZd0T": {
-    "defaultMessage": "作品發布成功，快把作品分享到不同渠道，吸引更多人為你拍手！",
-    "description": "src/views/Me/DraftDetail/PublishState/PublishedState.tsx"
-  },
   "18HJlm": {
     "defaultMessage": "標籤"
   },
   "1COpAA": {
     "defaultMessage": "失敗",
     "description": "src/components/Transaction/State/index.tsx"
-  },
-  "1DNHwi": {
-    "defaultMessage": "你的作品即將存儲在星際文件系統（IPFS）分佈式節點中。在 IPFS 的存儲費用目前由 Matters 平台支付。"
   },
   "1EYCdR": {
     "defaultMessage": "標籤"
@@ -221,9 +214,6 @@
   },
   "1eKD7S": {
     "defaultMessage": "幫你的故事收集成冊"
-  },
-  "1exrSw": {
-    "defaultMessage": "歡迎上船！"
   },
   "1hyiZ8": {
     "defaultMessage": "確認 Matters ID",
@@ -886,9 +876,6 @@
     "defaultMessage": "複製留言",
     "description": "src/components/Comment/DropdownActions/index.tsx"
   },
-  "CbRvzm": {
-    "defaultMessage": "排程發布"
-  },
   "CcVXhc": {
     "defaultMessage": "Matters 正在通過合約交易將 {amount} 發送至你綁定的錢包 {address}（Matters 將暫時承擔交易手續費）。如需幫助請聯繫 ask@matters.town"
   },
@@ -1344,6 +1331,9 @@
     "defaultMessage": "錢包已綁定",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
   },
+  "Km6eJ2": {
+    "defaultMessage": "排程發布"
+  },
   "Kwv1n3": {
     "defaultMessage": " 用以出版 Writing NFT，費用 ≈1 LIKE，推廣期由平台補助"
   },
@@ -1389,10 +1379,6 @@
   },
   "LgbKvU": {
     "defaultMessage": "評論"
-  },
-  "Lhhi5l": {
-    "defaultMessage": "作品已發布",
-    "description": "src/views/Me/DraftDetail/PublishState/PublishedState.tsx"
   },
   "LmiUWG": {
     "defaultMessage": "你無法對此對象進行該操作",
@@ -1665,10 +1651,6 @@
     "defaultMessage": "圍爐營收",
     "description": "src/components/Transaction/index.tsx"
   },
-  "REQGgU": {
-    "defaultMessage": "發布須知",
-    "description": "src/views/Me/DraftDetail/SettingsButton/ConfirmPublishDialogContent/index.tsx"
-  },
   "RGEpvx": {
     "defaultMessage": "修改文案",
     "description": "src/views/ArticleDetail/SupportWidget/EditCopyButton/index.tsx"
@@ -1772,9 +1754,6 @@
   },
   "SuRTsQ": {
     "defaultMessage": "註冊 ISCN"
-  },
-  "SwoXPI": {
-    "defaultMessage": "指紋與節點隨之公開可見，皆可用於分享作品。"
   },
   "Szd1tH": {
     "defaultMessage": "登出失敗，請重試"
@@ -1918,6 +1897,9 @@
   },
   "VmYzLr": {
     "defaultMessage": "{total} 個成員"
+  },
+  "Vp5L/O": {
+    "defaultMessage": "發布中，請稍候⋯"
   },
   "VqdOGQ": {
     "defaultMessage": "相關推薦",
@@ -2094,10 +2076,6 @@
     "defaultMessage": "已封鎖用戶",
     "description": "src/views/Me/Settings/Blocked/index.tsx"
   },
-  "YWQTXE": {
-    "defaultMessage": "查看作品",
-    "description": "src/views/Me/DraftDetail/PublishState/PublishedState.tsx"
-  },
   "YjW2MT": {
     "defaultMessage": "評論已隱藏"
   },
@@ -2128,9 +2106,6 @@
   },
   "ZNK0I9": {
     "defaultMessage": "喜歡你的評論"
-  },
-  "ZOW313": {
-    "defaultMessage": "首次發布作品後有四次正文編輯機會，你也可以歸檔原文重新發布作品。"
   },
   "ZUPQzl": {
     "defaultMessage": "回覆了你",
@@ -2484,9 +2459,6 @@
   },
   "ftg7GK": {
     "defaultMessage": "選擇日期"
-  },
-  "fxhue9": {
-    "defaultMessage": "作品將發布至 IPFS，無法被他人刪改，創作權歸你所有。"
   },
   "g//2O2": {
     "defaultMessage": "取消闔上",
@@ -3084,6 +3056,9 @@
   },
   "ruZqtT": {
     "defaultMessage": "僅供輸入 {MIN_USER_DISPLAY_NAME_LENGTH}-{MAX_USER_DISPLAY_NAME_LENGTH} 個字元"
+  },
+  "s2s6tx": {
+    "defaultMessage": "已成功發布作品，稍後同步到 IPFS"
   },
   "sFJ/Is": {
     "defaultMessage": "確認清空當前編輯的内容嗎？"

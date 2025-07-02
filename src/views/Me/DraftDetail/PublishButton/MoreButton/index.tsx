@@ -12,22 +12,20 @@ import {
   useMediaQuery,
 } from '~/components'
 import { SchedulePublishDialog } from '~/components/Editor/SchedulePublishDialog'
-import { EditMetaDraftFragment } from '~/gql/graphql'
 
 interface MoreButtonProps {
-  draft: EditMetaDraftFragment
-  publishable: boolean
+  disabled?: boolean
+  onConfirmSchedulePublish: (date: Date) => void
 }
 
-export const MoreButton = ({ draft, publishable }: MoreButtonProps) => {
+export const MoreButton = ({
+  disabled,
+  onConfirmSchedulePublish,
+}: MoreButtonProps) => {
   const isSmUp = useMediaQuery(`(min-width: ${BREAKPOINTS.MD}px)`)
 
-  const isPending = draft.publishState === 'pending'
-  const isPublished = draft.publishState === 'published'
-  const disabled = !publishable || isPending || isPublished
-
   return (
-    <SchedulePublishDialog>
+    <SchedulePublishDialog onConfirm={onConfirmSchedulePublish}>
       {({ openDialog }) => (
         <Dropdown
           content={
@@ -36,8 +34,8 @@ export const MoreButton = ({ draft, publishable }: MoreButtonProps) => {
                 icon={<Icon icon={IconTime} size={20} />}
                 text={
                   <FormattedMessage
-                    defaultMessage="Schedule publish"
-                    id="CbRvzm"
+                    defaultMessage="Schedule Publish"
+                    id="Km6eJ2"
                   />
                 }
                 onClick={openDialog}

@@ -2,22 +2,9 @@ import { useApolloClient } from '@apollo/client'
 import { useContext, useEffect } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { MAX_META_SUMMARY_LENGTH } from '~/common/enums'
-import { makeSummary, toPath } from '~/common/utils'
-import { Dialog, ShareDialog, useRoute, ViewerContext } from '~/components'
+import { toPath } from '~/common/utils'
+import { toast, useRoute, ViewerContext } from '~/components'
 import { PublishStateDraftFragment } from '~/gql/graphql'
-
-const BasePublishedState = ({
-  openShareDialog,
-}: {
-  openShareDialog: () => void
-}) => {
-  useEffect(() => {
-    openShareDialog()
-  }, [])
-
-  return null
-}
 
 const PublishedState = ({ draft }: { draft: PublishStateDraftFragment }) => {
   const viewer = useContext(ViewerContext)
@@ -25,6 +12,11 @@ const PublishedState = ({ draft }: { draft: PublishStateDraftFragment }) => {
   const client = useApolloClient()
 
   useEffect(() => {
+    if (!draft.article) {
+      return
+    }
+
+    // refresh cacahe
     client.refetchQueries({
       updateCache: (cache) => {
         // evict viewer.drafts
@@ -47,70 +39,27 @@ const PublishedState = ({ draft }: { draft: PublishStateDraftFragment }) => {
         cache.gc()
       },
     })
-  }, [])
 
-  if (!draft.article) {
-    return null
-  }
-
-  const path = toPath({
-    page: 'articleDetail',
-    article: draft.article,
-  })
-
-  return (
-    <ShareDialog
-      disableNativeShare
-      title={
-        draft.article.author?.displayName
-          ? `${makeSummary(draft.article.title, MAX_META_SUMMARY_LENGTH)} - ${draft.article.author.displayName} - Matters`
-          : `${makeSummary(draft.article.title, MAX_META_SUMMARY_LENGTH)} - Matters`
-      }
-      path={path.href}
-      description={
-        <p>
-          <FormattedMessage
-            defaultMessage="Article successfully published. Share it on different platforms to receive more likes and donations!"
-            id="0zZd0T"
-            description="src/views/Me/DraftDetail/PublishState/PublishedState.tsx"
-          />
-        </p>
-      }
-      headerTitle={
+    // toast success
+    toast.success({
+      message: (
         <FormattedMessage
-          defaultMessage="Article published"
-          id="Lhhi5l"
-          description="src/views/Me/DraftDetail/PublishState/PublishedState.tsx"
+          defaultMessage="The article has been successfully published and will be synced to IPFS soon."
+          id="s2s6tx"
         />
-      }
-      btns={
-        <Dialog.RoundedButton
-          text={
-            <FormattedMessage
-              defaultMessage="View article"
-              id="YWQTXE"
-              description="src/views/Me/DraftDetail/PublishState/PublishedState.tsx"
-            />
-          }
-          onClick={() => router.replace(path.href)}
-        />
-      }
-      smUpBtns={
-        <Dialog.TextButton
-          text={
-            <FormattedMessage
-              defaultMessage="View article"
-              id="YWQTXE"
-              description="src/views/Me/DraftDetail/PublishState/PublishedState.tsx"
-            />
-          }
-          onClick={() => router.replace(path.href)}
-        />
-      }
-    >
-      {({ openDialog }) => <BasePublishedState openShareDialog={openDialog} />}
-    </ShareDialog>
-  )
+      ),
+    })
+
+    // redirect to article detail
+    router.push(
+      toPath({
+        page: 'articleDetail',
+        article: draft.article,
+      }).href
+    )
+  }, [draft.article?.id])
+
+  return null
 }
 
 export default PublishedState

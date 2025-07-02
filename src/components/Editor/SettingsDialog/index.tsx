@@ -29,19 +29,12 @@ export type Step =
   | 'tag'
   | 'collection'
   | 'circle'
-  | 'confirm'
   | 'support'
   | 'versionDescription'
-
-export type ConfirmStepContentProps = {
-  onBack: () => void
-  closeDialog: () => void
-}
 
 export type EditorSettingsDialogProps = {
   saving: boolean
   disabled: boolean
-  ConfirmStepContent: React.FC<ConfirmStepContentProps>
 
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 } & SetCoverProps &
@@ -125,7 +118,6 @@ const BaseEditorSettingsDialog = ({
   disabled,
   confirmButtonText,
   cancelButtonText,
-  ConfirmStepContent,
   onConfirm,
 
   children,
@@ -149,7 +141,6 @@ const BaseEditorSettingsDialog = ({
   const isTag = currStep === 'tag'
   const isCollection = currStep === 'collection'
   // const isCircle = currStep === 'circle'
-  const isConfirm = currStep === 'confirm'
   const isSupportSetting = currStep === 'support'
   const isVersionDescription = currStep === 'versionDescription'
   const coverProps: SetCoverProps = {
@@ -304,13 +295,6 @@ const BaseEditorSettingsDialog = ({
             editDescription={editVersionDescription}
             back={() => forward('list')}
             submitCallback={() => forward('list')}
-            closeDialog={closeDialog}
-          />
-        )}
-
-        {isConfirm && (
-          <ConfirmStepContent
-            onBack={() => forward('list')}
             closeDialog={closeDialog}
           />
         )}

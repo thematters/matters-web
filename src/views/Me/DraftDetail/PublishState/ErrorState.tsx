@@ -1,28 +1,56 @@
+import gql from 'graphql-tag'
+import { useEffect } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { Layout, Translate } from '~/components'
-import { PublishStateDraftFragment } from '~/gql/graphql'
+import { toast, useMutation } from '~/components'
+import {
+  PublishState as PublishStateType,
+  PublishStateDraftFragment,
+  RetryPublishMutation,
+} from '~/gql/graphql'
 
-import RetryButton from './RetryButton'
+const RETRY_PUBLISH = gql`
+  mutation RetryPublish($id: ID!) {
+    retryPublish: publishArticle(input: { id: $id }) {
+      id
+      publishState
+    }
+  }
+`
 
-const ErrorState = ({ draft }: { draft: PublishStateDraftFragment }) => (
-  <Layout.Notice
-    color="red"
-    content={
-      <FormattedMessage
-        defaultMessage="Failed to publish, please try again."
-        id="zE51j6"
-      />
-    }
-    subDescription={
-      <Translate
-        zh_hant="請檢查網絡後重試"
-        zh_hans="请检查网络后重试"
-        en="Please refresh the page and try again."
-      />
-    }
-    customButton={<RetryButton id={draft.id} />}
-  />
-)
+const ErrorState = ({ draft }: { draft: PublishStateDraftFragment }) => {
+  const [retry] = useMutation<RetryPublishMutation>(RETRY_PUBLISH, {
+    variables: { id: draft.id },
+    optimisticResponse: {
+      retryPublish: {
+        id: draft.id,
+        publishState: PublishStateType.Pending,
+        __typename: 'Draft',
+      },
+    },
+  })
+
+  useEffect(() => {
+    toast.error({
+      message: (
+        <FormattedMessage
+          defaultMessage="Failed to publish, please try again."
+          id="zE51j6"
+        />
+      ),
+      duration: Infinity,
+      actions: [
+        {
+          content: <FormattedMessage defaultMessage="Retry" id="62nsdy" />,
+          onClick: () => {
+            retry()
+          },
+        },
+      ],
+    })
+  }, [])
+
+  return null
+}
 
 export default ErrorState
