@@ -181,6 +181,9 @@
   "0r2yd+": {
     "defaultMessage": "首行縮排"
   },
+  "0r9bbv": {
+    "defaultMessage": "加入圍爐"
+  },
   "0tHLRn": {
     "defaultMessage": "錢包餘額不足"
   },
@@ -2962,6 +2965,9 @@
   "q192Fl": {
     "defaultMessage": "刪除留言",
     "description": "Moment"
+  },
+  "q7nV87": {
+    "defaultMessage": "連結你和讀者之間的長期互動"
   },
   "q9oMKE": {
     "defaultMessage": "圍爐名稱"

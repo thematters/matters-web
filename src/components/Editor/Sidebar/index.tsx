@@ -1,5 +1,6 @@
 import Campaign from './Campaign'
 import CanComment from './CanComment'
+import Circle from './Circle'
 import Collections from './Collections'
 import Connections from './Connections'
 import Cover from './Cover'
@@ -21,6 +22,7 @@ const Sidebar = {
   Collections,
   License,
   SupportSetting,
+  Circle,
 }
 
 export default Sidebar
