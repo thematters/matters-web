@@ -22,6 +22,7 @@ import {
   useEditDraftCollections,
   useEditDraftConnections,
   useEditDraftCover,
+  useEditDraftSensitiveByAuthor,
   useEditDraftTags,
   useEditIndent,
   useEditSupportSetting,
@@ -210,6 +211,18 @@ const EditDraftCircle = ({ draft, ownCircles }: OptionItemProps) => {
   )
 }
 
+const EditDraftSensitive = ({ draft }: OptionItemProps) => {
+  const { edit, saving } = useEditDraftSensitiveByAuthor()
+  const sensitive = draft.sensitiveByAuthor
+  return (
+    <Sidebar.Sensitive
+      sensitive={sensitive}
+      toggleSensitive={edit}
+      sensitiveSaving={saving}
+    />
+  )
+}
+
 export const OptionContent = (props: OptionContentProps) => {
   const [type, setType] = useState<'contentAndLayout' | 'settings'>(
     'contentAndLayout'
@@ -266,6 +279,7 @@ export const OptionContent = (props: OptionContentProps) => {
             <EditDraftLicense {...props} disabled={disabled} />
             <EditDraftCanComment {...props} disabled={disabled} />
             <EditDraftSupportSetting {...props} disabled={disabled} />
+            <EditDraftSensitive {...props} disabled={disabled} />
             <EditDraftCircle {...props} disabled={disabled} />
           </>
         )}

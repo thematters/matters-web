@@ -8,6 +8,7 @@ import Indent from './Indent'
 import License from './License'
 import Management from './Management'
 import Response from './Response'
+import Sensitive from './Sensitive'
 import SupportSetting from './SupportSetting'
 import Tags from './Tags'
 const Sidebar = {
@@ -20,6 +21,7 @@ const Sidebar = {
   Campaign,
   Indent,
   Collections,
+  Sensitive,
   License,
   SupportSetting,
   Circle,

@@ -1626,6 +1626,9 @@
     "defaultMessage": "郵件地址或密碼錯誤",
     "description": "USER_EMAIL_NOT_FOUND"
   },
+  "PvVnlo": {
+    "defaultMessage": "包含色情、暴力、血腥等內容"
+  },
   "Q8Qw5B": {
     "defaultMessage": "描述"
   },

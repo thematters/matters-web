@@ -1626,6 +1626,9 @@
     "defaultMessage": "Incorrect email or password",
     "description": "USER_EMAIL_NOT_FOUND"
   },
+  "PvVnlo": {
+    "defaultMessage": "Includes content that is sexual, violent, bloody, etc."
+  },
   "Q8Qw5B": {
     "defaultMessage": "Description"
   },
