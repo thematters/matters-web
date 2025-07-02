@@ -5,6 +5,7 @@ import Collections from './Collections'
 import Connections from './Connections'
 import Cover from './Cover'
 import Indent from './Indent'
+import ISCN from './ISCN'
 import License from './License'
 import Management from './Management'
 import Response from './Response'
@@ -22,6 +23,7 @@ const Sidebar = {
   Indent,
   Collections,
   Sensitive,
+  ISCN,
   License,
   SupportSetting,
   Circle,

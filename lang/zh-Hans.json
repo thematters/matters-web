@@ -933,6 +933,9 @@
   "D3idYv": {
     "defaultMessage": "设定"
   },
+  "D9/QIR": {
+    "defaultMessage": "注册 ISCN"
+  },
   "D9R/ol": {
     "defaultMessage": "将作品加入围炉，让更多人一起参与讨论"
   },
@@ -2542,6 +2545,9 @@
   "h+punE": {
     "defaultMessage": "{date}更新",
     "description": "src/views/User/CollectionDetail/Content.tsx"
+  },
+  "h5Y9al": {
+    "defaultMessage": "用于出版 Writing NFT，费用 ≈1 LIKE"
   },
   "h74kLA": {
     "defaultMessage": "支持失败"
