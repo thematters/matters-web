@@ -22,6 +22,7 @@ import {
   useEditDraftCollections,
   useEditDraftConnections,
   useEditDraftCover,
+  useEditDraftPublishISCN,
   useEditDraftSensitiveByAuthor,
   useEditDraftTags,
   useEditIndent,
@@ -223,6 +224,20 @@ const EditDraftSensitive = ({ draft }: OptionItemProps) => {
   )
 }
 
+const EditDraftISCN = ({ draft }: OptionItemProps) => {
+  const { edit, saving } = useEditDraftPublishISCN()
+
+  const iscnPublish = !!draft.iscnPublish
+
+  return (
+    <Sidebar.ISCN
+      iscnPublish={iscnPublish}
+      toggleISCN={edit}
+      iscnPublishSaving={saving}
+    />
+  )
+}
+
 export const OptionContent = (props: OptionContentProps) => {
   const [type, setType] = useState<'contentAndLayout' | 'settings'>(
     'contentAndLayout'
@@ -281,6 +296,7 @@ export const OptionContent = (props: OptionContentProps) => {
             <EditDraftSupportSetting {...props} disabled={disabled} />
             <EditDraftSensitive {...props} disabled={disabled} />
             <EditDraftCircle {...props} disabled={disabled} />
+            <EditDraftISCN {...props} disabled={disabled} />
           </>
         )}
       </section>
