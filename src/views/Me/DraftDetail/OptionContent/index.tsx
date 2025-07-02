@@ -190,6 +190,26 @@ const EditDraftSupportSetting = ({ draft }: OptionItemProps) => {
   )
 }
 
+const EditDraftCircle = ({ draft, ownCircles }: OptionItemProps) => {
+  const { edit, saving } = useEditDraftAccess(ownCircles && ownCircles[0])
+
+  const hasOwnCircle = ownCircles && ownCircles.length >= 1
+  const circle = draft.access?.circle
+
+  if (!hasOwnCircle) {
+    return null
+  }
+
+  return (
+    <Sidebar.Circle
+      license={draft.license}
+      circle={circle}
+      editAccess={edit}
+      saving={saving}
+    />
+  )
+}
+
 export const OptionContent = (props: OptionContentProps) => {
   const [type, setType] = useState<'contentAndLayout' | 'settings'>(
     'contentAndLayout'
@@ -246,6 +266,7 @@ export const OptionContent = (props: OptionContentProps) => {
             <EditDraftLicense {...props} disabled={disabled} />
             <EditDraftCanComment {...props} disabled={disabled} />
             <EditDraftSupportSetting {...props} disabled={disabled} />
+            <EditDraftCircle {...props} disabled={disabled} />
           </>
         )}
       </section>

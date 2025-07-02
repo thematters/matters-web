@@ -181,6 +181,9 @@
   "0r2yd+": {
     "defaultMessage": "Paragraph indent"
   },
+  "0r9bbv": {
+    "defaultMessage": "Join the Circle"
+  },
   "0tHLRn": {
     "defaultMessage": "Insufficient Balance"
   },
@@ -2962,6 +2965,9 @@
   "q192Fl": {
     "defaultMessage": "Delete comment",
     "description": "Moment"
+  },
+  "q7nV87": {
+    "defaultMessage": "Connect long-term interactions between you and your readers"
   },
   "q9oMKE": {
     "defaultMessage": "Circle Name"
