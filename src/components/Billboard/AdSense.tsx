@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react'
 
-import { Media } from '~/components'
+import { BREAKPOINTS } from '~/common/enums'
+import { useMediaQuery } from '~/components'
 
 interface AdSenseProps {
   adSlot?: string
@@ -27,6 +28,7 @@ export const AdSenseUnit = ({
 }: AdSenseProps) => {
   const mobileRef = useRef<HTMLModElement>(null)
   const desktopRef = useRef<HTMLModElement>(null)
+  const isMdUp = useMediaQuery(`(min-width: ${BREAKPOINTS.LG}px)`)
 
   useEffect(() => {
     // Helper to observe a given ins element
@@ -76,18 +78,7 @@ export const AdSenseUnit = ({
 
   return (
     <>
-      <Media lessThan="md">
-        <ins
-          className="adsbygoogle"
-          style={{ display: 'block' }}
-          data-ad-format="fluid"
-          data-ad-layout-key="-h9"
-          data-ad-client={adClient}
-          data-ad-slot="6282066188"
-          ref={mobileRef}
-        ></ins>
-      </Media>
-      <Media greaterThanOrEqual="md">
+      {isMdUp ? (
         <ins
           className="adsbygoogle"
           style={style}
@@ -97,7 +88,17 @@ export const AdSenseUnit = ({
           {...(isResponsive && { 'data-full-width-responsive': 'true' })}
           ref={desktopRef}
         />
-      </Media>
+      ) : (
+        <ins
+          className="adsbygoogle"
+          style={{ display: 'block' }}
+          data-ad-format="fluid"
+          data-ad-layout-key="-h9"
+          data-ad-client={adClient}
+          data-ad-slot="6282066188"
+          ref={mobileRef}
+        />
+      )}
     </>
   )
 }
