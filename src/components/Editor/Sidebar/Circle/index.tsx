@@ -27,14 +27,22 @@ const SidebarCircle: React.FC<SidebarCircleProps> = ({
 }) => {
   const intl = useIntl()
 
+  const displayName = circle?.displayName
+
   return (
     <Box
       title={<FormattedMessage defaultMessage="Join the Circle" id="0r9bbv" />}
       subtitle={
-        <FormattedMessage
-          defaultMessage="Connect long-term interactions between you and your readers"
-          id="q7nV87"
-        />
+        <>
+          {!!circle ? (
+            displayName
+          ) : (
+            <FormattedMessage
+              defaultMessage="Connect long-term interactions between you and your readers"
+              id="q7nV87"
+            />
+          )}
+        </>
       }
       rightButton={
         <Switch
