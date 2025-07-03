@@ -11,6 +11,7 @@ import {
   Icon,
   LanguageContext,
   toast,
+  Tooltip,
   useDialogSwitch,
   useMutation,
   ViewerContext,
@@ -112,18 +113,26 @@ const CancelScheduleButton = ({ draft }: CancelScheduleButtonProps) => {
 
   return (
     <>
-      <Button
-        onClick={openDialog}
-        textColor="greyDarker"
-        textActiveColor="red"
-        className={styles.cancelScheduleButton}
-        aria-label={intl.formatMessage({
+      <Tooltip
+        placement="bottom"
+        content={intl.formatMessage({
           defaultMessage: 'Cancel schedule',
           id: 'OwMuXW',
         })}
       >
-        <Icon icon={IconTime2} size={22} />
-      </Button>
+        <Button
+          onClick={openDialog}
+          textColor="greyDarker"
+          textActiveColor="red"
+          className={styles.cancelScheduleButton}
+          aria-label={intl.formatMessage({
+            defaultMessage: 'Cancel schedule',
+            id: 'OwMuXW',
+          })}
+        >
+          <Icon icon={IconTime2} size={22} />
+        </Button>
+      </Tooltip>
 
       <Dialog
         isOpen={show}
