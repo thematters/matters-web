@@ -1,12 +1,10 @@
 import gql from 'graphql-tag'
 import { useContext } from 'react'
-import { FormattedMessage, useIntl } from 'react-intl'
+import { FormattedMessage } from 'react-intl'
 
-import IconDelete from '@/public/static/icons/24px/delete.svg'
 import { TEST_ID } from '~/common/enums'
 import {
   Dialog,
-  Icon,
   toast,
   useDialogSwitch,
   useMutation,
@@ -14,29 +12,23 @@ import {
 } from '~/components'
 import { DeleteButtonDraftFragment, DeleteDraftMutation } from '~/gql/graphql'
 
-import styles from './styles.module.css'
-
-interface DeleteButtonProps {
-  draft: DeleteButtonDraftFragment
-}
-
 const DELETE_DRAFT = gql`
   mutation DeleteDraft($id: ID!) {
     deleteDraft(input: { id: $id })
   }
 `
-const fragments = {
-  draft: gql`
-    fragment DeleteButtonDraft on Draft {
-      id
-      title
-    }
-  `,
+
+export interface DeleteDraftDialogProps {
+  draft: DeleteButtonDraftFragment
+  children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
 
-const DeleteButton = ({ draft }: DeleteButtonProps) => {
-  const { show, openDialog, closeDialog } = useDialogSwitch(false)
-  const intl = useIntl()
+const DeleteDraftDialog = ({ draft, children }: DeleteDraftDialogProps) => {
+  const {
+    show,
+    openDialog: baseOpenDialog,
+    closeDialog,
+  } = useDialogSwitch(false)
   const viewer = useContext(ViewerContext)
 
   const [deleteDraft] = useMutation<DeleteDraftMutation>(DELETE_DRAFT, {
@@ -62,6 +54,10 @@ const DeleteButton = ({ draft }: DeleteButtonProps) => {
     },
   })
 
+  const openDialog = () => {
+    baseOpenDialog()
+  }
+
   const onDelete = async () => {
     await deleteDraft()
 
@@ -70,21 +66,13 @@ const DeleteButton = ({ draft }: DeleteButtonProps) => {
         <FormattedMessage defaultMessage="Draft has been deleted" id="yAflVX" />
       ),
     })
+
+    closeDialog()
   }
 
   return (
     <>
-      <button
-        onClick={openDialog}
-        className={styles.deleteButton}
-        type="button"
-        aria-label={intl.formatMessage({
-          defaultMessage: 'Delete',
-          id: 'K3r6DQ',
-        })}
-      >
-        <Icon icon={IconDelete} size={24} />
-      </button>
+      {children({ openDialog })}
 
       <Dialog
         isOpen={show}
@@ -100,9 +88,8 @@ const DeleteButton = ({ draft }: DeleteButtonProps) => {
             <p>
               {!!draft.title && (
                 <FormattedMessage
-                  defaultMessage="Are you sure you want to delete draft ‘{title}’?"
-                  id="hpIFGj"
-                  description="src/components/DraftDigest/Feed/DeleteButton.tsx"
+                  defaultMessage="Are you sure you want to delete draft '{title}'?"
+                  id="Nl6BeH"
                   values={{
                     title: <span className="u-highlight">{draft.title}</span>,
                   }}
@@ -111,15 +98,13 @@ const DeleteButton = ({ draft }: DeleteButtonProps) => {
               {!draft.title && (
                 <FormattedMessage
                   defaultMessage="Are you sure you want to delete draft?"
-                  id="7WXDhH"
-                  description="src/components/DraftDigest/Feed/DeleteButton.tsx"
+                  id="VbxMwX"
                 />
               )}
               <br />
               <FormattedMessage
                 defaultMessage="(This action cannot be undone)"
-                id="F3zk7E"
-                description="src/components/DraftDigest/Feed/DeleteButton.tsx"
+                id="JYvLqB"
               />
             </p>
           </Dialog.Content.Message>
@@ -131,20 +116,14 @@ const DeleteButton = ({ draft }: DeleteButtonProps) => {
             <Dialog.RoundedButton
               text={<FormattedMessage defaultMessage="Delete" id="K3r6DQ" />}
               color="red"
-              onClick={() => {
-                onDelete()
-                closeDialog()
-              }}
+              onClick={onDelete}
             />
           }
           smUpBtns={
             <Dialog.TextButton
               text={<FormattedMessage defaultMessage="Delete" id="K3r6DQ" />}
               color="red"
-              onClick={() => {
-                onDelete()
-                closeDialog()
-              }}
+              onClick={onDelete}
             />
           }
         />
@@ -153,6 +132,4 @@ const DeleteButton = ({ draft }: DeleteButtonProps) => {
   )
 }
 
-DeleteButton.fragments = fragments
-
-export default DeleteButton
+export default DeleteDraftDialog

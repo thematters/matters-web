@@ -6,6 +6,7 @@ import IconTime2 from '@/public/static/icons/24px/time-2.svg'
 import { TEST_ID } from '~/common/enums'
 import { datetimeFormat } from '~/common/utils'
 import {
+  Button,
   Dialog,
   Icon,
   LanguageContext,
@@ -29,7 +30,6 @@ const CANCEL_SCHEDULE_ARTICLE = gql`
   mutation CancelScheduleArticle($id: ID!) {
     publishArticle(input: { id: $id, publishAt: null }) {
       id
-      publishState
       publishAt
       updatedAt
     }
@@ -41,7 +41,6 @@ const fragments = {
     fragment CancelScheduleButtonDraft on Draft {
       id
       title
-      publishState
       publishAt
       updatedAt
     }
@@ -61,9 +60,8 @@ const CancelScheduleButton = ({ draft }: CancelScheduleButtonProps) => {
       optimisticResponse: {
         publishArticle: {
           id: draft.id,
-          publishState: draft.publishState,
           publishAt: null,
-          updatedAt: draft.updatedAt,
+          updatedAt: new Date(),
         },
       },
       update: (cache) => {
@@ -71,8 +69,6 @@ const CancelScheduleButton = ({ draft }: CancelScheduleButtonProps) => {
           id: cache.identify(viewer),
           fields: {
             drafts(existingDrafts, { readField }) {
-              console.log(existingDrafts)
-
               let scheduledDrafts = existingDrafts.edges.filter(
                 ({ node }: { node: CancelScheduleButtonDraftFragment }) =>
                   readField('publishAt', node)
@@ -116,17 +112,18 @@ const CancelScheduleButton = ({ draft }: CancelScheduleButtonProps) => {
 
   return (
     <>
-      <button
+      <Button
         onClick={openDialog}
+        textColor="greyDarker"
+        textActiveColor="red"
         className={styles.cancelScheduleButton}
-        type="button"
         aria-label={intl.formatMessage({
           defaultMessage: 'Cancel schedule',
           id: 'OwMuXW',
         })}
       >
-        <Icon icon={IconTime2} size={22} color="greyDarker" />
-      </button>
+        <Icon icon={IconTime2} size={22} />
+      </Button>
 
       <Dialog
         isOpen={show}

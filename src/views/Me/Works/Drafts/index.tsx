@@ -69,6 +69,7 @@ export const BaseMeWorksDrafts = () => {
           <FormattedMessage defaultMessage="Write" id="k2veDA" />
         </TextIcon>
       </section>
+
       <List>
         {edges.map(({ node }) => (
           <List.Item key={node.id}>

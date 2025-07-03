@@ -569,10 +569,6 @@
     "defaultMessage": "选择支持金额",
     "description": "src/components/Forms/PaymentForm/PayTo/SetAmount/SetAmountBalance/index.tsx"
   },
-  "7WXDhH": {
-    "defaultMessage": "确认要删除草稿吗？",
-    "description": "src/components/DraftDigest/Feed/DeleteButton.tsx"
-  },
   "7XWzvD": {
     "defaultMessage": "这里还没有任何作品",
     "description": "src/components/Empty/EmptyWork.tsx"
@@ -882,6 +878,9 @@
     "defaultMessage": "复制留言",
     "description": "src/components/Comment/DropdownActions/index.tsx"
   },
+  "CbRvzm": {
+    "defaultMessage": "定时发布"
+  },
   "CcVXhc": {
     "defaultMessage": "Matters 正在通过合约交易将 {amount} 发送至你绑定的钱包 {address}（Matters 将暂时承担交易手续费）。如需帮助请联系 ask@matters.town"
   },
@@ -1032,10 +1031,6 @@
   },
   "ErV/vT": {
     "defaultMessage": "晚鸟参与七日书"
-  },
-  "F3zk7E": {
-    "defaultMessage": "（草稿删除后无法恢复）",
-    "description": "src/components/DraftDigest/Feed/DeleteButton.tsx"
   },
   "FEI5Fv": {
     "defaultMessage": "邮箱",
@@ -1272,6 +1267,9 @@
   "JXdbo8": {
     "defaultMessage": "完成"
   },
+  "JYvLqB": {
+    "defaultMessage": "（草稿删除后无法恢复）"
+  },
   "JaLEXz": {
     "defaultMessage": "进入围炉",
     "description": "src/components/CircleDigest/UserProfile/index.tsx"
@@ -1495,6 +1493,9 @@
   "NfCbnZ": {
     "defaultMessage": "支持者数量",
     "description": "src/components/ArticleDigest/Published/FooterActions/index.tsx"
+  },
+  "Nl6BeH": {
+    "defaultMessage": "确认要删除草稿「{title}」吗？"
   },
   "NlX31w": {
     "defaultMessage": "确认删除后，{commentType}会立即消失。",
@@ -1898,6 +1899,9 @@
   },
   "VZsE96": {
     "defaultMessage": "选集名称"
+  },
+  "VbxMwX": {
+    "defaultMessage": "确认要删除草稿吗？"
   },
   "VdxjkY": {
     "defaultMessage": "确认删除后，留言会立即消失。",
@@ -2561,10 +2565,6 @@
   "hl9bd4": {
     "defaultMessage": "封面"
   },
-  "hpIFGj": {
-    "defaultMessage": "确认要删除草稿「{title}」吗？",
-    "description": "src/components/DraftDigest/Feed/DeleteButton.tsx"
-  },
   "hrgo+E": {
     "defaultMessage": "归档"
   },
@@ -2659,6 +2659,10 @@
   },
   "k97/u7": {
     "defaultMessage": "添加作品"
+  },
+  "kAtrEq": {
+    "defaultMessage": "修改",
+    "description": "src/components/DraftDigest/Feed/DropdownActions/index.tsx"
   },
   "kCPl0r": {
     "defaultMessage": "关联"
@@ -2808,6 +2812,9 @@
   },
   "me1nR+": {
     "defaultMessage": "复制地址"
+  },
+  "mij/rJ": {
+    "defaultMessage": "删除草稿"
   },
   "ml3SZN": {
     "defaultMessage": "至少 8 个字符，支持英文大小写字母、数字和特殊符号"

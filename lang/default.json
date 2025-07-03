@@ -569,10 +569,6 @@
     "defaultMessage": "Select amount",
     "description": "src/components/Forms/PaymentForm/PayTo/SetAmount/SetAmountBalance/index.tsx"
   },
-  "7WXDhH": {
-    "defaultMessage": "Are you sure you want to delete draft?",
-    "description": "src/components/DraftDigest/Feed/DeleteButton.tsx"
-  },
   "7XWzvD": {
     "defaultMessage": "No works here yet",
     "description": "src/components/Empty/EmptyWork.tsx"
@@ -882,6 +878,9 @@
     "defaultMessage": "Copy comment",
     "description": "src/components/Comment/DropdownActions/index.tsx"
   },
+  "CbRvzm": {
+    "defaultMessage": "Schedule publish"
+  },
   "CcVXhc": {
     "defaultMessage": "Matters is sending {amount} to your connected wallet {address} via a contract transaction (Matters will temporarily cover the transaction fee). For assistance, please contact ask@matters.town"
   },
@@ -1032,10 +1031,6 @@
   },
   "ErV/vT": {
     "defaultMessage": "Confirm to join"
-  },
-  "F3zk7E": {
-    "defaultMessage": "(This action cannot be undone)",
-    "description": "src/components/DraftDigest/Feed/DeleteButton.tsx"
   },
   "FEI5Fv": {
     "defaultMessage": "Email address",
@@ -1272,6 +1267,9 @@
   "JXdbo8": {
     "defaultMessage": "Done"
   },
+  "JYvLqB": {
+    "defaultMessage": "(This action cannot be undone)"
+  },
   "JaLEXz": {
     "defaultMessage": "Enter Circle",
     "description": "src/components/CircleDigest/UserProfile/index.tsx"
@@ -1495,6 +1493,9 @@
   "NfCbnZ": {
     "defaultMessage": "Number of supporters",
     "description": "src/components/ArticleDigest/Published/FooterActions/index.tsx"
+  },
+  "Nl6BeH": {
+    "defaultMessage": "Are you sure you want to delete draft '{title}'?"
   },
   "NlX31w": {
     "defaultMessage": "After deletion, the {commentType} will be removed immediately",
@@ -1898,6 +1899,9 @@
   },
   "VZsE96": {
     "defaultMessage": "Collection Name"
+  },
+  "VbxMwX": {
+    "defaultMessage": "Are you sure you want to delete draft?"
   },
   "VdxjkY": {
     "defaultMessage": "After deletion, the comment will be removed immediately",
@@ -2561,10 +2565,6 @@
   "hl9bd4": {
     "defaultMessage": "Cover"
   },
-  "hpIFGj": {
-    "defaultMessage": "Are you sure you want to delete draft ‘{title}’?",
-    "description": "src/components/DraftDigest/Feed/DeleteButton.tsx"
-  },
   "hrgo+E": {
     "defaultMessage": "Archive"
   },
@@ -2659,6 +2659,10 @@
   },
   "k97/u7": {
     "defaultMessage": "Add Articles"
+  },
+  "kAtrEq": {
+    "defaultMessage": "Edit",
+    "description": "src/components/DraftDigest/Feed/DropdownActions/index.tsx"
   },
   "kCPl0r": {
     "defaultMessage": "Collect"
@@ -2808,6 +2812,9 @@
   },
   "me1nR+": {
     "defaultMessage": "Copy Address"
+  },
+  "mij/rJ": {
+    "defaultMessage": "Delete draft"
   },
   "ml3SZN": {
     "defaultMessage": "Minimum 8 characters. Uppercase/lowercase letters, numbers and symbols are allowed"

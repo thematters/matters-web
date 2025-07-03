@@ -10,6 +10,7 @@ import { LanguageContext } from '~/components'
 import { DraftDigestFeedDraftFragment } from '~/gql/graphql'
 
 import CancelScheduleButton from './CancelScheduleButton'
+import DropdownActions from './DropdownActions'
 import Placeholder from './Placeholder'
 import styles from './styles.module.css'
 
@@ -26,8 +27,10 @@ const fragments = {
       updatedAt
       publishAt
       ...CancelScheduleButtonDraft
+      ...DraftDigestDropdownActionsDraft
     }
     ${CancelScheduleButton.fragments.draft}
+    ${DropdownActions.fragments.draft}
   `,
 }
 
@@ -82,6 +85,7 @@ const DraftDigestFeed = ({ draft }: DraftDigestFeedProps) => {
 
       <section className={styles.right}>
         {publishAt && <CancelScheduleButton draft={draft} />}
+        {!publishAt && <DropdownActions draft={draft} />}
       </section>
     </section>
   )
