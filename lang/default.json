@@ -1617,6 +1617,9 @@
     "defaultMessage": "Incorrect email or password",
     "description": "USER_EMAIL_NOT_FOUND"
   },
+  "PtlWaj": {
+    "defaultMessage": "The selected time has expired, please choose again."
+  },
   "Q8Qw5B": {
     "defaultMessage": "Description"
   },
@@ -2739,6 +2742,9 @@
   },
   "lO7wKc": {
     "defaultMessage": "Not yet"
+  },
+  "lYVn31": {
+    "defaultMessage": "This work has been added to the schedule. Please go to the \"My Works\" page to confirm"
   },
   "lZukEr": {
     "defaultMessage": "commented",

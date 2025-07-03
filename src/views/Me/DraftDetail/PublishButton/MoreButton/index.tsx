@@ -10,6 +10,7 @@ import {
   Menu,
   TextIcon,
   useMediaQuery,
+  useRoute,
 } from '~/components'
 import { SchedulePublishDialog } from '~/components/Editor/SchedulePublishDialog'
 
@@ -23,9 +24,11 @@ export const MoreButton = ({
   onConfirmSchedulePublish,
 }: MoreButtonProps) => {
   const isSmUp = useMediaQuery(`(min-width: ${BREAKPOINTS.MD}px)`)
+  const { getQuery } = useRoute()
+  const id = getQuery('draftId')
 
   return (
-    <SchedulePublishDialog onConfirm={onConfirmSchedulePublish}>
+    <SchedulePublishDialog draft={{ id }} onConfirm={onConfirmSchedulePublish}>
       {({ openDialog }) => (
         <Dropdown
           content={

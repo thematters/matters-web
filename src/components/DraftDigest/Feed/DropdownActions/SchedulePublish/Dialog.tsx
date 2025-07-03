@@ -87,6 +87,7 @@ const SchedulePublishDialogComponent = ({
 
   return (
     <SchedulePublishDialog
+      draft={draft}
       onConfirm={onSchedulePublish}
       confirmButtonText={
         <FormattedMessage defaultMessage="Schedule Publish" id="Km6eJ2" />

@@ -1617,6 +1617,9 @@
     "defaultMessage": "郵件地址或密碼錯誤",
     "description": "USER_EMAIL_NOT_FOUND"
   },
+  "PtlWaj": {
+    "defaultMessage": "選定時間已逾期，請重新選擇"
+  },
   "Q8Qw5B": {
     "defaultMessage": "描述"
   },
@@ -2739,6 +2742,9 @@
   },
   "lO7wKc": {
     "defaultMessage": "再想想"
+  },
+  "lYVn31": {
+    "defaultMessage": "此作品已加入排程，請前往「我的創作」頁面確認"
   },
   "lZukEr": {
     "defaultMessage": "評論了",
