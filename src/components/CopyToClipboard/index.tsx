@@ -35,7 +35,7 @@ export const CopyToClipboard: React.FC<CopyToClipboardProps> = ({
 
     await clipboard.write([item])
 
-    toast.success({
+    toast.info({
       message: successMessage || (
         <FormattedMessage defaultMessage="Copied successful" id="SYyBFF" />
       ),

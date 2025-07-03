@@ -76,7 +76,7 @@ const ToggleCampaignFeaturedButton = ({
       onClick={async () => {
         await update()
 
-        toast.success({
+        toast.info({
           message: campaignFeatured ? (
             <FormattedMessage
               defaultMessage="The article has been removed from the featured of the event"

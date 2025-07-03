@@ -23,7 +23,7 @@ const PendingState = ({ draft }: { draft: PublishStateDraftFragment }) => {
   useEffect(() => {
     startPolling(1000 * 2)
 
-    toast.success({
+    toast.info({
       message: (
         <FormattedMessage
           defaultMessage="Publishing, please wait..."

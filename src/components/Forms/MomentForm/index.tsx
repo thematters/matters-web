@@ -231,7 +231,7 @@ const MomentForm = ({ setFirstRendered }: MomentFormProps) => {
       const [, codes] = parseFormSubmitErrors(error as ApolloError)
       codes.forEach((code) => {
         if (code === 'ACTION_LIMIT_EXCEEDED') {
-          toast.success({
+          toast.info({
             message: intl.formatMessage({
               defaultMessage:
                 'You’ve posted several times in a short period. Please take a break.',

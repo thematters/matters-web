@@ -94,7 +94,7 @@ export const MomentAssetsUploader: React.FC<MomentAssetsUploaderProps> = ({
     async (files: File[]) => {
       const newFileCount = files.length
       if (newFileCount + assets.length > UPLOAD_MOMENT_ASSET_COUNT_LIMIT) {
-        toast.success({
+        toast.info({
           message: (
             <FormattedMessage
               defaultMessage="Up to 3 images can be uploaded"

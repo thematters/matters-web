@@ -33,7 +33,7 @@ const Toasts = () => (
         spacing={[8, 8]}
         bgColor="greenLighter"
         onClick={() => {
-          toast.success({
+          toast.info({
             message: (
               <FormattedMessage defaultMessage="Image uploaded" id="TcTp+J" />
             ),

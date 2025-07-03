@@ -61,7 +61,7 @@ const DeleteDraftDialog = ({ draft, children }: DeleteDraftDialogProps) => {
   const onDelete = async () => {
     await deleteDraft()
 
-    toast.success({
+    toast.info({
       message: (
         <FormattedMessage defaultMessage="Draft has been deleted" id="yAflVX" />
       ),

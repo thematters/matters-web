@@ -41,7 +41,7 @@ const PublishedState = ({ draft }: { draft: PublishStateDraftFragment }) => {
     })
 
     // toast success
-    toast.success({
+    toast.info({
       message: (
         <FormattedMessage
           defaultMessage="The article has been successfully published and will be synced to IPFS soon."

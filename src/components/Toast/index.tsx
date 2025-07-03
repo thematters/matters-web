@@ -4,6 +4,7 @@ import type { Toast as ToastType } from 'react-hot-toast'
 import baseToast, { Toaster as BaseToaster } from 'react-hot-toast'
 import { useIntl } from 'react-intl'
 
+import IconCircleCheckFill from '@/public/static/icons/24px/circle-check-fill.svg'
 import IconTimes from '@/public/static/icons/24px/times.svg'
 import IconWarn from '@/public/static/icons/24px/warn.svg'
 import { Button, ButtonProps, Icon, TextIcon } from '~/components'
@@ -11,7 +12,7 @@ import { Button, ButtonProps, Icon, TextIcon } from '~/components'
 import styles from './styles.module.css'
 
 type ToastActionsProps = {
-  type: 'success' | 'warning' | 'error'
+  type: 'info' | 'warning' | 'error' | 'success'
   actions: Array<{ content: string | React.ReactNode } & ButtonProps>
   onDismiss?: () => void
   hasClose?: boolean
@@ -93,12 +94,16 @@ const getAnimationStyle = (visible: boolean): React.CSSProperties => {
 }
 
 const Toast: React.FC<
-  ToastProps & { type: 'success' | 'warning' | 'error'; toast: ToastType }
+  ToastProps & {
+    type: 'info' | 'warning' | 'error' | 'success'
+    toast: ToastType
+  }
 > = React.memo(({ message, actions, type, toast, hasClose = true }) => {
   const animationStyle: React.CSSProperties = toast.height
     ? getAnimationStyle(toast.visible)
     : { opacity: 0 }
   const isSuccess = type === 'success'
+  const isInfo = type === 'info'
   const isWarning = type === 'warning'
   const isError = type === 'error'
 
@@ -110,9 +115,20 @@ const Toast: React.FC<
       aria-live="assertive"
       aria-atomic="true"
     >
-      {isSuccess && message}
+      {isInfo && message}
+      {isSuccess && (
+        <TextIcon
+          icon={<Icon icon={IconCircleCheckFill} color="white" size={22} />}
+          spacing={6}
+        >
+          {message}
+        </TextIcon>
+      )}
       {(isWarning || isError) && (
-        <TextIcon icon={<Icon icon={IconWarn} color="white" />} spacing={8}>
+        <TextIcon
+          icon={<Icon icon={IconWarn} color="white" size={22} />}
+          spacing={6}
+        >
           {message}
         </TextIcon>
       )}
@@ -134,6 +150,12 @@ export const toast = {
   success: ({ duration, ...props }: ToastProps) => {
     return baseToast.custom(
       (toast) => <Toast {...props} toast={toast} type="success" />,
+      { duration: !!duration ? duration : props.actions ? 5000 : 3000 }
+    )
+  },
+  info: ({ duration, ...props }: ToastProps) => {
+    return baseToast.custom(
+      (toast) => <Toast {...props} toast={toast} type="info" />,
       { duration: !!duration ? duration : props.actions ? 5000 : 3000 }
     )
   },

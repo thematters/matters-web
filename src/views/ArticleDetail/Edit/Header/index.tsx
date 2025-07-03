@@ -199,7 +199,7 @@ const EditModeHeader = ({
       if (needRepublish) {
         onPublish()
       } else {
-        toast.success({
+        toast.info({
           message: (
             <FormattedMessage
               defaultMessage="Saved"

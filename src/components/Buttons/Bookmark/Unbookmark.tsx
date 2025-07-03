@@ -68,7 +68,7 @@ const Unbookmark = ({
 
     await unbookmark()
 
-    toast.success({
+    toast.info({
       message: (
         <FormattedMessage defaultMessage="Bookmark removed" id="8ZyDQJ" />
       ),
