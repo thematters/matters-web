@@ -39,6 +39,9 @@
     "defaultMessage": "移至頂部",
     "description": "src/components/ArticleDigest/DropdownActions/SetTopCollectionButton.tsx"
   },
+  "+So1dD": {
+    "defaultMessage": "取消成功"
+  },
   "+a+2ug": {
     "defaultMessage": "成員"
   },
@@ -682,6 +685,9 @@
   "9J0iCw": {
     "defaultMessage": "已註銷用戶"
   },
+  "9MEe0P": {
+    "defaultMessage": "不取消"
+  },
   "9OPnTz": {
     "defaultMessage": "系統或連線異常，請刷新頁面後重新點擊晚鳥參與"
   },
@@ -1320,6 +1326,9 @@
   "KQi/UZ": {
     "defaultMessage": "封存作品"
   },
+  "KU53D5": {
+    "defaultMessage": "確認要將「{title}」原訂於 {date} {time} 的排程發布取消嗎？取消後，你可以再度編輯內容或重新排定發布時間。"
+  },
   "KWDSxB": {
     "defaultMessage": "保存編輯"
   },
@@ -1542,6 +1551,9 @@
   "OsX3KM": {
     "defaultMessage": "評論",
     "description": "src/views/ArticleDetail/index.tsx"
+  },
+  "OwMuXW": {
+    "defaultMessage": "取消排程"
   },
   "OwtCWk": {
     "defaultMessage": "僅供輸入 {MIN_CIRCLE_DISPLAY_NAME_LENGTH}-{MAX_CIRCLE_DISPLAY_NAME_LENGTH} 個字元"
@@ -2865,6 +2877,10 @@
   "nozN+j": {
     "defaultMessage": "電子信箱不正確",
     "description": "USER_EMAIL_INVALID"
+  },
+  "oEHAIT": {
+    "defaultMessage": "取消排程",
+    "description": "confirm cancel schedule button"
   },
   "ob+HDS": {
     "defaultMessage": "馬上逛逛"

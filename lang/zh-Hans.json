@@ -39,6 +39,9 @@
     "defaultMessage": "移至顶部",
     "description": "src/components/ArticleDigest/DropdownActions/SetTopCollectionButton.tsx"
   },
+  "+So1dD": {
+    "defaultMessage": "取消成功"
+  },
   "+a+2ug": {
     "defaultMessage": "成员"
   },
@@ -682,6 +685,9 @@
   "9J0iCw": {
     "defaultMessage": "已注销用户"
   },
+  "9MEe0P": {
+    "defaultMessage": "不取消"
+  },
   "9OPnTz": {
     "defaultMessage": "系统或连线异常，请刷新页面后重新点击晚鸟参与"
   },
@@ -1320,6 +1326,9 @@
   "KQi/UZ": {
     "defaultMessage": "归档作品"
   },
+  "KU53D5": {
+    "defaultMessage": "确认要将「{title}」原定于 {date} {time} 的定时发布取消吗？取消后，你可以再度编辑内容或重新设置发布时间。"
+  },
   "KWDSxB": {
     "defaultMessage": "保存编辑"
   },
@@ -1542,6 +1551,9 @@
   "OsX3KM": {
     "defaultMessage": "评论",
     "description": "src/views/ArticleDetail/index.tsx"
+  },
+  "OwMuXW": {
+    "defaultMessage": "取消定时发布"
   },
   "OwtCWk": {
     "defaultMessage": "仅供输入 {MIN_CIRCLE_DISPLAY_NAME_LENGTH}-{MAX_CIRCLE_DISPLAY_NAME_LENGTH} 個字符"
@@ -2865,6 +2877,10 @@
   "nozN+j": {
     "defaultMessage": "邮箱不正确",
     "description": "USER_EMAIL_INVALID"
+  },
+  "oEHAIT": {
+    "defaultMessage": "取消发布",
+    "description": "confirm cancel schedule button"
   },
   "ob+HDS": {
     "defaultMessage": "马上逛逛"

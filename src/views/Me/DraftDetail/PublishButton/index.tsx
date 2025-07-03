@@ -60,6 +60,8 @@ const PUBLISH_ARTICLE = gql`
     publishArticle(input: { id: $id, publishAt: $publishAt }) {
       id
       publishState
+      publishAt
+      updatedAt
     }
   }
 `

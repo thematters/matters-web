@@ -9,7 +9,7 @@ import { datetimeFormat, toPath } from '~/common/utils'
 import { LanguageContext } from '~/components'
 import { DraftDigestFeedDraftFragment } from '~/gql/graphql'
 
-import DeleteButton from './DeleteButton'
+import CancelScheduleButton from './CancelScheduleButton'
 import Placeholder from './Placeholder'
 import styles from './styles.module.css'
 
@@ -25,9 +25,9 @@ const fragments = {
       slug
       updatedAt
       publishAt
-      ...DeleteButtonDraft
+      ...CancelScheduleButtonDraft
     }
-    ${DeleteButton.fragments.draft}
+    ${CancelScheduleButton.fragments.draft}
   `,
 }
 
@@ -66,18 +66,22 @@ const DraftDigestFeed = ({ draft }: DraftDigestFeedProps) => {
           )}
         </time>
         <section className={styles.content}>
-          <Link {...path} className="u-link-active-green">
-            <section className={styles.title}>
-              {title || (
-                <FormattedMessage defaultMessage="Untitled" id="3kbIhS" />
-              )}
-            </section>
-          </Link>
+          {draft.publishAt ? (
+            <section className={styles.title}>{title}</section>
+          ) : (
+            <Link {...path} className="u-link-active-green">
+              <section className={styles.title}>
+                {title || (
+                  <FormattedMessage defaultMessage="Untitled" id="3kbIhS" />
+                )}
+              </section>
+            </Link>
+          )}
         </section>
       </section>
 
       <section className={styles.right}>
-        <DeleteButton draft={draft} />
+        {publishAt && <CancelScheduleButton draft={draft} />}
       </section>
     </section>
   )
@@ -95,7 +99,13 @@ type MemoizedDraftDigestFeedType = React.MemoExoticComponent<
 
 const MemoizedDraftDigestFeed = React.memo(
   DraftDigestFeed,
-  () => true
+  (prevProps, nextProps) => {
+    return (
+      prevProps.draft.publishAt === nextProps.draft.publishAt &&
+      prevProps.draft.title === nextProps.draft.title &&
+      prevProps.draft.updatedAt === nextProps.draft.updatedAt
+    )
+  }
 ) as MemoizedDraftDigestFeedType
 
 MemoizedDraftDigestFeed.Placeholder = Placeholder

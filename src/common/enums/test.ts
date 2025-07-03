@@ -63,6 +63,7 @@ export enum TEST_ID {
   DIALOG_COMMENT_DELETE = 'dialog/delete-comment',
   DIALOG_COMMENT_COLLAPSE = 'dialog/collapse-comment',
   DIALOG_DELETE_DRAFT = 'dialog/delete-draft',
+  DIALOG_CANCEL_SCHEDULE_DRAFT = 'dialog/cancel-schedule-draft',
   DIALOG_EDIT_COLLECTION = 'dialog/edit-collection',
   DIALOG_DELETE_COLLECTION = 'dialog/delete-collection',
   // drawer
