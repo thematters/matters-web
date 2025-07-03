@@ -3268,6 +3268,9 @@
     "defaultMessage": "reset your login password",
     "description": "src/components/Dialogs/SetEmailDialog/Content.tsx"
   },
+  "vsps+A": {
+    "defaultMessage": "Scheduled for {time} {date}"
+  },
   "w+6UiO": {
     "defaultMessage": "Add Invitation"
   },

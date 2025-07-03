@@ -1,11 +1,12 @@
+import classNames from 'classnames'
 import gql from 'graphql-tag'
 import Link from 'next/link'
-import React from 'react'
+import React, { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { TEST_ID } from '~/common/enums'
-import { toPath } from '~/common/utils'
-import { DateTime } from '~/components'
+import { datetimeFormat, toPath } from '~/common/utils'
+import { LanguageContext } from '~/components'
 import { DraftDigestFeedDraftFragment } from '~/gql/graphql'
 
 import DeleteButton from './DeleteButton'
@@ -23,6 +24,7 @@ const fragments = {
       title
       slug
       updatedAt
+      publishAt
       ...DeleteButtonDraft
     }
     ${DeleteButton.fragments.draft}
@@ -30,7 +32,8 @@ const fragments = {
 }
 
 const DraftDigestFeed = ({ draft }: DraftDigestFeedProps) => {
-  const { id, title, updatedAt } = draft
+  const { lang } = useContext(LanguageContext)
+  const { id, title, updatedAt, publishAt } = draft
   const path = toPath({ page: 'draftDetail', id })
 
   return (
@@ -39,9 +42,29 @@ const DraftDigestFeed = ({ draft }: DraftDigestFeedProps) => {
       data-test-id={TEST_ID.DIGEST_DRAFT_FEED}
     >
       <section className={styles.left}>
-        <section>
-          <DateTime date={updatedAt} color="grey" />
-        </section>
+        <time
+          dateTime={new Date(publishAt || updatedAt).toISOString()}
+          className={classNames(styles.date, {
+            [styles.scheduled]: !!publishAt,
+          })}
+        >
+          {publishAt ? (
+            <FormattedMessage
+              defaultMessage="Scheduled for {time} {date}"
+              id="vsps+A"
+              values={{
+                time: new Date(publishAt).toLocaleTimeString('en-GB', {
+                  hour: '2-digit',
+                  minute: '2-digit',
+                  hour12: false,
+                }),
+                date: datetimeFormat.absolute({ date: publishAt, lang }),
+              }}
+            />
+          ) : (
+            datetimeFormat.relative(updatedAt, lang)
+          )}
+        </time>
         <section className={styles.content}>
           <Link {...path} className="u-link-active-green">
             <section className={styles.title}>

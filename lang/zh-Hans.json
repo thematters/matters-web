@@ -3268,6 +3268,9 @@
     "defaultMessage": "重置你的登录密码",
     "description": "src/components/Dialogs/SetEmailDialog/Content.tsx"
   },
+  "vsps+A": {
+    "defaultMessage": "定时发布于 {date} {time}"
+  },
   "w+6UiO": {
     "defaultMessage": "新增邀请"
   },

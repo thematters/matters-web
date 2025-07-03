@@ -34,6 +34,16 @@
   }
 }
 
+.date {
+  font-size: var(--font-size-subtext);
+  line-height: 1.125rem;
+  color: var(--color-grey);
+
+  &.scheduled {
+    color: var(--color-positive-green);
+  }
+}
+
 .deleteButton {
   color: var(--color-grey);
 
