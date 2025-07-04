@@ -70,29 +70,28 @@ const CancelScheduleButton = ({ draft }: CancelScheduleButtonProps) => {
           id: cache.identify(viewer),
           fields: {
             drafts(existingDrafts, { readField }) {
-              let scheduledDrafts = existingDrafts.edges.filter(
+              const targetEdge = existingDrafts.edges.find(
                 ({ node }: { node: CancelScheduleButtonDraftFragment }) =>
-                  readField('publishAt', node)
+                  readField('id', node) === draft.id
+              )
+
+              const scheduledDrafts = existingDrafts.edges.filter(
+                ({ node }: { node: CancelScheduleButtonDraftFragment }) =>
+                  readField('publishAt', node) &&
+                  readField('id', node) !== draft.id
               )
               let nonScheduledDrafts = existingDrafts.edges.filter(
                 ({ node }: { node: CancelScheduleButtonDraftFragment }) =>
-                  !readField('publishAt', node)
-              )
-
-              // Remove the draft from the scheduled drafts
-              scheduledDrafts = scheduledDrafts.filter(
-                ({ node }: { node: CancelScheduleButtonDraftFragment }) =>
+                  !readField('publishAt', node) &&
                   readField('id', node) !== draft.id
               )
 
               // Add the draft to the non-scheduled drafts
-              nonScheduledDrafts = [draft, ...nonScheduledDrafts]
-
-              const edges = [...scheduledDrafts, ...nonScheduledDrafts]
+              nonScheduledDrafts = [targetEdge, ...nonScheduledDrafts]
 
               return {
                 ...existingDrafts,
-                edges,
+                edges: [...scheduledDrafts, ...nonScheduledDrafts],
               }
             },
           },

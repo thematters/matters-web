@@ -49,22 +49,32 @@ const SchedulePublishDialogComponent = ({
           id: cache.identify(viewer),
           fields: {
             drafts(existingDrafts, { readField }) {
+              // Target edge
+              const targetEdge = existingDrafts.edges.find(
+                ({ node }: { node: SchedulePublishButtonDraftFragment }) =>
+                  readField('id', node) === draft.id
+              )
+
               let scheduledDrafts = existingDrafts.edges.filter(
                 ({ node }: { node: SchedulePublishButtonDraftFragment }) =>
-                  readField('publishAt', node)
+                  readField('publishAt', node) &&
+                  readField('id', node) !== draft.id
               )
               let nonScheduledDrafts = existingDrafts.edges.filter(
                 ({ node }: { node: SchedulePublishButtonDraftFragment }) =>
-                  !readField('publishAt', node)
+                  !readField('publishAt', node) &&
+                  readField('id', node) !== draft.id
               )
 
               // Add the draft to the scheduled drafts
               // and order by publishAt desc
-              scheduledDrafts = [draft, ...scheduledDrafts].sort((a, b) => {
-                const aDate = new Date(readField('publishAt', a)!)
-                const bDate = new Date(readField('publishAt', b)!)
-                return bDate.getTime() - aDate.getTime()
-              })
+              scheduledDrafts = [targetEdge, ...scheduledDrafts].sort(
+                (a, b) => {
+                  const aDate = new Date(readField('publishAt', a.node)!)
+                  const bDate = new Date(readField('publishAt', b.node)!)
+                  return aDate.getTime() - bDate.getTime()
+                }
+              )
 
               // Remove the draft from the non-scheduled drafts
               nonScheduledDrafts = nonScheduledDrafts.filter(
@@ -72,11 +82,9 @@ const SchedulePublishDialogComponent = ({
                   readField('id', node) !== draft.id
               )
 
-              const edges = [...scheduledDrafts, ...nonScheduledDrafts]
-
               return {
                 ...existingDrafts,
-                edges,
+                edges: [...scheduledDrafts, ...nonScheduledDrafts],
               }
             },
           },
