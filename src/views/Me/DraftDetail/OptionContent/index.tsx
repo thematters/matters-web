@@ -4,6 +4,7 @@ import { FormattedMessage } from 'react-intl'
 
 import { ENTITY_TYPE } from '~/common/enums'
 import { Tabs, toDigestTagPlaceholder } from '~/components'
+import SupportSettingDialog from '~/components/Editor/MoreSettings/SupportSettingDialog'
 import { getSelectCampaigns } from '~/components/Editor/SelectCampaign'
 import Sidebar from '~/components/Editor/Sidebar'
 import {
@@ -17,11 +18,15 @@ import { EditMetaDraftFragment } from '~/gql/graphql'
 import {
   useEditDraftAccess,
   useEditDraftCampaign,
+  useEditDraftCanComment,
   useEditDraftCollections,
   useEditDraftConnections,
   useEditDraftCover,
+  useEditDraftPublishISCN,
+  useEditDraftSensitiveByAuthor,
   useEditDraftTags,
   useEditIndent,
+  useEditSupportSetting,
 } from '../hooks'
 import styles from './styles.module.css'
 
@@ -159,6 +164,80 @@ const EditDraftLicense = ({ draft }: OptionItemProps) => {
   )
 }
 
+const EditDraftCanComment = ({ draft }: OptionItemProps) => {
+  const { edit, saving } = useEditDraftCanComment()
+  const canComment = draft.canComment
+  return (
+    <Sidebar.CanComment
+      canComment={canComment}
+      editCanComment={edit}
+      saving={saving}
+    />
+  )
+}
+
+const EditDraftSupportSetting = ({ draft }: OptionItemProps) => {
+  const { edit: editSupport, saving: supportSaving } = useEditSupportSetting()
+
+  return (
+    <SupportSettingDialog
+      draft={draft}
+      editSupportSetting={editSupport}
+      supportSettingSaving={supportSaving}
+    >
+      {({ openDialog }) => (
+        <Sidebar.SupportSetting openSupportSetting={openDialog} />
+      )}
+    </SupportSettingDialog>
+  )
+}
+
+const EditDraftCircle = ({ draft, ownCircles }: OptionItemProps) => {
+  const { edit, saving } = useEditDraftAccess(ownCircles && ownCircles[0])
+
+  const hasOwnCircle = ownCircles && ownCircles.length >= 1
+  const circle = draft.access?.circle
+
+  if (!hasOwnCircle) {
+    return null
+  }
+
+  return (
+    <Sidebar.Circle
+      license={draft.license}
+      circle={circle}
+      editAccess={edit}
+      saving={saving}
+    />
+  )
+}
+
+const EditDraftSensitive = ({ draft }: OptionItemProps) => {
+  const { edit, saving } = useEditDraftSensitiveByAuthor()
+  const sensitive = draft.sensitiveByAuthor
+  return (
+    <Sidebar.Sensitive
+      sensitive={sensitive}
+      toggleSensitive={edit}
+      sensitiveSaving={saving}
+    />
+  )
+}
+
+const EditDraftISCN = ({ draft }: OptionItemProps) => {
+  const { edit, saving } = useEditDraftPublishISCN()
+
+  const iscnPublish = !!draft.iscnPublish
+
+  return (
+    <Sidebar.ISCN
+      iscnPublish={iscnPublish}
+      toggleISCN={edit}
+      iscnPublishSaving={saving}
+    />
+  )
+}
+
 export const OptionContent = (props: OptionContentProps) => {
   const [type, setType] = useState<'contentAndLayout' | 'settings'>(
     'contentAndLayout'
@@ -210,7 +289,16 @@ export const OptionContent = (props: OptionContentProps) => {
             <EditDraftIndent {...props} disabled={disabled} />
           </>
         )}
-        {isSettings && <EditDraftLicense {...props} disabled={disabled} />}
+        {isSettings && (
+          <>
+            <EditDraftLicense {...props} disabled={disabled} />
+            <EditDraftCanComment {...props} disabled={disabled} />
+            <EditDraftSupportSetting {...props} disabled={disabled} />
+            <EditDraftSensitive {...props} disabled={disabled} />
+            <EditDraftCircle {...props} disabled={disabled} />
+            <EditDraftISCN {...props} disabled={disabled} />
+          </>
+        )}
       </section>
     </section>
   )

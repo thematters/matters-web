@@ -8,4 +8,6 @@ export const KEYVALUE = {
   space: 'space',
   pageDown: 'pagedown',
   pageUp: 'pageup',
+  keyC: 'keyc',
+  keyD: 'keyd',
 }

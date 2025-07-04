@@ -52,6 +52,10 @@
     "defaultMessage": "Are you sure you want to remove ‘{article}’ from this collection?",
     "description": "src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
   },
+  "+grX8J": {
+    "defaultMessage": "Allow Comments",
+    "description": "src/components/Editor/Sidebar/CanComment/index.tsx"
+  },
   "+ixiPI": {
     "defaultMessage": "Delete moment"
   },
@@ -179,6 +183,9 @@
   },
   "0r2yd+": {
     "defaultMessage": "Paragraph indent"
+  },
+  "0r9bbv": {
+    "defaultMessage": "Join the Circle"
   },
   "0tHLRn": {
     "defaultMessage": "Insufficient Balance"
@@ -586,6 +593,10 @@
   "7oytv9": {
     "defaultMessage": "(edited)"
   },
+  "7uYW+U": {
+    "defaultMessage": "Comments",
+    "description": "src/views/ArticleDetail/Toolbar/FixedToolbar/index.tsx"
+  },
   "7ykJ+l": {
     "defaultMessage": "Still quiet here. {br}Be the first one to say hello!",
     "description": "src/components/Empty/EmptyComment.tsx"
@@ -917,6 +928,9 @@
   "D3idYv": {
     "defaultMessage": "Settings"
   },
+  "D9/QIR": {
+    "defaultMessage": "Register ISCN"
+  },
   "D9R/ol": {
     "defaultMessage": "Add articles to your circle"
   },
@@ -1039,6 +1053,9 @@
   "FEI5Fv": {
     "defaultMessage": "Email address",
     "description": "src/components/Dialogs/SetEmailDialog/Content.tsx"
+  },
+  "FLGK+W": {
+    "defaultMessage": "Custom Call-to-Support and Thank-you card"
   },
   "FMIIAZ": {
     "defaultMessage": "Revision history and IPFS entry,",
@@ -1631,6 +1648,9 @@
   },
   "PtlWaj": {
     "defaultMessage": "The selected time has expired, please choose again."
+  },
+  "PvVnlo": {
+    "defaultMessage": "Includes content that is sexual, violent, bloody, etc."
   },
   "Q8Qw5B": {
     "defaultMessage": "Description"
@@ -2524,6 +2544,10 @@
     "defaultMessage": "The payment amount is invalid, please re-enter.",
     "description": "PAYMENT_AMOUNT_INVALID"
   },
+  "gsZ/aj": {
+    "defaultMessage": "Comments allowed, cannot be closed once published",
+    "description": "src/components/Editor/Sidebar/CanComment/index.tsx"
+  },
   "gvTltk": {
     "defaultMessage": "Draft - {title}"
   },
@@ -2533,6 +2557,9 @@
   "h+punE": {
     "defaultMessage": "Updated {date}",
     "description": "src/views/User/CollectionDetail/Content.tsx"
+  },
+  "h5Y9al": {
+    "defaultMessage": "Used for publishing Writing NFTs, cost ≈1 LIKE"
   },
   "h74kLA": {
     "defaultMessage": "Failed to Donate"
@@ -2620,6 +2647,10 @@
   "imXsmo": {
     "defaultMessage": "back to latest",
     "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
+  },
+  "iqS81J": {
+    "defaultMessage": "Support Author",
+    "description": "src/views/ArticleDetail/Toolbar/FixedToolbar/index.tsx"
   },
   "itPgxd": {
     "defaultMessage": "Profile"
@@ -2968,6 +2999,9 @@
   "q192Fl": {
     "defaultMessage": "Delete comment",
     "description": "Moment"
+  },
+  "q7nV87": {
+    "defaultMessage": "Connect long-term interactions between you and your readers"
   },
   "q9oMKE": {
     "defaultMessage": "Circle Name"
@@ -3553,6 +3587,9 @@
   "zvNfwL": {
     "defaultMessage": "Operation too frequent, please try again later.",
     "description": "ACTION_LIMIT_EXCEEDED"
+  },
+  "zw4KNU": {
+    "defaultMessage": "Support Settings"
   },
   "zxy15q": {
     "defaultMessage": "{subscriber, plural, =1 {subscriber} other {subscribers}}",
