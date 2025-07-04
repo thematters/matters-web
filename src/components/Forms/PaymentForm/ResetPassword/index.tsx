@@ -69,7 +69,7 @@ const PaymentResetPasswordForm = ({
           submitCallback={
             autoCloseDialog
               ? () => {
-                  toast.success({
+                  toast.info({
                     message: (
                       <FormattedMessage
                         defaultMessage="Reset successful"

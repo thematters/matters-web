@@ -13,7 +13,7 @@ import styles from './styles.module.css'
 export type SettingsListDialogButtons = {
   confirmButtonText?: string | React.ReactNode
   cancelButtonText?: string | React.ReactNode
-  onConfirm?: () => void
+  onConfirm: ({ closeDialog }: { closeDialog: () => void }) => void
 }
 
 export type SettingsListDialogProps = {
@@ -98,11 +98,7 @@ const SettingsList = ({
       return
     }
 
-    if (onConfirm) {
-      onConfirm()
-    } else {
-      forward('confirm')
-    }
+    onConfirm({ closeDialog })
   }
 
   return (

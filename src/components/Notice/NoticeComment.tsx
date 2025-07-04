@@ -89,7 +89,7 @@ const NoticeComment = ({
     return (
       <button
         onClick={() => {
-          toast.success({
+          toast.info({
             message: (
               <FormattedMessage
                 defaultMessage="This comment has been hidden due to violation of community terms of services"

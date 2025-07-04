@@ -68,7 +68,7 @@ const UnfollowUserActionButton = ({ user }: UnfollowUserActionButtonProps) => {
       onClick={async () => {
         await unfollow()
 
-        toast.success({
+        toast.info({
           message: (
             <Translate
               zh_hant={`已取消追蹤 ${user.displayName}`}

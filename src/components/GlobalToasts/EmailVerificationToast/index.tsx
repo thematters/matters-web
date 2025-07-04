@@ -19,7 +19,7 @@ const EmailVerificationToast = () => {
 
   const ignite = () => {
     baseToast.dismiss()
-    toast.success({
+    toast.info({
       message: (
         <FormattedMessage
           defaultMessage="The email verification link has been sent to {email}"

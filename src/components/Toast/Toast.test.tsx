@@ -28,7 +28,7 @@ describe('<Toast>', () => {
     const duration = 1000
     const AnyToast = () => {
       const showToast = () => {
-        toast.success({
+        toast.info({
           message,
           duration,
           hasClose: true,
@@ -64,7 +64,7 @@ describe('<Toast>', () => {
 
     const AnyToast = () => {
       const showToast = () => {
-        toast.success({
+        toast.info({
           message,
           actions: [
             { content: 'Action', onClick: handleActionClick },

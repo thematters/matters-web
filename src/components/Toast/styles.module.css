@@ -34,8 +34,12 @@
   }
 }
 
-.success {
+.info {
   background: var(--color-black);
+}
+
+.success {
+  background: var(--color-positive-green);
 }
 
 .warning {

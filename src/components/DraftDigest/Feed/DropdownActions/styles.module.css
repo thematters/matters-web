@@ -1,0 +1,12 @@
+.deleteButton {
+  color: var(--color-grey);
+
+  &:hover,
+  &:focus {
+    color: var(--color-negative-red);
+  }
+
+  & svg {
+    @mixin transition;
+  }
+}

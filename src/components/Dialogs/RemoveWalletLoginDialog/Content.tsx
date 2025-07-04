@@ -32,7 +32,7 @@ const RemoveWalletLoginDialogContent: React.FC<Props> = ({ closeDialog }) => {
     try {
       disconnect()
       await removeLogin()
-      toast.success({
+      toast.info({
         message: (
           <FormattedMessage
             defaultMessage="Wallet disconnected"

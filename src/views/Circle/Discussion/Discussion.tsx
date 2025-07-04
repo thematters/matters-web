@@ -136,7 +136,7 @@ const CricleDiscussion = () => {
   )
 
   const submitCallback = () => {
-    toast.success({
+    toast.info({
       message: (
         <FormattedMessage
           defaultMessage="Discussion sent"

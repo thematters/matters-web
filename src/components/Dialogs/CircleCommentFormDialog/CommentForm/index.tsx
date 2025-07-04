@@ -105,7 +105,7 @@ const CommentForm: React.FC<CircleCommentFormProps> = ({
       // clear draft
       formStorage.remove<string>(formStorageKey, 'local')
 
-      toast.success({
+      toast.info({
         message: commentId ? (
           <FormattedMessage
             defaultMessage="{type} edited"

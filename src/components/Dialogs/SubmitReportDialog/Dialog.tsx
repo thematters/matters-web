@@ -83,7 +83,7 @@ const SubmitReportDialog = ({ id, children }: SubmitReportDialogProps) => {
           variables: { id, reason },
         })
 
-        toast.success({
+        toast.info({
           message: (
             <FormattedMessage
               defaultMessage="Submission successful"

@@ -60,7 +60,7 @@ const ToggleRestrictUserDialog = ({
         restrictions: enabled ? [] : ['articleHottest', 'articleNewest'],
       },
     })
-    toast.success({ message: '設置成功' })
+    toast.info({ message: '設置成功' })
     closeDialog()
   }
 

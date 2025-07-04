@@ -39,6 +39,9 @@
     "defaultMessage": "移至顶部",
     "description": "src/components/ArticleDigest/DropdownActions/SetTopCollectionButton.tsx"
   },
+  "+So1dD": {
+    "defaultMessage": "取消成功"
+  },
   "+a+2ug": {
     "defaultMessage": "成员"
   },
@@ -193,19 +196,12 @@
   "0xVT+0": {
     "defaultMessage": "已关联"
   },
-  "0zZd0T": {
-    "defaultMessage": "作品发布成功，快把作品分享到不同渠道，吸引更多人为你拍手！",
-    "description": "src/views/Me/DraftDetail/PublishState/PublishedState.tsx"
-  },
   "18HJlm": {
     "defaultMessage": "标签"
   },
   "1COpAA": {
     "defaultMessage": "失败",
     "description": "src/components/Transaction/State/index.tsx"
-  },
-  "1DNHwi": {
-    "defaultMessage": "你的作品即将存储在星际文件系统（IPFS）分布式节点中。在 IPFS 的存储费用目前由 Matters 平台支付。"
   },
   "1EYCdR": {
     "defaultMessage": "标签"
@@ -228,9 +224,6 @@
   },
   "1eKD7S": {
     "defaultMessage": "帮你的故事收集成册"
-  },
-  "1exrSw": {
-    "defaultMessage": "欢迎上船！"
   },
   "1hyiZ8": {
     "defaultMessage": "确认 Matters ID",
@@ -583,10 +576,6 @@
     "defaultMessage": "选择支持金额",
     "description": "src/components/Forms/PaymentForm/PayTo/SetAmount/SetAmountBalance/index.tsx"
   },
-  "7WXDhH": {
-    "defaultMessage": "确认要删除草稿吗？",
-    "description": "src/components/DraftDigest/Feed/DeleteButton.tsx"
-  },
   "7XWzvD": {
     "defaultMessage": "这里还没有任何作品",
     "description": "src/components/Empty/EmptyWork.tsx"
@@ -702,6 +691,9 @@
   },
   "9J0iCw": {
     "defaultMessage": "已注销用户"
+  },
+  "9MEe0P": {
+    "defaultMessage": "不取消"
   },
   "9OPnTz": {
     "defaultMessage": "系统或连线异常，请刷新页面后重新点击晚鸟参与"
@@ -897,6 +889,9 @@
     "defaultMessage": "复制留言",
     "description": "src/components/Comment/DropdownActions/index.tsx"
   },
+  "CbRvzm": {
+    "defaultMessage": "定时发布"
+  },
   "CcVXhc": {
     "defaultMessage": "Matters 正在通过合约交易将 {amount} 发送至你绑定的钱包 {address}（Matters 将暂时承担交易手续费）。如需帮助请联系 ask@matters.town"
   },
@@ -1012,6 +1007,10 @@
   "EBEwaP": {
     "defaultMessage": "请填写有效邮箱"
   },
+  "ECPtpP": {
+    "defaultMessage": "你的定时发布作品 {articleTitle} 已发布成功，部分已封存作品未能关联成",
+    "description": "src/components/Notice/ArticleNotice/ScheduledArticlePublishedNotice.tsx"
+  },
   "EPx6uM": {
     "defaultMessage": "打开菜单",
     "description": "src/components/Editor"
@@ -1051,10 +1050,6 @@
   "ErV/vT": {
     "defaultMessage": "晚鸟参与七日书"
   },
-  "F3zk7E": {
-    "defaultMessage": "（草稿删除后无法恢复）",
-    "description": "src/components/DraftDigest/Feed/DeleteButton.tsx"
-  },
   "FEI5Fv": {
     "defaultMessage": "邮箱",
     "description": "src/components/Dialogs/SetEmailDialog/Content.tsx"
@@ -1069,6 +1064,10 @@
   "FOOymB": {
     "defaultMessage": "还没有成员",
     "description": "src/views/Circle/Profile/MembersDialog/Content.tsx"
+  },
+  "FRfbEu": {
+    "defaultMessage": "你的定时发布作品 {articleTitle} 已发布成功",
+    "description": "src/components/Notice/ArticleNotice/ScheduledArticlePublishedNotice.tsx"
   },
   "FWCa4O": {
     "defaultMessage": "目前非 Optimism 网络，立即切换？",
@@ -1249,6 +1248,9 @@
     "defaultMessage": "标签活跃作者",
     "description": "src/views/TagDetail/RecommendedAuthors/index.tsx"
   },
+  "IW6zQv": {
+    "defaultMessage": "选择时间"
+  },
   "IXycMo": {
     "defaultMessage": "重新发送"
   },
@@ -1289,6 +1291,9 @@
   },
   "JXdbo8": {
     "defaultMessage": "完成"
+  },
+  "JYvLqB": {
+    "defaultMessage": "（草稿删除后无法恢复）"
   },
   "JaLEXz": {
     "defaultMessage": "进入围炉",
@@ -1344,6 +1349,9 @@
   "KQi/UZ": {
     "defaultMessage": "归档作品"
   },
+  "KU53D5": {
+    "defaultMessage": "确认要将「{title}」原定于 {date} {time} 的定时发布取消吗？取消后，你可以再度编辑内容或重新设置发布时间。"
+  },
   "KWDSxB": {
     "defaultMessage": "保存编辑"
   },
@@ -1354,6 +1362,9 @@
   "KlJEP9": {
     "defaultMessage": "钱包已绑定",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
+  },
+  "Km6eJ2": {
+    "defaultMessage": "定时发布"
   },
   "Kwv1n3": {
     "defaultMessage": " 用以出版 Writing NFT，费用 ≈1 LIKE，推广期由平台补助"
@@ -1400,10 +1411,6 @@
   },
   "LgbKvU": {
     "defaultMessage": "评论"
-  },
-  "Lhhi5l": {
-    "defaultMessage": "作品已发布",
-    "description": "src/views/Me/DraftDetail/PublishState/PublishedState.tsx"
   },
   "LmiUWG": {
     "defaultMessage": "你无法对此对象进行该操作",
@@ -1512,6 +1519,9 @@
     "defaultMessage": "支持者数量",
     "description": "src/components/ArticleDigest/Published/FooterActions/index.tsx"
   },
+  "Nl6BeH": {
+    "defaultMessage": "确认要删除草稿「{title}」吗？"
+  },
   "NlX31w": {
     "defaultMessage": "确认删除后，{commentType}会立即消失。",
     "description": "src/components/CircleComment/DropdownActions/DeleteComment/Dialog.tsx"
@@ -1553,6 +1563,10 @@
   "OKhRC6": {
     "defaultMessage": "分享"
   },
+  "OWCMkI": {
+    "defaultMessage": "你的定时发布作品 {articleTitle} 已发布成功，由于选择活动已结束，投稿未能成功",
+    "description": "src/components/Notice/ArticleNotice/ScheduledArticlePublishedNotice.tsx"
+  },
   "OjC4aZ": {
     "defaultMessage": "作者",
     "description": "src/components/ArticleComment/RoleLabel/index.tsx"
@@ -1567,6 +1581,9 @@
   "OsX3KM": {
     "defaultMessage": "评论",
     "description": "src/views/ArticleDetail/index.tsx"
+  },
+  "OwMuXW": {
+    "defaultMessage": "取消定时发布"
   },
   "OwtCWk": {
     "defaultMessage": "仅供输入 {MIN_CIRCLE_DISPLAY_NAME_LENGTH}-{MAX_CIRCLE_DISPLAY_NAME_LENGTH} 個字符"
@@ -1629,6 +1646,9 @@
     "defaultMessage": "邮箱或密码错误",
     "description": "USER_EMAIL_NOT_FOUND"
   },
+  "PtlWaj": {
+    "defaultMessage": "选定时间已逾期，请重新选择"
+  },
   "PvVnlo": {
     "defaultMessage": "包含色情、暴力、血腥等内容"
   },
@@ -1678,10 +1698,6 @@
   "R7yHDl": {
     "defaultMessage": "围炉营收",
     "description": "src/components/Transaction/index.tsx"
-  },
-  "REQGgU": {
-    "defaultMessage": "發布须知",
-    "description": "src/views/Me/DraftDetail/SettingsButton/ConfirmPublishDialogContent/index.tsx"
   },
   "RGEpvx": {
     "defaultMessage": "修改文案",
@@ -1786,9 +1802,6 @@
   },
   "SuRTsQ": {
     "defaultMessage": "注册 ISCN"
-  },
-  "SwoXPI": {
-    "defaultMessage": "指纹与节点随之公开可见，皆可用于分享作品。"
   },
   "Szd1tH": {
     "defaultMessage": "登出失败，再来一次"
@@ -1922,6 +1935,9 @@
   "VZsE96": {
     "defaultMessage": "选集名称"
   },
+  "VbxMwX": {
+    "defaultMessage": "确认要删除草稿吗？"
+  },
   "VdxjkY": {
     "defaultMessage": "确认删除后，留言会立即消失。",
     "description": "Moment"
@@ -1932,6 +1948,9 @@
   },
   "VmYzLr": {
     "defaultMessage": "{total} 個成員"
+  },
+  "Vp5L/O": {
+    "defaultMessage": "发布中，请稍候⋯"
   },
   "VqdOGQ": {
     "defaultMessage": "相关推荐",
@@ -2108,10 +2127,6 @@
     "defaultMessage": "已屏蔽用户",
     "description": "src/views/Me/Settings/Blocked/index.tsx"
   },
-  "YWQTXE": {
-    "defaultMessage": "查看作品",
-    "description": "src/views/Me/DraftDetail/PublishState/PublishedState.tsx"
-  },
   "YjW2MT": {
     "defaultMessage": "评论已隐藏"
   },
@@ -2142,9 +2157,6 @@
   },
   "ZNK0I9": {
     "defaultMessage": "喜欢你的评论"
-  },
-  "ZOW313": {
-    "defaultMessage": "首次发布作品后有四次正文编辑机会，你也可以封存原文重新发布作品。"
   },
   "ZUPQzl": {
     "defaultMessage": "回复了你",
@@ -2496,8 +2508,8 @@
   "fsB/4p": {
     "defaultMessage": "保存成功"
   },
-  "fxhue9": {
-    "defaultMessage": "作品将发布至 IPFS，无法被他人删改，创作权归你所有。"
+  "ftg7GK": {
+    "defaultMessage": "选择日期"
   },
   "g//2O2": {
     "defaultMessage": "取消折叠",
@@ -2594,10 +2606,6 @@
   },
   "hl9bd4": {
     "defaultMessage": "封面"
-  },
-  "hpIFGj": {
-    "defaultMessage": "确认要删除草稿「{title}」吗？",
-    "description": "src/components/DraftDigest/Feed/DeleteButton.tsx"
   },
   "hrgo+E": {
     "defaultMessage": "归档"
@@ -2698,6 +2706,10 @@
   "k97/u7": {
     "defaultMessage": "添加作品"
   },
+  "kAtrEq": {
+    "defaultMessage": "修改",
+    "description": "src/components/DraftDigest/Feed/DropdownActions/index.tsx"
+  },
   "kCPl0r": {
     "defaultMessage": "关联"
   },
@@ -2774,6 +2786,9 @@
   "lO7wKc": {
     "defaultMessage": "再想想"
   },
+  "lYVn31": {
+    "defaultMessage": "此作品已加入定时发布，请前往「我的创作」页确认"
+  },
   "lZukEr": {
     "defaultMessage": "评论了",
     "description": "src/components/Notice/CommentNotice/ArticleNewCommentNotice.tsx"
@@ -2847,6 +2862,9 @@
   "me1nR+": {
     "defaultMessage": "复制地址"
   },
+  "mij/rJ": {
+    "defaultMessage": "删除草稿"
+  },
   "ml3SZN": {
     "defaultMessage": "至少 8 个字符，支持英文大小写字母、数字和特殊符号"
   },
@@ -2894,6 +2912,9 @@
     "defaultMessage": "在 ",
     "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
   },
+  "nSwpYg": {
+    "defaultMessage": "前往"
+  },
   "nVoVnb": {
     "defaultMessage": "关注",
     "description": "src/views/User/UserProfile/FollowingDialog/CirclesFeed/CirclesTabs/index.tsx"
@@ -2915,6 +2936,10 @@
   "nozN+j": {
     "defaultMessage": "邮箱不正确",
     "description": "USER_EMAIL_INVALID"
+  },
+  "oEHAIT": {
+    "defaultMessage": "取消发布",
+    "description": "confirm cancel schedule button"
   },
   "ob+HDS": {
     "defaultMessage": "马上逛逛"
@@ -3110,12 +3135,18 @@
   "ruZqtT": {
     "defaultMessage": "仅供输入 {MIN_USER_DISPLAY_NAME_LENGTH}-{MAX_USER_DISPLAY_NAME_LENGTH} 个字符"
   },
+  "s2s6tx": {
+    "defaultMessage": "作品已成功发布，稍后将同步到 IPFS"
+  },
   "sFJ/Is": {
     "defaultMessage": "确认清空当前编辑的内容吗？"
   },
   "sPgUkN": {
     "defaultMessage": "本月营收",
     "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
+  },
+  "sbhWw+": {
+    "defaultMessage": "定时发布"
   },
   "sfj+KG": {
     "defaultMessage": "结果以链上记录为主，稍后同步至 Matters",
@@ -3315,8 +3346,15 @@
     "defaultMessage": "重置你的登录密码",
     "description": "src/components/Dialogs/SetEmailDialog/Content.tsx"
   },
+  "vsps+A": {
+    "defaultMessage": "定时发布于 {date} {time}"
+  },
   "w+6UiO": {
     "defaultMessage": "新增邀请"
+  },
+  "w1KWJ2": {
+    "defaultMessage": "你的定时发布作品 {articleTitle} 已发布成功，部分已满选集未能加入成功",
+    "description": "src/components/Notice/ArticleNotice/ScheduledArticlePublishedNotice.tsx"
   },
   "wAccv4": {
     "defaultMessage": "{commentType}已刪除",

@@ -41,7 +41,7 @@ const ConfirmStep: React.FC<Props> = ({ userName, back, closeDialog }) => {
     try {
       await update({ variables: { userName } })
 
-      toast.success({
+      toast.info({
         duration: Infinity,
         message: (
           <FormattedMessage

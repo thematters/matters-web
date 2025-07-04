@@ -106,7 +106,7 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
           },
         })
 
-        toast.success({
+        toast.info({
           message: isCreate ? (
             <FormattedMessage
               defaultMessage="Circle successfully created"

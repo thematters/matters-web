@@ -83,7 +83,7 @@ const UploadAudioButton: React.FC<UploadAudioButtonProps> = ({
         .setFigureAudio({ src: path, title: fileName })
         .run()
 
-      toast.success({
+      toast.info({
         message: (
           <Translate
             zh_hant="音訊上傳成功"

@@ -42,7 +42,7 @@ export const getErrorCodes = (error?: ApolloError): ERROR_CODES[] => {
 export type ToastMutationErrorsOptions = {
   showToast?: boolean
   showLoginToast?: boolean
-  toastType?: 'error' | 'success'
+  toastType?: 'error' | 'info'
   customErrors?: { [key: string]: string | React.ReactNode }
 }
 export const toastMutationErrors = (

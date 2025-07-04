@@ -128,7 +128,7 @@ const PinButton = ({
         canPin
           ? () => pinComment()
           : () =>
-              toast.success({
+              toast.info({
                 message: (
                   <FormattedMessage
                     defaultMessage="Only one comment can be pinned to the top"

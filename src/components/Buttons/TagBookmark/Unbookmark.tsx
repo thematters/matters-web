@@ -33,7 +33,7 @@ const Unbookmark = ({ tag }: UnbookmarkTagProps) => {
   )
   const onClick = async () => {
     await unbookmark()
-    toast.success({
+    toast.info({
       message: intl.formatMessage({
         defaultMessage: 'Bookmark removed',
         id: '8ZyDQJ',

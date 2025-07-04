@@ -146,7 +146,7 @@ const DeleteCommentDialog = ({
       })
     }
 
-    toast.success({
+    toast.info({
       message: isMoment ? (
         <FormattedMessage
           defaultMessage="Comment has been deleted"

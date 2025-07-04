@@ -67,7 +67,7 @@ const PinButton = ({ article }: PinButtonProps) => {
         })
       },
       onCompleted: () => {
-        toast.success({
+        toast.info({
           message: article.pinned ? (
             <FormattedMessage
               defaultMessage="Unpinned from profile"
@@ -80,7 +80,7 @@ const PinButton = ({ article }: PinButtonProps) => {
       },
     },
     {
-      toastType: 'success',
+      toastType: 'info',
       customErrors: {
         [ERROR_CODES.ACTION_LIMIT_EXCEEDED]: (
           <FormattedMessage

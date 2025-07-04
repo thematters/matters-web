@@ -50,7 +50,7 @@ const BanCampaignArticleButton = ({
       onClick={async () => {
         await update()
 
-        toast.success({
+        toast.info({
           message: (
             <FormattedMessage
               defaultMessage="The article has been removed from the event"

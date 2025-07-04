@@ -2,7 +2,16 @@ import classNames from 'classnames'
 import { forwardRef } from 'react'
 
 import IconDown from '@/public/static/icons/24px/down.svg'
-import { Card, CardProps, Icon, TextIcon } from '~/components'
+import {
+  Card,
+  CardBgColor,
+  CardBorderColor,
+  CardBorderRadius,
+  CardProps,
+  Icon,
+  IconColor,
+  TextIcon,
+} from '~/components'
 
 import styles from './styles.module.css'
 
@@ -14,9 +23,10 @@ type OptionProps = {
 
   selected?: boolean
   expanded?: boolean
+  disabled?: boolean
 
   size?: 14 | 16
-  color?: 'campaignBlue'
+  theme?: 'campaign' | 'editorDatePicker'
 
   role?: 'button' | 'option'
 
@@ -33,9 +43,10 @@ const Option: React.FC<OptionProps> = forwardRef(
 
       selected,
       expanded,
+      disabled,
 
       size = 16,
-      color,
+      theme,
 
       role = 'option',
 
@@ -47,12 +58,28 @@ const Option: React.FC<OptionProps> = forwardRef(
   ) => {
     const containerClasses = classNames({
       [styles.container]: true,
-      [styles[`${color}`]]: !!color,
+      [styles[`${theme}`]]: !!theme,
+      [styles.expanded]: expanded,
+      [styles.disabled]: disabled,
     })
     const nameClasses = classNames({
       [styles.name]: true,
       [styles[`text${size}`]]: !!size,
     })
+
+    let bgColor: CardBgColor = 'greyLighter'
+    let color: IconColor = 'grey'
+    let borderColor: CardBorderColor | undefined = undefined
+    let borderRadius: CardBorderRadius | undefined = undefined
+    if (theme === 'campaign') {
+      bgColor = 'campaignBlue'
+      color = 'campaignBlue'
+    } else if (theme === 'editorDatePicker') {
+      bgColor = 'white'
+      color = 'black'
+      borderColor = 'lineGreyLight'
+      borderRadius = 'xtight'
+    }
 
     return (
       <li
@@ -60,10 +87,12 @@ const Option: React.FC<OptionProps> = forwardRef(
         {...(role === 'option'
           ? { role: 'option', 'aria-selected': !!selected }
           : { role: 'button' })}
-        onClick={onClick}
+        onClick={disabled ? undefined : onClick}
       >
         <Card
-          bgColor={expanded ? undefined : color || 'greyLighter'}
+          bgColor={expanded ? undefined : bgColor}
+          borderColor={expanded ? undefined : borderColor}
+          borderRadius={expanded ? undefined : borderRadius}
           {...cardProps}
           spacing={cardProps.spacing || [0, 0]}
           ref={ref}
@@ -77,9 +106,7 @@ const Option: React.FC<OptionProps> = forwardRef(
 
             {!expanded && (
               <section className={styles.right}>
-                <TextIcon
-                  icon={<Icon icon={IconDown} color={color || 'grey'} />}
-                />
+                <TextIcon icon={<Icon icon={IconDown} color={color} />} />
               </section>
             )}
           </section>

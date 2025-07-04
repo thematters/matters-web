@@ -34,15 +34,16 @@
   }
 }
 
-.deleteButton {
+.date {
+  font-size: var(--font-size-subtext);
+  line-height: 1.125rem;
   color: var(--color-grey);
 
-  &:hover,
-  &:focus {
-    color: var(--color-negative-red);
+  &.scheduled {
+    color: var(--color-positive-green);
   }
+}
 
-  & svg {
-    @mixin transition;
-  }
+.highlight {
+  color: var(--color-black);
 }

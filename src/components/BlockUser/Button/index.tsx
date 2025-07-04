@@ -32,7 +32,7 @@ const BlockUserButton = ({
   const onUnblock = async () => {
     await unblockUser()
 
-    toast.success({
+    toast.info({
       message: (
         <FormattedMessage
           defaultMessage="User unblocked. User can now comment on your articles."

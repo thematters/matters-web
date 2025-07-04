@@ -60,7 +60,7 @@ const PinButton = ({
         return observableQuery.refetch()
       },
       onCompleted: () => {
-        toast.success({
+        toast.info({
           message: collection.pinned ? (
             <FormattedMessage
               defaultMessage="Unpinned from profile"
@@ -86,7 +86,7 @@ const PinButton = ({
       },
     },
     {
-      toastType: 'success',
+      toastType: 'info',
       customErrors: {
         [ERROR_CODES.ACTION_LIMIT_EXCEEDED]: (
           <FormattedMessage

@@ -99,7 +99,7 @@ const MigrationDialogUpload = ({
         variables: { input: { type: 'medium', files } },
       })
 
-      toast.success({
+      toast.info({
         message: texts[language].success,
       })
 

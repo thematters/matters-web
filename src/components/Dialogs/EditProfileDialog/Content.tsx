@@ -142,7 +142,7 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
           },
         })
 
-        toast.success({
+        toast.info({
           message: <FormattedMessage defaultMessage="Saved" id="fsB/4p" />,
         })
 

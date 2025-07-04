@@ -189,7 +189,7 @@ const CricleBroadcast = () => {
   const isMember = circle?.circleIsMember
   const lock = viewer.isAuthed && !isOwner && !isMember
   const submitCallback = () => {
-    toast.success({
+    toast.info({
       message: (
         <FormattedMessage
           defaultMessage="Broadcast sent"

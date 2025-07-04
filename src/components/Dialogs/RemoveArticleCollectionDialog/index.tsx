@@ -52,7 +52,7 @@ const BaseRemoveArticleCollectionDialog = ({
   const onRemove = async () => {
     await remove()
 
-    toast.success({
+    toast.info({
       message: (
         <FormattedMessage
           defaultMessage="Successfully removed"

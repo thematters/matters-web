@@ -245,7 +245,7 @@ const Connect: React.FC<FormProps> = ({
         if (isConnect) {
           await addWalletLogin({ variables })
 
-          toast.success({
+          toast.info({
             message: (
               <FormattedMessage
                 defaultMessage="Wallet connected"

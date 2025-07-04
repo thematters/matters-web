@@ -68,7 +68,7 @@ const SetPasswordDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
         await set({ variables: { input: { password } } })
 
         // toast
-        toast.success({
+        toast.info({
           message: (
             <FormattedMessage
               defaultMessage="Set password succeed"

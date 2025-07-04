@@ -15,9 +15,17 @@ describe('<DraftDigest.Feed>', () => {
     const $title = screen.getByText(MOCK_DRAFT.title)
     expect($title).toBeInTheDocument()
 
-    const $deleteButton = screen.getByRole('button', { name: 'Delete' })
-    expect($deleteButton).toBeInTheDocument()
-    fireEvent.click($deleteButton)
+    // Click on the more actions button to open the dropdown
+    const $moreActionsButton = screen.getByRole('button', {
+      name: 'More Actions',
+    })
+    expect($moreActionsButton).toBeInTheDocument()
+    fireEvent.click($moreActionsButton)
+
+    // Find the delete draft menu item and click it
+    const $deleteMenuItem = screen.getByText('Delete draft')
+    expect($deleteMenuItem).toBeInTheDocument()
+    fireEvent.click($deleteMenuItem)
 
     await waitFor(() => {
       expect(
@@ -34,5 +42,30 @@ describe('<DraftDigest.Feed>', () => {
 
     const $title = screen.getByText('Untitled')
     expect($title).toBeInTheDocument()
+  })
+
+  it('should render a scheduled draft with cancel schedule button', () => {
+    const scheduledDraft = {
+      ...MOCK_DRAFT,
+      publishAt: '2024-12-25T10:00:00.000Z',
+    }
+
+    render(<DraftDigest.Feed draft={scheduledDraft} />)
+
+    const $digest = screen.getByTestId(TEST_ID.DIGEST_DRAFT_FEED)
+    expect($digest).toBeInTheDocument()
+
+    // For scheduled drafts, the title should not be clickable
+    const $title = screen.getByText(MOCK_DRAFT.title)
+    expect($title).toBeInTheDocument()
+
+    // Should show scheduled time instead of updated time
+    expect(screen.getByText(/Scheduled for/)).toBeInTheDocument()
+
+    // Should have cancel schedule button instead of dropdown actions
+    const $cancelButton = screen.getByRole('button', {
+      name: 'Cancel schedule',
+    })
+    expect($cancelButton).toBeInTheDocument()
   })
 })

@@ -86,7 +86,7 @@ const Confirming: React.FC<ConfirmingProps> = ({ amount, closeDialog }) => {
   )
 
   const successToast = () => {
-    toast.success({
+    toast.info({
       message: (
         <FormattedMessage defaultMessage="Claim successful" id="rG2xmp" />
       ),
