@@ -98,6 +98,26 @@ const SideChannelNav = () => {
           </span>
         </Link>
 
+        <Link
+          href={PATHS.HOTTES}
+          className={classnames({
+            [styles.item]: true,
+            [styles.selected]: isInPath('HOTTES'),
+          })}
+          aria-selected={isInPath('HOTTES')}
+          onClick={() => onTabClick('hottest')}
+        >
+          <span className={styles.name}>
+            <span className={styles.inner}>
+              <FormattedMessage
+                defaultMessage="Trending"
+                id="8tczzy"
+                description="src/components/Layout/SideChannelNav/index.tsx"
+              />
+            </span>
+          </span>
+        </Link>
+
         {filteredChannels.map((c) => (
           <ChannelItem key={c.id} channel={c} />
         ))}

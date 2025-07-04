@@ -83,6 +83,19 @@ export const FEED_ARTICLES_PUBLIC = {
     ${feedFragment}
     ${IcymiCuratedFeed.fragments}
   `,
+  hottest: gql`
+    query HottestFeedPublic($after: String) {
+      viewer {
+        id
+        recommendation {
+          feed: hottest(input: { first: 20, after: $after, newAlgo: true }) {
+            ...FeedArticleConnection
+          }
+        }
+      }
+    }
+    ${feedFragment}
+  `,
 }
 
 export const FEED_ARTICLES_PUBLIC_CHANNEL = gql`

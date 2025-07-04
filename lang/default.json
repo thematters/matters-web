@@ -653,6 +653,10 @@
     "defaultMessage": "Matters Daily Report",
     "description": "src/views/Me/Settings/Notifications/Email.tsx"
   },
+  "8tczzy": {
+    "defaultMessage": "Trending",
+    "description": "src/components/Layout/SideChannelNav/index.tsx"
+  },
   "8w3GEA": {
     "defaultMessage": "mentioned you in {article}",
     "description": "src/components/Notice/ArticleNotice/ArticleMentionedYouNotice.tsx"
@@ -3169,6 +3173,9 @@
   "u9LYjQ": {
     "defaultMessage": "Comment has been deleted",
     "description": "Moment"
+  },
+  "u9Qoru": {
+    "defaultMessage": "The hottest articles on the platform"
   },
   "uM5qZr": {
     "defaultMessage": "Likes Given"
