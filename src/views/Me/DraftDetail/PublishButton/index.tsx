@@ -226,7 +226,7 @@ const PublishButton = ({
   })
 
   const onPublish = async ({ closeDialog }: { closeDialog: () => void }) => {
-    publish({ variables: { id: draft.id, publishAt } })
+    await publish({ variables: { id: draft.id, publishAt } })
 
     closeDialog()
 

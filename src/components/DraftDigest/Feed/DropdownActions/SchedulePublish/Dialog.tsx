@@ -55,6 +55,11 @@ const SchedulePublishDialogComponent = ({
                   readField('id', node) === draft.id
               )
 
+              // If target edge is not found, return existing drafts unchanged
+              if (!targetEdge) {
+                return existingDrafts
+              }
+
               let scheduledDrafts = existingDrafts.edges.filter(
                 ({ node }: { node: SchedulePublishButtonDraftFragment }) =>
                   readField('publishAt', node) &&

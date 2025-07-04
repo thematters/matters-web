@@ -75,6 +75,11 @@ const CancelScheduleButton = ({ draft }: CancelScheduleButtonProps) => {
                   readField('id', node) === draft.id
               )
 
+              // If target edge is not found, return existing drafts unchanged
+              if (!targetEdge) {
+                return existingDrafts
+              }
+
               const scheduledDrafts = existingDrafts.edges.filter(
                 ({ node }: { node: CancelScheduleButtonDraftFragment }) =>
                   readField('publishAt', node) &&
