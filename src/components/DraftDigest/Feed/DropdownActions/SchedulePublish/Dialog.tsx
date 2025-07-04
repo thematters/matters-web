@@ -67,7 +67,7 @@ const SchedulePublishDialogComponent = ({
               )
 
               // Add the draft to the scheduled drafts
-              // and order by publishAt desc
+              // and order by publishAt asc
               scheduledDrafts = [targetEdge, ...scheduledDrafts].sort(
                 (a, b) => {
                   const aDate = new Date(readField('publishAt', a.node)!)
