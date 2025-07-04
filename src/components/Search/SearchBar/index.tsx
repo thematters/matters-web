@@ -97,7 +97,17 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   const searchTextInput = useRef<HTMLInputElement>(null)
 
   const handleKeyDown = (event: KeyboardEvent) => {
-    if (event.key === '/') {
+    // skip if current focus is on another input element,
+    const target = event.target as HTMLElement
+    if (
+      target.tagName.toLowerCase() === 'input' ||
+      target.tagName.toLowerCase() === 'textarea' ||
+      target.contentEditable === 'true'
+    ) {
+      return
+    }
+
+    if (event.key === KEYVALUE.slash) {
       if (document.activeElement === searchTextInput.current) {
         return
       }
