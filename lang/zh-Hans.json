@@ -2869,6 +2869,9 @@
     "defaultMessage": "在 ",
     "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
   },
+  "nSwpYg": {
+    "defaultMessage": "前往"
+  },
   "nVoVnb": {
     "defaultMessage": "关注",
     "description": "src/views/User/UserProfile/FollowingDialog/CirclesFeed/CirclesTabs/index.tsx"

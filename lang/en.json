@@ -2869,6 +2869,9 @@
     "defaultMessage": "replied your comment in",
     "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
   },
+  "nSwpYg": {
+    "defaultMessage": "Go"
+  },
   "nVoVnb": {
     "defaultMessage": "Followed",
     "description": "src/views/User/UserProfile/FollowingDialog/CirclesFeed/CirclesTabs/index.tsx"

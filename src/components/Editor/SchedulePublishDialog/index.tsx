@@ -3,7 +3,8 @@ import gql from 'graphql-tag'
 import { useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { Dialog, Spacer, toast, useDialogSwitch } from '~/components'
+import { PATHS } from '~/common/enums'
+import { Dialog, Spacer, toast, useDialogSwitch, useRoute } from '~/components'
 import { GetDraftPublishAtQuery } from '~/gql/graphql'
 
 import SelectDate from './SelectDate'
@@ -34,6 +35,7 @@ const BaseSchedulePublishDialog = ({
   confirmButtonText,
   children,
 }: SchedulePublishDialogProps) => {
+  const { router } = useRoute()
   const { show, openDialog, closeDialog } = useDialogSwitch(true)
   const [selectedDate, setSelectedDate] = useState<Date | null>(null)
 
@@ -77,6 +79,14 @@ const BaseSchedulePublishDialog = ({
             id="lYVn31"
           />
         ),
+        actions: [
+          {
+            content: <FormattedMessage defaultMessage="Go" id="nSwpYg" />,
+            onClick: () => {
+              router.push(PATHS.ME_DRAFTS)
+            },
+          },
+        ],
       })
       return
     }
