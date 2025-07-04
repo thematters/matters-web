@@ -338,8 +338,6 @@ const BaseDraftDetail = () => {
           }
         />
 
-        <PublishState draft={draft} />
-
         <Layout.Main.Spacing>
           <Editor
             draft={draft}
