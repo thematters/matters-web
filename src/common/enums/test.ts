@@ -114,6 +114,7 @@ export enum TEST_ID {
   NOTICE_USER_NEW_FOLLOWER = 'notice/user-new-follower',
   NOTICE_ARTICLE_NEW_COLLECTED = 'notice/article-new-collected',
   NOTICE_ARTICLE_PUBLISHED = 'notice/article-published',
+  NOTICE_SCHEDULED_ARTICLE_PUBLISHED = 'notice/scheduled-article-published',
   NOTICE_ARTICLE_MENTIONED_YOU = 'notice/article-mentioned-you',
   NOTICE_ARTICLE_NEW_SUBSCRIBER = 'notice/article-new-subscriber',
   NOTICE_ARTICLE_NEW_APPRECIATION = 'notice/article-new-appreciation',

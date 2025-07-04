@@ -993,6 +993,10 @@
   "EBEwaP": {
     "defaultMessage": "Please fill in a valid email address"
   },
+  "ECPtpP": {
+    "defaultMessage": "Your schedule article {articleTitle} published successfully, some archived articles failed to be curated",
+    "description": "src/components/Notice/ArticleNotice/ScheduledArticlePublishedNotice.tsx"
+  },
   "EPx6uM": {
     "defaultMessage": "Open Menu",
     "description": "src/components/Editor"
@@ -1043,6 +1047,10 @@
   "FOOymB": {
     "defaultMessage": "No members yet",
     "description": "src/views/Circle/Profile/MembersDialog/Content.tsx"
+  },
+  "FRfbEu": {
+    "defaultMessage": "Your schedule article {articleTitle} has been published",
+    "description": "src/components/Notice/ArticleNotice/ScheduledArticlePublishedNotice.tsx"
   },
   "FWCa4O": {
     "defaultMessage": "Switch to Optimism network now?",
@@ -1537,6 +1545,10 @@
   },
   "OKhRC6": {
     "defaultMessage": "Share"
+  },
+  "OWCMkI": {
+    "defaultMessage": "Your schedule article {articleTitle} published successfully, but failed to submit because the selection event has ended",
+    "description": "src/components/Notice/ArticleNotice/ScheduledArticlePublishedNotice.tsx"
   },
   "OjC4aZ": {
     "defaultMessage": "Author",
@@ -3305,6 +3317,10 @@
   },
   "w+6UiO": {
     "defaultMessage": "Add Invitation"
+  },
+  "w1KWJ2": {
+    "defaultMessage": "Your schedule article {articleTitle} published successfully, but some full collections failed to be added",
+    "description": "src/components/Notice/ArticleNotice/ScheduledArticlePublishedNotice.tsx"
   },
   "wAccv4": {
     "defaultMessage": "{commentType} has been deleted",

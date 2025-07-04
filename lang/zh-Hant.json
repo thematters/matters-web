@@ -993,6 +993,10 @@
   "EBEwaP": {
     "defaultMessage": "請填寫有效郵件地址"
   },
+  "ECPtpP": {
+    "defaultMessage": "你的排程作品 {articleTitle} 已發布成功，部分已封存作品未能關聯成功",
+    "description": "src/components/Notice/ArticleNotice/ScheduledArticlePublishedNotice.tsx"
+  },
   "EPx6uM": {
     "defaultMessage": "開啟選單",
     "description": "src/components/Editor"
@@ -1043,6 +1047,10 @@
   "FOOymB": {
     "defaultMessage": "還沒有成員",
     "description": "src/views/Circle/Profile/MembersDialog/Content.tsx"
+  },
+  "FRfbEu": {
+    "defaultMessage": "你的排程作品 {articleTitle} 已發布成功",
+    "description": "src/components/Notice/ArticleNotice/ScheduledArticlePublishedNotice.tsx"
   },
   "FWCa4O": {
     "defaultMessage": "目前非 Optimism 網路，立即切換？",
@@ -1537,6 +1545,10 @@
   },
   "OKhRC6": {
     "defaultMessage": "分享"
+  },
+  "OWCMkI": {
+    "defaultMessage": "你的排程作品 {articleTitle} 已發布成功，由於選擇活動已結束，投稿未能成功",
+    "description": "src/components/Notice/ArticleNotice/ScheduledArticlePublishedNotice.tsx"
   },
   "OjC4aZ": {
     "defaultMessage": "作者",
@@ -3305,6 +3317,10 @@
   },
   "w+6UiO": {
     "defaultMessage": "新增邀請"
+  },
+  "w1KWJ2": {
+    "defaultMessage": "你的排程作品 {articleTitle} 已發布成功，部分已滿選集未能加入成功",
+    "description": "src/components/Notice/ArticleNotice/ScheduledArticlePublishedNotice.tsx"
   },
   "wAccv4": {
     "defaultMessage": "{commentType}已刪除",

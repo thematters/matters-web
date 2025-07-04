@@ -993,6 +993,10 @@
   "EBEwaP": {
     "defaultMessage": "请填写有效邮箱"
   },
+  "ECPtpP": {
+    "defaultMessage": "你的定时发布作品 {articleTitle} 已发布成功，部分已封存作品未能关联成",
+    "description": "src/components/Notice/ArticleNotice/ScheduledArticlePublishedNotice.tsx"
+  },
   "EPx6uM": {
     "defaultMessage": "打开菜单",
     "description": "src/components/Editor"
@@ -1043,6 +1047,10 @@
   "FOOymB": {
     "defaultMessage": "还没有成员",
     "description": "src/views/Circle/Profile/MembersDialog/Content.tsx"
+  },
+  "FRfbEu": {
+    "defaultMessage": "你的定时发布作品 {articleTitle} 已发布成功",
+    "description": "src/components/Notice/ArticleNotice/ScheduledArticlePublishedNotice.tsx"
   },
   "FWCa4O": {
     "defaultMessage": "目前非 Optimism 网络，立即切换？",
@@ -1537,6 +1545,10 @@
   },
   "OKhRC6": {
     "defaultMessage": "分享"
+  },
+  "OWCMkI": {
+    "defaultMessage": "你的定时发布作品 {articleTitle} 已发布成功，由于选择活动已结束，投稿未能成功",
+    "description": "src/components/Notice/ArticleNotice/ScheduledArticlePublishedNotice.tsx"
   },
   "OjC4aZ": {
     "defaultMessage": "作者",
@@ -3305,6 +3317,10 @@
   },
   "w+6UiO": {
     "defaultMessage": "新增邀请"
+  },
+  "w1KWJ2": {
+    "defaultMessage": "你的定时发布作品 {articleTitle} 已发布成功，部分已满选集未能加入成功",
+    "description": "src/components/Notice/ArticleNotice/ScheduledArticlePublishedNotice.tsx"
   },
   "wAccv4": {
     "defaultMessage": "{commentType}已刪除",
