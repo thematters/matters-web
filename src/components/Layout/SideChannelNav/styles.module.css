@@ -19,7 +19,7 @@
   gap: var(--sp8);
   align-items: flex-start;
   min-width: 4.75rem;
-  padding-top: var(--sp20);
+  padding-top: var(--sp16);
   padding-bottom: var(--sp32);
 
   @media (--sm-up) {
