@@ -73,7 +73,7 @@ const SideChannelNav = () => {
           >
             <span className={styles.name}>
               <span className={styles.inner}>
-                <FormattedMessage defaultMessage="My Page" id="enMIYK" />
+                <FormattedMessage defaultMessage="Following" id="cPIKU2" />
               </span>
             </span>
           </Link>
