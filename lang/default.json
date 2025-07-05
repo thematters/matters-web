@@ -989,9 +989,6 @@
   "E+dEI9": {
     "defaultMessage": "With your support, I will be able to accumulate more energy to create."
   },
-  "E048/V": {
-    "defaultMessage": "Save as Draft"
-  },
   "E0xjVb": {
     "defaultMessage": "commented on a deleted moment",
     "description": "src/components/Notice/CommentNotice/MomentNewCommentNotice.tsx"
@@ -2236,6 +2233,10 @@
     "defaultMessage": "Say something...",
     "description": "src/components/Forms/MomentCommentForm/index.tsx"
   },
+  "b0JEjP": {
+    "defaultMessage": "Preview",
+    "description": "src/components/Editor/PreviewDialog/index.tsx"
+  },
   "b0RNGM": {
     "defaultMessage": "Your article {articleTitle} has been listed as a feature of event in 7 days. Come and view more wonderful articles!",
     "description": "src/components/Notice/CampaignArticleNotice/CampaignArticleFeaturedNotice.tsx"
@@ -3163,6 +3164,9 @@
   },
   "tFeVR6": {
     "defaultMessage": "The summary text limit is {maxLength} characters"
+  },
+  "tGHG7q": {
+    "defaultMessage": "Back to Edit"
   },
   "tIDG14": {
     "defaultMessage": "Illegal advertising"
