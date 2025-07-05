@@ -23,6 +23,9 @@
   "+7SAix": {
     "defaultMessage": "Must be between 2-12 characters long."
   },
+  "+C53uY": {
+    "defaultMessage": "Trending Now"
+  },
   "+EHtpH": {
     "defaultMessage": "No updates yet"
   },
@@ -3173,9 +3176,6 @@
   "u9LYjQ": {
     "defaultMessage": "Comment has been deleted",
     "description": "Moment"
-  },
-  "u9Qoru": {
-    "defaultMessage": "The hottest articles on the platform"
   },
   "uM5qZr": {
     "defaultMessage": "Likes Given"

@@ -128,10 +128,7 @@ const MainFeed: React.FC<MainFeedProps> = ({ feedType }) => {
               />
             </h1>
             <p className={styles.description}>
-              <FormattedMessage
-                defaultMessage="The hottest articles on the platform"
-                id="u9Qoru"
-              />
+              <FormattedMessage defaultMessage="Trending Now" id="+C53uY" />
             </p>
           </section>
         </>

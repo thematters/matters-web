@@ -23,6 +23,9 @@
   "+7SAix": {
     "defaultMessage": "2-12 個字元"
   },
+  "+C53uY": {
+    "defaultMessage": "最新社區趨勢"
+  },
   "+EHtpH": {
     "defaultMessage": "暫無更新"
   },
@@ -3173,9 +3176,6 @@
   "u9LYjQ": {
     "defaultMessage": "留言已刪除",
     "description": "Moment"
-  },
-  "u9Qoru": {
-    "defaultMessage": "The hottest articles on the platform"
   },
   "uM5qZr": {
     "defaultMessage": "我讚賞的"
