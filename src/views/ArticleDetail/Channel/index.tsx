@@ -71,7 +71,7 @@ const Channel = ({ article, privateFetched }: ChannelProps) => {
     const hasTopicChannel = Array.isArray(topicChannel?.channels)
     const hasFeedback = !!topicChannel?.feedback
     const allChannelsDisabled = topicChannel?.channels?.every(
-      (channel) => !channel.enabled
+      (channel) => !channel.enabled || !channel.channel.enabled
     )
     const feedback = topicChannel?.feedback
     const feedbackState = feedback?.state
@@ -83,7 +83,9 @@ const Channel = ({ article, privateFetched }: ChannelProps) => {
       (channel) => channel.antiFlooded
     )
     const enabledChannels =
-      topicChannel?.channels?.filter((channel) => channel.enabled) || []
+      topicChannel?.channels?.filter(
+        (channel) => channel.enabled && channel.channel.enabled
+      ) || []
 
     return {
       topicChannel,
