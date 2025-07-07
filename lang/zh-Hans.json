@@ -23,6 +23,9 @@
   "+7SAix": {
     "defaultMessage": "2-12 个字符"
   },
+  "+C53uY": {
+    "defaultMessage": "最新社区趋势"
+  },
   "+EHtpH": {
     "defaultMessage": "暂无更新"
   },
@@ -652,6 +655,10 @@
   "8t6Cs8": {
     "defaultMessage": "Matters 日报",
     "description": "src/views/Me/Settings/Notifications/Email.tsx"
+  },
+  "8tczzy": {
+    "defaultMessage": "热文",
+    "description": "src/components/Layout/SideChannelNav/index.tsx"
   },
   "8w3GEA": {
     "defaultMessage": "在作品 {article} 中提及你",

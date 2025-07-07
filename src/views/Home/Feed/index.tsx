@@ -6,7 +6,7 @@ import { Layout, Spacer, useRoute, ViewerContext } from '~/components'
 import ChannelFeed from './ChannelFeed'
 import MainFeed from './MainFeed'
 
-export type FeedType = 'icymi' | 'newest'
+export type FeedType = 'icymi' | 'newest' | 'hottest'
 
 const HomeFeed = () => {
   const { isInPath } = useRoute()
@@ -15,17 +15,19 @@ const HomeFeed = () => {
   const isInNewest = isInPath('NEWEST')
   const isInChannel = isInPath('CHANNEL')
   const isInFeatured = isInPath('FEATURED') || (!isAuthed && isInPath('HOME'))
-
+  const isInHottest = isInPath('HOTTEST')
   const isBetaEnv = !(
     process.env.NEXT_PUBLIC_SITE_DOMAIN === 'web-next.matters.town' ||
     process.env.NEXT_PUBLIC_SITE_DOMAIN === 'web-next.matters.icu'
   )
 
-  const [feedType] = useState<FeedType>(isInNewest ? 'newest' : 'icymi')
+  const [feedType] = useState<FeedType>(
+    isInHottest ? 'hottest' : isInNewest ? 'newest' : 'icymi'
+  )
 
   return (
     <Layout.Main>
-      {!isInChannel && !isInFeatured && <Spacer size="sp20" />}
+      {!isInChannel && !isInFeatured && !isInHottest && <Spacer size="sp20" />}
 
       {isInChannel || (isBetaEnv && isInFeatured) ? (
         <ChannelFeed

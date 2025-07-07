@@ -23,6 +23,9 @@
   "+7SAix": {
     "defaultMessage": "Must be between 2-12 characters long."
   },
+  "+C53uY": {
+    "defaultMessage": "Trending Now"
+  },
   "+EHtpH": {
     "defaultMessage": "No updates yet"
   },
@@ -652,6 +655,10 @@
   "8t6Cs8": {
     "defaultMessage": "Matters Daily Report",
     "description": "src/views/Me/Settings/Notifications/Email.tsx"
+  },
+  "8tczzy": {
+    "defaultMessage": "Trending",
+    "description": "src/components/Layout/SideChannelNav/index.tsx"
   },
   "8w3GEA": {
     "defaultMessage": "mentioned you in {article}",

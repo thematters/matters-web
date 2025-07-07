@@ -82,6 +82,7 @@ const useLayoutType = () => {
   const isThreeColumnLayout =
     isHome ||
     isInPath('FEATURED') ||
+    isInPath('HOTTEST') ||
     isInPath('NEWEST') ||
     isInPath('CHANNEL') ||
     isInPath('FOLLOW') ||
