@@ -283,7 +283,14 @@ const MomentForm = ({ setFirstRendered }: MomentFormProps) => {
 
   if (!isEditing) {
     return (
-      <section className={styles.defalut} onClick={() => setEditing(true)}>
+      <section
+        className={styles.defalut}
+        onClick={(e) => {
+          // Prevent event bubbling to avoid immediate clickOutside handler execution
+          e.stopPropagation()
+          setEditing(true)
+        }}
+      >
         <div className={styles.imageButton}>
           <Icon icon={IconImage} size={22} color="greyDarker" />
         </div>
