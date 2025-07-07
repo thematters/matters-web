@@ -2,14 +2,16 @@
   position: sticky;
   top: 0;
   z-index: calc(var(--z-index-global-header) + 1);
+}
+
+.content {
+  @mixin border-bottom-grey-light;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: var(--sp16) var(--sp16);
   background-color: var(--color-white);
-
-  @mixin border-bottom-grey-light;
-
   border-bottom-color: var(--color-grey-hover);
 
   @media (--xs-up) {
