@@ -68,11 +68,12 @@ const SideChannelNav = () => {
               [styles.selected]:
                 (isAuthed && isInPath('HOME')) || isInPath('FOLLOW'),
             })}
+            aria-selected={(isAuthed && isInPath('HOME')) || isInPath('FOLLOW')}
             onClick={() => onTabClick('follow')}
           >
             <span className={styles.name}>
               <span className={styles.inner}>
-                <FormattedMessage defaultMessage="My Page" id="enMIYK" />
+                <FormattedMessage defaultMessage="Following" id="cPIKU2" />
               </span>
             </span>
           </Link>
@@ -85,11 +86,34 @@ const SideChannelNav = () => {
             [styles.selected]:
               isInPath('FEATURED') || (!isAuthed && isInPath('HOME')),
           })}
+          aria-selected={
+            isInPath('FEATURED') || (!isAuthed && isInPath('HOME'))
+          }
           onClick={() => onTabClick('featured')}
         >
           <span className={styles.name}>
             <span className={styles.inner}>
               <FormattedMessage defaultMessage="Featured" id="CnPG8j" />
+            </span>
+          </span>
+        </Link>
+
+        <Link
+          href={PATHS.HOTTEST}
+          className={classnames({
+            [styles.item]: true,
+            [styles.selected]: isInPath('HOTTEST'),
+          })}
+          aria-selected={isInPath('HOTTEST')}
+          onClick={() => onTabClick('hottest')}
+        >
+          <span className={styles.name}>
+            <span className={styles.inner}>
+              <FormattedMessage
+                defaultMessage="Trending"
+                id="8tczzy"
+                description="src/components/Layout/SideChannelNav/index.tsx"
+              />
             </span>
           </span>
         </Link>
@@ -104,6 +128,7 @@ const SideChannelNav = () => {
             [styles.item]: true,
             [styles.selected]: isInPath('NEWEST'),
           })}
+          aria-selected={isInPath('NEWEST')}
           onClick={() => onTabClick('newest')}
         >
           <span className={styles.name}>

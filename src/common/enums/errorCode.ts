@@ -78,6 +78,9 @@ export enum ERROR_CODES {
   PAYMENT_BALANCE_INSUFFICIENT = 'PAYMENT_BALANCE_INSUFFICIENT',
   PAYMENT_PASSWORD_NOT_SET = 'PAYMENT_PASSWORD_NOT_SET',
   PAYMENT_REACH_MAXIMUM_LIMIT = 'PAYMENT_REACH_MAXIMUM_LIMIT',
+
+  // Translation
+  TRANSLATION_INSUFFICIENT_CREDITS = 'TRANSLATION_INSUFFICIENT_CREDITS',
 }
 
 export const ERROR_MESSAGES: Partial<{
@@ -337,5 +340,10 @@ export const ERROR_MESSAGES: Partial<{
     defaultMessage: 'The daily limit is 5000 HKD',
     id: 'cufo9X',
     description: 'PAYMENT_REACH_MAXIMUM_LIMIT',
+  }),
+  [ERROR_CODES.TRANSLATION_INSUFFICIENT_CREDITS]: defineMessage({
+    defaultMessage: 'Translation quota exhausted. Try later.',
+    id: 'B1UqZN',
+    description: 'TRANSLATION_INSUFFICIENT_CREDITS',
   }),
 }

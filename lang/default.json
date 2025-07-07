@@ -23,6 +23,9 @@
   "+7SAix": {
     "defaultMessage": "Must be between 2-12 characters long."
   },
+  "+C53uY": {
+    "defaultMessage": "Trending Now"
+  },
   "+EHtpH": {
     "defaultMessage": "No updates yet"
   },
@@ -322,10 +325,6 @@
   },
   "2w2mhG": {
     "defaultMessage": "User blocked. User now can't reply to your articles and user's comments have been hidden from you."
-  },
-  "32bml8": {
-    "defaultMessage": "Following",
-    "description": "src/components/Layout/SideNav/index.tsx"
   },
   "34OLoD": {
     "defaultMessage": "Moment",
@@ -657,6 +656,10 @@
     "defaultMessage": "Matters Daily Report",
     "description": "src/views/Me/Settings/Notifications/Email.tsx"
   },
+  "8tczzy": {
+    "defaultMessage": "Trending",
+    "description": "src/components/Layout/SideChannelNav/index.tsx"
+  },
   "8w3GEA": {
     "defaultMessage": "mentioned you in {article}",
     "description": "src/components/Notice/ArticleNotice/ArticleMentionedYouNotice.tsx"
@@ -799,6 +802,10 @@
     "defaultMessage": "Please set your transcation password.",
     "description": "PAYMENT_PASSWORD_NOT_SET"
   },
+  "B1UqZN": {
+    "defaultMessage": "Translation quota exhausted. Try later.",
+    "description": "TRANSLATION_INSUFFICIENT_CREDITS"
+  },
   "B9IFMF": {
     "defaultMessage": "Yes, apply"
   },
@@ -889,9 +896,6 @@
   "Ci7dxf": {
     "defaultMessage": "Comment deleted",
     "description": "src/components/Notice/NoticeComment.tsx/moment"
-  },
-  "CjKqYk": {
-    "defaultMessage": "Share a story from your life"
   },
   "CnPG8j": {
     "defaultMessage": "Featured"
@@ -1911,9 +1915,6 @@
   },
   "VBve8d": {
     "defaultMessage": "Settled in Matters"
-  },
-  "VKxanK": {
-    "defaultMessage": "Moment Feature is Live"
   },
   "VZsE96": {
     "defaultMessage": "Collection Name"

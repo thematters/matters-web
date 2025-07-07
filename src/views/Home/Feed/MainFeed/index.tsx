@@ -10,7 +10,11 @@ import {
   usePublicQuery,
   ViewerContext,
 } from '~/components'
-import type { IcymiFeedPublicQuery, NewestFeedPublicQuery } from '~/gql/graphql'
+import type {
+  HottestFeedPublicQuery,
+  IcymiFeedPublicQuery,
+  NewestFeedPublicQuery,
+} from '~/gql/graphql'
 
 import { useMixedFeed } from '../../common'
 import FeedRenderer from '../FeedRenderer'
@@ -23,7 +27,10 @@ interface MainFeedProps {
   feedType: FeedType
 }
 
-type FeedArticlesPublic = NewestFeedPublicQuery | IcymiFeedPublicQuery
+type FeedArticlesPublic =
+  | NewestFeedPublicQuery
+  | IcymiFeedPublicQuery
+  | HottestFeedPublicQuery
 
 const MainFeed: React.FC<MainFeedProps> = ({ feedType }) => {
   const viewer = useContext(ViewerContext)
@@ -36,6 +43,7 @@ const MainFeed: React.FC<MainFeedProps> = ({ feedType }) => {
     })
 
   const isIcymiFeed = feedType === 'icymi'
+  const isHottestFeed = feedType === 'hottest'
   const connectionPath = 'viewer.recommendation.feed'
   const recommendation = data?.viewer?.recommendation
   const result = recommendation?.feed
@@ -91,14 +99,42 @@ const MainFeed: React.FC<MainFeedProps> = ({ feedType }) => {
     return { newData, count: edges?.length || 0 }
   }
 
-  const mixFeed = useMixedFeed(edges || [], isIcymiFeed, feedType)
+  const mixFeed = useMixedFeed(
+    edges || [],
+    isIcymiFeed || isHottestFeed,
+    feedType
+  )
 
   const itemCustomProps = {
-    includesMetaData: !isIcymiFeed,
-    excludesTimeStamp: isIcymiFeed,
+    includesMetaData: !isIcymiFeed && !isHottestFeed,
+    excludesTimeStamp: isIcymiFeed || isHottestFeed,
   }
 
   const renderHeader = () => {
+    if (isHottestFeed) {
+      return (
+        <>
+          <Media lessThan="lg">
+            <Spacer size="sp20" />
+            <Announcements />
+          </Media>
+
+          <section className={styles.header}>
+            <h1>
+              <FormattedMessage
+                defaultMessage="Trending"
+                id="8tczzy"
+                description="src/components/Layout/SideChannelNav/index.tsx"
+              />
+            </h1>
+            <p className={styles.description}>
+              <FormattedMessage defaultMessage="Trending Now" id="+C53uY" />
+            </p>
+          </section>
+        </>
+      )
+    }
+
     const isIcymiTopic = recommendation && 'icymiTopic' in recommendation
     if (!isIcymiTopic) return null
 
@@ -110,6 +146,7 @@ const MainFeed: React.FC<MainFeedProps> = ({ feedType }) => {
           <Spacer size="sp20" />
           <Announcements />
         </Media>
+
         <section className={styles.header}>
           <h1>
             <FormattedMessage defaultMessage="Featured" id="CnPG8j" />

@@ -23,6 +23,9 @@
   "+7SAix": {
     "defaultMessage": "2-12 个字符"
   },
+  "+C53uY": {
+    "defaultMessage": "最新社区趋势"
+  },
   "+EHtpH": {
     "defaultMessage": "暂无更新"
   },
@@ -322,10 +325,6 @@
   },
   "2w2mhG": {
     "defaultMessage": "已屏蔽。该用户无法评论你的作品和围炉，他的评论对你折叠。"
-  },
-  "32bml8": {
-    "defaultMessage": "关注",
-    "description": "src/components/Layout/SideNav/index.tsx"
   },
   "34OLoD": {
     "defaultMessage": "发动态",
@@ -657,6 +656,10 @@
     "defaultMessage": "Matters 日报",
     "description": "src/views/Me/Settings/Notifications/Email.tsx"
   },
+  "8tczzy": {
+    "defaultMessage": "热文",
+    "description": "src/components/Layout/SideChannelNav/index.tsx"
+  },
   "8w3GEA": {
     "defaultMessage": "在作品 {article} 中提及你",
     "description": "src/components/Notice/ArticleNotice/ArticleMentionedYouNotice.tsx"
@@ -799,6 +802,10 @@
     "defaultMessage": "请先设定交易密码",
     "description": "PAYMENT_PASSWORD_NOT_SET"
   },
+  "B1UqZN": {
+    "defaultMessage": "翻译定额暂被用尽，请稍候再试",
+    "description": "TRANSLATION_INSUFFICIENT_CREDITS"
+  },
   "B9IFMF": {
     "defaultMessage": "好的，我报名"
   },
@@ -889,9 +896,6 @@
   "Ci7dxf": {
     "defaultMessage": "留言已删除",
     "description": "src/components/Notice/NoticeComment.tsx/moment"
-  },
-  "CjKqYk": {
-    "defaultMessage": "分享今天开心或难过的小故事吧"
   },
   "CnPG8j": {
     "defaultMessage": "精选"
@@ -1911,9 +1915,6 @@
   },
   "VBve8d": {
     "defaultMessage": "搬家到 Matters"
-  },
-  "VKxanK": {
-    "defaultMessage": "短动态上线喽！"
   },
   "VZsE96": {
     "defaultMessage": "选集名称"
@@ -3354,7 +3355,7 @@
     "description": "src/components/Forms/PaymentForm/StripeCheckout/index.tsx"
   },
   "wlQosy": {
-    "defaultMessage": "。感谢鼓励 ～"
+    "defaultMessage": "。感谢鼓励～"
   },
   "wm9xNB": {
     "defaultMessage": "{type} 已解绑",

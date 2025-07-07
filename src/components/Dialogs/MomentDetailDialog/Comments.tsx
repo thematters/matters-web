@@ -12,7 +12,6 @@ import {
   EmptyComment,
   InfiniteScroll,
   List,
-  Media,
   useEventListener,
   useJumpToComment,
 } from '~/components'
@@ -150,16 +149,9 @@ const Comments = ({ moment, editing }: CommentsProps) => {
             }
             eofSpacingTop="base"
           >
-            <Media lessThan="md">
-              <List spacing={[0, 0]} hasBorder={false}>
-                {CommentsList}
-              </List>
-            </Media>
-            <Media greaterThanOrEqual="md">
-              <List spacing={[0, 0]} hasBorder={false}>
-                {CommentsList}
-              </List>
-            </Media>
+            <List spacing={[0, 0]} hasBorder={false}>
+              {CommentsList}
+            </List>
           </InfiniteScroll>
         </>
       )}

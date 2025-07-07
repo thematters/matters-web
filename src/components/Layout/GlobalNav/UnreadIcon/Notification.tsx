@@ -44,11 +44,9 @@ const NotificationUnreadIcon: React.FC<UnreadIconProps> = ({
   const icon = active ? IconNavNotificationsActive : IconNavNotifications
 
   return (
-    <>
-      <span className={iconClasses}>
-        <Icon icon={icon} size={iconSize} />
-      </span>
-    </>
+    <span className={iconClasses}>
+      <Icon icon={icon} size={iconSize} />
+    </span>
   )
 }
 

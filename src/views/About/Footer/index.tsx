@@ -145,7 +145,7 @@ const Footer = () => {
 
                   <li>
                     <a
-                      href="https://discord.gg/matterslab"
+                      href="https://discord.gg/2cgcWMGEbX"
                       target="_blank"
                       rel="noreferrer"
                     >
@@ -233,7 +233,7 @@ const Footer = () => {
                   </li>
                   <li>
                     <a
-                      href="https://www.instagram.com/matterslab2018/"
+                      href="https://www.instagram.com/matters.lab/"
                       target="_blank"
                       rel="noreferrer"
                     >

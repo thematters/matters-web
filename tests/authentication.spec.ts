@@ -32,8 +32,13 @@ test.describe('Authentication', () => {
     await login({ page, fillMode: true })
     await expect(page).toHaveURL('/')
 
-    // Expect homepage has "Notification" button on the left side
-    await expect(page.getByTestId(TEST_ID.SIDE_NAV_NOTIFICATIONS)).toBeVisible()
+    // Wait for the page to fully load after login
+    await page.waitForLoadState('networkidle')
+
+    // Expect homepage has "Notification" button
+    await expect(
+      page.getByTestId(TEST_ID.GLOBAL_NAV_NOTIFICATIONS)
+    ).toBeVisible()
   })
 
   test('can login in login page', async ({ page }) => {
@@ -41,7 +46,9 @@ test.describe('Authentication', () => {
     await expect(page).toHaveURL('/')
 
     // Expect homepage has "Notification" button on the left side
-    await expect(page.getByTestId(TEST_ID.SIDE_NAV_NOTIFICATIONS)).toBeVisible()
+    await expect(
+      page.getByTestId(TEST_ID.GLOBAL_NAV_NOTIFICATIONS)
+    ).toBeVisible()
   })
 
   test('can login with email and OTP', async ({ page }) => {
@@ -98,7 +105,9 @@ test.describe('Authentication', () => {
 
     // Expect homepage has "Notification" button on the left side
     await page.waitForURL(PATHS.HOME)
-    await expect(page.getByTestId(TEST_ID.SIDE_NAV_NOTIFICATIONS)).toBeVisible()
+    await expect(
+      page.getByTestId(TEST_ID.GLOBAL_NAV_NOTIFICATIONS)
+    ).toBeVisible()
 
     // Confirm Matters ID
     await expect(
@@ -119,7 +128,7 @@ test.describe('Authentication', () => {
 
       // [Logged-in] Expect homepage has "Notification" button on the left side
       await expect(
-        page.getByTestId(TEST_ID.SIDE_NAV_NOTIFICATIONS)
+        page.getByTestId(TEST_ID.GLOBAL_NAV_NOTIFICATIONS)
       ).toBeVisible()
 
       // Logout

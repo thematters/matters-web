@@ -2,9 +2,9 @@ import gql from 'graphql-tag'
 
 import { ArticleDigestFeed } from '~/components'
 
+import { ArticleDigestCurated } from './ArticleDigestCurated'
 import { ChannelHeader } from './ChannelFeed/ChannelHeader'
 import { IcymiCuratedFeed } from './IcymiCuratedFeed'
-import { ArticleDigestCurated } from './IcymiCuratedFeed/ArticleDigestCurated'
 
 const articleNodeFragment = gql`
   fragment ArticleNodeFragment on Article {
@@ -82,6 +82,19 @@ export const FEED_ARTICLES_PUBLIC = {
     }
     ${feedFragment}
     ${IcymiCuratedFeed.fragments}
+  `,
+  hottest: gql`
+    query HottestFeedPublic($after: String) {
+      viewer {
+        id
+        recommendation {
+          feed: hottest(input: { first: 20, after: $after, newAlgo: true }) {
+            ...FeedArticleConnection
+          }
+        }
+      }
+    }
+    ${feedFragment}
   `,
 }
 
