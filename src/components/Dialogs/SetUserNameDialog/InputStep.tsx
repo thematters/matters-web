@@ -120,7 +120,7 @@ const InputStep: React.FC<Props> = ({ userName, gotoConfirm }) => {
         // onBlur={handleBlur}
         onChange={handleChange}
         onKeyDown={(e) => {
-          if (e.key.toLocaleLowerCase() === KEYVALUE.enter) {
+          if (e.key.toLowerCase() === KEYVALUE.enter) {
             e.stopPropagation()
           }
         }}
