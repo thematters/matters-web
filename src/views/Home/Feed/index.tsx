@@ -15,7 +15,7 @@ const HomeFeed = () => {
   const isInNewest = isInPath('NEWEST')
   const isInChannel = isInPath('CHANNEL')
   const isInFeatured = isInPath('FEATURED') || (!isAuthed && isInPath('HOME'))
-  const isInHottest = isInPath('HOTTES')
+  const isInHottest = isInPath('HOTTEST')
   const isBetaEnv = !(
     process.env.NEXT_PUBLIC_SITE_DOMAIN === 'web-next.matters.town' ||
     process.env.NEXT_PUBLIC_SITE_DOMAIN === 'web-next.matters.icu'

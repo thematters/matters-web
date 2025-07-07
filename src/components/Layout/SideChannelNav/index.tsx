@@ -99,12 +99,12 @@ const SideChannelNav = () => {
         </Link>
 
         <Link
-          href={PATHS.HOTTES}
+          href={PATHS.HOTTEST}
           className={classnames({
             [styles.item]: true,
-            [styles.selected]: isInPath('HOTTES'),
+            [styles.selected]: isInPath('HOTTEST'),
           })}
-          aria-selected={isInPath('HOTTES')}
+          aria-selected={isInPath('HOTTEST')}
           onClick={() => onTabClick('hottest')}
         >
           <span className={styles.name}>

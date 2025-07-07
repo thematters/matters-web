@@ -8,7 +8,7 @@
 type ROUTE_KEY =
   | 'HOME'
   | 'FEATURED'
-  | 'HOTTES'
+  | 'HOTTEST'
   | 'NEWEST'
   | 'CHANNEL'
   | 'FOLLOW'
@@ -144,7 +144,7 @@ export const ROUTES: {
    */
   { key: 'HOME', pathname: '/' },
   { key: 'FEATURED', pathname: '/featured' },
-  { key: 'HOTTES', pathname: '/hottest' },
+  { key: 'HOTTEST', pathname: '/hottest' },
   { key: 'NEWEST', pathname: '/newest' },
   { key: 'CHANNEL', pathname: '/c/[shortHash]' },
   { key: 'FOLLOW', pathname: '/follow' },
