@@ -2688,6 +2688,10 @@
   "k6pcz/": {
     "defaultMessage": "Check the wallet status and confirm your network."
   },
+  "k7Oi38": {
+    "defaultMessage": "Language preference",
+    "description": "src/views/Me/Settings/Settings/index.tsx"
+  },
   "k97/u7": {
     "defaultMessage": "Add Articles"
   },
