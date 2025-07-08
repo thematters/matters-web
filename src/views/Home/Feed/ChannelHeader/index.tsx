@@ -7,7 +7,8 @@ import {
   TopicChannelHeaderFragment,
 } from '~/gql/graphql'
 
-import styles from '../styles.module.css'
+import Placeholder from './Placeholder'
+import styles from './styles.module.css'
 
 const fragments = {
   topicChannel: gql`
@@ -35,26 +36,31 @@ const fragments = {
 }
 
 interface ChannelHeaderProps {
-  channel: CurationChannelHeaderFragment | TopicChannelHeaderFragment
+  channel?: CurationChannelHeaderFragment | TopicChannelHeaderFragment
+  name?: React.ReactNode
+  note?: React.ReactNode
 }
 
-export const ChannelHeader = ({ channel }: ChannelHeaderProps) => {
+export const ChannelHeader = ({ channel, name, note }: ChannelHeaderProps) => {
   const { lang } = useContext(LanguageContext)
-  const name =
-    lang === 'zh_hant'
-      ? channel.nameZhHant
-      : lang === 'zh_hans'
-        ? channel.nameZhHans
-        : channel.nameEn
-  const note =
-    lang === 'zh_hant'
-      ? channel.noteZhHant
-      : lang === 'zh_hans'
-        ? channel.noteZhHans
-        : channel.noteEn
 
-  if (!channel) {
+  if (!channel && !name && !note) {
     return null
+  }
+
+  if (channel) {
+    name =
+      lang === 'zh_hant'
+        ? channel.nameZhHant
+        : lang === 'zh_hans'
+          ? channel.nameZhHans
+          : channel.nameEn
+    note =
+      lang === 'zh_hant'
+        ? channel.noteZhHant
+        : lang === 'zh_hans'
+          ? channel.noteZhHans
+          : channel.noteEn
   }
 
   return (
@@ -67,4 +73,5 @@ export const ChannelHeader = ({ channel }: ChannelHeaderProps) => {
   )
 }
 
+ChannelHeader.Placeholder = Placeholder
 ChannelHeader.fragments = fragments

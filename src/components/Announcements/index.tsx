@@ -9,7 +9,7 @@ import Carousel from './Carousel'
 import { VISIBLE_ANNOUNCEMENTS } from './gql'
 import Placeholder from './Placeholder'
 
-export const Announcements = memo(() => {
+const AnnouncementsComponent = memo(() => {
   const { isInPath, getQuery } = useRoute()
   const isInChannel = isInPath('CHANNEL')
   const shortHash = getQuery('shortHash')
@@ -46,6 +46,14 @@ export const Announcements = memo(() => {
   return <Carousel items={items} />
 })
 
+AnnouncementsComponent.displayName = 'Announcements'
+
+export const Announcements =
+  AnnouncementsComponent as typeof AnnouncementsComponent & {
+    Placeholder: typeof Placeholder
+  }
+
+Announcements.Placeholder = Placeholder
 Announcements.displayName = 'Announcements'
 
 export default Announcements
