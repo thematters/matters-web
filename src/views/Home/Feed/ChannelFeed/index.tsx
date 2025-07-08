@@ -14,10 +14,10 @@ import { FeedArticlesPublicChannelQuery } from '~/gql/graphql'
 
 import { MixedFeedArticleEdge, useMixedFeed } from '../../common'
 import { ArticleDigestCurated } from '../ArticleDigestCurated'
+import { ChannelHeader } from '../ChannelHeader'
 import FeedRenderer from '../FeedRenderer'
 import { FEED_ARTICLES_PRIVATE, FEED_ARTICLES_PUBLIC_CHANNEL } from '../gql'
 import feedStyles from '../styles.module.css'
-import { ChannelHeader } from './ChannelHeader'
 
 type ChannelFeedProps = {
   shortHash: string
@@ -106,11 +106,27 @@ const ChannelFeed = ({ shortHash: _shortHash }: ChannelFeedProps) => {
 
   const mixFeed = useMixedFeed(edges || [], true, feedType)
 
-  const renderCards = (
-    cardEdges: MixedFeedArticleEdge[],
-    numOfCards: number,
+  const renderCards = ({
+    loading,
+    edges,
+    numOfCards,
+    channelId,
+  }: {
+    loading?: boolean
+    edges?: MixedFeedArticleEdge[]
+    numOfCards?: number
     channelId?: string
-  ) => {
+  }) => {
+    if (loading) {
+      return (
+        <section className={feedStyles.cards}>
+          <ArticleDigestCurated.Placeholder />
+          <ArticleDigestCurated.Placeholder />
+          <ArticleDigestCurated.Placeholder />
+        </section>
+      )
+    }
+
     const onClick = (
       contentType: 'article' | 'user',
       location: number,
@@ -128,7 +144,7 @@ const ChannelFeed = ({ shortHash: _shortHash }: ChannelFeedProps) => {
       })
     }
 
-    const filteredEdges = cardEdges
+    const filteredEdges = edges
       ?.filter((edge) => edge.__typename === 'ChannelArticleEdge')
       .slice(0, numOfCards)
 
@@ -157,7 +173,7 @@ const ChannelFeed = ({ shortHash: _shortHash }: ChannelFeedProps) => {
 
     return (
       <section className={feedStyles.cards}>
-        {filteredEdges.map((edge, i) => (
+        {filteredEdges?.map((edge, i) => (
           <React.Fragment key={edge.node.id}>
             <Media at="xs">{renderArticleDigest(edge, i, 3)}</Media>
             <Media greaterThan="xs">{renderArticleDigest(edge, i, 2)}</Media>
@@ -167,7 +183,11 @@ const ChannelFeed = ({ shortHash: _shortHash }: ChannelFeedProps) => {
     )
   }
 
-  const renderHeader = () => {
+  const renderHeader = ({ loading }: { loading?: boolean }) => {
+    if (loading) {
+      return <ChannelHeader.Placeholder />
+    }
+
     if (
       !data?.channel ||
       (data.channel.__typename !== 'TopicChannel' &&
@@ -184,6 +204,7 @@ const ChannelFeed = ({ shortHash: _shortHash }: ChannelFeedProps) => {
     data?.channel?.__typename === 'CurationChannel' ? (
       <>
         <ChannelHeader channel={data.channel} />
+
         <EmptyWork
           description={intl.formatMessage({
             defaultMessage: 'No articles',

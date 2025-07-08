@@ -1,33 +1,3 @@
-.header {
-  z-index: var(--z-index-sticky-tabs);
-  display: flex;
-  flex-direction: column;
-  padding-top: var(--sp20);
-  background-color: var(--color-white);
-
-  @media (--xs-up) {
-    flex-flow: row wrap;
-    column-gap: var(--sp12);
-    align-items: center;
-  }
-
-  @media (--sm-up) {
-    top: var(--global-nav-height);
-  }
-
-  & h1 {
-    font-size: var(--text18);
-    font-weight: var(--font-medium);
-    line-height: 1.75rem;
-  }
-
-  & .description {
-    font-size: var(--text14);
-    line-height: 1.375rem;
-    color: var(--color-grey-dark);
-  }
-}
-
 .cards {
   @mixin border-bottom-grey-light;
 
