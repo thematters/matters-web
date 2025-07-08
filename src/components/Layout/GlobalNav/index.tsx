@@ -240,7 +240,7 @@ const BaseGlobalNav = ({
   const isAuthed = viewer.isAuthed
 
   return (
-    <div className={styles.container}>
+    <section className={styles.content}>
       <section className={styles.left}>
         <Logo />
 
@@ -266,19 +266,19 @@ const BaseGlobalNav = ({
           />
         )}
       </section>
-    </div>
+    </section>
   )
 }
 
 export const GlobalNav = () => {
   return (
-    <>
+    <section className={styles.container}>
       <Media lessThan="md">
         <BaseGlobalNav showSearchBar={false} iconSize={26} avatarSize={26} />
       </Media>
       <Media greaterThanOrEqual="md">
         <BaseGlobalNav showSearchBar={true} iconSize={30} avatarSize={30} />
       </Media>
-    </>
+    </section>
   )
 }

@@ -8,4 +8,5 @@ export const KEYVALUE = {
   space: 'space',
   pageDown: 'pagedown',
   pageUp: 'pageup',
+  slash: '/',
 }
