@@ -112,14 +112,20 @@ const MainFeed: React.FC<MainFeedProps> = ({ feedType }) => {
 
   const renderHeader = ({ loading }: { loading?: boolean }) => {
     const isIcymiTopic = recommendation && 'icymiTopic' in recommendation
+    const isHottestFeed = feedType === 'hottest'
 
     if (loading && (isHottestFeed || isIcymiTopic)) {
       return (
-        <Media lessThan="lg">
-          <Spacer size="sp20" />
-          <Announcements.Placeholder />
-          <ChannelHeader.Placeholder />
-        </Media>
+        <>
+          <Media lessThan="lg">
+            <Spacer size="sp20" />
+            <Announcements.Placeholder />
+            <ChannelHeader.Placeholder />
+          </Media>
+          <Media greaterThanOrEqual="lg">
+            <ChannelHeader.Placeholder />
+          </Media>
+        </>
       )
     }
 
