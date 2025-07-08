@@ -113,7 +113,7 @@ const MainFeed: React.FC<MainFeedProps> = ({ feedType }) => {
   const renderHeader = ({ loading }: { loading?: boolean }) => {
     const isIcymiTopic = recommendation && 'icymiTopic' in recommendation
 
-    if (loading && isHottestFeed && isIcymiTopic) {
+    if (loading && (isHottestFeed || isIcymiTopic)) {
       return (
         <Media lessThan="lg">
           <Spacer size="sp20" />
