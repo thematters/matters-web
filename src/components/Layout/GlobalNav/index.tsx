@@ -49,10 +49,14 @@ const Logo = () => {
   )
 }
 
-const UnauthenticatedNav = () => (
+const UnauthenticatedNav = ({ isSmUp }: { isSmUp: boolean }) => (
   <>
-    <LanguageSwitch size="lg" showText={false} />
-    <UniversalAuthButton resideIn="sideNav" />
+    <LanguageSwitch
+      showText={false}
+      iconSize={isSmUp ? 28 : 24}
+      iconColor="black"
+    />
+    <UniversalAuthButton resideIn="sideNav" size={isSmUp ? 'sm' : 'lg'} />
   </>
 )
 
@@ -183,15 +187,13 @@ const MobileSearchButton = ({
 interface AuthenticatedNavProps {
   viewer: Viewer
   isInNotification: boolean
-  iconSize: 26 | 30
-  avatarSize: 26 | 30
+  isSmUp: boolean
 }
 
 const AuthenticatedNav = ({
   viewer,
   isInNotification,
-  iconSize,
-  avatarSize,
+  isSmUp,
 }: AuthenticatedNavProps) => (
   <>
     <Dropdown
@@ -209,30 +211,20 @@ const AuthenticatedNav = ({
         <CreateButton
           openDropdown={openDropdown}
           buttonRef={ref}
-          iconSize={iconSize}
+          iconSize={isSmUp ? 30 : 26}
         />
       )}
     </Dropdown>
 
     <NotificationButton
       isInNotification={isInNotification}
-      iconSize={iconSize}
+      iconSize={isSmUp ? 30 : 26}
     />
-    <UserMenu viewer={viewer} avatarSize={avatarSize} />
+    <UserMenu viewer={viewer} avatarSize={isSmUp ? 30 : 26} />
   </>
 )
 
-interface BaseGlobalNavProps {
-  showSearchBar?: boolean
-  iconSize: 26 | 30
-  avatarSize: 26 | 30
-}
-
-const BaseGlobalNav = ({
-  showSearchBar = false,
-  iconSize,
-  avatarSize,
-}: BaseGlobalNavProps) => {
+const BaseGlobalNav = ({ isSmUp }: { isSmUp: boolean }) => {
   const { router, isInPath } = useRoute()
   const viewer = useContext(ViewerContext)
   const isInNotification = isInPath('ME_NOTIFICATIONS')
@@ -244,25 +236,24 @@ const BaseGlobalNav = ({
       <section className={styles.left}>
         <Logo />
 
-        {showSearchBar && (
+        {isSmUp && (
           <div className={styles.search}>
             <SearchBar />
           </div>
         )}
       </section>
       <section className={styles.right}>
-        {!showSearchBar && (
+        {!isSmUp && (
           <MobileSearchButton isInSearch={isInSearch} router={router} />
         )}
 
         {!isAuthed ? (
-          <UnauthenticatedNav />
+          <UnauthenticatedNav isSmUp={isSmUp} />
         ) : (
           <AuthenticatedNav
             viewer={viewer}
             isInNotification={isInNotification}
-            iconSize={iconSize}
-            avatarSize={avatarSize}
+            isSmUp={isSmUp}
           />
         )}
       </section>
@@ -274,10 +265,10 @@ export const GlobalNav = () => {
   return (
     <section className={styles.container}>
       <Media lessThan="md">
-        <BaseGlobalNav showSearchBar={false} iconSize={26} avatarSize={26} />
+        <BaseGlobalNav isSmUp={false} />
       </Media>
       <Media greaterThanOrEqual="md">
-        <BaseGlobalNav showSearchBar={true} iconSize={30} avatarSize={30} />
+        <BaseGlobalNav isSmUp={true} />
       </Media>
     </section>
   )

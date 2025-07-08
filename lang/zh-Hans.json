@@ -2688,6 +2688,10 @@
   "k6pcz/": {
     "defaultMessage": "请确认网路和钱包是否正常运行"
   },
+  "k7Oi38": {
+    "defaultMessage": "语言偏好",
+    "description": "src/views/Me/Settings/Settings/index.tsx"
+  },
   "k97/u7": {
     "defaultMessage": "添加作品"
   },

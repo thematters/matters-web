@@ -2,19 +2,21 @@ import React from 'react'
 import { useIntl } from 'react-intl'
 
 import {
-  BREAKPOINTS,
   OPEN_UNIVERSAL_AUTH_DIALOG,
   UNIVERSAL_AUTH_TRIGGER,
 } from '~/common/enums'
 import { analytics } from '~/common/utils'
-import { Button, TextIcon, useMediaQuery } from '~/components'
+import { Button, TextIcon } from '~/components'
 
-type UniversalAuthButtonProps = { resideIn?: 'nav' | 'sideNav' }
+type UniversalAuthButtonProps = {
+  resideIn?: 'nav' | 'sideNav'
+  size?: 'sm' | 'lg'
+}
 
 export const UniversalAuthButton: React.FC<UniversalAuthButtonProps> = ({
+  size = 'sm',
   resideIn,
 }) => {
-  const isSmUp = useMediaQuery(`(min-width: ${BREAKPOINTS.MD}px)`)
   const intl = useIntl()
   const enterText = intl.formatMessage({
     defaultMessage: 'Enter',
@@ -41,11 +43,11 @@ export const UniversalAuthButton: React.FC<UniversalAuthButtonProps> = ({
   return (
     <Button
       bgColor="black"
-      size={isSmUp ? undefined : [null, '1.625rem']}
-      spacing={isSmUp ? [8, 20] : [0, 12]}
+      size={size === 'sm' ? undefined : [null, '1.625rem']}
+      spacing={size === 'sm' ? [8, 20] : [0, 12]}
       onClick={handleClick}
     >
-      <TextIcon color="white" weight="medium" size={isSmUp ? 14 : 12}>
+      <TextIcon color="white" weight="medium" size={size === 'sm' ? 14 : 12}>
         {enterText}
       </TextIcon>
     </Button>
