@@ -462,7 +462,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
       )}
       {isSelectMethod && isInPage && (
         <section className={styles.footer}>
-          <LanguageSwitch />
+          <LanguageSwitch iconColor="black" />
         </section>
       )}
     </>
