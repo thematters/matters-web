@@ -17,11 +17,11 @@ import type {
 } from '~/gql/graphql'
 
 import { useMixedFeed } from '../../common'
+import { ChannelHeader } from '../ChannelHeader'
 import FeedRenderer from '../FeedRenderer'
 import { FEED_ARTICLES_PRIVATE, FEED_ARTICLES_PUBLIC } from '../gql'
 import { IcymiCuratedFeed } from '../IcymiCuratedFeed'
 import { FeedType } from '../index'
-import styles from '../styles.module.css'
 
 interface MainFeedProps {
   feedType: FeedType
@@ -110,7 +110,19 @@ const MainFeed: React.FC<MainFeedProps> = ({ feedType }) => {
     excludesTimeStamp: isIcymiFeed || isHottestFeed,
   }
 
-  const renderHeader = () => {
+  const renderHeader = ({ loading }: { loading?: boolean }) => {
+    const isIcymiTopic = recommendation && 'icymiTopic' in recommendation
+
+    if (loading && isHottestFeed && isIcymiTopic) {
+      return (
+        <Media lessThan="lg">
+          <Spacer size="sp20" />
+          <Announcements.Placeholder />
+          <ChannelHeader.Placeholder />
+        </Media>
+      )
+    }
+
     if (isHottestFeed) {
       return (
         <>
@@ -119,25 +131,23 @@ const MainFeed: React.FC<MainFeedProps> = ({ feedType }) => {
             <Announcements />
           </Media>
 
-          <section className={styles.header}>
-            <h1>
+          <ChannelHeader
+            name={
               <FormattedMessage
                 defaultMessage="Trending"
                 id="8tczzy"
                 description="src/components/Layout/SideChannelNav/index.tsx"
               />
-            </h1>
-            <p className={styles.description}>
+            }
+            note={
               <FormattedMessage defaultMessage="Trending Now" id="+C53uY" />
-            </p>
-          </section>
+            }
+          />
         </>
       )
     }
 
-    const isIcymiTopic = recommendation && 'icymiTopic' in recommendation
     if (!isIcymiTopic) return null
-
     const note = recommendation?.icymiTopic?.note
 
     return (
@@ -147,12 +157,10 @@ const MainFeed: React.FC<MainFeedProps> = ({ feedType }) => {
           <Announcements />
         </Media>
 
-        <section className={styles.header}>
-          <h1>
-            <FormattedMessage defaultMessage="Featured" id="CnPG8j" />
-          </h1>
-          {note && <p className={styles.description}>{note}</p>}
-        </section>
+        <ChannelHeader
+          name={<FormattedMessage defaultMessage="Featured" id="CnPG8j" />}
+          note={note}
+        />
 
         {recommendation &&
           'icymiTopic' in recommendation &&
