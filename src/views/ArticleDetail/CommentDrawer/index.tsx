@@ -3,8 +3,15 @@ import { useEffect } from 'react'
 import { useIntl } from 'react-intl'
 
 import IconLeft from '@/public/static/icons/24px/left.svg'
+import { KEYVALUE } from '~/common/enums'
 import { analytics } from '~/common/utils'
-import { Drawer, Icon, useCommentEditorContext } from '~/components'
+import {
+  Drawer,
+  Icon,
+  useCommentEditorContext,
+  useNativeEventListener,
+} from '~/components'
+import { ArticleDetailPublicQuery } from '~/gql/graphql'
 
 import { Placeholder as CommentsPlaceholder } from '../Comments/Placeholder'
 
@@ -27,29 +34,31 @@ type CommentDrawerProps = {
   isOpen: boolean
   onClose: () => void
   step: CommentDrawerStep
-  id: string
   lock: boolean
   switchToCommentList: () => void
+  article: NonNullable<ArticleDetailPublicQuery['article']>
 }
 
 export const CommentDrawer: React.FC<CommentDrawerProps> = ({
   isOpen,
   onClose,
   step,
-  id,
   lock,
   switchToCommentList,
+  article,
 }) => {
   const intl = useIntl()
   const isCommentDetail = step === 'commentDetail'
   const isCommentList = step === 'commentList'
   const { setActiveEditor } = useCommentEditorContext()
 
+  const canComment = article.canComment
+
   useEffect(() => {
     if (isOpen) {
       analytics.trackEvent('view_comment_drawer', {
         contentType: 'article',
-        id: id,
+        id: article.id,
       })
     }
 
@@ -57,6 +66,33 @@ export const CommentDrawer: React.FC<CommentDrawerProps> = ({
       setActiveEditor(null)
     }
   }, [isOpen])
+
+  // Keyboard shortcuts for open/close comment drawer
+  useNativeEventListener('keydown', (event: KeyboardEvent) => {
+    // skip if current focus is on another input element,
+    const target = event.target as HTMLElement
+    if (
+      target.tagName.toLowerCase() === 'input' ||
+      target.tagName.toLowerCase() === 'textarea' ||
+      target.contentEditable === 'true'
+    ) {
+      return
+    }
+
+    const keyCode = event.code.toLowerCase()
+
+    if (keyCode === KEYVALUE.escape && isOpen) {
+      onClose()
+    }
+
+    if (keyCode === KEYVALUE.keyC && !isOpen) {
+      if (!canComment) {
+        return
+      }
+
+      onClose()
+    }
+  })
 
   return (
     <Drawer isOpen={isOpen} onClose={onClose}>
@@ -71,7 +107,7 @@ export const CommentDrawer: React.FC<CommentDrawerProps> = ({
             closeDrawer={onClose}
           />
           <Drawer.Content>
-            <DynamicComments id={id} lock={lock} />
+            <DynamicComments id={article.id} lock={lock} />
           </Drawer.Content>
         </>
       )}

@@ -9,4 +9,6 @@ export const KEYVALUE = {
   pageDown: 'pagedown',
   pageUp: 'pageup',
   slash: '/',
+  keyC: 'keyc',
+  keyD: 'keyd',
 }
