@@ -10,20 +10,29 @@ import {
   usePublicQuery,
   ViewerContext,
 } from '~/components'
-import type { IcymiFeedPublicQuery, NewestFeedPublicQuery } from '~/gql/graphql'
+import type {
+  HottestFeedPublicQuery,
+  IcymiFeedPublicQuery,
+  NewestFeedPublicQuery,
+} from '~/gql/graphql'
 
 import { useMixedFeed } from '../../common'
+import { ArticleDigestCurated } from '../ArticleDigestCurated'
+import { ChannelHeader } from '../ChannelHeader'
 import FeedRenderer from '../FeedRenderer'
 import { FEED_ARTICLES_PRIVATE, FEED_ARTICLES_PUBLIC } from '../gql'
 import { IcymiCuratedFeed } from '../IcymiCuratedFeed'
 import { FeedType } from '../index'
-import styles from '../styles.module.css'
+import feedStyles from '../styles.module.css'
 
 interface MainFeedProps {
   feedType: FeedType
 }
 
-type FeedArticlesPublic = NewestFeedPublicQuery | IcymiFeedPublicQuery
+type FeedArticlesPublic =
+  | NewestFeedPublicQuery
+  | IcymiFeedPublicQuery
+  | HottestFeedPublicQuery
 
 const MainFeed: React.FC<MainFeedProps> = ({ feedType }) => {
   const viewer = useContext(ViewerContext)
@@ -36,6 +45,7 @@ const MainFeed: React.FC<MainFeedProps> = ({ feedType }) => {
     })
 
   const isIcymiFeed = feedType === 'icymi'
+  const isHottestFeed = feedType === 'hottest'
   const connectionPath = 'viewer.recommendation.feed'
   const recommendation = data?.viewer?.recommendation
   const result = recommendation?.feed
@@ -91,17 +101,69 @@ const MainFeed: React.FC<MainFeedProps> = ({ feedType }) => {
     return { newData, count: edges?.length || 0 }
   }
 
-  const mixFeed = useMixedFeed(edges || [], isIcymiFeed, feedType)
+  const mixFeed = useMixedFeed(
+    edges || [],
+    isIcymiFeed || isHottestFeed,
+    feedType
+  )
 
   const itemCustomProps = {
-    includesMetaData: !isIcymiFeed,
-    excludesTimeStamp: isIcymiFeed,
+    includesMetaData: !isIcymiFeed && !isHottestFeed,
+    excludesTimeStamp: isIcymiFeed || isHottestFeed,
   }
 
-  const renderHeader = () => {
-    const isIcymiTopic = recommendation && 'icymiTopic' in recommendation
-    if (!isIcymiTopic) return null
+  const renderHeader = ({ loading }: { loading?: boolean }) => {
+    const isIcymiFeed = feedType === 'icymi'
+    const isHottestFeed = feedType === 'hottest'
 
+    if (loading && (isHottestFeed || isIcymiFeed)) {
+      return (
+        <>
+          <Media lessThan="lg">
+            <Spacer size="sp20" />
+            <Announcements.Placeholder />
+            <ChannelHeader.Placeholder />
+          </Media>
+          <Media greaterThanOrEqual="lg">
+            <ChannelHeader.Placeholder />
+            {isIcymiFeed && (
+              <section className={feedStyles.cards}>
+                <ArticleDigestCurated.Placeholder />
+                <ArticleDigestCurated.Placeholder />
+                <ArticleDigestCurated.Placeholder />
+              </section>
+            )}
+          </Media>
+        </>
+      )
+    }
+
+    if (isHottestFeed) {
+      return (
+        <>
+          <Media lessThan="lg">
+            <Spacer size="sp20" />
+            <Announcements />
+          </Media>
+
+          <ChannelHeader
+            name={
+              <FormattedMessage
+                defaultMessage="Trending"
+                id="8tczzy"
+                description="src/components/Layout/SideChannelNav/index.tsx"
+              />
+            }
+            note={
+              <FormattedMessage defaultMessage="Trending Now" id="+C53uY" />
+            }
+          />
+        </>
+      )
+    }
+
+    if (!isIcymiFeed || !recommendation || !('icymiTopic' in recommendation))
+      return null
     const note = recommendation?.icymiTopic?.note
 
     return (
@@ -110,12 +172,11 @@ const MainFeed: React.FC<MainFeedProps> = ({ feedType }) => {
           <Spacer size="sp20" />
           <Announcements />
         </Media>
-        <section className={styles.header}>
-          <h1>
-            <FormattedMessage defaultMessage="Featured" id="CnPG8j" />
-          </h1>
-          {note && <p className={styles.description}>{note}</p>}
-        </section>
+
+        <ChannelHeader
+          name={<FormattedMessage defaultMessage="Featured" id="CnPG8j" />}
+          note={note}
+        />
 
         {recommendation &&
           'icymiTopic' in recommendation &&

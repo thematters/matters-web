@@ -2,13 +2,13 @@
   @mixin hide-scrollbar;
 
   position: relative;
-  max-height: calc(100vh - var(--global-nav-height-mobile));
+  max-height: calc(var(--ivh) * 100 - var(--global-nav-height-mobile));
   overflow: hidden auto;
   overscroll-behavior: contain;
   -webkit-overflow-scrolling: touch;
 
   @media (--md-up) {
-    max-height: calc(100vh - var(--global-nav-height));
+    max-height: calc(var(--ivh) * 100 - var(--global-nav-height));
   }
 }
 
@@ -19,7 +19,7 @@
   gap: var(--sp8);
   align-items: flex-start;
   min-width: 4.75rem;
-  padding-top: var(--sp20);
+  padding-top: var(--sp16);
   padding-bottom: var(--sp32);
 
   @media (--sm-up) {

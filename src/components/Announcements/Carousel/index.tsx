@@ -137,33 +137,27 @@ const Carousel = ({ items }: CarouselProps) => {
             const title = translatedItem?.title || item.title || ''
 
             const originalLink = translatedItem?.link || item.link || ''
-            let itemLink = originalLink
-
-            if (
-              typeof window !== 'undefined' &&
-              originalLink &&
-              process.env.NEXT_PUBLIC_RUNTIME_ENV !== 'local' &&
-              originalLink.startsWith('http')
-            ) {
-              try {
-                const url = new URL(originalLink)
-                url.hostname = window.location.hostname
-                itemLink = url.toString()
-              } catch {
-                console.warn(`Unable to parse URL: ${originalLink}`)
-              }
-            }
+            const itemLink = originalLink.replace(
+              'matters.town',
+              process.env.NEXT_PUBLIC_SITE_DOMAIN
+            )
 
             const isFirstFold = i === 0
 
             return (
               <div key={item.id} className={styles.slide}>
-                <Card htmlHref={itemLink} spacing={[0, 0]} bgActiveColor="none">
+                <Card
+                  htmlHref={itemLink}
+                  htmlTarget="_blank"
+                  is="anchor"
+                  spacing={[0, 0]}
+                  bgActiveColor="none"
+                >
                   <div className={styles.content}>
                     <ResponsiveImage
                       url={item.cover}
-                      width={1376}
-                      loading={isFirstFold ? undefined : 'lazy'}
+                      width={896}
+                      loading={isFirstFold ? 'eager' : 'lazy'}
                       fetchPriority={isFirstFold ? 'high' : 'low'}
                     />
                     <h3>{title}</h3>

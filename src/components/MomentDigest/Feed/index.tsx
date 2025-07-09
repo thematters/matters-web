@@ -93,13 +93,13 @@ export const MomentDigestFeed = ({
             className={styles.content}
             onClick={(event) => {
               const target = event.target as HTMLElement
-              const targetTagName = target.tagName.toLocaleLowerCase()
+              const targetTagName = target.tagName.toLowerCase()
               if (
                 // link
                 targetTagName === 'a' ||
                 // mention
                 (targetTagName === 'span' &&
-                  target.parentElement?.tagName.toLocaleLowerCase() === 'a' &&
+                  target.parentElement?.tagName.toLowerCase() === 'a' &&
                   target.innerText.includes('@'))
               ) {
                 event.stopPropagation()

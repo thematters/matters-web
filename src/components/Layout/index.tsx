@@ -82,6 +82,7 @@ const useLayoutType = () => {
   const isThreeColumnLayout =
     isHome ||
     isInPath('FEATURED') ||
+    isInPath('HOTTEST') ||
     isInPath('NEWEST') ||
     isInPath('CHANNEL') ||
     isInPath('FOLLOW') ||
@@ -92,10 +93,15 @@ const useLayoutType = () => {
     isInPath('USER_COLLECTIONS') ||
     isInPath('USER_COLLECTION_DETAIL')
 
+  // Fallback to one-column layout if no specific layout is determined
+  const hasSpecificLayout =
+    isOneColumnLayout || isTwoColumnLayout || isThreeColumnLayout
+  const fallbackOneColumnLayout = !hasSpecificLayout
+
   return {
     isInMomentDetail,
     isInMomentDetailEdit,
-    isOneColumnLayout,
+    isOneColumnLayout: isOneColumnLayout || fallbackOneColumnLayout,
     isTwoColumnLayout,
     isThreeColumnLayout,
     isLeftLayout,
@@ -210,7 +216,9 @@ export const Layout: React.FC<LayoutProps> & {
   return (
     <>
       <Head description={null} />
+
       {!isInMomentDetail && !isInMomentDetailEdit && <GlobalNav />}
+
       <div className={layoutClasses}>
         <main className={mainClasses}>
           {isThreeColumnLayout && (

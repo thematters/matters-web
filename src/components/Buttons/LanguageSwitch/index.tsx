@@ -8,10 +8,8 @@ import {
   ButtonSpacingY,
   Dropdown,
   Icon,
-  IconSize,
   LanguageConsumer,
   LanguageContext,
-  Media,
   Menu,
   TextIcon,
 } from '~/components'
@@ -51,12 +49,16 @@ export const LanguageSwitchContent = () => (
 
 type LanguageSwitchProps = {
   size?: 'sm' | 'lg'
+  iconSize?: 16 | 24 | 28
+  iconColor?: 'black' | 'white'
   bgColor?: 'greyDarkest'
   showText?: boolean
 }
 
 export const LanguageSwitch: React.FC<LanguageSwitchProps> = ({
   size = 'sm',
+  iconSize = 16,
+  iconColor = 'white',
   bgColor,
   showText = true,
 }) => {
@@ -66,41 +68,25 @@ export const LanguageSwitch: React.FC<LanguageSwitchProps> = ({
   const buttonSpacing: [ButtonSpacingY, ButtonSpacingX] =
     size === 'sm' ? [0, 0] : [0, 8]
 
-  // Create language switch button with appropriate icon size
-  const createLanguageButton = (
-    iconSize: IconSize,
-    ref: React.Ref<HTMLButtonElement> | undefined,
-    openDropdown: () => void
-  ) => (
-    <Button
-      onClick={openDropdown}
-      size={[null, buttonHeight]}
-      spacing={buttonSpacing}
-      bgColor={bgColor}
-      aria-haspopup="listbox"
-      ref={ref}
-    >
-      <TextIcon
-        icon={<Icon icon={IconWorld} size={iconSize} />}
-        size={textSize}
-        color="black"
-      >
-        {showText && LANG_TEXT_MAP[lang]}
-      </TextIcon>
-    </Button>
-  )
-
   return (
     <Dropdown content={<LanguageSwitchContent />} zIndex={Z_INDEX.OVER_DIALOG}>
       {({ openDropdown, ref }) => (
-        <>
-          <Media lessThan="md">
-            {createLanguageButton(24 as IconSize, ref, openDropdown)}
-          </Media>
-          <Media greaterThanOrEqual="md">
-            {createLanguageButton(28 as IconSize, ref, openDropdown)}
-          </Media>
-        </>
+        <Button
+          onClick={openDropdown}
+          size={[null, buttonHeight]}
+          spacing={buttonSpacing}
+          bgColor={bgColor}
+          aria-haspopup="listbox"
+          ref={ref}
+        >
+          <TextIcon
+            icon={<Icon icon={IconWorld} size={iconSize} />}
+            size={textSize}
+            color={iconColor}
+          >
+            {showText && LANG_TEXT_MAP[lang]}
+          </TextIcon>
+        </Button>
       )}
     </Dropdown>
   )

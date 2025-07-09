@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { useCallback, useContext, useEffect, useRef, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { FEATUED_CHANNEL_SHORT_HASH, PATHS } from '~/common/enums'
+import { PATHS } from '~/common/enums'
 import { analytics } from '~/common/utils'
 import { useRoute, ViewerContext } from '~/components'
 import { useChannels } from '~/components/Context'
@@ -47,10 +47,6 @@ const SideChannelNav = () => {
     })
   }
 
-  const filteredChannels = channels.filter(
-    (c) => c.shortHash !== FEATUED_CHANNEL_SHORT_HASH
-  )
-
   return (
     <section className={styles.content} ref={contentRef}>
       <section
@@ -68,11 +64,12 @@ const SideChannelNav = () => {
               [styles.selected]:
                 (isAuthed && isInPath('HOME')) || isInPath('FOLLOW'),
             })}
+            aria-selected={(isAuthed && isInPath('HOME')) || isInPath('FOLLOW')}
             onClick={() => onTabClick('follow')}
           >
             <span className={styles.name}>
               <span className={styles.inner}>
-                <FormattedMessage defaultMessage="My Page" id="enMIYK" />
+                <FormattedMessage defaultMessage="Following" id="cPIKU2" />
               </span>
             </span>
           </Link>
@@ -85,6 +82,9 @@ const SideChannelNav = () => {
             [styles.selected]:
               isInPath('FEATURED') || (!isAuthed && isInPath('HOME')),
           })}
+          aria-selected={
+            isInPath('FEATURED') || (!isAuthed && isInPath('HOME'))
+          }
           onClick={() => onTabClick('featured')}
         >
           <span className={styles.name}>
@@ -94,7 +94,27 @@ const SideChannelNav = () => {
           </span>
         </Link>
 
-        {filteredChannels.map((c) => (
+        <Link
+          href={PATHS.HOTTEST}
+          className={classnames({
+            [styles.item]: true,
+            [styles.selected]: isInPath('HOTTEST'),
+          })}
+          aria-selected={isInPath('HOTTEST')}
+          onClick={() => onTabClick('hottest')}
+        >
+          <span className={styles.name}>
+            <span className={styles.inner}>
+              <FormattedMessage
+                defaultMessage="Trending"
+                id="8tczzy"
+                description="src/components/Layout/SideChannelNav/index.tsx"
+              />
+            </span>
+          </span>
+        </Link>
+
+        {channels.map((c) => (
           <ChannelItem key={c.id} channel={c} />
         ))}
 
@@ -104,6 +124,7 @@ const SideChannelNav = () => {
             [styles.item]: true,
             [styles.selected]: isInPath('NEWEST'),
           })}
+          aria-selected={isInPath('NEWEST')}
           onClick={() => onTabClick('newest')}
         >
           <span className={styles.name}>

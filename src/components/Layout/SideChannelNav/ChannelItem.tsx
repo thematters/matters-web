@@ -3,9 +3,9 @@ import Link from 'next/link'
 import { useContext } from 'react'
 import { useRef } from 'react'
 
-import { CHANNEL_PATH_TYPES } from '~/common/enums'
+import { BREAKPOINTS, CHANNEL_PATH_TYPES } from '~/common/enums'
 import { analytics } from '~/common/utils'
-import { LanguageContext, Tooltip } from '~/components'
+import { LanguageContext, Tooltip, useMediaQuery } from '~/components'
 import { useRoute } from '~/components/Hook/useRoute'
 import { RootQueryPrivateQuery } from '~/gql/graphql'
 
@@ -16,6 +16,7 @@ type ChannelItemProps = {
 }
 
 const ChannelItem = ({ channel }: ChannelItemProps) => {
+  const isMdUp = useMediaQuery(`(min-width: ${BREAKPOINTS.LG}px)`)
   const { getQuery } = useRoute()
   const shortHash = getQuery('shortHash')
   const { lang } = useContext(LanguageContext)
@@ -46,6 +47,7 @@ const ChannelItem = ({ channel }: ChannelItemProps) => {
 
   return (
     <Tooltip
+      disabled={!isMdUp}
       content={channelName}
       zIndex={1000}
       placement="right"
@@ -60,6 +62,7 @@ const ChannelItem = ({ channel }: ChannelItemProps) => {
           [styles.selected]: shortHash === channel.shortHash,
           [styles.temporary]: isWritingChallenge || isCurationChannel,
         })}
+        aria-selected={shortHash === channel.shortHash}
         onClick={() => {
           analytics.trackEvent('click_button', {
             type: `channel_tab_${channel.id}` as `channel_tab_${string}`,

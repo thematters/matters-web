@@ -3,7 +3,7 @@ import { List, QueryError, ShuffleButton, UserDigest } from '~/components'
 
 import { useAuthorsRecommendation } from '../../common'
 import SectionHeader from '../../SectionHeader'
-import { AuthorsPlaceholder } from './placeholder'
+import Placeholder from './Placeholder'
 import styles from './styles.module.css'
 
 const Authors = () => {
@@ -20,6 +20,10 @@ const Authors = () => {
     return null
   }
 
+  if (loading) {
+    return <Placeholder />
+  }
+
   return (
     <section className={styles.container}>
       <SectionHeader
@@ -28,37 +32,35 @@ const Authors = () => {
         viewAll={false}
       />
 
-      {loading ? (
-        <AuthorsPlaceholder />
-      ) : (
-        <List hasBorder={false}>
-          {edges &&
-            edges.map(({ node }, i) => (
-              <List.Item key={node.id}>
-                <UserDigest.Rich
-                  user={node}
-                  is="link"
-                  spacing={[8, 8]}
-                  bgColor="none"
-                  bgActiveColor="greyLighter"
-                  borderRadius="xtight"
-                  onClick={() =>
-                    analytics.trackEvent('click_feed', {
-                      type: 'authors',
-                      contentType: 'user',
-                      location: i,
-                      id: node.id,
-                    })
-                  }
-                  hasFollow={false}
-                  hasState={false}
-                />
-              </List.Item>
-            ))}
-        </List>
-      )}
+      <List hasBorder={false}>
+        {edges &&
+          edges.map(({ node }, i) => (
+            <List.Item key={node.id}>
+              <UserDigest.Rich
+                user={node}
+                is="link"
+                spacing={[8, 8]}
+                bgColor="none"
+                bgActiveColor="greyLighter"
+                borderRadius="xtight"
+                onClick={() =>
+                  analytics.trackEvent('click_feed', {
+                    type: 'authors',
+                    contentType: 'user',
+                    location: i,
+                    id: node.id,
+                  })
+                }
+                hasFollow={false}
+                hasState={false}
+              />
+            </List.Item>
+          ))}
+      </List>
     </section>
   )
 }
+
+Authors.Placeholder = Placeholder
 
 export default Authors

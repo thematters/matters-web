@@ -28,12 +28,18 @@ interface FeedRendererProps {
   }
   loadMore?: () => Promise<{ count: number } | undefined>
   feedType: FeedType | 'channel'
-  renderHeader?: () => React.ReactNode
-  renderCards?: (
-    edges: MixedFeedArticleEdge[],
-    numOfCards: number,
+  renderHeader?: ({ loading }: { loading?: boolean }) => React.ReactNode
+  renderCards?: ({
+    loading,
+    edges,
+    numOfCards,
+    channelId,
+  }: {
+    loading?: boolean
+    edges?: MixedFeedArticleEdge[]
+    numOfCards?: number
     channelId?: string
-  ) => React.ReactNode
+  }) => React.ReactNode
   emptyCustomOption?: React.ReactNode
   itemCustomProps?: Record<string, unknown>
   numOfCards?: number
@@ -61,9 +67,13 @@ const FeedRenderer: React.FC<FeedRendererProps> = ({
       window.scrollTo(0, 0)
       document.body.focus()
     }
+
     return (
       <>
-        <ArticleFeedPlaceholder />
+        {renderHeader && renderHeader({ loading: true })}
+        {renderCards && renderCards({ loading: true })}
+
+        <ArticleFeedPlaceholder count={3} />
       </>
     )
   }
@@ -109,8 +119,8 @@ const FeedRenderer: React.FC<FeedRendererProps> = ({
 
   return (
     <>
-      {renderHeader && renderHeader()}
-      {renderCards && renderCards(edges, numOfCards, channelId)}
+      {renderHeader && renderHeader({})}
+      {renderCards && renderCards({ edges, numOfCards, channelId })}
 
       <InfiniteScroll
         hasNextPage={pageInfo.hasNextPage}

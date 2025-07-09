@@ -5,7 +5,8 @@ html {
   font-size: var(--sizing-root);
   font-weight: var(--font-weight-base);
   line-height: var(--line-height-base);
-  word-break: break-all;
+  /* stylelint-disable-next-line declaration-property-value-keyword-no-deprecated */
+  word-break: break-word;
   overflow-wrap: break-word;
   background-color: var(--color-white);
   text-size-adjust: 100%;

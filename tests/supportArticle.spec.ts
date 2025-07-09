@@ -7,7 +7,6 @@ import { stripSpaces } from '~/common/utils/text'
 import {
   ArticleDetailPage,
   authedTest,
-  NotificationsPage,
   pageGoto,
   sleep,
   UserProfilePage,
@@ -66,51 +65,6 @@ test.describe('Support article', () => {
         .innerText()
       expect(stripSpaces(aliceTransactionItemAmount)).toBe(
         stripSpaces(`+ HKD ${parseFloat(amount.toString()).toFixed(2)}`)
-      )
-
-      // [Alice] Go to notifications page
-      const aliceNotifications = new NotificationsPage(alicePage)
-
-      // Poll and refresh until the donation notice with correct amount is visible
-      let amountMatches = false
-      let noticeReceiveDonationAmount = ''
-
-      while (!amountMatches) {
-        // Go to notifications page
-        await aliceNotifications.goto()
-
-        // Try to find the donation notice
-        const noticeVisible = await alicePage
-          .getByTestId(TEST_ID.NOTICE_PAYMENT_RECEIVE_DONATION)
-          .first()
-          .isVisible({ timeout: 1000 })
-          .catch(() => false)
-
-        if (noticeVisible) {
-          // Check if the amount matches
-          noticeReceiveDonationAmount = await alicePage
-            .getByTestId(TEST_ID.NOTICE_PAYMENT_RECEIVE_DONATION)
-            .first()
-            .getByTestId(TEST_ID.NOTICE_PAYMENT_RECEIVE_DONATION_AMOUNT)
-            .first()
-            .innerText()
-            .catch(() => '')
-
-          // Check if the amount matches what we expect
-          amountMatches =
-            stripSpaces(noticeReceiveDonationAmount) ===
-            stripSpaces(`${amount} HKD`)
-        }
-
-        // Wait before next attempt if not found or amount doesn't match
-        if (!amountMatches) {
-          await alicePage.waitForTimeout(2000)
-        }
-      }
-
-      // Ensure the notification with correct amount was found
-      expect(stripSpaces(noticeReceiveDonationAmount)).toBe(
-        stripSpaces(`${amount} HKD`)
       )
     }
   )

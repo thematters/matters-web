@@ -6,19 +6,15 @@ import {
   UNIVERSAL_AUTH_TRIGGER,
 } from '~/common/enums'
 import { analytics } from '~/common/utils'
-import {
-  Button,
-  ButtonHeight,
-  ButtonSpacingX,
-  ButtonSpacingY,
-  ButtonWidth,
-  Media,
-  TextIcon,
-} from '~/components'
+import { Button, TextIcon } from '~/components'
 
-type UniversalAuthButtonProps = { resideIn?: 'nav' | 'sideNav' }
+type UniversalAuthButtonProps = {
+  resideIn?: 'nav' | 'sideNav'
+  size?: 'sm' | 'lg'
+}
 
 export const UniversalAuthButton: React.FC<UniversalAuthButtonProps> = ({
+  size = 'sm',
   resideIn,
 }) => {
   const intl = useIntl()
@@ -44,34 +40,16 @@ export const UniversalAuthButton: React.FC<UniversalAuthButtonProps> = ({
     )
   }
 
-  const renderButton = (
-    size: [ButtonWidth, ButtonHeight] | undefined,
-    spacing: [ButtonSpacingY, ButtonSpacingX],
-    textSize: 12 | 14
-  ) => (
-    <Button bgColor="black" size={size} spacing={spacing} onClick={handleClick}>
-      <TextIcon color="white" weight="medium" size={textSize}>
+  return (
+    <Button
+      bgColor="black"
+      size={size === 'sm' ? undefined : [null, '1.625rem']}
+      spacing={size === 'sm' ? [8, 20] : [0, 12]}
+      onClick={handleClick}
+    >
+      <TextIcon color="white" weight="medium" size={size === 'sm' ? 14 : 12}>
         {enterText}
       </TextIcon>
     </Button>
-  )
-
-  return (
-    <>
-      <Media lessThan="md">
-        {renderButton(
-          [null, '1.625rem' as ButtonHeight],
-          [0 as ButtonSpacingY, 12 as ButtonSpacingX],
-          12
-        )}
-      </Media>
-      <Media greaterThanOrEqual="md">
-        {renderButton(
-          undefined,
-          [8 as ButtonSpacingY, 20 as ButtonSpacingX],
-          14
-        )}
-      </Media>
-    </>
   )
 }

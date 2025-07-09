@@ -1,0 +1,34 @@
+.header {
+  @mixin flex-center-space-between;
+
+  margin-bottom: var(--sp24);
+
+  & .left,
+  & .right {
+    width: 4rem;
+    height: 1.5rem;
+    background: var(--color-grey-lighter);
+  }
+
+  & .right {
+    width: 1.375rem;
+  }
+}
+
+.list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--sp16);
+  margin-bottom: var(--sp16);
+
+  &.lg {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.tag {
+  width: 100%;
+  height: 1.875rem;
+  background: var(--color-grey-lighter);
+  border-radius: var(--sp8);
+}

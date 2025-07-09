@@ -8,8 +8,8 @@ import { pageGoto } from '../utils'
 export class HomePage {
   readonly page: Page
 
-  readonly tabTrending: Locator
-  readonly tabLatest: Locator
+  readonly tabFeatured: Locator
+  readonly tabNewest: Locator
 
   feedArticles: Locator
   sidebarTags: Locator
@@ -18,8 +18,8 @@ export class HomePage {
   constructor(page: Page) {
     this.page = page
 
-    this.tabTrending = page.getByRole('tab').filter({ hasText: 'Trending' })
-    this.tabLatest = page.getByRole('tab').filter({ hasText: 'Latest' })
+    this.tabFeatured = page.getByRole('link', { name: 'Featured' })
+    this.tabNewest = page.getByRole('link', { name: 'Latest' })
 
     this.feedArticles = page.getByTestId(TEST_ID.DIGEST_ARTICLE_FEED)
     this.sidebarTags = page.getByTestId(TEST_ID.DIGEST_TAG_ARTICLE)
@@ -27,7 +27,7 @@ export class HomePage {
   }
 
   async goto() {
-    await pageGoto(this.page, '/')
+    await pageGoto(this.page, '/newest')
   }
 
   async shuffleSidebarUsers() {

@@ -2,6 +2,7 @@ import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import IconTimes from '@/public/static/icons/24px/times.svg'
+import IconWallet from '@/public/static/icons/24px/wallet.svg'
 import { OPEN_WITHDRAW_VAULT_USDT_DIALOG } from '~/common/enums'
 import { truncate } from '~/common/utils'
 import {
@@ -9,6 +10,7 @@ import {
   Icon,
   RemoveWalletLoginDialog,
   TableView,
+  TextIcon,
   useVaultBalanceUSDT,
   ViewerContext,
   WithdrawVaultUSDTDialog,
@@ -37,11 +39,16 @@ const Wallet = () => {
               return (
                 <TableView.Cell
                   title={
-                    <FormattedMessage
-                      defaultMessage="Wallet address"
-                      id="Gt7K6r"
-                      description="src/views/Me/Settings/Settings/Wallet/index.tsx"
-                    />
+                    <TextIcon
+                      icon={<Icon icon={IconWallet} size={22} />}
+                      spacing={12}
+                    >
+                      <FormattedMessage
+                        defaultMessage="Wallet address"
+                        id="Gt7K6r"
+                        description="src/views/Me/Settings/Settings/Wallet/index.tsx"
+                      />
+                    </TextIcon>
                   }
                   rightText={
                     hasETHAddress ? truncate(ethAddress, 6) : undefined

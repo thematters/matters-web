@@ -23,6 +23,9 @@
   "+7SAix": {
     "defaultMessage": "Must be between 2-12 characters long."
   },
+  "+C53uY": {
+    "defaultMessage": "Trending Now"
+  },
   "+EHtpH": {
     "defaultMessage": "No updates yet"
   },
@@ -323,10 +326,6 @@
   "2w2mhG": {
     "defaultMessage": "User blocked. User now can't reply to your articles and user's comments have been hidden from you."
   },
-  "32bml8": {
-    "defaultMessage": "Following",
-    "description": "src/components/Layout/SideNav/index.tsx"
-  },
   "34OLoD": {
     "defaultMessage": "Moment",
     "description": "src/views/MomentDetail/Edit/index.tsx"
@@ -603,6 +602,10 @@
   "7oytv9": {
     "defaultMessage": " (edited) "
   },
+  "7uYW+U": {
+    "defaultMessage": "Comments",
+    "description": "src/views/ArticleDetail/Toolbar/FixedToolbar/index.tsx"
+  },
   "7ykJ+l": {
     "defaultMessage": "Still quiet here. {br}Be the first one to say hello!",
     "description": "src/components/Empty/EmptyComment.tsx"
@@ -656,6 +659,10 @@
   "8t6Cs8": {
     "defaultMessage": "Matters Daily Report",
     "description": "src/views/Me/Settings/Notifications/Email.tsx"
+  },
+  "8tczzy": {
+    "defaultMessage": "Trending",
+    "description": "src/components/Layout/SideChannelNav/index.tsx"
   },
   "8w3GEA": {
     "defaultMessage": "mentioned you in {article}",
@@ -799,6 +806,10 @@
     "defaultMessage": "Please set your transcation password.",
     "description": "PAYMENT_PASSWORD_NOT_SET"
   },
+  "B1UqZN": {
+    "defaultMessage": "Translation quota exhausted. Try later.",
+    "description": "TRANSLATION_INSUFFICIENT_CREDITS"
+  },
   "B9IFMF": {
     "defaultMessage": "Yes, apply"
   },
@@ -889,9 +900,6 @@
   "Ci7dxf": {
     "defaultMessage": "Comment deleted",
     "description": "src/components/Notice/NoticeComment.tsx/moment"
-  },
-  "CjKqYk": {
-    "defaultMessage": "Share a story from your life"
   },
   "CnPG8j": {
     "defaultMessage": "Featured"
@@ -1912,9 +1920,6 @@
   "VBve8d": {
     "defaultMessage": "Settled in Matters"
   },
-  "VKxanK": {
-    "defaultMessage": "Moment Feature is Live"
-  },
   "VZsE96": {
     "defaultMessage": "Collection Name"
   },
@@ -2628,6 +2633,10 @@
     "defaultMessage": "back to latest",
     "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
   },
+  "iqS81J": {
+    "defaultMessage": "Support Author",
+    "description": "src/views/ArticleDetail/Toolbar/FixedToolbar/index.tsx"
+  },
   "itPgxd": {
     "defaultMessage": "Profile"
   },
@@ -2678,6 +2687,10 @@
   },
   "k6pcz/": {
     "defaultMessage": "Check the wallet status and confirm your network."
+  },
+  "k7Oi38": {
+    "defaultMessage": "Language preference",
+    "description": "src/views/Me/Settings/Settings/index.tsx"
   },
   "k97/u7": {
     "defaultMessage": "Add Articles"

@@ -23,6 +23,9 @@
   "+7SAix": {
     "defaultMessage": "2-12 個字元"
   },
+  "+C53uY": {
+    "defaultMessage": "最新社區趨勢"
+  },
   "+EHtpH": {
     "defaultMessage": "暫無更新"
   },
@@ -323,10 +326,6 @@
   "2w2mhG": {
     "defaultMessage": "已封鎖。該用戶無法評論你的作品和圍爐，他的評論對你闔上。"
   },
-  "32bml8": {
-    "defaultMessage": "追蹤",
-    "description": "src/components/Layout/SideNav/index.tsx"
-  },
   "34OLoD": {
     "defaultMessage": "發動態",
     "description": "src/views/MomentDetail/Edit/index.tsx"
@@ -603,6 +602,10 @@
   "7oytv9": {
     "defaultMessage": "（修改過）"
   },
+  "7uYW+U": {
+    "defaultMessage": "打開評論",
+    "description": "src/views/ArticleDetail/Toolbar/FixedToolbar/index.tsx"
+  },
   "7ykJ+l": {
     "defaultMessage": "暫無評論",
     "description": "src/components/Empty/EmptyComment.tsx"
@@ -656,6 +659,10 @@
   "8t6Cs8": {
     "defaultMessage": "Matters 日報",
     "description": "src/views/Me/Settings/Notifications/Email.tsx"
+  },
+  "8tczzy": {
+    "defaultMessage": "熱文",
+    "description": "src/components/Layout/SideChannelNav/index.tsx"
   },
   "8w3GEA": {
     "defaultMessage": "在作品 {article} 中提及你",
@@ -799,6 +806,10 @@
     "defaultMessage": "請先設定交易密碼",
     "description": "PAYMENT_PASSWORD_NOT_SET"
   },
+  "B1UqZN": {
+    "defaultMessage": "翻譯定額暫被用盡，請稍候再試",
+    "description": "TRANSLATION_INSUFFICIENT_CREDITS"
+  },
   "B9IFMF": {
     "defaultMessage": "好的，我報名"
   },
@@ -889,9 +900,6 @@
   "Ci7dxf": {
     "defaultMessage": "留言已刪除",
     "description": "src/components/Notice/NoticeComment.tsx/moment"
-  },
-  "CjKqYk": {
-    "defaultMessage": "分享今天開心或難過的小故事吧"
   },
   "CnPG8j": {
     "defaultMessage": "精選"
@@ -1912,9 +1920,6 @@
   "VBve8d": {
     "defaultMessage": "搬家到 Matters"
   },
-  "VKxanK": {
-    "defaultMessage": "短動態上線囉！"
-  },
   "VZsE96": {
     "defaultMessage": "選集名稱"
   },
@@ -2628,6 +2633,10 @@
     "defaultMessage": "回到作品頁",
     "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
   },
+  "iqS81J": {
+    "defaultMessage": "支持作者",
+    "description": "src/views/ArticleDetail/Toolbar/FixedToolbar/index.tsx"
+  },
   "itPgxd": {
     "defaultMessage": "個人主頁"
   },
@@ -2678,6 +2687,10 @@
   },
   "k6pcz/": {
     "defaultMessage": "請確認網路和錢包是否正常運行"
+  },
+  "k7Oi38": {
+    "defaultMessage": "語言偏好",
+    "description": "src/views/Me/Settings/Settings/index.tsx"
   },
   "k97/u7": {
     "defaultMessage": "添加作品"
@@ -3354,7 +3367,7 @@
     "description": "src/components/Forms/PaymentForm/StripeCheckout/index.tsx"
   },
   "wlQosy": {
-    "defaultMessage": "。 感謝鼓勵 ～"
+    "defaultMessage": "。感謝鼓勵～"
   },
   "wm9xNB": {
     "defaultMessage": "{type} 已解綁",

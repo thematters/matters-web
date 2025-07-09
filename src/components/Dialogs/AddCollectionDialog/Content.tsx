@@ -137,7 +137,7 @@ const AddCollectionDialogContent: React.FC<FormProps> = ({
         onChange={handleChange}
         maxLength={maxCollectionTitle}
         onKeyDown={(e) => {
-          if (e.key.toLocaleLowerCase() === KEYVALUE.enter) {
+          if (e.key.toLowerCase() === KEYVALUE.enter) {
             e.stopPropagation()
           }
         }}

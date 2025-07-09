@@ -3,7 +3,7 @@ import { ArticleTag, List, QueryError } from '~/components'
 
 import { useTagsRecommendation } from '../../common'
 import SectionHeader from '../../SectionHeader'
-import { TagsPlaceholder } from './Placeholders'
+import Placeholder from './Placeholder'
 import styles from './styles.module.css'
 
 const Tags = () => {
@@ -20,33 +20,33 @@ const Tags = () => {
     return null
   }
 
+  if (loading) {
+    return <Placeholder />
+  }
+
   return (
     <section className={styles.container}>
       <SectionHeader type="tags" viewAll={true} />
 
-      {loading && <TagsPlaceholder />}
-
-      {!loading && (
-        <List hasBorder={false} className={styles.list}>
-          {edges &&
-            edges.map(({ node }, i) => (
-              <List.Item key={node.id}>
-                <ArticleTag
-                  tag={node}
-                  canClamp
-                  onClick={() =>
-                    analytics.trackEvent('click_feed', {
-                      type: 'tags',
-                      contentType: 'tag',
-                      location: i,
-                      id: node.id,
-                    })
-                  }
-                />
-              </List.Item>
-            ))}
-        </List>
-      )}
+      <List hasBorder={false} className={styles.list}>
+        {edges &&
+          edges.map(({ node }, i) => (
+            <List.Item key={node.id}>
+              <ArticleTag
+                tag={node}
+                canClamp
+                onClick={() =>
+                  analytics.trackEvent('click_feed', {
+                    type: 'tags',
+                    contentType: 'tag',
+                    location: i,
+                    id: node.id,
+                  })
+                }
+              />
+            </List.Item>
+          ))}
+      </List>
     </section>
   )
 }

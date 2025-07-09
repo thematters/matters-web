@@ -1,6 +1,6 @@
 import React from 'react'
 
-import ArticleDigestFeedPlaceholder from '~/components/ArticleDigest/Feed/Placeholder'
+import { ArticleDigestFeed } from '~/components'
 
 import styles from './styles.module.css'
 
@@ -17,7 +17,7 @@ export const ArticleFeedPlaceholder: React.FC<ArticleFeedPlaceholderProps> = ({
   return (
     <div className={className}>
       {Array.from({ length: count }).map((_, index) => (
-        <ArticleDigestFeedPlaceholder key={index} />
+        <ArticleDigestFeed.Placeholder key={index} />
       ))}
     </div>
   )

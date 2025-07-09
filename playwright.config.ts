@@ -15,13 +15,13 @@ const config = defineConfig({
   testDir: 'tests',
   testIgnore: ['mutateArticle.spec.ts'],
   outputDir: 'test-results/',
-  timeout: isCI ? 120e3 : 60e3,
+  timeout: 60e3,
   expect: {
-    timeout: isCI ? 120e3 : undefined,
+    timeout: 20e3,
   },
-  fullyParallel: true,
+  fullyParallel: isCI ? false : true,
   forbidOnly: !!isCI,
-  retries: isCI ? 2 : 1,
+  retries: isCI ? 3 : 1,
   workers: isCI ? 1 : undefined,
   maxFailures: process.env.CI ? 1 : 0,
   reporter: 'html',
@@ -48,54 +48,6 @@ const config = defineConfig({
       },
       dependencies: ['setup'],
     },
-    // ...(isLocal
-    //   ? []
-    //   : [
-    //       {
-    //         name: 'firefox',
-    //         use: {
-    //           ...devices['Desktop Firefox'],
-    //           locale: LOCALE,
-    //         },
-    //       },
-    //       // {
-    //       //   name: 'webkit',
-    //       //   use: {
-    //       //     ...devices['Desktop Safari'],
-    //       //     locale: LOCALE,
-    //       //   },
-    //       // },
-    //     ]),
-
-    /* Test against mobile viewports. */
-    // {
-    //   name: 'Mobile Chrome',
-    //   use: {
-    //     ...devices['Pixel 5'],
-    //     locale: LOCALE,
-    //   },
-    // },
-    // {
-    //   name: 'Mobile Safari',
-    //   use: {
-    //     ...devices['iPhone 12'],
-    //     locale: LOCALE,
-    //   },
-    // },
-
-    /* Test against branded browsers. */
-    // {
-    //   name: 'Microsoft Edge',
-    //   use: {
-    //     channel: 'msedge',
-    //   },
-    // },
-    // {
-    //   name: 'Google Chrome',
-    //   use: {
-    //     channel: 'chrome',
-    //   },
-    // },
   ],
 })
 

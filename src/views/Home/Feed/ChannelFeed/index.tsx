@@ -13,21 +13,17 @@ import { useRoute } from '~/components'
 import { FeedArticlesPublicChannelQuery } from '~/gql/graphql'
 
 import { MixedFeedArticleEdge, useMixedFeed } from '../../common'
+import { ArticleDigestCurated } from '../ArticleDigestCurated'
+import { ChannelHeader } from '../ChannelHeader'
 import FeedRenderer from '../FeedRenderer'
 import { FEED_ARTICLES_PRIVATE, FEED_ARTICLES_PUBLIC_CHANNEL } from '../gql'
-import { ArticleDigestCurated } from '../IcymiCuratedFeed/ArticleDigestCurated'
 import feedStyles from '../styles.module.css'
-import { ChannelHeader } from './ChannelHeader'
 
-type ChannelFeedProps = {
-  shortHash: string
-}
-
-const ChannelFeed = ({ shortHash: _shortHash }: ChannelFeedProps) => {
+const ChannelFeed = () => {
   const intl = useIntl()
   const viewer = useContext(ViewerContext)
   const { getQuery } = useRoute()
-  const shortHash = _shortHash || getQuery('shortHash')
+  const shortHash = getQuery('shortHash')
   const feedType = 'channel'
   const numOfCards = 6
 
@@ -106,11 +102,27 @@ const ChannelFeed = ({ shortHash: _shortHash }: ChannelFeedProps) => {
 
   const mixFeed = useMixedFeed(edges || [], true, feedType)
 
-  const renderCards = (
-    cardEdges: MixedFeedArticleEdge[],
-    numOfCards: number,
+  const renderCards = ({
+    loading,
+    edges,
+    numOfCards,
+    channelId,
+  }: {
+    loading?: boolean
+    edges?: MixedFeedArticleEdge[]
+    numOfCards?: number
     channelId?: string
-  ) => {
+  }) => {
+    if (loading) {
+      return (
+        <section className={feedStyles.cards}>
+          <ArticleDigestCurated.Placeholder />
+          <ArticleDigestCurated.Placeholder />
+          <ArticleDigestCurated.Placeholder />
+        </section>
+      )
+    }
+
     const onClick = (
       contentType: 'article' | 'user',
       location: number,
@@ -128,57 +140,50 @@ const ChannelFeed = ({ shortHash: _shortHash }: ChannelFeedProps) => {
       })
     }
 
-    const edges = cardEdges
+    const filteredEdges = edges
       ?.filter((edge) => edge.__typename === 'ChannelArticleEdge')
       .slice(0, numOfCards)
 
+    const renderArticleDigest = (
+      edge: Extract<MixedFeedArticleEdge, { __typename: 'ChannelArticleEdge' }>,
+      index: number,
+      titleLineClamp: 2 | 3
+    ) => (
+      <ArticleDigestCurated
+        article={edge.node}
+        titleLineClamp={titleLineClamp}
+        pinned={edge.pinned}
+        channelId={channelId}
+        onClick={() =>
+          onClick('article', index, edge.node.id, channelId, {
+            pinned: edge.pinned,
+          })
+        }
+        onClickAuthor={() =>
+          onClick('user', index, edge.node.author.id, channelId, {
+            pinned: edge.pinned,
+          })
+        }
+      />
+    )
+
     return (
       <section className={feedStyles.cards}>
-        {edges.map((edge, i) => (
+        {filteredEdges?.map((edge, i) => (
           <React.Fragment key={edge.node.id}>
-            <Media at="xs">
-              <ArticleDigestCurated
-                article={edge.node}
-                titleLineClamp={3}
-                pinned={edge.pinned}
-                channelId={channelId}
-                onClick={() =>
-                  onClick('article', i, edge.node.id, channelId, {
-                    pinned: edge.pinned,
-                  })
-                }
-                onClickAuthor={() =>
-                  onClick('user', i, edge.node.author.id, channelId, {
-                    pinned: edge.pinned,
-                  })
-                }
-              />
-            </Media>
-            <Media greaterThan="xs">
-              <ArticleDigestCurated
-                article={edge.node}
-                titleLineClamp={2}
-                pinned={edge.pinned}
-                channelId={channelId}
-                onClick={() =>
-                  onClick('article', i, edge.node.id, channelId, {
-                    pinned: edge.pinned,
-                  })
-                }
-                onClickAuthor={() =>
-                  onClick('user', i, edge.node.author.id, channelId, {
-                    pinned: edge.pinned,
-                  })
-                }
-              />
-            </Media>
+            <Media at="xs">{renderArticleDigest(edge, i, 3)}</Media>
+            <Media greaterThan="xs">{renderArticleDigest(edge, i, 2)}</Media>
           </React.Fragment>
         ))}
       </section>
     )
   }
 
-  const renderHeader = () => {
+  const renderHeader = ({ loading }: { loading?: boolean }) => {
+    if (loading) {
+      return <ChannelHeader.Placeholder />
+    }
+
     if (
       !data?.channel ||
       (data.channel.__typename !== 'TopicChannel' &&
@@ -195,6 +200,7 @@ const ChannelFeed = ({ shortHash: _shortHash }: ChannelFeedProps) => {
     data?.channel?.__typename === 'CurationChannel' ? (
       <>
         <ChannelHeader channel={data.channel} />
+
         <EmptyWork
           description={intl.formatMessage({
             defaultMessage: 'No articles',
