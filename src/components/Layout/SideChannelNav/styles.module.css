@@ -118,8 +118,6 @@
 
     display: inline-block;
     padding: var(--sp8) var(--sp10);
-    word-break: normal;
-    overflow-wrap: break-word;
     background-color: transparent;
     border-radius: 0.5rem;
     transition-property: background-color;

@@ -19,15 +19,11 @@ import FeedRenderer from '../FeedRenderer'
 import { FEED_ARTICLES_PRIVATE, FEED_ARTICLES_PUBLIC_CHANNEL } from '../gql'
 import feedStyles from '../styles.module.css'
 
-type ChannelFeedProps = {
-  shortHash: string
-}
-
-const ChannelFeed = ({ shortHash: _shortHash }: ChannelFeedProps) => {
+const ChannelFeed = () => {
   const intl = useIntl()
   const viewer = useContext(ViewerContext)
   const { getQuery } = useRoute()
-  const shortHash = _shortHash || getQuery('shortHash')
+  const shortHash = getQuery('shortHash')
   const feedType = 'channel'
   const numOfCards = 6
 
