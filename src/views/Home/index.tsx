@@ -1,7 +1,5 @@
-import { FormattedMessage } from 'react-intl'
-
 import IMAGE_INTRO from '@/public/static/images/intro.jpg'
-import { Head, Layout } from '~/components'
+import { Announcements, Head, Layout, Spacer } from '~/components'
 
 import Feed from './Feed'
 import Sidebar from './Sidebar'
@@ -11,17 +9,16 @@ const Home = () => {
     <Layout.Main
       aside={
         <>
-          <Sidebar.Billboard />
+          <Spacer size="sp16" />
+          <Announcements />
           <Sidebar.Authors />
           <Sidebar.Tags />
+          <Sidebar.Billboard />
+          <Spacer size="sp32" />
         </>
       }
     >
       <Head image={IMAGE_INTRO.src} />
-
-      <Layout.AuthHeader
-        title={<FormattedMessage defaultMessage="Discover" id="cE4Hfw" />}
-      />
 
       <Feed />
     </Layout.Main>

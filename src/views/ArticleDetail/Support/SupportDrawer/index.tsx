@@ -33,6 +33,16 @@ export const SupportDrawer: React.FC<SupportDrawerProps> = ({
 
   // Keyboard shortcuts for open/close support drawer
   useNativeEventListener('keydown', (event: KeyboardEvent) => {
+    // skip if current focus is on another input element,
+    const target = event.target as HTMLElement
+    if (
+      target.tagName.toLowerCase() === 'input' ||
+      target.tagName.toLowerCase() === 'textarea' ||
+      target.contentEditable === 'true'
+    ) {
+      return
+    }
+
     const keyCode = event.code.toLowerCase()
 
     if (keyCode === KEYVALUE.escape && isOpen) {

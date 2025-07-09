@@ -2,7 +2,9 @@
   --sizing-root: 16px;
   --global-header-height: 4rem;
   --global-header-height-mobile: 3rem;
-  --global-nav-height: 4rem;
+  --global-nav-height: 4.0625rem;
+  --global-nav-height-mobile: 3.703125rem;
   --sizing-menu: 16.5rem;
   --input-height: 3rem;
+  --content-max-width: 688px;
 }

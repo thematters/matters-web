@@ -9,6 +9,7 @@ import { UserDigest } from '~/components/UserDigest'
 import {
   ArticleDigestFeedArticlePrivateFragment,
   ArticleDigestFeedArticlePublicFragment,
+  AssetType,
 } from '~/gql/graphql'
 
 import { ArticleDigestTitle } from '../Title'
@@ -56,7 +57,9 @@ const BaseArticleDigestFeed = ({
   const { author, summary } = article
   const isBanned = article.articleState === 'banned'
   const isArchived = article.articleState === 'archived'
-  const cover = !isBanned && !isArchived ? article.cover : null
+  const assets = article.assets || []
+  const embed = assets.find((asset) => asset.type === AssetType.Embed)
+  const cover = !isBanned && !isArchived ? article.cover || embed?.path : null
   const cleanedSummary =
     isBanned && !isArchived ? '' : makeSummary(summary, MAX_FEED_SUMMARY_LENGTH)
 
@@ -84,35 +87,36 @@ const BaseArticleDigestFeed = ({
       className={styles.wrapper}
       data-test-id={TEST_ID.DIGEST_ARTICLE_FEED}
     >
+      {hasHeader && (
+        <header className={styles.header}>
+          {hasAuthor && (
+            <section className={styles.author}>
+              <UserDigest.Mini
+                user={author}
+                avatarSize={20}
+                textSize={12}
+                nameColor={
+                  author.status?.state === 'archived' ? 'grey' : undefined
+                }
+                spacing={6}
+                hasAvatar
+                hasDisplayName
+                onClick={onClickAuthor}
+              />
+              {!excludesTimeStamp && (
+                <Icon icon={IconDot} color="greyLight" size={20} />
+              )}
+            </section>
+          )}
+          {!excludesTimeStamp && (
+            <Link {...path}>
+              <DateTime date={article.createdAt} color="grey" minimal />
+            </Link>
+          )}
+        </header>
+      )}
       <section className={styles.container}>
         <section className={styles.content}>
-          {hasHeader && (
-            <header className={styles.header}>
-              {hasAuthor && (
-                <section className={styles.author}>
-                  <UserDigest.Mini
-                    user={author}
-                    avatarSize={20}
-                    textSize={12}
-                    nameColor={
-                      author.status?.state === 'archived' ? 'grey' : undefined
-                    }
-                    hasAvatar
-                    hasDisplayName
-                    onClick={onClickAuthor}
-                  />
-                  {!excludesTimeStamp && (
-                    <Icon icon={IconDot} color="greyLight" size={20} />
-                  )}
-                </section>
-              )}
-              {!excludesTimeStamp && (
-                <Link {...path}>
-                  <DateTime date={article.createdAt} color="grey" />
-                </Link>
-              )}
-            </header>
-          )}
           <section className={styles.head}>
             <section className={styles.title}>
               <ArticleDigestTitle
@@ -132,7 +136,7 @@ const BaseArticleDigestFeed = ({
             </Link>
           )}
 
-          <Media greaterThan="sm">{footerActions}</Media>
+          <Media greaterThanOrEqual="md">{footerActions}</Media>
         </section>
         {cover && (
           <Link {...path} onClick={onClick}>
@@ -153,7 +157,7 @@ const BaseArticleDigestFeed = ({
           </Link>
         )}
       </section>
-      <Media at="sm">{footerActions}</Media>
+      <Media lessThan="md">{footerActions}</Media>
     </section>
   )
 }

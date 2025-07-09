@@ -33,7 +33,13 @@ const RecommendHead = ({ type }: Props) => {
   }
 
   return (
-    <PageHeader title={titleMap[type]} is="h2" hasBorder={false} type="base" />
+    <PageHeader
+      title={titleMap[type]}
+      is="h2"
+      hasBorder={false}
+      type="base"
+      spacingBottom={16}
+    />
   )
 }
 

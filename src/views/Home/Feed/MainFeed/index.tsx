@@ -1,107 +1,57 @@
-import { useContext, useEffect, useRef } from 'react'
+import React, { useContext, useEffect, useRef } from 'react'
+import { FormattedMessage } from 'react-intl'
 
-import { analytics, mergeConnections } from '~/common/utils'
+import { mergeConnections } from '~/common/utils'
 import {
-  ArticleDigestFeed,
-  CardExposureTracker,
-  EmptyArticle,
-  InfiniteScroll,
-  List,
+  Announcements,
   Media,
-  QueryError,
-  SpinnerBlock,
+  Spacer,
+  useFetchPolicy,
   usePublicQuery,
   ViewerContext,
 } from '~/components'
-import {
+import type {
   HottestFeedPublicQuery,
   IcymiFeedPublicQuery,
   NewestFeedPublicQuery,
 } from '~/gql/graphql'
 
-import Announcements from '../../Announcements'
-import Authors from '../Authors'
-import Billboard from '../Billboard'
+import { useMixedFeed } from '../../common'
+import { ArticleDigestCurated } from '../ArticleDigestCurated'
+import { ChannelHeader } from '../ChannelHeader'
+import FeedRenderer from '../FeedRenderer'
 import { FEED_ARTICLES_PRIVATE, FEED_ARTICLES_PUBLIC } from '../gql'
 import { IcymiCuratedFeed } from '../IcymiCuratedFeed'
-import { HomeFeedType } from '../SortBy'
-import Tags from '../Tags'
-
-type FeedArticlesPublic =
-  | HottestFeedPublicQuery
-  | NewestFeedPublicQuery
-  | IcymiFeedPublicQuery
-
-type HorizontalFeed = React.FC<{ after?: string; first?: number }>
-
-interface HorizontalFeedEdge {
-  __typename: 'HorizontalFeed'
-  Feed: HorizontalFeed
-}
-
-type FeedEdge =
-  | HorizontalFeedEdge
-  | NonNullable<
-      NonNullable<
-        HottestFeedPublicQuery['viewer']
-      >['recommendation']['feed']['edges']
-    >[0]
-  | NonNullable<
-      NonNullable<
-        IcymiFeedPublicQuery['viewer']
-      >['recommendation']['feed']['edges']
-    >[0]
-  | NonNullable<
-      NonNullable<
-        NewestFeedPublicQuery['viewer']
-      >['recommendation']['feed']['edges']
-    >[0]
-
-interface FeedLocation {
-  [key: number]: HorizontalFeed
-}
+import { FeedType } from '../index'
+import feedStyles from '../styles.module.css'
 
 interface MainFeedProps {
-  feedSortType: HomeFeedType
+  feedType: FeedType
 }
 
-const horizontalFeeds: FeedLocation = {
-  3: () => (
-    <Media lessThan="lg">
-      <Billboard />
-    </Media>
-  ),
-  11: () => (
-    <Media lessThan="lg">
-      <Authors />
-    </Media>
-  ),
-  17: () => (
-    <Media lessThan="lg">
-      <Tags />
-    </Media>
-  ),
-}
+type FeedArticlesPublic =
+  | NewestFeedPublicQuery
+  | IcymiFeedPublicQuery
+  | HottestFeedPublicQuery
 
-const MainFeed = ({ feedSortType: sortBy }: MainFeedProps) => {
+const MainFeed: React.FC<MainFeedProps> = ({ feedType }) => {
   const viewer = useContext(ViewerContext)
-  const isHottestFeed = sortBy === 'hottest'
-  const isIcymiFeed = sortBy === 'icymi'
-  /**
-   * Data Fetching
-   */
-  // public data
-  const query = FEED_ARTICLES_PUBLIC[sortBy]
-  const { data, error, loading, fetchMore, client } =
-    usePublicQuery<FeedArticlesPublic>(query)
 
-  // pagination
+  const { fetchPolicy } = useFetchPolicy()
+
+  const { data, error, loading, fetchMore, client } =
+    usePublicQuery<FeedArticlesPublic>(FEED_ARTICLES_PUBLIC[feedType], {
+      fetchPolicy,
+    })
+
+  const isIcymiFeed = feedType === 'icymi'
+  const isHottestFeed = feedType === 'hottest'
   const connectionPath = 'viewer.recommendation.feed'
   const recommendation = data?.viewer?.recommendation
   const result = recommendation?.feed
   const { edges, pageInfo } = result || {}
+  const fetchedPrivateSortsRef = useRef<string[]>([])
 
-  // private data
   const loadPrivate = (publicData?: FeedArticlesPublic) => {
     if (!viewer.isAuthed || !publicData) {
       return
@@ -118,32 +68,26 @@ const MainFeed = ({ feedSortType: sortBy }: MainFeedProps) => {
   }
 
   // fetch private data for first page
-  const fetchedPrviateSortsRef = useRef<HomeFeedType[]>([])
   useEffect(() => {
-    const fetched = fetchedPrviateSortsRef.current.indexOf(sortBy) >= 0
+    const fetched = fetchedPrivateSortsRef.current.indexOf(feedType) >= 0
     if (loading || !edges || fetched || !viewer.isAuthed) {
       return
     }
 
     loadPrivate(data)
-    fetchedPrviateSortsRef.current = [...fetchedPrviateSortsRef.current, sortBy]
-  }, [!!edges, loading, sortBy, viewer.id])
+    fetchedPrivateSortsRef.current = [
+      ...fetchedPrivateSortsRef.current,
+      feedType,
+    ]
+  }, [!!edges, loading, viewer.id, feedType])
 
-  // load next page
   const loadMore = async () => {
     if (loading) {
       return
     }
 
-    analytics.trackEvent('load_more', {
-      type: sortBy,
-      location: edges?.length || 0,
-    })
-
     const { data: newData } = await fetchMore({
-      variables: {
-        after: pageInfo?.endCursor,
-      },
+      variables: { after: pageInfo?.endCursor },
       updateQuery: (previousResult, { fetchMoreResult }) =>
         mergeConnections({
           oldData: previousResult,
@@ -154,109 +98,106 @@ const MainFeed = ({ feedSortType: sortBy }: MainFeedProps) => {
     })
 
     loadPrivate(newData)
+    return { newData, count: edges?.length || 0 }
   }
 
-  /**
-   * Render
-   */
-  if (loading && !result) {
-    if (typeof window !== 'undefined') {
-      window.scrollTo(0, 0)
-      document.body.focus()
+  const mixFeed = useMixedFeed(
+    edges || [],
+    isIcymiFeed || isHottestFeed,
+    feedType
+  )
+
+  const itemCustomProps = {
+    includesMetaData: !isIcymiFeed && !isHottestFeed,
+    excludesTimeStamp: isIcymiFeed || isHottestFeed,
+  }
+
+  const renderHeader = ({ loading }: { loading?: boolean }) => {
+    const isIcymiFeed = feedType === 'icymi'
+    const isHottestFeed = feedType === 'hottest'
+
+    if (loading && (isHottestFeed || isIcymiFeed)) {
+      return (
+        <>
+          <Media lessThan="lg">
+            <Spacer size="sp20" />
+            <Announcements.Placeholder />
+            <ChannelHeader.Placeholder />
+          </Media>
+          <Media greaterThanOrEqual="lg">
+            <ChannelHeader.Placeholder />
+            {isIcymiFeed && (
+              <section className={feedStyles.cards}>
+                <ArticleDigestCurated.Placeholder />
+                <ArticleDigestCurated.Placeholder />
+                <ArticleDigestCurated.Placeholder />
+              </section>
+            )}
+          </Media>
+        </>
+      )
     }
-    return <SpinnerBlock />
-  }
 
-  if (error) {
-    return <QueryError error={error} />
-  }
+    if (isHottestFeed) {
+      return (
+        <>
+          <Media lessThan="lg">
+            <Spacer size="sp20" />
+            <Announcements />
+          </Media>
 
-  if (!edges || edges.length <= 0 || !pageInfo) {
-    return <EmptyArticle />
-  }
+          <ChannelHeader
+            name={
+              <FormattedMessage
+                defaultMessage="Trending"
+                id="8tczzy"
+                description="src/components/Layout/SideChannelNav/index.tsx"
+              />
+            }
+            note={
+              <FormattedMessage defaultMessage="Trending Now" id="+C53uY" />
+            }
+          />
+        </>
+      )
+    }
 
-  // insert other feeds
-  let mixFeed: FeedEdge[] = edges
+    if (!isIcymiFeed || !recommendation || !('icymiTopic' in recommendation))
+      return null
+    const note = recommendation?.icymiTopic?.note
 
-  if (isHottestFeed) {
-    // get copy
-    mixFeed = JSON.parse(JSON.stringify(edges))
+    return (
+      <>
+        <Media lessThan="lg">
+          <Spacer size="sp20" />
+          <Announcements />
+        </Media>
 
-    // get insert entries
-    const locs = Object.keys(horizontalFeeds).map((loc) => parseInt(loc, 10))
-    locs.sort((a, b) => a - b)
+        <ChannelHeader
+          name={<FormattedMessage defaultMessage="Featured" id="CnPG8j" />}
+          note={note}
+        />
 
-    // insert feed
-    locs.map((loc) => {
-      if (mixFeed.length >= loc) {
-        mixFeed.splice(loc, 0, {
-          Feed: horizontalFeeds[loc],
-          __typename: 'HorizontalFeed',
-        })
-      }
-    })
+        {recommendation &&
+          'icymiTopic' in recommendation &&
+          recommendation.icymiTopic && (
+            <IcymiCuratedFeed recommendation={recommendation} />
+          )}
+      </>
+    )
   }
 
   return (
-    <>
-      {recommendation &&
-        'icymiTopic' in recommendation &&
-        recommendation.icymiTopic && (
-          <IcymiCuratedFeed recommendation={recommendation} />
-        )}
-
-      <InfiniteScroll
-        hasNextPage={pageInfo.hasNextPage}
-        loadMore={loadMore}
-        eof
-      >
-        <List>
-          {isHottestFeed && <Announcements />}
-          {mixFeed.map((edge, i) => {
-            if (edge?.__typename === 'HorizontalFeed') {
-              const { Feed } = edge
-              return <Feed key={edge.__typename + i} />
-            }
-            const isFirstFold = i <= 3 // TODO: better guess'ing of first fold on different screens
-
-            return (
-              <List.Item key={`${sortBy}:${edge.node.id}`}>
-                <ArticleDigestFeed
-                  article={edge.node}
-                  hasReadTime={true}
-                  hasDonationCount={true}
-                  includesMetaData={!isIcymiFeed} // only include metadata for non-icymi feeds
-                  excludesTimeStamp={isIcymiFeed} // only exclude timestamp for icymi feed
-                  onClick={() =>
-                    analytics.trackEvent('click_feed', {
-                      type: sortBy,
-                      contentType: 'article',
-                      location: i,
-                      id: edge.node.id,
-                    })
-                  }
-                  onClickAuthor={() => {
-                    analytics.trackEvent('click_feed', {
-                      type: sortBy,
-                      contentType: 'user',
-                      location: i,
-                      id: edge.node.author.id,
-                    })
-                  }}
-                  isFirstFold={isFirstFold}
-                />
-                <CardExposureTracker
-                  contentType="article"
-                  feedType={sortBy}
-                  location={i}
-                  id={edge.node.id}
-                />
-              </List.Item>
-            )
-          })}
-        </List>
-      </InfiniteScroll>
-    </>
+    <FeedRenderer
+      loading={loading}
+      error={error}
+      edges={mixFeed}
+      pageInfo={pageInfo}
+      loadMore={loadMore}
+      feedType={feedType}
+      renderHeader={renderHeader}
+      itemCustomProps={itemCustomProps}
+    />
   )
 }
 

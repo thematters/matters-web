@@ -51,7 +51,7 @@ const RecommendUser = ({ user, ...cardProps }: Props) => {
             </Link>
 
             <section className={styles.follow}>
-              <FollowUserButton user={user} />
+              <FollowUserButton user={user} borderWidth="sm" />
             </section>
           </section>
         </section>

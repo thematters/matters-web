@@ -5,6 +5,7 @@ import {
   ArticleDigestFeed,
   LanguageContext,
   Layout,
+  useChannels,
   useRoute,
 } from '~/components'
 import { ArticleFeedsCampaignPublicFragment } from '~/gql/graphql'
@@ -29,6 +30,8 @@ const ArticleFeeds = ({
   const [feedType, setFeedType] = useState<CampaignFeedType>(
     qsType || FEED_TYPE_ALL
   )
+
+  const { isInWritingChallengeChannel } = useChannels()
 
   const changeFeed = (newType: CampaignFeedType) => {
     setQuery('type', newType === FEED_TYPE_ALL ? '' : newType)
@@ -60,6 +63,15 @@ const ArticleFeeds = ({
     ]
   const description = isFeaturedFeed ? featuredDescription : stageDescription
 
+  const content = (
+    <>
+      {description && (
+        <section className={styles.description}>{description}</section>
+      )}
+      <MainFeed feedType={feedType} camapign={campaign} />
+    </>
+  )
+
   return (
     <section className={styles.feeds}>
       <ArticleFeedsTabs
@@ -68,13 +80,11 @@ const ArticleFeeds = ({
         campaign={campaign}
       />
 
-      <Layout.Main.Spacing hasVertical={false}>
-        {description && (
-          <section className={styles.description}>{description}</section>
-        )}
-
-        <MainFeed feedType={feedType} camapign={campaign} />
-      </Layout.Main.Spacing>
+      {isInWritingChallengeChannel ? (
+        <Layout.Main>{content}</Layout.Main>
+      ) : (
+        <Layout.Main.Spacing hasVertical={false}>{content}</Layout.Main.Spacing>
+      )}
     </section>
   )
 }

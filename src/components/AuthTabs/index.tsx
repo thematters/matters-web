@@ -54,7 +54,7 @@ export const AuthTabs = ({
 
           <section className={styles.back}>
             {hasTarget && (
-              <Media at="sm">
+              <Media lessThan="md">
                 <Button onClick={() => router.back()}>
                   <Icon icon={IconTimes} size={24} />
                 </Button>

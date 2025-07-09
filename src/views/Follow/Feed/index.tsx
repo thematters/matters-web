@@ -1,13 +1,13 @@
 import { useQuery } from '@apollo/client'
+import { FormattedMessage } from 'react-intl'
 
 import { analytics, mergeConnections, shouldRenderNode } from '~/common/utils'
 import {
-  EmptyWarning,
+  ArticleFeedPlaceholder,
+  EmptyWork,
   InfiniteScroll,
   List,
   QueryError,
-  SpinnerBlock,
-  Translate,
 } from '~/components'
 import {
   FollowingFeedQuery,
@@ -85,7 +85,7 @@ const FollowingFeed = ({ tab }: FollowingFeedProps) => {
   )
 
   if (loading) {
-    return <SpinnerBlock />
+    return <ArticleFeedPlaceholder />
   }
 
   if (error) {
@@ -98,13 +98,9 @@ const FollowingFeed = ({ tab }: FollowingFeedProps) => {
   if (!edges || edges.length <= 0 || !pageInfo) {
     return (
       <>
-        <EmptyWarning
+        <EmptyWork
           description={
-            <Translate
-              zh_hant="還沒有動態"
-              zh_hans="还没有动态"
-              en="No activities."
-            />
+            <FormattedMessage defaultMessage="No updates yet" id="+EHtpH" />
           }
         />
       </>
@@ -136,11 +132,15 @@ const FollowingFeed = ({ tab }: FollowingFeedProps) => {
       <InfiniteScroll
         hasNextPage={pageInfo.hasNextPage}
         loadMore={loadMore}
+        loader={<ArticleFeedPlaceholder count={3} />}
         eof
       >
         <List>
           {edges.map(({ node, cursor }, i) => {
-            const uniqueKey = `${node.__typename}:${getNodeId(node, cursor)}:${i}`
+            const uniqueKey = `${node.__typename}:${getNodeId(
+              node,
+              cursor
+            )}:${i}`
 
             return shouldRenderNode(node, renderableTypes) ? (
               <List.Item key={uniqueKey}>

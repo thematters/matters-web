@@ -24,6 +24,7 @@ import {
   noop,
   useComposedRefs,
 } from './utils'
+import { KEYVALUE } from '~/common/enums'
 
 enum DialogState {
   Opening = 'opening',
@@ -152,7 +153,7 @@ const DialogInner = React.forwardRef(function DialogInner(
   }
 
   function handleKeyDown(event: React.KeyboardEvent) {
-    if (event.key === 'Escape') {
+    if (event.key.toLowerCase() === KEYVALUE.escape) {
       event.stopPropagation()
       onDismiss(event)
     }

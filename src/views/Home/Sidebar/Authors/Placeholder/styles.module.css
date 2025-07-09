@@ -1,0 +1,12 @@
+.header {
+  @mixin flex-center-space-between;
+
+  margin-bottom: var(--sp24);
+
+  & .left,
+  & .right {
+    width: 4rem;
+    height: 1.5rem;
+    background: var(--color-grey-lighter);
+  }
+}

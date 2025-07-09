@@ -141,7 +141,7 @@ const SetEmailDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
         // onBlur={handleBlur}
         onChange={handleChange}
         onKeyDown={(e) => {
-          if (e.key.toLocaleLowerCase() === KEYVALUE.enter) {
+          if (e.key.toLowerCase() === KEYVALUE.enter) {
             e.stopPropagation()
           }
         }}

@@ -26,6 +26,7 @@
   /* function */
   --color-editor-selection: #d5f1e6;
   --color-positive-green: #5c9969;
+  --color-new-palette-green: #82da0f;
   --color-top-up-yellow: #fff4dc;
   --color-top-up-yellow-darker: #ffe9b8;
   --color-warn-yellow: #dba34f;
@@ -59,4 +60,17 @@
   --color-line-matters-gold-light: rgb(192 164 107 / 40%);
   --color-line-matters-golod-lighter: rgb(192 164 107 / 20%);
   --color-line-matters-negative-red-lighter: rgb(200 92 65 / 20%);
+  --color-new-palette-linear-ocean: linear-gradient(
+    90deg,
+    #735bf3 0%,
+    #028ccc 100%
+  );
+  --color-new-palette-linear-ocean-deep: linear-gradient(
+    90deg,
+    #4b0ad6 0%,
+    #006fa3 100%
+  );
+  --color-new-palette-info-0: #edf9ff;
+  --color-new-palette-attention-600: #ddc700;
+  --color-new-palette-attention-700: #cab600;
 }

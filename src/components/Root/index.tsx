@@ -27,6 +27,7 @@ import {
   useRoute,
   ViewerProvider,
 } from '~/components'
+import { ChannelsProvider, FetchPolicyProvider } from '~/components/Context'
 import { RootQueryPrivateQuery } from '~/gql/graphql'
 
 import { ROOT_QUERY_PRIVATE } from './gql'
@@ -46,13 +47,19 @@ const DynamicGlobalDialogs = dynamic(
   () => import('~/components/GlobalDialogs'),
   { ssr: false }
 )
-
 const DynamicGlobalToasts = dynamic(() => import('~/components/GlobalToasts'), {
   ssr: false,
 })
 const DynamicFingerprint = dynamic(() => import('~/components/Fingerprint'), {
   ssr: false,
 })
+const DynamicFetchPolicyOnRouteChange = dynamic(
+  () =>
+    import('~/components/Context/FetchPolicy').then(
+      (mod) => mod.FetchPolicyOnRouteChange
+    ),
+  { ssr: false }
+)
 
 /**
  * `<Root>` contains components that depend on viewer
@@ -82,6 +89,7 @@ const Root = ({
     useQuery<RootQueryPrivateQuery>(ROOT_QUERY_PRIVATE)
   const viewer = data?.viewer
   const official = data?.official
+  const channels = data?.channels
 
   useEffect(() => {
     if (referralCode) {
@@ -130,14 +138,23 @@ const Root = ({
             <FeaturesProvider official={official}>
               <MediaContextProvider>
                 <TranslationsProvider>
-                  {shouldApplyLayout ? <Layout>{children}</Layout> : children}
+                  <FetchPolicyProvider>
+                    <ChannelsProvider channels={channels || []}>
+                      {shouldApplyLayout ? (
+                        <Layout>{children}</Layout>
+                      ) : (
+                        children
+                      )}
 
-                  <DynamicToaster />
-                  <DynamicAnalyticsInitilizer user={viewer || {}} />
-                  <DynamicGlobalDialogs />
-                  <DynamicGlobalToasts />
-                  <DynamicProgressBar />
-                  <DynamicFingerprint />
+                      <DynamicToaster />
+                      <DynamicAnalyticsInitilizer user={viewer || {}} />
+                      <DynamicGlobalDialogs />
+                      <DynamicGlobalToasts />
+                      <DynamicProgressBar />
+                      <DynamicFingerprint />
+                      <DynamicFetchPolicyOnRouteChange />
+                    </ChannelsProvider>
+                  </FetchPolicyProvider>
                 </TranslationsProvider>
               </MediaContextProvider>
             </FeaturesProvider>

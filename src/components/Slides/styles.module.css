@@ -1,11 +1,14 @@
 .slides {
-  padding: var(--sp24) 0 var(--sp8);
+  /* padding: var(--sp20) 0 var(--sp4); */
 
   & ul {
     @mixin hide-scrollbar;
 
     display: flex;
-    margin-right: calc(var(--sp16) * -1);
+
+    @media (--sm-up) {
+      margin-right: calc(var(--sp16) * -1);
+    }
 
     & li {
       position: relative;
@@ -46,6 +49,14 @@
 
 .bgGreyLighter {
   background: var(--color-grey-lighter);
+}
+
+.sizeXxs {
+  width: 13.5rem;
+
+  &:first-child {
+    width: calc(13.5rem + var(--sp16));
+  }
 }
 
 .sizeXs {

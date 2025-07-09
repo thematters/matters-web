@@ -11,9 +11,14 @@ import styles from './styles.module.css'
 
 type Props = {
   article: FollowingFeedRecommendArticlePublicFragment
+  showCover?: boolean
 } & CardProps
 
-const RecommendArticle = ({ article, ...cardProps }: Props) => {
+const RecommendArticle = ({
+  article,
+  showCover = true,
+  ...cardProps
+}: Props) => {
   const { author, summary, title } = article
   const isBanned = article.recommendArticleState === 'banned'
   const cover = !isBanned ? article.cover : null
@@ -53,7 +58,7 @@ const RecommendArticle = ({ article, ...cardProps }: Props) => {
             </section>
           </section>
 
-          {cover && (
+          {showCover && cover && (
             <section className={styles.cover}>
               <ResponsiveImage url={cover} width={144} height={144} />
             </section>

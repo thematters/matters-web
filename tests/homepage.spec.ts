@@ -5,7 +5,7 @@ import { stripSpaces } from '~/common/utils/text'
 import { HomePage } from './helpers'
 
 test.describe('Homepage', () => {
-  test('has article feed in latest feed', async ({ page }) => {
+  test('has article feed in newest feed', async ({ page }) => {
     const home = new HomePage(page)
     await home.goto()
 
@@ -18,27 +18,23 @@ test.describe('Homepage', () => {
     await expect(home.feedArticles.first()).toBeVisible()
   })
 
-  test('can switch to trending feed', async ({ page }) => {
+  test('can switch to featured feed', async ({ page }) => {
     const home = new HomePage(page)
     await home.goto()
 
-    // Expect home feed is a "Latest" feed
-    expect(await home.tabLatest.getAttribute('aria-selected')).toBe('true')
+    // Expect home feed is a "Newest" feed
+    expect(await home.tabNewest.getAttribute('aria-selected')).toBe('true')
 
-    // Switch to "Trending" feed
-    await home.tabTrending.click()
+    // Switch to "Featured" feed
+    await home.tabFeatured.click()
 
-    // Expect home feed is a "Trending" feed
-    expect(await home.tabTrending.getAttribute('aria-selected')).toBe('true')
+    // Expect home feed is a "Featured" feed
+    expect(await home.tabFeatured.getAttribute('aria-selected')).toBe('true')
   })
 
   test('sidebar users can be shuffled', async ({ page }) => {
     const home = new HomePage(page)
     await home.goto()
-
-    // Expect the sidebar has recommended tags
-    const firstTag = home.sidebarTags.first()
-    await expect(firstTag).toBeVisible()
 
     // Expect the sidebar has recommended users
     const firstUser = home.sidebarUsers.first()

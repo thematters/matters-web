@@ -20,6 +20,7 @@ const UserPublishArticleActivity = ({
         })
       }}
       article={node}
+      hasBookmark={false}
     />
     <CardExposureTracker
       id={node.id}

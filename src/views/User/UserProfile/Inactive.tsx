@@ -10,7 +10,7 @@ const Inactive = () => {
     <section className={styles.userProfile}>
       <Cover fallbackCover={IMAGE_COVER.src} />
 
-      <Media at="sm">
+      <Media lessThan="md">
         <header className={styles.header}>
           <section className={styles.avatar}>
             <Avatar size={76} />

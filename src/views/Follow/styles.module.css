@@ -1,0 +1,24 @@
+.headers {
+  @mixin flex-center-space-between;
+
+  position: sticky;
+  top: var(--global-nav-height-mobile);
+  z-index: var(--z-index-sticky-tabs);
+  padding-top: var(--sp20);
+  padding-right: var(--sp16);
+  padding-bottom: var(--sp8);
+  margin-right: calc(var(--sp16) * -1);
+  margin-bottom: calc(var(--sp8) * -1);
+  background-color: var(--color-white);
+
+  @media (--sm-up) {
+    top: var(--global-nav-height);
+  }
+
+  & .title {
+    font-size: var(--text18);
+    font-weight: var(--font-medium);
+    line-height: 1.75rem;
+    color: var(--color-black);
+  }
+}

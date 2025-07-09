@@ -15,6 +15,7 @@ import {
 } from '~/gql/graphql'
 
 import { fragments } from './gql'
+import Placeholder from './Placeholder'
 import styles from './styles.module.css'
 
 /**
@@ -189,6 +190,7 @@ const Rich = ({
 type MemoizedRichType = React.MemoExoticComponent<
   React.FC<UserDigestRichProps>
 > & {
+  Placeholder: typeof Placeholder
   fragments: typeof fragments
 }
 
@@ -205,5 +207,7 @@ const MemoizedRich = React.memo(
 ) as MemoizedRichType
 
 MemoizedRich.fragments = fragments
+
+MemoizedRich.Placeholder = Placeholder
 
 export default MemoizedRich

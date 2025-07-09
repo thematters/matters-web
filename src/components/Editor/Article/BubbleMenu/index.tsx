@@ -20,9 +20,9 @@ import IconEditorStrike from '@/public/static/icons/24px/editor-strike.svg'
 import IconEditorUl from '@/public/static/icons/24px/editor-ul.svg'
 import IconEditorUnlink from '@/public/static/icons/24px/editor-unlink.svg'
 import IconTimes from '@/public/static/icons/24px/times.svg'
-import { KEYVALUE } from '~/common/enums'
+import { BREAKPOINTS, KEYVALUE } from '~/common/enums'
 import { isUrl } from '~/common/utils'
-import { Icon, Media, useNativeEventListener } from '~/components'
+import { Icon, useMediaQuery, useNativeEventListener } from '~/components'
 
 import styles from './styles.module.css'
 
@@ -35,6 +35,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
   editor,
   isCommentEditor,
 }) => {
+  const isSmUp = useMediaQuery(`(min-width: ${BREAKPOINTS.MD}px)`)
   const intl = useIntl()
   const linkInputRef = useRef<HTMLInputElement>(null)
 
@@ -220,12 +221,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
                   description: 'src/components/Editor',
                 })}
               >
-                <Media at="sm">
-                  <Icon icon={IconEditorH2} size={22} />
-                </Media>
-                <Media greaterThan="sm">
-                  <Icon icon={IconEditorH2} size={24} />
-                </Media>
+                <Icon icon={IconEditorH2} size={isSmUp ? 24 : 22} />
               </button>
             )}
 
@@ -251,12 +247,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
                   description: 'src/components/Editor',
                 })}
               >
-                <Media at="sm">
-                  <Icon icon={IconEditorH3} size={22} />
-                </Media>
-                <Media greaterThan="sm">
-                  <Icon icon={IconEditorH3} size={24} />
-                </Media>
+                <Icon icon={IconEditorH3} size={isSmUp ? 24 : 22} />
               </button>
             )}
 
@@ -278,12 +269,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
                   description: 'src/components/Editor',
                 })}
               >
-                <Media at="sm">
-                  <Icon icon={IconEditorBold} size={22} />
-                </Media>
-                <Media greaterThan="sm">
-                  <Icon icon={IconEditorBold} size={24} />
-                </Media>
+                <Icon icon={IconEditorBold} size={isSmUp ? 24 : 22} />
               </button>
             )}
 
@@ -305,12 +291,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
                   description: 'src/components/Editor',
                 })}
               >
-                <Media at="sm">
-                  <Icon icon={IconEditorStrike} size={22} />
-                </Media>
-                <Media greaterThan="sm">
-                  <Icon icon={IconEditorStrike} size={24} />
-                </Media>
+                <Icon icon={IconEditorStrike} size={isSmUp ? 24 : 22} />
               </button>
             )}
 
@@ -330,12 +311,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
                   description: 'src/components/Editor',
                 })}
               >
-                <Media at="sm">
-                  <Icon icon={IconEditorCode} size={22} />
-                </Media>
-                <Media greaterThan="sm">
-                  <Icon icon={IconEditorCode} size={24} />
-                </Media>
+                <Icon icon={IconEditorCode} size={isSmUp ? 24 : 22} />
               </button>
             )}
 
@@ -353,12 +329,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
                 description: 'src/components/Editor',
               })}
             >
-              <Media at="sm">
-                <Icon icon={IconEditorQuote} size={22} />
-              </Media>
-              <Media greaterThan="sm">
-                <Icon icon={IconEditorQuote} size={24} />
-              </Media>
+              <Icon icon={IconEditorQuote} size={isSmUp ? 24 : 22} />
             </button>
 
             {/* Unordered list */}
@@ -374,12 +345,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
                   description: 'src/components/Editor',
                 })}
               >
-                <Media at="sm">
-                  <Icon icon={IconEditorUl} size={22} />
-                </Media>
-                <Media greaterThan="sm">
-                  <Icon icon={IconEditorUl} size={24} />
-                </Media>
+                <Icon icon={IconEditorUl} size={isSmUp ? 24 : 22} />
               </button>
             )}
 
@@ -396,12 +362,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
                   description: 'src/components/Editor',
                 })}
               >
-                <Media at="sm">
-                  <Icon icon={IconEditorOl} size={22} />
-                </Media>
-                <Media greaterThan="sm">
-                  <Icon icon={IconEditorOl} size={24} />
-                </Media>
+                <Icon icon={IconEditorOl} size={isSmUp ? 24 : 22} />
               </button>
             )}
 
@@ -426,12 +387,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
                 description: 'src/components/Editor',
               })}
             >
-              <Media at="sm">
-                <Icon icon={IconEditorLink} size={22} />
-              </Media>
-              <Media greaterThan="sm">
-                <Icon icon={IconEditorLink} size={24} />
-              </Media>
+              <Icon icon={IconEditorLink} size={isSmUp ? 24 : 22} />
             </button>
           </>
         )}

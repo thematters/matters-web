@@ -203,8 +203,8 @@ const Init: React.FC<FormProps> = ({
       />
 
       <Dialog.Content>
-        <Media at="sm">{InnerForm}</Media>
-        <Media greaterThan="sm">
+        <Media lessThan="md">{InnerForm}</Media>
+        <Media greaterThanOrEqual="md">
           <AuthTabs
             purpose={purpose}
             type={authFeedType}

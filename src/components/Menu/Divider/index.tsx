@@ -1,9 +1,21 @@
+import classNames from 'classnames'
 import React from 'react'
 
 import styles from './styles.module.css'
 
-const MenuDivider: React.FC = () => {
-  return <hr className={styles.divider} />
+interface MenuDividerProps {
+  isInSearch?: boolean
+}
+
+const MenuDivider: React.FC<MenuDividerProps> = ({ isInSearch }) => {
+  return (
+    <hr
+      className={classNames({
+        [styles.divider]: true,
+        [styles.isInSearch]: isInSearch,
+      })}
+    />
+  )
 }
 
 export default MenuDivider

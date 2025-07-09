@@ -90,3 +90,20 @@
     font-size: var(--text15);
   }
 }
+
+.placeholder {
+  @mixin flex-center-start;
+
+  & .avatar {
+    width: 3rem;
+    height: 3rem;
+    background-color: var(--color-grey-lighter);
+    border-radius: 50%;
+  }
+
+  & .content {
+    flex: 1;
+    height: 3rem;
+    background-color: var(--color-grey-lighter);
+  }
+}

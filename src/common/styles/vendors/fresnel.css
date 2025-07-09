@@ -5,121 +5,169 @@
   margin: 0;
 }
 
-@media not all and (width >= 0) and (width <= 474.98px) {
+@media not all and (width >= 0) and (width <= 462px) {
+  .fresnel-at-xs {
+    display: none !important;
+  }
+}
+
+@media not all and (width >= 463px) and (width <= 639.98px) {
   .fresnel-at-sm {
     display: none !important;
   }
 }
 
-@media not all and (width >= 475px) and (width <= 929.98px) {
+@media not all and (width >= 640px) and (width <= 866px) {
   .fresnel-at-md {
     display: none !important;
   }
 }
 
-@media not all and (width >= 930px) and (width <= 1183.98px) {
+@media not all and (width >= 867px) and (width <= 1210px) {
   .fresnel-at-lg {
     display: none !important;
   }
 }
 
-@media not all and (width >= 1184px) {
+@media not all and (width >= 1211px) {
   .fresnel-at-xl {
     display: none !important;
   }
 }
 
-@media not all and (width <= 474.98px) {
+@media not all and (width <= 462.98px) {
+  .fresnel-lessThan-sm {
+    display: none !important;
+  }
+}
+
+@media not all and (width <= 639.98px) {
   .fresnel-lessThan-md {
     display: none !important;
   }
 }
 
-@media not all and (width <= 929.98px) {
+@media not all and (width <= 866.98px) {
   .fresnel-lessThan-lg {
     display: none !important;
   }
 }
 
-@media not all and (width <= 1183.98px) {
+@media not all and (width <= 1210.98px) {
   .fresnel-lessThan-xl {
     display: none !important;
   }
 }
 
-@media not all and (width >= 475px) {
+@media not all and (width >= 463px) {
+  .fresnel-greaterThan-xs {
+    display: none !important;
+  }
+}
+
+@media not all and (width >= 640px) {
   .fresnel-greaterThan-sm {
     display: none !important;
   }
 }
 
-@media not all and (width >= 930px) {
+@media not all and (width >= 867px) {
   .fresnel-greaterThan-md {
     display: none !important;
   }
 }
 
-@media not all and (width >= 1184px) {
+@media not all and (width >= 1211px) {
   .fresnel-greaterThan-lg {
     display: none !important;
   }
 }
 
 @media not all and (width >= 0) {
+  .fresnel-greaterThanOrEqual-xs {
+    display: none !important;
+  }
+}
+
+@media not all and (width >= 463px) {
   .fresnel-greaterThanOrEqual-sm {
     display: none !important;
   }
 }
 
-@media not all and (width >= 475px) {
+@media not all and (width >= 640px) {
   .fresnel-greaterThanOrEqual-md {
     display: none !important;
   }
 }
 
-@media not all and (width >= 930px) {
+@media not all and (width >= 867px) {
   .fresnel-greaterThanOrEqual-lg {
     display: none !important;
   }
 }
 
-@media not all and (width >= 1184px) {
+@media not all and (width >= 1211px) {
   .fresnel-greaterThanOrEqual-xl {
     display: none !important;
   }
 }
 
-@media not all and (width >= 0) and (width <= 474.98px) {
+@media not all and (width >= 0) and (width <= 462.98px) {
+  .fresnel-between-xs-sm {
+    display: none !important;
+  }
+}
+
+@media not all and (width >= 0) and (width <= 639.98px) {
+  .fresnel-between-xs-md {
+    display: none !important;
+  }
+}
+
+@media not all and (width >= 0) and (width <= 866.98px) {
+  .fresnel-between-xs-lg {
+    display: none !important;
+  }
+}
+
+@media not all and (width >= 0) and (width <= 1210.98px) {
+  .fresnel-between-xs-xl {
+    display: none !important;
+  }
+}
+
+@media not all and (width >= 463px) and (width <= 639.98px) {
   .fresnel-between-sm-md {
     display: none !important;
   }
 }
 
-@media not all and (width >= 0) and (width <= 929.98px) {
+@media not all and (width >= 463px) and (width <= 866.98px) {
   .fresnel-between-sm-lg {
     display: none !important;
   }
 }
 
-@media not all and (width >= 0) and (width <= 1183.98px) {
+@media not all and (width >= 463px) and (width <= 1210.98px) {
   .fresnel-between-sm-xl {
     display: none !important;
   }
 }
 
-@media not all and (width >= 475px) and (width <= 929.98px) {
+@media not all and (width >= 640px) and (width <= 866.98px) {
   .fresnel-between-md-lg {
     display: none !important;
   }
 }
 
-@media not all and (width >= 475px) and (width <= 1183.98px) {
+@media not all and (width >= 640px) and (width <= 1210.98px) {
   .fresnel-between-md-xl {
     display: none !important;
   }
 }
 
-@media not all and (width >= 930px) and (width <= 1183.98px) {
+@media not all and (width >= 867px) and (width <= 1210.98px) {
   .fresnel-between-lg-xl {
     display: none !important;
   }

@@ -10,12 +10,14 @@ interface DateTimeProps {
   date: Date | string | number
   size?: 'xs' | 'sm'
   color?: 'grey' | 'greyDark' | 'greyDarker'
+  minimal?: boolean
 }
 
 const BaseDateTime = ({
   date,
   size = 'xs',
   color = 'greyDark',
+  minimal = false,
 }: DateTimeProps) => {
   const { lang } = useContext(LanguageContext)
   const timeclasses = classNames({
@@ -26,7 +28,7 @@ const BaseDateTime = ({
 
   return (
     <time dateTime={new Date(date).toISOString()} className={timeclasses}>
-      {datetimeFormat['relative'](date, lang)}
+      {datetimeFormat['relative'](date, lang, minimal)}
     </time>
   )
 }

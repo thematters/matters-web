@@ -11,6 +11,7 @@ import Unfollow from './Unfollow'
 interface FollowUserButtonProps {
   user: Partial<FollowButtonUserPrivateFragment>
   size?: FollowUserButtonSize
+  borderWidth?: 'sm' | 'md'
 }
 
 const fragments = {
@@ -33,6 +34,7 @@ export type FollowUserButtonSize = 'xl' | 'lg' | 'md'
 export const FollowUserButton = ({
   user,
   size = 'md',
+  borderWidth = 'md',
 }: FollowUserButtonProps) => {
   const viewer = useContext(ViewerContext)
 
@@ -48,7 +50,7 @@ export const FollowUserButton = ({
       return <span />
     }
 
-    return <Follow user={user} size={size} />
+    return <Follow user={user} size={size} borderWidth={borderWidth} />
   }
 }
 
