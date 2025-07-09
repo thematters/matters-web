@@ -93,10 +93,15 @@ const useLayoutType = () => {
     isInPath('USER_COLLECTIONS') ||
     isInPath('USER_COLLECTION_DETAIL')
 
+  // Fallback to one-column layout if no specific layout is determined
+  const hasSpecificLayout =
+    isOneColumnLayout || isTwoColumnLayout || isThreeColumnLayout
+  const fallbackOneColumnLayout = !hasSpecificLayout
+
   return {
     isInMomentDetail,
     isInMomentDetailEdit,
-    isOneColumnLayout,
+    isOneColumnLayout: isOneColumnLayout || fallbackOneColumnLayout,
     isTwoColumnLayout,
     isThreeColumnLayout,
     isLeftLayout,
