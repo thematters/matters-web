@@ -162,9 +162,8 @@ const MainFeed: React.FC<MainFeedProps> = ({ feedType }) => {
       )
     }
 
-    if (!isIcymiFeed) return null
-    if (!recommendation) return null
-    if (!('icymiTopic' in recommendation)) return null
+    if (!isIcymiFeed || !recommendation || !('icymiTopic' in recommendation))
+      return null
     const note = recommendation?.icymiTopic?.note
 
     return (
