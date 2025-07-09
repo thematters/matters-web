@@ -17,11 +17,13 @@ import type {
 } from '~/gql/graphql'
 
 import { useMixedFeed } from '../../common'
+import { ArticleDigestCurated } from '../ArticleDigestCurated'
 import { ChannelHeader } from '../ChannelHeader'
 import FeedRenderer from '../FeedRenderer'
 import { FEED_ARTICLES_PRIVATE, FEED_ARTICLES_PUBLIC } from '../gql'
 import { IcymiCuratedFeed } from '../IcymiCuratedFeed'
 import { FeedType } from '../index'
+import feedStyles from '../styles.module.css'
 
 interface MainFeedProps {
   feedType: FeedType
@@ -111,10 +113,10 @@ const MainFeed: React.FC<MainFeedProps> = ({ feedType }) => {
   }
 
   const renderHeader = ({ loading }: { loading?: boolean }) => {
-    const isIcymiTopic = recommendation && 'icymiTopic' in recommendation
+    const isIcymiFeed = feedType === 'icymi'
     const isHottestFeed = feedType === 'hottest'
 
-    if (loading && (isHottestFeed || isIcymiTopic)) {
+    if (loading && (isHottestFeed || isIcymiFeed)) {
       return (
         <>
           <Media lessThan="lg">
@@ -124,6 +126,13 @@ const MainFeed: React.FC<MainFeedProps> = ({ feedType }) => {
           </Media>
           <Media greaterThanOrEqual="lg">
             <ChannelHeader.Placeholder />
+            {isIcymiFeed && (
+              <section className={feedStyles.cards}>
+                <ArticleDigestCurated.Placeholder />
+                <ArticleDigestCurated.Placeholder />
+                <ArticleDigestCurated.Placeholder />
+              </section>
+            )}
           </Media>
         </>
       )
@@ -153,7 +162,8 @@ const MainFeed: React.FC<MainFeedProps> = ({ feedType }) => {
       )
     }
 
-    if (!isIcymiTopic) return null
+    if (!isIcymiFeed || !recommendation || !('icymiTopic' in recommendation))
+      return null
     const note = recommendation?.icymiTopic?.note
 
     return (
