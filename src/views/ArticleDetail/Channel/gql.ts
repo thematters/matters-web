@@ -19,6 +19,7 @@ export const fragments = {
                 nameZhHant: name(input: { language: zh_hant })
                 nameEn: name(input: { language: en })
                 shortHash
+                enabled
               }
             }
             feedback {
