@@ -100,7 +100,9 @@
     color: var(--color-black);
 
     & .name {
-      background-color: var(--color-grey-lighter);
+      @media (--sm-up) {
+        background-color: var(--color-grey-lighter);
+      }
     }
   }
 
@@ -117,7 +119,7 @@
     @mixin transition;
 
     display: inline-block;
-    padding: var(--sp8) var(--sp10);
+    padding: var(--sp8) 0;
     background-color: transparent;
     border-radius: 0.5rem;
     transition-property: background-color;
@@ -126,6 +128,10 @@
       @mixin line-clamp;
 
       -webkit-line-clamp: 2;
+    }
+
+    @media (--sm-up) {
+      padding: var(--sp8) var(--sp10);
     }
   }
 }
