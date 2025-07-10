@@ -13,10 +13,7 @@ import {
   ResponsiveImage,
 } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
-import {
-  ArticleDigestAuthorSidebarArticleFragment,
-  AssetType,
-} from '~/gql/graphql'
+import { ArticleDigestAuthorSidebarArticleFragment } from '~/gql/graphql'
 
 import Placeholder from './Placeholder'
 import styles from './styles.module.css'
@@ -40,12 +37,7 @@ const fragments = {
       title
       slug
       shortHash
-      cover
-      assets {
-        id
-        type
-        path
-      }
+      displayCover
       author {
         id
         userName
@@ -70,9 +62,7 @@ export const ArticleDigestAuthorSidebar = ({
 }: ArticleDigestAuthorSidebarProps) => {
   const { articleState: state, author } = article
   const isBanned = state === 'banned'
-  const assets = article.assets || []
-  const embed = assets.find((asset) => asset.type === AssetType.Embed)
-  const cover = !isBanned ? article.cover || embed?.path : null
+  const cover = !isBanned ? article.displayCover : null
   const containerClasses = classNames({
     [styles.container]: true,
     [styles.hasCover]: showCover && !!cover,
