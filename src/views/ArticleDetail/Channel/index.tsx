@@ -87,7 +87,9 @@ const Channel = ({ article, privateFetched }: ChannelProps) => {
       (channel) => channel.antiFlooded
     )
     const enabledChannels =
-      topicChannel?.channels?.filter((channel) => channel.enabled) || []
+      topicChannel?.channels?.filter(
+        (channel) => channel.enabled && channel.channel.enabled
+      ) || []
 
     return {
       topicChannel,
@@ -231,6 +233,9 @@ const Channel = ({ article, privateFetched }: ChannelProps) => {
       channelData.hasTopicChannel &&
       !channelData.isInLatestChannel
     ) {
+      if (channelData.enabledChannels.length === 0) {
+        return null
+      }
       return (
         <>
           <section className={styles.content}>
