@@ -14,6 +14,7 @@ export const fragments = {
         slug
         shortHash
         articleState: state
+        displayCover
         cover
         assets {
           id
