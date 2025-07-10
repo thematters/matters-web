@@ -127,6 +127,7 @@ export const MOCK_ARTILCE = {
   articleState: 'active' as any,
   revisionCount: 3,
   state: 'active' as any,
+  displayCover: 'https://placehold.co/256x256?article',
   cover: 'https://placehold.co/256x256?article',
   assets: [
     {
