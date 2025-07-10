@@ -16,7 +16,7 @@ import {
   Tooltip,
 } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
-import { ArticleDigestCuratedArticleFragment, AssetType } from '~/gql/graphql'
+import { ArticleDigestCuratedArticleFragment } from '~/gql/graphql'
 
 import CoverIcon from './CoverIcon'
 import FooterActions from './FooterActions'
@@ -42,12 +42,7 @@ const fragments = {
       title
       slug
       shortHash
-      cover
-      assets {
-        id
-        type
-        path
-      }
+      displayCover
       author {
         id
         userName
@@ -73,9 +68,7 @@ export const ArticleDigestCurated = ({
 }: ArticleDigestCuratedProps) => {
   const intl = useIntl()
   const isBanned = article.articleState === 'banned'
-  const assets = article.assets || []
-  const embed = assets.find((asset) => asset.type === AssetType.Embed)
-  const cover = !isBanned ? article.cover || embed?.path : null
+  const cover = !isBanned ? article.displayCover : null
   const path = toPath({
     page: 'articleDetail',
     article,

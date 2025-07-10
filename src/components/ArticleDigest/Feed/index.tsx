@@ -9,7 +9,6 @@ import { UserDigest } from '~/components/UserDigest'
 import {
   ArticleDigestFeedArticlePrivateFragment,
   ArticleDigestFeedArticlePublicFragment,
-  AssetType,
 } from '~/gql/graphql'
 
 import { ArticleDigestTitle } from '../Title'
@@ -57,9 +56,7 @@ const BaseArticleDigestFeed = ({
   const { author, summary } = article
   const isBanned = article.articleState === 'banned'
   const isArchived = article.articleState === 'archived'
-  const assets = article.assets || []
-  const embed = assets.find((asset) => asset.type === AssetType.Embed)
-  const cover = !isBanned && !isArchived ? article.cover || embed?.path : null
+  const cover = !isBanned && !isArchived ? article.displayCover : null
   const cleanedSummary =
     isBanned && !isArchived ? '' : makeSummary(summary, MAX_FEED_SUMMARY_LENGTH)
 

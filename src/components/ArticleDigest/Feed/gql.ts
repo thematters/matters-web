@@ -14,12 +14,7 @@ export const fragments = {
         slug
         shortHash
         articleState: state
-        cover
-        assets {
-          id
-          type
-          path
-        }
+        displayCover
         summary
         author {
           id
