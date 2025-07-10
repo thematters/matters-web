@@ -37,7 +37,7 @@ const fragments = {
       title
       slug
       shortHash
-      cover
+      displayCover
       author {
         id
         userName
@@ -62,7 +62,7 @@ export const ArticleDigestAuthorSidebar = ({
 }: ArticleDigestAuthorSidebarProps) => {
   const { articleState: state, author } = article
   const isBanned = state === 'banned'
-  const cover = !isBanned ? article.cover : null
+  const cover = !isBanned ? article.displayCover : null
   const containerClasses = classNames({
     [styles.container]: true,
     [styles.hasCover]: showCover && !!cover,

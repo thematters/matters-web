@@ -400,7 +400,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
       )}
 
       <Dialog.Content noMaxHeight={isInPage}>
-        <Media at="sm">
+        <Media lessThan="md">
           {isSelectMethod && (
             <AuthTabs
               type={authFeedType}
@@ -409,7 +409,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
             />
           )}
         </Media>
-        <Media greaterThan="sm">
+        <Media greaterThanOrEqual="md">
           <AuthTabs
             type={authFeedType}
             setType={setAuthFeedType}
@@ -462,7 +462,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
       )}
       {isSelectMethod && isInPage && (
         <section className={styles.footer}>
-          <LanguageSwitch />
+          <LanguageSwitch iconColor="black" />
         </section>
       )}
     </>

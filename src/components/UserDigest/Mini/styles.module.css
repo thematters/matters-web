@@ -113,6 +113,12 @@
   }
 }
 
+.spacing6 {
+  &.hasAvatar .name {
+    margin-left: var(--sp6);
+  }
+}
+
 .spacing4 {
   &.hasAvatar .name {
     margin-left: var(--sp4);

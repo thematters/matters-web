@@ -6,7 +6,6 @@ import SettingsTabs from '../SettingsTabs'
 import styles from '../styles.module.css'
 import BlockedUsers from './BlockedUsers'
 import Currency from './Currency'
-import Language from './Language'
 import LikerID from './LikerID'
 
 const SettingsMisc = () => {
@@ -33,7 +32,6 @@ const SettingsMisc = () => {
 
       <section className={styles.container}>
         <TableView spacingX={0}>
-          <Language />
           <Currency />
           <BlockedUsers />
           <LikerID />

@@ -1,5 +1,5 @@
 .container {
-  padding-bottom: var(--sp8);
+  padding: var(--sp20) 0 var(--sp20);
 }
 
 .item {

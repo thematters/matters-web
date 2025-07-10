@@ -84,7 +84,7 @@ export const MomentDigestFeed = ({
           )}
           <section>
             <Link {...momentDetailPath} onClick={handleClickDateTime}>
-              <DateTime date={createdAt} color="grey" />
+              <DateTime date={createdAt} color="grey" minimal />
             </Link>
           </section>
         </header>
@@ -93,13 +93,13 @@ export const MomentDigestFeed = ({
             className={styles.content}
             onClick={(event) => {
               const target = event.target as HTMLElement
-              const targetTagName = target.tagName.toLocaleLowerCase()
+              const targetTagName = target.tagName.toLowerCase()
               if (
                 // link
                 targetTagName === 'a' ||
                 // mention
                 (targetTagName === 'span' &&
-                  target.parentElement?.tagName.toLocaleLowerCase() === 'a' &&
+                  target.parentElement?.tagName.toLowerCase() === 'a' &&
                   target.innerText.includes('@'))
               ) {
                 event.stopPropagation()
@@ -156,10 +156,10 @@ export const MomentDigestFeed = ({
 
   return (
     <>
-      <Media at="sm">
+      <Media lessThan="md">
         <Container openMomentDetail={goToMomentDetail} hasAuthor={hasAuthor} />
       </Media>
-      <Media greaterThan="sm">
+      <Media greaterThanOrEqual="md">
         <MomentDetailDialog shortHash={moment.shortHash}>
           {({ openDialog }) => (
             <Container openMomentDetail={openDialog} hasAuthor={hasAuthor} />

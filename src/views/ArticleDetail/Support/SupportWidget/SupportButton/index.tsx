@@ -44,39 +44,37 @@ const SupportButton = ({
 
   const Content = ({ onClick }: { onClick: () => void }) => {
     return (
-      <>
-        <DonationButton
-          supported={supported}
-          onClick={() => {
-            if (!viewer.isAuthed) {
-              window.dispatchEvent(
-                new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
-                  detail: { trigger: UNIVERSAL_AUTH_TRIGGER.support },
-                })
-              )
-              return
-            }
+      <DonationButton
+        supported={supported}
+        onClick={() => {
+          if (!viewer.isAuthed) {
+            window.dispatchEvent(
+              new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
+                detail: { trigger: UNIVERSAL_AUTH_TRIGGER.support },
+              })
+            )
+            return
+          }
 
-            if (viewer.isFrozen) {
-              forbid()
-              return
-            }
+          if (viewer.isFrozen) {
+            forbid()
+            return
+          }
 
-            if (recipient.id === viewer.id) {
-              forbid(true)
-              return
-            }
+          if (recipient.id === viewer.id) {
+            forbid(true)
+            return
+          }
 
-            onClick()
-          }}
-        />
-      </>
+          onClick()
+        }}
+      />
     )
   }
 
   return (
     <>
-      <Media at="sm">
+      <Media lessThan="md">
         <SupportDialog article={article}>
           {({ openDialog }) => (
             <Content
@@ -92,7 +90,7 @@ const SupportButton = ({
           )}
         </SupportDialog>
       </Media>
-      <Media greaterThan="sm">
+      <Media greaterThanOrEqual="md">
         <Content onClick={toggleDonationDrawer} />
       </Media>
     </>

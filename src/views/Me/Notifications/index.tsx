@@ -156,8 +156,7 @@ const Notifications = () => {
           id: 'NAidKb',
         })}
       />
-
-      <Media at="sm">
+      <Media lessThan="md">
         <Layout.Header
           left={
             <Layout.Header.Title>
@@ -167,7 +166,7 @@ const Notifications = () => {
         />
         <Spacer size="sp16" />
       </Media>
-      <Media greaterThan="sm">
+      <Media greaterThanOrEqual="md">
         <Spacer size="sp32" />
       </Media>
 

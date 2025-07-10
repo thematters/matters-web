@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from 'react'
 import { Gallery, Item } from 'react-photoswipe-gallery'
 
 import IMAGE_PLACEHOLDER from '@/public/static/images/placeholder.svg?url'
-import { TEST_ID } from '~/common/enums'
+import { KEYVALUE, TEST_ID } from '~/common/enums'
 import {
   calculateRenderedImageSize,
   checkImagesLoaded,
@@ -103,7 +103,7 @@ const Assets = ({ moment }: { moment: MomentDigestAssetsMomentFragment }) => {
         onOpen={(photoswipe: PhotoSwipe) => {
           const closePhotoswipeListener = () => {
             document.addEventListener('keyup', (event) => {
-              if (event.key === 'Escape') {
+              if (event.key.toLowerCase() === KEYVALUE.escape) {
                 photoswipe.close()
               }
             })

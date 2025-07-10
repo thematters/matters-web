@@ -53,9 +53,13 @@
 .wrapper {
   &.sticky {
     position: sticky;
-    top: 0;
+    top: var(--global-nav-height-mobile);
     z-index: var(--z-index-sticky-tabs);
     background: var(--color-white);
+
+    @media (--sm-up) {
+      top: var(--global-nav-height);
+    }
   }
 
   &.spacingSm {

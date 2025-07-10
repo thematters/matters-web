@@ -8,7 +8,6 @@ import {
 } from '~/common/enums'
 import { analytics, toPath } from '~/common/utils'
 import {
-  Media,
   Menu,
   // Spacer,
   SpinnerBlock,
@@ -18,7 +17,6 @@ import {
 import { QuickResultQuery } from '~/gql/graphql'
 
 import { QUICK_RESULT } from './gql'
-import TriggerFullSearchItem from './TriggerFullSearchItem'
 
 interface QuickSearchProps {
   searchKey: string
@@ -27,10 +25,19 @@ interface QuickSearchProps {
   closeDropdown: () => void
 
   inPage?: boolean
+  setShowSearchQuickResult?: (show: boolean) => void
+  itemHorizontalSpacing?: 0 | 16
 }
 
-export const SearchQuickResult = (props: QuickSearchProps) => {
-  const { searchKey, inPage, activeItem, onUpdateData, closeDropdown } = props
+export const SearchQuickResult = ({
+  searchKey,
+  inPage,
+  activeItem,
+  onUpdateData,
+  closeDropdown,
+  setShowSearchQuickResult,
+  itemHorizontalSpacing = 16,
+}: QuickSearchProps) => {
   const client = useApolloClient()
   const [data, setData] = useState<QuickResultQuery>()
   const clearData = () => setData(undefined)
@@ -86,6 +93,7 @@ export const SearchQuickResult = (props: QuickSearchProps) => {
   }, [searchKey])
 
   if (loading) {
+    setShowSearchQuickResult?.(true)
     return (
       <Menu width={inPage ? undefined : 'md'}>
         <SpinnerBlock />
@@ -94,28 +102,27 @@ export const SearchQuickResult = (props: QuickSearchProps) => {
   }
 
   if (!hasUsers && !hasTags) {
+    setShowSearchQuickResult?.(false)
     return null
   }
 
+  setShowSearchQuickResult?.(true)
   return (
     <Menu width={inPage ? undefined : 'md'}>
-      <Media lessThan="lg">
-        <TriggerFullSearchItem searchKey={searchKey} />
-        <Menu.Divider />
-      </Media>
-
       {hasUsers &&
         userEdges.map(
           ({ node, cursor }, i) =>
             node.__typename === 'User' && (
               <Fragment key={node.id}>
                 <Menu.Item
+                  spacing={[12, itemHorizontalSpacing]}
                   bgActiveColor="greyHover"
                   isActive={`user${cursor}` === activeItem}
                   {...toPath({
                     page: 'userProfile',
                     userName: node.userName || '',
                   })}
+                  is="link"
                   onClick={() => {
                     closeDropdown()
                     analytics.trackEvent('click_feed', {
@@ -141,14 +148,14 @@ export const SearchQuickResult = (props: QuickSearchProps) => {
               </Fragment>
             )
         )}
-      {hasUsers && hasTags && <Menu.Divider />}
+      {hasUsers && hasTags && <Menu.Divider isInSearch={true} />}
       {hasTags &&
         tagEdges.map(
           ({ node, cursor }, i) =>
             node.__typename === 'Tag' && (
               <Fragment key={node.id}>
                 <Menu.Item
-                  spacing={[16, 16]}
+                  spacing={[16, itemHorizontalSpacing]}
                   bgActiveColor="greyHover"
                   isActive={`tag${cursor}` === activeItem}
                   {...toPath({

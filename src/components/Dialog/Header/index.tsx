@@ -55,7 +55,7 @@ const Header: React.FC<HeaderProps> = ({
 
   return (
     <>
-      <Media at="sm">
+      <Media lessThan="md">
         <header className={styles.header}>
           <Title title={title} titleLeft={titleLeft} />
           {leftBtn && <section className={styles.left}>{leftBtn}</section>}
@@ -68,7 +68,7 @@ const Header: React.FC<HeaderProps> = ({
         </header>
       </Media>
 
-      <Media greaterThan="sm">
+      <Media greaterThanOrEqual="md">
         {hasSmUpTitle ? (
           <header className={styles.smUpheader}>
             <Title title={title} />

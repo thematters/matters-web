@@ -4,7 +4,8 @@ import { BREAKPOINTS } from '~/common/enums'
 
 const AppMedia = createMedia({
   breakpoints: {
-    sm: 0,
+    xs: 0,
+    sm: BREAKPOINTS.SM,
     md: BREAKPOINTS.MD,
     lg: BREAKPOINTS.LG,
     xl: BREAKPOINTS.XL,

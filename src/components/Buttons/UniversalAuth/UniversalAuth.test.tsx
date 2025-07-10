@@ -1,18 +1,86 @@
-import { describe, expect, it } from 'vitest'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
-import { TEST_ID } from '~/common/enums'
+import { UNIVERSAL_AUTH_TRIGGER } from '~/common/enums'
 import { fireEvent, render, screen } from '~/common/utils/test'
 import { UniversalAuthButton } from '~/components'
 
-describe('<UniversalAuthButton>', () => {
-  it('should render an UniversalAuthButton', () => {
-    render(<UniversalAuthButton />)
+// Create a mock properly with vi.hoisted to avoid hoisting issues
+const mockTrackEvent = vi.hoisted(() => vi.fn())
 
-    const $button = screen.getByText('Enter')
-    expect($button).toBeDefined()
+// Mock ~/common/utils
+vi.mock('~/common/utils', async () => {
+  const actual = await vi.importActual('~/common/utils')
+  return {
+    ...(actual as Record<string, unknown>),
+    analytics: {
+      ...((actual as Record<string, unknown>).analytics || {}),
+      trackEvent: mockTrackEvent,
+    },
+  }
+})
 
-    fireEvent.click($button)
-    const $authDialog = screen.getByTestId(TEST_ID.DIALOG_AUTH)
-    expect($authDialog).toBeDefined()
+describe('UniversalAuthButton', () => {
+  // Mock window.dispatchEvent
+  let originalDispatchEvent: typeof window.dispatchEvent
+
+  beforeEach(() => {
+    // Store original and create mock
+    originalDispatchEvent = window.dispatchEvent
+    window.dispatchEvent = vi.fn()
+
+    // Reset mocks
+    vi.clearAllMocks()
+  })
+
+  afterEach(() => {
+    // Restore original
+    window.dispatchEvent = originalDispatchEvent
+  })
+
+  describe('Rendering', () => {
+    it('should render buttons with "Enter" text', () => {
+      render(<UniversalAuthButton />)
+
+      // Check both mobile and desktop buttons
+      const buttons = screen.getAllByText('Enter')
+      expect(buttons.length).toBe(1)
+      expect(buttons[0]).toBeInTheDocument()
+    })
+  })
+
+  describe('Trigger Context', () => {
+    it('should include nav trigger when resideIn is "nav"', () => {
+      render(<UniversalAuthButton resideIn="nav" />)
+
+      // Click the button
+      const buttons = screen.getAllByText('Enter')
+      fireEvent.click(buttons[0])
+
+      // Verify correct trigger is included
+      expect(window.dispatchEvent).toHaveBeenCalledWith(
+        expect.objectContaining({
+          detail: {
+            trigger: UNIVERSAL_AUTH_TRIGGER.nav,
+          },
+        })
+      )
+    })
+
+    it('should include sideNav trigger when resideIn is "sideNav"', () => {
+      render(<UniversalAuthButton resideIn="sideNav" />)
+
+      // Click the button
+      const buttons = screen.getAllByText('Enter')
+      fireEvent.click(buttons[0])
+
+      // Verify correct trigger is included
+      expect(window.dispatchEvent).toHaveBeenCalledWith(
+        expect.objectContaining({
+          detail: {
+            trigger: UNIVERSAL_AUTH_TRIGGER.sideNav,
+          },
+        })
+      )
+    })
   })
 })

@@ -6,6 +6,8 @@ import { FormattedMessage } from 'react-intl'
 
 import IMAGE_INTRO from '@/public/static/images/intro.jpg'
 import {
+  ERROR_CODES,
+  ERROR_MESSAGES,
   MAX_META_SUMMARY_LENGTH,
   OPEN_COMMENT_DETAIL_DIALOG,
   OPEN_COMMENT_LIST_DRAWER,
@@ -23,6 +25,7 @@ import {
   DrawerProvider,
   EmptyLayout,
   Error,
+  getErrorCodes,
   Head,
   LanguageContext,
   Layout,
@@ -48,6 +51,7 @@ import {
 } from '~/gql/graphql'
 
 import { AuthorSidebar } from './AuthorSidebar'
+import Channel from './Channel'
 import type { CommentDrawerStep } from './CommentDrawer'
 import { CommentsDialog } from './Comments/CommentsDialog'
 import { Placeholder as CommentsPlaceholder } from './Comments/Placeholder'
@@ -184,6 +188,20 @@ const BaseArticleDetail = ({
       if (error) {
         setTranslate(false)
 
+        const errorCodes = getErrorCodes(error)
+        if (errorCodes.includes(ERROR_CODES.TRANSLATION_INSUFFICIENT_CREDITS)) {
+          toast.error({
+            message: (
+              <FormattedMessage
+                {...ERROR_MESSAGES[
+                  ERROR_CODES.TRANSLATION_INSUFFICIENT_CREDITS
+                ]}
+              />
+            ),
+          })
+          return
+        }
+
         toast.error({
           message: (
             <FormattedMessage
@@ -291,12 +309,12 @@ const BaseArticleDetail = ({
 
       <StickyTopBanner type="inactive" article={article} />
 
-      <Media greaterThan="sm">
+      <Media greaterThanOrEqual="md">
         <DynamicCommentDrawer
           isOpen={isOpenComment}
           onClose={toggleCommentDrawer}
           step={commentDrawerStep}
-          id={article.id}
+          article={article}
           lock={!canReadFullContent}
           switchToCommentList={() => setCommentDrawerStep('commentList')}
         />
@@ -352,6 +370,8 @@ const BaseArticleDetail = ({
 
         <License license={article.license} />
 
+        <Channel article={article} privateFetched={privateFetched} />
+
         {features.payment && (
           <DynamicSupportWidget
             article={article}
@@ -398,7 +418,7 @@ const BaseArticleDetail = ({
           <AuthorSidebar article={article} />
         </Media>
 
-        <Media at="sm">
+        <Media lessThan="md">
           {article.comments.totalCount > 0 && (
             <section className={styles.smUpCommentBlock} ref={commentsRef}>
               <DynamicComments id={article.id} lock={!canReadFullContent} />
@@ -407,7 +427,7 @@ const BaseArticleDetail = ({
         </Media>
       </section>
 
-      <Media at="sm">
+      <Media lessThan="md">
         <Spacer size="sp64" />
         <CommentsDialog
           id={article.id}
@@ -436,7 +456,7 @@ const BaseArticleDetail = ({
         />
       </Media>
 
-      <Media greaterThan="sm">
+      <Media greaterThanOrEqual="md">
         <FloatToolbar
           show={!hideFloatToolbar}
           articleDetails={article}

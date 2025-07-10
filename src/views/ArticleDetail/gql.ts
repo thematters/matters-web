@@ -3,6 +3,7 @@ import gql from 'graphql-tag'
 import { UserDigest } from '~/components/UserDigest'
 
 import { AuthorSidebar } from './AuthorSidebar'
+import Channel from './Channel'
 import Header from './Header'
 import MetaInfo from './MetaInfo'
 import StickyTopBanner from './StickyTopBanner'
@@ -74,6 +75,8 @@ const articlePublicFragment = gql`
     ...ToolbarArticlePrivate
     ...SupportWidgetArticlePublic
     ...SupportWidgetArticlePrivate
+    ...ChannelArticlePublic
+    ...ChannelArticlePrivate
   }
   ${Header.fragments.article}
   ${AuthorSidebar.fragments.article}
@@ -88,6 +91,8 @@ const articlePublicFragment = gql`
   ${supportWidgetFragments.article.private}
   ${circleWallFragments.circle.public}
   ${circleWallFragments.circle.private}
+  ${Channel.fragments.article.public}
+  ${Channel.fragments.article.private}
 `
 
 export const ARTICLE_AVAILABLE_TRANSLATIONS = gql`
@@ -132,12 +137,14 @@ export const ARTICLE_DETAIL_PRIVATE = gql`
       }
       ...ToolbarArticlePrivate
       ...SupportWidgetArticlePrivate
+      ...ChannelArticlePrivate
     }
   }
   ${UserDigest.Rich.fragments.user.private}
   ${Toolbar.fragments.article.private}
   ${supportWidgetFragments.article.private}
   ${circleWallFragments.circle.private}
+  ${Channel.fragments.article.private}
 `
 
 export const ARTICLE_TRANSLATION = gql`

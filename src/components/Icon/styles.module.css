@@ -42,9 +42,19 @@
     height: 1.5rem;
   }
 
+  &.size26 {
+    width: 1.625rem;
+    height: 1.625rem;
+  }
+
   &.size28 {
     width: 1.75rem;
     height: 1.75rem;
+  }
+
+  &.size30 {
+    width: 1.875rem;
+    height: 1.875rem;
   }
 
   &.size32 {

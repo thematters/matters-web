@@ -122,7 +122,7 @@ const LatestComments = ({ id, lock }: { id: string; lock: boolean }) => {
 
   return (
     <section id="latest-comments">
-      <Media greaterThan="sm">
+      <Media greaterThanOrEqual="md">
         <ArticleCommentForm
           articleId={article?.id}
           isFallbackEditor

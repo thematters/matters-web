@@ -1,6 +1,6 @@
 .relatedTags {
-  padding-bottom: var(--sp24);
-  margin-top: var(--sp24);
+  padding-bottom: var(--sp20);
+  margin-top: var(--sp20);
   border-bottom: 1px dashed var(--color-grey-light);
 }
 

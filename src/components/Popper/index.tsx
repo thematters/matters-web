@@ -1,11 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import _throttle from 'lodash/throttle'
 import dynamic from 'next/dynamic'
 import { forwardRef } from 'react'
 import FocusLock from 'react-focus-lock'
 
-import { KEYVALUE, Z_INDEX } from '~/common/enums'
+import { BREAKPOINTS, KEYVALUE, Z_INDEX } from '~/common/enums'
 
-import { useDialogSwitch, useNativeEventListener } from '../Hook'
+import { useDialogSwitch, useMediaQuery, useNativeEventListener } from '../Hook'
 
 export type PopperInstance = any
 export type PopperProps = import('@tippyjs/react').TippyProps
@@ -22,7 +23,7 @@ type ForwardChildrenNode = ({
   ref,
 }: {
   openDropdown: () => void
-  ref?: React.Ref<any>
+  ref?: React.ForwardedRef<any>
 }) => React.ReactNode
 
 interface ForwardChildrenProps {
@@ -64,14 +65,19 @@ type DropdownProps = Omit<PopperProps, 'children'> &
 export const Dropdown: React.FC<DropdownProps> = ({
   children,
   focusLock = true,
+  appendTo = 'parent',
   ...props
 }) => {
   const {
     show,
-    openDialog: openDropdown,
+    openDialog: openDropdownOriginal,
     closeDialog: closeDropdown,
   } = useDialogSwitch(false)
-  const toggle = () => (show ? closeDropdown() : openDropdown())
+
+  const isMobile = useMediaQuery(`(max-width: ${BREAKPOINTS.LG}px)`)
+
+  const toggle = () => (show ? closeDropdown() : openDropdownOriginal())
+
   const closeOnClick = (event: React.MouseEvent | React.KeyboardEvent) => {
     const target = event.target as HTMLElement
     if (target?.closest && target.closest('[data-clickable], a, button')) {
@@ -79,6 +85,15 @@ export const Dropdown: React.FC<DropdownProps> = ({
     }
     event.stopPropagation()
   }
+
+  // Listen for scroll events on mobile only
+  const handleScroll = _throttle(() => {
+    if (show && isMobile) {
+      closeDropdown()
+    }
+  }, 300)
+
+  useNativeEventListener('scroll', handleScroll)
 
   useNativeEventListener('keydown', (event: KeyboardEvent) => {
     if (event.code?.toLowerCase() !== KEYVALUE.escape) {
@@ -95,12 +110,12 @@ export const Dropdown: React.FC<DropdownProps> = ({
       onClickOutside={closeDropdown}
       visible={show}
       interactive
+      appendTo={appendTo}
       offset={[0, 4]}
       placement="bottom-end"
       animation="shift-away"
       theme="dropdown"
       zIndex={Z_INDEX.OVER_DIALOG}
-      appendTo={typeof window !== 'undefined' ? document.body : undefined}
       aria={{ content: 'describedby', expanded: true }}
       {...props}
       content={

@@ -104,6 +104,26 @@ const DynamicArchiveUserDialog = dynamic(
   }
 )
 
+const DynamicToggleAdArticleButton = dynamic(
+  () => import('./ToggleAdArticle'),
+  {
+    loading: () => <Spinner />,
+  }
+)
+
+const DynamicToggleSpamArticleButton = dynamic(
+  () => import('./ToggleSpamArticle'),
+  {
+    loading: () => <Spinner />,
+  }
+)
+const DynamicTogglePinChannelArticlesButton = dynamic(
+  () => import('./TogglePinChannelArticles'),
+  {
+    loading: () => <Spinner />,
+  }
+)
+
 export interface DropdownActionsControls {
   icon?: React.ReactNode
   size?: IconSize
@@ -132,6 +152,11 @@ export interface DropdownActionsControls {
   campaignFeatured?: boolean
   hasToggleCampaignFeatured?: boolean
   hasBanCampaignArticle?: boolean
+
+  // channel
+  channelId?: string
+  pinned?: boolean
+  hasTogglePinChannelArticles?: boolean
 
   hasArchive?: boolean
   hasEdit?: boolean
@@ -189,6 +214,11 @@ const BaseDropdownActions = ({
 
   collectionId,
   collectionArticleCount,
+
+  // channel
+  channelId,
+  pinned,
+  hasTogglePinChannelArticles,
 
   campaignId,
   campaignFeatured,
@@ -337,16 +367,20 @@ const BaseDropdownActions = ({
           <DynamicSetArticleChannelsButton
             openDialog={openSetArticleChannelsDialog}
           />
+          {hasTogglePinChannelArticles && channelId && (
+            <DynamicTogglePinChannelArticlesButton
+              articleId={article.id}
+              channelId={channelId}
+              pinned={!!pinned}
+            />
+          )}
           <DynamicToggleRecommendArticleButton
             id={article.id}
             type="icymi"
             openDialog={openToggleRecommendArticleDialog}
           />
-          <DynamicToggleRecommendArticleButton
-            id={article.id}
-            type="hottestAndNewest"
-            openDialog={openToggleRecommendArticleDialog}
-          />
+          <DynamicToggleSpamArticleButton shortHash={article.shortHash} />
+          <DynamicToggleAdArticleButton shortHash={article.shortHash} />
           <DynamicToggleRestrictUserButton
             id={article.author.id}
             openDialog={openToggleRestrictUserDialog}
@@ -459,7 +493,7 @@ const DropdownActions = (props: DropdownActionsProps) => {
       hasSetBottomCollection && isActive && isArticleAuthor,
   }
 
-  if (_isEmpty(_pickBy(controls))) {
+  if (_isEmpty(_pickBy(controls)) && !viewer.isAdmin) {
     return null
   }
 

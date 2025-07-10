@@ -113,7 +113,7 @@ export const makeMentionSuggestion = ({
         }
 
         // @ts-expect-error - The type definition for onKeyDown is incorrect
-        return component?.ref?.onKeyDown(props)
+        return component?.ref?.onKeyDown?.(props)
       },
 
       onExit() {
