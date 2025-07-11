@@ -403,7 +403,7 @@ const BaseDropdownActions = ({
   })
 
   return (
-    <Dropdown content={<Content />}>
+    <Dropdown content={<Content />} appendTo={() => document.body}>
       {({ openDropdown, ref }) =>
         inCard ? (
           <button
