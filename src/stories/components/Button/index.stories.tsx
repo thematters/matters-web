@@ -3,7 +3,6 @@ import { Meta } from '@storybook/react'
 import React from 'react'
 
 import IconMore from '@/public/static/icons/24px/more.svg'
-import IconNavSearch from '@/public/static/icons/24px/nav-search.svg'
 import {
   Button,
   Icon,
@@ -11,7 +10,6 @@ import {
   ViewMoreButton as ViewMoreButtonComponent,
   WriteButton as WriteButtonComponent,
 } from '~/components'
-import NavListItem from '~/components/Layout/NavBar/NavListItem'
 
 export default {
   title: 'Components/Button',
@@ -27,17 +25,6 @@ export const MoreButton = () => (
     >
       <Icon icon={IconMore} color="grey" />
     </Button>
-  </MockedProvider>
-)
-
-export const SearchNavListItem = () => (
-  <MockedProvider>
-    <NavListItem
-      name="Search"
-      icon={<Icon icon={IconNavSearch} size={24} />}
-      activeIcon={<Icon icon={IconNavSearch} size={24} color="green" />}
-      active
-    />
   </MockedProvider>
 )
 

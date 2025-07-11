@@ -45,7 +45,7 @@ const NoticeMomentTitle = ({
 
   return (
     <>
-      <Media at="sm">
+      <Media lessThan="md">
         <a
           href={path.href}
           className={styles.noticeMomentTitle}
@@ -58,7 +58,10 @@ const NoticeMomentTitle = ({
           {title} {images}
         </a>
       </Media>
-      <Media greaterThan="sm" className={styles.noticeMomentTitleContainer}>
+      <Media
+        greaterThanOrEqual="md"
+        className={styles.noticeMomentTitleContainer}
+      >
         <MomentDetailDialog shortHash={moment.shortHash}>
           {({ openDialog }) => (
             <a

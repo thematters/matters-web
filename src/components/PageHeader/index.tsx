@@ -10,6 +10,7 @@ export interface PageHeaderProps {
   is?: 'h1' | 'h2' | 'h3'
   hasBorder?: boolean
   type?: 'nav' | 'base'
+  spacingBottom?: 8 | 16
 }
 
 export const PageHeader: React.FC<React.PropsWithChildren<PageHeaderProps>> = ({
@@ -17,12 +18,13 @@ export const PageHeader: React.FC<React.PropsWithChildren<PageHeaderProps>> = ({
   is = 'h1',
   type = 'nav',
   hasBorder = true,
-
+  spacingBottom = 8,
   children,
 }) => {
   const headerClasses = classNames({
     [styles.header]: true,
     [styles.hasBorder]: hasBorder,
+    [styles[`spacingBottom${spacingBottom}`]]: spacingBottom,
   })
 
   return (

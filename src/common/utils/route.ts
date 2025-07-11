@@ -37,6 +37,11 @@ interface CampaignArgs {
   shortHash: string
 }
 
+interface ChannelArgs {
+  id: string
+  shortHash: string
+}
+
 interface CampaignStageArgs {
   id: string
 }
@@ -91,6 +96,10 @@ type ToPathArgs =
       page: 'tagDetail'
       tag: TagArgs
       feedType?: string
+    }
+  | {
+      page: 'channelDetail'
+      channel: ChannelArgs
     }
   | {
       page: 'campaignDetail'
@@ -261,6 +270,10 @@ export const toPath = (
       } else if (args.announcement) {
         href = `${href}?type=announcement`
       }
+      break
+    }
+    case 'channelDetail': {
+      href = `/c/${args.channel.shortHash}`
       break
     }
     case 'userProfile': {

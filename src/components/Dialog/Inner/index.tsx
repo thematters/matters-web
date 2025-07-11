@@ -167,7 +167,7 @@ const Inner: React.FC<
         {...visuallyHiddenProps}
       />
 
-      <Media at="sm">
+      <Media lessThan="md">
         {dismissOnHandle && <Handle closeDialog={onDismiss} {...bind()} />}
       </Media>
 

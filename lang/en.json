@@ -23,6 +23,12 @@
   "+7SAix": {
     "defaultMessage": "Must be between 2-12 characters long."
   },
+  "+C53uY": {
+    "defaultMessage": "Trending Now"
+  },
+  "+EHtpH": {
+    "defaultMessage": "No updates yet"
+  },
   "+GAaxB": {
     "defaultMessage": "The article has been archived due to violation of terms"
   },
@@ -170,6 +176,9 @@
   "0jvbdb": {
     "defaultMessage": "Oops. Something went wrong. Please try again later.",
     "description": "INTERNAL_SERVER_ERROR"
+  },
+  "0mQE3E": {
+    "defaultMessage": "Recommended to channel: {channelNames}"
   },
   "0oLj/t": {
     "defaultMessage": "Expand"
@@ -333,10 +342,6 @@
   "2w2mhG": {
     "defaultMessage": "User blocked. User now can't reply to your articles and user's comments have been hidden from you."
   },
-  "32bml8": {
-    "defaultMessage": "Following",
-    "description": "src/components/Layout/SideNav/index.tsx"
-  },
   "34OLoD": {
     "defaultMessage": "Moment",
     "description": "src/views/MomentDetail/Edit/index.tsx"
@@ -350,9 +355,15 @@
   "3KNMbJ": {
     "defaultMessage": "Articles"
   },
+  "3MZvMF": {
+    "defaultMessage": "Would you like to recommend your work to the channel: {channelName}?"
+  },
   "3Tg548": {
     "defaultMessage": "Sign In",
     "description": "src/components/Forms/SelectAuthMethodForm/AuthTabs.tsx"
+  },
+  "3WUBfC": {
+    "defaultMessage": "Only articles"
   },
   "3YAasP": {
     "defaultMessage": "What is Liker ID?"
@@ -395,6 +406,9 @@
   "4KuZ0o": {
     "defaultMessage": "Asset not found",
     "description": "ASSET_NOT_FOUND"
+  },
+  "4M9oG6": {
+    "defaultMessage": "We couldn’t find a suitable channel to recommend this work"
   },
   "4OMGUj": {
     "defaultMessage": "Comment Details"
@@ -572,6 +586,9 @@
     "defaultMessage": "Payout Canceled",
     "description": "src/components/Transaction/index.tsx"
   },
+  "7HPPqs": {
+    "defaultMessage": ". {SuggestButton}?"
+  },
   "7JlauX": {
     "defaultMessage": "Explore"
   },
@@ -627,10 +644,6 @@
     "defaultMessage": "Unpin from profile",
     "description": "src/views/User/Articles/PinBoard/UnPinButton/index.tsx"
   },
-  "8GXAUX": {
-    "defaultMessage": "All results for",
-    "description": "src/views/Search/AggregateResults/index.tsx"
-  },
   "8KFsZN": {
     "defaultMessage": "Read Counts"
   },
@@ -666,6 +679,10 @@
     "defaultMessage": "Matters Daily Report",
     "description": "src/views/Me/Settings/Notifications/Email.tsx"
   },
+  "8tczzy": {
+    "defaultMessage": "Trending",
+    "description": "src/components/Layout/SideChannelNav/index.tsx"
+  },
   "8w3GEA": {
     "defaultMessage": "mentioned you in {article}",
     "description": "src/components/Notice/ArticleNotice/ArticleMentionedYouNotice.tsx"
@@ -688,14 +705,14 @@
     "defaultMessage": "Followed",
     "description": "src/components/Buttons/FollowUser/Unfollow.tsx"
   },
+  "95stPq": {
+    "defaultMessage": "Completed"
+  },
   "99OtWT": {
     "defaultMessage": "Pending..."
   },
   "9EABqX": {
     "defaultMessage": "Like my work? Don't forget to support and clap, let me know that you are with me on the road of creation. Keep this enthusiasm together!"
-  },
-  "9Fpc9S": {
-    "defaultMessage": "Bug Report"
   },
   "9HU8vw": {
     "defaultMessage": "Reply"
@@ -740,6 +757,9 @@
   "A3g33H": {
     "defaultMessage": "Archived articles can only be seen by you, and this operation cannot be undone. If this article has been added to collections, it will be removed. (IPFS version will not be effected)"
   },
+  "A4P0al": {
+    "defaultMessage": "Channel suggestion"
+  },
   "A6ozr9": {
     "defaultMessage": "Collection name"
   },
@@ -775,10 +795,6 @@
   "AYTnjk": {
     "defaultMessage": "Followers",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
-  },
-  "AeIRlL": {
-    "defaultMessage": "Articles",
-    "description": "src/views/Follow/Tabs/index.tsx"
   },
   "AeVndq": {
     "defaultMessage": "mentioned you in a comment at {commentMoment}"
@@ -907,9 +923,6 @@
     "defaultMessage": "Comment deleted",
     "description": "src/components/Notice/NoticeComment.tsx/moment"
   },
-  "CjKqYk": {
-    "defaultMessage": "Share a story from your life"
-  },
   "CnPG8j": {
     "defaultMessage": "Featured"
   },
@@ -982,6 +995,9 @@
     "defaultMessage": "Unpin Broadcast",
     "description": "src/components/CircleComment/DropdownActions/PinButton.tsx"
   },
+  "DtO278": {
+    "defaultMessage": "We’ve detected that several of your recent works have been recommended to related channels. They may not appear at the same time"
+  },
   "DyuHBH": {
     "defaultMessage": "Unpin from profile",
     "description": "src/components/CollectionDigest/DropdownActions/PinButton.tsx"
@@ -1034,12 +1050,19 @@
   "EcglP9": {
     "defaultMessage": "Key"
   },
+  "EiENui": {
+    "defaultMessage": "Related Tags"
+  },
   "El+nq2": {
     "defaultMessage": "Must be between {MIN_COLLECTION_TITLE_LENGTH}-{MAX_COLLECTION_TITLE_LENGTH} characters long."
   },
   "EmZFry": {
     "defaultMessage": "Please continue within your crypto wallet.",
     "description": "src/components/Forms/PaymentForm/Processing/index.tsx"
+  },
+  "EnAfl8": {
+    "defaultMessage": "Your channel suggestion for {articleTitle} has been accepted by the editor. Thank you for supporting Matters!",
+    "description": "src/components/Notice/ArticleNotice/TopicChannelFeedbackAcceptedNotice.tsx"
   },
   "EoeUjA": {
     "defaultMessage": "You do not have permission to perform this operation",
@@ -1141,6 +1164,9 @@
     "defaultMessage": "New Followers This Month",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
   },
+  "GvHgNX": {
+    "defaultMessage": "Are you satisfied with the result?"
+  },
   "H0JBH6": {
     "defaultMessage": "Log Out"
   },
@@ -1165,6 +1191,9 @@
   },
   "HJ0iZJ": {
     "defaultMessage": "Confirm Archiving"
+  },
+  "HJhf1Q": {
+    "defaultMessage": "Once it's approved, the channel will be updated : )"
   },
   "HJsl78": {
     "defaultMessage": "An issue occurred while claiming USDT. Please retry or contact ask@matters.town"
@@ -1306,6 +1335,9 @@
     "defaultMessage": "Accepted",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
   },
+  "Jv9SoD": {
+    "defaultMessage": "Suggest one"
+  },
   "K+pFNS": {
     "defaultMessage": "Event period{tz}"
   },
@@ -1348,9 +1380,15 @@
     "defaultMessage": "Topics",
     "description": "src/components/Dialogs/TagListDialog/index.tsx"
   },
+  "KhbWu2": {
+    "defaultMessage": "Your suggestion has been submitted to the editor."
+  },
   "KlJEP9": {
     "defaultMessage": "Wallet connected",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
+  },
+  "Kt6f7U": {
+    "defaultMessage": "Do not recommend to any channel"
   },
   "Kwv1n3": {
     "defaultMessage": " registration is about 1 LIKE. During promotion period it is sponsored by Matters.News."
@@ -1717,6 +1755,9 @@
     "defaultMessage": "friends have not accepted your invitations.",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/Accepted/index.tsx"
   },
+  "S+D/hf": {
+    "defaultMessage": "Recommending channels for your work…"
+  },
   "S/hoJx": {
     "defaultMessage": "User not found",
     "description": "USER_NOT_FOUND"
@@ -1913,9 +1954,6 @@
   "VBve8d": {
     "defaultMessage": "Settled in Matters"
   },
-  "VKxanK": {
-    "defaultMessage": "Moment Feature is Live"
-  },
   "VZsE96": {
     "defaultMessage": "Collection Name"
   },
@@ -2038,9 +2076,6 @@
   "XZ8IJ3": {
     "defaultMessage": "After the modification is completed, the new version will be released to IPFS again. You can view the historical version from \"IPFS\" under the article title."
   },
-  "Xd0J7Y": {
-    "defaultMessage": "Open Source"
-  },
   "XdLnXf": {
     "defaultMessage": "Insufficient wallet balance.",
     "description": "PAYMENT_BALANCE_INSUFFICIENT"
@@ -2090,6 +2125,9 @@
   },
   "Y8zV4A": {
     "defaultMessage": "Write a comment"
+  },
+  "Y9IYvj": {
+    "defaultMessage": "No suitable channels"
   },
   "YDMrKK": {
     "defaultMessage": "Users"
@@ -2274,11 +2312,17 @@
     "defaultMessage": "pinned your comment in {commentArticle}",
     "description": "src/components/Notice/CommentNotice/CommentPinnedNotice.tsx"
   },
+  "cCpbBu": {
+    "defaultMessage": "Popular Channel Authors"
+  },
   "cCsxxw": {
     "defaultMessage": "This {type} has been archived due to a violation of the user agreement"
   },
   "cE4Hfw": {
     "defaultMessage": "Discover"
+  },
+  "cHDJyK": {
+    "defaultMessage": "No articles"
   },
   "cK3TLr": {
     "defaultMessage": "Remove bookmark",
@@ -2307,10 +2351,6 @@
   },
   "cd/II9": {
     "defaultMessage": "{totalCount, plural, =1 {article} other {articles}}"
-  },
-  "cd8EmU": {
-    "defaultMessage": "",
-    "description": "src/views/Search/AggregateResults/index.tsx"
   },
   "cmtHjM": {
     "defaultMessage": "You haven‘t published any articles yet, so there is no data available. Create one now to introduce yourself!",
@@ -2386,6 +2426,9 @@
     "defaultMessage": "Comments and replies",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
+  "dZlT9q": {
+    "defaultMessage": "Your work has been recommended to the channels: {channelNames}. Are you satisfied with the result?"
+  },
   "ddJbkg": {
     "defaultMessage": "Pin",
     "description": "src/components/ArticleComment/DropdownActions/PinButton.tsx"
@@ -2416,6 +2459,9 @@
   "eKeBF9": {
     "defaultMessage": "Article does not exist"
   },
+  "eNv3Wm": {
+    "defaultMessage": "Your work has been recommended to the channels: {channelNames}"
+  },
   "eTpiYa": {
     "defaultMessage": "No data yet."
   },
@@ -2441,6 +2487,9 @@
   "erE5/4": {
     "defaultMessage": "Followed",
     "description": "src/components/Buttons/FollowUser/FollowState.tsx"
+  },
+  "exG99K": {
+    "defaultMessage": "Submit Confirmation"
   },
   "exb/12": {
     "defaultMessage": "You can log in through your wallet next time!",
@@ -2494,6 +2543,9 @@
   "fnv5rD": {
     "defaultMessage": "like article (current {total} likes)"
   },
+  "fpLpPO": {
+    "defaultMessage": "(This action is immediate and cannot be undone.)"
+  },
   "fsB/4p": {
     "defaultMessage": "Saved"
   },
@@ -2507,6 +2559,12 @@
   "g/IDCs": {
     "defaultMessage": "Moment",
     "description": "src/components/Dialogs/MomentDetailDialog/Content.tsx"
+  },
+  "g39W4D": {
+    "defaultMessage": " (the work will appear in \"Latest\")"
+  },
+  "g3NgLw": {
+    "defaultMessage": "Confirm to move the work to \"Latest\"?"
   },
   "g5pX+a": {
     "defaultMessage": "About"
@@ -2539,6 +2597,10 @@
   },
   "gvTltk": {
     "defaultMessage": "Draft - {title}"
+  },
+  "gykfC8": {
+    "defaultMessage": "Latest",
+    "description": "src/components/Layout/SideChannelNav/index.tsx"
   },
   "gzJEFb": {
     "defaultMessage": "Verify your Liker ID through like.co"
@@ -2695,6 +2757,10 @@
   },
   "k6pcz/": {
     "defaultMessage": "Check the wallet status and confirm your network."
+  },
+  "k7Oi38": {
+    "defaultMessage": "Language preference",
+    "description": "src/views/Me/Settings/Settings/index.tsx"
   },
   "k97/u7": {
     "defaultMessage": "Add Articles"
@@ -3087,6 +3153,9 @@
     "defaultMessage": "Verification code expired, try resend",
     "description": "CODE_EXPIRED"
   },
+  "raexxM": {
+    "defaultMessage": "Submitted"
+  },
   "rbrahO": {
     "defaultMessage": "Close"
   },
@@ -3391,6 +3460,9 @@
     "defaultMessage": "Visa / Mastercard / American Express payment",
     "description": "src/components/Forms/PaymentForm/StripeCheckout/index.tsx"
   },
+  "wlQosy": {
+    "defaultMessage": ". Really appreciate it!"
+  },
   "wm9xNB": {
     "defaultMessage": "{type} disconnected",
     "description": "src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
@@ -3406,6 +3478,10 @@
   "xDhqHi": {
     "defaultMessage": "Confirm",
     "description": "src/components/Forms/PaymentForm/PayTo/Confirm/index.tsx"
+  },
+  "xEJN39": {
+    "defaultMessage": "Featured",
+    "description": "Channel feed featured article"
   },
   "xMaFCO": {
     "defaultMessage": "Articles",
@@ -3498,6 +3574,9 @@
   },
   "yubNcI": {
     "defaultMessage": "Not support using punctuation marks alone."
+  },
+  "yx0LeF": {
+    "defaultMessage": "Select the channel you want to recommend (single choice)"
   },
   "yxMEo/": {
     "defaultMessage": "The article has been added to the featured of the event"

@@ -11,7 +11,7 @@ const AuthedHeader: React.FC<HeaderProps> = ({ title }) => {
 
   if (!viewer.isAuthed) {
     return (
-      <Media at="sm">
+      <Media lessThan="md">
         <Layout.Header
           left={<Layout.Header.Title>{title}</Layout.Header.Title>}
         />
@@ -20,7 +20,7 @@ const AuthedHeader: React.FC<HeaderProps> = ({ title }) => {
   }
 
   return (
-    <Media at="sm">
+    <Media lessThan="md">
       <Layout.Header
         left={<Layout.Header.MeButton />}
         right={<Layout.Header.Title>{title}</Layout.Header.Title>}

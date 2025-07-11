@@ -19,7 +19,7 @@ const Placeholder = () => {
     <section className={styles.userProfile} aria-busy="true" aria-live="polite">
       <Cover fallbackCover={IMAGE_PLACEHOLDER.src} />
 
-      <Media at="sm">
+      <Media lessThan="md">
         <header className={styles.header}>
           <section className={styles.avatar}>
             <Avatar size={76} src={IMAGE_PLACEHOLDER.src} />

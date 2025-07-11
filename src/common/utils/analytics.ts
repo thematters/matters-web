@@ -109,6 +109,8 @@ export interface ClickButtonProp {
     | 'hottest'
     | 'icymi'
     | 'newest'
+    | 'channel'
+    | `channel_tab_${string}`
     | 'campaign_detail_link'
     | `campaign_detail_tab_${string}`
     | `user_profile_tab_${string}`
@@ -195,6 +197,7 @@ interface ClickFeedProp {
   id?: string
   rootId?: string
   searchKey?: string
+  note?: Record<string, unknown>
 }
 
 /**
@@ -304,6 +307,8 @@ type ArticleFeedType =
   | 'icymi'
   | 'icymi_curated'
   | 'newest'
+  | 'channel'
+  | 'channel_card'
   | 'read_history'
   | 'related_article'
   | 'search'
@@ -352,6 +357,7 @@ type UserFeedType =
   | 'hottest'
   | 'icymi'
   | 'newest'
+  | 'channel'
   | 'search'
   | 'search_user'
   | 'quick_search_user'

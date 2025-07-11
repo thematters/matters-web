@@ -1,6 +1,5 @@
-import { useQuery } from '@apollo/client'
 import _chunk from 'lodash/chunk'
-import { useContext, useEffect } from 'react'
+import { useEffect } from 'react'
 
 import { analytics } from '~/common/utils'
 import {
@@ -9,56 +8,20 @@ import {
   ShuffleButton,
   Slides,
   SpinnerBlock,
-  usePublicQuery,
   UserDigest,
-  ViewerContext,
 } from '~/components'
-import FETCH_RECORD from '~/components/GQL/queries/lastFetchRandom'
-import { FeedAuthorsPublicQuery, LastFetchRandomQuery } from '~/gql/graphql'
 
+import { useAuthorsRecommendation } from '../../common'
 import SectionHeader from '../../SectionHeader'
-import { FEED_AUTHORS_PUBLIC } from './gql'
 import styles from './styles.module.css'
 
 const Authors = () => {
-  const viewer = useContext(ViewerContext)
-
-  const { data: lastFetchRandom, client } = useQuery<LastFetchRandomQuery>(
-    FETCH_RECORD,
-    { variables: { id: 'local' } }
-  )
-  const lastRandom = lastFetchRandom?.lastFetchRandom.feedAuthors
-
-  /**
-   * Data Fetching
-   */
-  const perPage = 6
-  const perColumn = 3
-  const randomMaxSize = 50
-  const { data, loading, error } = usePublicQuery<FeedAuthorsPublicQuery>(
-    FEED_AUTHORS_PUBLIC,
-    {
-      variables: { random: lastRandom || 0, first: perPage },
-    },
-    { publicQuery: !viewer.isAuthed }
-  )
-
-  const edges = data?.viewer?.recommendation.authors.edges
-
-  const shuffle = () => {
-    const size = Math.round(
-      (data?.viewer?.recommendation.authors.totalCount || randomMaxSize) /
-        perPage
-    )
-    const random = Math.floor(Math.min(randomMaxSize, size) * Math.random()) // in range [0..50) not including 50
-
-    if (lastFetchRandom) {
-      client.cache.modify({
-        id: client.cache.identify(lastFetchRandom.lastFetchRandom),
-        fields: { feedAuthors: () => random },
-      })
-    }
-  }
+  const perColumn = 2
+  const { loading, error, edges, shuffle, viewer, lastRandom } =
+    useAuthorsRecommendation({
+      cacheField: 'feedAuthors',
+      publicQuery: true,
+    })
 
   useEffect(() => {
     if (viewer.isAuthed && lastRandom === null) {
@@ -66,9 +29,6 @@ const Authors = () => {
     }
   }, [viewer.isAuthed])
 
-  /**
-   * Render
-   */
   if (error) {
     return <QueryError error={error} />
   }

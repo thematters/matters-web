@@ -3,10 +3,9 @@ export const FIELD_ID_STRIPE_CHECKOUT = 'field-checkout'
 export enum TEST_ID {
   // layout
   LAYOUT_HEADER = 'layout/header',
-  // side nav
-  SIDE_NAV_NOTIFICATIONS = 'sidenav/notifications',
-  SIDE_NAV_MY_PAGE = 'sidenav/my-page',
-  SIDE_NAY_WRITE_BUTTON = 'sidenav/write-button',
+  // global nav
+  GLOBAL_NAV_NOTIFICATIONS = 'global-nav/notifications',
+  GLOBAL_NAV_MY_PAGE = 'global-nav/my-page',
   // digests
   DIGEST_ARTICLE_ARCHIVED = 'digest/article/archived',
   DIGEST_ARTICLE_CARD = 'digest/article/card',

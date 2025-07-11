@@ -1,0 +1,70 @@
+.title {
+  margin-top: var(--sp16);
+  margin-bottom: var(--sp12);
+  font-size: var(--text16);
+  font-weight: var(--font-medium);
+  line-height: 1.5rem;
+  color: var(--color-black);
+}
+
+.channelList {
+  margin-bottom: var(--sp32);
+
+  & :global(ul) {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: var(--sp8);
+  }
+}
+
+.channelLabel {
+  font-size: var(--text14);
+  line-height: 1.375rem;
+  color: var(--color-black);
+
+  &.lineClamp {
+    @mixin line-clamp;
+  }
+
+  & .latest {
+    color: var(--color-grey-dark);
+  }
+}
+
+.noSuitableChannels {
+  margin: var(--sp32) 0;
+}
+
+.confirmTitle {
+  @mixin flex-center-all;
+
+  margin-top: var(--sp16);
+  font-size: var(--text16);
+  font-weight: var(--font-medium);
+  line-height: 1.5rem;
+}
+
+.confirmContent {
+  padding-bottom: var(--sp16);
+  margin: var(--sp24) 0;
+  font-size: var(--text14);
+  line-height: 1.375rem;
+  text-align: center;
+  word-break: auto-phrase;
+
+  & .selectedChannelName {
+    color: var(--color-matters-green);
+  }
+}
+
+.submittedContent {
+  @mixin flex-center-all;
+
+  flex-direction: column;
+  gap: var(--sp16);
+  padding-bottom: var(--sp16);
+  margin: var(--sp24) 0;
+  font-size: var(--text14);
+  line-height: 1.375rem;
+  text-align: center;
+}

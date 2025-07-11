@@ -1,3 +1,7 @@
 .divider {
   margin: var(--sp6) 0;
 }
+
+.isInSearch {
+  margin: var(--sp16) 0 var(--sp12);
+}

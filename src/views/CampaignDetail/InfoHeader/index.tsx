@@ -1,8 +1,9 @@
+import classNames from 'classnames'
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { datetimeFormat, isUTC8 } from '~/common/utils'
-import { LanguageContext, ResponsiveImage } from '~/components'
+import { LanguageContext, ResponsiveImage, useChannels } from '~/components'
 import {
   InfoHeaderCampaignPrivateFragment,
   InfoHeaderCampaignPublicFragment,
@@ -20,10 +21,17 @@ type InfoHeaderProps = {
 
 const InfoHeader = ({ campaign }: InfoHeaderProps) => {
   const { lang } = useContext(LanguageContext)
+  const { isInWritingChallengeChannel } = useChannels()
   const now = new Date()
   const { start: appStart, end: appEnd } = campaign.applicationPeriod || {}
   const { start: writingStart, end: writingEnd } = campaign.writingPeriod || {}
   const isInApplicationPeriod = !appEnd || now < new Date(appEnd)
+  const applicationState = campaign.application?.state
+  const isRejected = applicationState === 'rejected'
+
+  const headerClasses = classNames(styles.header, {
+    [styles.horizontalSpacing]: !isInWritingChallengeChannel,
+  })
 
   const name =
     campaign[
@@ -46,7 +54,7 @@ const InfoHeader = ({ campaign }: InfoHeaderProps) => {
   return (
     <Apply.Dialog campaign={campaign}>
       {({ openDialog }) => (
-        <header className={styles.header}>
+        <header className={headerClasses}>
           {campaign.cover && (
             <section className={styles.cover}>
               <ResponsiveImage url={campaign.cover} width={1376} />
@@ -135,9 +143,15 @@ const InfoHeader = ({ campaign }: InfoHeaderProps) => {
             <Participants campaign={campaign} />
           </section>
 
-          <section className={styles.mobileApply}>
-            <Apply.Button campaign={campaign} size="lg" onClick={openDialog} />
-          </section>
+          {!isRejected && (
+            <section className={styles.mobileApply}>
+              <Apply.Button
+                campaign={campaign}
+                size="lg"
+                onClick={openDialog}
+              />
+            </section>
+          )}
         </header>
       )}
     </Apply.Dialog>

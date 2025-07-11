@@ -3,7 +3,7 @@ import { useContext, useEffect, useRef } from 'react'
 import { useIntl } from 'react-intl'
 
 import { analytics } from '~/common/utils'
-import { LanguageContext, SquareTabs } from '~/components'
+import { LanguageContext, SquareTabs, useChannels } from '~/components'
 import {
   ArticleFeedsCampaignPublicFragment,
   ArticleFeedsTabsCampaignFragment,
@@ -53,12 +53,14 @@ const ArticleFeedsTabs = ({
     return now >= new Date(startedAt)
   }
 
+  const { isInWritingChallengeChannel } = useChannels()
+
   const shouldShowFeaturedTab = campaign.featuredArticles.totalCount > 0
   const shouldShowAnnouncementTab = campaign.announcements.length > 0
 
   return (
     <section className={styles.tabs}>
-      <SquareTabs sticky>
+      <SquareTabs spacing={!isInWritingChallengeChannel ? 'sm' : undefined}>
         <SquareTabs.Tab
           ref={(el) => {
             tabsRef.current[FEED_TYPE_ALL] = el

@@ -1,0 +1,13 @@
+.name {
+  width: 2.25rem;
+  height: 1.125rem;
+  margin: var(--sp5) 0;
+  background: var(--color-grey-lighter);
+}
+
+.description {
+  width: 6.5rem;
+  height: 0.875rem;
+  margin: var(--sp4) 0;
+  background: var(--color-grey-lighter);
+}

@@ -232,7 +232,7 @@ const BaseFooterActions = ({
             <>
               {isArticle && node?.id && (
                 <>
-                  <Media at="sm">
+                  <Media lessThan="md">
                     <ArticleCommentFormDialog
                       articleId={node.id}
                       replyToId={comment.id}
@@ -252,7 +252,7 @@ const BaseFooterActions = ({
                       )}
                     </ArticleCommentFormDialog>
                   </Media>
-                  <Media greaterThan="sm">
+                  <Media greaterThanOrEqual="md">
                     <ReplyButton
                       {...buttonProps}
                       {...replyButtonProps}

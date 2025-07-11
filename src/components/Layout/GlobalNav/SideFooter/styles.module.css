@@ -1,0 +1,17 @@
+.footer {
+  @mixin flex-center-space-between;
+
+  padding: var(--sp6) var(--sp16) var(--sp16);
+}
+
+.links {
+  @mixin flex-center-space-between;
+
+  font-size: var(--text12);
+  line-height: 1.125rem;
+  color: var(--color-grey);
+
+  & > * + * {
+    margin-left: var(--sp10);
+  }
+}

@@ -1,11 +1,11 @@
 :root {
   /* header */
-  --z-index-global-header: 100;
-  --z-index-under-global-header: 99;
+  --z-index-global-header: 110;
+  --z-index-under-global-header: 109;
 
   /* sticky tabs */
-  --z-index-sticky-tabs: 110;
-  --z-index-over-sticky-tabs: 111;
+  --z-index-sticky-tabs: 100;
+  --z-index-over-sticky-tabs: 101;
 
   /* bottom bar */
   --z-index-global-bottom-bar: 149;

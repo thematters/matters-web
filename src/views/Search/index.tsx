@@ -25,6 +25,7 @@ const Search = () => {
   const storageKey = STORAGE_KEY_SEARCH_HISTORY + '_' + viewer.id
 
   const [searchHistory, setSearchHistory] = useState<string[]>([])
+  const [showSearchQuickResult, setShowSearchQuickResult] = useState(false)
 
   const updateSearchHistory = (value: string[]) => {
     storage.set(storageKey, value)
@@ -68,18 +69,21 @@ const Search = () => {
 
   return (
     <Layout.Main>
-      <Media lessThan="lg">
+      <Media lessThan="md">
         <Layout.Header
           right={
             <section className={styles.layoutHeaderRight}>
-              <SearchBar hasDropdown={false} />
+              <SearchBar
+                hasDropdown={false}
+                setShowSearchQuickResult={setShowSearchQuickResult}
+              />
             </section>
           }
         />
       </Media>
 
-      {isHistory && (
-        <Media lessThan="lg">
+      {isHistory && !showSearchQuickResult && (
+        <Media lessThan="md">
           <SearchHistory
             data={searchHistory?.slice(0, SEARCH_HISTORY_DISPLAY_LENGTH)}
             removeSearchHistoryItem={removeSearchHistory}

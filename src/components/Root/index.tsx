@@ -6,6 +6,7 @@ import React, { useEffect } from 'react'
 import { WagmiProvider } from 'wagmi'
 
 import {
+  PATHS,
   REFERRAL_QUERY_REFERRAL_KEY,
   REFERRAL_STORAGE_REFERRAL_CODE,
 } from '~/common/enums'
@@ -27,6 +28,7 @@ import {
   useRoute,
   ViewerProvider,
 } from '~/components'
+import { ChannelsProvider, FetchPolicyProvider } from '~/components/Context'
 import { RootQueryPrivateQuery } from '~/gql/graphql'
 
 import { ROOT_QUERY_PRIVATE } from './gql'
@@ -46,13 +48,19 @@ const DynamicGlobalDialogs = dynamic(
   () => import('~/components/GlobalDialogs'),
   { ssr: false }
 )
-
 const DynamicGlobalToasts = dynamic(() => import('~/components/GlobalToasts'), {
   ssr: false,
 })
 const DynamicFingerprint = dynamic(() => import('~/components/Fingerprint'), {
   ssr: false,
 })
+const DynamicFetchPolicyOnRouteChange = dynamic(
+  () =>
+    import('~/components/Context/FetchPolicy').then(
+      (mod) => mod.FetchPolicyOnRouteChange
+    ),
+  { ssr: false }
+)
 
 /**
  * `<Root>` contains components that depend on viewer
@@ -67,13 +75,20 @@ const Root = ({
   headers?: IncomingHttpHeaders
   children: React.ReactNode
 }) => {
-  const { getQuery, isInPath } = useRoute()
+  const { router, getQuery, isInPath } = useRoute()
 
   const isInAbout = isInPath('ABOUT')
   const isInMigration = isInPath('MIGRATION')
   const isInAuthCallback = isInPath('CALLBACK_PROVIDER')
   const isInAuth = isInPath('LOGIN') || isInPath('SIGNUP')
   const isInMeDraftDetail = isInPath('ME_DRAFT_DETAIL')
+  const isInHome =
+    isInPath('HOME') ||
+    isInPath('FEATURED') ||
+    isInPath('HOTTEST') ||
+    isInPath('NEWEST') ||
+    isInPath('CHANNEL') ||
+    isInPath('FOLLOW')
   const shouldApplyLayout =
     !isInAbout &&
     !isInMigration &&
@@ -87,6 +102,7 @@ const Root = ({
     useQuery<RootQueryPrivateQuery>(ROOT_QUERY_PRIVATE)
   const viewer = data?.viewer
   const official = data?.official
+  const channels = data?.channels
 
   useEffect(() => {
     if (referralCode) {
@@ -102,6 +118,11 @@ const Root = ({
 
     // redirect after logged-in
     if (!getTarget()) {
+      // redirect to /follow if in homepage
+      if (isInHome) {
+        router.push(PATHS.FOLLOW)
+      }
+
       return
     }
 
@@ -135,14 +156,23 @@ const Root = ({
             <FeaturesProvider official={official}>
               <MediaContextProvider>
                 <TranslationsProvider>
-                  {shouldApplyLayout ? <Layout>{children}</Layout> : children}
+                  <FetchPolicyProvider>
+                    <ChannelsProvider channels={channels || []}>
+                      {shouldApplyLayout ? (
+                        <Layout>{children}</Layout>
+                      ) : (
+                        children
+                      )}
 
-                  <DynamicToaster />
-                  <DynamicAnalyticsInitilizer user={viewer || {}} />
-                  <DynamicGlobalDialogs />
-                  <DynamicGlobalToasts />
-                  <DynamicProgressBar />
-                  <DynamicFingerprint />
+                      <DynamicToaster />
+                      <DynamicAnalyticsInitilizer user={viewer || {}} />
+                      <DynamicGlobalDialogs />
+                      <DynamicGlobalToasts />
+                      <DynamicProgressBar />
+                      <DynamicFingerprint />
+                      <DynamicFetchPolicyOnRouteChange />
+                    </ChannelsProvider>
+                  </FetchPolicyProvider>
                 </TranslationsProvider>
               </MediaContextProvider>
             </FeaturesProvider>

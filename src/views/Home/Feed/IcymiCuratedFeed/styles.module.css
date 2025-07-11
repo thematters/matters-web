@@ -1,9 +1,5 @@
 .container {
-  padding: var(--sp24) 0 0;
-
-  @media (--sm-up) {
-    padding: var(--sp8) 0 0;
-  }
+  padding: var(--sp20) 0 0;
 }
 
 .description {
@@ -30,13 +26,17 @@
   @mixin border-bottom-grey-light;
 
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(1, 1fr);
   gap: var(--sp32) var(--sp16);
-  padding-bottom: var(--sp40);
+  padding-bottom: var(--sp20);
   border-bottom-style: dashed;
 
-  @media (--sm-up) {
+  @media (--xs-up) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* 540px is the breakpoint for 3 columns */
+  @media (width >= 540px) {
     grid-template-columns: repeat(3, 1fr);
-    gap: var(--sp32) var(--sp40);
   }
 }
