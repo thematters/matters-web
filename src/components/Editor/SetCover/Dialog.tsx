@@ -24,6 +24,7 @@ const BaseSetCoverDialog = ({ children, ...props }: SetCoverDialogProps) => {
         onDismiss={closeDialog}
         dismissOnClickOutside={false}
         dismissOnESC={false}
+        fixedWidth={false}
       >
         <DynamicSetCover {...props} closeDialog={closeDialog} />
       </Dialog>

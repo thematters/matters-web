@@ -55,6 +55,10 @@
     "defaultMessage": "确认要将“{article}”从选集中移出吗？",
     "description": "src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
   },
+  "+grX8J": {
+    "defaultMessage": "允许评论",
+    "description": "src/components/Editor/Sidebar/CanComment/index.tsx"
+  },
   "+ixiPI": {
     "defaultMessage": "删除动态"
   },
@@ -73,14 +77,14 @@
   "+vVZ/G": {
     "defaultMessage": "绑定"
   },
-  "//QMqf": {
-    "defaultMessage": "请输入标题…"
-  },
   "/5OvMK": {
     "defaultMessage": "喜欢你的动态"
   },
   "/5jk3i": {
     "defaultMessage": "订阅成功！🎉"
+  },
+  "/5yq4w": {
+    "defaultMessage": "最多增加 3 个标签"
   },
   "/BQWEh": {
     "defaultMessage": "最近 1 个月",
@@ -186,18 +190,21 @@
   "0r2yd+": {
     "defaultMessage": "首行缩进"
   },
+  "0r9bbv": {
+    "defaultMessage": "加入围炉"
+  },
   "0tHLRn": {
     "defaultMessage": "钱包余额不足"
   },
   "0tRUjd": {
     "defaultMessage": "因违反社区规定，评论已被隐藏"
   },
+  "0xVT+0": {
+    "defaultMessage": "已关联"
+  },
   "0zZd0T": {
     "defaultMessage": "作品发布成功，快把作品分享到不同渠道，吸引更多人为你拍手！",
     "description": "src/views/Me/DraftDetail/PublishState/PublishedState.tsx"
-  },
-  "16zJ3o": {
-    "defaultMessage": "自定义摘要…"
   },
   "18HJlm": {
     "defaultMessage": "标签"
@@ -228,6 +235,9 @@
     "defaultMessage": "尚无阅读记录",
     "description": "src/views/Me/History/index.tsx"
   },
+  "1eKD7S": {
+    "defaultMessage": "帮你的故事收集成册"
+  },
   "1exrSw": {
     "defaultMessage": "欢迎上船！"
   },
@@ -250,6 +260,12 @@
   "1zVIWy": {
     "defaultMessage": "在 {commentArticle} 评论提到了你",
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
+  },
+  "2/2yg+": {
+    "defaultMessage": "添加"
+  },
+  "2/C36c": {
+    "defaultMessage": "你无权进行此操作"
   },
   "202PEj": {
     "defaultMessage": "确认 Matters ID",
@@ -467,6 +483,9 @@
   "6+eeJ4": {
     "defaultMessage": "可使用小写英文、数字及下划线",
     "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
+  },
+  "6/eKGl": {
+    "defaultMessage": "写下你的故事⋯"
   },
   "6/kgzs": {
     "defaultMessage": "退订成功"
@@ -810,6 +829,9 @@
     "defaultMessage": "翻译定额暂被用尽，请稍候再试",
     "description": "TRANSLATION_INSUFFICIENT_CREDITS"
   },
+  "B7QJw1": {
+    "defaultMessage": "版权声明：{license}"
+  },
   "B9IFMF": {
     "defaultMessage": "好的，我报名"
   },
@@ -923,6 +945,9 @@
   },
   "D3idYv": {
     "defaultMessage": "设定"
+  },
+  "D9/QIR": {
+    "defaultMessage": "注册 ISCN"
   },
   "D9R/ol": {
     "defaultMessage": "将作品加入围炉，让更多人一起参与讨论"
@@ -1056,6 +1081,9 @@
   "FEI5Fv": {
     "defaultMessage": "邮箱",
     "description": "src/components/Dialogs/SetEmailDialog/Content.tsx"
+  },
+  "FLGK+W": {
+    "defaultMessage": "自定义支持号召、支持后回复给读者的话"
   },
   "FMIIAZ": {
     "defaultMessage": "此为历史版本和 IPFS 入口查阅区，",
@@ -1313,10 +1341,6 @@
   "Jv9SoD": {
     "defaultMessage": "建议频道"
   },
-  "Jxr/TM": {
-    "defaultMessage": "已满",
-    "description": "src/components/Dialogs/AddCollectionsArticleDialog/SelectDialogContent.tsx"
-  },
   "K+pFNS": {
     "defaultMessage": "活动时间{tz}"
   },
@@ -1466,6 +1490,10 @@
     "defaultMessage": "精选过去 24 小时与你有关的消息",
     "description": "src/views/Me/Settings/Notifications/Email.tsx"
   },
+  "Mu2Jy8": {
+    "defaultMessage": "作品设置",
+    "description": "src/views/Me/DraftDetail/OptionDrawer/index.tsx"
+  },
   "Myrqtn": {
     "defaultMessage": "🎉 感谢支持！"
   },
@@ -1489,6 +1517,9 @@
   "NCBtyI": {
     "defaultMessage": "支持",
     "description": "src/views/Me/Transactions/index.tsx"
+  },
+  "NDV5Mq": {
+    "defaultMessage": "选项"
   },
   "NEKHMm": {
     "defaultMessage": "邮件",
@@ -1636,6 +1667,9 @@
     "defaultMessage": "邮箱或密码错误",
     "description": "USER_EMAIL_NOT_FOUND"
   },
+  "PvVnlo": {
+    "defaultMessage": "包含色情、暴力、血腥等内容"
+  },
   "Q8Qw5B": {
     "defaultMessage": "描述"
   },
@@ -1781,6 +1815,9 @@
   "Sep44m": {
     "defaultMessage": "提现",
     "description": "src/components/Transaction/index.tsx"
+  },
+  "SeyETM": {
+    "defaultMessage": "移除封面"
   },
   "Sfql0+": {
     "defaultMessage": "恭喜获得七日书大满贯"
@@ -2028,6 +2065,10 @@
   "XTyKFR": {
     "defaultMessage": "精挑细选作品，帮助读者更容易发现优质内容"
   },
+  "XU93/I": {
+    "defaultMessage": "内容与排版",
+    "description": "src/views/Me/DraftDetail/OptionDrawer/index.tsx"
+  },
   "XVYrS/": {
     "defaultMessage": "还没有关注者"
   },
@@ -2154,6 +2195,9 @@
   "ZZ9zIR": {
     "defaultMessage": "点踩"
   },
+  "ZgRE5H": {
+    "defaultMessage": "选择或上传大于 120×120px 的正方形图片"
+  },
   "ZjDH42": {
     "defaultMessage": "关于我们"
   },
@@ -2212,6 +2256,9 @@
   "al5/yQ": {
     "defaultMessage": "晚鸟参与通过"
   },
+  "ammOoM": {
+    "defaultMessage": "选择或上传正方形图片"
+  },
   "aqX2Bt": {
     "defaultMessage": "前往首页",
     "description": "src/views/Callback/UI.tsx"
@@ -2230,6 +2277,9 @@
   "b0RNGM": {
     "defaultMessage": "你的作品 {articleTitle} 已被列为活动精选之作，快来看看更多精彩好文！",
     "description": "src/components/Notice/CampaignArticleNotice/CampaignArticleFeaturedNotice.tsx"
+  },
+  "b6x6lm": {
+    "defaultMessage": "输入简单明了的标题"
   },
   "b8ogKp": {
     "defaultMessage": "新增邀请",
@@ -2305,6 +2355,9 @@
     "defaultMessage": "由于你尚未发布任何作品，这裡还没有任何数据能与你分享哦！发布第一篇作品来介绍你自己，以此开启你的创作之旅吧！",
     "description": "src/views/Me/Analytics/EmptyAnalytics/index.tsx"
   },
+  "cpYr3r": {
+    "defaultMessage": "正文段落开头自动缩进"
+  },
   "ctl5tq": {
     "defaultMessage": "新作品",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
@@ -2329,6 +2382,9 @@
   },
   "d5+b8r": {
     "defaultMessage": "限制级内容"
+  },
+  "d5Y+dZ": {
+    "defaultMessage": "关联作品"
   },
   "d5bM8A": {
     "defaultMessage": "投稿日程⋯"
@@ -2355,6 +2411,9 @@
   "dSjI7E": {
     "defaultMessage": "暂无法断开钱包链接，因为你没有其他可用于登录的身份（邮箱/数字钱包/社交帐号）。",
     "description": "src/components/Dialogs/RemoveWalletLoginDialog/Content.tsx"
+  },
+  "dSx84k": {
+    "defaultMessage": "已满"
   },
   "dTOtPO": {
     "defaultMessage": "储值"
@@ -2395,6 +2454,9 @@
   },
   "eKVBm/": {
     "defaultMessage": "Optimism 是独立运行的区块链，若你在其他链上已有 USDT 货币，需要将它们转移到 Optimism 网络才能使用，详情参考{link}。"
+  },
+  "eKeBF9": {
+    "defaultMessage": "作品不存在"
   },
   "eNv3Wm": {
     "defaultMessage": "已推荐你的这篇作品到频道：{channelNames}"
@@ -2528,6 +2590,10 @@
     "defaultMessage": "支付金额无效，请重新输入",
     "description": "PAYMENT_AMOUNT_INVALID"
   },
+  "gsZ/aj": {
+    "defaultMessage": "允许评论后，一经发布后无法关闭",
+    "description": "src/components/Editor/Sidebar/CanComment/index.tsx"
+  },
   "gvTltk": {
     "defaultMessage": "草稿 - {title}"
   },
@@ -2541,6 +2607,9 @@
   "h+punE": {
     "defaultMessage": "{date}更新",
     "description": "src/views/User/CollectionDetail/Content.tsx"
+  },
+  "h5Y9al": {
+    "defaultMessage": "用于出版 Writing NFT，费用 ≈1 LIKE"
   },
   "h74kLA": {
     "defaultMessage": "支持失败"
@@ -2747,6 +2816,9 @@
   "l31hCd": {
     "defaultMessage": "效果预览",
     "description": "src/components/Editor/MoreSettings/SupportSettingDialog/Content.tsx"
+  },
+  "lFi0TA": {
+    "defaultMessage": "加入选集"
   },
   "lI2l2/": {
     "defaultMessage": "验证码不正确，请检查输入内容或重新发送",
@@ -2969,6 +3041,9 @@
     "defaultMessage": "删除留言",
     "description": "Moment"
   },
+  "q7nV87": {
+    "defaultMessage": "连接你和读者之间的长期互动"
+  },
   "q9oMKE": {
     "defaultMessage": "围炉名称"
   },
@@ -3087,6 +3162,9 @@
     "defaultMessage": "请输入邮箱",
     "description": "src/components/Forms/PaymentForm/ResetPassword/Request.tsx"
   },
+  "reRn/s": {
+    "defaultMessage": "粘贴想要关联的站上作品链接"
+  },
   "rfz/fN": {
     "defaultMessage": "建議尺寸 1600 x 900 像素"
   },
@@ -3196,6 +3274,9 @@
     "defaultMessage": "查看支持者名单",
     "description": "src/views/ArticleDetail/SupportWidget/Donators/index.tsx"
   },
+  "uOUCWK": {
+    "defaultMessage": "段首缩进"
+  },
   "uQHRvx": {
     "defaultMessage": "请选择问题类型："
   },
@@ -3218,6 +3299,9 @@
   "ucxFlV": {
     "defaultMessage": "提现流程已启动"
   },
+  "uhiBn9": {
+    "defaultMessage": "引用、链接相关作品，可延伸策展或主题式阅读功能"
+  },
   "ulh3kf": {
     "defaultMessage": "选集"
   },
@@ -3231,6 +3315,9 @@
   "utMaM0": {
     "defaultMessage": "验证码已通过邮件发送，有效期为 20 分钟",
     "description": "src/components/Forms/Verification/SendCodeButton/index.tsx"
+  },
+  "uuLhHH": {
+    "defaultMessage": "图片边长不得小于 120 像素"
   },
   "uw32VR": {
     "defaultMessage": "教学指南"
@@ -3358,6 +3445,9 @@
   "wbcwKd": {
     "defaultMessage": "查看全部"
   },
+  "wclk7z": {
+    "defaultMessage": "摘要，让读者快速掌握主题"
+  },
   "wdz6Pf": {
     "defaultMessage": "了解更多",
     "description": "src/components/Dialogs/BillboardDialog/Content.tsx"
@@ -3412,6 +3502,9 @@
     "defaultMessage": "作品编辑次数超出上限",
     "description": "ARTICLE_REVISION_REACH_LIMIT"
   },
+  "xk1AW6": {
+    "defaultMessage": "输入标签"
+  },
   "xkr+zo": {
     "defaultMessage": "协议"
   },
@@ -3439,9 +3532,6 @@
   },
   "yBUiiy": {
     "defaultMessage": "操作无法撤销，确认归档吗？"
-  },
-  "yCTXXb": {
-    "defaultMessage": "请输入正文…"
   },
   "yIlC0R": {
     "defaultMessage": "尚未发布作品",
@@ -3532,9 +3622,15 @@
     "defaultMessage": "在 {circleName} 中留言",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
+  "znN84l": {
+    "defaultMessage": "帮助读者更容易发现优质内容"
+  },
   "zvNfwL": {
     "defaultMessage": "操作过于频繁，请稍候重试",
     "description": "ACTION_LIMIT_EXCEEDED"
+  },
+  "zw4KNU": {
+    "defaultMessage": "支持设置"
   },
   "zxy15q": {
     "defaultMessage": "{subscriber, plural, =1 {人} other {人}}",

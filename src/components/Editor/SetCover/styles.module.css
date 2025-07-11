@@ -1,59 +1,63 @@
 .uploader {
-  display: block;
-  padding: var(--sp8) var(--sp16);
-  margin-bottom: var(--sp16);
-  border: 2px solid var(--color-grey-light);
-  border-style: dashed;
-  border-radius: var(--sp4);
+  @mixin flex-center-all;
 
-  & h3 {
-    @mixin flex-center-space-between;
+  width: 6.3125rem;
+  height: 6.3125rem;
+  background-color: var(--color-grey-lighter);
+  border-radius: 0.5rem;
+}
 
+.header {
+  margin: var(--sp20) 0 var(--sp16);
+
+  & .title {
     margin-bottom: var(--sp8);
+    font-size: var(--text20);
+    font-weight: var(--font-medium);
+    line-height: 1.875rem;
   }
 
-  & p {
-    font-size: var(--text13);
-    color: var(--color-grey);
+  & .text {
+    font-size: var(--text14);
+    color: var(--color-grey-darker);
   }
 }
 
-.selector {
-  & h3 {
-    margin-bottom: var(--sp16);
-    font-size: var(--text13);
-    font-weight: var(--font-normal);
-    color: var(--color-grey);
+.content {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--sp16);
+}
+
+.item {
+  position: relative;
+  display: block;
+  width: 6.3125rem;
+  height: 6.3125rem;
+  overflow: hidden;
+
+  & .loading {
+    @mixin flex-center-all;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
   }
 
-  & ul {
-    margin-right: calc(var(--sp16) * -1);
+  & img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    background: var(--color-grey-lighter);
+    border-radius: var(--sp8);
+  }
 
-    & li {
-      position: relative;
-      display: inline-block;
-      width: 4.5rem;
-      height: 4.5rem;
-      margin: 0 var(--sp16) var(--sp16) 0;
-
-      &.selected {
-        & img {
-          opacity: 0.5;
-        }
-      }
-
-      & img {
-        @mixin object-fit-cover;
-
-        background-color: var(--color-grey-lighter);
-      }
-
-      & :global(.icon) {
-        position: absolute;
-        right: 0;
-        bottom: 0;
-        margin: 0 var(--sp4) var(--sp4) 0;
-      }
-    }
+  & > :global(.icon) {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: var(--sp4) var(--sp4) 0 0;
   }
 }

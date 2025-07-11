@@ -135,6 +135,7 @@ const BaseArticleDigestFeed = ({
 
           <Media greaterThanOrEqual="md">{footerActions}</Media>
         </section>
+
         {cover && (
           <Link {...path} onClick={onClick}>
             <div

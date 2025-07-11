@@ -81,6 +81,7 @@ const Root = ({
   const isInMigration = isInPath('MIGRATION')
   const isInAuthCallback = isInPath('CALLBACK_PROVIDER')
   const isInAuth = isInPath('LOGIN') || isInPath('SIGNUP')
+  const isInMeDraftDetail = isInPath('ME_DRAFT_DETAIL')
   const isInHome =
     isInPath('HOME') ||
     isInPath('FEATURED') ||
@@ -89,7 +90,11 @@ const Root = ({
     isInPath('CHANNEL') ||
     isInPath('FOLLOW')
   const shouldApplyLayout =
-    !isInAbout && !isInMigration && !isInAuthCallback && !isInAuth
+    !isInAbout &&
+    !isInMigration &&
+    !isInAuthCallback &&
+    !isInAuth &&
+    !isInMeDraftDetail
 
   const referralCode = getQuery(REFERRAL_QUERY_REFERRAL_KEY)
 

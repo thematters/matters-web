@@ -55,6 +55,10 @@
     "defaultMessage": "Are you sure you want to remove ‘{article}’ from this collection?",
     "description": "src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
   },
+  "+grX8J": {
+    "defaultMessage": "Allow Comments",
+    "description": "src/components/Editor/Sidebar/CanComment/index.tsx"
+  },
   "+ixiPI": {
     "defaultMessage": "Delete moment"
   },
@@ -73,14 +77,14 @@
   "+vVZ/G": {
     "defaultMessage": "Connect"
   },
-  "//QMqf": {
-    "defaultMessage": "Enter title ..."
-  },
   "/5OvMK": {
     "defaultMessage": "liked your moment"
   },
   "/5jk3i": {
     "defaultMessage": "Circle successfully subscribed."
+  },
+  "/5yq4w": {
+    "defaultMessage": "Add up to 3 tags"
   },
   "/BQWEh": {
     "defaultMessage": "Last 1 month",
@@ -186,18 +190,21 @@
   "0r2yd+": {
     "defaultMessage": "Paragraph indent"
   },
+  "0r9bbv": {
+    "defaultMessage": "Join the Circle"
+  },
   "0tHLRn": {
     "defaultMessage": "Insufficient Balance"
   },
   "0tRUjd": {
     "defaultMessage": "This comment has been hidden due to violation of community terms of services"
   },
+  "0xVT+0": {
+    "defaultMessage": "Curated"
+  },
   "0zZd0T": {
     "defaultMessage": "Article successfully published. Share it on different platforms to receive more likes and donations!",
     "description": "src/views/Me/DraftDetail/PublishState/PublishedState.tsx"
-  },
-  "16zJ3o": {
-    "defaultMessage": "Enter summary…"
   },
   "18HJlm": {
     "defaultMessage": "Tag"
@@ -228,6 +235,9 @@
     "defaultMessage": "No data yet",
     "description": "src/views/Me/History/index.tsx"
   },
+  "1eKD7S": {
+    "defaultMessage": "Help compile your stories into a book"
+  },
   "1exrSw": {
     "defaultMessage": "Welcome onboard!"
   },
@@ -250,6 +260,12 @@
   "1zVIWy": {
     "defaultMessage": "mentioned you in a comment at {commentArticle}",
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
+  },
+  "2/2yg+": {
+    "defaultMessage": "Add"
+  },
+  "2/C36c": {
+    "defaultMessage": "You do not have permission to perform this action"
   },
   "202PEj": {
     "defaultMessage": "Confirm Matters ID",
@@ -467,6 +483,9 @@
   "6+eeJ4": {
     "defaultMessage": "Lowercase letters, numbers and underscores",
     "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
+  },
+  "6/eKGl": {
+    "defaultMessage": "Write your story..."
   },
   "6/kgzs": {
     "defaultMessage": "Unsubscribed"
@@ -810,6 +829,9 @@
     "defaultMessage": "Translation quota exhausted. Try later.",
     "description": "TRANSLATION_INSUFFICIENT_CREDITS"
   },
+  "B7QJw1": {
+    "defaultMessage": "License: {license}"
+  },
   "B9IFMF": {
     "defaultMessage": "Yes, apply"
   },
@@ -923,6 +945,9 @@
   },
   "D3idYv": {
     "defaultMessage": "Settings"
+  },
+  "D9/QIR": {
+    "defaultMessage": "Register ISCN"
   },
   "D9R/ol": {
     "defaultMessage": "Add articles to your circle"
@@ -1056,6 +1081,9 @@
   "FEI5Fv": {
     "defaultMessage": "Email address",
     "description": "src/components/Dialogs/SetEmailDialog/Content.tsx"
+  },
+  "FLGK+W": {
+    "defaultMessage": "Custom Call-to-Support and Thank-you card"
   },
   "FMIIAZ": {
     "defaultMessage": "Revision history and IPFS entry,",
@@ -1313,10 +1341,6 @@
   "Jv9SoD": {
     "defaultMessage": "Suggest one"
   },
-  "Jxr/TM": {
-    "defaultMessage": "FULL",
-    "description": "src/components/Dialogs/AddCollectionsArticleDialog/SelectDialogContent.tsx"
-  },
   "K+pFNS": {
     "defaultMessage": "Event period{tz}"
   },
@@ -1466,6 +1490,10 @@
     "defaultMessage": "Selected activities related to you in the past 24 hours",
     "description": "src/views/Me/Settings/Notifications/Email.tsx"
   },
+  "Mu2Jy8": {
+    "defaultMessage": "Settings",
+    "description": "src/views/Me/DraftDetail/OptionDrawer/index.tsx"
+  },
   "Myrqtn": {
     "defaultMessage": "🎉 Thank you for support!"
   },
@@ -1489,6 +1517,9 @@
   "NCBtyI": {
     "defaultMessage": "Supports",
     "description": "src/views/Me/Transactions/index.tsx"
+  },
+  "NDV5Mq": {
+    "defaultMessage": "Options"
   },
   "NEKHMm": {
     "defaultMessage": "Email",
@@ -1636,6 +1667,9 @@
     "defaultMessage": "Incorrect email or password",
     "description": "USER_EMAIL_NOT_FOUND"
   },
+  "PvVnlo": {
+    "defaultMessage": "Includes content that is sexual, violent, bloody, etc."
+  },
   "Q8Qw5B": {
     "defaultMessage": "Description"
   },
@@ -1781,6 +1815,9 @@
   "Sep44m": {
     "defaultMessage": "Payout",
     "description": "src/components/Transaction/index.tsx"
+  },
+  "SeyETM": {
+    "defaultMessage": "Remove cover"
   },
   "Sfql0+": {
     "defaultMessage": "Congratulations! You've got the Grand Badge!"
@@ -2028,6 +2065,10 @@
   "XTyKFR": {
     "defaultMessage": "Adding articles to a collection helps readers find your articles."
   },
+  "XU93/I": {
+    "defaultMessage": "Content and Layout",
+    "description": "src/views/Me/DraftDetail/OptionDrawer/index.tsx"
+  },
   "XVYrS/": {
     "defaultMessage": "No followers yet"
   },
@@ -2154,6 +2195,9 @@
   "ZZ9zIR": {
     "defaultMessage": "Downvote"
   },
+  "ZgRE5H": {
+    "defaultMessage": "Select or upload a square image ( > 120×120px )"
+  },
   "ZjDH42": {
     "defaultMessage": "About Us"
   },
@@ -2212,6 +2256,9 @@
   "al5/yQ": {
     "defaultMessage": "Joined successfully"
   },
+  "ammOoM": {
+    "defaultMessage": "Select or upload a square image"
+  },
   "aqX2Bt": {
     "defaultMessage": "go to the homepage",
     "description": "src/views/Callback/UI.tsx"
@@ -2230,6 +2277,9 @@
   "b0RNGM": {
     "defaultMessage": "Your article {articleTitle} has been listed as a feature of event in 7 days. Come and view more wonderful articles!",
     "description": "src/components/Notice/CampaignArticleNotice/CampaignArticleFeaturedNotice.tsx"
+  },
+  "b6x6lm": {
+    "defaultMessage": "Enter a clear and concise title"
   },
   "b8ogKp": {
     "defaultMessage": "Add Invitation",
@@ -2305,6 +2355,9 @@
     "defaultMessage": "You haven‘t published any articles yet, so there is no data available. Create one now to introduce yourself!",
     "description": "src/views/Me/Analytics/EmptyAnalytics/index.tsx"
   },
+  "cpYr3r": {
+    "defaultMessage": "Indent the beginning of paragraph text"
+  },
   "ctl5tq": {
     "defaultMessage": "New articles",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
@@ -2329,6 +2382,9 @@
   },
   "d5+b8r": {
     "defaultMessage": "Restricted content"
+  },
+  "d5Y+dZ": {
+    "defaultMessage": "Curate Article"
   },
   "d5bM8A": {
     "defaultMessage": "Select Date..."
@@ -2355,6 +2411,9 @@
   "dSjI7E": {
     "defaultMessage": "Unable to disconnect the wallet because you have not added or associated another login (Email/Wallet/Social account).",
     "description": "src/components/Dialogs/RemoveWalletLoginDialog/Content.tsx"
+  },
+  "dSx84k": {
+    "defaultMessage": "FULL"
   },
   "dTOtPO": {
     "defaultMessage": "Top Up"
@@ -2395,6 +2454,9 @@
   },
   "eKVBm/": {
     "defaultMessage": "Optimism is a standalone blockchain. If you have USDT on other chains, you need to transfer them to Optimism. See details in the {link}."
+  },
+  "eKeBF9": {
+    "defaultMessage": "Article does not exist"
   },
   "eNv3Wm": {
     "defaultMessage": "Your work has been recommended to the channels: {channelNames}"
@@ -2528,6 +2590,10 @@
     "defaultMessage": "The payment amount is invalid, please re-enter.",
     "description": "PAYMENT_AMOUNT_INVALID"
   },
+  "gsZ/aj": {
+    "defaultMessage": "Comments allowed, cannot be closed once published",
+    "description": "src/components/Editor/Sidebar/CanComment/index.tsx"
+  },
   "gvTltk": {
     "defaultMessage": "Draft - {title}"
   },
@@ -2541,6 +2607,9 @@
   "h+punE": {
     "defaultMessage": "Updated {date}",
     "description": "src/views/User/CollectionDetail/Content.tsx"
+  },
+  "h5Y9al": {
+    "defaultMessage": "Used for publishing Writing NFTs, cost ≈1 LIKE"
   },
   "h74kLA": {
     "defaultMessage": "Failed to Donate"
@@ -2747,6 +2816,9 @@
   "l31hCd": {
     "defaultMessage": "Preview",
     "description": "src/components/Editor/MoreSettings/SupportSettingDialog/Content.tsx"
+  },
+  "lFi0TA": {
+    "defaultMessage": "Add to Collection"
   },
   "lI2l2/": {
     "defaultMessage": "Incorrect verification code. Please check your input, or try resend",
@@ -2969,6 +3041,9 @@
     "defaultMessage": "Delete comment",
     "description": "Moment"
   },
+  "q7nV87": {
+    "defaultMessage": "Connect long-term interactions between you and your readers"
+  },
   "q9oMKE": {
     "defaultMessage": "Circle Name"
   },
@@ -3087,6 +3162,9 @@
     "defaultMessage": "Email",
     "description": "src/components/Forms/PaymentForm/ResetPassword/Request.tsx"
   },
+  "reRn/s": {
+    "defaultMessage": "Paste the link of the article you want to curate"
+  },
   "rfz/fN": {
     "defaultMessage": "Recommended size: 1600px x 900px"
   },
@@ -3196,6 +3274,9 @@
     "defaultMessage": "View supporters",
     "description": "src/views/ArticleDetail/SupportWidget/Donators/index.tsx"
   },
+  "uOUCWK": {
+    "defaultMessage": "Paragraph Indent"
+  },
   "uQHRvx": {
     "defaultMessage": "Please select the type of issues:"
   },
@@ -3218,6 +3299,9 @@
   "ucxFlV": {
     "defaultMessage": "The withdrawal process has started."
   },
+  "uhiBn9": {
+    "defaultMessage": "Citations and links to related articles can extend curation or thematic reading features"
+  },
   "ulh3kf": {
     "defaultMessage": "Collections"
   },
@@ -3231,6 +3315,9 @@
   "utMaM0": {
     "defaultMessage": "Verification code has been sent via email and is valid for 20 minutes.",
     "description": "src/components/Forms/Verification/SendCodeButton/index.tsx"
+  },
+  "uuLhHH": {
+    "defaultMessage": "Minimum image dimension is 120 pixels"
   },
   "uw32VR": {
     "defaultMessage": "tutorial"
@@ -3358,6 +3445,9 @@
   "wbcwKd": {
     "defaultMessage": "View All"
   },
+  "wclk7z": {
+    "defaultMessage": "Summary to help readers quickly grasp the topic"
+  },
   "wdz6Pf": {
     "defaultMessage": "Learn more",
     "description": "src/components/Dialogs/BillboardDialog/Content.tsx"
@@ -3412,6 +3502,9 @@
     "defaultMessage": "Article revision count reach limit",
     "description": "ARTICLE_REVISION_REACH_LIMIT"
   },
+  "xk1AW6": {
+    "defaultMessage": "Input tags"
+  },
   "xkr+zo": {
     "defaultMessage": "Terms"
   },
@@ -3439,9 +3532,6 @@
   },
   "yBUiiy": {
     "defaultMessage": "This operation cannot be undone, confirm archiving?"
-  },
-  "yCTXXb": {
-    "defaultMessage": "Enter content…"
   },
   "yIlC0R": {
     "defaultMessage": "No published articles yet",
@@ -3532,9 +3622,15 @@
     "defaultMessage": "left a comment in {circleName}",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
+  "znN84l": {
+    "defaultMessage": "Help readers discover articles more easily"
+  },
   "zvNfwL": {
     "defaultMessage": "Operation too frequent, please try again later.",
     "description": "ACTION_LIMIT_EXCEEDED"
+  },
+  "zw4KNU": {
+    "defaultMessage": "Support Settings"
   },
   "zxy15q": {
     "defaultMessage": "{subscriber, plural, =1 {subscriber} other {subscribers}}",

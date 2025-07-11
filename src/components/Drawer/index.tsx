@@ -35,8 +35,7 @@ export const Drawer: React.ComponentType<
   enableOverlay = false,
   direction = 'right',
 }) => {
-  const [mounted, setMounted] = useState(isOpen)
-  const [showDrawer, setShowDrawer] = useState(false)
+  const [showDrawer, setShowDrawer] = useState(isOpen)
   const { hasOpeningDrawer, setHasOpeningDrawer } = useDrawerContext()
   const [needCloseOtherDrawers, setNeedCloseOtherDrawers] = useState(false)
 
@@ -60,14 +59,11 @@ export const Drawer: React.ComponentType<
 
   useEffect(() => {
     if (isOpen) {
-      setMounted(true)
       if (hasOpeningDrawer) {
         setNeedCloseOtherDrawers(true)
       }
     } else {
       setShowDrawer(false)
-      // Unmount BaseDrawer Component after close
-      // setTimeout(() => setMounted(false), duration)
     }
   }, [isOpen])
 
@@ -83,15 +79,11 @@ export const Drawer: React.ComponentType<
   }, [needCloseOtherDrawers])
 
   useEffect(() => {
-    if (isOpen && mounted && !hasOpeningDrawer) {
+    if (isOpen && !hasOpeningDrawer) {
       setShowDrawer(true)
       setHasOpeningDrawer(true)
     }
-  }, [isOpen, hasOpeningDrawer, mounted])
-
-  if (!mounted) {
-    return null
-  }
+  }, [isOpen, hasOpeningDrawer])
 
   return (
     <BaseDrawer
