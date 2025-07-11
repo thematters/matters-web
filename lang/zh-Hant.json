@@ -1341,10 +1341,6 @@
   "Jv9SoD": {
     "defaultMessage": "建議頻道"
   },
-  "Jxr/TM": {
-    "defaultMessage": "已滿",
-    "description": "src/components/Dialogs/AddCollectionsArticleDialog/SelectDialogContent.tsx"
-  },
   "K+pFNS": {
     "defaultMessage": "活動時間{tz}"
   },

@@ -20,9 +20,18 @@ const useLayoutType = () => {
   const isHome = isInPath('HOME')
   const isInMomentDetail = isInPath('MOMENT_DETAIL')
   const isInMomentDetailEdit = isInPath('MOMENT_DETAIL_EDIT')
+  const isInDraftDetail = isInPath('ME_DRAFT_DETAIL')
+  const isInDraftDetailOptions = isInPath('ME_DRAFT_DETAIL_OPTIONS')
+
   const isInCircleDetail =
     isInPath('CIRCLE_DETAIL') && isPathStartWith('/~', true)
   const isUserWorks = isInPath('USER_WORKS') && isPathStartWith('/@', true)
+
+  const showGlobalNav =
+    !isInDraftDetail &&
+    !isInDraftDetailOptions &&
+    !isInMomentDetail &&
+    !isInMomentDetailEdit
 
   const isOneColumnLayout =
     isInPath('SEARCH') ||
@@ -105,6 +114,7 @@ const useLayoutType = () => {
     isTwoColumnLayout,
     isThreeColumnLayout,
     isLeftLayout,
+    showGlobalNav,
   }
 }
 
@@ -182,6 +192,7 @@ const Main: React.FC<MainProps> & {
 Main.Spacing = Spacing
 
 interface LayoutProps {
+  header?: React.ReactNode
   children?: React.ReactNode
 }
 
@@ -191,14 +202,13 @@ export const Layout: React.FC<LayoutProps> & {
   FixedMain: typeof FixedMain
   AuthHeader: typeof AuthHeader
   Notice: typeof Notice
-} = ({ children }) => {
+} = ({ header, children }) => {
   const {
-    isInMomentDetail,
-    isInMomentDetailEdit,
     isOneColumnLayout,
     isTwoColumnLayout,
     isThreeColumnLayout,
     isLeftLayout,
+    showGlobalNav,
   } = useLayoutType()
 
   const layoutClasses = classNames({
@@ -217,7 +227,9 @@ export const Layout: React.FC<LayoutProps> & {
     <>
       <Head description={null} />
 
-      {!isInMomentDetail && !isInMomentDetailEdit && <GlobalNav />}
+      {header}
+
+      {showGlobalNav && <GlobalNav />}
 
       <div className={layoutClasses}>
         <main className={mainClasses}>

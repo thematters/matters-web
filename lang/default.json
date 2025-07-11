@@ -1341,10 +1341,6 @@
   "Jv9SoD": {
     "defaultMessage": "Suggest one"
   },
-  "Jxr/TM": {
-    "defaultMessage": "FULL",
-    "description": "src/components/Dialogs/AddCollectionsArticleDialog/SelectDialogContent.tsx"
-  },
   "K+pFNS": {
     "defaultMessage": "Event period{tz}"
   },
