@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
 import Link from 'next/link'
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import { TEST_ID } from '~/common/enums'
 import { capitalizeFirstLetter, toPath } from '~/common/utils'
@@ -59,6 +59,7 @@ export const ArticleDigestTitle = ({
 
   ...restProps
 }: ArticleDigestTitleProps) => {
+  const intl = useIntl()
   const { articleState: state } = article
   const path = toPath({
     page: 'articleDetail',
@@ -67,14 +68,13 @@ export const ArticleDigestTitle = ({
   })
   const isBanned = state === 'banned'
   const isArchived = state === 'archived'
-  const title = isBanned ? (
-    <FormattedMessage
-      defaultMessage="The article has been archived due to violation of terms"
-      id="+GAaxB"
-    />
-  ) : (
-    article.title
-  )
+  const title = isBanned
+    ? intl.formatMessage({
+        defaultMessage:
+          'The article has been archived due to violation of terms',
+        id: '+GAaxB',
+      })
+    : article.title
   const titleClasses = classNames({
     [styles.title]: true,
     [styles[`text${textSize}`]]: !!textSize,
@@ -90,15 +90,25 @@ export const ArticleDigestTitle = ({
   const titleElement = (
     <>
       {is === 'h2' ? (
-        <h2 className={titleClasses}>{title}</h2>
+        <h2 className={titleClasses} title={title}>
+          {title}
+        </h2>
       ) : is === 'h3' ? (
-        <h3 className={titleClasses}>{title}</h3>
+        <h3 className={titleClasses} title={title}>
+          {title}
+        </h3>
       ) : is === 'h4' ? (
-        <h4 className={titleClasses}>{title}</h4>
+        <h4 className={titleClasses} title={title}>
+          {title}
+        </h4>
       ) : is === 'h5' ? (
-        <h5 className={titleClasses}>{title}</h5>
+        <h5 className={titleClasses} title={title}>
+          {title}
+        </h5>
       ) : (
-        <span className={titleClasses}>{title}</span>
+        <span className={titleClasses} title={title}>
+          {title}
+        </span>
       )}
     </>
   )

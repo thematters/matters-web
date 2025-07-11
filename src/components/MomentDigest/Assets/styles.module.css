@@ -4,8 +4,8 @@
 
   & .item {
     position: relative;
-    width: 6.625rem;
-    height: 6.625rem;
+    max-width: 6.625rem;
+    max-height: 6.625rem;
     cursor: pointer;
 
     &:first-child {
@@ -25,6 +25,7 @@
     & img {
       width: 100%;
       height: 100%;
+      aspect-ratio: 1 / 1;
       object-fit: cover;
       background: var(--color-grey-lighter);
     }

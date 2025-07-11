@@ -16,6 +16,7 @@ export type TextIconColor =
   | 'red'
   | 'likecoinGreen'
   | 'yellowLighter'
+  | 'attention700'
   | 'campaignBlue'
   | 'campaignGreenLabel'
 

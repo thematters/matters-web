@@ -10,6 +10,7 @@ export const GET_ARTICLE_TOPIC_CHANNELS = gql`
             id
           }
           enabled
+          pinned
         }
       }
     }
@@ -34,6 +35,7 @@ export const SET_ARTICLE_TOPIC_CHANNELS = gql`
             id
           }
           enabled
+          pinned
         }
       }
     }

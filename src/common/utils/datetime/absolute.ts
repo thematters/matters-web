@@ -71,4 +71,20 @@ absolute.monthDay = (dateString?: string, lang: Language = 'zh_hant') => {
   }
 }
 
+absolute.minimalDate = (date: Date | string | number) => {
+  if (typeof date === 'string') {
+    date = parseISO(date)
+  }
+
+  const dateObj = new Date(date)
+
+  if (isThisYear(dateObj)) {
+    const month = String(dateObj.getMonth() + 1).padStart(2, '0')
+    const day = String(dateObj.getDate()).padStart(2, '0')
+    return `${month}-${day}`
+  }
+
+  return absolute.dateISO(date)
+}
+
 export default absolute

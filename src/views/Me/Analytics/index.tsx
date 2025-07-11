@@ -30,7 +30,13 @@ const ME_ANALYTICS = gql`
           edges {
             cursor
             node {
-              ...UserDigestMiniUser
+              ... on User {
+                ...UserDigestMiniUser
+              }
+              ... on CryptoWallet {
+                id
+                address
+              }
             }
             donationCount
           }
@@ -139,7 +145,7 @@ const MyAnalytics = () => {
 
         <List>
           {edges?.map(({ node, donationCount }, i) => (
-            <List.Item key={node.id}>
+            <List.Item key={'address' in node ? node.address : node.id}>
               <SupporterDigestFeed
                 user={node}
                 index={i}

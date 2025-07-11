@@ -38,7 +38,7 @@ const Participants = ({
   const isViewerApplySucceeded = campaign.application?.state === 'succeeded'
   const edges = campaign.participants.edges?.slice(
     0,
-    isViewerApplySucceeded ? 7 : 8
+    isViewerApplySucceeded ? 4 : 5
   )
 
   return (
@@ -57,21 +57,23 @@ const Participants = ({
               )
             )}
           </section>
-          <span className={styles.count}>
-            {campaign.participants.totalCount}
-            &nbsp;
-          </span>
-          <TextIcon
-            icon={<Icon icon={IconRight} size={14} />}
-            placement="left"
-            size={14}
-          >
-            <FormattedMessage
-              defaultMessage="writers"
-              id="syBMnY"
-              description="src/views/CampaignDetail/InfoHeader/Participants/index.tsx"
-            />
-          </TextIcon>
+          <section className={styles.countContainer}>
+            <span className={styles.count}>
+              {campaign.participants.totalCount}
+              &nbsp;
+            </span>
+            <TextIcon
+              icon={<Icon icon={IconRight} size={14} />}
+              placement="left"
+              size={14}
+            >
+              <FormattedMessage
+                defaultMessage="writers"
+                id="syBMnY"
+                description="src/views/CampaignDetail/InfoHeader/Participants/index.tsx"
+              />
+            </TextIcon>
+          </section>
         </section>
       )}
     </ParticipantsDialog>

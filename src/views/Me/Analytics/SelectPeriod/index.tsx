@@ -92,11 +92,7 @@ const SelectPeriod: React.FC<SelectProps> = ({ period, onChange }) => {
     )
   }
   return (
-    <Dropdown
-      appendTo="parent"
-      content={<AnalyticsSelectContent />}
-      zIndex={Z_INDEX.OVER_DIALOG}
-    >
+    <Dropdown content={<AnalyticsSelectContent />} zIndex={Z_INDEX.OVER_DIALOG}>
       {({ openDropdown, ref }) => (
         <Button
           onClick={openDropdown}

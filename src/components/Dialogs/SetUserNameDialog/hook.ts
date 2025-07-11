@@ -41,7 +41,7 @@ export const useAvailableUserName = ({
         presetUserName
           .split('@')[0]
           .slice(0, MAX_USER_NAME_LENGTH)
-          .toLocaleLowerCase()
+          .toLowerCase()
       )
 
     if (!normalizedUserName) {

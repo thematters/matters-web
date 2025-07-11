@@ -1,0 +1,126 @@
+.unreadIcon {
+  position: relative;
+  display: inline-flex;
+
+  &::after {
+    @mixin transition;
+
+    position: absolute;
+    top: -0.25rem;
+    right: -0.25rem;
+    width: 0.5rem;
+    height: 0.5rem;
+    content: '';
+    background: var(--color-new-palette-green);
+    border-radius: 50%;
+    transform: scale(0);
+    transition-property: transform;
+  }
+
+  &.unread {
+    transform-origin: 50% 4px;
+    animation: ring 10s ease infinite;
+  }
+
+  &.unread::after {
+    transform: scale(1);
+  }
+}
+
+@keyframes ring {
+  0% {
+    transform: rotate(0);
+  }
+
+  0.2% {
+    transform: rotate(21deg);
+  }
+
+  0.7% {
+    transform: rotate(-19.6deg);
+  }
+
+  1.2% {
+    transform: rotate(23.8deg);
+  }
+
+  1.7% {
+    transform: rotate(-22.4deg);
+  }
+
+  2.2% {
+    transform: rotate(21deg);
+  }
+
+  2.7% {
+    transform: rotate(-19.6deg);
+  }
+
+  3.2% {
+    transform: rotate(18.2deg);
+  }
+
+  3.7% {
+    transform: rotate(-16.8deg);
+  }
+
+  4.1% {
+    transform: rotate(15.4deg);
+  }
+
+  4.6% {
+    transform: rotate(-14deg);
+  }
+
+  5.1% {
+    transform: rotate(12.6deg);
+  }
+
+  5.6% {
+    transform: rotate(-11.2deg);
+  }
+
+  6.1% {
+    transform: rotate(9.8deg);
+  }
+
+  6.6% {
+    transform: rotate(-8.4deg);
+  }
+
+  7.1% {
+    transform: rotate(7deg);
+  }
+
+  7.6% {
+    transform: rotate(-5.6deg);
+  }
+
+  8.0% {
+    transform: rotate(4.2deg);
+  }
+
+  8.5% {
+    transform: rotate(-2.8deg);
+  }
+
+  9.0% {
+    transform: rotate(1.4deg);
+  }
+
+  9.5% {
+    transform: rotate(-0.7deg);
+  }
+
+  10% {
+    transform: rotate(0.7deg);
+  }
+
+  10.5% {
+    transform: rotate(0);
+  }
+
+  100% {
+    transform: rotate(0);
+  }
+}

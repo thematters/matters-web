@@ -40,9 +40,7 @@ export const login = async ({
   waitForNavigation?: boolean
 }) => {
   if (!fillMode) {
-    target = encodeURIComponent(
-      `${process.env.PLAYWRIGHT_TEST_BASE_URL}${target}`
-    )
+    target = encodeURIComponent(`${target}`)
     await page.goto(`/login?target=${target}`, { waitUntil: 'networkidle' })
   }
 
@@ -66,7 +64,7 @@ export const login = async ({
 
 export const logout = async ({ page }: { page: Page }) => {
   // Click "My Page" button
-  await page.getByTestId(TEST_ID.SIDE_NAV_MY_PAGE).click()
+  await page.getByTestId(TEST_ID.GLOBAL_NAV_MY_PAGE).click()
 
   // Click "Log Out" button
   await page.getByRole('menuitem', { name: 'Log Out' }).click()

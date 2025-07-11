@@ -189,27 +189,25 @@ const TagDetailArticles = ({ tag, feedType }: TagArticlesProps) => {
                 />
               </List.Item>
 
-              {edges.length >= 2 && i === 0 && (
-                <Media lessThan="lg">
+              <Media lessThan="lg">
+                {edges.length >= 2 && i === 0 && (
                   <RecommendedAuthors tagId={tag.id} />
-                </Media>
-              )}
+                )}
 
-              {edges.length >= 2 && i === 1 && (
-                <Media lessThan="lg">
-                  <RelatedTags tagId={tag.id} />
-                </Media>
-              )}
+                {edges.length >= 2 && i === 1 && <RelatedTags tagId={tag.id} />}
+              </Media>
             </React.Fragment>
           ))}
         </List>
 
-        {edges.length < 2 && (
-          <Media lessThan="lg">
-            <RecommendedAuthors tagId={tag.id} />
-            <RelatedTags tagId={tag.id} />
-          </Media>
-        )}
+        <Media lessThan="lg">
+          {edges.length < 2 && (
+            <>
+              <RecommendedAuthors tagId={tag.id} />
+              <RelatedTags tagId={tag.id} />
+            </>
+          )}
+        </Media>
       </InfiniteScroll>
     </Layout.Main.Spacing>
   )

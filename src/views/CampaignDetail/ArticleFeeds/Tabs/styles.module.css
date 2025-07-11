@@ -1,8 +1,16 @@
 .tabs {
-  padding-left: var(--sp16);
-  margin-bottom: var(--sp8);
+  position: sticky;
+  top: var(--global-nav-height-mobile);
+  z-index: var(--z-index-sticky-tabs);
+  padding-top: var(--sp20);
+  padding-bottom: var(--sp8);
+  background-color: var(--color-white);
 
   @media (--sm-up) {
-    padding-left: 0;
+    top: var(--global-nav-height);
+  }
+
+  @media (--md-up) {
+    margin-right: calc(var(--pixel-adjust) * -1);
   }
 }

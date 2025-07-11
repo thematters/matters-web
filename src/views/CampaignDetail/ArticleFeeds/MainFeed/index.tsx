@@ -7,13 +7,13 @@ import IconStar from '@/public/static/icons/24px/star.svg'
 import { analytics, mergeConnections } from '~/common/utils'
 import {
   ArticleDigestFeed,
+  ArticleFeedPlaceholder,
   Empty,
   Icon,
   InfiniteScroll,
   LanguageContext,
   List,
   QueryError,
-  SpinnerBlock,
   TextIcon,
   usePublicQuery,
   useRoute,
@@ -207,7 +207,7 @@ const MainFeed = ({ feedType, camapign }: MainFeedProps) => {
   }
 
   if (loading && (!edges || isNewLoading)) {
-    return <SpinnerBlock />
+    return <ArticleFeedPlaceholder />
   }
 
   if (error) {
@@ -227,7 +227,12 @@ const MainFeed = ({ feedType, camapign }: MainFeedProps) => {
   }
 
   return (
-    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore} eof>
+    <InfiniteScroll
+      hasNextPage={pageInfo.hasNextPage}
+      loadMore={loadMore}
+      loader={<ArticleFeedPlaceholder count={3} />}
+      eof
+    >
       <List>
         {edges.map(({ node, featured, announcement }, i) => (
           <List.Item key={`${feedType}:${node.id}`}>
@@ -265,6 +270,7 @@ const MainFeed = ({ feedType, camapign }: MainFeedProps) => {
                   id: node.author.id,
                 })
               }}
+              hasCircle={false}
               hasCampaign={false}
               hasToggleCampaignFeatured={isManager || isAdmin}
               hasBanCampaignArticle={isManager || isAdmin}

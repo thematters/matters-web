@@ -6,6 +6,7 @@ import { Head, Layout, TableView } from '~/components'
 import SettingsTabs from '../SettingsTabs'
 import styles from '../styles.module.css'
 import Email from './Email'
+import Language from './Language'
 import MattersID from './MattersID'
 import MyProfile from './MyProfile'
 import Password from './Password'
@@ -37,6 +38,19 @@ const Settings = () => {
           <MyProfile />
           <Email />
           <Password />
+        </TableView>
+
+        <TableView
+          spacingX={0}
+          groupName={
+            <FormattedMessage
+              defaultMessage="Language preference"
+              id="k7Oi38"
+              description="src/views/Me/Settings/Settings/index.tsx"
+            />
+          }
+        >
+          <Language />
         </TableView>
 
         <TableView

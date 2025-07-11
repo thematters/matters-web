@@ -4,7 +4,7 @@
   background: var(--color-grey-lighter);
 
   &:first-child {
-    width: 50%;
+    width: 20%;
   }
 
   & + & {

@@ -57,7 +57,7 @@ const BaseCollectionDigestFeed = ({
             </Link>
           </header>
 
-          <Media at="sm">
+          <Media lessThan="md">
             <p className={styles.articleCount}>
               <FormattedMessage
                 defaultMessage={`{articleCount, plural, =1 {1 article} other {{articleCount} articles}}`}

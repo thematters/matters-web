@@ -2,6 +2,6 @@
   margin-top: var(--sp24);
 
   @media (--sm-up) {
-    margin-top: var(--sp32);
+    margin-top: var(--sp20);
   }
 }

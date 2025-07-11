@@ -106,11 +106,7 @@ const VersionsDropdown = ({
 
   return (
     <section className={styles.versions}>
-      <Dropdown
-        appendTo="parent"
-        content={<SelectContent />}
-        zIndex={Z_INDEX.OVER_DIALOG}
-      >
+      <Dropdown content={<SelectContent />} zIndex={Z_INDEX.OVER_DIALOG}>
         {({ openDropdown, ref }) => (
           <button
             onClick={openDropdown}

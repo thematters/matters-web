@@ -1,4 +1,4 @@
-.container {
+.layoutbase {
   display: grid;
   grid-template-areas: 'spacingLeft main spacingRight';
   grid-template-columns: minmax(0, 1fr) minmax(0, 100%) minmax(0, 1fr);
@@ -9,11 +9,10 @@
   }
 
   @media (--md-up) {
-    margin: 0 var(--sp40);
+    margin: 0 var(--sp24);
   }
 
   @media (--lg-up) {
-    grid-template-columns: minmax(0, 1fr) 1105px minmax(0, 1fr);
     margin: 0 auto;
   }
 
@@ -41,37 +40,128 @@
 }
 
 .oneColumnLayout {
-  display: grid;
-  grid-template-areas: 'spacingLeft main spacingRight';
-  grid-template-columns: minmax(0, 1fr) minmax(0, 100%) minmax(0, 1fr);
-  margin: 0;
-
-  @media (--sm-up) {
-    margin: 0 var(--sp16);
-  }
-
-  @media (--md-up) {
-    margin: 0 var(--sp24);
-  }
-
-  @media (--lg-up) {
-    grid-template-columns: minmax(0, 1fr) 688px minmax(0, 1fr);
-    margin: 0 auto;
-  }
+  /* stylelint-disable-next-line property-no-unknown */
+  composes: layoutbase;
+  grid-template-columns:
+    minmax(0, 1fr) minmax(0, var(--content-max-width))
+    minmax(0, 1fr);
 
   & .main {
     grid-column: main;
   }
 }
 
+.twoColumnLayout {
+  /* stylelint-disable-next-line property-no-unknown */
+  composes: layoutbase;
+
+  @media (--lg-up) {
+    grid-template-columns: minmax(0, 1fr) 1000px minmax(0, 1fr);
+  }
+
+  & .main {
+    grid-column: main;
+
+    @media (--sm-up) {
+      display: grid;
+      grid-template-areas: 'content';
+      grid-template-columns: minmax(0, var(--content-max-width));
+      margin: 0 auto;
+    }
+
+    @media (--md-up) {
+      grid-template-areas: 'content right';
+      grid-template-columns: minmax(0, var(--content-max-width)) 16.5rem;
+      grid-column-gap: 3rem;
+
+      &.leftLayout {
+        grid-template-areas: 'left content ';
+        grid-template-columns: 16.5rem minmax(0, var(--content-max-width));
+      }
+    }
+  }
+}
+
+.threeColumnLayout {
+  /* stylelint-disable-next-line property-no-unknown */
+  composes: layoutbase;
+
+  @media (--lg-up) {
+    grid-template-columns: minmax(0, 1fr) 1146px minmax(0, 1fr);
+  }
+
+  & .main {
+    grid-column: main;
+
+    @media (--sm-up) {
+      display: grid;
+      grid-template-areas: 'content';
+      grid-template-columns: minmax(0, var(--content-max-width));
+    }
+
+    @media (--md-up) {
+      grid-template-areas: 'left content right';
+      grid-template-columns: 6.125rem minmax(0, 100%) 16.5rem;
+      grid-column-gap: 3rem;
+    }
+  }
+}
+
+.sideNavLayout {
+  /* stylelint-disable-next-line property-no-unknown */
+  composes: layoutbase;
+  margin: 0 var(--sp16);
+
+  @media (--xs-up) {
+    margin: 0 var(--sp24);
+  }
+
+  @media (--md-up) {
+    margin: 0 var(--sp32);
+  }
+
+  @media (--lg-up) {
+    grid-template-columns: minmax(0, 1fr) 1146px minmax(0, 1fr);
+    margin: 0 auto;
+  }
+
+  & .main {
+    display: grid;
+    grid-template-areas: 'left content';
+    grid-template-columns: 4.75rem minmax(0, var(--content-max-width));
+    grid-column: main;
+    grid-column-gap: 1.25rem;
+
+    @media (--xs-up) {
+      grid-column-gap: 2rem;
+    }
+
+    @media (--sm-up) {
+      grid-template-columns: 6.125rem minmax(0, var(--content-max-width));
+    }
+
+    @media (--md-up) {
+      grid-template-areas: 'left content right';
+      grid-template-columns:
+        6.125rem minmax(0, var(--content-max-width))
+        16.5rem;
+      grid-column-gap: 3rem;
+    }
+  }
+}
+
 .sidenav {
-  @media (--sm-up) {
+  @media (--md-up) {
     grid-column: left;
   }
 
   & .sideNavContent {
     position: sticky;
-    top: 0;
+    top: var(--global-nav-height-mobile);
+
+    @media (--sm-up) {
+      top: var(--global-nav-height);
+    }
   }
 }
 
@@ -92,6 +182,14 @@
 }
 
 .aside {
+  @media (--md-up) {
+    grid-column: right;
+
+    &.leftLayout {
+      grid-column: left;
+    }
+  }
+
   & .content {
     display: flex;
     flex-direction: column;
@@ -99,20 +197,15 @@
     & .top {
       & > :global(*) {
         margin-top: var(--sp32);
+
+        &:first-child {
+          margin-top: var(--sp20);
+        }
       }
-    }
-  }
 
-  @media (--md-up) {
-    & .content {
-      min-height: 100vh;
-
-      & .top {
+      @media (--md-up) {
         flex-grow: 1;
       }
     }
-
-    grid-column: right;
-    padding-left: var(--sp8);
   }
 }
