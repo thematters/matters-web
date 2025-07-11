@@ -114,35 +114,6 @@ const BaseArticleDigestFeed = ({
       )}
       <section className={styles.container}>
         <section className={styles.content}>
-          {hasHeader && (
-            <header className={styles.header}>
-              {hasAuthor && (
-                <section className={styles.author}>
-                  <UserDigest.Mini
-                    user={author}
-                    avatarSize={20}
-                    textSize={12}
-                    nameColor={
-                      author.status?.state === 'archived' ? 'grey' : undefined
-                    }
-                    hasAvatar
-                    hasDisplayName
-                    onClick={onClickAuthor}
-                  />
-                  {!excludesTimeStamp && (
-                    <Icon icon={IconDot} color="greyLight" size={20} />
-                  )}
-                </section>
-              )}
-
-              {!excludesTimeStamp && (
-                <Link {...path}>
-                  <DateTime date={article.createdAt} color="grey" />
-                </Link>
-              )}
-            </header>
-          )}
-
           <section className={styles.head}>
             <section className={styles.title}>
               <ArticleDigestTitle
