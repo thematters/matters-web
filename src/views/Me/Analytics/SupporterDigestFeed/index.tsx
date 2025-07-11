@@ -1,7 +1,7 @@
 import IconCoin from '@/public/static/icons/24px/coin.svg'
-import { toPath } from '~/common/utils'
+import { toPath, truncate } from '~/common/utils'
 import { Card, Icon, TextIcon, UserDigest } from '~/components'
-import { MeAnalyticsQuery } from '~/gql/graphql'
+import { MeAnalyticsQuery, UserDigestMiniUserFragment } from '~/gql/graphql'
 
 import styles from './styles.module.css'
 
@@ -18,23 +18,35 @@ const SupporterDigestFeed = ({
   index,
   donationCount,
 }: SupporterDigestFeedProps) => {
-  const userName = user.userName!
+  const userName = 'userName' in user ? user.userName! : ''
   const path = toPath({
     page: 'userProfile',
     userName,
   })
+
+  const isAnonymous = 'address' in user
+  if ('address' in user) {
+    user = {
+      id: user.address,
+      liker: {
+        civicLiker: false,
+      },
+      displayName: truncate(user.address, 6),
+    } as UserDigestMiniUserFragment
+  }
+
   return (
-    <Card {...path} spacing={[0, 0]} bgActiveColor="none">
+    <Card {...(isAnonymous ? {} : path)} spacing={[0, 0]} bgActiveColor="none">
       <section className={styles.container}>
         <span className={styles.number}>{index + 1}</span>
         <section className={styles.supporter}>
           <UserDigest.Mini
             user={user}
+            disabled={isAnonymous}
             hasAvatar
             avatarSize={24}
             hasDisplayName
             textSize={15}
-            textWeight="medium"
           />
 
           <section className={styles.count}>
