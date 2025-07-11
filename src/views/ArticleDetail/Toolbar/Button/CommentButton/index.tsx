@@ -82,7 +82,7 @@ const Content = ({
 
   return (
     <Tooltip
-      disabled={!!tooltip && !isMdUp}
+      disabled={!tooltip || (!!tooltip && !isMdUp)}
       content={tooltip}
       placement="top"
       delay={[500, null]}
@@ -201,6 +201,17 @@ const CommentButton = ({
 
     return (
       <Content
+        tooltip={
+          <span className={styles.hotKeyTooltip}>
+            <FormattedMessage
+              defaultMessage="Comments"
+              id="7uYW+U"
+              description="src/views/ArticleDetail/Toolbar/FixedToolbar/index.tsx"
+            />
+            &nbsp;
+            <span className={styles.key}>(c)</span>
+          </span>
+        }
         aria-haspopup="dialog"
         article={article}
         iconSize={iconSize}
