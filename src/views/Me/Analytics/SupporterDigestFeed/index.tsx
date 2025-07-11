@@ -1,4 +1,4 @@
-import IconDonate from '@/public/static/icons/24px/donate.svg'
+import IconCoin from '@/public/static/icons/24px/coin.svg'
 import { toPath } from '~/common/utils'
 import { Card, Icon, TextIcon, UserDigest } from '~/components'
 import { MeAnalyticsQuery } from '~/gql/graphql'
@@ -39,8 +39,9 @@ const SupporterDigestFeed = ({
 
           <section className={styles.count}>
             <TextIcon
-              icon={<Icon icon={IconDonate} size={12} />}
-              size={12}
+              icon={<Icon icon={IconCoin} />}
+              size={14}
+              spacing={4}
               color="greyDark"
             >
               {donationCount}
