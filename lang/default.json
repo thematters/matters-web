@@ -45,6 +45,10 @@
     "defaultMessage": "Move to top",
     "description": "src/components/ArticleDigest/DropdownActions/SetTopCollectionButton.tsx"
   },
+  "+SgLoK": {
+    "defaultMessage": "Event",
+    "description": "src/components/Editor/PreviewDialog/Campaign/index.tsx"
+  },
   "+a+2ug": {
     "defaultMessage": "Members"
   },

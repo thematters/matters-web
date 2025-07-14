@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { useIntl } from 'react-intl'
 
 import { Drawer } from '~/components'
@@ -29,6 +30,20 @@ export const OptionDrawer: React.FC<OptionDrawerProps> = ({
     defaultMessage: 'Options',
     id: 'NDV5Mq',
   })
+
+  useEffect(() => {
+    const handleOpenDrawer = (event: Event) => {
+      const customEvent = event as CustomEvent<{
+        type: string
+        id: string
+        name: string
+      }>
+      console.log('event', customEvent.detail)
+      onClose()
+    }
+    window.addEventListener('open-drawer', handleOpenDrawer)
+    return () => window.removeEventListener('open-drawer', handleOpenDrawer)
+  }, [])
 
   return (
     <Drawer isOpen={isOpen} onClose={onClose}>

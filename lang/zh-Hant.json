@@ -45,6 +45,10 @@
     "defaultMessage": "移至頂部",
     "description": "src/components/ArticleDigest/DropdownActions/SetTopCollectionButton.tsx"
   },
+  "+SgLoK": {
+    "defaultMessage": "活動",
+    "description": "src/components/Editor/PreviewDialog/Campaign/index.tsx"
+  },
   "+a+2ug": {
     "defaultMessage": "成員"
   },
