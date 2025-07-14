@@ -17,6 +17,12 @@
     flex-direction: column;
     gap: var(--sp8);
 
+    & .publishAt {
+      font-size: var(--text12);
+      line-height: 1.125rem;
+      color: var(--color-positive-green);
+    }
+
     & .title {
       @mixin line-clamp;
 

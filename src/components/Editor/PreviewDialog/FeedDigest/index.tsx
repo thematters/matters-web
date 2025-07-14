@@ -1,7 +1,10 @@
 import gql from 'graphql-tag'
+import { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import IconImage from '@/public/static/icons/24px/image.svg'
-import { Icon, ResponsiveImage } from '~/components'
+import absolute from '~/common/utils/datetime/absolute'
+import { Icon, LanguageContext, ResponsiveImage } from '~/components'
 import { FeedDigestDraftFragment } from '~/gql/graphql'
 
 import styles from './styles.module.css'
@@ -13,6 +16,7 @@ const fragment = gql`
     summary
     content
     cover
+    publishAt
   }
 `
 
@@ -21,6 +25,7 @@ type FeedDigestProps = {
 }
 
 export const FeedDigest = ({ draft }: FeedDigestProps) => {
+  const { lang } = useContext(LanguageContext)
   if (!draft) {
     return null
   }
@@ -28,6 +33,21 @@ export const FeedDigest = ({ draft }: FeedDigestProps) => {
   return (
     <section className={styles.container}>
       <section className={styles.left}>
+        {draft.publishAt && (
+          <span className={styles.publishAt}>
+            <FormattedMessage
+              defaultMessage="Scheduled for {date} {time}"
+              id="lr5qH7"
+              values={{
+                date: absolute({
+                  date: draft.publishAt,
+                  lang,
+                }),
+                time: absolute.timeISO(draft.publishAt),
+              }}
+            />
+          </span>
+        )}
         <h4 className={styles.title}>{draft.title}</h4>
         <span className={styles.content}>{draft.summary || draft.content}</span>
       </section>
