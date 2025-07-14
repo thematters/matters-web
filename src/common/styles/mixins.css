@@ -322,6 +322,7 @@
 @define-mixin line-clamp {
   display: -webkit-box;
   overflow: hidden;
+  text-overflow: ellipsis;
   -webkit-line-clamp: 1;
 
   /* autoprefixer: ignore next */
