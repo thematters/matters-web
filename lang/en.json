@@ -807,6 +807,10 @@
     "defaultMessage": "Articles",
     "description": "src/views/Me/Bookmarks/Tabs.tsx"
   },
+  "Ajy3De": {
+    "defaultMessage": "Curated Article",
+    "description": "src/components/Editor/PreviewDialog/Connections/index.tsx"
+  },
   "AlHYvk": {
     "defaultMessage": "{type} edited"
   },

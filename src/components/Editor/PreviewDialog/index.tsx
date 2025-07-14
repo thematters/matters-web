@@ -5,6 +5,7 @@ import { Dialog, useDialogSwitch } from '~/components'
 import { EditorPreviewDialogDraftFragment } from '~/gql/graphql'
 
 import { Campaign } from './Campaign'
+import { Connections } from './Connections'
 import { FeedDigest } from './FeedDigest'
 import styles from './styles.module.css'
 import { Tags } from './Tags'
@@ -13,9 +14,11 @@ const fragment = gql`
   fragment EditorPreviewDialogDraft on Draft {
     ...EditorPreviewDialogCampaignDraft
     ...FeedDigestDraft
+    ...EditorPreviewDialogConnectionsDraft
   }
   ${Campaign.fragment}
   ${FeedDigest.fragment}
+  ${Connections.fragment}
 `
 
 export type PreviewDialogButtons = {
@@ -92,6 +95,7 @@ const BaseEditorPreviewDialog = ({
             <section className={styles.settings}>
               <Campaign draft={draft} closeDialog={closeDialog} />
               <Tags draft={draft} closeDialog={closeDialog} />
+              <Connections draft={draft} closeDialog={closeDialog} />
             </section>
           </section>
         </Dialog.Content>

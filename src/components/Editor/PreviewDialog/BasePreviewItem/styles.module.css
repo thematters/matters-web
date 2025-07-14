@@ -26,9 +26,11 @@
     & .name {
       @mixin line-clamp;
 
+      max-width: 23.375rem;
       padding: var(--sp4) var(--sp8);
       color: var(--color-grey-darker);
       background: var(--color-grey-lighter);
+      border-radius: var(--sp8);
     }
   }
 

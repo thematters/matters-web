@@ -807,6 +807,10 @@
     "defaultMessage": "作品",
     "description": "src/views/Me/Bookmarks/Tabs.tsx"
   },
+  "Ajy3De": {
+    "defaultMessage": "关联作品",
+    "description": "src/components/Editor/PreviewDialog/Connections/index.tsx"
+  },
   "AlHYvk": {
     "defaultMessage": "{type}已编辑"
   },
