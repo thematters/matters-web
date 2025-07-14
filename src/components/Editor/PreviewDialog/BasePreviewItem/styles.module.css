@@ -24,6 +24,8 @@
     }
 
     & .name {
+      @mixin line-clamp;
+
       padding: var(--sp4) var(--sp8);
       color: var(--color-grey-darker);
       background: var(--color-grey-lighter);
