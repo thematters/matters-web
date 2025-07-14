@@ -33,7 +33,7 @@ const ConfirmButton = ({
   disabled?: boolean
 }) => (
   <>
-    <Media at="sm">
+    <Media lessThan="md">
       <Button
         size={[null, '2.125rem']}
         spacing={[0, 14]}
@@ -48,7 +48,7 @@ const ConfirmButton = ({
         </TextIcon>
       </Button>
     </Media>
-    <Media greaterThan="sm">
+    <Media greaterThanOrEqual="md">
       <Button
         size={[null, '2.375rem']}
         spacing={[0, 14]}
