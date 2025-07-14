@@ -2,7 +2,7 @@
   overflow-y: auto;
 
   @media (--sm-up) {
-    max-width: 25.25rem; /* 404px */
+    width: 25.25rem; /* 404px */
   }
 }
 
