@@ -2588,6 +2588,10 @@
   "gS1u3d": {
     "defaultMessage": "你還可以修改 {left} 次"
   },
+  "gccvX4": {
+    "defaultMessage": "標籤",
+    "description": "src/components/Editor/PreviewDialog/Tags/index.tsx"
+  },
   "gczcC5": {
     "defaultMessage": "訂閱"
   },

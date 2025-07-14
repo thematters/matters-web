@@ -2588,6 +2588,10 @@
   "gS1u3d": {
     "defaultMessage": "{left} modifications available"
   },
+  "gccvX4": {
+    "defaultMessage": "Tags",
+    "description": "src/components/Editor/PreviewDialog/Tags/index.tsx"
+  },
   "gczcC5": {
     "defaultMessage": "Subscribe"
   },

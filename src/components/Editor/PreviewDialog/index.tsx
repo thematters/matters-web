@@ -7,6 +7,7 @@ import { EditorPreviewDialogDraftFragment } from '~/gql/graphql'
 import { Campaign } from './Campaign'
 import { FeedDigest } from './FeedDigest'
 import styles from './styles.module.css'
+import { Tags } from './Tags'
 
 const fragment = gql`
   fragment EditorPreviewDialogDraft on Draft {
@@ -90,6 +91,7 @@ const BaseEditorPreviewDialog = ({
             </section>
             <section className={styles.settings}>
               <Campaign draft={draft} closeDialog={closeDialog} />
+              <Tags draft={draft} closeDialog={closeDialog} />
             </section>
           </section>
         </Dialog.Content>
