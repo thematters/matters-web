@@ -17,6 +17,12 @@
       font-weight: var(--font-medium);
     }
 
+    & .names {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--sp8);
+    }
+
     & .name {
       padding: var(--sp4) var(--sp8);
       color: var(--color-grey-darker);
