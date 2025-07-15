@@ -1600,6 +1600,9 @@
   "OKhRC6": {
     "defaultMessage": "分享"
   },
+  "OhSg5a": {
+    "defaultMessage": "限制級內容"
+  },
   "OjC4aZ": {
     "defaultMessage": "作者",
     "description": "src/components/ArticleComment/RoleLabel/index.tsx"
@@ -3616,6 +3619,9 @@
   },
   "zE51j6": {
     "defaultMessage": "發布失敗"
+  },
+  "zJLPmE": {
+    "defaultMessage": "允許評論"
   },
   "zKOr2x": {
     "defaultMessage": "已追蹤用戶佔總觀看人數比例",

@@ -9,6 +9,7 @@ import { Collection } from './Collection'
 import { Connections } from './Connections'
 import { FeedDigest } from './FeedDigest'
 import { License } from './License'
+import { Misc } from './Misc'
 import styles from './styles.module.css'
 import { Tags } from './Tags'
 
@@ -20,6 +21,7 @@ const fragment = gql`
     ...EditorPreviewDialogConnectionsDraft
     ...EditorPreviewDialogCollectionDraft
     ...EditorPreviewDialogLicenseDraft
+    ...EditorPreviewDialogMiscDraft
   }
   ${Campaign.fragment}
   ${FeedDigest.fragment}
@@ -27,6 +29,7 @@ const fragment = gql`
   ${Connections.fragment}
   ${Collection.fragment}
   ${License.fragment}
+  ${Misc.fragment}
 `
 
 export type PreviewDialogButtons = {
@@ -124,6 +127,7 @@ const BaseEditorPreviewDialog = ({
 
               {showHr && <hr />}
               <License draft={draft} closeDialog={closeDialog} />
+              <Misc draft={draft} closeDialog={closeDialog} />
             </section>
           </section>
         </Dialog.Content>

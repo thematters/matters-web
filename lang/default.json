@@ -1600,6 +1600,9 @@
   "OKhRC6": {
     "defaultMessage": "Share"
   },
+  "OhSg5a": {
+    "defaultMessage": "Sensitive by author"
+  },
   "OjC4aZ": {
     "defaultMessage": "Author",
     "description": "src/components/ArticleComment/RoleLabel/index.tsx"
@@ -3616,6 +3619,9 @@
   },
   "zE51j6": {
     "defaultMessage": "Failed to publish, please try again."
+  },
+  "zJLPmE": {
+    "defaultMessage": "Allow comments"
   },
   "zKOr2x": {
     "defaultMessage": "Conversion Rate of Followers",
