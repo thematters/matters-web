@@ -8,6 +8,7 @@ import { Campaign } from './Campaign'
 import { Collection } from './Collection'
 import { Connections } from './Connections'
 import { FeedDigest } from './FeedDigest'
+import { License } from './License'
 import styles from './styles.module.css'
 import { Tags } from './Tags'
 
@@ -17,11 +18,13 @@ const fragment = gql`
     ...FeedDigestDraft
     ...EditorPreviewDialogConnectionsDraft
     ...EditorPreviewDialogCollectionDraft
+    ...EditorPreviewDialogLicenseDraft
   }
   ${Campaign.fragment}
   ${FeedDigest.fragment}
   ${Connections.fragment}
   ${Collection.fragment}
+  ${License.fragment}
 `
 
 export type PreviewDialogButtons = {
@@ -100,7 +103,7 @@ const BaseEditorPreviewDialog = ({
               <Tags draft={draft} closeDialog={closeDialog} />
               <Connections draft={draft} closeDialog={closeDialog} />
               <Collection draft={draft} closeDialog={closeDialog} />
-              <hr />
+              <License draft={draft} closeDialog={closeDialog} />
             </section>
           </section>
         </Dialog.Content>
