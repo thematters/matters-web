@@ -5,8 +5,8 @@ import IconTimes from '@/public/static/icons/24px/times.svg'
 import { Button, Icon, useRoute } from '~/components'
 
 import { DraftLoadingStates } from '../DraftLoadingStates'
-import { useDraftDetail } from '../hooks'
-import { OptionContent, OptionTab } from '../OptionContent'
+import { getOptionTabByType, OptionTab, useDraftDetail } from '../hooks'
+import { OptionContent } from '../OptionContent'
 import styles from './styles.module.css'
 
 const OptionsPage = () => {
@@ -24,15 +24,7 @@ const OptionsPage = () => {
 
   const { getQuery } = useRoute()
   const type = getQuery('type')
-  const [tab, setTab] = useState<OptionTab>(
-    type === 'campaign' ||
-      type === 'tags' ||
-      type === 'connections' ||
-      type === 'collections' ||
-      type === undefined
-      ? 'settings'
-      : 'contentAndLayout'
-  )
+  const [tab, setTab] = useState<OptionTab>(getOptionTabByType(type))
 
   const goBack = () => {
     window.history.back()

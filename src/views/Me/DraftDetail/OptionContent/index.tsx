@@ -15,6 +15,7 @@ import {
 import { EditMetaDraftFragment } from '~/gql/graphql'
 
 import {
+  OptionTab,
   useEditDraftAccess,
   useEditDraftCampaign,
   useEditDraftCanComment,
@@ -40,8 +41,6 @@ export type OptionContentProps = {
     ApolloQueryResult<DraftDetailViewerQueryQuery>
   >
 }
-
-export type OptionTab = 'contentAndLayout' | 'settings'
 
 type OptionItemProps = OptionContentProps & { disabled: boolean }
 

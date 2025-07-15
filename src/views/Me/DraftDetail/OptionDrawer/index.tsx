@@ -3,7 +3,8 @@ import { useIntl } from 'react-intl'
 
 import { Drawer } from '~/components'
 
-import { OptionContent, OptionContentProps, OptionTab } from '../OptionContent'
+import { getOptionTabByType, OptionTab } from '../hooks'
+import { OptionContent, OptionContentProps } from '../OptionContent'
 
 type OptionDrawerProps = {
   isOpen: boolean
@@ -39,17 +40,7 @@ export const OptionDrawer: React.FC<OptionDrawerProps> = ({
         type: string
       }>
       const type = customEvent.detail.type
-      if (
-        type === 'campaign' ||
-        type === 'tags' ||
-        type === 'connections' ||
-        type === 'collections' ||
-        type === undefined
-      ) {
-        setTab('contentAndLayout')
-      } else {
-        setTab('settings')
-      }
+      setTab(getOptionTabByType(type))
       toggleDrawer()
     }
     window.addEventListener('open-drawer', handleOpenDrawer)
