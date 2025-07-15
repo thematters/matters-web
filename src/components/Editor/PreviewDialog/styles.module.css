@@ -1,0 +1,17 @@
+.container {
+  overflow-y: auto;
+
+  @media (--sm-up) {
+    width: 25.25rem; /* 404px */
+  }
+}
+
+.campaign,
+.response {
+  padding: var(--sp16);
+}
+
+.title {
+  padding-bottom: var(--sp16);
+  font-size: var(--font-size-base);
+}

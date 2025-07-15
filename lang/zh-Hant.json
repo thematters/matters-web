@@ -1005,9 +1005,6 @@
   "E+dEI9": {
     "defaultMessage": "有了你的支持，我將能夠蓄積更多能量創作"
   },
-  "E048/V": {
-    "defaultMessage": "存至草稿"
-  },
   "E0xjVb": {
     "defaultMessage": "在已刪除動態中留言",
     "description": "src/components/Notice/CommentNotice/MomentNewCommentNotice.tsx"
@@ -2274,6 +2271,10 @@
     "defaultMessage": "聊幾句？",
     "description": "src/components/Forms/MomentCommentForm/index.tsx"
   },
+  "b0JEjP": {
+    "defaultMessage": "預覽作品",
+    "description": "src/components/Editor/PreviewDialog/index.tsx"
+  },
   "b0RNGM": {
     "defaultMessage": "你的作品 {articleTitle} 已被列為活動精選，快來看看更多精彩好文！",
     "description": "src/components/Notice/CampaignArticleNotice/CampaignArticleFeaturedNotice.tsx"
@@ -2856,6 +2857,9 @@
   "lqdpsm": {
     "defaultMessage": "回到訂閱"
   },
+  "lr5qH7": {
+    "defaultMessage": "排程於 {date} {time}"
+  },
   "m+cdhC": {
     "defaultMessage": "近期使用"
   },
@@ -3232,6 +3236,9 @@
   },
   "tFeVR6": {
     "defaultMessage": "摘要文字上限為 {maxLength} 字"
+  },
+  "tGHG7q": {
+    "defaultMessage": "返回修改"
   },
   "tIDG14": {
     "defaultMessage": "非法廣告"
