@@ -359,7 +359,7 @@ const BaseDraftDetail = () => {
           <Media greaterThan="sm">
             <DynamicOptionDrawer
               isOpen={isOpenOptionDrawer}
-              onClose={toggleOptionDrawer}
+              toggleDrawer={toggleOptionDrawer}
               draft={draft}
               draftViewer={viewerData}
               campaigns={appliedCampaigns}

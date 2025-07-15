@@ -1,5 +1,4 @@
 import { ApolloQueryResult } from '@apollo/client'
-import { useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { ENTITY_TYPE } from '~/common/enums'
@@ -30,8 +29,9 @@ import {
 } from '../hooks'
 import styles from './styles.module.css'
 
-export interface OptionContentProps {
+export type OptionContentProps = {
   draft: EditMetaDraftFragment
+
   draftViewer?: DraftDetailViewerQueryQuery
   campaigns?: EditorSelectCampaignFragment[]
   ownCircles?: DigestRichCirclePublicFragment[]
@@ -40,6 +40,8 @@ export interface OptionContentProps {
     ApolloQueryResult<DraftDetailViewerQueryQuery>
   >
 }
+
+export type OptionTab = 'contentAndLayout' | 'settings'
 
 type OptionItemProps = OptionContentProps & { disabled: boolean }
 
@@ -238,13 +240,15 @@ const EditDraftISCN = ({ draft }: OptionItemProps) => {
   )
 }
 
-export const OptionContent = (props: OptionContentProps) => {
-  const [type, setType] = useState<'contentAndLayout' | 'settings'>(
-    'contentAndLayout'
-  )
-
-  const isContentAndLayout = type === 'contentAndLayout'
-  const isSettings = type === 'settings'
+export const OptionContent = (
+  props: OptionContentProps & {
+    tab: OptionTab
+    setTab: (tab: OptionTab) => void
+  }
+) => {
+  const { tab, setTab } = props
+  const isContentAndLayout = tab === 'contentAndLayout'
+  const isSettings = tab === 'settings'
 
   const isPending = props.draft.publishState === 'pending'
   const isPublished = props.draft.publishState === 'published'
@@ -257,7 +261,7 @@ export const OptionContent = (props: OptionContentProps) => {
         <Tabs noSpacing fill>
           <Tabs.Tab
             selected={isContentAndLayout}
-            onClick={() => setType('contentAndLayout')}
+            onClick={() => setTab('contentAndLayout')}
           >
             <FormattedMessage
               defaultMessage="Content and Layout"
@@ -266,7 +270,7 @@ export const OptionContent = (props: OptionContentProps) => {
             />
           </Tabs.Tab>
 
-          <Tabs.Tab selected={isSettings} onClick={() => setType('settings')}>
+          <Tabs.Tab selected={isSettings} onClick={() => setTab('settings')}>
             <FormattedMessage
               defaultMessage="Settings"
               id="Mu2Jy8"
