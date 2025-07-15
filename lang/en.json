@@ -103,6 +103,10 @@
   "/IMR+8": {
     "defaultMessage": "Top Supporters"
   },
+  "/MS+jK": {
+    "defaultMessage": "Collection",
+    "description": "src/components/Editor/PreviewDialog/Collections/index.tsx"
+  },
   "/TXBJR": {
     "defaultMessage": "Unknown error. Please try again later.",
     "description": "UNKNOWN_ERROR"

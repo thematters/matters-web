@@ -103,6 +103,10 @@
   "/IMR+8": {
     "defaultMessage": "支持排行榜"
   },
+  "/MS+jK": {
+    "defaultMessage": "選集",
+    "description": "src/components/Editor/PreviewDialog/Collections/index.tsx"
+  },
   "/TXBJR": {
     "defaultMessage": "不知道哪裏出錯了，過幾分鐘看看",
     "description": "UNKNOWN_ERROR"

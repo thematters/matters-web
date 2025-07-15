@@ -2,6 +2,8 @@
   overflow-y: auto;
 
   @media (--sm-up) {
+    @mixin scrollbar-thin;
+
     width: 25.25rem; /* 404px */
   }
 
