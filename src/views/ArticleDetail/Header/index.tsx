@@ -2,12 +2,7 @@ import Link from 'next/link'
 import { useContext } from 'react'
 
 import { analytics, toPath } from '~/common/utils'
-import {
-  BackToHomeMobileButton,
-  DotDivider,
-  LanguageContext,
-  Media,
-} from '~/components'
+import { DotDivider, LanguageContext } from '~/components'
 import { HeaderArticleFragment } from '~/gql/graphql'
 
 import { fragments } from './gql'
@@ -27,10 +22,6 @@ const Header = ({ article }: HeaderProps) => {
 
   return (
     <section className={styles.header}>
-      <Media at="sm" className={styles.mobileLogo}>
-        <BackToHomeMobileButton />
-      </Media>
-
       {campaign && (
         <Link
           className={styles.campaign}
