@@ -37,7 +37,6 @@ export const License = ({
 
   return (
     <>
-      <hr />
       <BasePreviewItem
         title={title}
         names={[subtitle]}

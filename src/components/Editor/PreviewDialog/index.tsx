@@ -16,12 +16,14 @@ const fragment = gql`
   fragment EditorPreviewDialogDraft on Draft {
     ...EditorPreviewDialogCampaignDraft
     ...FeedDigestDraft
+    ...EditorPreviewDialogTagsDraft
     ...EditorPreviewDialogConnectionsDraft
     ...EditorPreviewDialogCollectionDraft
     ...EditorPreviewDialogLicenseDraft
   }
   ${Campaign.fragment}
   ${FeedDigest.fragment}
+  ${Tags.fragment}
   ${Connections.fragment}
   ${Collection.fragment}
   ${License.fragment}
@@ -61,6 +63,16 @@ const BaseEditorPreviewDialog = ({
     baseOpenDialog()
   }
 
+  const { campaign } = draft.campaigns?.[0] ?? { campaign: null }
+  const hasCampaign = campaign !== null
+  const hasTags = !!draft.tags && draft.tags.length > 0
+  const hasConnections =
+    !!draft.connections && (draft.connections.edges?.length ?? 0) > 0
+  const hasCollections =
+    !!draft.collections && (draft.collections.edges?.length ?? 0) > 0
+
+  const showHr = hasCampaign || hasTags || hasConnections || hasCollections
+
   return (
     <>
       {children({ openDialog })}
@@ -99,10 +111,18 @@ const BaseEditorPreviewDialog = ({
               <FeedDigest draft={draft} />
             </section>
             <section className={styles.settings}>
-              <Campaign draft={draft} closeDialog={closeDialog} />
-              <Tags draft={draft} closeDialog={closeDialog} />
-              <Connections draft={draft} closeDialog={closeDialog} />
-              <Collection draft={draft} closeDialog={closeDialog} />
+              {hasCampaign && (
+                <Campaign draft={draft} closeDialog={closeDialog} />
+              )}
+              {hasTags && <Tags draft={draft} closeDialog={closeDialog} />}
+              {hasConnections && (
+                <Connections draft={draft} closeDialog={closeDialog} />
+              )}
+              {hasCollections && (
+                <Collection draft={draft} closeDialog={closeDialog} />
+              )}
+
+              {showHr && <hr />}
               <License draft={draft} closeDialog={closeDialog} />
             </section>
           </section>
