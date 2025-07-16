@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import IconInfo from '@/public/static/icons/24px/information.svg'
+import IconInfoFill from '@/public/static/icons/24px/information-fill.svg'
 import { featureSupportedChains } from '~/common/utils'
 import {
   BillboardDialog,
@@ -121,7 +122,7 @@ export const Billboard = ({ tokenId, type }: BillboardProps) => {
                       openBillboardDialog()
                     }}
                   >
-                    <Icon icon={IconInfo} size={24} />
+                    <Icon icon={IconInfoFill} size={24} />
                   </button>
                 </Media>
                 <BillboardExposureTracker id={id} type={type} />

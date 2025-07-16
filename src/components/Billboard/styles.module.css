@@ -53,7 +53,7 @@
   & .mdButton {
     position: absolute;
     top: var(--sp8);
-    right: var(--sp14);
+    left: var(--sp14);
     color: var(--color-grey);
   }
 }
