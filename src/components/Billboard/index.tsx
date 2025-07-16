@@ -67,25 +67,25 @@ export const Billboard = ({ tokenId, type }: BillboardProps) => {
   }
   console.log({ GOOGLE_ADS_ELIGIBLE_ADDRESS })
   return (
-    <BillboardDialog>
-      {({ openDialog: openBillboardDialog }) => {
-        return (
-          <div className={styles.billboard}>
-            <AdSenseUnit
-              adFormat={adFormat}
-              isResponsive={isResponsive}
-              style={{
-                display: 'inline-block',
-                width: adWidth,
-                height: adHeight,
-                maxWidth: adMaxWidth,
-                maxHeight: adMaxHeight,
-                overflow: 'hidden',
-              }}
-              onAdFilled={() => setAdsenseFilled(true)}
-            />
+    <div className={styles.billboard}>
+      <AdSenseUnit
+        adFormat={adFormat}
+        isResponsive={isResponsive}
+        style={{
+          display: 'inline-block',
+          width: adWidth,
+          height: adHeight,
+          maxWidth: adMaxWidth,
+          maxHeight: adMaxHeight,
+          overflow: 'hidden',
+        }}
+        onAdFilled={() => setAdsenseFilled(true)}
+      />
 
-            {adsenseFilled && (
+      {adsenseFilled && (
+        <BillboardDialog>
+          {({ openDialog: openBillboardDialog }) => {
+            return (
               <>
                 <Media lessThan="md">
                   <button
@@ -126,12 +126,13 @@ export const Billboard = ({ tokenId, type }: BillboardProps) => {
                 </Media>
                 <BillboardExposureTracker id={id} type={type} />
               </>
-            )}
-          </div>
-        )
-      }}
-    </BillboardDialog>
+            )
+          }}
+        </BillboardDialog>
+      )}
+    </div>
   )
+
   // return (
   //   <BillboardDialog>
   //     {({ openDialog: openBillboardDialog }) => {
