@@ -333,6 +333,10 @@
   "39AHJm": {
     "defaultMessage": "注册"
   },
+  "3EMGys": {
+    "defaultMessage": "为了提升广告位利用率与租借收入，将引入 Google AD Sense 内容，并维持租借收入回馈给社区创作者。更多详情请查看 {announcements}。",
+    "description": "src/components/Dialogs/BillboardDialog/Content.tsx"
+  },
   "3EeDnu": {
     "defaultMessage": "贴上 JSFiddle 或 CodePen 链接后，Enter 进行新增"
   },
@@ -1440,10 +1444,6 @@
     "defaultMessage": "人",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
   },
-  "MP6xe/": {
-    "defaultMessage": "Billboard 是一个公开且可付费租借的链上 NFT 广告协议。租借成功后，可以进行14天的内容投放。租借费用基于哈柏格税概念计算，产生的租借收入将以二次方配捐方式回馈给社区创作者。更多详情请查看{announcements}。",
-    "description": "src/components/Dialogs/BillboardDialog/Content.tsx"
-  },
   "MPEeBy": {
     "defaultMessage": "操作失败，请稍候重试",
     "description": "ACTION_FAILED"
@@ -1653,6 +1653,10 @@
   "QUqfbW": {
     "defaultMessage": "说说围炉的有趣之处，吸引支持者加入",
     "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
+  },
+  "QWU/Cf": {
+    "defaultMessage": "Billboard 是一个公开且可付费租借的链上 NFT 广告协议。租借成功后，可进行 14 天的内容投放。租借费用基于哈伯格税概念计算，产生的租借收入将以二次方配捐方式回馈给社区创作者。",
+    "description": "src/components/Dialogs/BillboardDialog/Content.tsx"
   },
   "QXJQ5G": {
     "defaultMessage": "授权信息已失效，请重新登入",
