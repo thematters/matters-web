@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import IconInfo from '@/public/static/icons/24px/information.svg'
-import { analytics, featureSupportedChains } from '~/common/utils'
+import { featureSupportedChains } from '~/common/utils'
 import {
   BillboardDialog,
   BillboardExposureTracker,
@@ -65,118 +65,114 @@ export const Billboard = ({ tokenId, type }: BillboardProps) => {
   if (!id || isError || isLoading || !data || !data.contentURI) {
     return null
   }
-
-  // Only check for essential conditions since AdSenseUnit doesn't depend on legacy billboard data
-  if (registryAddress === GOOGLE_ADS_ELIGIBLE_ADDRESS) {
-    return (
-      <BillboardDialog>
-        {({ openDialog: openBillboardDialog }) => {
-          return (
-            <div className={styles.billboard}>
-              <AdSenseUnit
-                adFormat={adFormat}
-                isResponsive={isResponsive}
-                style={{
-                  display: 'inline-block',
-                  width: adWidth,
-                  height: adHeight,
-                  maxWidth: adMaxWidth,
-                  maxHeight: adMaxHeight,
-                  overflow: 'hidden',
-                }}
-                onAdFilled={() => setAdsenseFilled(true)}
-              />
-
-              {adsenseFilled && (
-                <>
-                  <Media lessThan="md">
-                    <button
-                      className={styles.button}
-                      type="button"
-                      aria-label={intl.formatMessage({
-                        defaultMessage: "What's this?",
-                        id: '4wOWfp',
-                        description: 'src/components/Billboard/index.tsx',
-                      })}
-                      onClick={openBillboardDialog}
-                    >
-                      <TextIcon icon={<Icon icon={IconInfo} />} size={12}>
-                        <FormattedMessage
-                          defaultMessage="What's this?"
-                          id="4wOWfp"
-                          description="src/components/Billboard/index.tsx"
-                        />
-                      </TextIcon>
-                    </button>
-                  </Media>
-                  <Media greaterThanOrEqual="md">
-                    <button
-                      className={styles.mdButton}
-                      type="button"
-                      aria-label={intl.formatMessage({
-                        defaultMessage: "What's this?",
-                        id: '4wOWfp',
-                        description: 'src/components/Billboard/index.tsx',
-                      })}
-                      onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
-                        e.stopPropagation()
-                        openBillboardDialog()
-                      }}
-                    >
-                      <Icon icon={IconInfo} size={24} />
-                    </button>
-                  </Media>
-                  <BillboardExposureTracker id={id} type={type} />
-                </>
-              )}
-            </div>
-          )
-        }}
-      </BillboardDialog>
-    )
-  }
-
+  console.log({ GOOGLE_ADS_ELIGIBLE_ADDRESS })
   return (
     <BillboardDialog>
       {({ openDialog: openBillboardDialog }) => {
         return (
           <div className={styles.billboard}>
-            <a
-              href={data.redirectURI}
-              target="_blank"
-              onClick={() =>
-                analytics.trackEvent('click_billboard', {
-                  id,
-                  type,
-                  target: data.redirectURI,
-                })
-              }
-            >
-              <img src={data.contentURI} alt="ad" loading="lazy" />
-            </a>
+            <AdSenseUnit
+              adFormat={adFormat}
+              isResponsive={isResponsive}
+              style={{
+                display: 'inline-block',
+                width: adWidth,
+                height: adHeight,
+                maxWidth: adMaxWidth,
+                maxHeight: adMaxHeight,
+                overflow: 'hidden',
+              }}
+              onAdFilled={() => setAdsenseFilled(true)}
+            />
 
-            <button
-              className={styles.button}
-              type="button"
-              aria-label={intl.formatMessage({
-                defaultMessage: "What's this?",
-                id: '4wOWfp',
-                description: 'src/components/Billboard/index.tsx',
-              })}
-              onClick={openBillboardDialog}
-            >
-              <TextIcon icon={<Icon icon={IconInfo} />} size={12}>
-                <FormattedMessage
-                  defaultMessage="What's this?"
-                  id="4wOWfp"
-                  description="src/components/Billboard/index.tsx"
-                />
-              </TextIcon>
-            </button>
-            <BillboardExposureTracker id={id} type={type} />
+            {adsenseFilled && (
+              <>
+                <Media lessThan="md">
+                  <button
+                    className={styles.button}
+                    type="button"
+                    aria-label={intl.formatMessage({
+                      defaultMessage: "What's this?",
+                      id: '4wOWfp',
+                      description: 'src/components/Billboard/index.tsx',
+                    })}
+                    onClick={openBillboardDialog}
+                  >
+                    <TextIcon icon={<Icon icon={IconInfo} />} size={12}>
+                      <FormattedMessage
+                        defaultMessage="What's this?"
+                        id="4wOWfp"
+                        description="src/components/Billboard/index.tsx"
+                      />
+                    </TextIcon>
+                  </button>
+                </Media>
+                <Media greaterThanOrEqual="md">
+                  <button
+                    className={styles.mdButton}
+                    type="button"
+                    aria-label={intl.formatMessage({
+                      defaultMessage: "What's this?",
+                      id: '4wOWfp',
+                      description: 'src/components/Billboard/index.tsx',
+                    })}
+                    onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+                      e.stopPropagation()
+                      openBillboardDialog()
+                    }}
+                  >
+                    <Icon icon={IconInfo} size={24} />
+                  </button>
+                </Media>
+                <BillboardExposureTracker id={id} type={type} />
+              </>
+            )}
           </div>
         )
       }}
     </BillboardDialog>
   )
+  // return (
+  //   <BillboardDialog>
+  //     {({ openDialog: openBillboardDialog }) => {
+  //       return (
+  //         <div className={styles.billboard}>
+  //           <a
+  //             href={data.redirectURI}
+  //             target="_blank"
+  //             onClick={() =>
+  //               analytics.trackEvent('click_billboard', {
+  //                 id,
+  //                 type,
+  //                 target: data.redirectURI,
+  //               })
+  //             }
+  //           >
+  //             <img src={data.contentURI} alt="ad" loading="lazy" />
+  //           </a>
+
+  //           <button
+  //             className={styles.button}
+  //             type="button"
+  //             aria-label={intl.formatMessage({
+  //               defaultMessage: "What's this?",
+  //               id: '4wOWfp',
+  //               description: 'src/components/Billboard/index.tsx',
+  //             })}
+  //             onClick={openBillboardDialog}
+  //           >
+  //             <TextIcon icon={<Icon icon={IconInfo} />} size={12}>
+  //               <FormattedMessage
+  //                 defaultMessage="What's this?"
+  //                 id="4wOWfp"
+  //                 description="src/components/Billboard/index.tsx"
+  //               />
+  //             </TextIcon>
+  //           </button>
+  //           <BillboardExposureTracker id={id} type={type} />
+  //         </div>
+  //       )
+  //     }}
+  //   </BillboardDialog>
+  // )
 }
