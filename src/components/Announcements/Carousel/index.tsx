@@ -31,7 +31,6 @@ const Carousel = ({ items }: CarouselProps) => {
   const [carousel, carouselApi] = useEmblaCarousel({
     loop: true,
     skipSnaps: false,
-    watchDrag: items?.length && items.length > 1 ? true : false,
   })
 
   // state of carusel

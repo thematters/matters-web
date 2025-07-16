@@ -1,12 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react'
 
-import { PATHS } from '~/common/enums'
-import { Layout, SpinnerBlock, useRoute, ViewerContext } from '~/components'
+import { redirectToLogin } from '~/common/utils'
+import { Layout, SpinnerBlock, ViewerContext } from '~/components'
 
 export const Protected: React.FC<{ children?: React.ReactNode }> = ({
   children,
 }) => {
-  const { router } = useRoute()
   const viewer = useContext(ViewerContext)
   const [hasMounted, setHasMounted] = useState(false)
 
@@ -16,7 +15,7 @@ export const Protected: React.FC<{ children?: React.ReactNode }> = ({
 
   useEffect(() => {
     if (hasMounted && !viewer.isAuthed) {
-      router.push(PATHS.HOME)
+      redirectToLogin()
     }
   }, [hasMounted, viewer.isAuthed])
 

@@ -438,7 +438,11 @@
  */
 .u-article-title {
   position: relative;
-  margin: 0 0 var(--ar17-100) 0;
+  margin: var(--ar17-100) 0;
+
+  @media (--sm-up) {
+    margin: 0 0 var(--ar17-100) 0;
+  }
 }
 
 .u-article-title h1,
