@@ -3,7 +3,7 @@ import gql from 'graphql-tag'
 import Link from 'next/link'
 import { useIntl } from 'react-intl'
 
-import IconStar from '@/public/static/icons/24px/star.svg'
+import IconEditorPin from '@/public/static/icons/24px/editor-pin.svg'
 import { TEST_ID } from '~/common/enums'
 import { toPath } from '~/common/utils'
 import {
@@ -116,7 +116,11 @@ export const ArticleDigestCurated = ({
               placement="bottom"
             >
               <div className={styles.pinned}>
-                <Icon icon={IconStar} size={20} color="white" />
+                <Icon
+                  icon={IconEditorPin}
+                  size={35}
+                  color="newPaletteSecondary700"
+                />
               </div>
             </Tooltip>
           )}
