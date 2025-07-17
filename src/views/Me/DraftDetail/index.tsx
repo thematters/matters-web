@@ -354,8 +354,6 @@ const BaseDraftDetail = () => {
             upload={async (props) => addRequest(() => upload(props))}
           />
 
-          <PublishState draft={draft} />
-
           <Media greaterThan="sm">
             <DynamicOptionDrawer
               isOpen={isOpenOptionDrawer}

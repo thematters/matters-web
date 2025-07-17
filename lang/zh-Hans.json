@@ -1693,6 +1693,10 @@
     "defaultMessage": "主标题",
     "description": "src/components/Editor"
   },
+  "QOLRFh": {
+    "defaultMessage": "作品已成功发布，稍后将同步到 IPFS",
+    "description": "src/views/Me/DraftDetail/PublishState/index.tsx"
+  },
   "QQSdHP": {
     "defaultMessage": "查看更多"
   },
@@ -1957,6 +1961,10 @@
   "UxAA/V": {
     "defaultMessage": "Optimism 是基于以太坊的第二层（Layer2）扩容方案，能提升交易速度，并降低手续费，同时确保安全性，让你更轻松地支持创作者。",
     "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
+  },
+  "V1Lts1": {
+    "defaultMessage": "发布中，请稍候⋯",
+    "description": "src/components/Editor/PreviewDialog/index.tsx"
   },
   "V5OMr4": {
     "defaultMessage": "什么是数字钱包？",

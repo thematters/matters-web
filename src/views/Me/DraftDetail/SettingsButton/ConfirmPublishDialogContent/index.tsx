@@ -1,10 +1,10 @@
-import gql from 'graphql-tag'
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import IMAGE_PUBLISH from '@/public/static/images/publish-1.svg?url'
 import { analytics } from '~/common/utils'
 import { Dialog, useMutation, useRoute, ViewerContext } from '~/components'
+import PUBLISH_ARTICLE from '~/components/GQL/mutations/publishArticle'
 import { PublishArticleMutation } from '~/gql/graphql'
 
 import styles from './styles.module.css'
@@ -13,15 +13,6 @@ interface ConfirmPublishDialogContentProps {
   onBack: () => void
   closeDialog: () => void
 }
-
-const PUBLISH_ARTICLE = gql`
-  mutation PublishArticle($id: ID!) {
-    publishArticle(input: { id: $id }) {
-      id
-      publishState
-    }
-  }
-`
 
 const ConfirmPublishDialogContent: React.FC<
   ConfirmPublishDialogContentProps

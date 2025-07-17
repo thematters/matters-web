@@ -1,8 +1,20 @@
 import gql from 'graphql-tag'
+import { useContext } from 'react'
+import baseToast from 'react-hot-toast'
 import { FormattedMessage } from 'react-intl'
 
-import { Dialog, useDialogSwitch } from '~/components'
-import { EditorPreviewDialogDraftFragment } from '~/gql/graphql'
+import {
+  Dialog,
+  toast,
+  useDialogSwitch,
+  useMutation,
+  ViewerContext,
+} from '~/components'
+import PUBLISH_ARTICLE from '~/components/GQL/mutations/publishArticle'
+import {
+  EditorPreviewDialogDraftFragment,
+  PublishArticleMutation,
+} from '~/gql/graphql'
 
 import { Campaign } from './Campaign'
 import { Collection } from './Collection'
@@ -52,7 +64,7 @@ const BaseEditorPreviewDialog = ({
   disabled,
   confirmButtonText,
   cancelButtonText,
-  onConfirm,
+  onConfirm: onConfirmProp,
 
   children,
 }: EditorPreviewDialogProps) => {
@@ -62,8 +74,37 @@ const BaseEditorPreviewDialog = ({
     closeDialog,
   } = useDialogSwitch(true)
 
+  const viewer = useContext(ViewerContext)
+  const [publish, { loading: publishLoading }] =
+    useMutation<PublishArticleMutation>(PUBLISH_ARTICLE, {
+      update(cache) {
+        cache.evict({ id: cache.identify(viewer), fieldName: 'articles' })
+        cache.evict({ id: cache.identify(viewer), fieldName: 'writings' })
+        cache.gc()
+      },
+      onQueryUpdated(observableQuery) {
+        return observableQuery.refetch()
+      },
+    })
+
   const openDialog = () => {
     baseOpenDialog()
+  }
+
+  const onConfirm = () => {
+    baseToast.dismiss()
+
+    toast.success({
+      message: (
+        <FormattedMessage
+          defaultMessage="Publishing, please wait..."
+          id="V1Lts1"
+          description="src/components/Editor/PreviewDialog/index.tsx"
+        />
+      ),
+    })
+    publish({ variables: { id: draft.id } })
+    onConfirmProp?.()
   }
 
   const { campaign } = draft.campaigns?.[0] ?? { campaign: null }
@@ -100,11 +141,9 @@ const BaseEditorPreviewDialog = ({
           rightBtn={
             <Dialog.TextButton
               text={confirmButtonText}
-              onClick={() => {
-                onConfirm?.()
-              }}
-              loading={saving}
-              disabled={disabled}
+              onClick={onConfirm}
+              loading={saving || publishLoading}
+              disabled={disabled || publishLoading}
             />
           }
         />
@@ -140,14 +179,13 @@ const BaseEditorPreviewDialog = ({
                   text={cancelButtonText}
                   color="greyDarker"
                   onClick={closeDialog}
+                  disabled={saving || publishLoading}
                 />
                 <Dialog.TextButton
                   text={confirmButtonText}
-                  onClick={() => {
-                    onConfirm?.()
-                  }}
-                  loading={saving}
-                  disabled={disabled}
+                  onClick={onConfirm}
+                  loading={saving || publishLoading}
+                  disabled={disabled || publishLoading}
                 />
               </>
             }
