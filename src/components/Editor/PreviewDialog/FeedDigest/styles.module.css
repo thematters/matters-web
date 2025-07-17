@@ -57,6 +57,7 @@
     & .coverPlaceholder {
       @mixin flex-center-all;
 
+      height: 100%;
       background-color: var(--color-grey-lighter);
       border-radius: var(--sp8);
     }
