@@ -45,6 +45,10 @@
     "defaultMessage": "移至頂部",
     "description": "src/components/ArticleDigest/DropdownActions/SetTopCollectionButton.tsx"
   },
+  "+SgLoK": {
+    "defaultMessage": "活動",
+    "description": "src/components/Editor/PreviewDialog/Campaign/index.tsx"
+  },
   "+a+2ug": {
     "defaultMessage": "成員"
   },
@@ -98,6 +102,10 @@
   },
   "/IMR+8": {
     "defaultMessage": "支持排行榜"
+  },
+  "/MS+jK": {
+    "defaultMessage": "選集",
+    "description": "src/components/Editor/PreviewDialog/Collections/index.tsx"
   },
   "/TXBJR": {
     "defaultMessage": "不知道哪裏出錯了，過幾分鐘看看",
@@ -802,6 +810,10 @@
   "Ajc5SE": {
     "defaultMessage": "作品",
     "description": "src/views/Me/Bookmarks/Tabs.tsx"
+  },
+  "Ajy3De": {
+    "defaultMessage": "關聯作品",
+    "description": "src/components/Editor/PreviewDialog/Connections/index.tsx"
   },
   "AlHYvk": {
     "defaultMessage": "{type}已編輯"
@@ -2583,6 +2595,10 @@
   },
   "gS1u3d": {
     "defaultMessage": "你還可以修改 {left} 次"
+  },
+  "gccvX4": {
+    "defaultMessage": "標籤",
+    "description": "src/components/Editor/PreviewDialog/Tags/index.tsx"
   },
   "gczcC5": {
     "defaultMessage": "訂閱"

@@ -4,13 +4,24 @@ import { FormattedMessage } from 'react-intl'
 import { Dialog, useDialogSwitch } from '~/components'
 import { EditorPreviewDialogDraftFragment } from '~/gql/graphql'
 
+import { Campaign } from './Campaign'
+import { Collection } from './Collection'
+import { Connections } from './Connections'
 import { FeedDigest } from './FeedDigest'
 import styles from './styles.module.css'
+import { Tags } from './Tags'
 
 const fragment = gql`
   fragment EditorPreviewDialogDraft on Draft {
+    ...EditorPreviewDialogCampaignDraft
     ...FeedDigestDraft
+    ...EditorPreviewDialogConnectionsDraft
+    ...EditorPreviewDialogCollectionDraft
   }
+  ${Campaign.fragment}
+  ${FeedDigest.fragment}
+  ${Connections.fragment}
+  ${Collection.fragment}
 `
 
 export type PreviewDialogButtons = {
@@ -80,11 +91,18 @@ const BaseEditorPreviewDialog = ({
           }
         />
         <Dialog.Content>
-          <ul className={styles.container} role="list">
-            <li>
+          <section className={styles.container}>
+            <section className={styles.feedDigest}>
               <FeedDigest draft={draft} />
-            </li>
-          </ul>
+            </section>
+            <section className={styles.settings}>
+              <Campaign draft={draft} closeDialog={closeDialog} />
+              <Tags draft={draft} closeDialog={closeDialog} />
+              <Connections draft={draft} closeDialog={closeDialog} />
+              <Collection draft={draft} closeDialog={closeDialog} />
+              <hr />
+            </section>
+          </section>
         </Dialog.Content>
 
         {(confirmButtonText || cancelButtonText) && (

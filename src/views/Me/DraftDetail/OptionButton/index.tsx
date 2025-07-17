@@ -17,14 +17,14 @@ export const OptionButton = ({ onClick }: { onClick: () => void }) => {
   }
   return (
     <>
-      <Media at="sm">
+      <Media lessThan="md">
         <OptionButtonContent
           size="2.125rem"
           onClick={goToOptionsPage}
           showIcon={false}
         />
       </Media>
-      <Media greaterThan="sm">
+      <Media greaterThanOrEqual="md">
         <OptionButtonContent
           size="2.375rem"
           onClick={onClick}

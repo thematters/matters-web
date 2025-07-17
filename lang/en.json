@@ -45,6 +45,10 @@
     "defaultMessage": "Move to top",
     "description": "src/components/ArticleDigest/DropdownActions/SetTopCollectionButton.tsx"
   },
+  "+SgLoK": {
+    "defaultMessage": "Event",
+    "description": "src/components/Editor/PreviewDialog/Campaign/index.tsx"
+  },
   "+a+2ug": {
     "defaultMessage": "Members"
   },
@@ -98,6 +102,10 @@
   },
   "/IMR+8": {
     "defaultMessage": "Top Supporters"
+  },
+  "/MS+jK": {
+    "defaultMessage": "Collection",
+    "description": "src/components/Editor/PreviewDialog/Collections/index.tsx"
   },
   "/TXBJR": {
     "defaultMessage": "Unknown error. Please try again later.",
@@ -802,6 +810,10 @@
   "Ajc5SE": {
     "defaultMessage": "Articles",
     "description": "src/views/Me/Bookmarks/Tabs.tsx"
+  },
+  "Ajy3De": {
+    "defaultMessage": "Curated Article",
+    "description": "src/components/Editor/PreviewDialog/Connections/index.tsx"
   },
   "AlHYvk": {
     "defaultMessage": "{type} edited"
@@ -2583,6 +2595,10 @@
   },
   "gS1u3d": {
     "defaultMessage": "{left} modifications available"
+  },
+  "gccvX4": {
+    "defaultMessage": "Tags",
+    "description": "src/components/Editor/PreviewDialog/Tags/index.tsx"
   },
   "gczcC5": {
     "defaultMessage": "Subscribe"

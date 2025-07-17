@@ -1,19 +1,21 @@
+import { useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 
 import { Drawer } from '~/components'
 
+import { getOptionTabByType, OptionTab } from '../hooks'
 import { OptionContent, OptionContentProps } from '../OptionContent'
 
 type OptionDrawerProps = {
   isOpen: boolean
-  onClose: () => void
+  toggleDrawer: () => void
   title?: string
   children?: React.ReactNode
 } & OptionContentProps
 
 export const OptionDrawer: React.FC<OptionDrawerProps> = ({
   isOpen,
-  onClose,
+  toggleDrawer,
   title,
   children,
   draft,
@@ -30,15 +32,32 @@ export const OptionDrawer: React.FC<OptionDrawerProps> = ({
     id: 'NDV5Mq',
   })
 
+  const [tab, setTab] = useState<OptionTab>('contentAndLayout')
+
+  useEffect(() => {
+    const handleOpenDrawer = (event: Event) => {
+      const customEvent = event as CustomEvent<{
+        type: string
+      }>
+      const type = customEvent.detail.type
+      setTab(getOptionTabByType(type))
+      toggleDrawer()
+    }
+    window.addEventListener('open-drawer', handleOpenDrawer)
+    return () => window.removeEventListener('open-drawer', handleOpenDrawer)
+  }, [])
+
   return (
-    <Drawer isOpen={isOpen} onClose={onClose}>
+    <Drawer isOpen={isOpen} onClose={toggleDrawer}>
       <Drawer.Header
         title={title || defaultTitle}
-        closeDrawer={onClose}
+        closeDrawer={toggleDrawer}
         fixedWidth
       />
       <Drawer.Content fixedWidth>
         <OptionContent
+          tab={tab}
+          setTab={setTab}
           draft={draft}
           draftViewer={draftViewer}
           campaigns={campaigns}
