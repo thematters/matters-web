@@ -31,8 +31,16 @@ const Content: React.FC<Props> = ({ closeDialog }) => {
         <Dialog.Content.Message>
           <p>
             <FormattedMessage
-              defaultMessage="Billboard is an open and rentable on-chain NFT advertising protocol. Once a rental is completed, the content can be displayed for 14 days. The rental fee is calculated based on the concept of the Harberger tax, and the generated rental income is distributed to the community creators through quadratic funding. Please check out our {announcements}."
-              id="MP6xe/"
+              defaultMessage="Billboard is an open and rentable on-chain NFT advertising protocol. Once a rental is completed, the content can be displayed for 14 days. The rental fee is calculated based on the concept of the Harberger tax, and the generated rental income is distributed to the community creators through quadratic funding."
+              id="QWU/Cf"
+              description="src/components/Dialogs/BillboardDialog/Content.tsx"
+            />
+          </p>
+          <br />
+          <p>
+            <FormattedMessage
+              defaultMessage="To enhance the utilization of advertising space and rental income, Google AdSense content will be introduced, while maintaining rental income to benefit community creators. Please check out our {announcements}."
+              id="3EMGys"
               description="src/components/Dialogs/BillboardDialog/Content.tsx"
               values={{
                 announcements: (
