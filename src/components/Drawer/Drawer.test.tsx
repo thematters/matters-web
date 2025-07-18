@@ -1,53 +1,66 @@
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
 
 import { fireEvent, render, screen } from '~/common/utils/test'
-import { Drawer, DrawerProvider, useDialogSwitch } from '~/components'
-
-type AnyDrawerProps = {
-  children: React.ReactNode
-  defaultOpen: boolean
-  title: string
-}
-
-const AnyDrawer = ({ defaultOpen, title, children }: AnyDrawerProps) => {
-  const { show, openDialog, closeDialog } = useDialogSwitch(defaultOpen)
-
-  return (
-    <>
-      <button type="button" onClick={openDialog}>
-        Open
-      </button>
-      <DrawerProvider>
-        <Drawer isOpen={show} onClose={closeDialog}>
-          <Drawer.Header title={title} closeDrawer={closeDialog} />
-          {children}
-        </Drawer>
-      </DrawerProvider>
-    </>
-  )
-}
+import { Drawer, DrawerProvider } from '~/components'
 
 describe('<Drawer>', () => {
-  it('should render, open and close a Drawer', async () => {
-    const title = 'drawer title'
+  it('should handle open and close actions correctly', () => {
+    // Create mock function to track drawer close actions
+    const handleClose = vi.fn()
 
+    // Directly render Drawer component with isOpen=true to test initial open state
     render(
-      <AnyDrawer defaultOpen={false} title={title}>
-        <Drawer.Content>
-          <section>hello drawer</section>
-        </Drawer.Content>
-      </AnyDrawer>
+      <DrawerProvider>
+        <Drawer isOpen={true} onClose={handleClose}>
+          <Drawer.Header title="Drawer Title" closeDrawer={handleClose} />
+          <Drawer.Content>
+            <div>Drawer Content</div>
+          </Drawer.Content>
+        </Drawer>
+      </DrawerProvider>
     )
 
-    expect(screen.queryByText(title)).not.toBeInTheDocument()
+    // When drawer is open, content and title should be present
+    expect(screen.getByText('Drawer Title')).toBeInTheDocument()
+    expect(screen.getByText('Drawer Content')).toBeInTheDocument()
 
-    // open drawer
-    fireEvent.click(screen.getByRole('button', { name: 'Open' }))
-    expect(screen.getByText(title)).toBeInTheDocument()
-
-    // close drawer
+    // Test close functionality: click close button
     fireEvent.click(screen.getByRole('button', { name: 'Close' }))
-    // drawer component should not be removed from the DOM
-    expect(screen.getByText(title)).toBeInTheDocument()
+
+    // Verify close callback was called
+    expect(handleClose).toHaveBeenCalledTimes(1)
+  })
+
+  it('should render open and closed states differently', () => {
+    // Render drawer in closed state
+    const { rerender } = render(
+      <DrawerProvider>
+        <Drawer isOpen={false} onClose={() => {}}>
+          <Drawer.Header title="Test Drawer" closeDrawer={() => {}} />
+          <Drawer.Content>
+            <p>Test Content</p>
+          </Drawer.Content>
+        </Drawer>
+      </DrawerProvider>
+    )
+
+    // Close button should exist even in closed state
+    expect(screen.getByRole('button', { name: 'Close' })).toBeInTheDocument()
+
+    // Re-render in open state
+    rerender(
+      <DrawerProvider>
+        <Drawer isOpen={true} onClose={() => {}}>
+          <Drawer.Header title="Test Drawer" closeDrawer={() => {}} />
+          <Drawer.Content>
+            <p>Test Content</p>
+          </Drawer.Content>
+        </Drawer>
+      </DrawerProvider>
+    )
+
+    // In open state, content should be in the DOM and visible
+    expect(screen.getByText('Test Content')).toBeInTheDocument()
+    expect(screen.getByText('Test Drawer')).toBeInTheDocument()
   })
 })

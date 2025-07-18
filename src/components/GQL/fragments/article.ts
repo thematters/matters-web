@@ -1,7 +1,6 @@
 import gql from 'graphql-tag'
 
-import { ArticleDigestTitle } from '~/components/ArticleDigest'
-import { UserDigest } from '~/components/UserDigest'
+import { ArticleDigestDropdown } from '~/components/ArticleDigest'
 
 const fragments = {
   articleCollection: gql`
@@ -19,17 +18,12 @@ const fragments = {
           cursor
           node {
             id
-            ...ArticleDigestTitleArticle
-            author {
-              id
-              ...UserDigestMiniUser
-            }
+            ...ArticleDigestDropdownArticle
           }
         }
       }
     }
-    ${ArticleDigestTitle.fragments.article}
-    ${UserDigest.Mini.fragments.user}
+    ${ArticleDigestDropdown.fragments.article}
   `,
 }
 

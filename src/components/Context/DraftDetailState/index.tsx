@@ -91,7 +91,7 @@ export const DraftDetailStateProvider = ({
    * Draft getter and setter
    */
   const viewer = useContext(ViewerContext)
-  const { router } = useRoute()
+  const { getQuery, router } = useRoute()
   const [create] = useMutation<CreateDraftMutation>(CREATE_DRAFT, {
     update: (cache) => {
       cache.evict({
@@ -126,7 +126,7 @@ export const DraftDetailStateProvider = ({
       return undefined
     }
 
-    const id = window.location.href.split('/').pop()
+    const id = getQuery('draftId')
     return id === NEW_DRAFT_ID ? undefined : id
   }
 

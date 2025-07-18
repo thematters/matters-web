@@ -1,28 +1,20 @@
 .inline {
   display: inline-flex;
   align-items: center;
-  height: 1.25rem;
-  padding: 0 var(--sp8) 0 var(--sp8);
-  line-height: 1.25rem;
+  padding: var(--sp4) var(--sp10) var(--sp4) var(--sp8);
   background: var(--color-grey-lighter);
-  border-radius: 1.25rem;
-
-  &.disabled {
-    & .name {
-      color: var(--color-grey);
-    }
-  }
+  border-radius: var(--sp8);
 
   & .name {
     @mixin line-clamp;
 
-    line-height: 1.01;
+    line-height: 1.3725rem;
     color: var(--color-black);
   }
 
   & .close {
     display: inline-flex;
-    margin-left: var(--sp2);
+    margin-left: var(--sp8);
   }
 
   &.clickable {

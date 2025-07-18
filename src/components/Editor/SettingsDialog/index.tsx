@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl'
 import { Dialog, SpinnerBlock, useDialogSwitch, useStep } from '~/components'
 import {
   MoreSettingsProps,
-  SetCollectionProps,
+  SetConnectionsProps,
   SetCoverProps,
   SetPublishISCNProps,
   SetTagsProps,
@@ -45,7 +45,7 @@ export type EditorSettingsDialogProps = {
 
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 } & SetCoverProps &
-  SetCollectionProps &
+  SetConnectionsProps &
   SetTagsProps &
   MoreSettingsProps &
   ToggleResponseProps &
@@ -82,9 +82,9 @@ const BaseEditorSettingsDialog = ({
   entityType,
   coverSaving,
 
-  collection,
-  editCollection,
-  collectionSaving,
+  connections,
+  editConnections,
+  connectionsSaving,
 
   tags,
   editTags,
@@ -218,7 +218,7 @@ const BaseEditorSettingsDialog = ({
             versionDescription={versionDescription}
             hasSetVersionDescription={!!editVersionDescription}
             cover={cover}
-            collectionCount={collection.length}
+            connectionCount={connections.length}
             tagsCount={tags.length}
             {...accessProps}
             {...campaignProps}
@@ -249,12 +249,12 @@ const BaseEditorSettingsDialog = ({
             searchType="Article"
             searchExclude={SearchExclude.Blocked}
             onSave={async (nodes: SearchSelectNode[]) => {
-              await editCollection(
+              await editConnections(
                 nodes as ArticleDigestDropdownArticleFragment[]
               )
             }}
-            nodes={collection}
-            saving={collectionSaving}
+            nodes={connections}
+            saving={connectionsSaving}
             back={() => forward('list')}
             closeDialog={closeDialog}
             submitCallback={() => forward('list')}

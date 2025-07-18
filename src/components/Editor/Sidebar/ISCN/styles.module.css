@@ -1,0 +1,10 @@
+.title {
+  display: flex;
+  gap: var(--sp4);
+  align-items: center;
+  line-height: 1.5rem;
+}
+
+.help {
+  display: inline-flex;
+}

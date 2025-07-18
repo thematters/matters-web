@@ -131,3 +131,16 @@ export const parseCommentHash = () => {
     descendantId: descendantId || undefined,
   }
 }
+
+export const extractShortHashFromUrl = (url: string) => {
+  if (!url) return null
+
+  const cleanUrl = url.trim()
+
+  // Match exactly 12-character lowercase alphanumeric string
+  // Use negative lookahead/lookbehind to ensure exactly 12 characters
+  const shortHashPattern = /(?<![a-z0-9])[a-z0-9]{12}(?![a-z0-9])/
+  const match = cleanUrl.match(shortHashPattern)
+
+  return match ? match[0] : null
+}

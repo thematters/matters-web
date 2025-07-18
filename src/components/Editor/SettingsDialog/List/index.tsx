@@ -27,7 +27,7 @@ export type SettingsListDialogProps = {
   hasSetVersionDescription?: boolean
 
   cover?: string | null
-  collectionCount: number
+  connectionCount: number
   tagsCount: number
 } & SettingsListDialogButtons &
   ToggleResponseProps &
@@ -50,7 +50,7 @@ const SettingsList = ({
   hasSetVersionDescription,
 
   cover,
-  collectionCount,
+  connectionCount,
   tagsCount,
 
   campaigns,
@@ -199,7 +199,7 @@ const SettingsList = ({
             }
             onClick={() => forward('collection')}
           >
-            <ListItem.NumberIndicator num={collectionCount} />
+            <ListItem.NumberIndicator num={connectionCount} />
           </ListItem>
 
           <section className={styles.response}>

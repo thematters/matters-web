@@ -91,6 +91,7 @@ type ToPathArgs =
       moment?: MomentArgs | null
     }
   | { page: 'draftDetail'; id: string }
+  | { page: 'draftDetailOptions'; id: string }
   | {
       page: 'tagDetail'
       tag: TagArgs
@@ -241,6 +242,10 @@ export const toPath = (
     }
     case 'draftDetail': {
       href = `/me/drafts/${args.id}`
+      break
+    }
+    case 'draftDetailOptions': {
+      href = `/me/drafts/${args.id}/options`
       break
     }
     case 'tagDetail': {

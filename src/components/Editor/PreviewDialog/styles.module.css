@@ -1,0 +1,30 @@
+.container {
+  overflow-y: auto;
+
+  @media (--sm-up) {
+    @mixin scrollbar-thin;
+
+    width: 25.25rem; /* 404px */
+  }
+
+  & .feedDigest {
+    margin-bottom: var(--sp16);
+  }
+
+  & .settings {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp20);
+    padding: var(--sp8) 0;
+  }
+}
+
+.campaign,
+.response {
+  padding: var(--sp16);
+}
+
+.title {
+  padding-bottom: var(--sp16);
+  font-size: var(--font-size-base);
+}
