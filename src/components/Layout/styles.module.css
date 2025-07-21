@@ -107,6 +107,24 @@
   }
 }
 
+.editorLayout {
+  /* stylelint-disable-next-line property-no-unknown */
+  composes: layoutbase;
+  grid-template-columns:
+    minmax(0, 1fr) minmax(0, var(--content-max-width))
+    minmax(0, 1fr);
+
+  & .main {
+    grid-column: main;
+
+    @media (--sm-up) {
+      display: grid;
+      grid-template-areas: 'content';
+      grid-template-columns: minmax(0, 100%);
+    }
+  }
+}
+
 .sideNavLayout {
   /* stylelint-disable-next-line property-no-unknown */
   composes: layoutbase;
