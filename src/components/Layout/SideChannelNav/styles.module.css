@@ -22,6 +22,7 @@
   padding-bottom: var(--sp32);
 
   @media (--sm-up) {
+    gap: var(--sp8);
     align-items: flex-end;
   }
 
