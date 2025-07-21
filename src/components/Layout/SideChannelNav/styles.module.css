@@ -16,7 +16,6 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: var(--sp8);
   align-items: flex-start;
   min-width: 4.75rem;
   padding-top: var(--sp16);
@@ -119,7 +118,7 @@
     @mixin transition;
 
     display: inline-block;
-    padding: var(--sp8) var(--sp16);
+    padding: var(--sp12) var(--sp16);
     background-color: transparent;
     border-radius: 0.5rem;
     transition-property: background-color;
@@ -131,7 +130,7 @@
     }
 
     @media (--xs-up) {
-      padding: var(--sp8) var(--sp32) var(--sp8) var(--sp24);
+      padding: var(--sp12) var(--sp32) var(--sp12) var(--sp24);
     }
 
     @media (--sm-up) {
