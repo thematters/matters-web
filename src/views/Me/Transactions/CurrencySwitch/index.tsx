@@ -2,6 +2,8 @@ import IconDown from '@/public/static/icons/24px/down.svg'
 import { Z_INDEX } from '~/common/enums'
 import { Button, Dropdown, Icon, Menu, TextIcon, Translate } from '~/components'
 
+import styles from './styles.module.css'
+
 export enum Currency {
   ALL = 'ALL',
   USDT = 'USDT',
@@ -21,31 +23,33 @@ const CurrencySwitchContent: React.FC<CurrencySwitchContentProps> = ({
   setCurrency,
 }) => {
   return (
-    <Menu>
-      <Menu.Item
-        text={<Translate zh_hans="全部" zh_hant="全部" en="All" />}
-        onClick={() => setCurrency(Currency.ALL)}
-        weight={currency === Currency.ALL ? 'bold' : 'normal'}
-      />
+    <section className={styles.currencySwitchContent}>
+      <Menu>
+        <Menu.Item
+          text={<Translate zh_hans="全部" zh_hant="全部" en="All" />}
+          onClick={() => setCurrency(Currency.ALL)}
+          weight={currency === Currency.ALL ? 'bold' : 'normal'}
+        />
 
-      <Menu.Item
-        text={Currency.USDT}
-        onClick={() => setCurrency(Currency.USDT)}
-        weight={currency === Currency.USDT ? 'bold' : 'normal'}
-      />
+        <Menu.Item
+          text={Currency.USDT}
+          onClick={() => setCurrency(Currency.USDT)}
+          weight={currency === Currency.USDT ? 'bold' : 'normal'}
+        />
 
-      <Menu.Item
-        text={Currency.HKD}
-        onClick={() => setCurrency(Currency.HKD)}
-        weight={currency === Currency.HKD ? 'bold' : 'normal'}
-      />
+        <Menu.Item
+          text={Currency.HKD}
+          onClick={() => setCurrency(Currency.HKD)}
+          weight={currency === Currency.HKD ? 'bold' : 'normal'}
+        />
 
-      <Menu.Item
-        text={Currency.LIKE}
-        onClick={() => setCurrency(Currency.LIKE)}
-        weight={currency === Currency.LIKE ? 'bold' : 'normal'}
-      />
-    </Menu>
+        <Menu.Item
+          text={Currency.LIKE}
+          onClick={() => setCurrency(Currency.LIKE)}
+          weight={currency === Currency.LIKE ? 'bold' : 'normal'}
+        />
+      </Menu>
+    </section>
   )
 }
 

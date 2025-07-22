@@ -1,0 +1,6 @@
+.currencySwitchContent {
+  & ul {
+    flex-direction: column;
+    align-items: flex-start !important;
+  }
+}
