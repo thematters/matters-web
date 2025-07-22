@@ -72,7 +72,9 @@ export const useMixedFeed = (
   const mixFeed = JSON.parse(JSON.stringify(edges)) as MixedFeedArticleEdge[]
 
   // get insert entries
-  const locs = Object.keys(horizontalFeeds).map((loc) => parseInt(loc, 10))
+  const locs = Object.keys(
+    feedType === 'channel' ? channelHorizontalFeeds : horizontalFeeds
+  ).map((loc) => parseInt(loc, 10))
   locs.sort((a, b) => a - b)
 
   // insert feed
