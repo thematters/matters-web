@@ -25,7 +25,6 @@ const ChannelFeed = () => {
   const { getQuery } = useRoute()
   const shortHash = getQuery('shortHash')
   const feedType = 'channel'
-  const numOfCards = 6
 
   const { fetchPolicy } = useFetchPolicy()
 
@@ -42,6 +41,9 @@ const ChannelFeed = () => {
       ? data?.channel?.articles
       : {}
   const fetchedPrivateSortsRef = useRef<string[]>([])
+
+  const isCurationChannel = data?.channel?.__typename === 'CurationChannel'
+  const numOfCards = isCurationChannel ? 3 : 6
 
   const loadPrivate = (publicData?: FeedArticlesPublicChannelQuery) => {
     if (!viewer.isAuthed || !publicData) {
