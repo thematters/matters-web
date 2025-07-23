@@ -22,6 +22,7 @@ type BillboardData = {
   contentURI: string
   redirectURI: string
   expired: number
+  bidder: `0x${string}` | null
 }
 
 type Props = {
@@ -54,6 +55,7 @@ export const useBillboard = ({
       contentURI: '',
       redirectURI: '',
       expired: Date.now() + ttl,
+      bidder: null,
     })
   }
 
@@ -106,6 +108,7 @@ export const useBillboard = ({
             contentURI: bid.contentURI,
             redirectURI: bid.redirectURI,
             expired: Date.now() + ttl,
+            bidder,
           })
         } else {
           // if no running ad or it hasn't been cleared yet

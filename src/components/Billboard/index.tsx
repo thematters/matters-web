@@ -52,7 +52,7 @@ export const Billboard = ({ tokenId, type }: BillboardProps) => {
   const adMaxHeight = adHeight
   const adFormat = 'rectangle'
   const isResponsive = router.query.responsive === 'true'
-  const { data, isError, isLoading, bidder } = useBillboard({
+  const { data, isError, isLoading } = useBillboard({
     id,
     chainId: network.id,
     operatorAddress,
@@ -63,13 +63,20 @@ export const Billboard = ({ tokenId, type }: BillboardProps) => {
     return null
   }
 
-  if (!id || isError || isLoading || !data || !data.contentURI) {
+  if (
+    !id ||
+    isError ||
+    isLoading ||
+    !data ||
+    !data.contentURI ||
+    !data.bidder
+  ) {
     return null
   }
-  console.log({ id, isError, isLoading, data, bidder })
+  console.log({ id, isError, isLoading, data })
   console.log({ registryAddress, GOOGLE_ADS_ELIGIBLE_ADDRESS })
   if (
-    bidder?.toLocaleLowerCase() ===
+    data.bidder?.toLocaleLowerCase() ===
     GOOGLE_ADS_ELIGIBLE_ADDRESS.toLocaleLowerCase()
   ) {
     return (
