@@ -16,9 +16,3 @@
 .smUpCommentBlock {
   padding-top: var(--sp40);
 }
-
-.mobileLogo {
-  display: inline-flex;
-  align-items: center;
-  justify-content: flex-start;
-}

@@ -26,7 +26,7 @@ const SideChannelNav = () => {
     const { scrollTop, scrollHeight, clientHeight } = contentRef.current
     setShowTopGradient(scrollTop > 10)
     setShowBottomGradient(scrollTop < scrollHeight - clientHeight - 10)
-  }, [contentRef])
+  }, [contentRef.current])
 
   useEffect(() => {
     const contentElement = contentRef.current
@@ -38,7 +38,7 @@ const SideChannelNav = () => {
         contentElement.removeEventListener('scroll', checkScroll)
       }
     }
-  }, [contentRef, checkScroll])
+  }, [contentRef.current, checkScroll])
 
   const onTabClick = (type: string) => {
     analytics.trackEvent('click_button', {
