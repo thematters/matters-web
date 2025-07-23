@@ -19,6 +19,7 @@ enum QueryStatus {
 }
 
 type BillboardData = {
+  bidder: string
   contentURI: string
   redirectURI: string
   expired: number
@@ -51,6 +52,7 @@ export const useBillboard = ({
 
   const resetData = () => {
     storage.set(STORAGE_KEY_BILLBOARD, {
+      bidder: '',
       contentURI: '',
       redirectURI: '',
       expired: Date.now() + ttl,
@@ -102,6 +104,7 @@ export const useBillboard = ({
 
         if (bid && bid.isWon) {
           storage.set(STORAGE_KEY_BILLBOARD, {
+            bidder: (bidder || '').toLowerCase(),
             contentURI: bid.contentURI,
             redirectURI: bid.redirectURI,
             expired: Date.now() + ttl,
