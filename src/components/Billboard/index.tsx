@@ -52,30 +52,24 @@ export const Billboard = ({ tokenId, type }: BillboardProps) => {
   const adMaxHeight = adHeight
   const adFormat = 'rectangle'
   const isResponsive = router.query.responsive === 'true'
-  const { data, isError, isLoading, bidder } = useBillboard({
+  const { data, isError, isLoading } = useBillboard({
     id,
     chainId: network.id,
     operatorAddress,
     registryAddress,
   })
 
-  console.log({ bidder, data, isError, isLoading })
-
   if (!mount) {
     return null
   }
 
-  console.log({ id, isError, isLoading, data })
-
   if (!id || isError || isLoading || !data) {
     return null
   }
-  console.log({ id, isError, isLoading, data })
-  console.log({ registryAddress, GOOGLE_ADS_ELIGIBLE_ADDRESS })
+
   if (
     data.bidder?.toLowerCase() === GOOGLE_ADS_ELIGIBLE_ADDRESS.toLowerCase()
   ) {
-    console.log('Google Ads')
     return (
       <div className={styles.billboard}>
         <AdSenseUnit
