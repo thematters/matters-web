@@ -63,10 +63,13 @@ export const Billboard = ({ tokenId, type }: BillboardProps) => {
     return null
   }
 
-  if (!id || isError || isLoading || !data || !data.contentURI) {
+  if (!id || isError || isLoading || !data) {
     return null
   }
-  if (registryAddress === GOOGLE_ADS_ELIGIBLE_ADDRESS) {
+
+  if (
+    data.bidder?.toLowerCase() === GOOGLE_ADS_ELIGIBLE_ADDRESS.toLowerCase()
+  ) {
     return (
       <div className={styles.billboard}>
         <AdSenseUnit
@@ -133,6 +136,10 @@ export const Billboard = ({ tokenId, type }: BillboardProps) => {
         )}
       </div>
     )
+  }
+
+  if (!data.contentURI) {
+    return null
   }
 
   return (
