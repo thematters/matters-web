@@ -67,14 +67,7 @@ export const Billboard = ({ tokenId, type }: BillboardProps) => {
 
   console.log({ id, isError, isLoading, data })
 
-  if (
-    !id ||
-    isError ||
-    isLoading ||
-    !data ||
-    !data.contentURI ||
-    !data.bidder
-  ) {
+  if (!id || isError || isLoading || !data) {
     return null
   }
   console.log({ id, isError, isLoading, data })
@@ -149,6 +142,10 @@ export const Billboard = ({ tokenId, type }: BillboardProps) => {
         )}
       </div>
     )
+  }
+
+  if (!data || !data.contentURI) {
+    return null
   }
 
   return (
