@@ -66,6 +66,8 @@ export const Billboard = ({ tokenId, type }: BillboardProps) => {
   if (!id || isError || isLoading || !data || !data.contentURI) {
     return null
   }
+  console.log({ id, isError, isLoading, data })
+  console.log({ registryAddress, GOOGLE_ADS_ELIGIBLE_ADDRESS })
   if (registryAddress === GOOGLE_ADS_ELIGIBLE_ADDRESS) {
     return (
       <div className={styles.billboard}>
