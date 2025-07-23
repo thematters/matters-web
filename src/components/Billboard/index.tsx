@@ -52,12 +52,14 @@ export const Billboard = ({ tokenId, type }: BillboardProps) => {
   const adMaxHeight = adHeight
   const adFormat = 'rectangle'
   const isResponsive = router.query.responsive === 'true'
-  const { data, isError, isLoading } = useBillboard({
+  const { data, isError, isLoading, bidder } = useBillboard({
     id,
     chainId: network.id,
     operatorAddress,
     registryAddress,
   })
+
+  console.log({ bidder, data, isError, isLoading })
 
   if (!mount) {
     return null
