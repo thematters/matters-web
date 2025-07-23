@@ -42,7 +42,7 @@ export const useBillboard = ({
   registryAddress,
 }: Props) => {
   const [status, setStatus] = useState<QueryStatus>(QueryStatus.IDLE)
-
+  const [bidder, setBidder] = useState<`0x${string}` | null>(null)
   const data = storage.get(STORAGE_KEY_BILLBOARD) as BillboardData | null
   const ttl = 3 * 60 * 1000
 
@@ -92,6 +92,7 @@ export const useBillboard = ({
           functionName: 'highestBidder',
           args: [tokenId, epoch],
         })
+        setBidder(bidder)
         const bid = await readContract(wagmiConfig, {
           abi: BillboardOperatorABI,
           address: operatorAddress,
@@ -119,5 +120,5 @@ export const useBillboard = ({
     })()
   }, [])
 
-  return { data, isLoading, isError }
+  return { data, isLoading, isError, bidder }
 }
