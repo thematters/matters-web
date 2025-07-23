@@ -1,11 +1,5 @@
 .header {
   @mixin flex-start-start;
-
-  & .mobileLogo {
-    display: inline-flex;
-    align-items: center;
-    justify-content: flex-start;
-  }
 }
 
 .campaign {
@@ -13,12 +7,11 @@
   align-items: center;
   justify-content: flex-start;
   height: 1.125rem;
-  margin-left: var(--sp16);
+  margin-bottom: var(--ar17-100);
   font-size: var(--text12);
   color: var(--color-campaign-blue);
 
   @media (--sm-up) {
-    margin-bottom: var(--ar17-100);
     margin-left: 0;
   }
 

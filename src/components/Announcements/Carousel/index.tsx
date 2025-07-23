@@ -31,6 +31,7 @@ const Carousel = ({ items }: CarouselProps) => {
   const [carousel, carouselApi] = useEmblaCarousel({
     loop: true,
     skipSnaps: false,
+    watchDrag: items?.length && items.length > 1 ? true : false,
   })
 
   // state of carusel
@@ -105,16 +106,18 @@ const Carousel = ({ items }: CarouselProps) => {
     <section className={styles.carousel}>
       <header className={styles.header}>
         <div className={styles.left}>
-          <section className={styles.dots}>
-            {items?.map((_, index) => (
-              <Dot
-                key={index}
-                index={index}
-                selected={index === dot}
-                scroll={scroll}
-              />
-            ))}
-          </section>
+          {items?.length && items?.length > 1 && (
+            <section className={styles.dots}>
+              {items?.map((_, index) => (
+                <Dot
+                  key={index}
+                  index={index}
+                  selected={index === dot}
+                  scroll={scroll}
+                />
+              ))}
+            </section>
+          )}
         </div>
       </header>
 
