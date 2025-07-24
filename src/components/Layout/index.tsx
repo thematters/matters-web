@@ -68,6 +68,7 @@ const useLayoutType = () => {
     isInPath('ME_SETTINGS_NOTIFICATIONS_CIRCLE') ||
     isInPath('ME_SETTINGS_MISC') ||
     isInPath('ME_SETTINGS_BLOCKED') ||
+    isInPath('ME_DRAFT_DETAIL') ||
     // Moment
     isInPath('MOMENT_DETAIL') ||
     isInPath('MOMENT_DETAIL_EDIT')
@@ -84,7 +85,6 @@ const useLayoutType = () => {
     isInPath('ARTICLE_DETAIL_EDIT') ||
     isInPath('ARTICLE_DETAIL_HISTORY') ||
     isInPath('ME_DRAFT_NEW') ||
-    isInPath('ME_DRAFT_DETAIL') ||
     // Campaign
     (isInPath('CAMPAIGN_DETAIL') && !isInWritingChallengeChannel)
 
@@ -102,6 +102,11 @@ const useLayoutType = () => {
     isInPath('USER_COLLECTIONS') ||
     isInPath('USER_COLLECTION_DETAIL')
 
+  const isEditorLayout =
+    isInPath('ARTICLE_DETAIL_EDIT') ||
+    isInPath('ME_DRAFT_NEW') ||
+    isInPath('ME_DRAFT_DETAIL')
+
   // Fallback to one-column layout if no specific layout is determined
   const hasSpecificLayout =
     isOneColumnLayout || isTwoColumnLayout || isThreeColumnLayout
@@ -114,6 +119,7 @@ const useLayoutType = () => {
     isTwoColumnLayout,
     isThreeColumnLayout,
     isLeftLayout,
+    isEditorLayout,
     showGlobalNav,
   }
 }
@@ -208,6 +214,7 @@ export const Layout: React.FC<LayoutProps> & {
     isTwoColumnLayout,
     isThreeColumnLayout,
     isLeftLayout,
+    isEditorLayout,
     showGlobalNav,
   } = useLayoutType()
 
@@ -216,6 +223,7 @@ export const Layout: React.FC<LayoutProps> & {
     [styles.twoColumnLayout]: isTwoColumnLayout,
     [styles.threeColumnLayout]: isThreeColumnLayout,
     [styles.sideNavLayout]: isThreeColumnLayout,
+    [styles.editorLayout]: isEditorLayout,
   })
 
   const mainClasses = classNames({
