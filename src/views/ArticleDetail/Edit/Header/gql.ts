@@ -30,10 +30,10 @@ const fragment = gql`
         id
       }
     }
-    ...ArticleCollection
+    ...ArticleConnections
   }
   ${ArticleTag.fragments.tag}
-  ${articleFragments.articleCollection}
+  ${articleFragments.articleConnections}
 `
 
 export const EDIT_ARTICLE = gql`

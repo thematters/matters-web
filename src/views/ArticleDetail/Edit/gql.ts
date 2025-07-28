@@ -82,12 +82,12 @@ export const GET_EDIT_ARTICLE = gql`
           id
         }
       }
-      ...ArticleCollection
+      ...ArticleConnections
     }
   }
   ${assetFragment}
   ${ArticleTag.fragments.tag}
-  ${articleFragments.articleCollection}
+  ${articleFragments.articleConnections}
   ${CircleDigest.Rich.fragments.circle.public}
   ${SelectCampaign.fragments}
 `

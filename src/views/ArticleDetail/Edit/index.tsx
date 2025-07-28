@@ -130,7 +130,7 @@ const BaseEdit = ({ article }: { article: Article }) => {
   const [tags, setTags] = useState<DigestTagFragment[]>(article.tags || [])
   const [connections, setConnections] = useState<
     ArticleDigestDropdownArticleFragment[]
-  >(article.collection.edges?.map(({ node }) => node) || [])
+  >(article.connections.edges?.map(({ node }) => node) || [])
 
   // access
   const [circle, setCircle] = useState<

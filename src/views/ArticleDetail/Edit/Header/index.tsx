@@ -103,7 +103,7 @@ const EditModeHeader = ({
   )
   const isConnectionRevised = !_isEqual(
     connections.map((connection) => connection.id).sort(),
-    article.collection.edges?.map(({ node }) => node.id).sort()
+    article.connections.edges?.map(({ node }) => node.id).sort()
   )
   const isCoverRevised = article.cover
     ? revision.cover?.path !== article.cover

@@ -3,11 +3,11 @@ import gql from 'graphql-tag'
 import { ArticleDigestDropdown } from '~/components/ArticleDigest'
 
 const fragments = {
-  articleCollection: gql`
-    fragment ArticleCollection on Article {
+  articleConnections: gql`
+    fragment ArticleConnections on Article {
       id
-      collection(input: { after: $after, first: $first })
-        @connection(key: "articleCollection") {
+      connections(input: { after: $after, first: $first })
+        @connection(key: "articleConnections") {
         pageInfo {
           startCursor
           endCursor

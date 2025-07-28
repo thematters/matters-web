@@ -161,7 +161,7 @@ const SettingsButton = ({
   )
   const isConnectionRevised = !_isEqual(
     connections.map(({ id }) => id).sort(),
-    article.collection.edges?.map(({ node }) => node.id).sort()
+    article.connections.edges?.map(({ node }) => node.id).sort()
   )
 
   const isCoverRevised = article.cover
@@ -212,7 +212,7 @@ const SettingsButton = ({
           ...(isSummaryRevised ? { summary: summary || null } : {}),
           ...(isContentRevised ? { content: content } : {}),
           ...(isTagRevised ? { tags: tags } : {}),
-          ...(isConnectionRevised ? { collection: connections } : {}),
+          ...(isConnectionRevised ? { connections: connections } : {}),
           ...(isCoverRevised ? { cover: cover?.id || null } : {}),
           ...(isRequestForDonationRevised
             ? { requestForDonation: requestForDonation }
