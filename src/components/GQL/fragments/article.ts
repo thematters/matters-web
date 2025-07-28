@@ -18,6 +18,7 @@ const fragments = {
           cursor
           node {
             id
+            title
             ...ArticleDigestDropdownArticle
           }
         }

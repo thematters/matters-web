@@ -1,3 +1,17 @@
+.header {
+  @mixin flex-center-end;
+
+  position: sticky;
+  top: 0;
+  z-index: var(--z-index-global-header);
+  padding: var(--sp16);
+  background-color: var(--color-white);
+
+  @media (--sm-up) {
+    padding: var(--sp16) var(--sp32);
+  }
+}
+
 .sidebar {
   padding-top: calc(var(--global-header-height) - var(--sp32));
   padding-bottom: var(--sp16);
