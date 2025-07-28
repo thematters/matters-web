@@ -1141,9 +1141,6 @@
     "defaultMessage": "数字钱包",
     "description": "src/components/Forms/SelectAuthMethodForm/AuthTabs.tsx"
   },
-  "GRrsEH": {
-    "defaultMessage": "查看作品"
-  },
   "GU6vV0": {
     "defaultMessage": "尚未创建选集",
     "description": "src/components/Empty/EmptyCollection.tsx"
@@ -1484,9 +1481,6 @@
   "MRn08S": {
     "defaultMessage": "回复评论",
     "description": "src/components/CircleComment/FooterActions/ReplyButton/index.tsx"
-  },
-  "MV0JlP": {
-    "defaultMessage": "吸引更多人为你拍手！"
   },
   "Me5cJu": {
     "defaultMessage": "绑定钱包",
@@ -3283,9 +3277,6 @@
   "tZKvnZ": {
     "defaultMessage": "取消喜欢动态"
   },
-  "tqEGfa": {
-    "defaultMessage": "作品发布成功，快把作品分享到不同渠道，"
-  },
   "tzq2+W": {
     "defaultMessage": "寄出邀请",
     "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/PreSend.tsx"
@@ -3319,9 +3310,6 @@
   },
   "uVCg1l": {
     "defaultMessage": "玩转 Matters 实用指南"
-  },
-  "uYwH7j": {
-    "defaultMessage": "作品已发布"
   },
   "uaFED8": {
     "defaultMessage": "绑定后除原有登入方式，增加钱包登入管道",

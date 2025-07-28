@@ -68,9 +68,8 @@ import { GET_EDIT_ARTICLE, GET_EDIT_ARTICLE_ASSETS } from './gql'
 import { useViewer } from './Hooks'
 import { useCampaignState } from './Hooks/useCampaignState'
 import { OptionButton } from './OptionButton'
+import PublishState from './PublishState'
 import SettingsButton from './SettingsButton'
-// import PublishState from './PublishState'
-// import SettingsButton from './SettingsButton'
 import styles from './styles.module.css'
 
 export type Article = NonNullable<
@@ -98,7 +97,7 @@ const BaseEdit = ({ article }: { article: Article }) => {
     // loadMoreCollections,
   } = useViewer()
 
-  const [showPublishState] = useState(false)
+  const [showPublishState, setShowPublishState] = useState(false)
 
   // const [versionDescription, setVersionDescription] = useState('')
 
@@ -161,13 +160,6 @@ const BaseEdit = ({ article }: { article: Article }) => {
     )
     setLicense(newLicense)
   }
-
-  // const editLicense = (paywalled: boolean, newLicense: ArticleLicenseType) => {
-  //   setAccessType(
-  //     paywalled ? ArticleAccessType.Paywall : ArticleAccessType.Public
-  //   )
-  //   setLicense(newLicense)
-  // }
 
   const { setCampaign, selectedCampaign, selectedStage, selectableCampaigns } =
     useCampaignState(article)
@@ -372,7 +364,7 @@ const BaseEdit = ({ article }: { article: Article }) => {
                     content={content}
                     tags={tags}
                     connections={connections}
-                    cover={cover?.path}
+                    cover={cover || null}
                     requestForDonation={requestForDonation}
                     replyToDonator={replyToDonator}
                     circle={circle || null}
@@ -383,9 +375,11 @@ const BaseEdit = ({ article }: { article: Article }) => {
                     sensitiveByAuthor={contentSensitive}
                     iscnPublish={iscnPublish}
                     onPublish={() => {
-                      console.log('onPublish')
+                      setShowPublishState(true)
                     }}
                     isOverRevisionLimit={isOverRevisionLimit}
+                    selectedCampaign={selectedCampaign}
+                    selectedStage={selectedStage}
                   />
                 </section>
               </section>
@@ -393,6 +387,12 @@ const BaseEdit = ({ article }: { article: Article }) => {
           </>
         }
       >
+        {showPublishState && article.versions.edges[0]?.node.id && (
+          <PublishState
+            articleId={article.id}
+            currVersionId={article.versions.edges[0]?.node.id}
+          />
+        )}
         <Layout.Main.Spacing>
           <Editor
             draft={{

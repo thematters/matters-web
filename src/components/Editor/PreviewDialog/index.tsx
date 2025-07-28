@@ -8,6 +8,7 @@ import {
   toast,
   useDialogSwitch,
   useMutation,
+  useRoute,
   ViewerContext,
 } from '~/components'
 import PUBLISH_ARTICLE from '~/components/GQL/mutations/publishArticle'
@@ -73,7 +74,8 @@ const BaseEditorPreviewDialog = ({
     openDialog: baseOpenDialog,
     closeDialog,
   } = useDialogSwitch(true)
-
+  const { isInPath } = useRoute()
+  const isInDraftDetail = isInPath('ME_DRAFT_DETAIL')
   const viewer = useContext(ViewerContext)
   const [publish, { loading: publishLoading }] =
     useMutation<PublishArticleMutation>(PUBLISH_ARTICLE, {
@@ -103,7 +105,9 @@ const BaseEditorPreviewDialog = ({
         />
       ),
     })
-    publish({ variables: { id: draft.id } })
+    if (isInDraftDetail) {
+      publish({ variables: { id: draft.id } })
+    }
     onConfirmProp?.()
   }
 

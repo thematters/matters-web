@@ -1,15 +1,17 @@
 import _isEqual from 'lodash/isEqual'
 import { useRouter } from 'next/router'
+import baseToast from 'react-hot-toast'
 import { FormattedMessage } from 'react-intl'
 
 import IconPublishFill from '@/public/static/icons/24px/publish-fill.svg'
 import { MAX_ARTICLE_CONTENT_LENGTH } from '~/common/enums'
 import { containsFigureTag, stripHtml, toPath } from '~/common/utils'
 import { Button, Icon, Media, TextIcon, toast, useMutation } from '~/components'
-// import { EditorPreviewDialog } from '~/components/Editor/PreviewDialog'
+import { EditorPreviewDialog } from '~/components/Editor/PreviewDialog'
 import {
   ArticleAccessType,
   ArticleDigestDropdownArticleFragment,
+  AssetFragment,
   DigestRichCirclePublicFragment,
   EditArticleMutation,
   EditorSelectCampaignFragment,
@@ -21,6 +23,7 @@ import { EDIT_ARTICLE } from '../Header/gql'
 type SettingsButtonProps = {
   article: Article
   content: string
+  cover: AssetFragment | null
   circle: DigestRichCirclePublicFragment | null
   accessType: ArticleAccessType
   ownCircles?: DigestRichCirclePublicFragment[]
@@ -37,7 +40,6 @@ type SettingsButtonProps = {
   Article,
   | 'title'
   | 'summary'
-  | 'cover'
   | 'tags'
   | 'license'
   | 'canComment'
@@ -120,61 +122,6 @@ const SettingsButton = ({
   onPublish,
   isOverRevisionLimit,
 }: SettingsButtonProps) => {
-  // const isPending = draft.publishState === 'pending'
-  // const isPublished = draft.publishState === 'published'
-  // const disabled = !publishable || isPending || isPublished
-
-  // const { selectedCampaign } = getSelectCampaigns({
-  //   applied: campaigns,
-  //   attached: draft.campaigns,
-  //   createdAt: draft.createdAt,
-  // })
-
-  // return (
-  //   <EditorPreviewDialog
-  //     draft={draft}
-  //     saving={saving || false}
-  //     disabled={
-  //       // connectionsSaving ||
-  //       // coverSaving ||
-  //       // tagsSaving ||
-  //       // accessSaving ||
-  //       // canCommentSaving
-  //       saving || false
-  //     }
-  //     confirmButtonText={
-  //       <FormattedMessage defaultMessage="Publish" id="syEQFE" />
-  //     }
-  //     cancelButtonText={
-  //       <FormattedMessage defaultMessage="Back to Edit" id="tGHG7q" />
-  //     }
-  //   >
-  //     {({ openDialog: openEditorSettingsDialog }) => (
-  //       <ConfirmButton
-  //         openDialog={() => {
-  //           const hasCampaign = !!selectedCampaign
-  //           const hasCircle = !!draft.access.circle
-
-  //           if (hasCampaign && hasCircle) {
-  //             toast.error({
-  //               message: (
-  //                 <FormattedMessage
-  //                   defaultMessage="Article cannot be added to event or circle at the same time"
-  //                   id="cPXsvZ"
-  //                 />
-  //               ),
-  //             })
-  //             return
-  //           }
-
-  //           openEditorSettingsDialog()
-  //         }}
-  //         disabled={disabled}
-  //       />
-  //     )}
-  //   </EditorPreviewDialog>
-  // )
-
   const router = useRouter()
   const [editArticle, { loading }] = useMutation<EditArticleMutation>(
     EDIT_ARTICLE,
@@ -217,7 +164,9 @@ const SettingsButton = ({
     article.collection.edges?.map(({ node }) => node.id).sort()
   )
 
-  const isCoverRevised = article.cover ? cover !== article.cover : !!cover
+  const isCoverRevised = article.cover
+    ? cover?.path !== article.cover
+    : !!cover?.path
   const isRequestForDonationRevised =
     requestForDonation !== article.requestForDonation
   const isReplyToDonatorRevised = replyToDonator !== article.replyToDonator
@@ -264,7 +213,7 @@ const SettingsButton = ({
           ...(isContentRevised ? { content: content } : {}),
           ...(isTagRevised ? { tags: tags } : {}),
           ...(isConnectionRevised ? { collection: connections } : {}),
-          ...(isCoverRevised ? { cover: cover || null } : {}),
+          ...(isCoverRevised ? { cover: cover?.id || null } : {}),
           ...(isRequestForDonationRevised
             ? { requestForDonation: requestForDonation }
             : {}),
@@ -272,12 +221,14 @@ const SettingsButton = ({
             ? { replyToDonator: replyToDonator }
             : {}),
           ...(isCircleRevised ? { circle: circle?.id || null } : {}),
-          ...(isAccessRevised ? { access: accessType } : {}),
+          ...(isAccessRevised ? { accessType: accessType } : {}),
           ...(isLicenseRevised ? { license } : {}),
           ...(isCanCommentRevised ? { canComment: canComment } : {}),
-          ...(isIndentFirstLineRevised ? { indented: indentFirstLine } : {}),
+          ...(isIndentFirstLineRevised
+            ? { indentFirstLine: indentFirstLine }
+            : {}),
           ...(isSensitiveByAuthorRevised
-            ? { contentSensitive: sensitiveByAuthor }
+            ? { sensitive: sensitiveByAuthor }
             : {}),
           ...(isCampaignRevised
             ? {
@@ -298,6 +249,7 @@ const SettingsButton = ({
       if (needRepublish) {
         onPublish()
       } else {
+        baseToast.dismiss()
         toast.success({
           message: (
             <FormattedMessage
@@ -333,13 +285,83 @@ const SettingsButton = ({
     isOverLength
 
   return (
-    <ConfirmButton
-      openDialog={() => {
-        console.log('openDialog')
+    <EditorPreviewDialog
+      draft={{
+        __typename: 'Draft',
+        id: article.id,
+        title,
+        summary,
+        content,
+        cover: cover?.path || null,
+        tags: tags?.map((tag) => tag.content),
+        license,
+        canComment,
+        sensitiveByAuthor,
+        campaigns: selectedCampaign
+          ? [
+              {
+                __typename: 'ArticleCampaign',
+                campaign: {
+                  __typename: 'WritingChallenge',
+                  id: selectedCampaign?.id || '',
+                  name: selectedCampaign?.name || '',
+                },
+              },
+            ]
+          : [],
+        collections: { __typename: 'CollectionConnection', edges: [] },
+        access: {
+          __typename: 'DraftAccess',
+          circle,
+        },
+        connections: {
+          __typename: 'ArticleConnection',
+          edges: connections.map((node) => ({
+            __typename: 'ArticleEdge',
+            node: {
+              __typename: 'Article',
+              id: node.id,
+              title: node.title,
+            },
+          })),
+        },
+      }}
+      saving={loading}
+      disabled={disabled}
+      confirmButtonText={
+        <FormattedMessage defaultMessage="Publish Now" id="nWhqw9" />
+      }
+      cancelButtonText={
+        <FormattedMessage defaultMessage="Back to Edit" id="tGHG7q" />
+      }
+      onConfirm={() => {
         onSave()
       }}
-      disabled={disabled}
-    />
+    >
+      {({ openDialog: openEditorSettingsDialog }) => (
+        <ConfirmButton
+          openDialog={() => {
+            const hasCampaign = !!selectedCampaign
+            const hasCircle = !!circle
+
+            if (hasCampaign && hasCircle) {
+              toast.error({
+                message: (
+                  <FormattedMessage
+                    defaultMessage="Article cannot be added to event or circle at the same time"
+                    id="cPXsvZ"
+                  />
+                ),
+              })
+              return
+            }
+
+            openEditorSettingsDialog()
+          }}
+          disabled={disabled}
+        />
+      )}
+    </EditorPreviewDialog>
   )
 }
 

@@ -25,12 +25,20 @@ export const BasePreviewItem = ({
   closeDialog,
   withBackground = true,
 }: BasePreviewItemProps) => {
-  const { getQuery, router } = useRoute()
+  const { getQuery, router, isInPath } = useRoute()
   const draftId = getQuery('draftId')
-  const path = toPath({
-    page: 'draftDetailOptions',
-    id: draftId,
-  })
+  const shortHash = getQuery('shortHash')
+  const isInArticleEdit = isInPath('ARTICLE_DETAIL_EDIT')
+
+  const path = isInArticleEdit
+    ? toPath({
+        page: 'articleEditOptions',
+        article: { shortHash },
+      })
+    : toPath({
+        page: 'draftDetailOptions',
+        id: draftId,
+      })
 
   const goToOptionsPage = () => {
     router.push(path.href + `?type=${eventType}`)

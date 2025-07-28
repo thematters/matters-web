@@ -1141,9 +1141,6 @@
     "defaultMessage": "Wallet",
     "description": "src/components/Forms/SelectAuthMethodForm/AuthTabs.tsx"
   },
-  "GRrsEH": {
-    "defaultMessage": "View published article"
-  },
   "GU6vV0": {
     "defaultMessage": "No collection created yet",
     "description": "src/components/Empty/EmptyCollection.tsx"
@@ -1484,9 +1481,6 @@
   "MRn08S": {
     "defaultMessage": "Reply",
     "description": "src/components/CircleComment/FooterActions/ReplyButton/index.tsx"
-  },
-  "MV0JlP": {
-    "defaultMessage": "to receive more support"
   },
   "Me5cJu": {
     "defaultMessage": "Connect wallet",
@@ -3283,9 +3277,6 @@
   "tZKvnZ": {
     "defaultMessage": "Unlike moment"
   },
-  "tqEGfa": {
-    "defaultMessage": "Your work has been published. Share it on different platforms"
-  },
   "tzq2+W": {
     "defaultMessage": "Send",
     "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/PreSend.tsx"
@@ -3319,9 +3310,6 @@
   },
   "uVCg1l": {
     "defaultMessage": "Explore Matters"
-  },
-  "uYwH7j": {
-    "defaultMessage": "Article published"
   },
   "uaFED8": {
     "defaultMessage": "After binding, in addition to the original login method, a wallet login channel will be added.",
