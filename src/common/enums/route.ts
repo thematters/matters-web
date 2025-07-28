@@ -21,6 +21,7 @@ type ROUTE_KEY =
   // Article
   | 'ARTICLE_DETAIL'
   | 'ARTICLE_DETAIL_EDIT'
+  | 'ARTICLE_DETAIL_EDIT_OPTIONS'
   | 'ARTICLE_DETAIL_HISTORY'
   // Moment
   | 'MOMENT_DETAIL_EDIT'
@@ -115,6 +116,10 @@ export const PROTECTED_ROUTES: {
 
   // Article
   { key: 'ARTICLE_DETAIL_EDIT', pathname: '/a/[shortHash]/edit' },
+  {
+    key: 'ARTICLE_DETAIL_EDIT_OPTIONS',
+    pathname: '/a/[shortHash]/edit/options',
+  },
 
   // Draft
   { key: 'ME_DRAFT_NEW', pathname: '/me/drafts/new' },
