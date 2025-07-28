@@ -6,6 +6,7 @@ import { useContext, useEffect, useState } from 'react'
 import {
   ASSET_TYPE,
   ENTITY_TYPE,
+  MAX_ARTICLE_CONTENT_LENGTH,
   MAX_ARTICLE_REVISION_COUNT,
 } from '~/common/enums'
 import {
@@ -57,6 +58,7 @@ const DynamicOptionDrawer = dynamic(
   }
 )
 
+import { stripHtml } from '~/common/utils'
 import { SidebarCanCommentProps } from '~/components/Editor/Sidebar/CanComment'
 import { SidebarISCNProps } from '~/components/Editor/Sidebar/ISCN'
 import { SidebarLicenseProps } from '~/components/Editor/Sidebar/License'
@@ -66,6 +68,7 @@ import { GET_EDIT_ARTICLE, GET_EDIT_ARTICLE_ASSETS } from './gql'
 import { useViewer } from './Hooks'
 import { useCampaignState } from './Hooks/useCampaignState'
 import { OptionButton } from './OptionButton'
+import SettingsButton from './SettingsButton'
 // import PublishState from './PublishState'
 // import SettingsButton from './SettingsButton'
 import styles from './styles.module.css'
@@ -100,9 +103,12 @@ const BaseEdit = ({ article }: { article: Article }) => {
   // const [versionDescription, setVersionDescription] = useState('')
 
   // content-related
-  const [, setTitle] = useState(article.title)
-  const [, setSummary] = useState(article.summary)
-  const [, setContent] = useState(article.contents.html)
+  const [title, setTitle] = useState(article.title)
+  const [summary, setSummary] = useState(article.summary)
+  const [content, setContent] = useState(article.contents.html)
+
+  const contentLength = stripHtml(content || '').length
+  const isOverLength = contentLength > MAX_ARTICLE_CONTENT_LENGTH
 
   // cover
   const [assets, setAssets] = useState(article.assets || [])
@@ -131,7 +137,9 @@ const BaseEdit = ({ article }: { article: Article }) => {
   const [circle, setCircle] = useState<
     DigestRichCirclePublicFragment | null | undefined
   >(article.access.circle)
-  const [, setAccessType] = useState<ArticleAccessType>(article.access.type)
+  const [accessType, setAccessType] = useState<ArticleAccessType>(
+    article.access.type
+  )
 
   // cc2.0 is replace by cc4.0 when editing article
   const [license, setLicense] = useState<ArticleLicenseType>(
@@ -186,7 +194,7 @@ const BaseEdit = ({ article }: { article: Article }) => {
 
   const revisionCountLeft =
     MAX_ARTICLE_REVISION_COUNT - (article?.revisionCount || 0)
-  // const isOverRevisionLimit = revisionCountLeft <= 0
+  const isOverRevisionLimit = revisionCountLeft <= 0
 
   const coverProps: SetCoverProps = {
     cover: cover?.path,
@@ -350,9 +358,35 @@ const BaseEdit = ({ article }: { article: Article }) => {
           <>
             <section className={styles.header}>
               <section className={styles.headerRight}>
+                {isOverLength && (
+                  <span className={styles.count}>
+                    {contentLength} / {MAX_ARTICLE_CONTENT_LENGTH}
+                  </span>
+                )}
                 <OptionButton onClick={toggleOptionDrawer} />
                 <section className={styles.publishButtons}>
-                  publish button
+                  <SettingsButton
+                    article={article}
+                    title={title}
+                    summary={summary}
+                    content={content}
+                    tags={tags}
+                    connections={connections}
+                    cover={cover?.path}
+                    requestForDonation={requestForDonation}
+                    replyToDonator={replyToDonator}
+                    circle={circle || null}
+                    accessType={accessType}
+                    license={license}
+                    canComment={canComment}
+                    indentFirstLine={indented}
+                    sensitiveByAuthor={contentSensitive}
+                    iscnPublish={iscnPublish}
+                    onPublish={() => {
+                      console.log('onPublish')
+                    }}
+                    isOverRevisionLimit={isOverRevisionLimit}
+                  />
                 </section>
               </section>
             </section>
