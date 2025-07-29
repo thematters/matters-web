@@ -12,6 +12,7 @@ import {
   ArticleAccessType,
   ArticleDigestDropdownArticleFragment,
   AssetFragment,
+  CollectionDigestCollectionPublicFragment,
   DigestRichCirclePublicFragment,
   EditArticleMutation,
   EditorSelectCampaignFragment,
@@ -35,6 +36,7 @@ type SettingsButtonProps = {
   isOverRevisionLimit: boolean
   publishable?: boolean
   connections: ArticleDigestDropdownArticleFragment[]
+  collections: CollectionDigestCollectionPublicFragment[]
   saving?: boolean
 } & Pick<
   Article,
@@ -108,6 +110,7 @@ const SettingsButton = ({
   cover,
   tags,
   connections,
+  collections,
   circle,
   accessType,
   license,
@@ -163,6 +166,10 @@ const SettingsButton = ({
     connections.map(({ id }) => id).sort(),
     article.connections.edges?.map(({ node }) => node.id).sort()
   )
+  const isCollectionRevised = !_isEqual(
+    collections?.map(({ id }) => id).sort(),
+    article.collections.edges?.map(({ node }) => node.id).sort()
+  )
 
   const isCoverRevised = article.cover
     ? cover?.path !== article.cover
@@ -201,6 +208,7 @@ const SettingsButton = ({
     isIndentFirstLineRevised ||
     isSensitiveByAuthorRevised ||
     isCampaignRevised ||
+    isCollectionRevised ||
     iscnPublish
 
   const onSave = async () => {
@@ -212,8 +220,13 @@ const SettingsButton = ({
           ...(isSummaryRevised ? { summary: summary || null } : {}),
           ...(isContentRevised ? { content: content } : {}),
           ...(isTagRevised ? { tags: tags } : {}),
-          ...(isConnectionRevised ? { connections: connections } : {}),
           ...(isCoverRevised ? { cover: cover?.id || null } : {}),
+          ...(isConnectionRevised
+            ? { connections: connections.map(({ id }) => id) }
+            : {}),
+          ...(isCollectionRevised
+            ? { collections: collections.map(({ id }) => id) }
+            : {}),
           ...(isRequestForDonationRevised
             ? { requestForDonation: requestForDonation }
             : {}),
@@ -309,7 +322,13 @@ const SettingsButton = ({
               },
             ]
           : [],
-        collections: { __typename: 'CollectionConnection', edges: [] },
+        collections: {
+          __typename: 'CollectionConnection',
+          edges: collections.map(({ id, title }) => ({
+            __typename: 'CollectionEdge',
+            node: { __typename: 'Collection', id, title },
+          })),
+        },
         access: {
           __typename: 'DraftAccess',
           circle,

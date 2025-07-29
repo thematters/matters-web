@@ -30,6 +30,14 @@ const fragment = gql`
         id
       }
     }
+    collections(input: { first: null }) {
+      edges {
+        node {
+          id
+          title
+        }
+      }
+    }
     ...ArticleConnections
   }
   ${ArticleTag.fragments.tag}
@@ -45,7 +53,8 @@ export const EDIT_ARTICLE = gql`
     $content: String
     $cover: ID
     $tags: [String!]
-    $collection: [ID!]
+    $connections: [ID!]
+    $collections: [ID!]
     $circle: ID
     $accessType: ArticleAccessType
     $license: ArticleLicenseType
@@ -69,7 +78,8 @@ export const EDIT_ARTICLE = gql`
         content: $content
         cover: $cover
         tags: $tags
-        collection: $collection
+        connections: $connections
+        collections: $collections
         circle: $circle
         accessType: $accessType
         license: $license
@@ -94,7 +104,8 @@ export const EDIT_ARTICLE = gql`
         content: $content
         cover: $cover
         tags: $tags
-        collection: $collection
+        connections: $connections
+        collections: $collections
         circle: $circle
         accessType: $accessType
         license: $license

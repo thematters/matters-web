@@ -7,6 +7,7 @@ import { SelectCampaignProps } from '~/components/Editor/SelectCampaign'
 import { SetCoverProps } from '~/components/Editor/SetCover'
 import Sidebar from '~/components/Editor/Sidebar'
 import { SidebarCanCommentProps } from '~/components/Editor/Sidebar/CanComment'
+import { SidebarCollectionsProps } from '~/components/Editor/Sidebar/Collections'
 import { SidebarIndentProps } from '~/components/Editor/Sidebar/Indent'
 import { SidebarISCNProps } from '~/components/Editor/Sidebar/ISCN'
 import { SidebarLicenseProps } from '~/components/Editor/Sidebar/License'
@@ -33,6 +34,7 @@ export type OptionContentProps = {
   SetCoverProps &
   SetTagsProps &
   SetConnectionsProps &
+  SidebarCollectionsProps &
   SidebarIndentProps &
   SidebarLicenseProps &
   SidebarCanCommentProps & {
@@ -119,32 +121,30 @@ const EditConnections = ({
   )
 }
 
-// const EditCollections = ({
-//   article,
-//   ownCollections,
-//   editCollections,
-//   collectionsSaving,
-//   disabled,
-//   loadMoreCollections,
-//   viewerData,
-// }: OptionItemProps) => {
-//   const collections = ownCollections || []
-//   const checkedCollections =
-//     article.collection.edges?.map(({ node }) => node) || []
-//   const hasMoreCollections =
-//     !!viewerData?.viewer?.collections?.pageInfo?.hasNextPage
-//   return (
-//     <Sidebar.Collections
-//       checkedCollections={checkedCollections}
-//       collections={collections}
-//       editCollections={editCollections}
-//       collectionsSaving={collectionsSaving}
-//       disabled={disabled}
-//       loadMore={loadMoreCollections}
-//       hasNextPage={hasMoreCollections}
-//     />
-//   )
-// }
+const EditCollections = ({
+  ownCollections,
+  checkedCollections,
+  editCollections,
+  collectionsSaving,
+  disabled,
+  loadMore,
+  viewerData,
+}: OptionItemProps) => {
+  const collections = ownCollections || []
+  const hasMoreCollections =
+    !!viewerData?.viewer?.collections?.pageInfo?.hasNextPage
+  return (
+    <Sidebar.Collections
+      checkedCollections={checkedCollections}
+      collections={collections}
+      editCollections={editCollections}
+      collectionsSaving={collectionsSaving}
+      disabled={disabled}
+      loadMore={loadMore}
+      hasNextPage={hasMoreCollections}
+    />
+  )
+}
 
 const EditIndent = ({
   indented,
@@ -253,7 +253,7 @@ export const OptionContent = (
   const { tab, setTab } = props
   const isContentAndLayout = tab === 'contentAndLayout'
   const isSettings = tab === 'settings'
-  // const hasOwnCollections = (props.ownCollections?.length || 0) > 0
+  const hasOwnCollections = (props.ownCollections?.length || 0) > 0
   const hasOwnCircle = props.ownCircles && props.ownCircles.length >= 1
   const disabled = false
 
@@ -289,6 +289,9 @@ export const OptionContent = (
             <EditCover {...props} disabled={disabled} />
             <EditTags {...props} disabled={disabled} />
             <EditConnections {...props} disabled={disabled} />
+            {hasOwnCollections && (
+              <EditCollections {...props} disabled={disabled} />
+            )}
             <EditIndent {...props} disabled={disabled} />
           </>
         )}

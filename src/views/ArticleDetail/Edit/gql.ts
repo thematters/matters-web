@@ -82,6 +82,17 @@ export const GET_EDIT_ARTICLE = gql`
           id
         }
       }
+      collections(input: { first: null }) {
+        edges {
+          node {
+            id
+            title
+            articles(input: { first: 0 }) {
+              totalCount
+            }
+          }
+        }
+      }
       ...ArticleConnections
     }
   }

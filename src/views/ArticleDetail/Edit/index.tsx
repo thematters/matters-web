@@ -60,6 +60,7 @@ const DynamicOptionDrawer = dynamic(
 
 import { stripHtml } from '~/common/utils'
 import { SidebarCanCommentProps } from '~/components/Editor/Sidebar/CanComment'
+import { SidebarCollectionsProps } from '~/components/Editor/Sidebar/Collections'
 import { SidebarISCNProps } from '~/components/Editor/Sidebar/ISCN'
 import { SidebarLicenseProps } from '~/components/Editor/Sidebar/License'
 import { SidebarSensitiveProps } from '~/components/Editor/Sidebar/Sensitive'
@@ -90,11 +91,11 @@ const BaseEdit = ({ article }: { article: Article }) => {
   }
 
   const {
-    // viewerData,
+    viewerData,
     ownCircles,
     ownCollections,
     // appliedCampaigns,
-    // loadMoreCollections,
+    loadMoreCollections,
   } = useViewer()
 
   const [showPublishState, setShowPublishState] = useState(false)
@@ -128,9 +129,16 @@ const BaseEdit = ({ article }: { article: Article }) => {
 
   // tags
   const [tags, setTags] = useState<DigestTagFragment[]>(article.tags || [])
+
+  // connections
   const [connections, setConnections] = useState<
     ArticleDigestDropdownArticleFragment[]
   >(article.connections.edges?.map(({ node }) => node) || [])
+
+  // collections
+  const [checkedCollections, setCheckedCollections] = useState<string[]>(
+    article.collections.edges?.map(({ node }) => node.id) || []
+  )
 
   // access
   const [circle, setCircle] = useState<
@@ -208,6 +216,18 @@ const BaseEdit = ({ article }: { article: Article }) => {
     editConnections: async (c: ArticleDigestDropdownArticleFragment[]) =>
       setConnections(c),
     nodeExclude: article.id,
+  }
+
+  const collectionsProps: SidebarCollectionsProps = {
+    collections: ownCollections || [],
+    checkedCollections:
+      ownCollections?.filter((c) => checkedCollections.includes(c.id)) || [],
+    collectionsSaving: false,
+    editCollections: async (collections: string[]) => {
+      setCheckedCollections(collections)
+    },
+    loadMore: loadMoreCollections,
+    hasNextPage: !!viewerData?.viewer?.collections?.pageInfo?.hasNextPage,
   }
 
   const indentProps: SidebarIndentProps = {
@@ -364,6 +384,7 @@ const BaseEdit = ({ article }: { article: Article }) => {
                     content={content}
                     tags={tags}
                     connections={connections}
+                    collections={collectionsProps.checkedCollections}
                     cover={cover || null}
                     requestForDonation={requestForDonation}
                     replyToDonator={replyToDonator}
@@ -438,6 +459,7 @@ const BaseEdit = ({ article }: { article: Article }) => {
               {...coverProps}
               {...tagsProps}
               {...connectionsProps}
+              {...collectionsProps}
               {...indentProps}
               {...licenseProps}
               {...canCommentProps}
