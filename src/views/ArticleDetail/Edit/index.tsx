@@ -26,7 +26,6 @@ import {
   SetConnectionsProps,
   SetCoverProps,
   SetTagsProps,
-  // SetVersionDescriptionProps,
 } from '~/components/Editor'
 import { SidebarIndentProps } from '~/components/Editor/Sidebar/Indent'
 import { QueryError, useImperativeQuery } from '~/components/GQL'
@@ -100,7 +99,7 @@ const BaseEdit = ({ article }: { article: Article }) => {
 
   const [showPublishState, setShowPublishState] = useState(false)
 
-  // const [versionDescription, setVersionDescription] = useState('')
+  const [versionDescription, setVersionDescription] = useState('')
 
   // content-related
   const [title, setTitle] = useState(article.title)
@@ -155,8 +154,6 @@ const BaseEdit = ({ article }: { article: Article }) => {
       : article.license
   )
 
-  // const ownCircles = article.author.ownCircles
-  // const hasOwnCircle = ownCircles && ownCircles.length >= 1
   const editAccess = (
     addToCircle: boolean,
     paywalled: boolean,
@@ -267,11 +264,6 @@ const BaseEdit = ({ article }: { article: Article }) => {
     toggleISCN: () => setIscnPublish(!iscnPublish),
     iscnPublishSaving: false,
   }
-
-  // const versionDescriptionProps: SetVersionDescriptionProps = {
-  //   versionDescription: versionDescription,
-  //   editVersionDescription: setVersionDescription,
-  // }
 
   const [singleFileUpload] =
     useMutation<SingleFileUploadMutation>(SINGLE_FILE_UPLOAD)
@@ -401,6 +393,8 @@ const BaseEdit = ({ article }: { article: Article }) => {
                     isOverRevisionLimit={isOverRevisionLimit}
                     selectedCampaign={selectedCampaign}
                     selectedStage={selectedStage}
+                    versionDescription={versionDescription}
+                    editVersionDescription={setVersionDescription}
                   />
                 </section>
               </section>

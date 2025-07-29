@@ -38,6 +38,8 @@ type SettingsButtonProps = {
   connections: ArticleDigestDropdownArticleFragment[]
   collections: CollectionDigestCollectionPublicFragment[]
   saving?: boolean
+  versionDescription: string
+  editVersionDescription: (description: string) => void
 } & Pick<
   Article,
   | 'title'
@@ -122,6 +124,8 @@ const SettingsButton = ({
   selectedCampaign,
   selectedStage,
   iscnPublish,
+  versionDescription,
+  editVersionDescription,
   onPublish,
   isOverRevisionLimit,
 }: SettingsButtonProps) => {
@@ -256,6 +260,7 @@ const SettingsButton = ({
               }
             : {}),
           isResetCampaign,
+          versionDescription,
         },
       })
 
@@ -356,6 +361,8 @@ const SettingsButton = ({
       onConfirm={() => {
         onSave()
       }}
+      versionDescription={versionDescription}
+      editVersionDescription={editVersionDescription}
     >
       {({ openDialog: openEditorSettingsDialog }) => (
         <ConfirmButton
