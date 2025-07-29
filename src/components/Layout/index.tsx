@@ -23,6 +23,7 @@ const useLayoutType = () => {
   const isInDraftDetail = isInPath('ME_DRAFT_DETAIL')
   const isInDraftDetailOptions = isInPath('ME_DRAFT_DETAIL_OPTIONS')
   const isInArticleDetailEdit = isInPath('ARTICLE_DETAIL_EDIT')
+  const isInArticleDetailEditOptions = isInPath('ARTICLE_DETAIL_EDIT_OPTIONS')
 
   const isInCircleDetail =
     isInPath('CIRCLE_DETAIL') && isPathStartWith('/~', true)
@@ -33,7 +34,8 @@ const useLayoutType = () => {
     !isInDraftDetailOptions &&
     !isInMomentDetail &&
     !isInMomentDetailEdit &&
-    !isInArticleDetailEdit
+    !isInArticleDetailEdit &&
+    !isInArticleDetailEditOptions
 
   const isOneColumnLayout =
     isInPath('SEARCH') ||

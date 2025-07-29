@@ -65,9 +65,11 @@ import { SidebarLicenseProps } from '~/components/Editor/Sidebar/License'
 import { SidebarSensitiveProps } from '~/components/Editor/Sidebar/Sensitive'
 
 import { GET_EDIT_ARTICLE, GET_EDIT_ARTICLE_ASSETS } from './gql'
-import { useViewer } from './Hooks'
+import { getOptionTabByType, OptionTab, useViewer } from './Hooks'
 import { useCampaignState } from './Hooks/useCampaignState'
 import { OptionButton } from './OptionButton'
+import { OptionContent } from './OptionContent'
+import OptionsPage from './OptionsPage'
 import PublishState from './PublishState'
 import SettingsButton from './SettingsButton'
 import styles from './styles.module.css'
@@ -88,6 +90,10 @@ const BaseEdit = ({ article }: { article: Article }) => {
   const toggleOptionDrawer = () => {
     setIsOpenOptionDrawer((prevState) => !prevState)
   }
+  const { isInPath, getQuery } = useRoute()
+  const isInArticleEditOptions = isInPath('ARTICLE_DETAIL_EDIT_OPTIONS')
+  const type = getQuery('type')
+  const [tab, setTab] = useState<OptionTab>(getOptionTabByType(type))
 
   const {
     viewerData,
@@ -353,6 +359,33 @@ const BaseEdit = ({ article }: { article: Article }) => {
     else {
       return trySingleUpload()
     }
+  }
+  if (isInArticleEditOptions) {
+    return (
+      <OptionsPage>
+        <OptionContent
+          tab={tab}
+          setTab={setTab}
+          article={article}
+          ownCircles={ownCircles}
+          ownCollections={ownCollections}
+          campaigns={selectableCampaigns || []}
+          selectedCampaign={selectedCampaign}
+          selectedStage={selectedStage}
+          editCampaign={setCampaign}
+          {...coverProps}
+          {...tagsProps}
+          {...connectionsProps}
+          {...collectionsProps}
+          {...indentProps}
+          {...licenseProps}
+          {...canCommentProps}
+          {...supportSettingProps}
+          {...sensitiveProps}
+          {...iscnProps}
+        />
+      </OptionsPage>
+    )
   }
 
   return (
