@@ -100,6 +100,10 @@ export const ConnectionInput = ({
   const formik = useFormik<{ url: string }>({
     initialValues: { url: '' },
     onSubmit: async () => {
+      if (searchLoading) {
+        return
+      }
+
       if (!searchData?.article || searchData.article.state === 'archived') {
         toast.error({
           message: intl.formatMessage({
@@ -214,7 +218,7 @@ export const ConnectionInput = ({
               formik.handleChange(e)
             }}
             onBlur={formik.handleBlur}
-            disabled={saving || searchLoading}
+            disabled={saving}
             onKeyDown={(e) => {
               if (e.key === 'Enter') {
                 e.preventDefault()
