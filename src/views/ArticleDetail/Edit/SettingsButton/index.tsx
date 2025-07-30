@@ -102,10 +102,6 @@ const ConfirmButton = ({
 
 const SettingsButton = ({
   article,
-  // ownCircles,
-  // campaigns,
-  // publishable,
-  // saving,
   title,
   summary,
   content,
