@@ -32,7 +32,7 @@ export const BasePreviewItem = ({
 
   const path = isInArticleEdit
     ? toPath({
-        page: 'articleEditOptions',
+        page: 'articleEdit',
         article: { shortHash },
       })
     : toPath({
@@ -41,7 +41,11 @@ export const BasePreviewItem = ({
       })
 
   const goToOptionsPage = () => {
-    router.push(path.href + `?type=${eventType}`)
+    if (isInArticleEdit) {
+      router.push(path.href + `?page=options&type=${eventType}`)
+    } else {
+      router.push(path.href + `?type=${eventType}`)
+    }
   }
 
   const isSmUp = useMediaQuery(`(min-width: ${BREAKPOINTS.MD}px)`)

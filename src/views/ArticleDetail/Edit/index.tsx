@@ -90,10 +90,10 @@ const BaseEdit = ({ article }: { article: Article }) => {
   const toggleOptionDrawer = () => {
     setIsOpenOptionDrawer((prevState) => !prevState)
   }
-  const { isInPath, getQuery } = useRoute()
+  const { getQuery } = useRoute()
 
   // Detect if coming from options page
-  const isInArticleEditOptions = isInPath('ARTICLE_DETAIL_EDIT_OPTIONS')
+  const isInArticleEditOptions = getQuery('page') === 'options'
   const type = getQuery('type')
   const [tab, setTab] = useState<OptionTab>(getOptionTabByType(type))
 

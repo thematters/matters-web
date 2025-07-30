@@ -9,11 +9,11 @@ export const OptionButton = ({ onClick }: { onClick: () => void }) => {
   const { getQuery, router } = useRoute()
   const shortHash = getQuery('shortHash')
   const path = toPath({
-    page: 'articleEditOptions',
+    page: 'articleEdit',
     article: { shortHash },
   })
   const goToOptionsPage = () => {
-    router.push(path.href)
+    router.push(path.href + '?page=options')
   }
   return (
     <>
