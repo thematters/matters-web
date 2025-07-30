@@ -26,8 +26,12 @@
     & .name {
       @mixin line-clamp;
 
-      max-width: calc(23.375rem - var(--sp16));
+      max-width: calc(100vw - var(--sp16) - var(--sp14) - var(--sp32));
       color: var(--color-grey-darker);
+
+      @media (--sm-up) {
+        max-width: calc(23.375rem - var(--sp16));
+      }
 
       &.withBackground {
         padding: var(--sp4) var(--sp8);
