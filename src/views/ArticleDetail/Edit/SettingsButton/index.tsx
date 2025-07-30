@@ -219,7 +219,7 @@ const SettingsButton = ({
           ...(isTitleRevised ? { title: title } : {}),
           ...(isSummaryRevised ? { summary: summary || null } : {}),
           ...(isContentRevised ? { content: content } : {}),
-          ...(isTagRevised ? { tags: tags } : {}),
+          ...(isTagRevised ? { tags: tags?.map(({ id }) => id) } : {}),
           ...(isCoverRevised ? { cover: cover?.id || null } : {}),
           ...(isConnectionRevised
             ? { connections: connections.map(({ id }) => id) }
