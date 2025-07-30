@@ -214,7 +214,7 @@ export const ConnectionInput = ({
               formik.handleChange(e)
             }}
             onBlur={formik.handleBlur}
-            disabled={saving}
+            disabled={saving || searchLoading}
             onKeyDown={(e) => {
               if (e.key === 'Enter') {
                 e.preventDefault()
@@ -222,7 +222,7 @@ export const ConnectionInput = ({
               }
             }}
           />
-          {saving && <SpinnerBlock size={16} noSpacing />}
+          {(saving || searchLoading) && <SpinnerBlock size={16} noSpacing />}
         </form>
       )}
     </Dropdown>
