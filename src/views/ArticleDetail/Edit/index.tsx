@@ -91,43 +91,15 @@ const BaseEdit = ({ article }: { article: Article }) => {
     setIsOpenOptionDrawer((prevState) => !prevState)
   }
   const { getQuery } = useRoute()
+  const [showReviseDialog, setShowReviseDialog] = useState(true)
 
-  // Detect if coming from options page
   const isInArticleEditOptions = getQuery('page') === 'options'
   const type = getQuery('type')
   const [tab, setTab] = useState<OptionTab>(getOptionTabByType(type))
 
-  // Hide ReviseArticleDialog when returning from options page
-  const [shouldHideReviseDialog] = useState(() => {
-    const wasInOptions =
-      typeof window !== 'undefined' &&
-      sessionStorage.getItem('articleEditWasInOptions') === 'true'
-
-    if (wasInOptions) {
-      if (typeof window !== 'undefined') {
-        sessionStorage.removeItem('articleEditWasInOptions')
-      }
-      return true
-    }
-
-    return false
-  })
-
   useEffect(() => {
-    // Set flag when entering options page
-    if (isInArticleEditOptions) {
-      sessionStorage.setItem('articleEditWasInOptions', 'true')
-    }
-  }, [isInArticleEditOptions])
-
-  // Cleanup sessionStorage on unmount
-  useEffect(() => {
-    return () => {
-      if (!isInArticleEditOptions) {
-        sessionStorage.removeItem('articleEditWasInOptions')
-      }
-    }
-  }, [isInArticleEditOptions])
+    setTab(getOptionTabByType(type))
+  }, [type])
 
   const {
     viewerData,
@@ -531,8 +503,11 @@ const BaseEdit = ({ article }: { article: Article }) => {
           </Media>
         </Layout.Main.Spacing>
 
-        {!shouldHideReviseDialog && (
-          <ReviseArticleDialog revisionCountLeft={revisionCountLeft} />
+        {showReviseDialog && (
+          <ReviseArticleDialog
+            revisionCountLeft={revisionCountLeft}
+            onCloseDialog={() => setShowReviseDialog(false)}
+          />
         )}
       </Layout>
     </>
