@@ -27,10 +27,13 @@
       @mixin line-clamp;
 
       max-width: calc(23.375rem - var(--sp16));
-      padding: var(--sp4) var(--sp8);
       color: var(--color-grey-darker);
-      background: var(--color-grey-lighter);
-      border-radius: var(--sp8);
+
+      &.withBackground {
+        padding: var(--sp4) var(--sp8);
+        background: var(--color-grey-lighter);
+        border-radius: var(--sp8);
+      }
     }
   }
 

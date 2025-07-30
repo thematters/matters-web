@@ -1600,6 +1600,9 @@
   "OKhRC6": {
     "defaultMessage": "分享"
   },
+  "OhSg5a": {
+    "defaultMessage": "限制級內容"
+  },
   "OjC4aZ": {
     "defaultMessage": "作者",
     "description": "src/components/ArticleComment/RoleLabel/index.tsx"
@@ -1689,6 +1692,10 @@
   "QKo4ol": {
     "defaultMessage": "主標題",
     "description": "src/components/Editor"
+  },
+  "QOLRFh": {
+    "defaultMessage": "已成功發布作品，稍後同步到 IPFS",
+    "description": "src/views/Me/DraftDetail/PublishState/index.tsx"
   },
   "QQSdHP": {
     "defaultMessage": "查看更多"
@@ -1954,6 +1961,10 @@
   "UxAA/V": {
     "defaultMessage": "Optimism 是基於以太坊的第二層（Layer2）擴容方案，能提升交易速度，並降低手續費，同時確保安全性，讓你更輕鬆地支持創作者。",
     "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
+  },
+  "V1Lts1": {
+    "defaultMessage": "發布中，請稍候⋯",
+    "description": "src/components/Editor/PreviewDialog/index.tsx"
   },
   "V5OMr4": {
     "defaultMessage": "什麼是數字錢包？",
@@ -3616,6 +3627,9 @@
   },
   "zE51j6": {
     "defaultMessage": "發布失敗"
+  },
+  "zJLPmE": {
+    "defaultMessage": "允許評論"
   },
   "zKOr2x": {
     "defaultMessage": "已追蹤用戶佔總觀看人數比例",

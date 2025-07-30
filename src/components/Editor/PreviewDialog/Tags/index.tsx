@@ -20,7 +20,7 @@ export const Tags = ({
 }) => {
   const { tags } = draft
 
-  if (!tags) {
+  if (!tags || tags.length === 0) {
     return null
   }
 

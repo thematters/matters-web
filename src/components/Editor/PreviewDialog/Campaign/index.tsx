@@ -24,6 +24,9 @@ export const Campaign = ({
   closeDialog: () => void
 }) => {
   const { campaign } = draft.campaigns[0]
+  if (!campaign) {
+    return null
+  }
 
   return (
     <BasePreviewItem

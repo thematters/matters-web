@@ -1,3 +1,4 @@
+import classNames from 'classnames'
 import { ReactNode } from 'react'
 
 import IconRight from '@/public/static/icons/24px/right.svg'
@@ -13,6 +14,7 @@ export interface BasePreviewItemProps {
   eventType: string
   eventDetail?: Record<string, string | number>
   closeDialog: () => void
+  withBackground?: boolean
 }
 
 export const BasePreviewItem = ({
@@ -21,6 +23,7 @@ export const BasePreviewItem = ({
   eventType,
   eventDetail = {},
   closeDialog,
+  withBackground = true,
 }: BasePreviewItemProps) => {
   const { getQuery, router } = useRoute()
   const draftId = getQuery('draftId')
@@ -52,13 +55,17 @@ export const BasePreviewItem = ({
     goToOptionsPage()
   }
 
+  const nameClasses = classNames(styles.name, {
+    [styles.withBackground]: withBackground,
+  })
+
   return (
     <button className={styles.container} onClick={onClick}>
       <section className={styles.left}>
         <span className={styles.title}>{title}</span>
         <section className={styles.names}>
           {names.map((name, index) => (
-            <div className={styles.name} key={name || index}>
+            <div className={nameClasses} key={name || index}>
               {name}
             </div>
           ))}
