@@ -56,7 +56,7 @@ const BaseArticleDigestFeed = ({
   const { author, summary } = article
   const isBanned = article.articleState === 'banned'
   const isArchived = article.articleState === 'archived'
-  const cover = !isBanned && !isArchived ? article.cover : null
+  const cover = !isBanned && !isArchived ? article.displayCover : null
   const cleanedSummary =
     isBanned && !isArchived ? '' : makeSummary(summary, MAX_FEED_SUMMARY_LENGTH)
 
@@ -84,37 +84,36 @@ const BaseArticleDigestFeed = ({
       className={styles.wrapper}
       data-test-id={TEST_ID.DIGEST_ARTICLE_FEED}
     >
+      {hasHeader && (
+        <header className={styles.header}>
+          {hasAuthor && (
+            <section className={styles.author}>
+              <UserDigest.Mini
+                user={author}
+                avatarSize={20}
+                textSize={12}
+                nameColor={
+                  author.status?.state === 'archived' ? 'grey' : undefined
+                }
+                spacing={6}
+                hasAvatar
+                hasDisplayName
+                onClick={onClickAuthor}
+              />
+              {!excludesTimeStamp && (
+                <Icon icon={IconDot} color="greyLight" size={20} />
+              )}
+            </section>
+          )}
+          {!excludesTimeStamp && (
+            <Link {...path}>
+              <DateTime date={article.createdAt} color="grey" minimal />
+            </Link>
+          )}
+        </header>
+      )}
       <section className={styles.container}>
         <section className={styles.content}>
-          {hasHeader && (
-            <header className={styles.header}>
-              {hasAuthor && (
-                <section className={styles.author}>
-                  <UserDigest.Mini
-                    user={author}
-                    avatarSize={20}
-                    textSize={12}
-                    nameColor={
-                      author.status?.state === 'archived' ? 'grey' : undefined
-                    }
-                    hasAvatar
-                    hasDisplayName
-                    onClick={onClickAuthor}
-                  />
-                  {!excludesTimeStamp && (
-                    <Icon icon={IconDot} color="greyLight" size={20} />
-                  )}
-                </section>
-              )}
-
-              {!excludesTimeStamp && (
-                <Link {...path}>
-                  <DateTime date={article.createdAt} color="grey" />
-                </Link>
-              )}
-            </header>
-          )}
-
           <section className={styles.head}>
             <section className={styles.title}>
               <ArticleDigestTitle
@@ -134,7 +133,7 @@ const BaseArticleDigestFeed = ({
             </Link>
           )}
 
-          <Media greaterThan="sm">{footerActions}</Media>
+          <Media greaterThanOrEqual="md">{footerActions}</Media>
         </section>
 
         {cover && (
@@ -156,7 +155,7 @@ const BaseArticleDigestFeed = ({
           </Link>
         )}
       </section>
-      <Media at="sm">{footerActions}</Media>
+      <Media lessThan="md">{footerActions}</Media>
     </section>
   )
 }

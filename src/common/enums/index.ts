@@ -1,5 +1,6 @@
 export * from './analytics'
 export * from './article'
+export * from './channel'
 export * from './chart'
 export * from './contract'
 export * from './cookie'

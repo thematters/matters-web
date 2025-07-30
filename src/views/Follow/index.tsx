@@ -4,6 +4,7 @@ import { useContext, useEffect, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import {
+  Announcements,
   Head,
   Layout,
   Media,
@@ -15,8 +16,8 @@ import {
 import { MeFollowQuery, ReadFollowingFeedMutation } from '~/gql/graphql'
 
 import Feed from './Feed'
+import styles from './styles.module.css'
 import { TABS, Tabs } from './Tabs'
-
 const READ_FOLLOWING = gql`
   mutation ReadFollowingFeed {
     logRecord(input: { type: ReadFollowingFeed })
@@ -82,29 +83,30 @@ const Follow = () => {
   const [tab, setTab] = useState<TABS>('All')
 
   return (
-    <Layout.Main>
+    <Layout.Main
+      aside={
+        <>
+          <Spacer size="sp16" />
+          <Announcements />
+        </>
+      }
+    >
       <Head
         title={intl.formatMessage({ defaultMessage: 'Follow', id: 'ieGrWo' })}
       />
-
-      <Media at="sm">
-        <Layout.Header
-          left={
-            <Layout.Header.Title>
-              <FormattedMessage defaultMessage="Following" id="cPIKU2" />
-            </Layout.Header.Title>
-          }
-        />
+      <Media lessThan="lg">
+        <Spacer size="sp20" />
+        <Announcements />
       </Media>
-      <Media greaterThan="sm">
-        <Spacer size="sp16" />
-      </Media>
-
-      <Layout.Main.Spacing hasVertical={false}>
-        <Tabs tab={tab} setTab={setTab} />
-        <Spacer size="sp8" />
-        <BaseFollow tab={tab} />
-      </Layout.Main.Spacing>
+      <section className={styles.headers}>
+        <section className={styles.title}>
+          <FormattedMessage defaultMessage="Following" id="cPIKU2" />
+        </section>
+        <section className={styles.tabs}>
+          <Tabs tab={tab} setTab={setTab} />
+        </section>
+      </section>
+      <BaseFollow tab={tab} />
     </Layout.Main>
   )
 }

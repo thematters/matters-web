@@ -3,7 +3,7 @@
   padding: var(--sp20) var(--sp16);
 
   @media (--sm-up) {
-    padding: var(--sp32);
+    padding: var(--sp20);
     padding-right: 0;
     padding-left: 0;
   }
@@ -15,10 +15,4 @@
 
 .smUpCommentBlock {
   padding-top: var(--sp40);
-}
-
-.mobileLogo {
-  display: inline-flex;
-  align-items: center;
-  justify-content: flex-start;
 }

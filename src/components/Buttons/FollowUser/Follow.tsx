@@ -28,9 +28,10 @@ import { FollowUserButtonSize } from './index'
 interface FollowUserProps {
   user: Partial<FollowButtonUserPrivateFragment>
   size: FollowUserButtonSize
+  borderWidth?: 'sm' | 'md'
 }
 
-const FollowUser = ({ user, size }: FollowUserProps) => {
+const FollowUser = ({ user, size, borderWidth = 'md' }: FollowUserProps) => {
   const viewer = useContext(ViewerContext)
 
   const [follow] = useMutation<ToggleFollowUserMutation>(TOGGLE_FOLLOW_USER, {
@@ -82,7 +83,7 @@ const FollowUser = ({ user, size }: FollowUserProps) => {
   const sizes: Record<FollowUserButtonSize, [ButtonWidth, ButtonHeight]> = {
     xl: ['7.5rem', '2.5rem'],
     lg: ['6rem', '2rem'],
-    md: [null, '1.5rem'],
+    md: [null, '1.625rem'],
   }
   const spacings: Record<
     FollowUserButtonSize,
@@ -119,6 +120,7 @@ const FollowUser = ({ user, size }: FollowUserProps) => {
       textActiveColor="greenDark"
       borderColor="green"
       borderActiveColor="greenDark"
+      borderWidth={borderWidth}
       onClick={onClick}
     >
       <TextIcon

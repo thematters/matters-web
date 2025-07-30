@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { analytics } from '~/common/utils'
 import {
   CardExposureTracker,
+  Media,
   Slides,
   useIntersectionObserver,
 } from '~/components'
@@ -44,37 +45,55 @@ const RecommendArticleActivity = ({ articles, source, location }: Props) => {
     source === 'UserDonation'
       ? 'UserDonateArticleActivity'
       : 'ArticleRecommendationActivity'
+  const renderSlideItem = (
+    article: NonNullable<
+      RecommendArticleActivityFragment['recommendArticles']
+    >[number],
+    index: number,
+    isMobile: boolean
+  ) => (
+    <Slides.Item
+      size={isMobile ? 'xxs' : 'md'}
+      key={index}
+      onClick={() => {
+        analytics.trackEvent('click_feed', {
+          type: 'following',
+          contentType,
+          location: `${location}.${index}`,
+          id: article.id,
+        })
+      }}
+    >
+      <section className={styles.item}>
+        <FollowingRecommendArticle article={article} showCover={!isMobile} />
+        {mountTracker && (
+          <CardExposureTracker
+            location={`${location}.${index}`}
+            feedType="following"
+            contentType={contentType}
+            id={article.id}
+          />
+        )}
+      </section>
+    </Slides.Item>
+  )
 
   return (
     <section className={styles.container}>
-      <Slides header={<FollowingRecommendHead type={type} />}>
-        {articles.map((article, index) => (
-          <Slides.Item
-            size="md"
-            key={index}
-            onClick={() => {
-              analytics.trackEvent('click_feed', {
-                type: 'following',
-                contentType,
-                location: `${location}.${index}`,
-                id: article.id,
-              })
-            }}
-          >
-            <section className={styles.item}>
-              <FollowingRecommendArticle article={article} />
-              {mountTracker && (
-                <CardExposureTracker
-                  location={`${location}.${index}`}
-                  feedType="following"
-                  contentType={contentType}
-                  id={article.id}
-                />
-              )}
-            </section>
-          </Slides.Item>
-        ))}
-      </Slides>
+      <Media lessThan="md">
+        <Slides header={<FollowingRecommendHead type={type} />}>
+          {articles.map((article, index) =>
+            renderSlideItem(article, index, true)
+          )}
+        </Slides>
+      </Media>
+      <Media greaterThanOrEqual="md">
+        <Slides header={<FollowingRecommendHead type={type} />}>
+          {articles.map((article, index) =>
+            renderSlideItem(article, index, false)
+          )}
+        </Slides>
+      </Media>
       <span ref={ref} />
     </section>
   )

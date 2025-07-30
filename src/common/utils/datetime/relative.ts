@@ -23,16 +23,39 @@ const DIFFS = {
   },
 } as const
 
+const MINIMAL_DIFFS = {
+  zh_hant: {
+    justNow: '剛剛',
+    minutesAgo: 'm',
+    hourAgo: 'h',
+    hoursAgo: 'h',
+  },
+  zh_hans: {
+    justNow: '刚刚',
+    minutesAgo: 'm',
+    hourAgo: 'h',
+    hoursAgo: 'h',
+  },
+  en: {
+    justNow: 'now',
+    minutesAgo: 'm',
+    hourAgo: 'h',
+    hoursAgo: 'h',
+  },
+} as const
+
 /**
  * Platform-wise date time format
  *
  * @param {Date|string|number} date - input date
  * @param {Language} lang - switch format based on language
+ * @param {boolean} minimal - use minimal format
  * @returns {string}
  */
 const relative = (
   date: Date | string | number,
-  lang: Language = 'zh_hant'
+  lang: Language = 'zh_hant',
+  minimal: boolean = false
 ): string => {
   if (typeof date === 'string') {
     date = parseISO(date)
@@ -40,18 +63,23 @@ const relative = (
 
   const diffMins = differenceInMinutes(new Date(), date)
 
-  // if it is within 2 minutes
+  const formatDict = minimal ? MINIMAL_DIFFS[lang] : DIFFS[lang]
+
   if (diffMins < 2) {
-    return DIFFS[lang].justNow
+    return formatDict.justNow
   }
 
   if (diffMins < 60) {
-    return diffMins + DIFFS[lang]['minutesAgo']
+    return diffMins + formatDict.minutesAgo
   }
 
   const diffHrs = differenceInHours(new Date(), date)
   if (diffHrs < 24) {
-    return diffHrs + DIFFS[lang][diffHrs === 1 ? 'hourAgo' : 'hoursAgo']
+    return diffHrs + formatDict[diffHrs === 1 ? 'hourAgo' : 'hoursAgo']
+  }
+
+  if (minimal) {
+    return absolute.minimalDate(date)
   }
 
   return absolute({ date, lang })

@@ -3,11 +3,11 @@
 }
 
 .container {
-  @mixin flex-center-space-between;
+  @mixin flex-start-space-between;
 
-  gap: 2rem;
+  gap: 1.5rem;
 
-  @media (--sm-up) {
+  @media (--md-up) {
     gap: 3rem;
   }
 }

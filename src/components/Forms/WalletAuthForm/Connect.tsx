@@ -308,7 +308,7 @@ const Connect: React.FC<FormProps> = ({
 
       <Dialog.Content>
         {isLogin && (
-          <Media greaterThan="sm">
+          <Media greaterThanOrEqual="md">
             <AuthTabs
               purpose={purpose}
               type={authTypeFeed}

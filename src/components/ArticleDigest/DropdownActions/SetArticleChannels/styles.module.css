@@ -1,3 +1,9 @@
 .item {
+  @mixin flex-center-space-between;
+
   padding: var(--sp8) 0;
+
+  & .pinnedChannel {
+    color: var(--color-grey-darker);
+  }
 }

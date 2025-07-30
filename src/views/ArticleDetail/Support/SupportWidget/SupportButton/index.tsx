@@ -74,7 +74,7 @@ const SupportButton = ({
 
   return (
     <>
-      <Media at="sm">
+      <Media lessThan="md">
         <SupportDialog article={article}>
           {({ openDialog }) => (
             <Content
@@ -90,7 +90,7 @@ const SupportButton = ({
           )}
         </SupportDialog>
       </Media>
-      <Media greaterThan="sm">
+      <Media greaterThanOrEqual="md">
         <Content onClick={toggleDonationDrawer} />
       </Media>
     </>

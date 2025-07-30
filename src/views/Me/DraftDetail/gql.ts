@@ -48,6 +48,7 @@ export const editMetaFragment = gql`
     campaigns {
       campaign {
         id
+        name
       }
       stage {
         id

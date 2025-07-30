@@ -345,12 +345,10 @@ const BaseDraftDetail = () => {
             upload={async (props) => addRequest(() => upload(props))}
           />
 
-          <PublishState draft={draft} />
-
           <Media greaterThan="sm">
             <DynamicOptionDrawer
               isOpen={isOpenOptionDrawer}
-              onClose={toggleOptionDrawer}
+              toggleDrawer={toggleOptionDrawer}
               draft={draft}
               draftViewer={viewerData}
               campaigns={appliedCampaigns}

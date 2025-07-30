@@ -3,7 +3,7 @@
 
   position: relative;
   position: sticky;
-  top: 0;
+  top: var(--global-nav-height-mobile);
   z-index: var(--z-index-sticky-tabs);
   padding: 0 var(--sp16);
   margin-top: var(--sp8);
@@ -11,7 +11,12 @@
   background: var(--color-white);
 
   @media (--sm-up) {
+    top: var(--global-nav-height);
     margin-top: var(--sp20);
+  }
+
+  @media (--md-up) {
+    margin-right: calc(var(--pixel-adjust) * -1);
   }
 }
 

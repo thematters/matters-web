@@ -169,7 +169,7 @@ const NoticeComment = ({
   if (moment) {
     return (
       <>
-        <Media at="sm">
+        <Media lessThan="md">
           <a
             href={path.href}
             onClick={(e) => {
@@ -182,7 +182,7 @@ const NoticeComment = ({
             </section>
           </a>
         </Media>
-        <Media greaterThan="sm">
+        <Media greaterThanOrEqual="md">
           <MomentDetailDialog shortHash={moment.shortHash}>
             {({ openDialog }) => (
               <a

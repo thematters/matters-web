@@ -7,6 +7,7 @@ import { capitalizeFirstLetter } from '~/common/utils'
 import styles from './styles.module.css'
 
 export type ButtonWidth =
+  | '1.125rem'
   | '2rem'
   | '2.5rem'
   | '3rem'
@@ -28,8 +29,10 @@ export type ButtonWidth =
 
 export type ButtonHeight =
   | '1rem'
+  | '1.125rem'
   | '1.25rem'
   | '1.5rem'
+  | '1.625rem'
   | '1.75rem'
   | '1.875rem'
   | '2rem'

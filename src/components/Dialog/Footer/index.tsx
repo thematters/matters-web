@@ -40,7 +40,7 @@ const Footer: React.FC<FooterProps> = ({
 
   return (
     <footer className={footerClasses} data-dialog-entity={!!hasBtns}>
-      <Media at="sm">
+      <Media lessThan="md">
         {hasBtns && (
           <section className={styles.content}>
             {btns}
@@ -55,7 +55,7 @@ const Footer: React.FC<FooterProps> = ({
         )}
       </Media>
       {hasSmUpBtns && (
-        <Media greaterThan="sm">
+        <Media greaterThanOrEqual="md">
           <section className={smUpContentClasses}>
             {closeDialog && (
               <TextButton

@@ -1,0 +1,19 @@
+.cards {
+  @mixin border-bottom-grey-light;
+
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: var(--sp32) var(--sp16);
+  padding-top: var(--sp20);
+  padding-bottom: var(--sp20);
+  border-bottom-style: dashed;
+
+  @media (--xs-up) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* 540px is the breakpoint for 3 columns */
+  @media (width >= 540px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

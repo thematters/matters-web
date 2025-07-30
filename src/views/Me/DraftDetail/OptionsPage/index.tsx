@@ -1,10 +1,11 @@
+import { useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import IconTimes from '@/public/static/icons/24px/times.svg'
-import { Button, Icon } from '~/components'
+import { Button, Icon, useRoute } from '~/components'
 
 import { DraftLoadingStates } from '../DraftLoadingStates'
-import { useDraftDetail } from '../hooks'
+import { getOptionTabByType, OptionTab, useDraftDetail } from '../hooks'
 import { OptionContent } from '../OptionContent'
 import styles from './styles.module.css'
 
@@ -20,6 +21,10 @@ const OptionsPage = () => {
     isNewDraft,
     loadMoreCollections,
   } = useDraftDetail()
+
+  const { getQuery } = useRoute()
+  const type = getQuery('type')
+  const [tab, setTab] = useState<OptionTab>(getOptionTabByType(type))
 
   const goBack = () => {
     window.history.back()
@@ -51,6 +56,8 @@ const OptionsPage = () => {
         </section>
 
         <OptionContent
+          tab={tab}
+          setTab={setTab}
           draft={draft}
           draftViewer={viewerData}
           campaigns={appliedCampaigns}

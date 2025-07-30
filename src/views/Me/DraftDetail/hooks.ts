@@ -47,6 +47,22 @@ import {
   SET_TAGS,
 } from './gql'
 
+export type OptionTab = 'contentAndLayout' | 'settings'
+
+export const getOptionTabByType = (type?: string): OptionTab => {
+  if (
+    type === 'campaign' ||
+    type === 'tags' ||
+    type === 'connections' ||
+    type === 'collections' ||
+    type === '' ||
+    type === undefined
+  ) {
+    return 'contentAndLayout'
+  }
+  return 'settings'
+}
+
 export const useVersionConflictHandler = () => {
   const intl = useIntl()
   const { router } = useRoute()

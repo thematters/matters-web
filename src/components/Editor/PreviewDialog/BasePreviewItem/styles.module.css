@@ -1,0 +1,49 @@
+.container {
+  display: flex;
+  gap: var(--sp16);
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+
+  & .left {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp4);
+    align-items: flex-start;
+    font-size: var(--text14);
+    line-height: 1.375rem;
+
+    & .title {
+      font-weight: var(--font-medium);
+    }
+
+    & .names {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--sp8);
+    }
+
+    & .name {
+      @mixin line-clamp;
+
+      max-width: calc(100vw - var(--sp16) - var(--sp14) - var(--sp32));
+      color: var(--color-grey-darker);
+
+      @media (--sm-up) {
+        max-width: calc(23.375rem - var(--sp16));
+      }
+
+      &.withBackground {
+        padding: var(--sp4) var(--sp8);
+        background: var(--color-grey-lighter);
+        border-radius: var(--sp8);
+      }
+    }
+  }
+
+  &:hover {
+    & .name {
+      color: var(--color-black);
+    }
+  }
+}

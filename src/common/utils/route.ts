@@ -37,6 +37,11 @@ interface CampaignArgs {
   shortHash: string
 }
 
+interface ChannelArgs {
+  id: string
+  shortHash: string
+}
+
 interface CampaignStageArgs {
   id: string
 }
@@ -56,6 +61,7 @@ type ToPathArgs =
       collectionId?: string
     }
   | { page: 'articleEdit'; article: ArticleArgs }
+  | { page: 'articleEditOptions'; article: ArticleArgs }
   | { page: 'articleHistory'; article: ArticleArgs }
   | { page: 'momentDetailEdit' }
   | {
@@ -91,6 +97,10 @@ type ToPathArgs =
       page: 'tagDetail'
       tag: TagArgs
       feedType?: string
+    }
+  | {
+      page: 'channelDetail'
+      channel: ChannelArgs
     }
   | {
       page: 'campaignDetail'
@@ -146,6 +156,13 @@ export const toPath = (
       const { shortHash } = args.article
 
       href = `/a/${shortHash}/edit`
+
+      break
+    }
+    case 'articleEditOptions': {
+      const { shortHash } = args.article
+
+      href = `/a/${shortHash}/edit/options`
 
       break
     }
@@ -261,6 +278,10 @@ export const toPath = (
       } else if (args.announcement) {
         href = `${href}?type=announcement`
       }
+      break
+    }
+    case 'channelDetail': {
+      href = `/c/${args.channel.shortHash}`
       break
     }
     case 'userProfile': {

@@ -10,6 +10,7 @@ import CircleNewArticle from './CircleNewArticle'
 import RevisedArticleNotPublishedNotice from './RevisedArticleNotPublishedNotice'
 import RevisedArticlePublishedNotice from './RevisedArticlePublishedNotice'
 import ScheduledArticlePublishedNotice from './ScheduledArticlePublishedNotice'
+import TopicChannelFeedbackAcceptedNotice from './TopicChannelFeedbackAcceptedNotice'
 
 const ArticleNotice = ({ notice }: { notice: ArticleNoticeFragment }) => {
   switch (notice.articleNoticeType) {
@@ -29,6 +30,8 @@ const ArticleNotice = ({ notice }: { notice: ArticleNoticeFragment }) => {
       return <RevisedArticleNotPublishedNotice notice={notice} />
     case 'CircleNewArticle':
       return <CircleNewArticle notice={notice} />
+    case 'TopicChannelFeedbackAccepted':
+      return <TopicChannelFeedbackAcceptedNotice notice={notice} />
     default:
       return null
   }
@@ -49,6 +52,7 @@ ArticleNotice.fragments = {
       ...RevisedArticleNotPublishedNotice
       ...RevisedArticlePublishedNotice
       ...CircleNewArticleNotice
+      ...TopicChannelFeedbackAcceptedNotice
     }
     ${ArticleMentionedYouNotice.fragments.notice}
     ${ArticleNewAppreciationNotice.fragments.notice}
@@ -58,6 +62,7 @@ ArticleNotice.fragments = {
     ${RevisedArticleNotPublishedNotice.fragments.notice}
     ${RevisedArticlePublishedNotice.fragments.notice}
     ${CircleNewArticle.fragments.notice}
+    ${TopicChannelFeedbackAcceptedNotice.fragments.notice}
   `,
 }
 

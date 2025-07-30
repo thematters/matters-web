@@ -1,34 +1,11 @@
-.title {
-  @mixin flex-center-start;
-
-  padding: var(--sp24) var(--sp16) 0;
-  font-size: var(--text14);
-  font-weight: var(--font-medium);
-  color: var(--color-grey);
-
-  @media (--sm-up) {
-    padding-top: var(--sp32);
-    padding-right: 0;
-    padding-left: 0;
-    font-size: var(--text18);
-  }
-
-  & .titleLeft {
-    white-space: nowrap;
-  }
-
-  & .titleMiddle {
-    @mixin line-clamp;
-
-    color: var(--color-black);
-    word-break: break-all;
-  }
-
-  & .titleRight {
-    white-space: nowrap;
-  }
-}
-
 .result-item {
   padding: var(--sp16);
+}
+
+.tabs {
+  padding: var(--sp14) var(--sp16) 0;
+
+  @media (--sm-up) {
+    padding: var(--sp32) 0 var(--sp8) 0;
+  }
 }
