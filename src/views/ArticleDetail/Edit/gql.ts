@@ -82,12 +82,23 @@ export const GET_EDIT_ARTICLE = gql`
           id
         }
       }
-      ...ArticleCollection
+      collections(input: { first: null }) {
+        edges {
+          node {
+            id
+            title
+            articles(input: { first: 0 }) {
+              totalCount
+            }
+          }
+        }
+      }
+      ...ArticleConnections
     }
   }
   ${assetFragment}
   ${ArticleTag.fragments.tag}
-  ${articleFragments.articleCollection}
+  ${articleFragments.articleConnections}
   ${CircleDigest.Rich.fragments.circle.public}
   ${SelectCampaign.fragments}
 `

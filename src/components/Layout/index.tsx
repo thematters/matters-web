@@ -22,6 +22,7 @@ const useLayoutType = () => {
   const isInMomentDetailEdit = isInPath('MOMENT_DETAIL_EDIT')
   const isInDraftDetail = isInPath('ME_DRAFT_DETAIL')
   const isInDraftDetailOptions = isInPath('ME_DRAFT_DETAIL_OPTIONS')
+  const isInArticleDetailEdit = isInPath('ARTICLE_DETAIL_EDIT')
 
   const isInCircleDetail =
     isInPath('CIRCLE_DETAIL') && isPathStartWith('/~', true)
@@ -31,7 +32,8 @@ const useLayoutType = () => {
     !isInDraftDetail &&
     !isInDraftDetailOptions &&
     !isInMomentDetail &&
-    !isInMomentDetailEdit
+    !isInMomentDetailEdit &&
+    !isInArticleDetailEdit
 
   const isOneColumnLayout =
     isInPath('SEARCH') ||
@@ -50,6 +52,7 @@ const useLayoutType = () => {
     isInPath('COMMUNITY') ||
     isInPath('TOS') ||
     // Me
+    isInPath('ARTICLE_DETAIL_EDIT') ||
     isInPath('ME_DRAFTS') ||
     isInPath('ME_PUBLISHED') ||
     isInPath('ME_ARCHIVED') ||
@@ -82,7 +85,6 @@ const useLayoutType = () => {
     isInPath('USER_COLLECTION_DETAIL') ||
     // Article
     isInPath('ARTICLE_DETAIL') ||
-    isInPath('ARTICLE_DETAIL_EDIT') ||
     isInPath('ARTICLE_DETAIL_HISTORY') ||
     isInPath('ME_DRAFT_NEW') ||
     // Campaign

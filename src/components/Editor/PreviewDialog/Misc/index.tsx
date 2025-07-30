@@ -31,15 +31,26 @@ export const Misc = ({
   draft: EditorPreviewDialogMiscDraftFragment
   closeDialog: () => void
 }) => {
-  const { getQuery, router } = useRoute()
+  const { getQuery, isInPath, router } = useRoute()
   const draftId = getQuery('draftId')
-  const path = toPath({
-    page: 'draftDetailOptions',
-    id: draftId,
-  })
+  const shortHash = getQuery('shortHash')
+  const isInArticleEdit = isInPath('ARTICLE_DETAIL_EDIT')
+  const path = isInArticleEdit
+    ? toPath({
+        page: 'articleEdit',
+        article: { shortHash },
+      })
+    : toPath({
+        page: 'draftDetailOptions',
+        id: draftId,
+      })
 
   const goToOptionsPage = (type: string) => {
-    router.push(path.href + `?type=${type}`)
+    if (isInArticleEdit) {
+      router.push(path.href + `?page=options&type=${type}`)
+    } else {
+      router.push(path.href + `?type=${type}`)
+    }
   }
 
   const isSmUp = useMediaQuery(`(min-width: ${BREAKPOINTS.MD}px)`)

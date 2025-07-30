@@ -82,6 +82,7 @@ const Root = ({
   const isInAuthCallback = isInPath('CALLBACK_PROVIDER')
   const isInAuth = isInPath('LOGIN') || isInPath('SIGNUP')
   const isInMeDraftDetail = isInPath('ME_DRAFT_DETAIL')
+  const isInArticleDetailEdit = isInPath('ARTICLE_DETAIL_EDIT')
   const isInHome =
     isInPath('HOME') ||
     isInPath('FEATURED') ||
@@ -94,7 +95,8 @@ const Root = ({
     !isInMigration &&
     !isInAuthCallback &&
     !isInAuth &&
-    !isInMeDraftDetail
+    !isInMeDraftDetail &&
+    !isInArticleDetailEdit
 
   const referralCode = getQuery(REFERRAL_QUERY_REFERRAL_KEY)
 

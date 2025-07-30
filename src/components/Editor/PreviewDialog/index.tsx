@@ -8,6 +8,7 @@ import {
   toast,
   useDialogSwitch,
   useMutation,
+  useRoute,
   ViewerContext,
 } from '~/components'
 import PUBLISH_ARTICLE from '~/components/GQL/mutations/publishArticle'
@@ -24,6 +25,7 @@ import { License } from './License'
 import { Misc } from './Misc'
 import styles from './styles.module.css'
 import { Tags } from './Tags'
+import { VersionDescription } from './VersionDescription'
 
 const fragment = gql`
   fragment EditorPreviewDialogDraft on Draft {
@@ -56,6 +58,8 @@ export type EditorPreviewDialogProps = {
   disabled: boolean
 
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
+  versionDescription?: string
+  editVersionDescription?: (description: string) => void
 } & PreviewDialogButtons
 
 const BaseEditorPreviewDialog = ({
@@ -65,7 +69,8 @@ const BaseEditorPreviewDialog = ({
   confirmButtonText,
   cancelButtonText,
   onConfirm: onConfirmProp,
-
+  versionDescription,
+  editVersionDescription,
   children,
 }: EditorPreviewDialogProps) => {
   const {
@@ -73,7 +78,9 @@ const BaseEditorPreviewDialog = ({
     openDialog: baseOpenDialog,
     closeDialog,
   } = useDialogSwitch(true)
-
+  const { isInPath } = useRoute()
+  const isInDraftDetail = isInPath('ME_DRAFT_DETAIL')
+  const isInArticleEdit = isInPath('ARTICLE_DETAIL_EDIT')
   const viewer = useContext(ViewerContext)
   const [publish, { loading: publishLoading }] =
     useMutation<PublishArticleMutation>(PUBLISH_ARTICLE, {
@@ -103,7 +110,9 @@ const BaseEditorPreviewDialog = ({
         />
       ),
     })
-    publish({ variables: { id: draft.id } })
+    if (isInDraftDetail) {
+      publish({ variables: { id: draft.id } })
+    }
     onConfirmProp?.()
   }
 
@@ -153,6 +162,16 @@ const BaseEditorPreviewDialog = ({
               <FeedDigest draft={draft} />
             </section>
             <section className={styles.settings}>
+              {isInArticleEdit && editVersionDescription && (
+                <>
+                  <VersionDescription
+                    versionDescription={versionDescription || ''}
+                    editVersionDescription={editVersionDescription}
+                    closeDialog={closeDialog}
+                  />
+                  <hr />
+                </>
+              )}
               {hasCampaign && (
                 <Campaign draft={draft} closeDialog={closeDialog} />
               )}
