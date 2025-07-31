@@ -62,6 +62,11 @@
     height: 2rem;
   }
 
+  &.size35 {
+    width: 2.1875rem;
+    height: 2.1875rem;
+  }
+
   &.size40 {
     width: 2.5rem;
     height: 2.5rem;
@@ -133,5 +138,9 @@
 
   &.campaignBlue {
     color: var(--color-campaign-blue);
+  }
+
+  &.newPaletteSecondary700 {
+    color: var(--color-new-palette-secondary-700);
   }
 }

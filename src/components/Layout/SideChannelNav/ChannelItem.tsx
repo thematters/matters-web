@@ -40,10 +40,10 @@ const ChannelItem = ({ channel }: ChannelItemProps) => {
 
   const channelName =
     lang === 'zh_hans'
-      ? channel.nameZhHans
+      ? channel.navbarTitleZhHans
       : lang === 'zh_hant'
-        ? channel.nameZhHant
-        : channel.nameEn
+        ? channel.navbarTitleZhHant
+        : channel.navbarTitleEn
 
   return (
     <Tooltip

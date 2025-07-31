@@ -201,6 +201,7 @@ const FRAME_SRC = [
   'googleads.g.doubleclick.net',
   'tpc.googlesyndication.com',
   '*.adtrafficquality.google',
+  'www.google.com',
 ]
 
 // Add prefetch-src directive
