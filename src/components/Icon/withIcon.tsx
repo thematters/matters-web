@@ -15,6 +15,7 @@ export type IconSize =
   | 28
   | 30
   | 32
+  | 35
   | 40
   | 48
   | 64
@@ -35,6 +36,7 @@ export type IconColor =
   | 'red'
   | 'redLight'
   | 'campaignBlue'
+  | 'newPaletteSecondary700'
 
 export interface IconProps extends React.SVGAttributes<HTMLOrSVGElement> {
   /** Working Icon description */

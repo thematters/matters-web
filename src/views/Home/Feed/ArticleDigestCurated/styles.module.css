@@ -25,16 +25,10 @@
 
   & .pinned {
     position: absolute;
-    top: 0;
-    right: -0.333px;
+    top: -1.3125rem;
+    right: 15.67px;
     height: 2.25rem;
     padding: 0.5rem;
-    background-color: var(--color-new-palette-attention-600);
-    border-radius: 0 8px;
-    box-shadow:
-      0 -2px 12px 0 rgb(0 0 0 / 5%),
-      0 1px 0 0 rgb(0 0 0 / 0%),
-      0 2px 4px 0 rgb(0 0 0 / 14%);
   }
 }
 

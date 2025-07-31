@@ -6,7 +6,6 @@ import React, { useEffect } from 'react'
 import { WagmiProvider } from 'wagmi'
 
 import {
-  PATHS,
   REFERRAL_QUERY_REFERRAL_KEY,
   REFERRAL_STORAGE_REFERRAL_CODE,
 } from '~/common/enums'
@@ -75,7 +74,7 @@ const Root = ({
   headers?: IncomingHttpHeaders
   children: React.ReactNode
 }) => {
-  const { router, getQuery, isInPath } = useRoute()
+  const { getQuery, isInPath } = useRoute()
 
   const isInAbout = isInPath('ABOUT')
   const isInMigration = isInPath('MIGRATION')
@@ -83,13 +82,6 @@ const Root = ({
   const isInAuth = isInPath('LOGIN') || isInPath('SIGNUP')
   const isInMeDraftDetail = isInPath('ME_DRAFT_DETAIL')
   const isInArticleDetailEdit = isInPath('ARTICLE_DETAIL_EDIT')
-  const isInHome =
-    isInPath('HOME') ||
-    isInPath('FEATURED') ||
-    isInPath('HOTTEST') ||
-    isInPath('NEWEST') ||
-    isInPath('CHANNEL') ||
-    isInPath('FOLLOW')
   const shouldApplyLayout =
     !isInAbout &&
     !isInMigration &&
@@ -120,11 +112,6 @@ const Root = ({
 
     // redirect after logged-in
     if (!getTarget()) {
-      // redirect to /follow if in homepage
-      if (isInHome) {
-        router.push(PATHS.FOLLOW)
-      }
-
       return
     }
 

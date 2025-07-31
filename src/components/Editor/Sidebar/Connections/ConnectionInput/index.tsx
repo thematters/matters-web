@@ -100,6 +100,10 @@ export const ConnectionInput = ({
   const formik = useFormik<{ url: string }>({
     initialValues: { url: '' },
     onSubmit: async () => {
+      if (searchLoading) {
+        return
+      }
+
       if (!searchData?.article || searchData.article.state === 'archived') {
         toast.error({
           message: intl.formatMessage({
@@ -222,7 +226,7 @@ export const ConnectionInput = ({
               }
             }}
           />
-          {saving && <SpinnerBlock size={16} noSpacing />}
+          {(saving || searchLoading) && <SpinnerBlock size={16} noSpacing />}
         </form>
       )}
     </Dropdown>

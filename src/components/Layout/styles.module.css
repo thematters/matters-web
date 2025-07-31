@@ -128,10 +128,14 @@
 .sideNavLayout {
   /* stylelint-disable-next-line property-no-unknown */
   composes: layoutbase;
-  margin: 0 var(--sp16);
+  margin-right: var(--sp16);
 
   @media (--xs-up) {
-    margin: 0 var(--sp24);
+    margin-right: var(--sp24);
+  }
+
+  @media (--sm-up) {
+    margin-right: 0 var(--sp24);
   }
 
   @media (--md-up) {
@@ -146,16 +150,16 @@
   & .main {
     display: grid;
     grid-template-areas: 'left content';
-    grid-template-columns: 4.75rem minmax(0, var(--content-max-width));
+    grid-template-columns: 7rem minmax(0, var(--content-max-width));
     grid-column: main;
-    grid-column-gap: 1.25rem;
 
     @media (--xs-up) {
-      grid-column-gap: 2rem;
+      grid-template-columns: 8.25rem minmax(0, var(--content-max-width));
     }
 
     @media (--sm-up) {
       grid-template-columns: 6.125rem minmax(0, var(--content-max-width));
+      grid-column-gap: 2rem;
     }
 
     @media (--md-up) {

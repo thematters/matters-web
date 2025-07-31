@@ -94,13 +94,20 @@ export const EmailLoginForm: React.FC<FormProps> = ({
   )
   const { lang } = useContext(LanguageContext)
 
-  const { getQuery, router } = useRoute()
+  const { getQuery, isInPath, router } = useRoute()
   const referralCode =
     getQuery(REFERRAL_QUERY_REFERRAL_KEY) ||
     storage.get<{ referralCode: string }>(REFERRAL_STORAGE_REFERRAL_CODE)
       ?.referralCode ||
     undefined
 
+  const isInHome =
+    isInPath('HOME') ||
+    isInPath('FEATURED') ||
+    isInPath('HOTTEST') ||
+    isInPath('NEWEST') ||
+    isInPath('CHANNEL') ||
+    isInPath('FOLLOW')
   const isInPage = purpose === 'page'
   const formId = useId()
 
@@ -178,6 +185,11 @@ export const EmailLoginForm: React.FC<FormProps> = ({
         // redirect to homepage if the user is in page and not `?target`
         if (isInPage && !getTarget()) {
           router.push(PATHS.HOME)
+        }
+
+        // redirect to /follow if in homepage
+        if (isInHome && !getTarget()) {
+          router.push(PATHS.FOLLOW)
         }
       } catch (error) {
         const [messages, codes] = parseFormSubmitErrors(error as ApolloError)
