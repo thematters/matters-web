@@ -3,6 +3,7 @@ import { useContext } from 'react'
 import baseToast from 'react-hot-toast'
 import { FormattedMessage } from 'react-intl'
 
+import { PATHS } from '~/common/enums'
 import {
   Dialog,
   toast,
@@ -56,6 +57,7 @@ export type EditorPreviewDialogProps = {
   draft: EditorPreviewDialogDraftFragment
   saving: boolean
   disabled: boolean
+  publishAt?: Date
 
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
   versionDescription?: string
@@ -72,7 +74,9 @@ const BaseEditorPreviewDialog = ({
   versionDescription,
   editVersionDescription,
   children,
+  publishAt,
 }: EditorPreviewDialogProps) => {
+  const { router } = useRoute()
   const {
     show,
     openDialog: baseOpenDialog,
@@ -98,7 +102,7 @@ const BaseEditorPreviewDialog = ({
     baseOpenDialog()
   }
 
-  const onConfirm = () => {
+  const onConfirm = async () => {
     baseToast.dismiss()
 
     toast.success({
@@ -111,7 +115,10 @@ const BaseEditorPreviewDialog = ({
       ),
     })
     if (isInDraftDetail) {
-      publish({ variables: { id: draft.id } })
+      await publish({ variables: { id: draft.id, publishAt } })
+      if (publishAt) {
+        router.push(PATHS.ME_DRAFTS)
+      }
     }
     onConfirmProp?.()
   }
