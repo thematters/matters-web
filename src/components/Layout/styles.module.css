@@ -15,28 +15,6 @@
   @media (--lg-up) {
     margin: 0 auto;
   }
-
-  & .main {
-    grid-column: main;
-
-    @media (--sm-up) {
-      display: grid;
-      grid-template-areas: 'left content';
-      grid-template-columns: 3rem minmax(0, 100%);
-      grid-column-gap: 1.25rem;
-    }
-
-    @media (--md-up) {
-      grid-template-areas: 'left content right';
-      grid-template-columns: 4rem minmax(0, 100%) 17rem;
-      grid-column-gap: 2.5rem;
-    }
-
-    @media (--lg-up) {
-      grid-template-areas: 'left content content content content content content content right right right';
-      grid-template-columns: repeat(11, [col-start] minmax(0, 1fr));
-    }
-  }
 }
 
 .oneColumnLayout {
