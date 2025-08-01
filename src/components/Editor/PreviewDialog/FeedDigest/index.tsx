@@ -22,9 +22,10 @@ const fragment = gql`
 
 type FeedDigestProps = {
   draft: FeedDigestDraftFragment
+  publishAt?: Date
 }
 
-export const FeedDigest = ({ draft }: FeedDigestProps) => {
+export const FeedDigest = ({ draft, publishAt }: FeedDigestProps) => {
   const { lang } = useContext(LanguageContext)
   if (!draft) {
     return null
@@ -33,17 +34,17 @@ export const FeedDigest = ({ draft }: FeedDigestProps) => {
   return (
     <section className={styles.container}>
       <section className={styles.left}>
-        {draft.publishAt && (
+        {(publishAt || draft.publishAt) && (
           <span className={styles.publishAt}>
             <FormattedMessage
               defaultMessage="Scheduled for {date} {time}"
               id="lr5qH7"
               values={{
                 date: absolute({
-                  date: draft.publishAt,
+                  date: publishAt || draft.publishAt,
                   lang,
                 }),
-                time: absolute.timeISO(draft.publishAt),
+                time: absolute.timeISO(publishAt || draft.publishAt),
               }}
             />
           </span>
