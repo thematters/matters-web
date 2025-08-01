@@ -220,9 +220,6 @@
     "defaultMessage": "失败",
     "description": "src/components/Transaction/State/index.tsx"
   },
-  "1DNHwi": {
-    "defaultMessage": "Your work will be stored in IPFS network. Currently the fee is covered by Matters."
-  },
   "1EYCdR": {
     "defaultMessage": "标签"
   },
@@ -244,9 +241,6 @@
   },
   "1eKD7S": {
     "defaultMessage": "帮你的故事收集成册"
-  },
-  "1exrSw": {
-    "defaultMessage": "Welcome onboard!"
   },
   "1hyiZ8": {
     "defaultMessage": "确认 Matters ID",
@@ -1757,10 +1751,6 @@
     "defaultMessage": "围炉营收",
     "description": "src/components/Transaction/index.tsx"
   },
-  "REQGgU": {
-    "defaultMessage": "Notice",
-    "description": "src/views/Me/DraftDetail/SettingsButton/ConfirmPublishDialogContent/index.tsx"
-  },
   "RGEpvx": {
     "defaultMessage": "修改文案",
     "description": "src/views/ArticleDetail/SupportWidget/EditCopyButton/index.tsx"
@@ -1867,9 +1857,6 @@
   },
   "SuRTsQ": {
     "defaultMessage": "注册 ISCN"
-  },
-  "SwoXPI": {
-    "defaultMessage": "Content hash and gateway addresses will be public, and can be used for sharing."
   },
   "Szd1tH": {
     "defaultMessage": "登出失败，再来一次"
@@ -2226,9 +2213,6 @@
   },
   "ZNK0I9": {
     "defaultMessage": "喜欢你的评论"
-  },
-  "ZOW313": {
-    "defaultMessage": "You can edit the article four times after publishing it. You can also archive the original and republish.."
   },
   "ZUPQzl": {
     "defaultMessage": "回复了你",
@@ -2600,9 +2584,6 @@
   },
   "ftg7GK": {
     "defaultMessage": "选择日期"
-  },
-  "fxhue9": {
-    "defaultMessage": "Article will be published to IPFS, others can not tamper with it, and you own the copyright."
   },
   "g//2O2": {
     "defaultMessage": "取消折叠",
