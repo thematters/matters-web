@@ -118,7 +118,7 @@ export const ArticleDigestTitle = ({
       <section
         role="button"
         onClick={() => {
-          toast.success({
+          toast.info({
             message: (
               <FormattedMessage defaultMessage="Archived Work" id="Jmg5do" />
             ),

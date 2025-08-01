@@ -84,7 +84,7 @@ const BaseSetArticleChannelsDialog = ({
             },
           })
 
-          toast.success({
+          toast.info({
             message: '分類已修正',
           })
 

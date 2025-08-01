@@ -86,7 +86,7 @@ type ButtonTextColor = Extract<
 
 type ButtonTextActiveColor = Extract<
   ButtonColor,
-  'white' | 'black' | 'green' | 'greenDark' | 'redDark' | 'greyDarker'
+  'white' | 'black' | 'green' | 'greenDark' | 'red' | 'redDark' | 'greyDarker'
 >
 
 export type ButtonBgColor = Extract<

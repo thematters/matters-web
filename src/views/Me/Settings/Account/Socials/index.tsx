@@ -91,7 +91,7 @@ const Socials = () => {
     const delay = isSafari() ? 2 * 1000 : 0
     if (state === OAUTH_STORAGE_BIND_STATE_SUCCESS) {
       setTimeout(() => {
-        toast.success({
+        toast.info({
           message: (
             <FormattedMessage
               defaultMessage="Connected to {type}"

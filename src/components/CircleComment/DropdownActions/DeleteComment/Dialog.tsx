@@ -59,7 +59,7 @@ const DeleteCommentDialog = ({
   const onDelete = async () => {
     await deleteComment()
 
-    toast.success({
+    toast.info({
       message: (
         <FormattedMessage
           defaultMessage="{commentType} has been deleted"

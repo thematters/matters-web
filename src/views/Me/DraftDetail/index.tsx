@@ -44,11 +44,10 @@ import {
 import { DraftLoadingStates } from './DraftLoadingStates'
 import { SET_CONTENT } from './gql'
 import { useDraftDetail } from './hooks'
-import { MoreButton } from './MoreButton'
 import { OptionButton } from './OptionButton'
+import PublishButton from './PublishButton'
 import PublishState from './PublishState'
 import SaveStatus from './SaveStatus'
-import SettingsButton from './SettingsButton'
 import styles from './styles.module.css'
 
 const Editor = dynamic(
@@ -305,22 +304,16 @@ const BaseDraftDetail = () => {
                     {contentLength} / {MAX_ARTICLE_CONTENT_LENGTH}
                   </span>
                 )}
+
                 <OptionButton onClick={toggleOptionDrawer} />
+
                 {draft && (
-                  <section className={styles.publishButtons}>
-                    <SettingsButton
-                      draft={draft}
-                      campaigns={appliedCampaigns}
-                      ownCircles={ownCircles}
-                      publishable={!!publishable}
-                    />
-                    <span className={styles.divider} />
-                    <MoreButton
-                      draft={draft}
-                      publishable={!!publishable}
-                      onClick={() => console.log('click more button')}
-                    />
-                  </section>
+                  <PublishButton
+                    draft={draft}
+                    campaigns={appliedCampaigns}
+                    ownCircles={ownCircles}
+                    publishable={!!publishable}
+                  />
                 )}
               </section>
             </section>
@@ -344,9 +337,7 @@ const BaseDraftDetail = () => {
                 })
           }
         />
-
         <PublishState draft={draft} />
-
         <Layout.Main.Spacing>
           <Editor
             draft={draft}

@@ -43,7 +43,7 @@ const CircleInvitationResendButton = ({
         },
       })
 
-      toast.success({
+      toast.info({
         message: (
           <FormattedMessage defaultMessage="Invitation sent" id="sjdyQ0" />
         ),

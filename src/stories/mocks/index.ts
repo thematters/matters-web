@@ -237,7 +237,9 @@ export const MOCK_DRAFT = {
   id: 'RHJhZnQ6MQ', // Draft:1
   title: 'draft-title',
   slug: 'draft-slug',
+  publishState: 'unpublished' as any,
   updatedAt: '2020-12-24T07:29:17.682Z',
+  publishAt: null,
 }
 
 export const MOCK_COLLECTON = {

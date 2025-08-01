@@ -83,6 +83,13 @@ span.container {
   }
 }
 
+.textActiveRed {
+  &:hover,
+  &:focus {
+    color: var(--color-negative-red);
+  }
+}
+
 .textActiveRedDark {
   &:hover,
   &:focus {

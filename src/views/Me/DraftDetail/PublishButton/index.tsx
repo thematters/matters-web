@@ -1,7 +1,17 @@
+import { useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import IconPublishFill from '@/public/static/icons/24px/publish-fill.svg'
-import { Button, Icon, Media, TextIcon, toast } from '~/components'
+import { BREAKPOINTS, PATHS } from '~/common/enums'
+import {
+  Button,
+  Icon,
+  TextIcon,
+  toast,
+  useMediaQuery,
+  useRoute,
+} from '~/components'
+import { SetResponseProps } from '~/components/Editor'
 import { EditorPreviewDialog } from '~/components/Editor/PreviewDialog'
 import { getSelectCampaigns } from '~/components/Editor/SelectCampaign'
 import {
@@ -17,44 +27,40 @@ import {
   useEditDraftCover,
   useEditDraftTags,
 } from '../hooks'
+import { MoreButton } from './MoreButton'
+import styles from './styles.module.css'
 
-interface SettingsButtonProps {
+interface PublishButtonProps {
   draft: EditMetaDraftFragment
   ownCircles?: DigestRichCirclePublicFragment[]
   campaigns?: EditorSelectCampaignFragment[]
   publishable?: boolean
 }
 
-const ConfirmButton = ({
-  openDialog,
+const Buttons = ({
   disabled,
+  openSettingsDialog,
+  setPublishAt,
 }: {
-  openDialog: () => void
   disabled?: boolean
-}) => (
-  <>
-    <Media lessThan="md">
+  openSettingsDialog: () => void
+  setPublishAt: (date: Date) => void
+}) => {
+  const isSmUp = useMediaQuery(`(min-width: ${BREAKPOINTS.MD}px)`)
+
+  const onConfirmSchedulePublish = (date: Date) => {
+    setPublishAt(date)
+    openSettingsDialog()
+  }
+
+  return (
+    <section className={styles.buttons}>
       <Button
-        size={[null, '2.125rem']}
+        size={[null, isSmUp ? '2.375rem' : '2.125rem']}
         spacing={[0, 14]}
         borderRadius={'0.75rem'}
         bgColor="black"
-        onClick={openDialog}
-        disabled={disabled}
-        aria-haspopup="dialog"
-      >
-        <TextIcon color="white" size={14} weight="medium" spacing={8}>
-          <FormattedMessage defaultMessage="Publish Now" id="nWhqw9" />
-        </TextIcon>
-      </Button>
-    </Media>
-    <Media greaterThanOrEqual="md">
-      <Button
-        size={[null, '2.375rem']}
-        spacing={[0, 14]}
-        borderRadius={'0.75rem'}
-        bgColor="black"
-        onClick={openDialog}
+        onClick={openSettingsDialog}
         disabled={disabled}
         aria-haspopup="dialog"
       >
@@ -62,22 +68,31 @@ const ConfirmButton = ({
           color="white"
           size={14}
           weight="medium"
-          icon={<Icon icon={IconPublishFill} size={18} />}
+          icon={isSmUp ? <Icon icon={IconPublishFill} size={18} /> : undefined}
           spacing={8}
         >
           <FormattedMessage defaultMessage="Publish Now" id="nWhqw9" />
         </TextIcon>
       </Button>
-    </Media>
-  </>
-)
 
-const SettingsButton = ({
+      <span className={styles.divider} />
+
+      <MoreButton
+        disabled={disabled}
+        onConfirmSchedulePublish={onConfirmSchedulePublish}
+      />
+    </section>
+  )
+}
+
+const PublishButton = ({
   draft,
   ownCircles,
   campaigns,
   publishable,
-}: SettingsButtonProps) => {
+}: PublishButtonProps) => {
+  const { router } = useRoute()
+
   const { saving: connectionsSaving } = useEditDraftConnections()
   const { saving: coverSaving } = useEditDraftCover()
   const { saving: tagsSaving } = useEditDraftTags()
@@ -85,7 +100,11 @@ const SettingsButton = ({
     ownCircles && ownCircles[0]
   )
 
-  const { saving: canCommentSaving } = useEditDraftCanComment()
+  const { edit: toggleComment, saving: canCommentSaving } =
+    useEditDraftCanComment()
+  const canComment = draft.canComment
+
+  const [publishAt, setPublishAt] = useState<Date>()
   const isPending = draft.publishState === 'pending'
   const isPublished = draft.publishState === 'published'
   const disabled = !publishable || isPending || isPublished
@@ -95,6 +114,21 @@ const SettingsButton = ({
     attached: draft.campaigns,
     createdAt: draft.createdAt,
   })
+
+  const responseProps: SetResponseProps = {
+    canComment,
+    toggleComment,
+  }
+
+  const schedulePublishProps = {
+    publishAt,
+  }
+
+  const onPublish = async () => {
+    if (publishAt) {
+      router.push(PATHS.ME_DRAFTS)
+    }
+  }
 
   return (
     <EditorPreviewDialog
@@ -108,15 +142,24 @@ const SettingsButton = ({
         canCommentSaving
       }
       confirmButtonText={
-        <FormattedMessage defaultMessage="Publish Now" id="nWhqw9" />
+        publishAt ? (
+          <FormattedMessage defaultMessage="Schedule Publish" id="Km6eJ2" />
+        ) : (
+          <FormattedMessage defaultMessage="Publish Now" id="nWhqw9" />
+        )
       }
       cancelButtonText={
         <FormattedMessage defaultMessage="Back to Edit" id="tGHG7q" />
       }
+      onConfirm={onPublish}
+      {...responseProps}
+      {...schedulePublishProps}
     >
       {({ openDialog: openEditorSettingsDialog }) => (
-        <ConfirmButton
-          openDialog={() => {
+        <Buttons
+          disabled={disabled}
+          setPublishAt={setPublishAt}
+          openSettingsDialog={() => {
             const hasCampaign = !!selectedCampaign
             const hasCircle = !!draft.access.circle
 
@@ -134,11 +177,10 @@ const SettingsButton = ({
 
             openEditorSettingsDialog()
           }}
-          disabled={disabled}
         />
       )}
     </EditorPreviewDialog>
   )
 }
 
-export default SettingsButton
+export default PublishButton

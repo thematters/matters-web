@@ -3,14 +3,9 @@
 
   gap: var(--sp4);
   padding: var(--sp16);
-}
 
-.campaignBlue {
-  color: var(--color-campaign-blue);
-
-  & .name {
-    font-weight: var(--font-medium);
-    color: var(--color-campaign-blue);
+  &.disabled {
+    cursor: not-allowed;
   }
 }
 
@@ -51,4 +46,33 @@
 
 .right {
   display: inline-flex;
+}
+
+/** Theme: Campaign */
+.campaign {
+  color: var(--color-campaign-blue);
+
+  & .name {
+    font-weight: var(--font-medium);
+    color: var(--color-campaign-blue);
+  }
+}
+
+/** Theme: Editor Date Picker */
+[role='button'] .editorDatePicker {
+  & .name {
+    color: var(--color-black);
+  }
+
+  &.disabled {
+    & .name {
+      color: var(--color-grey);
+    }
+  }
+}
+
+.editorDatePicker {
+  &.expanded {
+    padding: var(--sp12) var(--sp16);
+  }
 }

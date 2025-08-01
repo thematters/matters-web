@@ -38,7 +38,7 @@ const RemoveSocailLoginDialogContent: React.FC<Props> = ({
           },
         },
       })
-      toast.success({
+      toast.info({
         message: (
           <FormattedMessage
             defaultMessage="{type} disconnected"
