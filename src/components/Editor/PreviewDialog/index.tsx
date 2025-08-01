@@ -166,7 +166,7 @@ const BaseEditorPreviewDialog = ({
         <Dialog.Content>
           <section className={styles.container}>
             <section className={styles.feedDigest}>
-              <FeedDigest draft={draft} />
+              <FeedDigest draft={draft} publishAt={publishAt} />
             </section>
             <section className={styles.settings}>
               {isInArticleEdit && editVersionDescription && (
