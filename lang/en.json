@@ -220,9 +220,6 @@
     "defaultMessage": "Failed",
     "description": "src/components/Transaction/State/index.tsx"
   },
-  "1DNHwi": {
-    "defaultMessage": "Your work will be stored in IPFS network. Currently the fee is covered by Matters."
-  },
   "1EYCdR": {
     "defaultMessage": "Tags"
   },
@@ -244,9 +241,6 @@
   },
   "1eKD7S": {
     "defaultMessage": "Help compile your stories into a book"
-  },
-  "1exrSw": {
-    "defaultMessage": "Welcome onboard!"
   },
   "1hyiZ8": {
     "defaultMessage": "Confirm Matters ID",
@@ -1757,10 +1751,6 @@
     "defaultMessage": "Circle Revenue",
     "description": "src/components/Transaction/index.tsx"
   },
-  "REQGgU": {
-    "defaultMessage": "Notice",
-    "description": "src/views/Me/DraftDetail/SettingsButton/ConfirmPublishDialogContent/index.tsx"
-  },
   "RGEpvx": {
     "defaultMessage": "Support setting",
     "description": "src/views/ArticleDetail/SupportWidget/EditCopyButton/index.tsx"
@@ -1867,9 +1857,6 @@
   },
   "SuRTsQ": {
     "defaultMessage": "Register for ISCN"
-  },
-  "SwoXPI": {
-    "defaultMessage": "Content hash and gateway addresses will be public, and can be used for sharing."
   },
   "Szd1tH": {
     "defaultMessage": "Failed to log out, please try again."
@@ -2226,9 +2213,6 @@
   },
   "ZNK0I9": {
     "defaultMessage": "liked your comment"
-  },
-  "ZOW313": {
-    "defaultMessage": "You can edit the article four times after publishing it. You can also archive the original and republish.."
   },
   "ZUPQzl": {
     "defaultMessage": " ",
@@ -2600,9 +2584,6 @@
   },
   "ftg7GK": {
     "defaultMessage": "Select Date"
-  },
-  "fxhue9": {
-    "defaultMessage": "Article will be published to IPFS, others can not tamper with it, and you own the copyright."
   },
   "g//2O2": {
     "defaultMessage": "Uncollapse",

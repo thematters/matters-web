@@ -11,7 +11,6 @@ import {
   useMediaQuery,
   useRoute,
 } from '~/components'
-import { SetResponseProps } from '~/components/Editor'
 import { EditorPreviewDialog } from '~/components/Editor/PreviewDialog'
 import { getSelectCampaigns } from '~/components/Editor/SelectCampaign'
 import {
@@ -100,9 +99,7 @@ const PublishButton = ({
     ownCircles && ownCircles[0]
   )
 
-  const { edit: toggleComment, saving: canCommentSaving } =
-    useEditDraftCanComment()
-  const canComment = draft.canComment
+  const { saving: canCommentSaving } = useEditDraftCanComment()
 
   const [publishAt, setPublishAt] = useState<Date>()
   const isPending = draft.publishState === 'pending'
@@ -114,11 +111,6 @@ const PublishButton = ({
     attached: draft.campaigns,
     createdAt: draft.createdAt,
   })
-
-  const responseProps: SetResponseProps = {
-    canComment,
-    toggleComment,
-  }
 
   const schedulePublishProps = {
     publishAt,
@@ -152,7 +144,6 @@ const PublishButton = ({
         <FormattedMessage defaultMessage="Back to Edit" id="tGHG7q" />
       }
       onConfirm={onPublish}
-      {...responseProps}
       {...schedulePublishProps}
     >
       {({ openDialog: openEditorSettingsDialog }) => (
