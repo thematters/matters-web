@@ -5,12 +5,15 @@ import { FormattedMessage } from 'react-intl'
 
 import { PATHS } from '~/common/enums'
 import { Dialog, Spacer, toast, useDialogSwitch, useRoute } from '~/components'
-import { GetDraftPublishAtQuery } from '~/gql/graphql'
+import {
+  EditorPreviewDialogDraftFragment,
+  GetDraftPublishAtQuery,
+} from '~/gql/graphql'
 
 import SelectDate from './SelectDate'
 
 interface SchedulePublishDialogProps {
-  draft: { id: string }
+  draft: EditorPreviewDialogDraftFragment
 
   onConfirm: (date: Date) => void
   confirmButtonText?: React.ReactNode
@@ -102,7 +105,7 @@ const BaseSchedulePublishDialog = ({
         )
       }
       disabled={!selectedDate}
-      color="greyDarker"
+      color="green"
       onClick={handleSubmit}
     />
   )

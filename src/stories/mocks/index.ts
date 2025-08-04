@@ -240,6 +240,31 @@ export const MOCK_DRAFT = {
   publishState: 'unpublished' as any,
   updatedAt: '2020-12-24T07:29:17.682Z',
   publishAt: null,
+  content: '<p>draft-content</p>',
+  summary: 'draft-summary',
+  cover: 'https://placehold.co/256x256?draft',
+  tags: ['tag-1', 'tag-2', 'tag-3'],
+  access: {
+    __typename: 'DraftAccess' as any,
+    type: 'public' as any,
+  },
+  canComment: true,
+  license: 'cc-by-nc-sa' as any,
+  iscnPublish: false,
+  sensitiveByAuthor: false,
+  campaigns: [],
+  circles: [],
+  assets: [],
+  author: MOCK_USER,
+  createdAt: '2020-12-24T07:29:17.682Z',
+  connections: {
+    __typename: 'ArticleConnection' as any,
+    edges: [],
+  },
+  collections: {
+    __typename: 'CollectionConnection' as any,
+    edges: [],
+  },
 }
 
 export const MOCK_COLLECTON = {

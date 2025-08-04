@@ -5,6 +5,7 @@ import IconEdit from '@/public/static/icons/24px/edit.svg'
 import IconMore from '@/public/static/icons/24px/more.svg'
 import { toPath } from '~/common/utils'
 import { Button, Dropdown, Icon, Menu } from '~/components'
+import { EditorPreviewDialog } from '~/components/Editor/PreviewDialog'
 import { DraftDigestDropdownActionsDraftFragment } from '~/gql/graphql'
 
 import DeleteDraft from './DeleteDraft'
@@ -15,10 +16,11 @@ const fragments = {
     fragment DraftDigestDropdownActionsDraft on Draft {
       id
       ...DeleteButtonDraft
-      ...SchedulePublishButtonDraft
+      ...EditorPreviewDialogDraft
     }
     ${DeleteDraft.fragments.draft}
     ${SchedulePublish.fragments.draft}
+    ${EditorPreviewDialog.fragment}
   `,
 }
 

@@ -37,19 +37,21 @@ interface PublishButtonProps {
 }
 
 const Buttons = ({
+  draft,
   disabled,
-  openSettingsDialog,
+  openEditorPreviewDialog,
   setPublishAt,
 }: {
+  draft: EditMetaDraftFragment
   disabled?: boolean
-  openSettingsDialog: () => void
+  openEditorPreviewDialog: () => void
   setPublishAt: (date: Date) => void
 }) => {
   const isSmUp = useMediaQuery(`(min-width: ${BREAKPOINTS.MD}px)`)
 
   const onConfirmSchedulePublish = (date: Date) => {
     setPublishAt(date)
-    openSettingsDialog()
+    openEditorPreviewDialog()
   }
 
   return (
@@ -59,7 +61,7 @@ const Buttons = ({
         spacing={[0, 14]}
         borderRadius={'0.75rem'}
         bgColor="black"
-        onClick={openSettingsDialog}
+        onClick={openEditorPreviewDialog}
         disabled={disabled}
         aria-haspopup="dialog"
       >
@@ -77,6 +79,7 @@ const Buttons = ({
       <span className={styles.divider} />
 
       <MoreButton
+        draft={draft}
         disabled={disabled}
         onConfirmSchedulePublish={onConfirmSchedulePublish}
       />
@@ -146,11 +149,12 @@ const PublishButton = ({
       onConfirm={onPublish}
       {...schedulePublishProps}
     >
-      {({ openDialog: openEditorSettingsDialog }) => (
+      {({ openDialog: openEditorPreviewDialog }) => (
         <Buttons
+          draft={draft}
           disabled={disabled}
           setPublishAt={setPublishAt}
-          openSettingsDialog={() => {
+          openEditorPreviewDialog={() => {
             const hasCampaign = !!selectedCampaign
             const hasCircle = !!draft.access.circle
 
@@ -166,7 +170,7 @@ const PublishButton = ({
               return
             }
 
-            openEditorSettingsDialog()
+            openEditorPreviewDialog()
           }}
         />
       )}
