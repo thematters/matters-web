@@ -3,7 +3,8 @@ import { useIntl } from 'react-intl'
 
 import IconEdit from '@/public/static/icons/24px/edit.svg'
 import IconMore from '@/public/static/icons/24px/more.svg'
-import { toPath } from '~/common/utils'
+import { MAX_ARTICLE_CONTENT_LENGTH } from '~/common/enums'
+import { containsFigureTag, stripHtml, toPath } from '~/common/utils'
 import { Button, Dropdown, Icon, Menu } from '~/components'
 import { EditorPreviewDialog } from '~/components/Editor/PreviewDialog'
 import { DraftDigestDropdownActionsDraftFragment } from '~/gql/graphql'
@@ -33,28 +34,41 @@ const DropdownActions = (props: DropdownActionsProps) => {
   const path = toPath({ page: 'draftDetail', id: props.draft.id })
 
   const Content = ({
+    draft,
     openDeleteDialog,
     openSchedulePublishDialog,
   }: {
+    draft: DraftDigestDropdownActionsDraftFragment
     openDeleteDialog: () => void
     openSchedulePublishDialog: () => void
-  }) => (
-    <Menu>
-      <Menu.Item
-        text={intl.formatMessage({
-          defaultMessage: 'Edit',
-          id: 'kAtrEq',
-          description:
-            'src/components/DraftDigest/Feed/DropdownActions/index.tsx',
-        })}
-        icon={<Icon icon={IconEdit} size={20} />}
-        href={path.href}
-      />
+  }) => {
+    const hasContent =
+      draft?.content &&
+      (stripHtml(draft.content).length > 0 || containsFigureTag(draft.content))
+    const hasTitle = draft?.title && draft.title.length > 0
+    const isOverLength =
+      draft?.content && draft.content.length > MAX_ARTICLE_CONTENT_LENGTH
+    const publishable = !!(hasContent && hasTitle && !isOverLength)
+    return (
+      <Menu>
+        <Menu.Item
+          text={intl.formatMessage({
+            defaultMessage: 'Edit',
+            id: 'kAtrEq',
+            description:
+              'src/components/DraftDigest/Feed/DropdownActions/index.tsx',
+          })}
+          icon={<Icon icon={IconEdit} size={20} />}
+          href={path.href}
+        />
 
-      <SchedulePublish.Button openDialog={openSchedulePublishDialog} />
-      <DeleteDraft.Button openDialog={openDeleteDialog} />
-    </Menu>
-  )
+        {publishable && (
+          <SchedulePublish.Button openDialog={openSchedulePublishDialog} />
+        )}
+        <DeleteDraft.Button openDialog={openDeleteDialog} />
+      </Menu>
+    )
+  }
 
   return (
     <SchedulePublish.Dialog draft={props.draft}>
@@ -64,6 +78,7 @@ const DropdownActions = (props: DropdownActionsProps) => {
             <Dropdown
               content={
                 <Content
+                  draft={props.draft}
                   openDeleteDialog={openDeleteDialog}
                   openSchedulePublishDialog={openSchedulePublishDialog}
                 />
