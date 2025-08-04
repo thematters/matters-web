@@ -111,7 +111,7 @@ const BaseSchedulePublishDialog = ({
     <>
       {children({ openDialog })}
 
-      <Dialog isOpen={show} onDismiss={closeDialog}>
+      <Dialog isOpen={show} onDismiss={closeDialog} innerOverflowHidden={false}>
         <Dialog.Header
           title={
             <FormattedMessage
