@@ -61,6 +61,15 @@ export const useRoute = () => {
     router.replace({ query })
   }
 
+  const removeQuery = (keys: QueryKey | QueryKey[]) => {
+    const keysToRemove = Array.isArray(keys) ? keys : [keys]
+    const newQuery = { ...router.query }
+    keysToRemove.forEach((key) => {
+      delete newQuery[key]
+    })
+    router.replace({ query: newQuery })
+  }
+
   // i18n
   const locale = getQuery('locale')
   const routerLang = toUserLanguage(locale) as UserLanguage
@@ -71,6 +80,7 @@ export const useRoute = () => {
     getQuery,
     setQuery,
     replaceQuery,
+    removeQuery,
     router,
     routerLang,
   }

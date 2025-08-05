@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 
-import { Drawer } from '~/components'
+import { Drawer, useRoute } from '~/components'
 
 import { getOptionTabByType, OptionTab } from '../hooks'
 import { OptionContent, OptionContentProps } from '../OptionContent'
@@ -26,13 +26,24 @@ export const OptionDrawer: React.FC<OptionDrawerProps> = ({
   loadMoreCollections,
 }) => {
   const intl = useIntl()
+  const { getQuery, removeQuery } = useRoute()
 
   const defaultTitle = intl.formatMessage({
     defaultMessage: 'Options',
     id: 'NDV5Mq',
   })
 
+  const isInDraftOptions = getQuery('page') === 'options'
+
   const [tab, setTab] = useState<OptionTab>('contentAndLayout')
+
+  useEffect(() => {
+    if (isInDraftOptions) {
+      toggleDrawer()
+      setTab(getOptionTabByType(getQuery('type')))
+      removeQuery(['page', 'type'])
+    }
+  }, [isInDraftOptions])
 
   useEffect(() => {
     const handleOpenDrawer = (event: Event) => {

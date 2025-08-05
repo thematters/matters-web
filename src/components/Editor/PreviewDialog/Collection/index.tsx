@@ -7,6 +7,7 @@ import { BasePreviewItem } from '../BasePreviewItem'
 
 const fragment = gql`
   fragment EditorPreviewDialogCollectionDraft on Draft {
+    id
     collections(input: { first: null }) {
       edges {
         node {
@@ -48,6 +49,7 @@ export const Collection = ({
       }
       names={names}
       eventType="collections"
+      draftId={draft.id}
       closeDialog={closeDialog}
     />
   )

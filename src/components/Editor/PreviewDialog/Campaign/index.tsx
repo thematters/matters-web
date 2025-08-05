@@ -7,6 +7,7 @@ import { BasePreviewItem } from '../BasePreviewItem'
 
 const fragment = gql`
   fragment EditorPreviewDialogCampaignDraft on Draft {
+    id
     campaigns {
       campaign {
         id
@@ -39,6 +40,7 @@ export const Campaign = ({
       }
       names={[campaign.name]}
       eventType="campaign"
+      draftId={draft.id}
       eventDetail={{
         id: campaign.id,
         name: campaign.name,
