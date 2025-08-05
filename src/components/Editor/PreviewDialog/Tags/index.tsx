@@ -7,6 +7,7 @@ import { BasePreviewItem } from '../BasePreviewItem'
 
 const fragment = gql`
   fragment EditorPreviewDialogTagsDraft on Draft {
+    id
     tags
   }
 `
@@ -35,6 +36,7 @@ export const Tags = ({
       }
       names={tags}
       eventType="tags"
+      draftId={draft.id}
       closeDialog={closeDialog}
     />
   )

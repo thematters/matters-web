@@ -12,6 +12,7 @@ export interface BasePreviewItemProps {
   title: ReactNode
   names: string[]
   eventType: string
+  draftId?: string
   eventDetail?: Record<string, string | number>
   closeDialog: () => void
   withBackground?: boolean
@@ -21,24 +22,33 @@ export const BasePreviewItem = ({
   title,
   names,
   eventType,
+  draftId: draftIdProp,
   eventDetail = {},
   closeDialog,
   withBackground = true,
 }: BasePreviewItemProps) => {
   const { getQuery, router, isInPath } = useRoute()
-  const draftId = getQuery('draftId')
+  const draftId = getQuery('draftId') || draftIdProp
   const shortHash = getQuery('shortHash')
   const isInArticleEdit = isInPath('ARTICLE_DETAIL_EDIT')
+  const isInDrafts = isInPath('ME_DRAFTS')
+
+  const isSmUp = useMediaQuery(`(min-width: ${BREAKPOINTS.MD}px)`)
 
   const path = isInArticleEdit
     ? toPath({
         page: 'articleEdit',
         article: { shortHash },
       })
-    : toPath({
-        page: 'draftDetailOptions',
-        id: draftId,
-      })
+    : isInDrafts && isSmUp
+      ? toPath({
+          page: 'draftDetail',
+          id: draftId || '',
+        })
+      : toPath({
+          page: 'draftDetailOptions',
+          id: draftId || '',
+        })
 
   const goToOptionsPage = () => {
     if (isInArticleEdit) {
@@ -48,11 +58,9 @@ export const BasePreviewItem = ({
     }
   }
 
-  const isSmUp = useMediaQuery(`(min-width: ${BREAKPOINTS.MD}px)`)
-
   const onClick = () => {
     closeDialog()
-    if (isSmUp) {
+    if (isSmUp && !isInDrafts) {
       window.dispatchEvent(
         new CustomEvent('open-drawer', {
           detail: {
@@ -61,6 +69,11 @@ export const BasePreviewItem = ({
           },
         })
       )
+      return
+    }
+
+    if (isSmUp && isInDrafts) {
+      router.push(path.href + `?page=options&type=${eventType}`)
       return
     }
 

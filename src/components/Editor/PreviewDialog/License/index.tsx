@@ -9,6 +9,7 @@ import { BasePreviewItem } from '../BasePreviewItem'
 
 const fragment = gql`
   fragment EditorPreviewDialogLicenseDraft on Draft {
+    id
     license
   }
 `
@@ -41,6 +42,7 @@ export const License = ({
         title={title}
         names={[subtitle]}
         eventType="license"
+        draftId={draft.id}
         closeDialog={closeDialog}
         withBackground={false}
       />

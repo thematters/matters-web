@@ -7,6 +7,7 @@ import { BasePreviewItem } from '../BasePreviewItem'
 
 const fragment = gql`
   fragment EditorPreviewDialogConnectionsDraft on Draft {
+    id
     connections(input: { first: null }) {
       edges {
         node {
@@ -47,6 +48,7 @@ export const Connections = ({
         />
       }
       names={names}
+      draftId={draft.id}
       eventType="connections"
       closeDialog={closeDialog}
     />

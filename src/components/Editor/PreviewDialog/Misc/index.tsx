@@ -14,6 +14,7 @@ import styles from './styles.module.css'
 
 const fragment = gql`
   fragment EditorPreviewDialogMiscDraft on Draft {
+    id
     canComment
     sensitiveByAuthor
     access {
@@ -32,18 +33,26 @@ export const Misc = ({
   closeDialog: () => void
 }) => {
   const { getQuery, isInPath, router } = useRoute()
-  const draftId = getQuery('draftId')
+  const draftId = getQuery('draftId') || draft.id
   const shortHash = getQuery('shortHash')
   const isInArticleEdit = isInPath('ARTICLE_DETAIL_EDIT')
+  const isInDrafts = isInPath('ME_DRAFTS')
+
+  const isSmUp = useMediaQuery(`(min-width: ${BREAKPOINTS.MD}px)`)
   const path = isInArticleEdit
     ? toPath({
         page: 'articleEdit',
         article: { shortHash },
       })
-    : toPath({
-        page: 'draftDetailOptions',
-        id: draftId,
-      })
+    : isInDrafts && isSmUp
+      ? toPath({
+          page: 'draftDetail',
+          id: draftId,
+        })
+      : toPath({
+          page: 'draftDetailOptions',
+          id: draftId,
+        })
 
   const goToOptionsPage = (type: string) => {
     if (isInArticleEdit) {
@@ -53,11 +62,9 @@ export const Misc = ({
     }
   }
 
-  const isSmUp = useMediaQuery(`(min-width: ${BREAKPOINTS.MD}px)`)
-
   const onClick = (type: string) => {
     closeDialog()
-    if (isSmUp) {
+    if (isSmUp && !isInDrafts) {
       window.dispatchEvent(
         new CustomEvent('open-drawer', {
           detail: {
@@ -65,6 +72,11 @@ export const Misc = ({
           },
         })
       )
+      return
+    }
+
+    if (isSmUp && isInDrafts) {
+      router.push(path.href + `?page=options&type=${type}`)
       return
     }
 
