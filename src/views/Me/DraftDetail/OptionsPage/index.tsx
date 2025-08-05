@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import IconTimes from '@/public/static/icons/24px/times.svg'
+import { toPath } from '~/common/utils'
 import { Button, Icon, useRoute } from '~/components'
 
 import { DraftLoadingStates } from '../DraftLoadingStates'
@@ -22,12 +23,16 @@ const OptionsPage = () => {
     loadMoreCollections,
   } = useDraftDetail()
 
-  const { getQuery } = useRoute()
+  const { router, getQuery } = useRoute()
   const type = getQuery('type')
   const [tab, setTab] = useState<OptionTab>(getOptionTabByType(type))
 
   const goBack = () => {
-    window.history.back()
+    const path = toPath({
+      page: 'draftDetail',
+      id: draft.id,
+    })
+    router.push(path.href)
   }
 
   return (
