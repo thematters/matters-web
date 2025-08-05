@@ -1,10 +1,12 @@
 import gql from 'graphql-tag'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { useMutation, ViewerContext } from '~/components'
+import { EditorPreviewDialog } from '~/components/Editor/PreviewDialog'
 import { SchedulePublishDialog } from '~/components/Editor/SchedulePublishDialog'
 import {
+  EditorPreviewDialogDraftFragment,
   SchedulePublishArticleMutation,
   SchedulePublishButtonDraftFragment,
 } from '~/gql/graphql'
@@ -20,7 +22,7 @@ const SCHEDULE_PUBLISH_ARTICLE = gql`
 `
 
 export interface SchedulePublishDialogProps {
-  draft: SchedulePublishButtonDraftFragment
+  draft: EditorPreviewDialogDraftFragment
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
 
@@ -29,10 +31,15 @@ const SchedulePublishDialogComponent = ({
   children,
 }: SchedulePublishDialogProps) => {
   const viewer = useContext(ViewerContext)
+  const [publishAt, setPublishAt] = useState<Date>()
 
   const [schedulePublishArticle] = useMutation<SchedulePublishArticleMutation>(
     SCHEDULE_PUBLISH_ARTICLE
   )
+
+  const schedulePublishProps = {
+    publishAt,
+  }
 
   const onSchedulePublish = async (date: Date) => {
     await schedulePublishArticle({
@@ -99,15 +106,40 @@ const SchedulePublishDialogComponent = ({
   }
 
   return (
-    <SchedulePublishDialog
+    <EditorPreviewDialog
       draft={draft}
-      onConfirm={onSchedulePublish}
+      saving={false}
+      disabled={!publishAt}
       confirmButtonText={
         <FormattedMessage defaultMessage="Schedule Publish" id="Km6eJ2" />
       }
+      cancelButtonText={
+        <FormattedMessage defaultMessage="Back to Edit" id="tGHG7q" />
+      }
+      onConfirm={() => {
+        if (publishAt) {
+          onSchedulePublish(publishAt)
+        }
+      }}
+      {...schedulePublishProps}
     >
-      {({ openDialog }: { openDialog: () => void }) => children({ openDialog })}
-    </SchedulePublishDialog>
+      {({ openDialog: openEditorPreviewDialog }) => (
+        <SchedulePublishDialog
+          draft={draft}
+          onConfirm={(date: Date) => {
+            setPublishAt(date)
+            openEditorPreviewDialog()
+          }}
+          confirmButtonText={
+            <FormattedMessage defaultMessage="Schedule Publish" id="Km6eJ2" />
+          }
+        >
+          {({ openDialog }: { openDialog: () => void }) =>
+            children({ openDialog })
+          }
+        </SchedulePublishDialog>
+      )}
+    </EditorPreviewDialog>
   )
 }
 

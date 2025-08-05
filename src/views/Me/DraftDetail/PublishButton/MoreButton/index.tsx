@@ -10,25 +10,25 @@ import {
   Menu,
   TextIcon,
   useMediaQuery,
-  useRoute,
 } from '~/components'
 import { SchedulePublishDialog } from '~/components/Editor/SchedulePublishDialog'
+import { EditorPreviewDialogDraftFragment } from '~/gql/graphql'
 
 interface MoreButtonProps {
+  draft: EditorPreviewDialogDraftFragment
   disabled?: boolean
   onConfirmSchedulePublish: (date: Date) => void
 }
 
 export const MoreButton = ({
+  draft,
   disabled,
   onConfirmSchedulePublish,
 }: MoreButtonProps) => {
   const isSmUp = useMediaQuery(`(min-width: ${BREAKPOINTS.MD}px)`)
-  const { getQuery } = useRoute()
-  const id = getQuery('draftId')
 
   return (
-    <SchedulePublishDialog draft={{ id }} onConfirm={onConfirmSchedulePublish}>
+    <SchedulePublishDialog draft={draft} onConfirm={onConfirmSchedulePublish}>
       {({ openDialog }) => (
         <Dropdown
           content={
