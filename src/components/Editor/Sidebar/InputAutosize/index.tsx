@@ -8,10 +8,17 @@ interface InputAutosizeProps
   value: string
 }
 
-export default function InputAutosize({ value, ...props }: InputAutosizeProps) {
+export default function InputAutosize({
+  value,
+  placeholder,
+  ...props
+}: InputAutosizeProps) {
+  // Use placeholder text for width calculation when value is empty
+  const displayValue = value || placeholder || ''
+
   return (
-    <span className={styles.autosize} data-value={value}>
-      <input type="text" value={value} {...props} />
+    <span className={styles.autosize} data-value={displayValue}>
+      <input type="text" value={value} placeholder={placeholder} {...props} />
     </span>
   )
 }
