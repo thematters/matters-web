@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 
-import { Drawer } from '~/components'
+import { KEYVALUE } from '~/common/enums'
+import { Drawer, useNativeEventListener } from '~/components'
 
 import { getOptionTabByType, OptionTab } from '../Hooks'
 import { OptionContent, OptionContentProps } from '../OptionContent'
@@ -45,6 +46,25 @@ export const OptionDrawer: React.FC<OptionDrawerProps> = ({
     window.addEventListener('open-drawer', handleOpenDrawer)
     return () => window.removeEventListener('open-drawer', handleOpenDrawer)
   }, [])
+
+  // Keyboard shortcuts for open/close comment drawer
+  useNativeEventListener('keydown', (event: KeyboardEvent) => {
+    // skip if current focus is on another input element,
+    const target = event.target as HTMLElement
+    if (
+      target.tagName.toLowerCase() === 'input' ||
+      target.tagName.toLowerCase() === 'textarea' ||
+      target.contentEditable === 'true'
+    ) {
+      return
+    }
+
+    const keyCode = event.code.toLowerCase()
+
+    if (keyCode === KEYVALUE.escape && isOpen) {
+      toggleDrawer()
+    }
+  })
 
   return (
     <Drawer isOpen={isOpen} onClose={toggleDrawer}>
