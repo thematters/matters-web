@@ -4,22 +4,29 @@ export const GET_ARTICLE_TOPIC_CHANNELS = gql`
   query GetArticleTopicChannels($shortHash: String!) {
     article(input: { shortHash: $shortHash }) {
       id
-      oss {
-        topicChannels {
-          channel {
-            id
-          }
+      classification {
+        topicChannel {
           enabled
-          pinned
+          channels {
+            channel {
+              id
+            }
+            enabled
+            pinned
+          }
         }
       }
     }
-    channels {
+    channels(input: { oss: true }) {
       id
       shortHash
       ... on TopicChannel {
         name(input: { language: zh_hant })
-        enabled
+        providerId
+        parent {
+          id
+          name(input: { language: zh_hant })
+        }
       }
     }
   }
@@ -29,13 +36,16 @@ export const SET_ARTICLE_TOPIC_CHANNELS = gql`
   mutation SetArticleTopicChannels($id: ID!, $channels: [ID!]!) {
     setArticleTopicChannels(input: { id: $id, channels: $channels }) {
       id
-      oss {
-        topicChannels {
-          channel {
-            id
-          }
+      classification {
+        topicChannel {
           enabled
-          pinned
+          channels {
+            channel {
+              id
+            }
+            enabled
+            pinned
+          }
         }
       }
     }

@@ -144,7 +144,7 @@ const BaseSetArticleChannelsDialog = ({
   const allChannels = data?.channels.filter(
     (channel) => 'enabled' in channel && channel.enabled
   )
-  const articleChannels = data?.article?.oss.topicChannels?.filter(
+  const articleChannels = data?.article?.classification?.topicChannel?.channels?.filter(
     (channel) => channel.enabled
   )
 
