@@ -81,6 +81,7 @@ const Channel = ({ article, privateFetched }: ChannelProps) => {
     const feedbackState = feedback?.state
     const isFeedbackToLatest = feedback?.channels?.length === 0
     const isInLatestChannel =
+      !topicChannel?.enabled ||
       (hasTopicChannel && topicChannel?.channels?.length === 0) ||
       (hasTopicChannel && !!allChannelsDisabled)
     const hasAntiFlooded = !!topicChannel?.channels?.some(
