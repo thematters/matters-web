@@ -34,9 +34,9 @@ const OptionsPage = () => {
         id: draft.id,
       })
       router.push(path.href)
-    } else {
-      router.back()
+      return
     }
+    router.back()
   }
 
   return (
