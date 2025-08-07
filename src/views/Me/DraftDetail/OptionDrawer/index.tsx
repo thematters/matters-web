@@ -59,7 +59,7 @@ export const OptionDrawer: React.FC<OptionDrawerProps> = ({
     return () => window.removeEventListener('open-drawer', handleOpenDrawer)
   }, [])
 
-  // Keyboard shortcuts for open/close comment drawer
+  // Keyboard shortcuts for open/close option drawer
   useNativeEventListener('keydown', (event: KeyboardEvent) => {
     // skip if current focus is on another input element,
     const target = event.target as HTMLElement
