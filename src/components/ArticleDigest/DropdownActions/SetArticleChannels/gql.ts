@@ -27,6 +27,7 @@ export const GET_ARTICLE_TOPIC_CHANNELS = gql`
           id
           name(input: { language: zh_hant })
         }
+        enabled
       }
     }
   }
