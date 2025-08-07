@@ -28,11 +28,15 @@ const OptionsPage = () => {
   const [tab, setTab] = useState<OptionTab>(getOptionTabByType(type))
 
   const goBack = () => {
-    const path = toPath({
-      page: 'draftDetail',
-      id: draft.id,
-    })
-    router.push(path.href)
+    if (draft.id) {
+      const path = toPath({
+        page: 'draftDetail',
+        id: draft.id,
+      })
+      router.push(path.href)
+    } else {
+      router.back()
+    }
   }
 
   return (
