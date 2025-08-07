@@ -94,7 +94,7 @@ const BaseAddCollectionsArticleDialog = ({
         userName,
         collection: { id: checked[0] },
       })
-      toast.success({
+      toast.info({
         message: (
           <FormattedMessage
             defaultMessage="Successfully added"

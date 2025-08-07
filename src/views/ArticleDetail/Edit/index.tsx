@@ -6,9 +6,11 @@ import { useContext, useEffect, useState } from 'react'
 import {
   ASSET_TYPE,
   ENTITY_TYPE,
+  MAX_ARTICLE_CONTENT_LENGTH,
   MAX_ARTICLE_REVISION_COUNT,
 } from '~/common/enums'
 import {
+  DrawerProvider,
   EmptyLayout,
   Layout,
   Media,
@@ -21,17 +23,10 @@ import {
   ViewerContext,
 } from '~/components'
 import {
-  MoreSettingsProps,
-  SetCollectionProps,
+  SetConnectionsProps,
   SetCoverProps,
-  SetResponseProps,
   SetTagsProps,
-  SetVersionDescriptionProps,
 } from '~/components/Editor'
-import BottomBar from '~/components/Editor/BottomBar'
-import SupportSettingDialog from '~/components/Editor/MoreSettings/SupportSettingDialog'
-import { SelectCampaignProps } from '~/components/Editor/SelectCampaign'
-import Sidebar from '~/components/Editor/Sidebar'
 import { SidebarIndentProps } from '~/components/Editor/Sidebar/Indent'
 import { QueryError, useImperativeQuery } from '~/components/GQL'
 import {
@@ -55,10 +50,28 @@ import {
   SingleFileUploadMutation,
 } from '~/gql/graphql'
 
+const DynamicOptionDrawer = dynamic(
+  () => import('./OptionDrawer').then((mod) => mod.OptionDrawer),
+  {
+    ssr: false,
+  }
+)
+
+import { stripHtml } from '~/common/utils'
+import { SidebarCanCommentProps } from '~/components/Editor/Sidebar/CanComment'
+import { SidebarCollectionsProps } from '~/components/Editor/Sidebar/Collections'
+import { SidebarISCNProps } from '~/components/Editor/Sidebar/ISCN'
+import { SidebarLicenseProps } from '~/components/Editor/Sidebar/License'
+import { SidebarSensitiveProps } from '~/components/Editor/Sidebar/Sensitive'
+
 import { GET_EDIT_ARTICLE, GET_EDIT_ARTICLE_ASSETS } from './gql'
-import EditHeader from './Header'
+import { getOptionTabByType, OptionTab, useViewer } from './Hooks'
 import { useCampaignState } from './Hooks/useCampaignState'
+import { OptionButton } from './OptionButton'
+import { OptionContent } from './OptionContent'
+import OptionsPage from './OptionsPage'
 import PublishState from './PublishState'
+import SettingsButton from './SettingsButton'
 import styles from './styles.module.css'
 
 export type Article = NonNullable<
@@ -73,6 +86,29 @@ const Editor = dynamic(
 )
 
 const BaseEdit = ({ article }: { article: Article }) => {
+  const [isOpenOptionDrawer, setIsOpenOptionDrawer] = useState(false)
+  const toggleOptionDrawer = () => {
+    setIsOpenOptionDrawer((prevState) => !prevState)
+  }
+  const { getQuery } = useRoute()
+  const [showReviseDialog, setShowReviseDialog] = useState(true)
+
+  const isInArticleEditOptions = getQuery('page') === 'options'
+  const type = getQuery('type')
+  const [tab, setTab] = useState<OptionTab>(getOptionTabByType(type))
+
+  useEffect(() => {
+    setTab(getOptionTabByType(type))
+  }, [type])
+
+  const {
+    viewerData,
+    ownCircles,
+    ownCollections,
+    // appliedCampaigns,
+    loadMoreCollections,
+  } = useViewer()
+
   const [showPublishState, setShowPublishState] = useState(false)
 
   const [versionDescription, setVersionDescription] = useState('')
@@ -81,6 +117,9 @@ const BaseEdit = ({ article }: { article: Article }) => {
   const [title, setTitle] = useState(article.title)
   const [summary, setSummary] = useState(article.summary)
   const [content, setContent] = useState(article.contents.html)
+
+  const contentLength = stripHtml(content || '').length
+  const isOverLength = contentLength > MAX_ARTICLE_CONTENT_LENGTH
 
   // cover
   const [assets, setAssets] = useState(article.assets || [])
@@ -101,9 +140,16 @@ const BaseEdit = ({ article }: { article: Article }) => {
 
   // tags
   const [tags, setTags] = useState<DigestTagFragment[]>(article.tags || [])
-  const [collection, setCollection] = useState<
+
+  // connections
+  const [connections, setConnections] = useState<
     ArticleDigestDropdownArticleFragment[]
-  >(article.collection.edges?.map(({ node }) => node) || [])
+  >(article.connections.edges?.map(({ node }) => node) || [])
+
+  // collections
+  const [checkedCollections, setCheckedCollections] = useState<string[]>(
+    article.collections.edges?.map(({ node }) => node.id) || []
+  )
 
   // access
   const [circle, setCircle] = useState<
@@ -120,18 +166,12 @@ const BaseEdit = ({ article }: { article: Article }) => {
       : article.license
   )
 
-  const ownCircles = article.author.ownCircles
-  const hasOwnCircle = ownCircles && ownCircles.length >= 1
   const editAccess = (
     addToCircle: boolean,
     paywalled: boolean,
     newLicense: ArticleLicenseType
   ) => {
-    if (!ownCircles) {
-      return
-    }
-
-    setCircle(addToCircle ? ownCircles[0] : null)
+    setCircle(addToCircle ? ownCircles?.[0] : null)
     setAccessType(
       paywalled ? ArticleAccessType.Paywall : ArticleAccessType.Public
     )
@@ -179,27 +219,24 @@ const BaseEdit = ({ article }: { article: Article }) => {
     tagsSaving: false,
     editTags: async (t: DigestTagFragment[]) => setTags(t),
   }
-  const collectionProps: SetCollectionProps = {
-    collection,
-    collectionSaving: false,
-    editCollection: async (c: ArticleDigestDropdownArticleFragment[]) =>
-      setCollection(c),
+  const connectionsProps: SetConnectionsProps = {
+    connections,
+    connectionsSaving: false,
+    editConnections: async (c: ArticleDigestDropdownArticleFragment[]) =>
+      setConnections(c),
     nodeExclude: article.id,
   }
-  const setCommentProps: SetResponseProps = {
-    canComment,
-    toggleComment: setCanComment,
-  }
-  const setIndentProps: SidebarIndentProps = {
-    indented,
-    toggleIndent: setIndented,
-    indentSaving: false,
-  }
-  const campaignProps: Partial<SelectCampaignProps> = {
-    campaigns: selectableCampaigns,
-    selectedCampaign,
-    selectedStage,
-    editCampaign: setCampaign,
+
+  const collectionsProps: SidebarCollectionsProps = {
+    collections: ownCollections || [],
+    checkedCollections:
+      ownCollections?.filter((c) => checkedCollections.includes(c.id)) || [],
+    collectionsSaving: false,
+    editCollections: async (collections: string[]) => {
+      setCheckedCollections(collections)
+    },
+    loadMore: loadMoreCollections,
+    hasNextPage: !!viewerData?.viewer?.collections?.pageInfo?.hasNextPage,
   }
 
   const indentProps: SidebarIndentProps = {
@@ -208,35 +245,36 @@ const BaseEdit = ({ article }: { article: Article }) => {
     indentSaving: false,
   }
 
-  const accessProps: MoreSettingsProps = {
-    circle,
-    accessType,
+  const licenseProps: SidebarLicenseProps = {
     license,
-    accessSaving: false,
+    circle,
     editAccess,
-    canToggleCircle: !!hasOwnCircle && !isOverRevisionLimit,
-    iscnPublish,
-
-    article: { ...article, replyToDonator, requestForDonation },
-    editSupportSetting,
-    supportSettingSaving: false,
-    onOpenSupportSetting: () => undefined,
-
-    contentSensitive,
-    toggleContentSensitive() {
-      setContentSensitive(!contentSensitive)
-    },
-    contentSensitiveSaving: false,
-
-    togglePublishISCN() {
-      setIscnPublish(!iscnPublish)
-    },
-    iscnPublishSaving: false,
+    saving: false,
   }
 
-  const versionDescriptionProps: SetVersionDescriptionProps = {
-    versionDescription: versionDescription,
-    editVersionDescription: setVersionDescription,
+  const canCommentProps: SidebarCanCommentProps = {
+    canComment,
+    editCanComment: setCanComment,
+    saving: false,
+  }
+
+  const supportSettingProps = {
+    requestForDonation,
+    replyToDonator,
+    editSupportSetting,
+    supportSettingSaving: false,
+  }
+
+  const sensitiveProps: SidebarSensitiveProps = {
+    sensitive: contentSensitive,
+    toggleSensitive: () => setContentSensitive(!contentSensitive),
+    sensitiveSaving: false,
+  }
+
+  const iscnProps: SidebarISCNProps = {
+    iscnPublish,
+    toggleISCN: () => setIscnPublish(!iscnPublish),
+    iscnPublishSaving: false,
   }
 
   const [singleFileUpload] =
@@ -328,75 +366,87 @@ const BaseEdit = ({ article }: { article: Article }) => {
       return trySingleUpload()
     }
   }
+  if (isInArticleEditOptions) {
+    return (
+      <OptionsPage>
+        <OptionContent
+          tab={tab}
+          setTab={setTab}
+          article={article}
+          ownCircles={ownCircles}
+          ownCollections={ownCollections}
+          campaigns={selectableCampaigns || []}
+          selectedCampaign={selectedCampaign}
+          selectedStage={selectedStage}
+          editCampaign={setCampaign}
+          {...coverProps}
+          {...tagsProps}
+          {...connectionsProps}
+          {...collectionsProps}
+          {...indentProps}
+          {...licenseProps}
+          {...canCommentProps}
+          {...supportSettingProps}
+          {...sensitiveProps}
+          {...iscnProps}
+        />
+      </OptionsPage>
+    )
+  }
 
   return (
     <>
-      <Layout.Main
-        aside={
-          <section className={styles.sidebar}>
-            <Sidebar.Campaign {...campaignProps} />
-            <Sidebar.Cover {...coverProps} />
-            <Sidebar.Indent {...indentProps} />
-            <Sidebar.Tags {...tagsProps} />
-            <Sidebar.Collection {...collectionProps} />
-            <Sidebar.Response
-              inSidebar
-              disableChangeCanComment={article.canComment}
-              {...setCommentProps}
-            />
-
-            <SupportSettingDialog
-              article={{ ...article, replyToDonator, requestForDonation }}
-              editSupportSetting={editSupportSetting}
-              supportSettingSaving={false}
-            >
-              {({ openDialog }) => (
-                <Sidebar.Management
-                  {...accessProps}
-                  onOpenSupportSetting={openDialog}
-                />
-              )}
-            </SupportSettingDialog>
-          </section>
+      <Layout
+        header={
+          <>
+            <section className={styles.header}>
+              <section className={styles.headerRight}>
+                {isOverLength && (
+                  <span className={styles.count}>
+                    {contentLength} / {MAX_ARTICLE_CONTENT_LENGTH}
+                  </span>
+                )}
+                <OptionButton onClick={toggleOptionDrawer} />
+                <section className={styles.publishButtons}>
+                  <SettingsButton
+                    article={article}
+                    title={title}
+                    summary={summary}
+                    content={content}
+                    tags={tags}
+                    connections={connections}
+                    collections={collectionsProps.checkedCollections}
+                    cover={cover || null}
+                    requestForDonation={requestForDonation}
+                    replyToDonator={replyToDonator}
+                    circle={circle || null}
+                    accessType={accessType}
+                    license={license}
+                    canComment={canComment}
+                    indentFirstLine={indented}
+                    sensitiveByAuthor={contentSensitive}
+                    iscnPublish={iscnPublish}
+                    onPublish={() => {
+                      setShowPublishState(true)
+                    }}
+                    isOverRevisionLimit={isOverRevisionLimit}
+                    selectedCampaign={selectedCampaign}
+                    selectedStage={selectedStage}
+                    versionDescription={versionDescription}
+                    editVersionDescription={setVersionDescription}
+                  />
+                </section>
+              </section>
+            </section>
+          </>
         }
       >
-        <Layout.Header
-          mode="compact"
-          right={
-            <EditHeader
-              {...coverProps}
-              {...tagsProps}
-              {...collectionProps}
-              {...accessProps}
-              {...setCommentProps}
-              {...setIndentProps}
-              {...versionDescriptionProps}
-              {...campaignProps}
-              article={article}
-              revision={{
-                versionDescription,
-                title,
-                summary,
-                content,
-                cover,
-                replyToDonator,
-                requestForDonation,
-              }}
-              isOverRevisionLimit={isOverRevisionLimit}
-              onPublish={() => {
-                setShowPublishState(true)
-              }}
-            />
-          }
-        />
-
         {showPublishState && article.versions.edges[0]?.node.id && (
           <PublishState
             articleId={article.id}
             currVersionId={article.versions.edges[0]?.node.id}
           />
         )}
-
         <Layout.Main.Spacing>
           <Editor
             draft={{
@@ -427,33 +477,39 @@ const BaseEdit = ({ article }: { article: Article }) => {
             }}
             upload={upload}
           />
+
+          <Media greaterThan="sm">
+            <DynamicOptionDrawer
+              isOpen={isOpenOptionDrawer}
+              toggleDrawer={toggleOptionDrawer}
+              article={article}
+              ownCircles={ownCircles}
+              ownCollections={ownCollections}
+              campaigns={selectableCampaigns || []}
+              selectedCampaign={selectedCampaign}
+              selectedStage={selectedStage}
+              editCampaign={setCampaign}
+              {...coverProps}
+              {...tagsProps}
+              {...connectionsProps}
+              {...collectionsProps}
+              {...indentProps}
+              {...licenseProps}
+              {...canCommentProps}
+              {...supportSettingProps}
+              {...sensitiveProps}
+              {...iscnProps}
+            />
+          </Media>
         </Layout.Main.Spacing>
 
-        {/* BottomBar */}
-        <Media lessThan="lg">
-          <SupportSettingDialog
-            article={{ ...article, replyToDonator, requestForDonation }}
-            editSupportSetting={editSupportSetting}
-            supportSettingSaving={false}
-          >
-            {({ openDialog: openSupportSettingDialog }) => (
-              <BottomBar
-                disabled={false}
-                {...coverProps}
-                {...tagsProps}
-                {...collectionProps}
-                {...accessProps}
-                {...setCommentProps}
-                {...campaignProps}
-                {...indentProps}
-                onOpenSupportSetting={openSupportSettingDialog}
-              />
-            )}
-          </SupportSettingDialog>
-        </Media>
-      </Layout.Main>
-
-      <ReviseArticleDialog revisionCountLeft={revisionCountLeft} />
+        {showReviseDialog && (
+          <ReviseArticleDialog
+            revisionCountLeft={revisionCountLeft}
+            onCloseDialog={() => setShowReviseDialog(false)}
+          />
+        )}
+      </Layout>
     </>
   )
 }
@@ -466,13 +522,14 @@ const Edit = () => {
     GET_EDIT_ARTICLE,
     { variables: { shortHash }, fetchPolicy: 'network-only' }
   )
+  const { loading: viewerLoading } = useViewer()
   const article = data?.article
   const isAuthor = viewer.id === article?.author.id
 
   /**
    * Render
    */
-  if (loading) {
+  if (loading || viewerLoading) {
     return (
       <EmptyLayout>
         <SpinnerBlock />
@@ -496,7 +553,11 @@ const Edit = () => {
     )
   }
 
-  return <BaseEdit article={article as Article} />
+  return (
+    <DrawerProvider>
+      <BaseEdit article={article as Article} />
+    </DrawerProvider>
+  )
 }
 
 export default Edit

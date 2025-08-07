@@ -7,13 +7,24 @@ import { Card, CardProps } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
 import { ArticleDigestDropdownArticleFragment } from '~/gql/graphql'
 
-import { ArticleDigestTitle, ArticleDigestTitleTextSize } from '../Title'
+import {
+  ArticleDigestTitle,
+  ArticleDigestTitleColor,
+  ArticleDigestTitleIs,
+  ArticleDigestTitleTextSize,
+  ArticleDigestTitleTextWeight,
+} from '../Title'
 import styles from './styles.module.css'
 
 export type ArticleDigestDropdownProps = {
   article: ArticleDigestDropdownArticleFragment
 
+  nameColor?: 'grey' | 'black'
+  relatedNode?: React.ReactNode
   titleTextSize?: ArticleDigestTitleTextSize
+  titleIs?: ArticleDigestTitleIs
+  titleTextWeight?: ArticleDigestTitleTextWeight
+  titleColor?: ArticleDigestTitleColor
   disabled?: boolean
   extraButton?: React.ReactNode
   lineClamp?: boolean
@@ -30,9 +41,11 @@ const fragments = {
       articleState: state
       slug
       shortHash
+      state
       author {
         id
         userName
+        isBlocking
         ...UserDigestMiniUser
       }
       ...ArticleDigestTitleArticle
@@ -45,8 +58,12 @@ const fragments = {
 
 export const ArticleDigestDropdown = ({
   article,
-
+  nameColor,
+  relatedNode,
   titleTextSize,
+  titleIs,
+  titleTextWeight,
+  titleColor,
   disabled,
   extraButton,
   lineClamp,
@@ -79,13 +96,16 @@ export const ArticleDigestDropdown = ({
             article={article}
             textSize={titleTextSize}
             disabled={cardDisabled}
-            is="h3"
+            is={titleIs}
+            textWeight={titleTextWeight}
             lineClamp={lineClamp}
+            textColor={titleColor}
           />
 
           <section className={styles.extraButton}>
             {!isBanned && extraButton}
           </section>
+          {relatedNode}
         </header>
 
         <footer className={styles.footer}>
@@ -93,6 +113,7 @@ export const ArticleDigestDropdown = ({
             user={article.author}
             avatarSize={16}
             textSize={13}
+            nameColor={nameColor}
             hasAvatar
             hasUserName
             hasDisplayName

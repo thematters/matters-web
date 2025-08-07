@@ -28,11 +28,11 @@ const COLLECTION_LIST = gql`
     article: node(input: { id: $id }) {
       ... on Article {
         id
-        ...ArticleCollection
+        ...ArticleConnections
       }
     }
   }
-  ${articleFragments.articleCollection}
+  ${articleFragments.articleConnections}
 `
 
 const Collection: React.FC<{
@@ -42,9 +42,9 @@ const Collection: React.FC<{
     COLLECTION_LIST,
     { variables: { id: article.id, first: 3 } }
   )
-  const connectionPath = 'article.collection'
+  const connectionPath = 'article.connections'
   const { edges, pageInfo } =
-    (data?.article as CollectionListArticle)?.collection || {}
+    (data?.article as CollectionListArticle)?.connections || {}
   const loadAll = () =>
     fetchMore({
       variables: {

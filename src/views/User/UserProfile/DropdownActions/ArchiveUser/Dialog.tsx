@@ -60,7 +60,7 @@ const ArchiveUserDialog = ({
       nextStep()
     } else {
       await archiveUser({ variables: { id, password } })
-      toast.success({ message: '用戶已註銷' })
+      toast.info({ message: '用戶已註銷' })
       closeDialog()
     }
   }

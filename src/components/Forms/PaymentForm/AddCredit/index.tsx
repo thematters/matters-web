@@ -207,7 +207,7 @@ const BaseAddCredit: React.FC<FormProps> = ({
           setWaiting(true)
           // FIXME:  wait for 3 seconds to server to update the balance
           setTimeout(() => {
-            toast.success({
+            toast.info({
               message: (
                 <FormattedMessage
                   defaultMessage="Top-up successful"
