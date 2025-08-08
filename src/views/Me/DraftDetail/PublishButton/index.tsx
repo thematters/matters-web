@@ -72,7 +72,7 @@ const Buttons = ({
           icon={isSmUp ? <Icon icon={IconPublishFill} size={18} /> : undefined}
           spacing={8}
         >
-          <FormattedMessage defaultMessage="Publish Now" id="nWhqw9" />
+          <FormattedMessage defaultMessage="Publish" id="syEQFE" />
         </TextIcon>
       </Button>
 
