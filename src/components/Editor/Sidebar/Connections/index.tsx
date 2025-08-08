@@ -54,7 +54,7 @@ const SidebarConnections = ({
             placement="top"
             touch={['hold', 1000]}
           >
-            <span>
+            <span className={styles.help}>
               <Icon icon={IconHelp} size={14} />
             </span>
           </Tooltip>
@@ -96,30 +96,32 @@ const SidebarConnections = ({
       }
       disabled={disabled}
     >
-      <div className={styles.content}>
-        {connections.length > 0 && (
-          <ul className={styles.list}>
-            {connections.map((article) => (
-              <li key={article.id}>
-                <ArticleDigestDraftTitle
-                  article={article}
-                  onRemove={() => onRemoveArticle(article)}
-                  saving={connectionsSaving}
-                />
-              </li>
-            ))}
-          </ul>
-        )}
-        {isEditing && (
-          <div className={styles.connectionInput}>
-            <ConnectionInput
-              connections={connections}
-              onAddArticle={onAddArticle}
-              saving={connectionsSaving}
-            />
-          </div>
-        )}
-      </div>
+      {(isEditing || connections.length > 0) && (
+        <div className={styles.content}>
+          {connections.length > 0 && (
+            <ul className={styles.list}>
+              {connections.map((article) => (
+                <li key={article.id}>
+                  <ArticleDigestDraftTitle
+                    article={article}
+                    onRemove={() => onRemoveArticle(article)}
+                    saving={connectionsSaving}
+                  />
+                </li>
+              ))}
+            </ul>
+          )}
+          {isEditing && (
+            <div className={styles.connectionInput}>
+              <ConnectionInput
+                connections={connections}
+                onAddArticle={onAddArticle}
+                saving={connectionsSaving}
+              />
+            </div>
+          )}
+        </div>
+      )}
     </Box>
   )
 }

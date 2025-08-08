@@ -1452,7 +1452,7 @@
     "description": "src/views/User/UserProfile/BadgeNomadLabel/index.tsx"
   },
   "LWE7oq": {
-    "defaultMessage": "草稿保存中，確定要離開嗎？"
+    "defaultMessage": "草稿儲存中，確定要離開嗎？"
   },
   "Lb0JsC": {
     "defaultMessage": "你封鎖了該用戶"
@@ -3691,6 +3691,9 @@
   },
   "znN84l": {
     "defaultMessage": "幫助讀者更容易發現優質內容"
+  },
+  "zso4HL": {
+    "defaultMessage": "每筆內容在 LikeCoin chain 區塊鏈上註冊的元數據"
   },
   "zvNfwL": {
     "defaultMessage": "操作過於頻繁，請稍候重試",

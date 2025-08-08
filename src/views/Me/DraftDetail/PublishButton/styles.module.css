@@ -10,6 +10,10 @@
   &:hover {
     opacity: 0.85;
   }
+
+  &.disabled {
+    background-color: var(--color-grey);
+  }
 }
 
 .divider {
@@ -17,4 +21,8 @@
   width: 1px;
   height: 0.875rem;
   background-color: var(--color-grey-scale-white-60);
+
+  &.disabled {
+    background-color: var(--color-white);
+  }
 }
