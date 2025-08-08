@@ -54,7 +54,7 @@ const SidebarConnections = ({
             placement="top"
             touch={['hold', 1000]}
           >
-            <span>
+            <span className={styles.help}>
               <Icon icon={IconHelp} size={14} />
             </span>
           </Tooltip>
