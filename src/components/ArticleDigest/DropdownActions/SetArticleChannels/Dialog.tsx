@@ -59,6 +59,47 @@ const BaseSetArticleChannelsDialog = ({
       { showToast: true }
     )
 
+  const channelsEnabled =
+    data?.article?.classification?.topicChannel?.enabled ?? true
+  const allChannels = data?.channels
+    .filter((channel) => channel.__typename === 'TopicChannel')
+    .sort((a, b) => {
+      // Type assertion for TopicChannel
+      type TopicChannel = {
+        enabled: boolean
+        parent: { name: string } | null
+        name: string
+      }
+      const channelA = a as unknown as TopicChannel
+      const channelB = b as unknown as TopicChannel
+
+      // First sort by enabled status (enabled channels first)
+      if (channelA.enabled && !channelB.enabled) return -1
+      if (!channelA.enabled && channelB.enabled) return 1
+
+      // Then sort by parent (channels with parent come first)
+      const aHasParent = channelA.parent !== null
+      const bHasParent = channelB.parent !== null
+      if (aHasParent && !bHasParent) return -1
+      if (!aHasParent && bHasParent) return 1
+
+      // If both have parents, sort by parent name
+      if (aHasParent && bHasParent) {
+        const parentNameA = channelA.parent?.name || ''
+        const parentNameB = channelB.parent?.name || ''
+        return parentNameA.localeCompare(parentNameB)
+      }
+
+      // If neither has parent, sort by channel name
+      const nameA = channelA.name || ''
+      const nameB = channelB.name || ''
+      return nameA.localeCompare(nameB)
+    })
+  const articleChannels =
+    data?.article?.classification?.topicChannel?.channels?.filter(
+      (channel) => channel.enabled
+    )
+
   const formId = useId()
 
   const { values, handleSubmit, isSubmitting, setFieldValue } =
@@ -141,15 +182,11 @@ const BaseSetArticleChannelsDialog = ({
     setFieldValue('channels', currentChannels)
   }
 
-  const allChannels = data?.channels.filter(
-    (channel) => 'enabled' in channel && channel.enabled
-  )
-  const articleChannels = data?.article?.oss.topicChannels?.filter(
-    (channel) => channel.enabled
-  )
-
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
+      {!channelsEnabled && (
+        <span className={styles.disabledTip}>該文章反饋不参与频道推荐</span>
+      )}
       <List>
         {allChannels?.map((channel) => (
           <List.Item key={channel.id}>
@@ -157,15 +194,24 @@ const BaseSetArticleChannelsDialog = ({
               <Form.SquareCheckBox
                 name="channels"
                 value={channel.id}
-                contents={'name' in channel ? channel.name : channel.id}
+                disabled={!('providerId' in channel && channel.providerId)}
+                contents={
+                  'name' in channel
+                    ? channel.name +
+                      (channel.parent ? `(${channel.parent.name})` : '')
+                    : channel.id
+                }
                 checked={values.channels.includes(channel.id)}
                 onChange={() => handleToggleChannel(channel.id)}
               />
               <section className={styles.pinnedChannel}>
                 <Form.SquareCheckBox
                   name="pinnedChannels"
+                  disabled={'enabled' in channel && !channel.enabled}
                   value={channel.id}
-                  contents={'置頂'}
+                  contents={
+                    'enabled' in channel && !channel.enabled ? '' : '置頂'
+                  }
                   color="greyDarker"
                   checked={values.pinnedChannels.includes(channel.id)}
                   onChange={() => handleTogglePinnedChannel(channel.id)}
@@ -211,7 +257,7 @@ const BaseSetArticleChannelsDialog = ({
 
       <Dialog isOpen={show} onDismiss={closeDialog}>
         <Dialog.Header
-          title="頻道管理"
+          title="頻道標籤管理"
           closeDialog={closeDialog}
           rightBtn={SubmitButton}
         />
