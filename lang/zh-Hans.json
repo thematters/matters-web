@@ -3692,6 +3692,9 @@
   "znN84l": {
     "defaultMessage": "帮助读者更容易发现优质内容"
   },
+  "zso4HL": {
+    "defaultMessage": "每笔内容在 LikeCoin 链区块链上注册的元数据"
+  },
   "zvNfwL": {
     "defaultMessage": "操作过于频繁，请稍候重试",
     "description": "ACTION_LIMIT_EXCEEDED"
