@@ -3692,6 +3692,9 @@
   "znN84l": {
     "defaultMessage": "Help readers discover articles more easily"
   },
+  "zso4HL": {
+    "defaultMessage": "Metadata registered on the LikeCoin chain for each piece of content"
+  },
   "zvNfwL": {
     "defaultMessage": "Operation too frequent, please try again later.",
     "description": "ACTION_LIMIT_EXCEEDED"
