@@ -1,3 +1,4 @@
+import classNames from 'classnames'
 import { useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
@@ -54,13 +55,21 @@ const Buttons = ({
     openEditorPreviewDialog()
   }
 
+  const buttonsClasses = classNames(styles.buttons, {
+    [styles.disabled]: disabled,
+  })
+
+  const dividerClasses = classNames(styles.divider, {
+    [styles.disabled]: disabled,
+  })
+
   return (
-    <section className={styles.buttons}>
+    <section className={buttonsClasses}>
       <Button
         size={[null, isSmUp ? '2.375rem' : '2.125rem']}
         spacing={[0, 14]}
         borderRadius={'0.75rem'}
-        bgColor="black"
+        bgColor={disabled ? 'grey' : 'black'}
         onClick={openEditorPreviewDialog}
         disabled={disabled}
         aria-haspopup="dialog"
@@ -76,7 +85,7 @@ const Buttons = ({
         </TextIcon>
       </Button>
 
-      <span className={styles.divider} />
+      <span className={dividerClasses} />
 
       <MoreButton
         draft={draft}
