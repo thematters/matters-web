@@ -11,9 +11,9 @@
 .disabledTip {
   padding: var(--sp8) var(--sp12);
   margin-bottom: var(--sp12);
+  font-size: var(--font-sm);
+  color: var(--color-grey-darker);
+  text-align: center;
   background-color: var(--color-grey-lighter);
   border-radius: var(--radius-sm);
-  color: var(--color-grey-darker);
-  font-size: var(--font-sm);
-  text-align: center;
 }
