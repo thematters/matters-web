@@ -39,7 +39,13 @@ const SidebarCover = ({ cover, disabled, ...restProps }: SidebarCoverProps) => {
                       size={24}
                     />
                   </div>
-                  <ResponsiveImage url={cover} width={72} height={72} />
+                  <ResponsiveImage
+                    url={cover}
+                    width={72 * 2}
+                    height={72 * 2}
+                    smUpWidth={72 * 2}
+                    smUpHeight={72 * 2}
+                  />
                 </div>
               ) : (
                 <button
