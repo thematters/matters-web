@@ -1,0 +1,33 @@
+.container {
+  padding: var(--sp8) var(--sp16) 0;
+}
+
+.list {
+  overflow: hidden;
+  cursor: pointer;
+  user-select: none;
+  border-radius: var(--sp8);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.options {
+  width: 100%;
+  max-height: 50vh;
+  max-height: calc(var(--ivh) * 50);
+  max-height: 50dvh;
+  padding-top: var(--sp8);
+  padding-bottom: var(--sp8);
+  overflow: auto;
+  text-align: left;
+  border-radius: var(--sp8);
+
+  @media (--sm-up) {
+    max-height: 30vh;
+    max-height: calc(var(--ivh) * 30);
+    max-height: 30dvh;
+  }
+
+  &.dropdown {
+    width: var(--sizing-menu);
+  }
+}

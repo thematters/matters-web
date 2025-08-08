@@ -2,7 +2,7 @@ import { useQuery } from '@apollo/client'
 import { useEffect } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { Layout, Translate } from '~/components'
+import { toast } from '~/components'
 import DRAFT_PUBLISH_STATE from '~/components/GQL/queries/draftPublishState'
 import {
   DraftPublishStateQuery,
@@ -23,24 +23,22 @@ const PendingState = ({ draft }: { draft: PublishStateDraftFragment }) => {
   useEffect(() => {
     startPolling(1000 * 2)
 
+    toast.info({
+      message: (
+        <FormattedMessage
+          defaultMessage="Publishing, please wait..."
+          id="Vp5L/O"
+        />
+      ),
+      duration: Infinity,
+    })
+
     return () => {
       stopPolling()
     }
   }, [])
 
-  return (
-    <Layout.Notice
-      color="green"
-      content={<FormattedMessage defaultMessage="Publishing..." id="PesLat" />}
-      subDescription={
-        <Translate
-          zh_hant="上鏈後，作品不可刪除，去中心化保存"
-          zh_hans="上链后，作品不可删除，去中心化保存"
-          en="After publication, your work cannot be deleted."
-        />
-      }
-    />
-  )
+  return null
 }
 
 export default PendingState

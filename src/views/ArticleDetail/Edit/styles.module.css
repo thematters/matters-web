@@ -1,3 +1,29 @@
+.header {
+  @mixin flex-center-end;
+
+  position: sticky;
+  top: 0;
+  z-index: var(--z-index-global-header);
+  padding: var(--sp16);
+  background-color: var(--color-white);
+
+  @media (--sm-up) {
+    padding: var(--sp16) var(--sp32);
+  }
+
+  & .headerRight {
+    display: flex;
+    gap: var(--sp24);
+    align-items: center;
+  }
+}
+
+.count {
+  font-size: var(--text14);
+  line-height: 1.375rem;
+  color: var(--color-negative-red);
+}
+
 .sidebar {
   padding-top: calc(var(--global-header-height) - var(--sp32));
   padding-bottom: var(--sp16);

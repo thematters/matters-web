@@ -6,7 +6,6 @@ import { MAX_ARTICLE_CONTENT_LENGTH } from '~/common/enums'
 import { containsFigureTag, stripHtml, toPath } from '~/common/utils'
 import { Button, TextIcon, toast, useMutation } from '~/components'
 import {
-  ConfirmStepContentProps,
   EditorSettingsDialog,
   EditorSettingsDialogProps,
 } from '~/components/Editor/SettingsDialog'
@@ -17,7 +16,6 @@ import {
   QueryEditArticleQuery,
 } from '~/gql/graphql'
 
-import ConfirmRevisedPublishDialogContent from './ConfirmRevisedPublishDialogContent'
 import { EDIT_ARTICLE } from './gql'
 import styles from './styles.module.css'
 
@@ -48,7 +46,6 @@ type EditModeHeaderProps = {
   | 'confirmButtonText'
   | 'cancelButtonText'
   | 'onConfirm'
-  | 'ConfirmStepContent'
   | 'children'
 > &
   SidebarIndentProps // no need to show indent setting on EditorSettingsDialog
@@ -63,7 +60,7 @@ const EditModeHeader = ({
   ...restProps
 }: EditModeHeaderProps) => {
   const router = useRouter()
-  const { tags, collection, circle, accessType, license } = restProps
+  const { tags, connections, circle, accessType, license } = restProps
   const [editArticle, { loading }] = useMutation<EditArticleMutation>(
     EDIT_ARTICLE,
     {
@@ -101,9 +98,9 @@ const EditModeHeader = ({
     tags.map((tag) => tag.id).sort(),
     article.tags?.map((tag) => tag.id).sort()
   )
-  const isCollectionRevised = !_isEqual(
-    collection.map((collection) => collection.id).sort(),
-    article.collection.edges?.map(({ node }) => node.id).sort()
+  const isConnectionRevised = !_isEqual(
+    connections.map((connection) => connection.id).sort(),
+    article.connections.edges?.map(({ node }) => node.id).sort()
   )
   const isCoverRevised = article.cover
     ? revision.cover?.path !== article.cover
@@ -129,7 +126,7 @@ const EditModeHeader = ({
     isSummaryRevised ||
     isContentRevised ||
     isTagRevised ||
-    isCollectionRevised ||
+    isConnectionRevised ||
     isCoverRevised
 
   const isRevised =
@@ -160,8 +157,8 @@ const EditModeHeader = ({
           ...(isSummaryRevised ? { summary: revision.summary || null } : {}),
           ...(isContentRevised ? { content: revision.content } : {}),
           ...(isTagRevised ? { tags: tags.map((tag) => tag.content) } : {}),
-          ...(isCollectionRevised
-            ? { collection: collection.map(({ id }) => id) }
+          ...(isConnectionRevised
+            ? { connections: connections.map(({ id }) => id) }
             : {}),
           ...(isCoverRevised ? { cover: revision.cover?.id || null } : {}),
           ...(isRequestForDonationRevised
@@ -202,7 +199,7 @@ const EditModeHeader = ({
       if (needRepublish) {
         onPublish()
       } else {
-        toast.success({
+        toast.info({
           message: (
             <FormattedMessage
               defaultMessage="Saved"
@@ -224,10 +221,6 @@ const EditModeHeader = ({
       })
     }
   }
-
-  const ConfirmStepContent = (props: ConfirmStepContentProps) => (
-    <ConfirmRevisedPublishDialogContent onSave={onSave} {...props} />
-  )
 
   const disabled =
     !isRevised ||
@@ -286,16 +279,11 @@ const EditModeHeader = ({
           cancelButtonText={
             <FormattedMessage defaultMessage="Cancel" id="47FYwb" />
           }
-          onConfirm={
-            needRepublish
-              ? undefined
-              : () => {
-                  if (validateArticleSettings()) {
-                    onSave()
-                  }
-                }
-          }
-          ConfirmStepContent={ConfirmStepContent}
+          onConfirm={() => {
+            if (validateArticleSettings()) {
+              onSave()
+            }
+          }}
         >
           {({ openDialog: openEditorSettingsDialog }) => (
             <Button

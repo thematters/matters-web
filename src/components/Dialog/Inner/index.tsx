@@ -28,6 +28,7 @@ export type DialogInnerProps = {
   dismissOnClickOutside?: boolean
   dismissOnHandle?: boolean
   dismissOnESC?: boolean
+  innerOverflowHidden?: boolean
 
   testId?: string
 }
@@ -48,6 +49,7 @@ const Inner: React.FC<
   dismissOnClickOutside = true,
   dismissOnHandle = true,
   dismissOnESC = true,
+  innerOverflowHidden = true,
 
   style,
   initialFocusRef,
@@ -70,6 +72,7 @@ const Inner: React.FC<
 
   const innerClasses = classNames({
     [styles.inner]: true,
+    [styles.innerOverflowHidden]: innerOverflowHidden,
     [smBgColor ? styles[`bg${capitalizeFirstLetter(smBgColor)}`] : '']:
       !!smBgColor,
     [smUpBgColor ? styles[`bg${capitalizeFirstLetter(smUpBgColor)}SmUp`] : '']:

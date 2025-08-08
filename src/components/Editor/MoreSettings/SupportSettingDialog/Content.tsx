@@ -72,7 +72,7 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
     onSubmit: async ({}, { setSubmitting }) => {
       editSupportSetting(values.requestForDonation, values.replyToDonator)
 
-      toast.success({
+      toast.info({
         message: (
           <FormattedMessage
             defaultMessage="Support setting updated"

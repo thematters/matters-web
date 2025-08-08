@@ -2,8 +2,8 @@ import classNames from 'classnames'
 import gql from 'graphql-tag'
 import { useIntl } from 'react-intl'
 
-import IconCircleTimes from '@/public/static/icons/24px/circle-times-fill.svg'
 import IconHashTag from '@/public/static/icons/24px/hashtag.svg'
+import IconTimes from '@/public/static/icons/24px/times.svg'
 import { TEST_ID } from '~/common/enums'
 import { Icon, TextIcon, TextIconProps } from '~/components'
 import { DigestTagFragment } from '~/gql/graphql'
@@ -37,9 +37,9 @@ export const InlineTag = ({
   const tagName = tag.content
 
   const textIconProps: TextIconProps = {
-    size: 13,
+    size: 14,
     weight: 'normal',
-    spacing: 0,
+    spacing: 4,
     color: active ? 'white' : 'greyDarker',
     icon: <Icon icon={IconHashTag} color="greyDark" />,
     placement: 'right',
@@ -67,7 +67,7 @@ export const InlineTag = ({
             id: 'G/yZLu',
           })}
         >
-          <Icon icon={IconCircleTimes} color="grey" />
+          <Icon icon={IconTimes} color="grey" size={12} />
         </button>
       )}
     </span>

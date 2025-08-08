@@ -22,6 +22,7 @@
   --color-grey-hover: #ededed;
   --color-white: #fff;
   --color-white-light: #fff9; /* FIXME: undocumented */
+  --color-grey-scale-white-60: rgb(255 255 255 / 60%);
 
   /* function */
   --color-editor-selection: #d5f1e6;

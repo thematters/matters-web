@@ -57,3 +57,11 @@
   color: var(--color-grey);
   cursor: pointer;
 }
+
+.textColorGreyDarker {
+  color: var(--color-grey-darker);
+}
+
+.textColorBlack {
+  color: var(--color-black);
+}

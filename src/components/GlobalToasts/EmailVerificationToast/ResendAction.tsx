@@ -69,7 +69,7 @@ const ResendAction = () => {
     }
 
     baseToast.dismiss()
-    toast.success({
+    toast.info({
       message: (
         <FormattedMessage
           defaultMessage="Verification successful"

@@ -1,0 +1,5 @@
+.container {
+  @mixin border-top-grey;
+
+  margin-top: var(--sp16);
+}

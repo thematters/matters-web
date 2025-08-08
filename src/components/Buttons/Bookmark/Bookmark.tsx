@@ -88,7 +88,7 @@ const Bookmark = ({
 
     await bookmark()
 
-    toast.success({
+    toast.info({
       message: <FormattedMessage defaultMessage="Bookmarked" id="k0fraU" />,
     })
   }
