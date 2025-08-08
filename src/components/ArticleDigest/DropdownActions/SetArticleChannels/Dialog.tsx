@@ -61,9 +61,40 @@ const BaseSetArticleChannelsDialog = ({
 
   const channelsEnabled =
     data?.article?.classification?.topicChannel?.enabled ?? true
-  const allChannels = data?.channels.filter(
-    (channel) => channel.__typename == 'TopicChannel'
-  )
+  const allChannels = data?.channels
+    .filter((channel) => channel.__typename === 'TopicChannel')
+    .sort((a, b) => {
+      // Type assertion for TopicChannel
+      type TopicChannel = {
+        enabled: boolean
+        parent: { name: string } | null
+        name: string
+      }
+      const channelA = a as unknown as TopicChannel
+      const channelB = b as unknown as TopicChannel
+
+      // First sort by enabled status (enabled channels first)
+      if (channelA.enabled && !channelB.enabled) return -1
+      if (!channelA.enabled && channelB.enabled) return 1
+
+      // Then sort by parent (channels with parent come first)
+      const aHasParent = channelA.parent !== null
+      const bHasParent = channelB.parent !== null
+      if (aHasParent && !bHasParent) return -1
+      if (!aHasParent && bHasParent) return 1
+
+      // If both have parents, sort by parent name
+      if (aHasParent && bHasParent) {
+        const parentNameA = channelA.parent?.name || ''
+        const parentNameB = channelB.parent?.name || ''
+        return parentNameA.localeCompare(parentNameB)
+      }
+
+      // If neither has parent, sort by channel name
+      const nameA = channelA.name || ''
+      const nameB = channelB.name || ''
+      return nameA.localeCompare(nameB)
+    })
   const articleChannels =
     data?.article?.classification?.topicChannel?.channels?.filter(
       (channel) => channel.enabled
