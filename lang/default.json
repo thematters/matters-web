@@ -1942,6 +1942,9 @@
     "defaultMessage": "Done",
     "description": "src/components/Interaction/"
   },
+  "UQzOZF": {
+    "defaultMessage": "Comments Closed"
+  },
   "URljhZ": {
     "defaultMessage": "Successfully removed",
     "description": "src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
@@ -3664,9 +3667,6 @@
   },
   "zE51j6": {
     "defaultMessage": "Failed to publish, please try again."
-  },
-  "zJLPmE": {
-    "defaultMessage": "Allow comments"
   },
   "zKOr2x": {
     "defaultMessage": "Conversion Rate of Followers",

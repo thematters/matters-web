@@ -1942,6 +1942,9 @@
     "defaultMessage": "刷完啦",
     "description": "src/components/Interaction/"
   },
+  "UQzOZF": {
+    "defaultMessage": "禁止評論"
+  },
   "URljhZ": {
     "defaultMessage": "作品已移出",
     "description": "src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
@@ -3664,9 +3667,6 @@
   },
   "zE51j6": {
     "defaultMessage": "發布失敗"
-  },
-  "zJLPmE": {
-    "defaultMessage": "允許評論"
   },
   "zKOr2x": {
     "defaultMessage": "已追蹤用戶佔總觀看人數比例",

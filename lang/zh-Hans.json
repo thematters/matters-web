@@ -1942,6 +1942,9 @@
     "defaultMessage": "刷完啦",
     "description": "src/components/Interaction/"
   },
+  "UQzOZF": {
+    "defaultMessage": "禁止评论"
+  },
   "URljhZ": {
     "defaultMessage": "作品已移出",
     "description": "src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
@@ -3664,9 +3667,6 @@
   },
   "zE51j6": {
     "defaultMessage": "发布失败"
-  },
-  "zJLPmE": {
-    "defaultMessage": "允许评论"
   },
   "zKOr2x": {
     "defaultMessage": "已关注用户占总观看人数比例",
