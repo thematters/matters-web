@@ -2771,6 +2771,9 @@
   "jtdQHR": {
     "defaultMessage": "公共节点"
   },
+  "jvo0vs": {
+    "defaultMessage": "保存"
+  },
   "jx7Hn3": {
     "defaultMessage": "写文章"
   },
@@ -2852,7 +2855,7 @@
     "defaultMessage": "交易密码重置成功"
   },
   "l31hCd": {
-    "defaultMessage": "效果预览",
+    "defaultMessage": "预览",
     "description": "src/components/Editor/MoreSettings/SupportSettingDialog/Content.tsx"
   },
   "lFi0TA": {

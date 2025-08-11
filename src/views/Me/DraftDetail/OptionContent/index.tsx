@@ -261,6 +261,7 @@ export const OptionContent = (
           <Tabs.Tab
             selected={isContentAndLayout}
             onClick={() => setTab('contentAndLayout')}
+            textSize={16}
           >
             <FormattedMessage
               defaultMessage="Content and Layout"
@@ -269,7 +270,11 @@ export const OptionContent = (
             />
           </Tabs.Tab>
 
-          <Tabs.Tab selected={isSettings} onClick={() => setTab('settings')}>
+          <Tabs.Tab
+            selected={isSettings}
+            onClick={() => setTab('settings')}
+            textSize={16}
+          >
             <FormattedMessage
               defaultMessage="Settings"
               id="Mu2Jy8"

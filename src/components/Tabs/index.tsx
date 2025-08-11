@@ -7,6 +7,7 @@ type TabProps = {
   href?: string
   selected?: boolean
   count?: number
+  textSize?: 14 | 16
   onClick?: () => void
   disabled?: boolean
 }
@@ -15,6 +16,7 @@ const Tab: React.FC<React.PropsWithChildren<TabProps>> = ({
   href,
   selected,
   count,
+  textSize = 14,
   children,
   onClick,
   disabled = false,
@@ -23,6 +25,7 @@ const Tab: React.FC<React.PropsWithChildren<TabProps>> = ({
     [styles.item]: true,
     [styles.selected]: !disabled && selected,
     [styles.disabled]: disabled,
+    [styles[`textSize${textSize}`]]: !!textSize,
   })
 
   if (disabled) {
