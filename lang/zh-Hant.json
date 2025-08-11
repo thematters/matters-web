@@ -327,6 +327,10 @@
   "2lAxMG": {
     "defaultMessage": "法幣"
   },
+  "2nZWBw": {
+    "defaultMessage": "排程中，請稍後⋯",
+    "description": "src/components/Editor/PreviewDialog/index.tsx"
+  },
   "2oxLHg": {
     "defaultMessage": "最多可設置 3 個代表作"
   },
@@ -1937,6 +1941,9 @@
   "UMCQ4G": {
     "defaultMessage": "刷完啦",
     "description": "src/components/Interaction/"
+  },
+  "UQzOZF": {
+    "defaultMessage": "禁止評論"
   },
   "URljhZ": {
     "defaultMessage": "作品已移出",
@@ -3660,9 +3667,6 @@
   },
   "zE51j6": {
     "defaultMessage": "發布失敗"
-  },
-  "zJLPmE": {
-    "defaultMessage": "允許評論"
   },
   "zKOr2x": {
     "defaultMessage": "已追蹤用戶佔總觀看人數比例",
