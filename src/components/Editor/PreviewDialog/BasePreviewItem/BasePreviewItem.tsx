@@ -91,7 +91,9 @@ export const BasePreviewItem = ({
         <section className={styles.names}>
           {names.map((name, index) => (
             <div className={nameClasses} key={name || index}>
-              {name}
+              {withBackground && name.length > 7
+                ? name.slice(0, 7) + '...'
+                : name}
             </div>
           ))}
         </section>
