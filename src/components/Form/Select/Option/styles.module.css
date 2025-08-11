@@ -2,7 +2,7 @@
   @mixin flex-start-space-between;
 
   gap: var(--sp4);
-  padding: var(--sp16);
+  padding: var(--sp8) var(--sp16);
 
   &.disabled {
     cursor: not-allowed;
@@ -53,7 +53,7 @@
   color: var(--color-campaign-blue);
 
   & .name {
-    font-weight: var(--font-medium);
+    font-weight: var(--font-normal);
     color: var(--color-campaign-blue);
   }
 }
