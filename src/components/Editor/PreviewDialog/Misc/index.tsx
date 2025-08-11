@@ -1,7 +1,9 @@
 import gql from 'graphql-tag'
 import { FormattedMessage } from 'react-intl'
 
+import IconCircle from '@/public/static/icons/24px/circle.svg'
 import IconCircleCheck from '@/public/static/icons/24px/circle-check.svg'
+import IconInvisible from '@/public/static/icons/24px/invisible.svg'
 import { BREAKPOINTS } from '~/common/enums'
 import { toPath } from '~/common/utils'
 import { Icon } from '~/components'
@@ -106,7 +108,7 @@ export const Misc = ({
         {sensitiveByAuthor && (
           <button onClick={() => onClick('sensitiveByAuthor')}>
             <TextIcon
-              icon={<Icon icon={IconCircleCheck} size={16} />}
+              icon={<Icon icon={IconInvisible} size={16} />}
               size={14}
               color="black"
             >
@@ -120,7 +122,7 @@ export const Misc = ({
         {access?.circle?.id && (
           <button onClick={() => onClick('joinCircle')}>
             <TextIcon
-              icon={<Icon icon={IconCircleCheck} size={16} />}
+              icon={<Icon icon={IconCircle} size={16} />}
               size={14}
               color="black"
             >
