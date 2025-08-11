@@ -106,7 +106,13 @@ const BaseEditorPreviewDialog = ({
     baseToast.dismiss()
 
     toast.success({
-      message: (
+      message: publishAt ? (
+        <FormattedMessage
+          defaultMessage="Scheduling, please wait..."
+          id="2nZWBw"
+          description="src/components/Editor/PreviewDialog/index.tsx"
+        />
+      ) : (
         <FormattedMessage
           defaultMessage="Publishing, please wait..."
           id="V1Lts1"

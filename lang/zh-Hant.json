@@ -327,6 +327,10 @@
   "2lAxMG": {
     "defaultMessage": "法幣"
   },
+  "2nZWBw": {
+    "defaultMessage": "排程中，請稍後⋯",
+    "description": "src/components/Editor/PreviewDialog/index.tsx"
+  },
   "2oxLHg": {
     "defaultMessage": "最多可設置 3 個代表作"
   },

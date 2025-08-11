@@ -327,6 +327,10 @@
   "2lAxMG": {
     "defaultMessage": "法币"
   },
+  "2nZWBw": {
+    "defaultMessage": "排程中，请稍后⋯",
+    "description": "src/components/Editor/PreviewDialog/index.tsx"
+  },
   "2oxLHg": {
     "defaultMessage": "最多可设置 3 个代表作"
   },

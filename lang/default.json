@@ -327,6 +327,10 @@
   "2lAxMG": {
     "defaultMessage": "Fiat Currency"
   },
+  "2nZWBw": {
+    "defaultMessage": "Scheduling, please wait...",
+    "description": "src/components/Editor/PreviewDialog/index.tsx"
+  },
   "2oxLHg": {
     "defaultMessage": "Up to 3 articles/collections can be pinned"
   },
