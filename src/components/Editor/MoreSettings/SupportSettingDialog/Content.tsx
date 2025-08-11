@@ -181,7 +181,7 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
         isSubmitting ||
         supportSettingSaving
       }
-      text={<FormattedMessage defaultMessage="Confirm" id="N2IrpM" />}
+      text={<FormattedMessage defaultMessage="Save" id="jvo0vs" />}
       loading={isSubmitting}
     />
   )
