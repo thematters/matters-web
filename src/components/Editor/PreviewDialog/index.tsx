@@ -163,7 +163,7 @@ const BaseEditorPreviewDialog = ({
             />
           }
         />
-        <Dialog.Content>
+        <Dialog.Content noSpacing>
           <section className={styles.container}>
             <section className={styles.feedDigest}>
               <FeedDigest draft={draft} publishAt={publishAt} />
