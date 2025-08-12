@@ -8,7 +8,9 @@ export const fragments = gql`
   fragment IcymiCuratedFeedRecommendation on Recommendation {
     icymiTopic {
       id
-      note
+      noteEn: note(input: { language: en })
+      noteZhHant: note(input: { language: zh_hant })
+      noteZhHans: note(input: { language: zh_hans })
       pinAmount
       articles {
         ...ArticleDigestCuratedArticle
