@@ -32,3 +32,14 @@
     margin-top: var(--sp24);
   }
 }
+
+.editor {
+  @media (--md-down) {
+    margin-top: var(--sp20);
+    margin-left: var(--sp16);
+
+    & :global(#editor) {
+      padding-right: var(--sp16);
+    }
+  }
+}

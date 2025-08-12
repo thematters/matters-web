@@ -338,12 +338,14 @@ const BaseDraftDetail = () => {
           }
         />
         <PublishState draft={draft} />
-        <Layout.Main.Spacing>
-          <Editor
-            draft={draft}
-            update={async (props) => addRequest(() => update(props))}
-            upload={async (props) => addRequest(() => upload(props))}
-          />
+        <Layout.Main>
+          <section className={styles.editor}>
+            <Editor
+              draft={draft}
+              update={async (props) => addRequest(() => update(props))}
+              upload={async (props) => addRequest(() => upload(props))}
+            />
+          </section>
 
           <Media greaterThan="sm">
             <DynamicOptionDrawer
@@ -357,7 +359,7 @@ const BaseDraftDetail = () => {
               loadMoreCollections={loadMoreCollections}
             />
           </Media>
-        </Layout.Main.Spacing>
+        </Layout.Main>
       </Layout>
     </DraftLoadingStates>
   )
