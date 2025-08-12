@@ -233,13 +233,17 @@ const EditCircle = ({
   editAccess,
   saving,
   license,
+  ownCircles,
 }: OptionItemProps) => {
+  const checked = ownCircles?.[0].id === circle?.id
+
   return (
     <Sidebar.Circle
       license={license}
       circle={circle}
       editAccess={editAccess}
       saving={saving}
+      checked={checked}
     />
   )
 }
