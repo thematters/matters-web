@@ -15,8 +15,8 @@
   max-height: 50vh;
   max-height: calc(var(--ivh) * 50);
   max-height: 50dvh;
-  padding-top: var(--sp8);
-  padding-bottom: var(--sp8);
+  padding-top: var(--sp6);
+  padding-bottom: var(--sp6);
   overflow: auto;
   text-align: left;
   border-radius: var(--sp8);
