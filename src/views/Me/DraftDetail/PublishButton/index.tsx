@@ -68,8 +68,8 @@ const Buttons = ({
       <Button
         size={[null, isSmUp ? '2.375rem' : '2.125rem']}
         spacing={[0, 14]}
-        borderRadius={'0.75rem'}
-        bgColor={disabled ? 'grey' : 'black'}
+        borderRadius={0}
+        bgColor={'black'}
         onClick={openEditorPreviewDialog}
         disabled={disabled}
         aria-haspopup="dialog"
