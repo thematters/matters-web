@@ -80,17 +80,18 @@ const SidebarConnections = ({
               <Icon icon={IconTimes} size={24} color="black" />
             </button>
           ) : (
-            <button
-              onClick={() => setIsEditing(true)}
-              className={styles.rightButton}
-              aria-label={intl.formatMessage({
-                defaultMessage: 'Add',
-                id: '2/2yg+',
-              })}
-              disabled={connections.length >= MAX_ARTICLE_COLLECT_LENGTH}
-            >
-              <Icon icon={IconPlus} size={24} color="black" />
-            </button>
+            connections.length < MAX_ARTICLE_COLLECT_LENGTH && (
+              <button
+                onClick={() => setIsEditing(true)}
+                className={styles.rightButton}
+                aria-label={intl.formatMessage({
+                  defaultMessage: 'Add',
+                  id: '2/2yg+',
+                })}
+              >
+                <Icon icon={IconPlus} size={24} color="black" />
+              </button>
+            )
           )}
         </>
       }
