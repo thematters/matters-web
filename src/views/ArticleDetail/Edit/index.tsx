@@ -447,36 +447,38 @@ const BaseEdit = ({ article }: { article: Article }) => {
             currVersionId={article.versions.edges[0]?.node.id}
           />
         )}
-        <Layout.Main.Spacing>
-          <Editor
-            draft={{
-              // mock a draft
-              __typename: 'Draft',
-              id: article.id,
-              title: article.title,
-              publishState: showPublishState
-                ? PublishStateType.Pending
-                : PublishStateType.Unpublished,
-              content: article.contents.html,
-              summary: article.summary,
-              summaryCustomized: article.summaryCustomized,
-              indentFirstLine: indented,
-            }}
-            update={async (update) => {
-              if (update.title !== undefined) {
-                setTitle(update.title || '')
-              }
+        <Layout.Main>
+          <section className={styles.editor}>
+            <Editor
+              draft={{
+                // mock a draft
+                __typename: 'Draft',
+                id: article.id,
+                title: article.title,
+                publishState: showPublishState
+                  ? PublishStateType.Pending
+                  : PublishStateType.Unpublished,
+                content: article.contents.html,
+                summary: article.summary,
+                summaryCustomized: article.summaryCustomized,
+                indentFirstLine: indented,
+              }}
+              update={async (update) => {
+                if (update.title !== undefined) {
+                  setTitle(update.title || '')
+                }
 
-              if (update.summary !== undefined) {
-                setSummary(update.summary || '')
-              }
+                if (update.summary !== undefined) {
+                  setSummary(update.summary || '')
+                }
 
-              if (update.content !== undefined) {
-                setContent(update.content || '')
-              }
-            }}
-            upload={upload}
-          />
+                if (update.content !== undefined) {
+                  setContent(update.content || '')
+                }
+              }}
+              upload={upload}
+            />
+          </section>
 
           <Media greaterThan="sm">
             <DynamicOptionDrawer
@@ -501,7 +503,7 @@ const BaseEdit = ({ article }: { article: Article }) => {
               {...iscnProps}
             />
           </Media>
-        </Layout.Main.Spacing>
+        </Layout.Main>
 
         {showReviseDialog && (
           <ReviseArticleDialog

@@ -11,15 +11,16 @@
 
 .name {
   font-weight: var(--font-normal);
-  line-height: 1rem;
   color: var(--color-grey-darker);
 
   &.text14 {
     font-size: var(--text14);
+    line-height: 1.375rem;
   }
 
   &.text16 {
     font-size: var(--text16);
+    line-height: 1.5rem;
   }
 }
 

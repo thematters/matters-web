@@ -8,11 +8,23 @@
   transition-property: opacity;
 
   &:hover {
-    opacity: 0.85;
+    opacity: 0.5;
   }
 
-  &.disabled {
-    background-color: var(--color-grey);
+  /* first button */
+  & > button:first-child {
+    & > div > div {
+      border-top-left-radius: 0.75rem !important;
+      border-bottom-left-radius: 0.75rem !important;
+    }
+  }
+
+  /* last button */
+  & > button:last-child {
+    & > div > div {
+      border-top-right-radius: 0.75rem !important;
+      border-bottom-right-radius: 0.75rem !important;
+    }
   }
 }
 
@@ -23,6 +35,6 @@
   background-color: var(--color-grey-scale-white-60);
 
   &.disabled {
-    background-color: var(--color-white);
+    opacity: 0.5;
   }
 }
