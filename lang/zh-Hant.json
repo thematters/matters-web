@@ -993,7 +993,7 @@
     "description": "src/components/ArticleComment/RoleLabel/index.tsx"
   },
   "DjIpR6": {
-    "defaultMessage": "設置封面"
+    "defaultMessage": "選擇封面"
   },
   "Dom0EF": {
     "defaultMessage": "驗證成功",
@@ -2104,7 +2104,7 @@
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
   },
   "XTRqqT": {
-    "defaultMessage": "參與活動"
+    "defaultMessage": "投稿活動"
   },
   "XTyKFR": {
     "defaultMessage": "精挑細選作品，幫助讀者更容易發現優質內容"
@@ -2397,7 +2397,7 @@
     "description": "src/views/Me/Analytics/EmptyAnalytics/index.tsx"
   },
   "cpYr3r": {
-    "defaultMessage": "正文段落開頭自動縮進"
+    "defaultMessage": "正文段落開頭自動縮排"
   },
   "ctl5tq": {
     "defaultMessage": "新作品",

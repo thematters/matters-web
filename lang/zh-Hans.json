@@ -993,7 +993,7 @@
     "description": "src/components/ArticleComment/RoleLabel/index.tsx"
   },
   "DjIpR6": {
-    "defaultMessage": "设置封面"
+    "defaultMessage": "选择封面"
   },
   "Dom0EF": {
     "defaultMessage": "验证成功",
@@ -2104,7 +2104,7 @@
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
   },
   "XTRqqT": {
-    "defaultMessage": "参与活动"
+    "defaultMessage": "投稿活动"
   },
   "XTyKFR": {
     "defaultMessage": "精挑细选作品，帮助读者更容易发现优质内容"
