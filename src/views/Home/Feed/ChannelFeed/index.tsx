@@ -19,7 +19,11 @@ import FeedRenderer from '../FeedRenderer'
 import { FEED_ARTICLES_PRIVATE, FEED_ARTICLES_PUBLIC_CHANNEL } from '../gql'
 import feedStyles from '../styles.module.css'
 
-const ChannelFeed = () => {
+const ChannelFeed = ({
+  showRecommendation = true,
+}: {
+  showRecommendation?: boolean
+} = {}) => {
   const intl = useIntl()
   const viewer = useContext(ViewerContext)
   const { getQuery } = useRoute()
@@ -102,7 +106,7 @@ const ChannelFeed = () => {
     return { newData, count: edges?.length || 0 }
   }
 
-  const mixFeed = useMixedFeed(edges || [], true, feedType)
+  const mixFeed = useMixedFeed(edges || [], showRecommendation, feedType)
 
   const renderCards = ({
     loading,

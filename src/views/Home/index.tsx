@@ -24,7 +24,7 @@ const Home = ({
     >
       <Head image={IMAGE_INTRO.src} />
 
-      <Feed />
+      <Feed showRecommendation={showRecommendation} />
     </Layout.Main>
   )
 }
