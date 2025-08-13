@@ -17,6 +17,7 @@ export type SidebarCircleProps = {
     license: ArticleLicenseType
   ) => void
   saving: boolean
+  checked: boolean
 }
 
 const SidebarCircle: React.FC<SidebarCircleProps> = ({
@@ -24,6 +25,7 @@ const SidebarCircle: React.FC<SidebarCircleProps> = ({
   circle,
   editAccess,
   saving,
+  checked,
 }) => {
   const intl = useIntl()
 
@@ -32,18 +34,7 @@ const SidebarCircle: React.FC<SidebarCircleProps> = ({
   return (
     <Box
       title={<FormattedMessage defaultMessage="Join the Circle" id="0r9bbv" />}
-      subtitle={
-        <>
-          {!!circle ? (
-            displayName
-          ) : (
-            <FormattedMessage
-              defaultMessage="Connect long-term interactions between you and your readers"
-              id="q7nV87"
-            />
-          )}
-        </>
-      }
+      subtitle={<>{displayName}</>}
       rightButton={
         <Switch
           name="circle"
@@ -51,9 +42,9 @@ const SidebarCircle: React.FC<SidebarCircleProps> = ({
             defaultMessage: 'Join the Circle',
             id: '0r9bbv',
           })}
-          checked={!!circle}
+          checked={checked}
           onChange={() =>
-            editAccess(!circle, license === ArticleLicenseType.Arr, license)
+            editAccess(!checked, license === ArticleLicenseType.Arr, license)
           }
           loading={saving}
         />

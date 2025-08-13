@@ -56,17 +56,18 @@ const SidebarTags = ({
               <Icon icon={IconTimes} size={24} color="black" />
             </button>
           ) : (
-            <button
-              onClick={() => setIsEditing(true)}
-              className={styles.rightButton}
-              aria-label={intl.formatMessage({
-                defaultMessage: 'Add Tags',
-                id: 'WNxQX0',
-              })}
-              disabled={tags.length >= ARTICLE_TAGS_MAX_COUNT}
-            >
-              <Icon icon={IconPlus} size={24} color="black" />
-            </button>
+            tags.length < ARTICLE_TAGS_MAX_COUNT && (
+              <button
+                onClick={() => setIsEditing(true)}
+                className={styles.rightButton}
+                aria-label={intl.formatMessage({
+                  defaultMessage: 'Add Tags',
+                  id: 'WNxQX0',
+                })}
+              >
+                <Icon icon={IconPlus} size={24} color="black" />
+              </button>
+            )
           )}
         </>
       }

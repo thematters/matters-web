@@ -1,5 +1,5 @@
 import gql from 'graphql-tag'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import baseToast from 'react-hot-toast'
 import { FormattedMessage } from 'react-intl'
 
@@ -86,6 +86,7 @@ const BaseEditorPreviewDialog = ({
   const isInDraftDetail = isInPath('ME_DRAFT_DETAIL')
   const isInArticleEdit = isInPath('ARTICLE_DETAIL_EDIT')
   const viewer = useContext(ViewerContext)
+  const [confirmLoading, setConfirmLoading] = useState(false)
   const [publish, { loading: publishLoading }] =
     useMutation<PublishArticleMutation>(PUBLISH_ARTICLE, {
       update(cache) {
@@ -122,6 +123,7 @@ const BaseEditorPreviewDialog = ({
     })
     if (isInDraftDetail) {
       await publish({ variables: { id: draft.id, publishAt } })
+      setConfirmLoading(true)
       if (publishAt) {
         router.push(PATHS.ME_DRAFTS)
       }
@@ -164,8 +166,8 @@ const BaseEditorPreviewDialog = ({
             <Dialog.TextButton
               text={confirmButtonText}
               onClick={onConfirm}
-              loading={saving || publishLoading}
-              disabled={disabled || publishLoading}
+              loading={confirmLoading || publishLoading}
+              disabled={disabled || publishLoading || confirmLoading}
             />
           }
         />
@@ -216,8 +218,8 @@ const BaseEditorPreviewDialog = ({
                 <Dialog.TextButton
                   text={confirmButtonText}
                   onClick={onConfirm}
-                  loading={saving || publishLoading}
-                  disabled={disabled || publishLoading}
+                  loading={confirmLoading || publishLoading}
+                  disabled={disabled || publishLoading || confirmLoading}
                 />
               </>
             }
