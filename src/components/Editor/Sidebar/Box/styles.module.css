@@ -3,7 +3,7 @@
 
   padding: var(--sp16) 0 0;
   margin-bottom: var(--sp24);
-  border-radius: var(--sp8);
+  border-radius: var(--sp16);
 
   & .top {
     @mixin flex-center-space-between;
