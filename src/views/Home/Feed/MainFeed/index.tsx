@@ -103,11 +103,7 @@ const MainFeed: React.FC<MainFeedProps> = ({ feedType }) => {
     return { newData, count: edges?.length || 0 }
   }
 
-  const mixFeed = useMixedFeed(
-    edges || [],
-    isIcymiFeed || isHottestFeed,
-    feedType
-  )
+  const mixFeed = useMixedFeed(edges || [], isIcymiFeed || isHottestFeed)
 
   const itemCustomProps = {
     includesMetaData: !isIcymiFeed && !isHottestFeed,
