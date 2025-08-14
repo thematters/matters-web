@@ -21,5 +21,9 @@
     @media (--sm-up) {
       max-width: 17.25rem;
     }
+
+    &::placeholder {
+      color: var(--color-grey);
+    }
   }
 }
