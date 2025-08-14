@@ -41,7 +41,7 @@ export const InlineTag = ({
     weight: 'normal',
     spacing: 4,
     color: active ? 'white' : 'greyDarker',
-    icon: <Icon icon={IconHashTag} color="greyDark" />,
+    icon: <Icon icon={IconHashTag} color="greyDark" size={16} />,
     placement: 'right',
     ...customTextIconProps,
   }
@@ -67,7 +67,7 @@ export const InlineTag = ({
             id: 'G/yZLu',
           })}
         >
-          <Icon icon={IconTimes} color="grey" size={12} />
+          <Icon icon={IconTimes} color="black" size={12} />
         </button>
       )}
     </span>

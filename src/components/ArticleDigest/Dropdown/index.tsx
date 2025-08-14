@@ -66,7 +66,6 @@ export const ArticleDigestDropdown = ({
   titleColor,
   disabled,
   extraButton,
-  lineClamp,
 
   // Card Props
   ...cardProps
@@ -98,7 +97,7 @@ export const ArticleDigestDropdown = ({
             disabled={cardDisabled}
             is={titleIs}
             textWeight={titleTextWeight}
-            lineClamp={lineClamp}
+            lineClamp={1}
             textColor={titleColor}
           />
 
@@ -111,9 +110,10 @@ export const ArticleDigestDropdown = ({
         <footer className={styles.footer}>
           <UserDigest.Mini
             user={article.author}
-            avatarSize={16}
-            textSize={13}
+            avatarSize={22}
+            textSize={14}
             nameColor={nameColor}
+            nameNoWrap
             hasAvatar
             hasUserName
             hasDisplayName
