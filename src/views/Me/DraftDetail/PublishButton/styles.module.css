@@ -20,7 +20,7 @@
   }
 
   /* last button */
-  & > button:last-child {
+  & > button:last-of-type {
     & > div > div {
       border-top-right-radius: 0.75rem !important;
       border-bottom-right-radius: 0.75rem !important;
