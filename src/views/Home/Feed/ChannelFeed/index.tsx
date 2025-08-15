@@ -14,6 +14,7 @@ import { FeedArticlesPublicChannelQuery } from '~/gql/graphql'
 
 import { MixedFeedArticleEdge, useMixedFeed } from '../../common'
 import { ArticleDigestCurated } from '../ArticleDigestCurated'
+import Billboard from '../Billboard'
 import { ChannelHeader } from '../ChannelHeader'
 import FeedRenderer from '../FeedRenderer'
 import { FEED_ARTICLES_PRIVATE, FEED_ARTICLES_PUBLIC_CHANNEL } from '../gql'
@@ -172,10 +173,17 @@ const ChannelFeed = () => {
     return (
       <section className={feedStyles.cards}>
         {filteredEdges?.map((edge, i) => (
-          <React.Fragment key={edge.node.id}>
-            <Media at="xs">{renderArticleDigest(edge, i, 3)}</Media>
-            <Media greaterThan="xs">{renderArticleDigest(edge, i, 2)}</Media>
-          </React.Fragment>
+          <>
+            <React.Fragment key={edge.node.id}>
+              <Media at="xs">{renderArticleDigest(edge, i, 3)}</Media>
+              <Media greaterThan="xs">{renderArticleDigest(edge, i, 2)}</Media>
+            </React.Fragment>
+            {i === 2 && (
+              <Media lessThan="lg">
+                <Billboard />
+              </Media>
+            )}
+          </>
         ))}
       </section>
     )
