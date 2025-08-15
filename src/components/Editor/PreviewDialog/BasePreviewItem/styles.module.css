@@ -44,6 +44,10 @@
   &:hover {
     & .name {
       color: var(--color-black);
+
+      &.withBackground {
+        background: var(--color-grey-hover);
+      }
     }
   }
 }

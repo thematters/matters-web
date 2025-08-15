@@ -1,5 +1,5 @@
 import gql from 'graphql-tag'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import baseToast from 'react-hot-toast'
 import { FormattedMessage } from 'react-intl'
 
@@ -86,6 +86,7 @@ const BaseEditorPreviewDialog = ({
   const isInDraftDetail = isInPath('ME_DRAFT_DETAIL')
   const isInArticleEdit = isInPath('ARTICLE_DETAIL_EDIT')
   const viewer = useContext(ViewerContext)
+  const [confirmLoading, setConfirmLoading] = useState(false)
   const [publish, { loading: publishLoading }] =
     useMutation<PublishArticleMutation>(PUBLISH_ARTICLE, {
       update(cache) {
@@ -106,7 +107,13 @@ const BaseEditorPreviewDialog = ({
     baseToast.dismiss()
 
     toast.success({
-      message: (
+      message: publishAt ? (
+        <FormattedMessage
+          defaultMessage="Scheduling, please wait..."
+          id="2nZWBw"
+          description="src/components/Editor/PreviewDialog/index.tsx"
+        />
+      ) : (
         <FormattedMessage
           defaultMessage="Publishing, please wait..."
           id="V1Lts1"
@@ -116,6 +123,7 @@ const BaseEditorPreviewDialog = ({
     })
     if (isInDraftDetail) {
       await publish({ variables: { id: draft.id, publishAt } })
+      setConfirmLoading(true)
       if (publishAt) {
         router.push(PATHS.ME_DRAFTS)
       }
@@ -158,12 +166,12 @@ const BaseEditorPreviewDialog = ({
             <Dialog.TextButton
               text={confirmButtonText}
               onClick={onConfirm}
-              loading={saving || publishLoading}
-              disabled={disabled || publishLoading}
+              loading={confirmLoading || publishLoading}
+              disabled={disabled || publishLoading || confirmLoading}
             />
           }
         />
-        <Dialog.Content>
+        <Dialog.Content noSpacing>
           <section className={styles.container}>
             <section className={styles.feedDigest}>
               <FeedDigest draft={draft} publishAt={publishAt} />
@@ -210,8 +218,8 @@ const BaseEditorPreviewDialog = ({
                 <Dialog.TextButton
                   text={confirmButtonText}
                   onClick={onConfirm}
-                  loading={saving || publishLoading}
-                  disabled={disabled || publishLoading}
+                  loading={confirmLoading || publishLoading}
+                  disabled={disabled || publishLoading || confirmLoading}
                 />
               </>
             }

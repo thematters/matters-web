@@ -327,6 +327,10 @@
   "2lAxMG": {
     "defaultMessage": "法幣"
   },
+  "2nZWBw": {
+    "defaultMessage": "排程中，請稍後⋯",
+    "description": "src/components/Editor/PreviewDialog/index.tsx"
+  },
   "2oxLHg": {
     "defaultMessage": "最多可設置 3 個代表作"
   },
@@ -989,7 +993,7 @@
     "description": "src/components/ArticleComment/RoleLabel/index.tsx"
   },
   "DjIpR6": {
-    "defaultMessage": "設置封面"
+    "defaultMessage": "選擇封面"
   },
   "Dom0EF": {
     "defaultMessage": "驗證成功",
@@ -1452,7 +1456,7 @@
     "description": "src/views/User/UserProfile/BadgeNomadLabel/index.tsx"
   },
   "LWE7oq": {
-    "defaultMessage": "草稿保存中，確定要離開嗎？"
+    "defaultMessage": "草稿儲存中，確定要離開嗎？"
   },
   "Lb0JsC": {
     "defaultMessage": "你封鎖了該用戶"
@@ -1938,6 +1942,9 @@
     "defaultMessage": "刷完啦",
     "description": "src/components/Interaction/"
   },
+  "UQzOZF": {
+    "defaultMessage": "禁止評論"
+  },
   "URljhZ": {
     "defaultMessage": "作品已移出",
     "description": "src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
@@ -2097,7 +2104,7 @@
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
   },
   "XTRqqT": {
-    "defaultMessage": "參與活動"
+    "defaultMessage": "投稿活動"
   },
   "XTyKFR": {
     "defaultMessage": "精挑細選作品，幫助讀者更容易發現優質內容"
@@ -2390,7 +2397,7 @@
     "description": "src/views/Me/Analytics/EmptyAnalytics/index.tsx"
   },
   "cpYr3r": {
-    "defaultMessage": "正文段落開頭自動縮進"
+    "defaultMessage": "正文段落開頭自動縮排"
   },
   "ctl5tq": {
     "defaultMessage": "新作品",
@@ -2771,6 +2778,9 @@
   "jtdQHR": {
     "defaultMessage": "公共節點"
   },
+  "jvo0vs": {
+    "defaultMessage": "儲存"
+  },
   "jx7Hn3": {
     "defaultMessage": "寫文章"
   },
@@ -2852,7 +2862,7 @@
     "defaultMessage": "交易密碼重置成功"
   },
   "l31hCd": {
-    "defaultMessage": "效果預覽",
+    "defaultMessage": "預覽",
     "description": "src/components/Editor/MoreSettings/SupportSettingDialog/Content.tsx"
   },
   "lFi0TA": {
@@ -3094,9 +3104,6 @@
   "q192Fl": {
     "defaultMessage": "刪除留言",
     "description": "Moment"
-  },
-  "q7nV87": {
-    "defaultMessage": "連結你和讀者之間的長期互動"
   },
   "q9oMKE": {
     "defaultMessage": "圍爐名稱"
@@ -3658,9 +3665,6 @@
   "zE51j6": {
     "defaultMessage": "發布失敗"
   },
-  "zJLPmE": {
-    "defaultMessage": "允許評論"
-  },
   "zKOr2x": {
     "defaultMessage": "已追蹤用戶佔總觀看人數比例",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
@@ -3691,6 +3695,9 @@
   },
   "znN84l": {
     "defaultMessage": "幫助讀者更容易發現優質內容"
+  },
+  "zso4HL": {
+    "defaultMessage": "每筆內容在 LikeCoin chain 區塊鏈上註冊的元數據"
   },
   "zvNfwL": {
     "defaultMessage": "操作過於頻繁，請稍候重試",

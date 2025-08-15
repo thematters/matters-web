@@ -4,6 +4,7 @@ import { FormattedMessage } from 'react-intl'
 import { mergeConnections } from '~/common/utils'
 import {
   Announcements,
+  LanguageContext,
   Media,
   Spacer,
   useFetchPolicy,
@@ -36,6 +37,7 @@ type FeedArticlesPublic =
 
 const MainFeed: React.FC<MainFeedProps> = ({ feedType }) => {
   const viewer = useContext(ViewerContext)
+  const { lang } = useContext(LanguageContext)
 
   const { fetchPolicy } = useFetchPolicy()
 
@@ -46,6 +48,7 @@ const MainFeed: React.FC<MainFeedProps> = ({ feedType }) => {
 
   const isIcymiFeed = feedType === 'icymi'
   const isHottestFeed = feedType === 'hottest'
+  const isNewestFeed = feedType === 'newest'
   const connectionPath = 'viewer.recommendation.feed'
   const recommendation = data?.viewer?.recommendation
   const result = recommendation?.feed
@@ -103,8 +106,7 @@ const MainFeed: React.FC<MainFeedProps> = ({ feedType }) => {
 
   const mixFeed = useMixedFeed(
     edges || [],
-    isIcymiFeed || isHottestFeed,
-    feedType
+    isIcymiFeed || isHottestFeed || isNewestFeed
   )
 
   const itemCustomProps = {
@@ -164,7 +166,12 @@ const MainFeed: React.FC<MainFeedProps> = ({ feedType }) => {
 
     if (!isIcymiFeed || !recommendation || !('icymiTopic' in recommendation))
       return null
-    const note = recommendation?.icymiTopic?.note
+    const note =
+      lang === 'en'
+        ? recommendation?.icymiTopic?.noteEn
+        : lang === 'zh_hant'
+          ? recommendation?.icymiTopic?.noteZhHant
+          : recommendation?.icymiTopic?.noteZhHans
 
     return (
       <>

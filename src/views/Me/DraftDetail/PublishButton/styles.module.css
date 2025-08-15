@@ -8,7 +8,23 @@
   transition-property: opacity;
 
   &:hover {
-    opacity: 0.85;
+    opacity: 0.5;
+  }
+
+  /* first button */
+  & > button:first-child {
+    & > div > div {
+      border-top-left-radius: 0.75rem !important;
+      border-bottom-left-radius: 0.75rem !important;
+    }
+  }
+
+  /* last button */
+  & > button:last-of-type {
+    & > div > div {
+      border-top-right-radius: 0.75rem !important;
+      border-bottom-right-radius: 0.75rem !important;
+    }
   }
 }
 
@@ -17,4 +33,8 @@
   width: 1px;
   height: 0.875rem;
   background-color: var(--color-grey-scale-white-60);
+
+  &.disabled {
+    opacity: 0.5;
+  }
 }

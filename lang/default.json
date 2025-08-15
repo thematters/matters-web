@@ -327,6 +327,10 @@
   "2lAxMG": {
     "defaultMessage": "Fiat Currency"
   },
+  "2nZWBw": {
+    "defaultMessage": "Scheduling, please wait...",
+    "description": "src/components/Editor/PreviewDialog/index.tsx"
+  },
   "2oxLHg": {
     "defaultMessage": "Up to 3 articles/collections can be pinned"
   },
@@ -1938,6 +1942,9 @@
     "defaultMessage": "Done",
     "description": "src/components/Interaction/"
   },
+  "UQzOZF": {
+    "defaultMessage": "Comments Closed"
+  },
   "URljhZ": {
     "defaultMessage": "Successfully removed",
     "description": "src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
@@ -2771,6 +2778,9 @@
   "jtdQHR": {
     "defaultMessage": "Gateways"
   },
+  "jvo0vs": {
+    "defaultMessage": "Save"
+  },
   "jx7Hn3": {
     "defaultMessage": "Article"
   },
@@ -3094,9 +3104,6 @@
   "q192Fl": {
     "defaultMessage": "Delete comment",
     "description": "Moment"
-  },
-  "q7nV87": {
-    "defaultMessage": "Connect long-term interactions between you and your readers"
   },
   "q9oMKE": {
     "defaultMessage": "Circle Name"
@@ -3658,9 +3665,6 @@
   "zE51j6": {
     "defaultMessage": "Failed to publish, please try again."
   },
-  "zJLPmE": {
-    "defaultMessage": "Allow comments"
-  },
   "zKOr2x": {
     "defaultMessage": "Conversion Rate of Followers",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
@@ -3691,6 +3695,9 @@
   },
   "znN84l": {
     "defaultMessage": "Help readers discover articles more easily"
+  },
+  "zso4HL": {
+    "defaultMessage": "Metadata registered on the LikeCoin chain for each piece of content"
   },
   "zvNfwL": {
     "defaultMessage": "Operation too frequent, please try again later.",

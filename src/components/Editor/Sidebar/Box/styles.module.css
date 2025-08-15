@@ -3,7 +3,7 @@
 
   padding: var(--sp16) 0 0;
   margin-bottom: var(--sp24);
-  border-radius: var(--sp8);
+  border-radius: var(--sp16);
 
   & .top {
     @mixin flex-center-space-between;
@@ -23,7 +23,7 @@
 
 .subtitle {
   margin-top: var(--sp4);
-  font-size: var(--text12);
+  font-size: var(--text14);
   font-weight: var(--font-normal);
-  color: var(--color-grey);
+  color: var(--color-grey-dark);
 }

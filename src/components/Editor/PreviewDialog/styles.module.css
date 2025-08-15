@@ -1,10 +1,11 @@
 .container {
+  padding: 0 var(--sp20);
   overflow-y: auto;
 
   @media (--sm-up) {
     @mixin scrollbar-thin;
 
-    width: 25.25rem; /* 404px */
+    width: 27.75rem; /* 444px */
   }
 
   & .feedDigest {

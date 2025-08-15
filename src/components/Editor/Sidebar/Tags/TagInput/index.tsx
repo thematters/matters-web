@@ -226,7 +226,7 @@ const TagInput = ({ tags, onAddTag, saving }: TagInputProps) => {
           ref={ref}
           autoComplete="off"
         >
-          <Icon icon={IconHashTag} color="greyDark" />
+          <Icon icon={IconHashTag} color="greyDark" size={16} />
           <InputAutosize
             type="text"
             name="tag"

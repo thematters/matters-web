@@ -1,7 +1,9 @@
 import gql from 'graphql-tag'
 import { FormattedMessage } from 'react-intl'
 
-import IconCircleCheck from '@/public/static/icons/24px/circle-check.svg'
+import IconCircle from '@/public/static/icons/24px/circle.svg'
+import IconCircleSlash from '@/public/static/icons/24px/circle-slash.svg'
+import IconInvisible from '@/public/static/icons/24px/invisible.svg'
 import { BREAKPOINTS } from '~/common/enums'
 import { toPath } from '~/common/utils'
 import { Icon } from '~/components'
@@ -84,7 +86,7 @@ export const Misc = ({
   }
   const { canComment, sensitiveByAuthor, access } = draft
 
-  if (!canComment && !sensitiveByAuthor && !access?.circle?.id) {
+  if (canComment && !sensitiveByAuthor && !access?.circle?.id) {
     return null
   }
 
@@ -92,21 +94,21 @@ export const Misc = ({
     <>
       <hr />
       <section className={styles.container}>
-        {canComment && (
+        {!canComment && (
           <button onClick={() => onClick('allowComment')}>
             <TextIcon
-              icon={<Icon icon={IconCircleCheck} size={16} />}
+              icon={<Icon icon={IconCircleSlash} size={16} />}
               size={14}
               color="black"
             >
-              <FormattedMessage defaultMessage="Allow comments" id="zJLPmE" />
+              <FormattedMessage defaultMessage="Comments Closed" id="UQzOZF" />
             </TextIcon>
           </button>
         )}
         {sensitiveByAuthor && (
           <button onClick={() => onClick('sensitiveByAuthor')}>
             <TextIcon
-              icon={<Icon icon={IconCircleCheck} size={16} />}
+              icon={<Icon icon={IconInvisible} size={16} />}
               size={14}
               color="black"
             >
@@ -120,7 +122,7 @@ export const Misc = ({
         {access?.circle?.id && (
           <button onClick={() => onClick('joinCircle')}>
             <TextIcon
-              icon={<Icon icon={IconCircleCheck} size={16} />}
+              icon={<Icon icon={IconCircle} size={16} />}
               size={14}
               color="black"
             >

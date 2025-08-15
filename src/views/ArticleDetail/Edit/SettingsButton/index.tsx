@@ -256,7 +256,7 @@ const SettingsButton = ({
               }
             : {}),
           isResetCampaign,
-          versionDescription,
+          description: versionDescription,
         },
       })
 

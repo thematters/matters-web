@@ -81,7 +81,6 @@ const Select = <OptionValue,>({
             selected={option.selected}
             expanded
             size={size}
-            theme={theme}
             key={index}
             disabled={isDisabled}
           />

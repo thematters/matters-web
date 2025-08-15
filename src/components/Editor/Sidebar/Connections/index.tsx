@@ -54,7 +54,7 @@ const SidebarConnections = ({
             placement="top"
             touch={['hold', 1000]}
           >
-            <span>
+            <span className={styles.help}>
               <Icon icon={IconHelp} size={14} />
             </span>
           </Tooltip>
@@ -80,46 +80,49 @@ const SidebarConnections = ({
               <Icon icon={IconTimes} size={24} color="black" />
             </button>
           ) : (
-            <button
-              onClick={() => setIsEditing(true)}
-              className={styles.rightButton}
-              aria-label={intl.formatMessage({
-                defaultMessage: 'Add',
-                id: '2/2yg+',
-              })}
-              disabled={connections.length >= MAX_ARTICLE_COLLECT_LENGTH}
-            >
-              <Icon icon={IconPlus} size={24} color="black" />
-            </button>
+            connections.length < MAX_ARTICLE_COLLECT_LENGTH && (
+              <button
+                onClick={() => setIsEditing(true)}
+                className={styles.rightButton}
+                aria-label={intl.formatMessage({
+                  defaultMessage: 'Add',
+                  id: '2/2yg+',
+                })}
+              >
+                <Icon icon={IconPlus} size={24} color="black" />
+              </button>
+            )
           )}
         </>
       }
       disabled={disabled}
     >
-      <div className={styles.content}>
-        {connections.length > 0 && (
-          <ul className={styles.list}>
-            {connections.map((article) => (
-              <li key={article.id}>
-                <ArticleDigestDraftTitle
-                  article={article}
-                  onRemove={() => onRemoveArticle(article)}
-                  saving={connectionsSaving}
-                />
-              </li>
-            ))}
-          </ul>
-        )}
-        {isEditing && (
-          <div className={styles.connectionInput}>
-            <ConnectionInput
-              connections={connections}
-              onAddArticle={onAddArticle}
-              saving={connectionsSaving}
-            />
-          </div>
-        )}
-      </div>
+      {(isEditing || connections.length > 0) && (
+        <div className={styles.content}>
+          {connections.length > 0 && (
+            <ul className={styles.list}>
+              {connections.map((article) => (
+                <li key={article.id}>
+                  <ArticleDigestDraftTitle
+                    article={article}
+                    onRemove={() => onRemoveArticle(article)}
+                    saving={connectionsSaving}
+                  />
+                </li>
+              ))}
+            </ul>
+          )}
+          {isEditing && (
+            <div className={styles.connectionInput}>
+              <ConnectionInput
+                connections={connections}
+                onAddArticle={onAddArticle}
+                saving={connectionsSaving}
+              />
+            </div>
+          )}
+        </div>
+      )}
     </Box>
   )
 }

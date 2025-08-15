@@ -82,4 +82,9 @@
   & .count {
     color: var(--color-grey-dark);
   }
+
+  &.textSize16 {
+    font-size: var(--text16);
+    line-height: 1.5rem;
+  }
 }

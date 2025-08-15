@@ -1,8 +1,7 @@
-import Link from 'next/link'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import IconHelp from '@/public/static/icons/24px/help.svg'
-import { Icon, Switch } from '~/components'
+import { Icon, Switch, Tooltip } from '~/components'
 
 import Box from '../Box'
 import styles from './styles.module.css'
@@ -25,13 +24,21 @@ const SidebarISCN: React.FC<SidebarISCNProps> = ({
       title={
         <div className={styles.title}>
           <FormattedMessage defaultMessage="Register ISCN" id="D9/QIR" />
-          <Link
-            className={styles.help}
-            href="https://docs.like.co/v/zh/general-guides/writing-nft/nft-portal#publish-writing-nft-with-iscn-id"
-            target="_blank"
+          <Tooltip
+            content={
+              <FormattedMessage
+                defaultMessage="Metadata registered on the LikeCoin chain for each piece of content"
+                id="zso4HL"
+              />
+            }
+            zIndex={1000}
+            placement="top"
+            touch={['hold', 1000]}
           >
-            <Icon icon={IconHelp} size={14} />
-          </Link>
+            <span className={styles.help}>
+              <Icon icon={IconHelp} size={14} />
+            </span>
+          </Tooltip>
         </div>
       }
       subtitle={

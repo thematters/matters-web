@@ -6,6 +6,10 @@
   display: flex;
   flex-wrap: wrap;
 
+  &.nameNoWrap {
+    flex-wrap: nowrap;
+  }
+
   &.directionRow {
     flex-direction: row;
     align-items: center;
@@ -35,7 +39,7 @@
 
   margin-left: var(--sp4);
   font-size: var(--text14);
-  line-height: 1.25;
+  line-height: 1.57;
   color: var(--color-grey);
 }
 

@@ -203,11 +203,14 @@ const EditDraftCircle = ({ draft, ownCircles }: OptionItemProps) => {
     return null
   }
 
+  const checked = ownCircles?.[0].id === circle?.id
+
   return (
     <Sidebar.Circle
       license={draft.license}
-      circle={circle}
+      circle={ownCircles?.[0]}
       editAccess={edit}
+      checked={checked}
       saving={saving}
     />
   )
@@ -261,6 +264,7 @@ export const OptionContent = (
           <Tabs.Tab
             selected={isContentAndLayout}
             onClick={() => setTab('contentAndLayout')}
+            textSize={16}
           >
             <FormattedMessage
               defaultMessage="Content and Layout"
@@ -269,7 +273,11 @@ export const OptionContent = (
             />
           </Tabs.Tab>
 
-          <Tabs.Tab selected={isSettings} onClick={() => setTab('settings')}>
+          <Tabs.Tab
+            selected={isSettings}
+            onClick={() => setTab('settings')}
+            textSize={16}
+          >
             <FormattedMessage
               defaultMessage="Settings"
               id="Mu2Jy8"
@@ -298,8 +306,8 @@ export const OptionContent = (
             <EditDraftCanComment {...props} disabled={disabled} />
             <EditDraftSupportSetting {...props} disabled={disabled} />
             <EditDraftSensitive {...props} disabled={disabled} />
-            <EditDraftCircle {...props} disabled={disabled} />
             <EditDraftISCN {...props} disabled={disabled} />
+            <EditDraftCircle {...props} disabled={disabled} />
           </>
         )}
       </section>

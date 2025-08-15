@@ -327,6 +327,10 @@
   "2lAxMG": {
     "defaultMessage": "法币"
   },
+  "2nZWBw": {
+    "defaultMessage": "排程中，请稍后⋯",
+    "description": "src/components/Editor/PreviewDialog/index.tsx"
+  },
   "2oxLHg": {
     "defaultMessage": "最多可设置 3 个代表作"
   },
@@ -989,7 +993,7 @@
     "description": "src/components/ArticleComment/RoleLabel/index.tsx"
   },
   "DjIpR6": {
-    "defaultMessage": "设置封面"
+    "defaultMessage": "选择封面"
   },
   "Dom0EF": {
     "defaultMessage": "验证成功",
@@ -1938,6 +1942,9 @@
     "defaultMessage": "刷完啦",
     "description": "src/components/Interaction/"
   },
+  "UQzOZF": {
+    "defaultMessage": "禁止评论"
+  },
   "URljhZ": {
     "defaultMessage": "作品已移出",
     "description": "src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
@@ -2097,7 +2104,7 @@
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
   },
   "XTRqqT": {
-    "defaultMessage": "参与活动"
+    "defaultMessage": "投稿活动"
   },
   "XTyKFR": {
     "defaultMessage": "精挑细选作品，帮助读者更容易发现优质内容"
@@ -2771,6 +2778,9 @@
   "jtdQHR": {
     "defaultMessage": "公共节点"
   },
+  "jvo0vs": {
+    "defaultMessage": "保存"
+  },
   "jx7Hn3": {
     "defaultMessage": "写文章"
   },
@@ -2852,7 +2862,7 @@
     "defaultMessage": "交易密码重置成功"
   },
   "l31hCd": {
-    "defaultMessage": "效果预览",
+    "defaultMessage": "预览",
     "description": "src/components/Editor/MoreSettings/SupportSettingDialog/Content.tsx"
   },
   "lFi0TA": {
@@ -3094,9 +3104,6 @@
   "q192Fl": {
     "defaultMessage": "删除留言",
     "description": "Moment"
-  },
-  "q7nV87": {
-    "defaultMessage": "连接你和读者之间的长期互动"
   },
   "q9oMKE": {
     "defaultMessage": "围炉名称"
@@ -3658,9 +3665,6 @@
   "zE51j6": {
     "defaultMessage": "发布失败"
   },
-  "zJLPmE": {
-    "defaultMessage": "允许评论"
-  },
   "zKOr2x": {
     "defaultMessage": "已关注用户占总观看人数比例",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
@@ -3691,6 +3695,9 @@
   },
   "znN84l": {
     "defaultMessage": "帮助读者更容易发现优质内容"
+  },
+  "zso4HL": {
+    "defaultMessage": "每笔内容在 LikeCoin 链区块链上注册的元数据"
   },
   "zvNfwL": {
     "defaultMessage": "操作过于频繁，请稍候重试",
