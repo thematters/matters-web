@@ -102,7 +102,7 @@ const ChannelFeed = () => {
     return { newData, count: edges?.length || 0 }
   }
 
-  const mixFeed = useMixedFeed(edges || [], true, feedType)
+  const mixFeed = useMixedFeed(edges || [], true)
 
   const renderCards = ({
     loading,
