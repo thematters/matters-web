@@ -46,6 +46,7 @@ const MainFeed: React.FC<MainFeedProps> = ({ feedType }) => {
 
   const isIcymiFeed = feedType === 'icymi'
   const isHottestFeed = feedType === 'hottest'
+  const isNewestFeed = feedType === 'newest'
   const connectionPath = 'viewer.recommendation.feed'
   const recommendation = data?.viewer?.recommendation
   const result = recommendation?.feed
@@ -103,8 +104,7 @@ const MainFeed: React.FC<MainFeedProps> = ({ feedType }) => {
 
   const mixFeed = useMixedFeed(
     edges || [],
-    isIcymiFeed || isHottestFeed,
-    feedType
+    isIcymiFeed || isHottestFeed || isNewestFeed
   )
 
   const itemCustomProps = {
