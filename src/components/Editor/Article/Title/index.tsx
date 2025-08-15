@@ -33,8 +33,6 @@ const EditorTitle: React.FC<Props> = ({ defaultValue = '', update }) => {
     debouncedUpdate()
   }
 
-  const handleBlur = () => update({ title: value })
-
   const handleKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
     const target = event.target as HTMLTextAreaElement
 
@@ -89,7 +87,6 @@ const EditorTitle: React.FC<Props> = ({ defaultValue = '', update }) => {
         value={value}
         onPaste={handlePaste}
         onChange={handleChange}
-        onBlur={handleBlur}
         onKeyDown={handleKeyDown}
       />
     </header>
