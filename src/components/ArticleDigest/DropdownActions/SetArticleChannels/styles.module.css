@@ -8,6 +8,10 @@
   }
 }
 
+.child {
+  padding-left: var(--sp24);
+}
+
 .disabledTip {
   padding: var(--sp8) var(--sp12);
   margin-bottom: var(--sp12);
