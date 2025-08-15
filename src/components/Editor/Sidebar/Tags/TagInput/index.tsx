@@ -247,7 +247,6 @@ const TagInput = ({ tags, onAddTag, saving }: TagInputProps) => {
             onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
               if (e.key === 'Enter') {
                 e.preventDefault()
-                formik.handleSubmit()
               }
             }}
           />
