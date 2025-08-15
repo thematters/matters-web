@@ -180,7 +180,7 @@ const ChannelFeed = () => {
             </React.Fragment>
             {i === 2 && (
               <Media lessThan="lg">
-                <Billboard />
+                <Billboard hasBorder={false} />
               </Media>
             )}
           </>
