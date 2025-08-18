@@ -140,17 +140,23 @@ const SelectedCollectionsList = ({
 }: {
   checkedCollections: CollectionDigestCollectionPublicFragment[]
   onRemove: (collectionId: string) => void
-}) => (
-  <div className={`${styles.content} ${styles.checkedCollections}`}>
-    {checkedCollections.map((collection) => (
-      <CollectionDigest
-        key={collection.id}
-        collection={collection}
-        onRemove={onRemove}
-      />
-    ))}
-  </div>
-)
+}) => {
+  if (checkedCollections.length === 0) {
+    return null
+  }
+
+  return (
+    <div className={`${styles.content} ${styles.checkedCollections}`}>
+      {checkedCollections.map((collection) => (
+        <CollectionDigest
+          key={collection.id}
+          collection={collection}
+          onRemove={onRemove}
+        />
+      ))}
+    </div>
+  )
+}
 
 const ToggleButton = ({
   isEditing,
