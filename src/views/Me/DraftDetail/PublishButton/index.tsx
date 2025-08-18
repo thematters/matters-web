@@ -57,6 +57,7 @@ const Buttons = ({
 
   const buttonsClasses = classNames(styles.buttons, {
     [styles.disabled]: disabled,
+    [styles.hover]: !disabled,
   })
 
   const dividerClasses = classNames(styles.divider, {

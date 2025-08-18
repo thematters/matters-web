@@ -46,6 +46,7 @@ export const MoreButton = ({
               />
             </Menu>
           }
+          appendTo={() => document.body}
         >
           {({ openDropdown, ref }) => (
             <Button
