@@ -100,7 +100,7 @@ const ConfirmButton = ({
   </>
 )
 
-const SettingsButton = ({
+const PublishButton = ({
   article,
   title,
   summary,
@@ -358,7 +358,9 @@ const SettingsButton = ({
         onSave()
       }}
       versionDescription={versionDescription}
-      editVersionDescription={editVersionDescription}
+      editVersionDescription={
+        needRepublish ? editVersionDescription : undefined
+      }
     >
       {({ openDialog: openEditorSettingsDialog }) => (
         <ConfirmButton
@@ -387,4 +389,4 @@ const SettingsButton = ({
   )
 }
 
-export default SettingsButton
+export default PublishButton
