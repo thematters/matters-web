@@ -3006,6 +3006,9 @@
     "defaultMessage": "名稱不正確",
     "description": "NAME_INVALID"
   },
+  "n5C/Rj": {
+    "defaultMessage": "貼上想要關聯的站上作品連結"
+  },
   "n6ZdqD": {
     "defaultMessage": "圍爐名稱已被使用",
     "description": "DUPLICATE_CIRCLE"
@@ -3222,9 +3225,6 @@
   "rdxgu4": {
     "defaultMessage": "請輸入電子信箱",
     "description": "src/components/Forms/PaymentForm/ResetPassword/Request.tsx"
-  },
-  "reRn/s": {
-    "defaultMessage": "貼上想要關聯的站上作品連結"
   },
   "rfz/fN": {
     "defaultMessage": "建議封面尺寸 1600 x 900 像素"
