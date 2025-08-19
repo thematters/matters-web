@@ -5,9 +5,13 @@
   align-items: center;
   background-color: var(--color-black);
   border-radius: 0.75rem;
-  transition-property: opacity;
+  transition-property: opacity, background-color;
 
-  &:hover {
+  &.hover:hover:not(:has([data-tippy-root]:hover)) {
+    opacity: 0.85;
+  }
+
+  &.disabled {
     opacity: 0.5;
   }
 

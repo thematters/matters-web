@@ -61,40 +61,40 @@ const BaseSetArticleChannelsDialog = ({
 
   const channelsEnabled =
     data?.article?.classification?.topicChannel?.enabled ?? true
-  const allChannels = data?.channels
+  type TopicChannel = {
+    id: string
+    name?: string
+    enabled?: boolean
+    parent?: { id: string; name?: string } | null
+    providerId?: string | null
+    __typename?: string
+  }
+  const topicChannels: TopicChannel[] = (data?.channels ?? [])
     .filter((channel) => channel.__typename === 'TopicChannel')
-    .sort((a, b) => {
-      // Type assertion for TopicChannel
-      type TopicChannel = {
-        enabled: boolean
-        parent: { name: string } | null
-        name: string
-      }
-      const channelA = a as unknown as TopicChannel
-      const channelB = b as unknown as TopicChannel
-
-      // First sort by enabled status (enabled channels first)
-      if (channelA.enabled && !channelB.enabled) return -1
-      if (!channelA.enabled && channelB.enabled) return 1
-
-      // Then sort by parent (channels with parent come first)
-      const aHasParent = channelA.parent !== null
-      const bHasParent = channelB.parent !== null
-      if (aHasParent && !bHasParent) return -1
-      if (!aHasParent && bHasParent) return 1
-
-      // If both have parents, sort by parent name
-      if (aHasParent && bHasParent) {
-        const parentNameA = channelA.parent?.name || ''
-        const parentNameB = channelB.parent?.name || ''
-        return parentNameA.localeCompare(parentNameB)
-      }
-
-      // If neither has parent, sort by channel name
-      const nameA = channelA.name || ''
-      const nameB = channelB.name || ''
-      return nameA.localeCompare(nameB)
-    })
+    .map((c) => c as unknown as TopicChannel)
+  const sortByEnabledThenName = (a: TopicChannel, b: TopicChannel) => {
+    const aEnabled = a.enabled ?? true
+    const bEnabled = b.enabled ?? true
+    if (aEnabled && !bEnabled) return -1
+    if (!aEnabled && bEnabled) return 1
+    const nameA = a.name || ''
+    const nameB = b.name || ''
+    return nameA.localeCompare(nameB)
+  }
+  const parentChannels: TopicChannel[] = topicChannels
+    .filter((c) => !c.parent)
+    .sort(sortByEnabledThenName)
+  const childrenByParentId = new Map<string, TopicChannel[]>()
+  for (const ch of topicChannels) {
+    if (ch.parent) {
+      const list = childrenByParentId.get(ch.parent.id) ?? []
+      list.push(ch)
+      childrenByParentId.set(ch.parent.id, list)
+    }
+  }
+  for (const [, list] of childrenByParentId) {
+    list.sort(sortByEnabledThenName)
+  }
   const articleChannels =
     data?.article?.classification?.topicChannel?.channels?.filter(
       (channel) => channel.enabled
@@ -188,37 +188,57 @@ const BaseSetArticleChannelsDialog = ({
         <span className={styles.disabledTip}>該文章反饋不参与频道推荐</span>
       )}
       <List>
-        {allChannels?.map((channel) => (
-          <List.Item key={channel.id}>
-            <section className={styles.item}>
-              <Form.SquareCheckBox
-                name="channels"
-                value={channel.id}
-                disabled={!('providerId' in channel && channel.providerId)}
-                contents={
-                  'name' in channel
-                    ? channel.name +
-                      (channel.parent ? `(${channel.parent.name})` : '')
-                    : channel.id
-                }
-                checked={values.channels.includes(channel.id)}
-                onChange={() => handleToggleChannel(channel.id)}
-              />
-              <section className={styles.pinnedChannel}>
+        {parentChannels.map((parent) => (
+          <>
+            <List.Item key={parent.id}>
+              <section className={styles.item}>
                 <Form.SquareCheckBox
-                  name="pinnedChannels"
-                  disabled={'enabled' in channel && !channel.enabled}
-                  value={channel.id}
-                  contents={
-                    'enabled' in channel && !channel.enabled ? '' : '置頂'
-                  }
-                  color="greyDarker"
-                  checked={values.pinnedChannels.includes(channel.id)}
-                  onChange={() => handleTogglePinnedChannel(channel.id)}
+                  name="channels"
+                  value={parent.id}
+                  disabled={!parent.providerId}
+                  contents={parent.name || parent.id}
+                  checked={values.channels.includes(parent.id)}
+                  onChange={() => handleToggleChannel(parent.id)}
                 />
+                <section className={styles.pinnedChannel}>
+                  <Form.SquareCheckBox
+                    name="pinnedChannels"
+                    disabled={parent.enabled === false}
+                    value={parent.id}
+                    contents={parent.enabled === false ? '' : '置頂'}
+                    color="greyDarker"
+                    checked={values.pinnedChannels.includes(parent.id)}
+                    onChange={() => handleTogglePinnedChannel(parent.id)}
+                  />
+                </section>
               </section>
-            </section>
-          </List.Item>
+            </List.Item>
+            {(childrenByParentId.get(parent.id) || []).map((child) => (
+              <List.Item key={child.id}>
+                <section className={`${styles.item} ${styles.child}`}>
+                  <Form.SquareCheckBox
+                    name="channels"
+                    value={child.id}
+                    disabled={!child.providerId}
+                    contents={child.name || child.id}
+                    checked={values.channels.includes(child.id)}
+                    onChange={() => handleToggleChannel(child.id)}
+                  />
+                  <section className={styles.pinnedChannel}>
+                    <Form.SquareCheckBox
+                      name="pinnedChannels"
+                      disabled={child.enabled === false}
+                      value={child.id}
+                      contents={child.enabled === false ? '' : '置頂'}
+                      color="greyDarker"
+                      checked={values.pinnedChannels.includes(child.id)}
+                      onChange={() => handleTogglePinnedChannel(child.id)}
+                    />
+                  </section>
+                </section>
+              </List.Item>
+            ))}
+          </>
         ))}
       </List>
     </Form>

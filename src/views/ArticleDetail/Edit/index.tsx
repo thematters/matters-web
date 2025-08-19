@@ -70,8 +70,8 @@ import { useCampaignState } from './Hooks/useCampaignState'
 import { OptionButton } from './OptionButton'
 import { OptionContent } from './OptionContent'
 import OptionsPage from './OptionsPage'
+import PublishButton from './PublishButton'
 import PublishState from './PublishState'
-import SettingsButton from './SettingsButton'
 import styles from './styles.module.css'
 
 export type Article = NonNullable<
@@ -408,7 +408,7 @@ const BaseEdit = ({ article }: { article: Article }) => {
                 )}
                 <OptionButton onClick={toggleOptionDrawer} />
                 <section className={styles.publishButtons}>
-                  <SettingsButton
+                  <PublishButton
                     article={article}
                     title={title}
                     summary={summary}

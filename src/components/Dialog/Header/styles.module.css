@@ -24,7 +24,6 @@
 
   & .left,
   & .right {
-    z-index: var(--z-index-global-header);
     display: inline-flex;
     min-height: 1.75rem;
 
