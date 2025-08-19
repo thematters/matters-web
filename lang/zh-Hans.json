@@ -3006,6 +3006,9 @@
     "defaultMessage": "名称不正确",
     "description": "NAME_INVALID"
   },
+  "n5C/Rj": {
+    "defaultMessage": "粘贴想要关联的站上作品链接"
+  },
   "n6ZdqD": {
     "defaultMessage": "围炉名称已被使用",
     "description": "DUPLICATE_CIRCLE"
@@ -3222,9 +3225,6 @@
   "rdxgu4": {
     "defaultMessage": "请输入邮箱",
     "description": "src/components/Forms/PaymentForm/ResetPassword/Request.tsx"
-  },
-  "reRn/s": {
-    "defaultMessage": "粘贴想要关联的站上作品链接"
   },
   "rfz/fN": {
     "defaultMessage": "建議尺寸 1600 x 900 像素"
