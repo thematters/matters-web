@@ -177,8 +177,8 @@ export const ConnectionInput = ({
   const isDropdownVisible = !searchLoading && !!searchData?.article && !saving
 
   const inputPlaceholder = intl.formatMessage({
-    defaultMessage: 'Paste the link of the article you want to curate',
-    id: 'reRn/s',
+    defaultMessage: 'Paste the article link',
+    id: 'n5C/Rj',
   })
 
   const dropdownContent = (

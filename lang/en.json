@@ -3006,6 +3006,9 @@
     "defaultMessage": "Invalid name",
     "description": "NAME_INVALID"
   },
+  "n5C/Rj": {
+    "defaultMessage": "Paste the article link"
+  },
   "n6ZdqD": {
     "defaultMessage": "This circle is already taken.",
     "description": "DUPLICATE_CIRCLE"
@@ -3222,9 +3225,6 @@
   "rdxgu4": {
     "defaultMessage": "Email",
     "description": "src/components/Forms/PaymentForm/ResetPassword/Request.tsx"
-  },
-  "reRn/s": {
-    "defaultMessage": "Paste the link of the article you want to curate"
   },
   "rfz/fN": {
     "defaultMessage": "Recommended size: 1600px x 900px"
