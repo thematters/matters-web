@@ -1,7 +1,4 @@
-// https://dev.to/zechdc/autosize-input-field-plain-js-and-react-examples-38kb
-// https://github.com/JedWatson/react-input-autosize/issues/196
-
-import styles from './styles.module.css'
+import { useEffect, useRef, useState } from 'react'
 
 interface InputAutosizeProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -11,14 +8,52 @@ interface InputAutosizeProps
 export default function InputAutosize({
   value,
   placeholder,
+  style,
   ...props
 }: InputAutosizeProps) {
-  // Use placeholder text for width calculation when value is empty
-  const displayValue = value || placeholder || ''
+  const inputRef = useRef<HTMLInputElement>(null)
+  const [width, setWidth] = useState(0)
+
+  useEffect(() => {
+    if (!inputRef.current) return
+
+    const input = inputRef.current
+    const displayValue = value || placeholder || ''
+
+    // Create a temporary span to measure text width
+    const span = document.createElement('span')
+    span.style.visibility = 'hidden'
+    span.style.position = 'absolute'
+    span.style.whiteSpace = 'nowrap'
+
+    // Copy all computed styles from input to span
+    const computedStyle = window.getComputedStyle(input)
+    span.style.font = computedStyle.font
+    span.style.letterSpacing = computedStyle.letterSpacing
+    span.style.wordSpacing = computedStyle.wordSpacing
+    span.style.textTransform = computedStyle.textTransform
+
+    span.textContent = displayValue
+    document.body.appendChild(span)
+
+    const measuredWidth = span.offsetWidth
+    setWidth(measuredWidth + 2) // Add 2px for cursor space
+
+    document.body.removeChild(span)
+  }, [value, placeholder])
 
   return (
-    <span className={styles.autosize} data-value={displayValue}>
-      <input type="text" value={value} placeholder={placeholder} {...props} />
-    </span>
+    <input
+      ref={inputRef}
+      type="text"
+      value={value}
+      placeholder={placeholder}
+      style={{
+        width: width ? `${width}px` : 'auto',
+        minWidth: 0,
+        ...style,
+      }}
+      {...props}
+    />
   )
 }
