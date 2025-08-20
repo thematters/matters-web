@@ -707,7 +707,7 @@ export const EMPTY_DRAFT: DraftDetailQueryQuery['node'] = {
     circle: null,
     __typename: 'DraftAccess',
   },
-  license: ArticleLicenseType.Cc_0,
+  license: ArticleLicenseType.CcByNcNd_4,
   requestForDonation: null,
   replyToDonator: null,
   sensitiveByAuthor: false,

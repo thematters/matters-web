@@ -72,7 +72,7 @@ const DraftDigestFeed = ({ draft }: DraftDigestFeedProps) => {
           {draft.publishAt ? (
             <section className={styles.title}>{title}</section>
           ) : (
-            <Link {...path} className="u-link-active-green">
+            <Link {...path} className="u-link-active-green" target="_blank">
               <section className={styles.title}>
                 {title || (
                   <FormattedMessage defaultMessage="Untitled" id="3kbIhS" />
