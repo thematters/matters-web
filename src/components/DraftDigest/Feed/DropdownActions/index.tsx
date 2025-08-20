@@ -60,6 +60,8 @@ const DropdownActions = (props: DropdownActionsProps) => {
           })}
           icon={<Icon icon={IconEdit} size={20} />}
           href={path.href}
+          htmlHref={path.href}
+          htmlTarget="_blank"
         />
 
         {publishable && (
