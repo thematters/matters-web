@@ -59,7 +59,6 @@ const DropdownActions = (props: DropdownActionsProps) => {
               'src/components/DraftDigest/Feed/DropdownActions/index.tsx',
           })}
           icon={<Icon icon={IconEdit} size={20} />}
-          href={path.href}
           htmlHref={path.href}
           htmlTarget="_blank"
         />
