@@ -49,7 +49,8 @@ const EditArticleButton = ({
       }
       icon={<Icon icon={IconEdit} size={20} />}
       onClick={isExceedRevision ? onExceed : undefined}
-      href={isExceedRevision ? undefined : path.href}
+      htmlHref={isExceedRevision ? undefined : path.href}
+      htmlTarget="_blank"
       is={isExceedRevision ? undefined : 'link'}
     />
   )
