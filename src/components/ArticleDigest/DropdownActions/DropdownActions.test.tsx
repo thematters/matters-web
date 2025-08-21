@@ -166,7 +166,7 @@ describe('<ArticleDigest/DropdownActions>', () => {
     expect($menu).toBeInTheDocument()
 
     // edit button render as link
-    const $editButton = screen.getByRole('link', {
+    const $editButton = screen.getByRole('menuitem', {
       name: 'Edit',
     })
     expect($editButton).toBeInTheDocument()
