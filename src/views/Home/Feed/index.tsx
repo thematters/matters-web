@@ -7,7 +7,11 @@ import MainFeed from './MainFeed'
 
 export type FeedType = 'icymi' | 'newest' | 'hottest'
 
-const HomeFeed = () => {
+const HomeFeed = ({
+  showRecommendation = true,
+}: {
+  showRecommendation?: boolean
+} = {}) => {
   const { isInPath } = useRoute()
   const viewer = useContext(ViewerContext)
   const isAuthed = viewer.isAuthed
@@ -24,7 +28,11 @@ const HomeFeed = () => {
     <Layout.Main>
       {!isInChannel && !isInFeatured && !isInHottest && <Spacer size="sp20" />}
 
-      {isInChannel ? <ChannelFeed /> : <MainFeed feedType={feedType} />}
+      {isInChannel ? (
+        <ChannelFeed showRecommendation={showRecommendation} />
+      ) : (
+        <MainFeed feedType={feedType} />
+      )}
     </Layout.Main>
   )
 }

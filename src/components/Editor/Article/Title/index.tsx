@@ -33,8 +33,6 @@ const EditorTitle: React.FC<Props> = ({ defaultValue = '', update }) => {
     debouncedUpdate()
   }
 
-  const handleBlur = () => update({ title: value })
-
   const handleKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
     const target = event.target as HTMLTextAreaElement
 
@@ -79,17 +77,16 @@ const EditorTitle: React.FC<Props> = ({ defaultValue = '', update }) => {
         ref={inputRef}
         rows={1}
         aria-label={intl.formatMessage({
-          defaultMessage: 'Enter title ...',
-          id: '//QMqf',
+          defaultMessage: 'Enter a clear and concise title',
+          id: 'b6x6lm',
         })}
         placeholder={intl.formatMessage({
-          defaultMessage: 'Enter title ...',
-          id: '//QMqf',
+          defaultMessage: 'Enter a clear and concise title',
+          id: 'b6x6lm',
         })}
         value={value}
         onPaste={handlePaste}
         onChange={handleChange}
-        onBlur={handleBlur}
         onKeyDown={handleKeyDown}
       />
     </header>

@@ -69,6 +69,7 @@ const ActivityPopover = ({ authed, forbidden }: Props) => {
       moment: {
         text: <FormattedMessage defaultMessage="Moment" id="afLdf2" />,
         icon: <Icon icon={IconComment} size={20} />,
+        htmlTarget: undefined,
         href:
           authed && !forbidden
             ? isSmUp
@@ -85,12 +86,10 @@ const ActivityPopover = ({ authed, forbidden }: Props) => {
       article: {
         text: <FormattedMessage defaultMessage="Article" id="jx7Hn3" />,
         icon: <Icon icon={IconEdit} size={20} />,
-        href:
-          authed && !forbidden && !isInDraftDetail
-            ? PATHS.ME_DRAFT_NEW
-            : undefined,
+        htmlTarget: '_blank',
+        href: undefined,
         htmlHref:
-          authed && !forbidden && isInDraftDetail
+          authed && !forbidden && !isInDraftDetail
             ? PATHS.ME_DRAFT_NEW
             : undefined,
       },
@@ -102,6 +101,7 @@ const ActivityPopover = ({ authed, forbidden }: Props) => {
       is: 'link' as const,
       href: config[type].href,
       htmlHref: config[type].htmlHref,
+      htmlTarget: config[type].htmlTarget as '_blank' | undefined,
       onClick: () => onClick(type),
     }
   }

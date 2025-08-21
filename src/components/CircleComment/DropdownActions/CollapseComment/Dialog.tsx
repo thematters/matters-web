@@ -58,7 +58,7 @@ const CollapseCommentDialog = ({
   const onCollapse = async () => {
     await collapseComment()
 
-    toast.success({
+    toast.info({
       message: (
         <Translate
           zh_hant={`已成功闔上${COMMENT_TYPE_TEXT.zh_hant[type]}`}

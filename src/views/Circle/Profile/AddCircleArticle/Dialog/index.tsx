@@ -79,7 +79,7 @@ const AddCircleArticleDialog = ({
       },
     })
 
-    toast.success({
+    toast.info({
       message: intl.formatMessage({
         defaultMessage: 'Articles added ',
         id: 'z1ucgb',

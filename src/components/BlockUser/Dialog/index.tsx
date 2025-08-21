@@ -37,7 +37,7 @@ const BlockUserDialog = ({ user, children }: BlockUserDialogProps) => {
   const onBlock = async () => {
     await blockUser()
 
-    toast.success({
+    toast.info({
       message: (
         <FormattedMessage
           defaultMessage="User blocked. User now can't reply to your articles and user's comments have been hidden from you."

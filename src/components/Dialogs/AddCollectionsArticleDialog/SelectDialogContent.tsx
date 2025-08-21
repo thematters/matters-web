@@ -116,8 +116,7 @@ const SelectDialogContent: React.FC<SelectDialogContentProps> = ({
                           <span className={styles.full}>
                             <FormattedMessage
                               defaultMessage="FULL"
-                              id="Jxr/TM"
-                              description="src/components/Dialogs/AddCollectionsArticleDialog/SelectDialogContent.tsx"
+                              id="dSx84k"
                             />
                           </span>
                         ) : undefined

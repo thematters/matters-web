@@ -74,7 +74,7 @@ const ArchiveArticleDialog = ({
   const onArchive = async () => {
     await archiveArticle()
 
-    toast.success({
+    toast.info({
       message: (
         <FormattedMessage
           defaultMessage="Archived"

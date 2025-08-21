@@ -105,7 +105,7 @@ const Edit = () => {
 
       goToUserProfile(moment.shortHash)
 
-      toast.success({
+      toast.info({
         message: intl.formatMessage({
           defaultMessage: 'Published',
           description: 'src/views/MomentDetail/Edit/index.tsx',
@@ -120,7 +120,7 @@ const Edit = () => {
       const [, codes] = parseFormSubmitErrors(error as ApolloError)
       codes.forEach((code) => {
         if (code === 'ACTION_LIMIT_EXCEEDED') {
-          toast.success({
+          toast.info({
             message: intl.formatMessage({
               defaultMessage:
                 'You’ve posted several times in a short period. Please take a break.',

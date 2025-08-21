@@ -2,7 +2,6 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
   background: var(--color-white);
   border-radius: var(--sp8) var(--sp8) 0 0;
   will-change: transform, top;
@@ -30,5 +29,9 @@
   @media (--sm-up) {
     border-radius: var(--sp8);
     will-change: opacity;
+  }
+
+  &.innerOverflowHidden {
+    overflow: hidden;
   }
 }

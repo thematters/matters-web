@@ -1,20 +1,17 @@
-import type { FetchResult } from '@apollo/client'
-import { FormattedMessage } from 'react-intl'
+import { FetchResult } from '@apollo/client'
+import { useState } from 'react'
+import { FormattedMessage, useIntl } from 'react-intl'
 
-import IconHashtag from '@/public/static/icons/24px/hashtag.svg'
-import { analytics } from '~/common/utils'
-import {
-  EditorSearchSelectDialog,
-  Icon,
-  InlineTag,
-  // SearchSelectNode,
-} from '~/components'
-import { SearchSelectNode } from '~/components/Forms/SearchSelectForm'
+import IconPlus from '@/public/static/icons/24px/plus.svg'
+import IconTimes from '@/public/static/icons/24px/times.svg'
+import { ARTICLE_TAGS_MAX_COUNT } from '~/common/enums/article'
+import { analytics, normalizeTag } from '~/common/utils'
+import { Icon, InlineTag, toDigestTagPlaceholder } from '~/components'
 import { DigestTagFragment, SetDraftTagsMutation } from '~/gql/graphql'
 
-import TagCustomStagingArea from '../../TagCustomStagingArea'
 import Box from '../Box'
 import styles from './styles.module.css'
+import TagInput from './TagInput'
 
 export interface SidebarTagsProps {
   tags: DigestTagFragment[]
@@ -31,60 +28,77 @@ const SidebarTags = ({
   saving,
   disabled,
 }: SidebarTagsProps) => {
+  const intl = useIntl()
+  const [isEditing, setIsEditing] = useState(false)
+
+  const onAddTag = async (tag: string) => {
+    await editTags([...tags, toDigestTagPlaceholder(normalizeTag(tag))])
+    setIsEditing(false)
+  }
+
   return (
-    <EditorSearchSelectDialog
-      title={<FormattedMessage defaultMessage="Add Tag" id="GUW//c" />}
-      hint={
-        <FormattedMessage
-          defaultMessage="Adding tags helps readers find your articles. Add or create new tags."
-          id="NmhF45"
-        />
+    <Box
+      title={<FormattedMessage defaultMessage="Add Tags" id="WNxQX0" />}
+      subtitle={
+        <FormattedMessage defaultMessage="Add up to 3 tags" id="/5yq4w" />
       }
-      searchType="Tag"
-      onSave={(nodes: SearchSelectNode[]) =>
-        editTags(nodes as DigestTagFragment[])
-      }
-      nodes={tags}
-      saving={saving}
-      createTag
-      CustomStagingArea={TagCustomStagingArea}
-      dismissOnClickOutside={false}
-      dismissOnESC={false}
-    >
-      {({ openDialog }) => (
-        <Box
-          icon={<Icon icon={IconHashtag} size={24} />}
-          title={<FormattedMessage defaultMessage="Add Tag" id="GUW//c" />}
-          subtitle={
-            <FormattedMessage
-              defaultMessage="Adding tags helps readers find your articles."
-              id="fPcF7H"
-            />
-          }
-          onClick={openDialog}
-          disabled={disabled}
-        >
-          {tags.length > 0 && (
-            <ul className={styles.list}>
-              {tags.map((tag) => (
-                <li key={tag.id}>
-                  <InlineTag
-                    tag={tag}
-                    onRemoveTag={() => {
-                      editTags(tags.filter((t) => t.content !== tag.content))
-                      analytics.trackEvent('click_button', {
-                        type: 'remove_tag',
-                        pageType: 'edit_draft',
-                      })
-                    }}
-                  />
-                </li>
-              ))}
-            </ul>
+      rightButton={
+        <>
+          {isEditing ? (
+            <button
+              onClick={() => setIsEditing(false)}
+              className={styles.rightButton}
+              aria-label={intl.formatMessage({
+                defaultMessage: 'Close',
+                id: 'rbrahO',
+              })}
+            >
+              <Icon icon={IconTimes} size={24} color="black" />
+            </button>
+          ) : (
+            tags.length < ARTICLE_TAGS_MAX_COUNT && (
+              <button
+                onClick={() => setIsEditing(true)}
+                className={styles.rightButton}
+                aria-label={intl.formatMessage({
+                  defaultMessage: 'Add Tags',
+                  id: 'WNxQX0',
+                })}
+              >
+                <Icon icon={IconPlus} size={24} color="black" />
+              </button>
+            )
           )}
-        </Box>
-      )}
-    </EditorSearchSelectDialog>
+        </>
+      }
+      disabled={disabled}
+    >
+      <div className={styles.content}>
+        {tags.length > 0 && (
+          <ul className={styles.list}>
+            {tags.map((tag) => (
+              <li key={tag.id}>
+                <InlineTag
+                  tag={tag}
+                  onRemoveTag={() => {
+                    editTags(tags.filter((t) => t.content !== tag.content))
+                    analytics.trackEvent('click_button', {
+                      type: 'remove_tag',
+                      pageType: 'edit_draft',
+                    })
+                  }}
+                />
+              </li>
+            ))}
+          </ul>
+        )}
+        {isEditing && (
+          <div className={styles.tagInput}>
+            <TagInput tags={tags} onAddTag={onAddTag} saving={saving} />
+          </div>
+        )}
+      </div>
+    </Box>
   )
 }
 

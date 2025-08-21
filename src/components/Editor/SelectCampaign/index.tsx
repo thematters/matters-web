@@ -107,7 +107,7 @@ const SelectCampaign = ({
           }),
         ]}
         size={14}
-        color="campaignBlue"
+        theme="campaign"
       />
       {selectedCampaign?.id &&
         availableStages &&
@@ -140,7 +140,7 @@ const SelectCampaign = ({
                 }),
               ]}
               size={14}
-              color="campaignBlue"
+              theme="campaign"
             />
           </>
         )}

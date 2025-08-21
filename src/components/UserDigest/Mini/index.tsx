@@ -30,6 +30,7 @@ export type UserDigestMiniProps = {
   textWeight?: 'medium' | 'semibold'
   nameColor?: 'black' | 'white' | 'grey' | 'greyDarker' | 'green'
   direction?: 'row' | 'column'
+  nameNoWrap?: boolean
   spacing?: 4 | 6 | 8
 
   hasAvatar?: boolean
@@ -64,6 +65,7 @@ const Mini = ({
   nameColor = 'black',
   direction = 'row',
   spacing = 8,
+  nameNoWrap,
 
   hasAvatar,
   hasDisplayName,
@@ -86,6 +88,7 @@ const Mini = ({
   const nameClasses = classNames({
     [styles.name]: true,
     [styles[`direction${capitalizeFirstLetter(direction)}`]]: !!direction,
+    [styles.nameNoWrap]: !!nameNoWrap,
   })
 
   if (isArchived || !user) {

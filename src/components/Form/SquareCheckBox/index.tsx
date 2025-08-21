@@ -14,6 +14,7 @@ export type SquareCheckBoxBoxProps = {
   value: string
   contents?: React.ReactNode
 
+  checkedBoxColor?: 'green' | 'black' | 'grey'
   icon?: React.ReactNode
   left?: React.ReactNode
   sup?: React.ReactNode
@@ -29,7 +30,7 @@ export type SquareCheckBoxBoxProps = {
 const SquareCheckBox: React.FC<SquareCheckBoxBoxProps> = ({
   contents,
   hint,
-
+  checkedBoxColor = 'green',
   icon,
   left,
   sup,
@@ -65,7 +66,7 @@ const SquareCheckBox: React.FC<SquareCheckBoxBoxProps> = ({
       setLineClampable(true)
     }
     setFirstRender(false)
-  }, [])
+  }, [node.current])
 
   const labelClasses = classNames({
     [styles.label]: true,
@@ -81,10 +82,10 @@ const SquareCheckBox: React.FC<SquareCheckBoxBoxProps> = ({
     <Icon
       icon={IconSquareCheck}
       size={20}
-      color={disabled ? 'grey' : 'green'}
+      color={disabled ? 'grey' : checkedBoxColor}
     />
   ) : (
-    <Icon icon={IconSquare} size={20} color="greyDark" />
+    <Icon icon={IconSquare} size={20} color={disabled ? 'white' : 'greyDark'} />
   )
 
   return (

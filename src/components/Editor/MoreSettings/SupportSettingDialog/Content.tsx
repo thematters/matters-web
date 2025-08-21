@@ -72,7 +72,7 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
     onSubmit: async ({}, { setSubmitting }) => {
       editSupportSetting(values.requestForDonation, values.replyToDonator)
 
-      toast.success({
+      toast.info({
         message: (
           <FormattedMessage
             defaultMessage="Support setting updated"
@@ -181,7 +181,7 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
         isSubmitting ||
         supportSettingSaving
       }
-      text={<FormattedMessage defaultMessage="Confirm" id="N2IrpM" />}
+      text={<FormattedMessage defaultMessage="Save" id="jvo0vs" />}
       loading={isSubmitting}
     />
   )

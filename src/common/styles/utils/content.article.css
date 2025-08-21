@@ -483,7 +483,7 @@
 
   & .counter {
     font-size: var(--text12);
-    color: var(--color-grey-light);
+    color: var(--color-grey);
     text-align: right;
   }
 

@@ -20,9 +20,20 @@ const useLayoutType = () => {
   const isHome = isInPath('HOME')
   const isInMomentDetail = isInPath('MOMENT_DETAIL')
   const isInMomentDetailEdit = isInPath('MOMENT_DETAIL_EDIT')
+  const isInDraftDetail = isInPath('ME_DRAFT_DETAIL')
+  const isInDraftDetailOptions = isInPath('ME_DRAFT_DETAIL_OPTIONS')
+  const isInArticleDetailEdit = isInPath('ARTICLE_DETAIL_EDIT')
+
   const isInCircleDetail =
     isInPath('CIRCLE_DETAIL') && isPathStartWith('/~', true)
   const isUserWorks = isInPath('USER_WORKS') && isPathStartWith('/@', true)
+
+  const showGlobalNav =
+    !isInDraftDetail &&
+    !isInDraftDetailOptions &&
+    !isInMomentDetail &&
+    !isInMomentDetailEdit &&
+    !isInArticleDetailEdit
 
   const isOneColumnLayout =
     isInPath('SEARCH') ||
@@ -41,6 +52,7 @@ const useLayoutType = () => {
     isInPath('COMMUNITY') ||
     isInPath('TOS') ||
     // Me
+    isInPath('ARTICLE_DETAIL_EDIT') ||
     isInPath('ME_DRAFTS') ||
     isInPath('ME_PUBLISHED') ||
     isInPath('ME_ARCHIVED') ||
@@ -59,6 +71,7 @@ const useLayoutType = () => {
     isInPath('ME_SETTINGS_NOTIFICATIONS_CIRCLE') ||
     isInPath('ME_SETTINGS_MISC') ||
     isInPath('ME_SETTINGS_BLOCKED') ||
+    isInPath('ME_DRAFT_DETAIL') ||
     // Moment
     isInPath('MOMENT_DETAIL') ||
     isInPath('MOMENT_DETAIL_EDIT')
@@ -72,10 +85,8 @@ const useLayoutType = () => {
     isInPath('USER_COLLECTION_DETAIL') ||
     // Article
     isInPath('ARTICLE_DETAIL') ||
-    isInPath('ARTICLE_DETAIL_EDIT') ||
     isInPath('ARTICLE_DETAIL_HISTORY') ||
     isInPath('ME_DRAFT_NEW') ||
-    isInPath('ME_DRAFT_DETAIL') ||
     // Campaign
     (isInPath('CAMPAIGN_DETAIL') && !isInWritingChallengeChannel)
 
@@ -93,6 +104,11 @@ const useLayoutType = () => {
     isInPath('USER_COLLECTIONS') ||
     isInPath('USER_COLLECTION_DETAIL')
 
+  const isEditorLayout =
+    isInPath('ARTICLE_DETAIL_EDIT') ||
+    isInPath('ME_DRAFT_NEW') ||
+    isInPath('ME_DRAFT_DETAIL')
+
   // Fallback to one-column layout if no specific layout is determined
   const hasSpecificLayout =
     isOneColumnLayout || isTwoColumnLayout || isThreeColumnLayout
@@ -105,6 +121,8 @@ const useLayoutType = () => {
     isTwoColumnLayout,
     isThreeColumnLayout,
     isLeftLayout,
+    isEditorLayout,
+    showGlobalNav,
   }
 }
 
@@ -182,6 +200,7 @@ const Main: React.FC<MainProps> & {
 Main.Spacing = Spacing
 
 interface LayoutProps {
+  header?: React.ReactNode
   children?: React.ReactNode
 }
 
@@ -191,14 +210,14 @@ export const Layout: React.FC<LayoutProps> & {
   FixedMain: typeof FixedMain
   AuthHeader: typeof AuthHeader
   Notice: typeof Notice
-} = ({ children }) => {
+} = ({ header, children }) => {
   const {
-    isInMomentDetail,
-    isInMomentDetailEdit,
     isOneColumnLayout,
     isTwoColumnLayout,
     isThreeColumnLayout,
     isLeftLayout,
+    isEditorLayout,
+    showGlobalNav,
   } = useLayoutType()
 
   const layoutClasses = classNames({
@@ -206,6 +225,7 @@ export const Layout: React.FC<LayoutProps> & {
     [styles.twoColumnLayout]: isTwoColumnLayout,
     [styles.threeColumnLayout]: isThreeColumnLayout,
     [styles.sideNavLayout]: isThreeColumnLayout,
+    [styles.editorLayout]: isEditorLayout,
   })
 
   const mainClasses = classNames({
@@ -217,7 +237,9 @@ export const Layout: React.FC<LayoutProps> & {
     <>
       <Head description={null} />
 
-      {!isInMomentDetail && !isInMomentDetailEdit && <GlobalNav />}
+      {header}
+
+      {showGlobalNav && <GlobalNav />}
 
       <div className={layoutClasses}>
         <main className={mainClasses}>

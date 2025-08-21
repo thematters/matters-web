@@ -1,6 +1,5 @@
 .tag .name {
   @mixin line-clamp;
-  @mixin fix-cropped-letters;
 
   line-height: inherit;
 }
@@ -8,7 +7,6 @@
 .list {
   position: relative;
   display: block;
-  padding-right: 3rem;
 
   & .count {
     @mixin inline-flex-center-all;

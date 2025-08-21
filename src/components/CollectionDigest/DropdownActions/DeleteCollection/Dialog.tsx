@@ -104,7 +104,7 @@ const DeleteCollectionDialog = ({
   const onDelete = async () => {
     await deleteCollection()
 
-    toast.success({
+    toast.info({
       message: (
         <FormattedMessage
           defaultMessage="Collection is deleted"

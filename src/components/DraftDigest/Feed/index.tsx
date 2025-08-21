@@ -1,14 +1,16 @@
+import classNames from 'classnames'
 import gql from 'graphql-tag'
 import Link from 'next/link'
-import React from 'react'
+import React, { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { TEST_ID } from '~/common/enums'
-import { toPath } from '~/common/utils'
-import { DateTime } from '~/components'
+import { datetimeFormat, toPath } from '~/common/utils'
+import { LanguageContext } from '~/components'
 import { DraftDigestFeedDraftFragment } from '~/gql/graphql'
 
-import DeleteButton from './DeleteButton'
+import CancelScheduleButton from './CancelScheduleButton'
+import DropdownActions from './DropdownActions'
 import Placeholder from './Placeholder'
 import styles from './styles.module.css'
 
@@ -23,14 +25,18 @@ const fragments = {
       title
       slug
       updatedAt
-      ...DeleteButtonDraft
+      publishAt
+      ...CancelScheduleButtonDraft
+      ...DraftDigestDropdownActionsDraft
     }
-    ${DeleteButton.fragments.draft}
+    ${CancelScheduleButton.fragments.draft}
+    ${DropdownActions.fragments.draft}
   `,
 }
 
 const DraftDigestFeed = ({ draft }: DraftDigestFeedProps) => {
-  const { id, title, updatedAt } = draft
+  const { lang } = useContext(LanguageContext)
+  const { id, title, updatedAt, publishAt } = draft
   const path = toPath({ page: 'draftDetail', id })
 
   return (
@@ -39,22 +45,47 @@ const DraftDigestFeed = ({ draft }: DraftDigestFeedProps) => {
       data-test-id={TEST_ID.DIGEST_DRAFT_FEED}
     >
       <section className={styles.left}>
-        <section>
-          <DateTime date={updatedAt} color="grey" />
-        </section>
+        <time
+          dateTime={new Date(publishAt || updatedAt).toISOString()}
+          className={classNames(styles.date, {
+            [styles.scheduled]: !!publishAt,
+          })}
+        >
+          {publishAt ? (
+            <FormattedMessage
+              defaultMessage="Scheduled for {time} {date}"
+              id="vsps+A"
+              values={{
+                time: new Date(publishAt).toLocaleTimeString('en-GB', {
+                  hour: '2-digit',
+                  minute: '2-digit',
+                  hour12: false,
+                }),
+                date: datetimeFormat.absolute({ date: publishAt, lang }),
+              }}
+            />
+          ) : (
+            datetimeFormat.relative(updatedAt, lang)
+          )}
+        </time>
         <section className={styles.content}>
-          <Link {...path} className="u-link-active-green">
-            <section className={styles.title}>
-              {title || (
-                <FormattedMessage defaultMessage="Untitled" id="3kbIhS" />
-              )}
-            </section>
-          </Link>
+          {draft.publishAt ? (
+            <section className={styles.title}>{title}</section>
+          ) : (
+            <Link {...path} className="u-link-active-green" target="_blank">
+              <section className={styles.title}>
+                {title || (
+                  <FormattedMessage defaultMessage="Untitled" id="3kbIhS" />
+                )}
+              </section>
+            </Link>
+          )}
         </section>
       </section>
 
       <section className={styles.right}>
-        <DeleteButton draft={draft} />
+        {publishAt && <CancelScheduleButton draft={draft} />}
+        {!publishAt && <DropdownActions draft={draft} />}
       </section>
     </section>
   )
@@ -72,7 +103,13 @@ type MemoizedDraftDigestFeedType = React.MemoExoticComponent<
 
 const MemoizedDraftDigestFeed = React.memo(
   DraftDigestFeed,
-  () => true
+  (prevProps, nextProps) => {
+    return (
+      prevProps.draft.publishAt === nextProps.draft.publishAt &&
+      prevProps.draft.title === nextProps.draft.title &&
+      prevProps.draft.updatedAt === nextProps.draft.updatedAt
+    )
+  }
 ) as MemoizedDraftDigestFeedType
 
 MemoizedDraftDigestFeed.Placeholder = Placeholder

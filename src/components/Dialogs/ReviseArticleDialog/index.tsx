@@ -6,11 +6,21 @@ import styles from './styles.module.css'
 
 interface Props {
   children?: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
+  onCloseDialog: () => void
   revisionCountLeft: number
 }
 
-export const ReviseArticleDialog = ({ children, revisionCountLeft }: Props) => {
-  const { show, openDialog, closeDialog } = useDialogSwitch(true)
+export const ReviseArticleDialog = ({
+  children,
+  onCloseDialog,
+  revisionCountLeft,
+}: Props) => {
+  const { show, openDialog, closeDialog: _closeDialog } = useDialogSwitch(true)
+
+  const closeDialog = () => {
+    _closeDialog()
+    onCloseDialog()
+  }
 
   return (
     <>

@@ -1,0 +1,12 @@
+.title {
+  display: flex;
+  gap: var(--sp4);
+}
+
+.content {
+  padding: var(--sp10) var(--sp16) 0 var(--sp16);
+}
+
+.help {
+  display: inline-flex;
+}

@@ -21,7 +21,18 @@ export const editMetaFragment = gql`
       ...Asset
     }
     tags
-    collection(input: { first: null }) {
+    collections(input: { first: null }) {
+      edges {
+        node {
+          id
+          title
+          articles(input: { first: 0 }) {
+            totalCount
+          }
+        }
+      }
+    }
+    connections(input: { first: null }) {
       edges {
         node {
           ...ArticleDigestDropdownArticle
@@ -37,6 +48,7 @@ export const editMetaFragment = gql`
     campaigns {
       campaign {
         id
+        name
       }
       stage {
         id
@@ -59,7 +71,7 @@ export const editMetaFragment = gql`
  * Fetch draft detail or assets only
  */
 export const DRAFT_DETAIL_VIEWER = gql`
-  query DraftDetailViewerQuery {
+  query DraftDetailViewerQuery($collectionsAfter: String) {
     viewer {
       id
       campaigns(input: { first: null }) {
@@ -75,6 +87,21 @@ export const DRAFT_DETAIL_VIEWER = gql`
       }
       displayName
       avatar
+      collections(input: { first: 20, after: $collectionsAfter }) {
+        pageInfo {
+          hasNextPage
+          endCursor
+        }
+        edges {
+          node {
+            id
+            title
+            articles(input: { first: 0 }) {
+              totalCount
+            }
+          }
+        }
+      }
     }
   }
   ${CircleDigest.Rich.fragments.circle.public}
@@ -146,14 +173,38 @@ export const SET_CONTENT = gql`
   ${assetFragment}
 `
 
-export const SET_COLLECTION = gql`
-  mutation SetDraftCollection(
+export const SET_CONNECTIONS = gql`
+  mutation SetDraftConnections(
     $id: ID!
-    $collection: [ID]
+    $connections: [ID!]
     $lastUpdatedAt: DateTime
   ) {
     putDraft(
-      input: { id: $id, collection: $collection, lastUpdatedAt: $lastUpdatedAt }
+      input: {
+        id: $id
+        connections: $connections
+        lastUpdatedAt: $lastUpdatedAt
+      }
+    ) {
+      id
+      ...EditMetaDraft
+    }
+  }
+  ${editMetaFragment}
+`
+
+export const SET_COLLECTIONS = gql`
+  mutation SetDraftCollections(
+    $id: ID!
+    $collections: [ID!]
+    $lastUpdatedAt: DateTime
+  ) {
+    putDraft(
+      input: {
+        id: $id
+        collections: $collections
+        lastUpdatedAt: $lastUpdatedAt
+      }
     ) {
       id
       ...EditMetaDraft

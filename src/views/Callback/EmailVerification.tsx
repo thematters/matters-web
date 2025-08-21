@@ -61,7 +61,7 @@ const EmailVerification = () => {
 
         router.push(PATHS.ME_SETTINGS)
 
-        toast.success({
+        toast.info({
           message: (
             <FormattedMessage
               defaultMessage="Verification successful"
