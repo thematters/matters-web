@@ -1,6 +1,8 @@
 import { useEffect, useRef } from 'react'
 import { useIntl } from 'react-intl'
 
+import { PATHS } from '~/common/enums'
+
 import { useRoute } from './useRoute'
 
 export const useUnloadConfirm = ({
@@ -22,6 +24,11 @@ export const useUnloadConfirm = ({
     })
 
   const onRouteChange = () => {
+    const currentUrl = router.asPath
+    if (currentUrl.includes(PATHS.ME_DRAFT_NEW)) {
+      return null
+    }
+
     if (!blockRef.current) {
       return null
     }

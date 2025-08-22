@@ -25,5 +25,9 @@
 
   &.dropdown {
     width: var(--sizing-menu);
+
+    &.sm {
+      width: var(--sizing-menu-sm);
+    }
   }
 }

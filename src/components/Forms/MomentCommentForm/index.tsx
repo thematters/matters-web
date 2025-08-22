@@ -160,7 +160,7 @@ const MomentCommentForm = ({
             },
           })
 
-          toast.success({
+          toast.info({
             message: (
               <FormattedMessage
                 defaultMessage="Published"

@@ -1,7 +1,6 @@
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import IconIndent from '@/public/static/icons/24px/indent.svg'
-import { Icon, Switch } from '~/components'
+import { Switch } from '~/components'
 
 import Box from '../Box'
 
@@ -20,14 +19,19 @@ const SidebarIndent: React.FC<SidebarIndentProps> = ({
 
   return (
     <Box
-      icon={<Icon icon={IconIndent} size={24} />}
-      title={<FormattedMessage defaultMessage="Paragraph indent" id="0r2yd+" />}
+      title={<FormattedMessage defaultMessage="Paragraph Indent" id="uOUCWK" />}
+      subtitle={
+        <FormattedMessage
+          defaultMessage="Indent the beginning of paragraph text"
+          id="cpYr3r"
+        />
+      }
       rightButton={
         <Switch
           name="indent"
           label={intl.formatMessage({
-            defaultMessage: 'Paragraph indent',
-            id: '0r2yd+',
+            defaultMessage: 'Paragraph Indent',
+            id: 'uOUCWK',
           })}
           checked={!!indented}
           onChange={() => toggleIndent(!indented)}

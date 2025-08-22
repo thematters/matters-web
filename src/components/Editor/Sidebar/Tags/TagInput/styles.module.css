@@ -1,0 +1,29 @@
+.form {
+  position: relative;
+  display: flex;
+  gap: var(--sp4);
+  align-items: center;
+  width: fit-content;
+  max-width: 100%;
+  padding: var(--sp4) var(--sp10) var(--sp4) var(--sp8);
+  font-size: var(--sp14);
+  background: var(--color-grey-lighter);
+  border-radius: var(--sp8);
+
+  & input {
+    max-width: calc(
+      100vw - 102px
+    ); /* 102px is the width of the icon and the spacing */
+
+    line-height: 1.3725rem;
+    background: transparent;
+
+    @media (--sm-up) {
+      max-width: 17.25rem;
+    }
+
+    &::placeholder {
+      color: var(--color-grey);
+    }
+  }
+}

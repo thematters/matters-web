@@ -59,6 +59,7 @@ export const ROOT_QUERY_PRIVATE = gql`
         navbarTitleZhHans: navbarTitle(input: { language: zh_hans })
         navbarTitleZhHant: navbarTitle(input: { language: zh_hant })
         navbarTitleEn: navbarTitle(input: { language: en })
+        showRecommendation
       }
 
       ... on WritingChallenge {

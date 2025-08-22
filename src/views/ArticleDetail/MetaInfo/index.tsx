@@ -173,7 +173,8 @@ const MetaInfo = ({
                 <Button
                   textColor="black"
                   textActiveColor="greyDarker"
-                  href={editable ? editPath.href : undefined}
+                  htmlHref={editable ? editPath.href : undefined}
+                  htmlTarget="_blank"
                   disabled={!editable}
                   onClick={() => {
                     analytics.trackEvent('click_button', {

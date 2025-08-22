@@ -1,0 +1,16 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background-color: var(--color-white);
+  border-bottom: 1px solid var(--color-border);
+
+  @media (--sm-up) {
+    /* title height */
+    top: 86px;
+  }
+}
+
+.content {
+  margin-top: var(--sp24);
+}

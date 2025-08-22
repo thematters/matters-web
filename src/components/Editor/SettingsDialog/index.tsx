@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl'
 import { Dialog, SpinnerBlock, useDialogSwitch, useStep } from '~/components'
 import {
   MoreSettingsProps,
-  SetCollectionProps,
+  SetConnectionsProps,
   SetCoverProps,
   SetPublishISCNProps,
   SetTagsProps,
@@ -29,23 +29,16 @@ export type Step =
   | 'tag'
   | 'collection'
   | 'circle'
-  | 'confirm'
   | 'support'
   | 'versionDescription'
-
-export type ConfirmStepContentProps = {
-  onBack: () => void
-  closeDialog: () => void
-}
 
 export type EditorSettingsDialogProps = {
   saving: boolean
   disabled: boolean
-  ConfirmStepContent: React.FC<ConfirmStepContentProps>
 
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 } & SetCoverProps &
-  SetCollectionProps &
+  SetConnectionsProps &
   SetTagsProps &
   MoreSettingsProps &
   ToggleResponseProps &
@@ -82,9 +75,9 @@ const BaseEditorSettingsDialog = ({
   entityType,
   coverSaving,
 
-  collection,
-  editCollection,
-  collectionSaving,
+  connections,
+  editConnections,
+  connectionsSaving,
 
   tags,
   editTags,
@@ -125,7 +118,6 @@ const BaseEditorSettingsDialog = ({
   disabled,
   confirmButtonText,
   cancelButtonText,
-  ConfirmStepContent,
   onConfirm,
 
   children,
@@ -149,7 +141,6 @@ const BaseEditorSettingsDialog = ({
   const isTag = currStep === 'tag'
   const isCollection = currStep === 'collection'
   // const isCircle = currStep === 'circle'
-  const isConfirm = currStep === 'confirm'
   const isSupportSetting = currStep === 'support'
   const isVersionDescription = currStep === 'versionDescription'
   const coverProps: SetCoverProps = {
@@ -218,7 +209,7 @@ const BaseEditorSettingsDialog = ({
             versionDescription={versionDescription}
             hasSetVersionDescription={!!editVersionDescription}
             cover={cover}
-            collectionCount={collection.length}
+            connectionCount={connections.length}
             tagsCount={tags.length}
             {...accessProps}
             {...campaignProps}
@@ -249,12 +240,12 @@ const BaseEditorSettingsDialog = ({
             searchType="Article"
             searchExclude={SearchExclude.Blocked}
             onSave={async (nodes: SearchSelectNode[]) => {
-              await editCollection(
+              await editConnections(
                 nodes as ArticleDigestDropdownArticleFragment[]
               )
             }}
-            nodes={collection}
-            saving={collectionSaving}
+            nodes={connections}
+            saving={connectionsSaving}
             back={() => forward('list')}
             closeDialog={closeDialog}
             submitCallback={() => forward('list')}
@@ -304,13 +295,6 @@ const BaseEditorSettingsDialog = ({
             editDescription={editVersionDescription}
             back={() => forward('list')}
             submitCallback={() => forward('list')}
-            closeDialog={closeDialog}
-          />
-        )}
-
-        {isConfirm && (
-          <ConfirmStepContent
-            onBack={() => forward('list')}
             closeDialog={closeDialog}
           />
         )}

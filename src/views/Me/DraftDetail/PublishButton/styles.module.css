@@ -1,0 +1,44 @@
+.buttons {
+  @mixin transition;
+
+  display: flex;
+  align-items: center;
+  background-color: var(--color-black);
+  border-radius: 0.75rem;
+  transition-property: opacity, background-color;
+
+  &.hover:hover:not(:has([data-tippy-root]:hover)) {
+    opacity: 0.85;
+  }
+
+  &.disabled {
+    opacity: 0.5;
+  }
+
+  /* first button */
+  & > button:first-child {
+    & > div > div {
+      border-top-left-radius: 0.75rem !important;
+      border-bottom-left-radius: 0.75rem !important;
+    }
+  }
+
+  /* last button */
+  & > button:last-of-type {
+    & > div > div {
+      border-top-right-radius: 0.75rem !important;
+      border-bottom-right-radius: 0.75rem !important;
+    }
+  }
+}
+
+.divider {
+  display: inline-block;
+  width: 1px;
+  height: 0.875rem;
+  background-color: var(--color-grey-scale-white-60);
+
+  &.disabled {
+    opacity: 0.5;
+  }
+}

@@ -37,7 +37,10 @@ export const getSelectCampaigns = ({
 
     // only show appliedCampaign if the article or draft
     // is created during the writing period
-    return (isCampaignStarted && !isCampaignEnded) || isCampaignActive
+    return (
+      (isCampaignStarted && !isCampaignEnded && isCampaignActive) ||
+      (isCampaignEnded && isCampaignActive)
+    )
   })
 
   const selectedCampaign = campaigns?.find((campaign) => {
@@ -104,7 +107,7 @@ const SelectCampaign = ({
           }),
         ]}
         size={14}
-        color="campaignBlue"
+        theme="campaign"
       />
       {selectedCampaign?.id &&
         availableStages &&
@@ -137,7 +140,7 @@ const SelectCampaign = ({
                 }),
               ]}
               size={14}
-              color="campaignBlue"
+              theme="campaign"
             />
           </>
         )}

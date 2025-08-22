@@ -138,7 +138,7 @@ export const Billboard = ({ tokenId, type }: BillboardProps) => {
     )
   }
 
-  if (!data || !data.contentURI) {
+  if (!data.contentURI) {
     return null
   }
 

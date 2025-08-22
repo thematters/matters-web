@@ -10,6 +10,7 @@ export const fragments = {
         }
         classification {
           topicChannel {
+            enabled
             channels {
               enabled
               antiFlooded
@@ -39,6 +40,7 @@ export const fragments = {
         id
         classification {
           topicChannel {
+            enabled
             feedback {
               id
               state

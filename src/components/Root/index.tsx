@@ -80,8 +80,15 @@ const Root = ({
   const isInMigration = isInPath('MIGRATION')
   const isInAuthCallback = isInPath('CALLBACK_PROVIDER')
   const isInAuth = isInPath('LOGIN') || isInPath('SIGNUP')
+  const isInMeDraftDetail = isInPath('ME_DRAFT_DETAIL')
+  const isInArticleDetailEdit = isInPath('ARTICLE_DETAIL_EDIT')
   const shouldApplyLayout =
-    !isInAbout && !isInMigration && !isInAuthCallback && !isInAuth
+    !isInAbout &&
+    !isInMigration &&
+    !isInAuthCallback &&
+    !isInAuth &&
+    !isInMeDraftDetail &&
+    !isInArticleDetailEdit
 
   const referralCode = getQuery(REFERRAL_QUERY_REFERRAL_KEY)
 

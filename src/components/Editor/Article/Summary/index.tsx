@@ -68,12 +68,6 @@ const EditorSummary: React.FC<Props> = ({
     debouncedUpdate()
   }
 
-  const handleBlur = () => {
-    if (length <= MAX_ARTICE_SUMMARY_LENGTH) {
-      update({ summary: value })
-    }
-  }
-
   const handleKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
     const target = event.target as HTMLTextAreaElement
 
@@ -136,16 +130,15 @@ const EditorSummary: React.FC<Props> = ({
         ref={inputRef}
         rows={1}
         aria-label={intl.formatMessage({
-          defaultMessage: 'Enter summary…',
-          id: '16zJ3o',
+          defaultMessage: 'Summary to help readers quickly grasp the topic',
+          id: 'wclk7z',
         })}
         placeholder={intl.formatMessage({
-          defaultMessage: 'Enter summary…',
-          id: '16zJ3o',
+          defaultMessage: 'Summary to help readers quickly grasp the topic',
+          id: 'wclk7z',
         })}
         value={value}
         onPaste={handlePaste}
-        onBlur={handleBlur}
         onChange={handleChange}
         onKeyDown={handleKeyDown}
       />

@@ -97,7 +97,7 @@ const InfoHeader = ({
               <button
                 type="button"
                 onClick={() =>
-                  toast.success({
+                  toast.info({
                     message: (
                       <FormattedMessage
                         defaultMessage="IPFS is a decentralized storage technology that has the advantages of being decentralized, easy to survive, and difficult to be censored. Every article published on Matters is uploaded to IPFS. IPFS will incur certain storage fees, which are currently borne by Matters. (Go to the IPFS official website ipfs.com to learn more)"

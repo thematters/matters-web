@@ -1,11 +1,36 @@
-.headerRight {
+.header {
   @mixin flex-center-space-between;
+
+  position: sticky;
+  top: 0;
+  z-index: var(--z-index-global-header);
+  padding: var(--sp12) var(--sp16);
+  background-color: var(--color-white);
+
+  @media (--sm-up) {
+    padding: var(--sp13) var(--sp32);
+  }
+
+  & .headerRight {
+    display: flex;
+    gap: var(--sp24);
+    align-items: center;
+  }
 }
 
 .count {
-  padding-right: var(--sp20);
-  margin-right: var(--sp8);
   font-size: var(--text14);
   line-height: 1.375rem;
   color: var(--color-negative-red);
+}
+
+.editor {
+  @media (--md-down) {
+    margin-top: var(--sp20);
+    margin-left: var(--sp16);
+
+    & :global(#editor) {
+      padding-right: var(--sp16);
+    }
+  }
 }

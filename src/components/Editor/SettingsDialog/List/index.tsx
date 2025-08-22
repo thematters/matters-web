@@ -13,7 +13,7 @@ import styles from './styles.module.css'
 export type SettingsListDialogButtons = {
   confirmButtonText?: string | React.ReactNode
   cancelButtonText?: string | React.ReactNode
-  onConfirm?: () => void
+  onConfirm: ({ closeDialog }: { closeDialog: () => void }) => void
 }
 
 export type SettingsListDialogProps = {
@@ -27,7 +27,7 @@ export type SettingsListDialogProps = {
   hasSetVersionDescription?: boolean
 
   cover?: string | null
-  collectionCount: number
+  connectionCount: number
   tagsCount: number
 } & SettingsListDialogButtons &
   ToggleResponseProps &
@@ -50,7 +50,7 @@ const SettingsList = ({
   hasSetVersionDescription,
 
   cover,
-  collectionCount,
+  connectionCount,
   tagsCount,
 
   campaigns,
@@ -98,11 +98,7 @@ const SettingsList = ({
       return
     }
 
-    if (onConfirm) {
-      onConfirm()
-    } else {
-      forward('confirm')
-    }
+    onConfirm({ closeDialog })
   }
 
   return (
@@ -199,7 +195,7 @@ const SettingsList = ({
             }
             onClick={() => forward('collection')}
           >
-            <ListItem.NumberIndicator num={collectionCount} />
+            <ListItem.NumberIndicator num={connectionCount} />
           </ListItem>
 
           <section className={styles.response}>

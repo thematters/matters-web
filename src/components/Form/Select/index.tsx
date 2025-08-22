@@ -31,7 +31,7 @@ export type FormSelectOption<OptionValue> = {
 export type FormSelectProps<OptionValue> = {
   options: FormSelectOption<OptionValue>[]
   size?: 14 | 16
-  color?: 'campaignBlue'
+  theme?: 'campaign' | 'editorDatePicker'
   onChange: (option: FormSelectOption<OptionValue>) => void
 } & Omit<FieldProps, 'fieldMsgId'>
 
@@ -43,7 +43,7 @@ const Select = <OptionValue,>({
   onChange,
 
   size,
-  color,
+  theme,
 
   spacingTop,
   spacingBottom,
@@ -52,12 +52,16 @@ const Select = <OptionValue,>({
   const selectedOptionId = `${fieldId}-selected`
 
   const selectedOption = options.find((o) => o.selected) || options[0]
+  const filteredOptions =
+    theme === 'editorDatePicker' ? options.filter((o) => o.value) : options
+  const isDisabled = filteredOptions.length === 0
 
   const Options = ({ dropdown }: { dropdown?: boolean }) => {
     const optionsClasses = classNames({
       [styles.list]: true,
       [styles.options]: true,
       [styles.dropdown]: dropdown,
+      [styles.sm]: theme === 'editorDatePicker',
     })
 
     return (
@@ -68,7 +72,7 @@ const Select = <OptionValue,>({
         aria-labelledby={fieldId}
         aria-activedescendant={selectedOptionId}
       >
-        {options.map((option, index) => (
+        {filteredOptions.map((option, index) => (
           <Option
             id={option.selected ? selectedOptionId : `${fieldId}-${index}`}
             name={option.name}
@@ -78,6 +82,7 @@ const Select = <OptionValue,>({
             expanded
             size={size}
             key={index}
+            disabled={isDisabled}
           />
         ))}
       </ul>
@@ -97,8 +102,9 @@ const Select = <OptionValue,>({
             selected
             extra={selectedOption?.extra}
             size={size}
-            color={color}
+            theme={theme}
             ref={ref as React.RefObject<HTMLLIElement>}
+            disabled={isDisabled}
           />
         </ul>
       )}

@@ -1,10 +1,10 @@
-import { ApolloError } from '@apollo/client'
+import { ApolloError, useQuery } from '@apollo/client'
 import _uniq from 'lodash/uniq'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { useIntl } from 'react-intl'
 
 import { ERROR_CODES, PATHS } from '~/common/enums'
-import { parseFormSubmitErrors } from '~/common/utils'
+import { mergeConnections, parseFormSubmitErrors } from '~/common/utils'
 import { DraftDetailStateContext, useRoute } from '~/components'
 import { useImperativeQuery, useMutation } from '~/components/GQL'
 import {
@@ -15,9 +15,13 @@ import {
   DigestRichCirclePublicFragment,
   DigestTagFragment,
   DraftAssetsQuery,
+  DraftDetailQueryQuery,
+  DraftDetailViewerQueryQuery,
+  PublishState as PublishStateType,
   SetDraftAccessMutation,
   SetDraftCanCommentMutation,
-  SetDraftCollectionMutation,
+  SetDraftCollectionsMutation,
+  SetDraftConnectionsMutation,
   SetDraftCoverMutation,
   SetDraftIndentMutation,
   SetDraftPublishIscnMutation,
@@ -28,10 +32,13 @@ import {
 
 import {
   DRAFT_ASSETS,
+  DRAFT_DETAIL,
+  DRAFT_DETAIL_VIEWER,
   SET_ACCESS,
   SET_CAMPAIGN,
   SET_CAN_COMMENT,
-  SET_COLLECTION,
+  SET_COLLECTIONS,
+  SET_CONNECTIONS,
   SET_COVER,
   SET_INDENT,
   SET_PUBLISH_ISCN,
@@ -39,6 +46,22 @@ import {
   SET_SUPPORT_REQUEST_REPLY,
   SET_TAGS,
 } from './gql'
+
+export type OptionTab = 'contentAndLayout' | 'settings'
+
+export const getOptionTabByType = (type?: string): OptionTab => {
+  if (
+    type === 'campaign' ||
+    type === 'tags' ||
+    type === 'connections' ||
+    type === 'collections' ||
+    type === '' ||
+    type === undefined
+  ) {
+    return 'contentAndLayout'
+  }
+  return 'settings'
+}
 
 export const useVersionConflictHandler = () => {
   const intl = useIntl()
@@ -179,12 +202,12 @@ export const useEditDraftTags = () => {
   }
 }
 
-export const useEditDraftCollection = () => {
+export const useEditDraftConnections = () => {
   const { addRequest, createDraft, getDraftId, getDraftUpdatedAt } = useContext(
     DraftDetailStateContext
   )
-  const [setCollection, { loading: saving }] =
-    useMutation<SetDraftCollectionMutation>(SET_COLLECTION)
+  const [setConnections, { loading: saving }] =
+    useMutation<SetDraftConnectionsMutation>(SET_CONNECTIONS)
   const handleVersionConflict = useVersionConflictHandler()
 
   const edit = async (
@@ -193,18 +216,18 @@ export const useEditDraftCollection = () => {
     lastUpdatedAt?: string
   ) => {
     return handleVersionConflict(
-      setCollection({
+      setConnections({
         variables: {
           id: newId || getDraftId(),
-          collection: _uniq(newArticles.map(({ id }) => id)),
+          connections: _uniq(newArticles.map(({ id }) => id)),
           lastUpdatedAt,
         },
       }),
       () =>
-        setCollection({
+        setConnections({
           variables: {
             id: newId || getDraftId(),
-            collection: _uniq(newArticles.map(({ id }) => id)),
+            connections: _uniq(newArticles.map(({ id }) => id)),
           },
         })
     )
@@ -225,6 +248,54 @@ export const useEditDraftCollection = () => {
   return {
     edit: async (newArticles: ArticleDigestDropdownArticleFragment[]) =>
       addRequest(() => createDraftAndEdit(newArticles)),
+    saving,
+  }
+}
+
+export const useEditDraftCollections = () => {
+  const { addRequest, createDraft, getDraftId, getDraftUpdatedAt } = useContext(
+    DraftDetailStateContext
+  )
+  const [setCollections, { loading: saving }] =
+    useMutation<SetDraftCollectionsMutation>(SET_COLLECTIONS)
+  const handleVersionConflict = useVersionConflictHandler()
+
+  const edit = async (
+    newCollections: string[],
+    newId?: string,
+    lastUpdatedAt?: string
+  ) => {
+    return handleVersionConflict(
+      setCollections({
+        variables: {
+          id: newId || getDraftId(),
+          collections: _uniq(newCollections.map((id) => id)),
+          lastUpdatedAt,
+        },
+      }),
+      () =>
+        setCollections({
+          variables: {
+            id: newId || getDraftId(),
+            collections: _uniq(newCollections.map((id) => id)),
+          },
+        })
+    )
+  }
+
+  const createDraftAndEdit = async (newCollections: string[]) => {
+    if (getDraftId()) {
+      return edit(newCollections, undefined, getDraftUpdatedAt())
+    }
+
+    return createDraft({
+      onCreate: (newDraftId) => edit(newCollections, newDraftId),
+    })
+  }
+
+  return {
+    edit: async (newCollections: string[]) =>
+      addRequest(() => createDraftAndEdit(newCollections)),
     saving,
   }
 }
@@ -606,5 +677,103 @@ export const useEditDraftCampaign = () => {
     edit: async (selected?: { campaign: string; stage?: string | null }) =>
       addRequest(() => createDraftAndEdit(selected)),
     saving: saving,
+  }
+}
+
+export const EMPTY_DRAFT: DraftDetailQueryQuery['node'] = {
+  id: '',
+  title: '',
+  createdAt: new Date().toISOString(),
+  updatedAt: new Date().toISOString(),
+  publishState: PublishStateType.Unpublished,
+  content: '',
+  summary: '',
+  summaryCustomized: false,
+  __typename: 'Draft',
+  article: null,
+  cover: null,
+  assets: [],
+  tags: null,
+  connections: {
+    edges: null,
+    __typename: 'ArticleConnection',
+  },
+  collections: {
+    edges: null,
+    __typename: 'CollectionConnection',
+  },
+  access: {
+    type: ArticleAccessType.Public,
+    circle: null,
+    __typename: 'DraftAccess',
+  },
+  license: ArticleLicenseType.CcByNcNd_4,
+  requestForDonation: null,
+  replyToDonator: null,
+  sensitiveByAuthor: false,
+  iscnPublish: null,
+  canComment: true,
+  campaigns: [],
+  indentFirstLine: false,
+}
+
+export const useDraftDetail = () => {
+  const { getDraftId, isNewDraft } = useContext(DraftDetailStateContext)
+  const [initNew] = useState(isNewDraft())
+
+  const { data, loading, error } = useQuery<DraftDetailQueryQuery>(
+    DRAFT_DETAIL,
+    {
+      variables: { id: getDraftId() },
+      fetchPolicy: 'network-only',
+      skip: isNewDraft(),
+    }
+  )
+
+  const {
+    data: viewerData,
+    loading: viewerLoading,
+    fetchMore,
+  } = useQuery<DraftDetailViewerQueryQuery>(DRAFT_DETAIL_VIEWER, {
+    fetchPolicy: 'network-only',
+  })
+
+  const draft = (data?.node?.__typename === 'Draft' && data.node) || EMPTY_DRAFT
+  const ownCircles = viewerData?.viewer?.ownCircles || undefined
+  const appliedCampaigns = viewerData?.viewer?.campaigns.edges?.map(
+    (e) => e.node
+  )
+  const ownCollections = viewerData?.viewer?.collections.edges?.map(
+    (e) => e.node
+  )
+
+  const loadMoreCollections = () => {
+    const connectionPath = 'viewer.collections'
+    return fetchMore({
+      variables: {
+        collectionsAfter: viewerData?.viewer?.collections?.pageInfo?.endCursor,
+      },
+      updateQuery: (previousResult, { fetchMoreResult }) => {
+        return mergeConnections({
+          oldData: previousResult,
+          newData: fetchMoreResult,
+          path: connectionPath,
+        })
+      },
+    })
+  }
+
+  return {
+    draft,
+    viewerData,
+    ownCircles,
+    ownCollections,
+    appliedCampaigns,
+    loading: (loading && !initNew) || viewerLoading,
+    error,
+    isNewDraft: isNewDraft,
+    getDraftId,
+    initNew,
+    loadMoreCollections,
   }
 }
