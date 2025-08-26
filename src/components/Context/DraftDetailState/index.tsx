@@ -21,7 +21,9 @@ export const DraftDetailStateContext = createContext(
     addRequest: (fn: () => Promise<any>) => Promise<any>
     getDraftId: () => string | undefined
     isNewDraft: () => boolean
-    createDraft: (props: { onCreate: (draftId: string) => void }) => void
+    createDraft: (props: {
+      onCreate: (draftId: string) => void
+    }) => Promise<string | undefined>
     getDraftUpdatedAt: () => string | undefined
   }
 )
@@ -107,17 +109,19 @@ export const DraftDetailStateProvider = ({
     onCreate,
   }: {
     onCreate: (draftId: string) => void
-  }) => {
+  }): Promise<string | undefined> => {
     const result = await create()
     const { id } = result?.data?.putDraft || {}
 
-    if (!id) return
+    if (!id) return undefined
 
     await onCreate(id)
 
     await router.replace({ query: { draftId: id } }, undefined, {
       shallow: true,
     })
+
+    return id
   }
 
   // get draft id from URL instead of `useRouter.getQuery`
