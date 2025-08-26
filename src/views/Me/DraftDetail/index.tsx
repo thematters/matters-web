@@ -1,7 +1,7 @@
 import { ApolloError } from '@apollo/client'
 import _omit from 'lodash/omit'
 import dynamic from 'next/dynamic'
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import { useIntl } from 'react-intl'
 
 import {
@@ -67,10 +67,28 @@ const DynamicOptionDrawer = dynamic(
 
 const BaseDraftDetail = () => {
   const intl = useIntl()
-  const { router } = useRoute()
+  const { router, getQuery } = useRoute()
 
-  const { addRequest, createDraft, getDraftId, isNewDraft, getDraftUpdatedAt } =
-    useContext(DraftDetailStateContext)
+  const { addRequest, createDraft, isNewDraft, getDraftUpdatedAt } = useContext(
+    DraftDetailStateContext
+  )
+
+  // Add draftId ref to avoid closure issues
+  const initialDraftId = (() => {
+    const urlDraftId = getQuery('draftId')
+    return urlDraftId === 'new' ? undefined : urlDraftId
+  })()
+  const currentDraftIdRef = useRef<string | undefined>(initialDraftId)
+
+  useEffect(() => {
+    const urlDraftId = getQuery('draftId')
+    const draftId = urlDraftId === 'new' ? undefined : urlDraftId
+
+    // Only update if URL actually changed
+    if (draftId !== currentDraftIdRef.current) {
+      currentDraftIdRef.current = draftId
+    }
+  }, [getQuery('draftId')])
 
   const {
     draft,
@@ -115,7 +133,7 @@ const BaseDraftDetail = () => {
   const hasTitle = draft?.title && draft.title.length > 0
   const isUnpublished = draft?.publishState === 'unpublished'
   const publishable = !!(
-    getDraftId() &&
+    currentDraftIdRef.current &&
     isUnpublished &&
     hasContent &&
     hasTitle &&
@@ -128,14 +146,28 @@ const BaseDraftDetail = () => {
   }): Promise<{ id: string; path: string }> => {
     const isImage = input.type !== ASSET_TYPE.embedaudio
 
-    // create draft first if not exist
-    let draftId = getDraftId()
+    let draftId = currentDraftIdRef.current
+
+    // if ref is empty, try to get the latest draftId from URL
     if (!draftId) {
-      await createDraft({
+      const urlDraftId = getQuery('draftId')
+      draftId = urlDraftId === 'new' ? undefined : urlDraftId
+
+      if (draftId) {
+        currentDraftIdRef.current = draftId
+      }
+    }
+
+    // create draft first if not exist
+    if (!draftId) {
+      draftId = await createDraft({
         onCreate: (newDraftId) => {
-          draftId = newDraftId
+          currentDraftIdRef.current = newDraftId
         },
       })
+      if (!draftId) {
+        throw new Error('Failed to create draft')
+      }
     }
 
     setSaveStatus('saving')
@@ -241,13 +273,16 @@ const BaseDraftDetail = () => {
     try {
       setSaveStatus('saving')
 
-      let draftId = getDraftId()
+      let draftId = currentDraftIdRef.current
       if (!draftId) {
-        await createDraft({
+        draftId = await createDraft({
           onCreate: (newDraftId) => {
-            draftId = newDraftId
+            currentDraftIdRef.current = newDraftId
           },
         })
+        if (!draftId) {
+          throw new Error('Failed to create draft')
+        }
       }
 
       await setContent({
