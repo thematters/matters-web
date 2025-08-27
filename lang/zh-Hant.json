@@ -1683,9 +1683,6 @@
     "defaultMessage": "尚無草稿",
     "description": "src/components/Empty/EmptyDraft.tsx"
   },
-  "Pp/0po": {
-    "defaultMessage": "換一批"
-  },
   "Pq/7m5": {
     "defaultMessage": "晚鳥參與處理中⋯",
     "description": "type:join"

@@ -10,7 +10,7 @@ export interface PageHeaderProps {
   is?: 'h1' | 'h2' | 'h3'
   hasBorder?: boolean
   type?: 'nav' | 'base'
-  spacingBottom?: 8 | 16
+  spacingBottom?: 8 | 12 | 16
 }
 
 export const PageHeader: React.FC<React.PropsWithChildren<PageHeaderProps>> = ({
