@@ -5,35 +5,14 @@
   padding-bottom: var(--sp20);
   border-bottom-style: dashed;
 
-  & > header {
-    padding-bottom: var(--sp24);
-  }
-
   @media (--sm-up) {
-    padding-bottom: var(--sp8);
-  }
-
-  & :global(.list-item > .card) {
-    margin: 0 calc(var(--sp8) * -1);
+    padding-bottom: var(--sp12);
   }
 
   & .tagSection {
-    @mixin border-bottom-grey;
-
     display: flex;
+    flex-wrap: wrap;
     gap: var(--sp16);
-    padding-bottom: var(--sp20);
-    margin-bottom: var(--sp20);
-    border-bottom-style: dashed;
-
-    &:last-child {
-      padding-bottom: 0;
-      margin-bottom: 0;
-      border-bottom-style: none;
-    }
-
-    & > a {
-      flex: 1;
-    }
+    margin-top: var(--sp12);
   }
 }

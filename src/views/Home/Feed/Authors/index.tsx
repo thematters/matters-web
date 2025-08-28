@@ -6,7 +6,6 @@ import {
   Media,
   QueryError,
   ShuffleButton,
-  Slides,
   SpinnerBlock,
   UserDigest,
 } from '~/components'
@@ -39,7 +38,10 @@ const Authors = () => {
 
   const SlidesHeader = (
     <>
-      <Media lessThan="md">
+      <Media lessThan="sm">
+        <SectionHeader type="authors" rightButton={<></>} viewAll={false} />
+      </Media>
+      <Media between={['sm', 'md']}>
         <SectionHeader
           type="authors"
           rightButton={<ShuffleButton onClick={shuffle} />}
@@ -58,40 +60,33 @@ const Authors = () => {
 
   return (
     <section className={styles.authors}>
-      <Slides header={SlidesHeader}>
-        {loading && (
-          <Slides.Item size="md">
-            <SpinnerBlock />
-          </Slides.Item>
-        )}
+      {SlidesHeader}
+      {loading && <SpinnerBlock />}
 
-        {!loading &&
-          _chunk(edges, perColumn).map((chunks, edgeIndex) => (
-            <Slides.Item size="md" key={edgeIndex}>
-              <section>
-                {chunks.map(({ node }, nodeIndex) => (
-                  <UserDigest.Rich
-                    is="link"
-                    key={node.id}
-                    user={node}
-                    spacing={[16, 0]}
-                    bgColor="none"
-                    hasFollow={false}
-                    hasState={false}
-                    onClick={() =>
-                      analytics.trackEvent('click_feed', {
-                        type: 'authors',
-                        contentType: 'user',
-                        location: (edgeIndex + 1) * (nodeIndex + 1) - 1,
-                        id: node.id,
-                      })
-                    }
-                  />
-                ))}
-              </section>
-            </Slides.Item>
-          ))}
-      </Slides>
+      {!loading &&
+        _chunk(edges, perColumn).map((chunks, edgeIndex) => (
+          <section key={edgeIndex}>
+            {chunks.map(({ node }, nodeIndex) => (
+              <UserDigest.Rich
+                is="link"
+                key={node.id}
+                user={node}
+                spacing={[12, 0]}
+                bgColor="none"
+                hasFollow={false}
+                hasState={false}
+                onClick={() =>
+                  analytics.trackEvent('click_feed', {
+                    type: 'authors',
+                    contentType: 'user',
+                    location: (edgeIndex + 1) * (nodeIndex + 1) - 1,
+                    id: node.id,
+                  })
+                }
+              />
+            ))}
+          </section>
+        ))}
     </section>
   )
 }

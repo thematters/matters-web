@@ -1683,9 +1683,6 @@
     "defaultMessage": "No drafts yet",
     "description": "src/components/Empty/EmptyDraft.tsx"
   },
-  "Pp/0po": {
-    "defaultMessage": "Shuffle"
-  },
   "Pq/7m5": {
     "defaultMessage": "Reviewing...",
     "description": "type:join"

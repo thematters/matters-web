@@ -1,11 +1,12 @@
 import { FormattedMessage } from 'react-intl'
 
+import IconEditorUl from '@/public/static/icons/24px/editor-ul.svg'
 import { PATHS } from '~/common/enums'
 import {
   Button,
   ButtonProps,
+  Icon,
   PageHeader,
-  TextIcon,
   useChannels,
 } from '~/components'
 
@@ -22,9 +23,7 @@ type ViewAllButtonProps = ButtonProps
 const ViewAllButton: React.FC<ViewAllButtonProps> = ({ ...props }) => {
   return (
     <Button textColor="greyDarker" textActiveColor="black" {...props}>
-      <TextIcon size={14}>
-        <FormattedMessage defaultMessage="All" id="zQvVDJ" />
-      </TextIcon>
+      <Icon icon={IconEditorUl} size={20} />
     </Button>
   )
 }
@@ -54,7 +53,13 @@ const FeedHeader = ({
   const path = pathMap[type]
 
   return (
-    <PageHeader title={titleMap[type]} is="h2" hasBorder={false} type="base">
+    <PageHeader
+      title={titleMap[type]}
+      is="h2"
+      hasBorder={false}
+      type="base"
+      spacingBottom={12}
+    >
       <section className={styles.right}>
         {rightButton}
 
