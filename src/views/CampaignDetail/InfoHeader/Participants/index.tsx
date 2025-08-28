@@ -67,11 +67,7 @@ const Participants = ({
               placement="left"
               size={14}
             >
-              <FormattedMessage
-                defaultMessage="writers"
-                id="syBMnY"
-                description="src/views/CampaignDetail/InfoHeader/Participants/index.tsx"
-              />
+              <FormattedMessage defaultMessage="Participants" id="zx0myy" />
             </TextIcon>
           </section>
         </section>

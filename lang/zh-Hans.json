@@ -3272,10 +3272,6 @@
   "sy+pv5": {
     "defaultMessage": "邮箱"
   },
-  "syBMnY": {
-    "defaultMessage": "位写作者",
-    "description": "src/views/CampaignDetail/InfoHeader/Participants/index.tsx"
-  },
   "syEQFE": {
     "defaultMessage": "发布"
   },
@@ -3576,10 +3572,6 @@
   "xkr+zo": {
     "defaultMessage": "协议"
   },
-  "xl95XN": {
-    "defaultMessage": "作者",
-    "description": "src/views/CampaignDetail/SideParticipants/index.tsx"
-  },
   "xmcVZ0": {
     "defaultMessage": "搜索"
   },
@@ -3702,6 +3694,9 @@
   },
   "zw4KNU": {
     "defaultMessage": "支持设置"
+  },
+  "zx0myy": {
+    "defaultMessage": "参与者"
   },
   "zxy15q": {
     "defaultMessage": "{subscriber, plural, =1 {人} other {人}}",
