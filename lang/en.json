@@ -3272,10 +3272,6 @@
   "sy+pv5": {
     "defaultMessage": "Email"
   },
-  "syBMnY": {
-    "defaultMessage": "writers",
-    "description": "src/views/CampaignDetail/InfoHeader/Participants/index.tsx"
-  },
   "syEQFE": {
     "defaultMessage": "Publish"
   },
@@ -3576,10 +3572,6 @@
   "xkr+zo": {
     "defaultMessage": "Terms"
   },
-  "xl95XN": {
-    "defaultMessage": "Writers",
-    "description": "src/views/CampaignDetail/SideParticipants/index.tsx"
-  },
   "xmcVZ0": {
     "defaultMessage": "Search"
   },
@@ -3702,6 +3694,9 @@
   },
   "zw4KNU": {
     "defaultMessage": "Support Settings"
+  },
+  "zx0myy": {
+    "defaultMessage": "Participants"
   },
   "zxy15q": {
     "defaultMessage": "{subscriber, plural, =1 {subscriber} other {subscribers}}",
