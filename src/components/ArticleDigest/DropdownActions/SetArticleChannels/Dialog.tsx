@@ -200,17 +200,18 @@ const BaseSetArticleChannelsDialog = ({
                   checked={values.channels.includes(parent.id)}
                   onChange={() => handleToggleChannel(parent.id)}
                 />
-                <section className={styles.pinnedChannel}>
-                  <Form.SquareCheckBox
-                    name="pinnedChannels"
-                    disabled={parent.enabled === false}
-                    value={parent.id}
-                    contents={parent.enabled === false ? '' : '置頂'}
-                    color="greyDarker"
-                    checked={values.pinnedChannels.includes(parent.id)}
-                    onChange={() => handleTogglePinnedChannel(parent.id)}
-                  />
-                </section>
+                {parent.enabled && (
+                  <section className={styles.pinnedChannel}>
+                    <Form.SquareCheckBox
+                      name="pinnedChannels"
+                      value={parent.id}
+                      contents="置頂"
+                      color="greyDarker"
+                      checked={values.pinnedChannels.includes(parent.id)}
+                      onChange={() => handleTogglePinnedChannel(parent.id)}
+                    />
+                  </section>
+                )}
               </section>
             </List.Item>
             {(childrenByParentId.get(parent.id) || []).map((child) => (
@@ -224,17 +225,6 @@ const BaseSetArticleChannelsDialog = ({
                     checked={values.channels.includes(child.id)}
                     onChange={() => handleToggleChannel(child.id)}
                   />
-                  <section className={styles.pinnedChannel}>
-                    <Form.SquareCheckBox
-                      name="pinnedChannels"
-                      disabled={child.enabled === false}
-                      value={child.id}
-                      contents={child.enabled === false ? '' : '置頂'}
-                      color="greyDarker"
-                      checked={values.pinnedChannels.includes(child.id)}
-                      onChange={() => handleTogglePinnedChannel(child.id)}
-                    />
-                  </section>
                 </section>
               </List.Item>
             ))}

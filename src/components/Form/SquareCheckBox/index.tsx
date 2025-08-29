@@ -85,7 +85,7 @@ const SquareCheckBox: React.FC<SquareCheckBoxBoxProps> = ({
       color={disabled ? 'grey' : checkedBoxColor}
     />
   ) : (
-    <Icon icon={IconSquare} size={20} color={disabled ? 'white' : 'greyDark'} />
+    <Icon icon={IconSquare} size={20} color="greyDark" />
   )
 
   return (
