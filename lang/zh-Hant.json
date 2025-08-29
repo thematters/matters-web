@@ -3272,10 +3272,6 @@
   "sy+pv5": {
     "defaultMessage": "電子郵件"
   },
-  "syBMnY": {
-    "defaultMessage": "位寫作者",
-    "description": "src/views/CampaignDetail/InfoHeader/Participants/index.tsx"
-  },
   "syEQFE": {
     "defaultMessage": "發布"
   },
@@ -3576,10 +3572,6 @@
   "xkr+zo": {
     "defaultMessage": "協議"
   },
-  "xl95XN": {
-    "defaultMessage": "作者",
-    "description": "src/views/CampaignDetail/SideParticipants/index.tsx"
-  },
   "xmcVZ0": {
     "defaultMessage": "搜尋"
   },
@@ -3702,6 +3694,9 @@
   },
   "zw4KNU": {
     "defaultMessage": "支持設定"
+  },
+  "zx0myy": {
+    "defaultMessage": "參與者"
   },
   "zxy15q": {
     "defaultMessage": "{subscriber, plural, =1 {人} other {人}}",
