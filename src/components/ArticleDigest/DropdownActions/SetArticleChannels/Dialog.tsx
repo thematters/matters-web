@@ -3,12 +3,14 @@ import { useFormik } from 'formik'
 import { useEffect, useId } from 'react'
 import { FormattedMessage } from 'react-intl'
 
+import { Z_INDEX } from '~/common/enums'
 import {
   Dialog,
   Form,
   List,
   Spinner,
   toast,
+  Tooltip,
   useDialogSwitch,
   useMutation,
 } from '~/components'
@@ -191,28 +193,39 @@ const BaseSetArticleChannelsDialog = ({
         {parentChannels.map((parent) => (
           <>
             <List.Item key={parent.id}>
-              <section className={styles.item}>
-                <Form.SquareCheckBox
-                  name="channels"
-                  value={parent.id}
-                  disabled={!parent.providerId}
-                  contents={parent.name || parent.id}
-                  checked={values.channels.includes(parent.id)}
-                  onChange={() => handleToggleChannel(parent.id)}
-                />
-                {parent.enabled && (
-                  <section className={styles.pinnedChannel}>
-                    <Form.SquareCheckBox
-                      name="pinnedChannels"
-                      value={parent.id}
-                      contents="置頂"
-                      color="greyDarker"
-                      checked={values.pinnedChannels.includes(parent.id)}
-                      onChange={() => handleTogglePinnedChannel(parent.id)}
-                    />
-                  </section>
-                )}
-              </section>
+              <Tooltip
+                content={'隐藏频道'}
+                delay={[500, 0]}
+                zIndex={Z_INDEX.OVER_DIALOG}
+                disabled={parent.enabled}
+                placement={'right'}
+              >
+                <section className={styles.item}>
+                  <Form.SquareCheckBox
+                    name="channels"
+                    value={parent.id}
+                    disabled={
+                      !parent.providerId && !values.channels.includes(parent.id)
+                    }
+                    contents={parent.name || parent.id}
+                    contentColor={parent.enabled ? 'black' : 'grey'}
+                    checked={values.channels.includes(parent.id)}
+                    onChange={() => handleToggleChannel(parent.id)}
+                  />
+                  {parent.enabled && (
+                    <section className={styles.pinnedChannel}>
+                      <Form.SquareCheckBox
+                        name="pinnedChannels"
+                        value={parent.id}
+                        contents="置頂"
+                        color="greyDarker"
+                        checked={values.pinnedChannels.includes(parent.id)}
+                        onChange={() => handleTogglePinnedChannel(parent.id)}
+                      />
+                    </section>
+                  )}
+                </section>
+              </Tooltip>
             </List.Item>
             {(childrenByParentId.get(parent.id) || []).map((child) => (
               <List.Item key={child.id}>
