@@ -47,6 +47,7 @@ const Content = ({ step, setStep, onClose, onConfirm }: ContentProps) => {
 
   const topicChannels = channels?.filter(
     (channel) =>
+      channel.__typename !== 'Tag' &&
       channel.__typename === 'TopicChannel' &&
       'enabled' in channel &&
       channel.enabled
@@ -108,7 +109,7 @@ const Content = ({ step, setStep, onClose, onConfirm }: ContentProps) => {
                   <span
                     className={`${styles.channelLabel} ${styles.lineClamp}`}
                   >
-                    {getChannelDisplayName(channel, lang)}
+                    {getChannelDisplayName(channel as Channel, lang)}
                   </span>
                 ),
                 value: channel.id,
@@ -181,7 +182,7 @@ const Content = ({ step, setStep, onClose, onConfirm }: ContentProps) => {
             values={{
               channelName: (
                 <span className={styles.selectedChannelName}>
-                  {getChannelDisplayName(selectedChannel, lang)}
+                  {getChannelDisplayName(selectedChannel as Channel, lang)}
                 </span>
               ),
             }}
