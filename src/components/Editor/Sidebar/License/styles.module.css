@@ -2,6 +2,19 @@
   padding: var(--sp8) var(--sp16) 0;
 }
 
+.dropdownButton {
+  display: block;
+  margin-bottom: var(--sp24);
+  line-height: inherit;
+  vertical-align: initial;
+  text-align: initial;
+  white-space: initial;
+
+  & > section {
+    margin-bottom: 0;
+  }
+}
+
 .list {
   overflow: hidden;
   cursor: pointer;
