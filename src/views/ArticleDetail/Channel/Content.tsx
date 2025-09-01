@@ -51,7 +51,7 @@ const Content = ({ step, setStep, onClose, onConfirm }: ContentProps) => {
       channel.__typename === 'TopicChannel' &&
       'enabled' in channel &&
       channel.enabled
-  )
+  ) as Channel[]
 
   const { setFieldValue, values } = useFormik<FormValues>({
     initialValues: { selectedChannel: '' },
