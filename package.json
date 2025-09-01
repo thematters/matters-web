@@ -4,7 +4,7 @@
   "description": "codebase of Matters' website",
   "author": "Matters <hi@matters.town>",
   "engines": {
-    "node": ">=16.14 <19.0"
+    "node": ">=22.0.0"
   },
   "license": "Apache-2.0",
   "sideEffects": false,
