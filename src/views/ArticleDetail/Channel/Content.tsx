@@ -47,7 +47,6 @@ const Content = ({ step, setStep, onClose, onConfirm }: ContentProps) => {
 
   const topicChannels = channels?.filter(
     (channel) =>
-      channel.__typename !== 'Tag' &&
       channel.__typename === 'TopicChannel' &&
       'enabled' in channel &&
       channel.enabled
