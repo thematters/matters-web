@@ -34,6 +34,7 @@ export const fragments = {
             shortHash
             ... on WritingChallenge {
               id
+              name
               nameZhHant: name(input: { language: zh_hant })
               nameZhHans: name(input: { language: zh_hans })
               nameEn: name(input: { language: en })
