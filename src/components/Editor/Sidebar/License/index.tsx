@@ -42,14 +42,12 @@ const ToggleButton = React.forwardRef<
   HTMLButtonElement,
   {
     isEditing: boolean
-    onToggle: () => void
     disabled?: boolean
   }
->(({ isEditing, onToggle, disabled }, ref) => {
+>(({ isEditing, disabled }, ref) => {
   const intl = useIntl()
   return (
     <button
-      onClick={onToggle}
       className={styles.rightButton}
       disabled={disabled}
       aria-label={intl.formatMessage(
@@ -127,30 +125,36 @@ const SidebarLicense: React.FC<SidebarLicenseProps> = ({
   return (
     <Dropdown content={<Options dropdown />} zIndex={Z_INDEX.OVER_DIALOG}>
       {({ openDropdown, ref }) => (
-        <Box
-          title={intl.formatMessage(
-            {
-              defaultMessage: 'License: {license}',
-              id: 'B7QJw1',
-            },
-            {
-              license: LICENSE_TEXT[license].title[lang],
-            }
+        <button
+          ref={ref}
+          onClick={() => {
+            openDropdown()
+            handleToggleEdit()
+          }}
+          aria-label={intl.formatMessage(
+            isEditing
+              ? { defaultMessage: 'Save', id: 'rbrahO' }
+              : { defaultMessage: 'Edit', id: '2/2yg+' }
           )}
-          subtitle={LICENSE_TEXT[license].subtitle[lang]}
-          rightButton={
-            <ToggleButton
-              isEditing={isEditing}
-              onToggle={() => {
-                openDropdown()
-                handleToggleEdit()
-              }}
-              disabled={saving}
-              ref={ref as React.RefObject<HTMLButtonElement>}
-            />
-          }
-          disabled={saving}
-        />
+          className={styles.dropdownButton}
+        >
+          <Box
+            title={intl.formatMessage(
+              {
+                defaultMessage: 'License: {license}',
+                id: 'B7QJw1',
+              },
+              {
+                license: LICENSE_TEXT[license].title[lang],
+              }
+            )}
+            subtitle={LICENSE_TEXT[license].subtitle[lang]}
+            rightButton={
+              <ToggleButton isEditing={isEditing} disabled={saving} />
+            }
+            disabled={saving}
+          />
+        </button>
       )}
     </Dropdown>
   )
