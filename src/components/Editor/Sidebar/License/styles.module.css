@@ -4,6 +4,7 @@
 
 .dropdownButton {
   display: block;
+  width: 100%;
   margin-bottom: var(--sp24);
   line-height: inherit;
   vertical-align: initial;
