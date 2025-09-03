@@ -83,6 +83,7 @@ const Authors = () => {
                     id: node.id,
                   })
                 }
+                showLogbook={false}
               />
             ))}
           </section>
