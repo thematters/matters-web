@@ -182,10 +182,6 @@
       border-color: var(--color-negative-red);
     }
   }
-
-  &:-webkit-autofill::first-line {
-    font-size: var(--text16);
-  }
 }
 
 @define-mixin form-input-number {

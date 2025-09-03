@@ -15,6 +15,7 @@ export type SquareCheckBoxBoxProps = {
   contents?: React.ReactNode
 
   checkedBoxColor?: 'green' | 'black' | 'grey'
+  contentColor?: 'black' | 'grey' | 'greyDark' | 'greyLight'
   icon?: React.ReactNode
   left?: React.ReactNode
   sup?: React.ReactNode
@@ -31,6 +32,7 @@ const SquareCheckBox: React.FC<SquareCheckBoxBoxProps> = ({
   contents,
   hint,
   checkedBoxColor = 'green',
+  contentColor,
   icon,
   left,
   sup,
@@ -85,7 +87,7 @@ const SquareCheckBox: React.FC<SquareCheckBoxBoxProps> = ({
       color={disabled ? 'grey' : checkedBoxColor}
     />
   ) : (
-    <Icon icon={IconSquare} size={20} color={disabled ? 'white' : 'greyDark'} />
+    <Icon icon={IconSquare} size={20} color="greyDark" />
   )
 
   return (
@@ -99,7 +101,12 @@ const SquareCheckBox: React.FC<SquareCheckBoxBoxProps> = ({
     >
       <section className={styles.wrapper} ref={node}>
         <label className={labelClasses}>
-          <TextIcon spacing={8} size={14} icon={icon || checkboxIcon}>
+          <TextIcon
+            spacing={8}
+            size={14}
+            icon={icon || checkboxIcon}
+            color={contentColor}
+          >
             <section className={styles.content}>
               {sup}
               <span className={hintClasses}>

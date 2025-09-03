@@ -27,10 +27,8 @@ export const ParticipantsDrawer: React.FC<DrawerProps> = ({
         title={
           <>
             {intl.formatMessage({
-              defaultMessage: 'Writers',
-              description:
-                'src/views/CampaignDetail/SideParticipants/index.tsx',
-              id: 'xl95XN',
+              defaultMessage: 'Participants',
+              id: 'zx0myy',
             })}{' '}
             {totalParticipants > 0 && (
               <span className={styles.count}>{totalParticipants}</span>
