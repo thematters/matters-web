@@ -112,10 +112,6 @@
     margin-right: var(--sp24);
   }
 
-  @media (--sm-up) {
-    margin-right: 0 var(--sp24);
-  }
-
   @media (--md-up) {
     margin: 0 var(--sp32);
   }

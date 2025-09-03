@@ -39,7 +39,7 @@ export const ArticleTag = ({
     size: 14,
     spacing: 0,
     weight: 'normal',
-    icon: <Icon icon={IconHashTag} color="greyDarker" />,
+    icon: <Icon icon={IconHashTag} color="grey" />,
     ...customTextIconProps,
   }
 
