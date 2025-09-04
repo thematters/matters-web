@@ -113,8 +113,12 @@ const DropdownMenu = ({
   const { edges: tagEdges } = searchResults || {}
   const hasSearchResults = tagEdges && tagEdges.length > 0
   const isSearching = searchKey !== ''
+  const tagAlreadyExists = tagEdges?.some(
+    (tag) =>
+      tag.node.__typename === 'Tag' && tag.node.content === debouncedSearchKey
+  )
   const shouldShowCreateOption =
-    isSearching && !hasSearchResults && !searchLoading
+    isSearching && !searchLoading && !tagAlreadyExists
 
   return (
     <Menu>
