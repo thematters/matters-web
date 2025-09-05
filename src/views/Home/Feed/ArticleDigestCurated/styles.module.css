@@ -50,3 +50,17 @@
     }
   }
 }
+
+.campaignName {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: var(--sp4) var(--sp16);
+  font-size: var(--sp12);
+  line-height: 1.125rem;
+  color: var(--color-white);
+  background-color: var(--color-other-mask);
+  border-bottom-right-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
+}
