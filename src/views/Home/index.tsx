@@ -1,5 +1,15 @@
+import { useContext } from 'react'
+
 import IMAGE_INTRO from '@/public/static/images/intro.jpg'
-import { Announcements, Head, Layout, Spacer } from '~/components'
+import {
+  Announcements,
+  Head,
+  LanguageContext,
+  Layout,
+  Spacer,
+  useChannels,
+  useRoute,
+} from '~/components'
 
 import Feed from './Feed'
 import Sidebar from './Sidebar'
@@ -9,6 +19,12 @@ const Home = ({
 }: {
   showRecommendation?: boolean
 } = {}) => {
+  const { lang } = useContext(LanguageContext)
+  const { isInPath, getQuery } = useRoute()
+  const isInChannel = isInPath('CHANNEL')
+  const shortHash = getQuery('shortHash')
+  const { channels } = useChannels()
+  const channel = channels?.find((channel) => channel.shortHash === shortHash)
   return (
     <Layout.Main
       aside={
@@ -22,7 +38,20 @@ const Home = ({
         </>
       }
     >
-      <Head image={IMAGE_INTRO.src} />
+      <Head
+        image={IMAGE_INTRO.src}
+        title={
+          isInChannel &&
+          (channel?.__typename === 'CurationChannel' ||
+            channel?.__typename === 'TopicChannel')
+            ? lang === 'zh_hans'
+              ? channel.nameZhHans
+              : lang === 'zh_hant'
+                ? channel.nameZhHant
+                : channel.nameEn
+            : undefined
+        }
+      />
 
       <Feed showRecommendation={showRecommendation} />
     </Layout.Main>
