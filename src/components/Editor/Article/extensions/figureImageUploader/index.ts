@@ -2,7 +2,7 @@ import { mergeAttributes, ReactNodeViewRenderer } from '@matters/matters-editor'
 import { Node } from '@tiptap/core'
 
 import { ASSET_TYPE } from '~/common/enums'
-import { getFileId } from '~/common/utils'
+import { getFileId, validateImageSync } from '~/common/utils'
 
 import Uploader, { StorageAsset, UploaderProps } from './Uploader'
 
@@ -87,6 +87,13 @@ export const FigureImageUploader = Node.create<FigcaptionImageUploaderOptions>({
         ({ chain }) => {
           if (!files.length) {
             return true
+          }
+
+          for (const file of files) {
+            const isValid = validateImageSync(file)
+            if (!isValid) {
+              return false
+            }
           }
 
           const assets = this.editor.storage[pluginName].assets as StorageAsset
