@@ -31,6 +31,10 @@
 .feedbackButtons {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--sp8);
   margin-top: var(--sp4);
+
+  & > button {
+    padding-right: var(--sp8);
+    padding-left: var(--sp12);
+  }
 }
