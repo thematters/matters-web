@@ -22,16 +22,12 @@ body {
   overscroll-behavior-y: none;
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   html,
   img {
     filter: invert(1) hue-rotate(0.5turn);
   }
-
-  img {
-    opacity: 0.75;
-  }
-}
+} */
 
 *:not(body) {
   background-repeat: no-repeat;

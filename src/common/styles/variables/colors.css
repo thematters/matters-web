@@ -76,4 +76,13 @@
   --color-new-palette-attention-600: #ddc700;
   --color-new-palette-attention-700: #cab600;
   --color-new-palette-secondary-700: #379f03;
+
+  @media (prefers-color-scheme: dark) {
+    --color-white: #161616;
+    --color-grey-darker: #a7a7a7;
+    --color-grey-dark: #929292;
+    --color-grey: #6b6b6b;
+    --color-grey-lighter: #2e2e2e;
+    --color-campaign-blue-label: #83bad1;
+  }
 }
