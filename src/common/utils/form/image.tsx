@@ -15,7 +15,48 @@ export const getFileType = (
   file: File
 ): Promise<FileType.FileTypeResult | undefined> => FileType.fromBlob(file)
 
-// return meme type or null if not valid
+export const validateImageSync = (
+  image: File,
+  isAvatar: boolean = false
+): string | null => {
+  // check file type
+  const isAcceptedType = ACCEPTED_UPLOAD_IMAGE_TYPES.includes(image.type)
+  if (!isAcceptedType) {
+    toast.error({
+      message: (
+        <FormattedMessage
+          defaultMessage="Only JPEG, PNG, and GIF and WebP images are supported."
+          id="91AzwP"
+        />
+      ),
+    })
+    return null
+  }
+
+  // check file size
+  const isGIF = image.type === 'image/gif'
+  const sizeLimit =
+    isAvatar && isGIF ? UPLOAD_GIF_AVATAR_SIZE_LIMIT : UPLOAD_IMAGE_SIZE_LIMIT
+  const isExceedSizeLimit = image.size > sizeLimit
+  if (isExceedSizeLimit) {
+    toast.error({
+      message: (
+        <FormattedMessage
+          defaultMessage="{ext, select, gif {GIF format i} other {I} }mages have a {sizeInMB} megabyte (MB) size limit."
+          id="bSqeXm"
+          values={{
+            ext: image.type.split('/')[1],
+            sizeInMB: sizeLimit / 1024 / 1024,
+          }}
+        />
+      ),
+    })
+    return null
+  }
+
+  return image.type
+}
+
 export const validateImage = (
   image: File,
   isAvatar: boolean = false,
