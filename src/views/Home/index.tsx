@@ -4,8 +4,10 @@ import IMAGE_INTRO from '@/public/static/images/intro.jpg'
 import {
   Announcements,
   Head,
+  LanguageContext,
   Layout,
   Spacer,
+  useChannels,
   useRoute,
   ViewerContext,
 } from '~/components'
@@ -18,13 +20,17 @@ const Home = ({
 }: {
   showRecommendation?: boolean
 } = {}) => {
-  const { isInPath } = useRoute()
+  const { isInPath, getQuery } = useRoute()
   const viewer = useContext(ViewerContext)
   const isAuthed = viewer.isAuthed
   const isInNewest = isInPath('NEWEST')
   const isInChannel = isInPath('CHANNEL')
   const isInFeatured = isInPath('FEATURED') || (!isAuthed && isInPath('HOME'))
   const isInHottest = isInPath('HOTTEST')
+  const { lang } = useContext(LanguageContext)
+  const shortHash = getQuery('shortHash')
+  const { channels } = useChannels()
+  const channel = channels?.find((channel) => channel.shortHash === shortHash)
   return (
     <Layout.Main
       aside={
@@ -41,7 +47,20 @@ const Home = ({
         </>
       }
     >
-      <Head image={IMAGE_INTRO.src} />
+      <Head
+        image={IMAGE_INTRO.src}
+        title={
+          isInChannel &&
+          (channel?.__typename === 'CurationChannel' ||
+            channel?.__typename === 'TopicChannel')
+            ? lang === 'zh_hans'
+              ? channel.nameZhHans
+              : lang === 'zh_hant'
+                ? channel.nameZhHant
+                : channel.nameEn
+            : undefined
+        }
+      />
 
       <Feed showRecommendation={showRecommendation} />
     </Layout.Main>
