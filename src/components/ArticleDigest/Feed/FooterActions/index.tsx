@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
+import IconBook2 from '@/public/static/icons/24px/book2.svg'
 import IconPaywall from '@/public/static/icons/24px/paywall.svg'
 import IconStar from '@/public/static/icons/24px/star.svg'
 import { toPath } from '~/common/utils'
@@ -29,6 +30,7 @@ export type FooterActionsProps = {
   hasDonationCount?: boolean
   hasCircle?: boolean
   hasCampaign?: boolean
+  hasCollection?: boolean
   tag?: React.ReactNode
   includesMetaData?: boolean
 } & FooterActionsControls
@@ -40,6 +42,7 @@ const FooterActions = ({
   hasDonationCount,
   hasCircle,
   hasCampaign = true,
+  hasCollection = false,
   tag,
   includesMetaData = true,
   ...controls
@@ -50,6 +53,18 @@ const FooterActions = ({
   const viewer = useContext(ViewerContext)
   const { lang } = useContext(LanguageContext)
   const { channelId, pinned, hasTogglePinChannelArticles } = controls
+  const collection = article.collections.edges
+    ?.map((edge) => edge.node)
+    .reduce(
+      (maxCollection, currentCollection) => {
+        if (!maxCollection) return currentCollection
+        return currentCollection.articles.totalCount >
+          maxCollection.articles.totalCount
+          ? currentCollection
+          : maxCollection
+      },
+      null as (typeof article.collections.edges)[0]['node'] | null
+    )
 
   return (
     <footer className={styles.footer}>
@@ -110,6 +125,25 @@ const FooterActions = ({
                         : 'nameEn'
                   ]
                 }
+              </Link>
+            )}
+
+            {hasCollection && collection && article.author.userName && (
+              <Link
+                {...toPath({
+                  page: 'collectionDetail',
+                  userName: article.author.userName,
+                  collection,
+                })}
+                className={styles.collection}
+              >
+                <TextIcon
+                  icon={<Icon icon={IconBook2} size={12} />}
+                  size={12}
+                  color="newPalettePrimary500"
+                >
+                  {collection.title}
+                </TextIcon>
               </Link>
             )}
           </>
