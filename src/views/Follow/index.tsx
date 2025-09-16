@@ -86,7 +86,7 @@ const Follow = () => {
     <Layout.Main
       aside={
         <>
-          <Spacer size="sp16" />
+          <Spacer size="sp44" />
           <Announcements />
         </>
       }

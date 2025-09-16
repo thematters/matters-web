@@ -28,6 +28,17 @@ export const fragments = {
             ...DigestTitleCircle
           }
         }
+        collections(input: { first: null }) {
+          edges {
+            node {
+              id
+              title
+              articles(input: { first: 0 }) {
+                totalCount
+              }
+            }
+          }
+        }
         campaigns {
           campaign {
             id

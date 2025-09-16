@@ -9,6 +9,7 @@ import {
   Spacer,
   useChannels,
   useRoute,
+  ViewerContext,
 } from '~/components'
 
 import Feed from './Feed'
@@ -19,9 +20,14 @@ const Home = ({
 }: {
   showRecommendation?: boolean
 } = {}) => {
-  const { lang } = useContext(LanguageContext)
   const { isInPath, getQuery } = useRoute()
+  const viewer = useContext(ViewerContext)
+  const isAuthed = viewer.isAuthed
+  const isInNewest = isInPath('NEWEST')
   const isInChannel = isInPath('CHANNEL')
+  const isInFeatured = isInPath('FEATURED') || (!isAuthed && isInPath('HOME'))
+  const isInHottest = isInPath('HOTTEST')
+  const { lang } = useContext(LanguageContext)
   const shortHash = getQuery('shortHash')
   const { channels } = useChannels()
   const channel = channels?.find((channel) => channel.shortHash === shortHash)
@@ -29,7 +35,10 @@ const Home = ({
     <Layout.Main
       aside={
         <>
-          <Spacer size="sp16" />
+          {(isInNewest || isInFeatured || isInHottest) && (
+            <Spacer size="sp44" />
+          )}
+          {isInChannel && <Spacer size="sp16" />}
           <Announcements />
           {showRecommendation && <Sidebar.Authors />}
           {showRecommendation && <Sidebar.Tags />}
