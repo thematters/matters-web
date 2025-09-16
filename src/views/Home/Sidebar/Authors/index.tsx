@@ -53,6 +53,7 @@ const Authors = () => {
                 }
                 hasFollow={false}
                 hasState={false}
+                showLogbook={false}
               />
             </List.Item>
           ))}

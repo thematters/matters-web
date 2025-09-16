@@ -71,6 +71,7 @@ const Mini = ({
   hasDisplayName,
   hasUserName,
   disabled,
+  showLogbook = true,
 
   onClick,
 }: UserDigestMiniProps) => {
@@ -124,7 +125,9 @@ const Mini = ({
 
   const Content = () => (
     <section className={containerClasses}>
-      {hasAvatar && <Avatar size={avatarSize} user={user} />}
+      {hasAvatar && (
+        <Avatar size={avatarSize} user={user} showLogbook={showLogbook} />
+      )}
 
       <span className={nameClasses}>
         {hasDisplayName && (

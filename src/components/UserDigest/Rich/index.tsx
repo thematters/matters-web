@@ -51,7 +51,7 @@ const Rich = ({
 
   hasFollow = true,
   hasState = true,
-
+  showLogbook = true,
   ...cardProps
 }: UserDigestRichProps) => {
   const { visuallyHiddenProps } = useVisuallyHidden()
@@ -124,7 +124,11 @@ const Rich = ({
     return (
       <>
         <span {...visuallyHiddenProps}>{user.displayName}</span>
-        <Avatar size={size === 'sm' ? 32 : 48} user={user} />
+        <Avatar
+          size={size === 'sm' ? 32 : 48}
+          user={user}
+          showLogbook={showLogbook}
+        />
         {avatarBadge && <span className={styles.badge}>{avatarBadge}</span>}
       </>
     )

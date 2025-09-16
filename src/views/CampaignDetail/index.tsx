@@ -96,6 +96,15 @@ const CampaignDetail = () => {
         }
         path={path.href}
         image={campaign.cover}
+        description={
+          campaign[
+            lang === 'zh_hans'
+              ? 'descriptionZhHans'
+              : lang === 'zh_hant'
+                ? 'descriptionZhHant'
+                : 'descriptionEn'
+          ]
+        }
       />
 
       <InfoHeader campaign={campaign} />
