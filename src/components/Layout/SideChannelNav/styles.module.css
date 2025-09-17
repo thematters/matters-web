@@ -128,6 +128,10 @@
       @mixin line-clamp;
 
       -webkit-line-clamp: 2;
+
+      &.threeLines {
+        -webkit-line-clamp: 3;
+      }
     }
 
     @media (--xs-up) {
