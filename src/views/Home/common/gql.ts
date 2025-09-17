@@ -19,7 +19,6 @@ export const AUTHORS_RECOMMENDATION_PUBLIC = gql`
               followed: false
               channel: { shortHash: $shortHash }
             }
-            newAlgo: true
           }
         ) {
           edges {
@@ -51,7 +50,6 @@ export const TAGS_RECOMMENDATION_PUBLIC = gql`
           input: {
             first: $first
             filter: { random: $random, channel: { shortHash: $shortHash } }
-            newAlgo: true
           }
         ) {
           totalCount
