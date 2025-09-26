@@ -119,7 +119,7 @@ const PublishButton = ({
   const isPublished = draft.publishState === 'published'
   const disabled = !publishable || isPending || isPublished
 
-  const { selectedCampaign } = getSelectCampaigns({
+  const { selectedCampaign, selectedStage } = getSelectCampaigns({
     applied: campaigns,
     attached: draft.campaigns,
     createdAt: draft.createdAt,
@@ -167,6 +167,22 @@ const PublishButton = ({
           openEditorPreviewDialog={() => {
             const hasCampaign = !!selectedCampaign
             const hasCircle = !!draft.access.circle
+
+            if (
+              hasCampaign &&
+              selectedCampaign.stages.length > 0 &&
+              !selectedStage
+            ) {
+              toast.error({
+                message: (
+                  <FormattedMessage
+                    defaultMessage="Please select a date of activity "
+                    id="P/7t1k"
+                  />
+                ),
+              })
+              return
+            }
 
             if (hasCampaign && hasCircle) {
               toast.error({
