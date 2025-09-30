@@ -36,5 +36,9 @@
   & > button {
     padding-right: var(--sp8);
     padding-left: var(--sp12);
+
+    & > div {
+      width: 1.125rem;
+    }
   }
 }
