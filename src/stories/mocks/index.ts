@@ -189,6 +189,10 @@ export const MOCK_ARTILCE = {
       iscnPublish: false,
     },
   ],
+  collections: {
+    __typename: 'CollectionConnection' as any,
+    edges: [],
+  },
 }
 
 export const MOCK_CIRCLE_ARTICLE = {

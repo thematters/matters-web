@@ -34,6 +34,11 @@ const ChannelItem = ({ channel }: ChannelItemProps) => {
   const isWritingChallenge = channel.__typename === 'WritingChallenge'
   const isCurationChannel = channel.__typename === 'CurationChannel'
 
+  const innerClassName = classnames({
+    [styles.inner]: true,
+    [styles.threeLines]: isWritingChallenge || isCurationChannel,
+  })
+
   const pathType = isWritingChallenge
     ? CHANNEL_PATH_TYPES.WRITING_CHALLENGE
     : CHANNEL_PATH_TYPES.REGULAR_CHANNEL
@@ -71,7 +76,7 @@ const ChannelItem = ({ channel }: ChannelItemProps) => {
         }}
       >
         <span className={styles.name}>
-          <span className={styles.inner}>{channelName}</span>
+          <span className={innerClassName}>{channelName}</span>
         </span>
       </Link>
     </Tooltip>
