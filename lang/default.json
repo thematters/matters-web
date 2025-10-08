@@ -3602,6 +3602,10 @@
     "defaultMessage": "New discussions",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
   },
+  "xiV3Wz": {
+    "defaultMessage": "More events",
+    "description": "src/views/CampaignDetail/InfoHeader/OtherCampaigns/index.tsx"
+  },
   "xjHiYx": {
     "defaultMessage": "Article revision count reach limit",
     "description": "ARTICLE_REVISION_REACH_LIMIT"

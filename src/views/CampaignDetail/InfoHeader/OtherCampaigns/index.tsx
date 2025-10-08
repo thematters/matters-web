@@ -20,7 +20,11 @@ const OtherCampaigns = () => {
         weight="medium"
         size={14}
       >
-        <FormattedMessage defaultMessage="More events" id="zM1YNT" />
+        <FormattedMessage
+          defaultMessage="More events"
+          id="xiV3Wz"
+          description="src/views/CampaignDetail/InfoHeader/OtherCampaigns/index.tsx"
+        />
       </TextIcon>
     </Button>
   )
