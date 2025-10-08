@@ -3602,6 +3602,10 @@
     "defaultMessage": "留言",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
   },
+  "xiV3Wz": {
+    "defaultMessage": "更多活動",
+    "description": "src/views/CampaignDetail/InfoHeader/OtherCampaigns/index.tsx"
+  },
   "xjHiYx": {
     "defaultMessage": "作品編輯次數超出上限",
     "description": "ARTICLE_REVISION_REACH_LIMIT"
