@@ -8,6 +8,7 @@
     "MomentNotice",
     "CommentNotice",
     "CommentCommentNotice",
+    "CampaignArticleNotice",
     "TransactionNotice",
     "CircleNotice",
     "OfficialAnnouncementNotice",
@@ -25,14 +26,18 @@
     "Report",
     "IcymiTopic",
     "Collection",
-    "Moment"
+    "Moment",
+    "TopicChannel",
+    "CurationChannel"
   ],
   "PinnableWork": ["Article", "Collection"],
   "Connection": [
     "ArticleVersionsConnection",
     "ArticleConnection",
     "TagConnection",
+    "TagWritingConnection",
     "CampaignParticipantConnection",
+    "CampaignArticleConnection",
     "CampaignConnection",
     "CircleConnection",
     "MemberConnection",
@@ -44,6 +49,7 @@
     "SkippedListItemsConnection",
     "ReportConnection",
     "IcymiTopicConnection",
+    "TopicChannelFeedbackConnection",
     "TopDonatorConnection",
     "UserConnection",
     "ReadHistoryConnection",
@@ -54,8 +60,10 @@
     "ResponseConnection",
     "TransactionConnection",
     "OAuthClientConnection",
-    "CollectionConnection"
+    "CollectionConnection",
+    "ChannelArticleConnection"
   ],
+  "Donator": ["User", "CryptoWallet"],
   "FollowingActivity": [
     "UserPublishArticleActivity",
     "UserAddArticleTagActivity",
@@ -68,5 +76,6 @@
   ],
   "Writing": ["Article", "Moment"],
   "Response": ["Article", "Comment"],
-  "TransactionTarget": ["Article", "Circle", "Transaction"]
+  "TransactionTarget": ["Article", "Circle", "Transaction"],
+  "Channel": ["Tag", "WritingChallenge", "TopicChannel", "CurationChannel"]
 }

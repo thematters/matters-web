@@ -1,0 +1,6 @@
+.period {
+  @mixin flex-center-start;
+
+  font-size: var(--text12);
+  color: var(--color-grey);
+}

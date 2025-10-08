@@ -619,6 +619,10 @@
   "7cwoRo": {
     "defaultMessage": "因为作者设置，你无法参与讨论。"
   },
+  "7hgQbi": {
+    "defaultMessage": "以文会友・绘画交流・社群互动",
+    "description": "src/views/Campaigns/index.tsx"
+  },
   "7jjWxF": {
     "defaultMessage": "无结果",
     "description": "src/components/Dialogs/AddArticlesCollectionDialog/SearchingDialogContent.tsx"
@@ -724,6 +728,10 @@
   },
   "9J0iCw": {
     "defaultMessage": "已注销用户"
+  },
+  "9Lr84S": {
+    "defaultMessage": "查看全部",
+    "description": "src/views/CampaignDetail/OtherCampaigns/SectionHeader/index.tsx"
   },
   "9MEe0P": {
     "defaultMessage": "不取消"
@@ -1109,6 +1117,10 @@
     "defaultMessage": "你的定时发布作品 {articleTitle} 已发布成功",
     "description": "src/components/Notice/ArticleNotice/ScheduledArticlePublishedNotice.tsx"
   },
+  "FVltBy": {
+    "defaultMessage": "发起人",
+    "description": "src/views/Campaigns/Organizers/SectionHeader/index.tsx"
+  },
   "FWCa4O": {
     "defaultMessage": "目前非 Optimism 网络，立即切换？",
     "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
@@ -1360,6 +1372,10 @@
   "Jv9SoD": {
     "defaultMessage": "建议频道"
   },
+  "JyfFVp": {
+    "defaultMessage": "活动",
+    "description": "src/views/Campaigns/index.tsx"
+  },
   "K+pFNS": {
     "defaultMessage": "活动时间{tz}"
   },
@@ -1608,6 +1624,10 @@
   "OKhRC6": {
     "defaultMessage": "分享"
   },
+  "OO72bT": {
+    "defaultMessage": "进行中",
+    "description": "src/components/CampaignDigest/Card/Label/index.tsx"
+  },
   "OWCMkI": {
     "defaultMessage": "你的定时发布作品 {articleTitle} 已发布成功，由于选择活动已结束，投稿未能成功",
     "description": "src/components/Notice/ArticleNotice/ScheduledArticlePublishedNotice.tsx"
@@ -1777,6 +1797,10 @@
   },
   "Rc4Oij": {
     "defaultMessage": "火闪电"
+  },
+  "RlqC+9": {
+    "defaultMessage": "报名中",
+    "description": "src/components/CampaignDigest/Card/Label/index.tsx"
   },
   "RnKPVm": {
     "defaultMessage": "{articleCount} 篇文章"
@@ -1992,6 +2016,10 @@
   "VBve8d": {
     "defaultMessage": "搬家到 Matters"
   },
+  "VMQPwZ": {
+    "defaultMessage": "过往结束",
+    "description": "src/views/Campaigns/Feeds/Tabs/index.tsx"
+  },
   "VZsE96": {
     "defaultMessage": "选集名称"
   },
@@ -2063,6 +2091,10 @@
   "WpvsPu": {
     "defaultMessage": "订阅",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
+  },
+  "Wq1mAB": {
+    "defaultMessage": "位参与者",
+    "description": "src/components/CampaignDigest/Card/Users/index.tsx"
   },
   "WsPbZT": {
     "defaultMessage": "继续提现"
@@ -2650,6 +2682,10 @@
     "defaultMessage": "{date}更新",
     "description": "src/views/User/CollectionDetail/Content.tsx"
   },
+  "h/z+Ml": {
+    "defaultMessage": "进行中",
+    "description": "src/views/Campaigns/Feeds/Tabs/index.tsx"
+  },
   "h5Y9al": {
     "defaultMessage": "用于出版 Writing NFT，费用 ≈1 LIKE"
   },
@@ -2763,6 +2799,10 @@
   "jBx/nm": {
     "defaultMessage": "邮箱注册",
     "description": "src/components/Forms/SelectAuthMethodForm/NormalFeed.tsx"
+  },
+  "jL/ZAU": {
+    "defaultMessage": "更多活动",
+    "description": "src/views/CampaignDetail/OtherCampaigns/SectionHeader/index.tsx"
   },
   "jLkKbI": {
     "defaultMessage": "报名处理中⋯",
@@ -3677,6 +3717,10 @@
   },
   "zb8Kx1": {
     "defaultMessage": "公告、提醒、碎碎念…"
+  },
+  "ze7hPz": {
+    "defaultMessage": "申请举办活动",
+    "description": "src/views/Campaigns/Portal/index.tsx"
   },
   "zllCbU": {
     "defaultMessage": "在 {circleName} 中留言",

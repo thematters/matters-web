@@ -1,0 +1,5 @@
+.stage {
+  margin-left: var(--sp6);
+  font-size: var(--text12);
+  color: var(--color-campaign-blue-label);
+}

@@ -1,0 +1,21 @@
+.cover {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.5rem;
+
+  & img {
+    @mixin object-fit-cover;
+
+    background-color: var(--color-grey-lighter);
+  }
+
+  &::after {
+    display: block;
+    padding-bottom: 33.33%;
+    content: '';
+  }
+}
+
+.title {
+  padding-top: var(--sp8);
+}

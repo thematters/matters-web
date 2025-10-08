@@ -97,6 +97,7 @@ const useLayoutType = () => {
     isInPath('NEWEST') ||
     isInPath('CHANNEL') ||
     isInPath('FOLLOW') ||
+    isInPath('CAMPAIGNS') ||
     isInWritingChallengeChannel
 
   const isLeftLayout =
