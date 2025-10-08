@@ -38,16 +38,18 @@ const CampaignDigestFeed = ({
         <section className={styles.content}>
           <section className={styles.header}>
             {hasOrganizer && (
-              <UserDigest.Mini
-                user={organizer}
-                avatarSize={20}
-                textSize={12}
-                spacing={6}
-                hasAvatar
-                hasDisplayName
-              />
+              <>
+                <UserDigest.Mini
+                  user={organizer}
+                  avatarSize={20}
+                  textSize={12}
+                  spacing={6}
+                  hasAvatar
+                  hasDisplayName
+                />
+                <Icon icon={IconDot} color="greyLight" size={20} />
+              </>
             )}
-            <Icon icon={IconDot} color="greyLight" size={20} />
             <span className={styles.date}>
               {datetimeFormat.absolute.monthDay(writingStart, lang, true)}
               {writingEnd && (
