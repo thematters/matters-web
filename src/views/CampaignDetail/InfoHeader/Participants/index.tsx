@@ -3,7 +3,7 @@ import _shuffle from 'lodash/shuffle'
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import IconRight from '@/public/static/icons/24px/right.svg'
+import IconDot from '@/public/static/icons/dot.svg'
 import { Avatar, Icon, TextIcon, ViewerContext } from '~/components'
 import { InfoHeaderParticipantsCampaignFragment } from '~/gql/graphql'
 
@@ -38,7 +38,7 @@ const Participants = ({
   const isViewerApplySucceeded = campaign.application?.state === 'succeeded'
   const edges = campaign.participants.edges?.slice(
     0,
-    isViewerApplySucceeded ? 4 : 5
+    isViewerApplySucceeded ? 3 : 4
   )
 
   return (
@@ -63,8 +63,9 @@ const Participants = ({
               &nbsp;
             </span>
             <TextIcon
-              icon={<Icon icon={IconRight} size={14} />}
+              icon={<Icon icon={IconDot} size={14} />}
               placement="left"
+              spacing={0}
               size={14}
             >
               <FormattedMessage defaultMessage="Participants" id="zx0myy" />
