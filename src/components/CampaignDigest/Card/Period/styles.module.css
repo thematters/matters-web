@@ -4,3 +4,10 @@
   font-size: var(--text12);
   color: var(--color-grey);
 }
+
+.time {
+  @mixin line-clamp;
+
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 1;
+}

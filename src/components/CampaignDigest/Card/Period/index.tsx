@@ -27,36 +27,38 @@ const Period = ({ campaign, hasDot }: PeriodProps) => {
       {isInApplyPeriod && (
         <>
           {hasDot && <Icon icon={IconDot} color="greyLight" size={20} />}
-          <FormattedMessage
-            defaultMessage="Application period{tz}: {period}"
-            id="wC7v0l"
-            values={{
-              tz: isUTC8() ? '' : ' (UTC+8) ',
-              period: (
-                <span>
-                  {applyStart
-                    ? datetimeFormat.absolute.monthDay(applyStart, lang, true)
-                    : ''}{' '}
-                  -{' '}
-                  {applyEnd
-                    ? datetimeFormat.absolute.monthDay(applyEnd, lang, true)
-                    : ''}
-                </span>
-              ),
-            }}
-          />
+          <span className={styles.time}>
+            <FormattedMessage
+              defaultMessage="Application period{tz}: {period}"
+              id="wC7v0l"
+              values={{
+                tz: isUTC8() ? '' : ' (UTC+8) ',
+                period: (
+                  <>
+                    {applyStart
+                      ? datetimeFormat.absolute.monthDay(applyStart, lang, true)
+                      : ''}{' '}
+                    -{' '}
+                    {applyEnd
+                      ? datetimeFormat.absolute.monthDay(applyEnd, lang, true)
+                      : ''}
+                  </>
+                ),
+              }}
+            />
+          </span>
         </>
       )}
       {isInWritingPeriod && (
         <>
           {hasDot && <Icon icon={IconDot} color="greyLight" size={20} />}
-          <FormattedMessage
-            defaultMessage="Event period{tz}"
-            id="K+pFNS"
-            values={{ tz: isUTC8() ? '' : ' (UTC+8)' }}
-          />
-          {lang === 'en' ? ': ' : '：'}
-          <span>
+          <span className={styles.time}>
+            <FormattedMessage
+              defaultMessage="Event period{tz}"
+              id="K+pFNS"
+              values={{ tz: isUTC8() ? '' : ' (UTC+8)' }}
+            />
+            {lang === 'en' ? ': ' : '：'}
             {writingStart
               ? datetimeFormat.absolute({
                   date: writingStart,
