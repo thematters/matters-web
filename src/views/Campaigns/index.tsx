@@ -4,6 +4,7 @@ import { useIntl } from 'react-intl'
 import IMAGE_INTRO from '@/public/static/images/intro.jpg'
 import { Head, Layout, Spacer, SpinnerBlock } from '~/components'
 
+import Billboard from './Billboard'
 import Feeds from './Feeds'
 import Header from './Header'
 import Portal from './Portal'
@@ -23,6 +24,7 @@ const Campaigns = () => {
           <Spacer size="sp78" />
           <Portal />
           <DynamicOrganizers />
+          <Billboard />
         </>
       }
     >
