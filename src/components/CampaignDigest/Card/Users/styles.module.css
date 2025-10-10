@@ -1,0 +1,32 @@
+.users {
+  @mixin flex-center-start;
+
+  padding-left: var(--sp16);
+
+  & .user {
+    margin-left: calc(var(--sp6) * -2.5);
+
+    & :global(.avatar) {
+      border: 1px solid var(--color-white);
+      border-radius: 50%;
+    }
+  }
+
+  & .user:nth-child(1) {
+    z-index: 3;
+    margin-left: 0;
+  }
+
+  & .user:nth-child(2) {
+    z-index: 2;
+  }
+
+  & .user:nth-child(3) {
+    z-index: 1;
+  }
+}
+
+.count {
+  font-size: var(--text12);
+  color: var(--color-grey);
+}

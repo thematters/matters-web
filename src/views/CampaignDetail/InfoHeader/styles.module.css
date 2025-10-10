@@ -23,8 +23,12 @@
 
   &::after {
     display: block;
-    padding-bottom: 23.26%;
+    padding-bottom: 21%;
     content: '';
+
+    @media (--sm-up) {
+      padding-bottom: 23.26%;
+    }
   }
 }
 

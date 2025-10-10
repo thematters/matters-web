@@ -11,6 +11,7 @@ import {
 
 import Apply from '../Apply'
 import { fragments } from './gql'
+import OtherCampaigns from './OtherCampaigns'
 import Participants from './Participants'
 import styles from './styles.module.css'
 
@@ -141,6 +142,7 @@ const InfoHeader = ({ campaign }: InfoHeaderProps) => {
 
           <section className={styles.extra}>
             <Participants campaign={campaign} />
+            <OtherCampaigns />
           </section>
 
           {!isRejected && (

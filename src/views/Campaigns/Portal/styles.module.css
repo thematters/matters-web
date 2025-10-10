@@ -1,0 +1,29 @@
+.container {
+  position: relative;
+}
+
+.text {
+  position: absolute;
+  top: 50%;
+  z-index: 1;
+  padding-left: var(--sp16);
+  transform: translateY(-50%);
+}
+
+.portal {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.5rem;
+
+  & img {
+    @mixin object-fit-cover;
+
+    background-color: var(--color-grey-lighter);
+  }
+
+  &::after {
+    display: block;
+    padding-bottom: 37.09%;
+    content: '';
+  }
+}
