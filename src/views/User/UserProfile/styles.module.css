@@ -57,7 +57,8 @@
     line-height: 1;
 
     & .name {
-      line-height: 1.5rem;
+      font-size: var(--text20);
+      line-height: 1.5;
     }
   }
 
