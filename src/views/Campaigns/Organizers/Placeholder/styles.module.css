@@ -1,0 +1,11 @@
+.header {
+  @mix flex-center-start;
+
+  margin-bottom: var(--sp16);
+
+  & .left {
+    width: 4rem;
+    height: 1.5rem;
+    background: var(--color-grey-lighter);
+  }
+}

@@ -2,6 +2,7 @@ import { List, QueryError, usePublicQuery, UserDigest } from '~/components'
 import { CampaignOrganizersQuery } from '~/gql/graphql'
 
 import { CAMPAIGN_ORGANIZERS_PUBLIC } from './gql'
+import Placeholder from './Placeholder'
 import SectionHeader from './SectionHeader'
 
 const Organizers = () => {
@@ -15,7 +16,7 @@ const Organizers = () => {
   const edges = data?.campaignOrganizers?.edges
 
   if (loading) {
-    return null
+    return <Placeholder />
   }
 
   if (!edges || edges.length <= 0) {
