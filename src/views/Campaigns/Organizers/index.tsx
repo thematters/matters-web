@@ -4,6 +4,7 @@ import { CampaignOrganizersQuery } from '~/gql/graphql'
 import { CAMPAIGN_ORGANIZERS_PUBLIC } from './gql'
 import Placeholder from './Placeholder'
 import SectionHeader from './SectionHeader'
+import styles from './styles.module.css'
 
 const Organizers = () => {
   const { data, loading, error } = usePublicQuery<CampaignOrganizersQuery>(
@@ -28,7 +29,7 @@ const Organizers = () => {
   }
 
   return (
-    <section>
+    <section className={styles.container}>
       <SectionHeader />
       <List hasBorder={false}>
         {edges &&

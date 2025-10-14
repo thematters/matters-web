@@ -4,7 +4,7 @@
   padding-left: var(--sp16);
 
   & .user {
-    margin-left: calc(var(--sp6) * -2.5);
+    margin-left: calc(var(--sp6) * -2);
 
     & :global(.avatar) {
       border: 1px solid var(--color-white);
