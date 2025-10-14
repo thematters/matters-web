@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import { FormattedMessage } from 'react-intl'
 
 import IconRight from '@/public/static/icons/24px/right.svg'
@@ -8,9 +7,10 @@ import { Icon, ResponsiveImage, TextIcon } from '~/components'
 import styles from './styles.module.css'
 
 const Portal = () => {
+  const application = process.env.NEXT_PUBLIC_CAMPAIGN_APPLICATION_LINK || ''
   return (
     <div>
-      <Link className={styles.container} href="/">
+      <a className={styles.container} href={application} target="_blank">
         <section className={styles.text}>
           <TextIcon
             icon={<Icon icon={IconRight} size={20} />}
@@ -29,7 +29,7 @@ const Portal = () => {
         <section className={styles.portal}>
           <ResponsiveImage url={IMAGE_CAMPAIGN_PORTAL.src} width={264} />
         </section>
-      </Link>
+      </a>
     </div>
   )
 }

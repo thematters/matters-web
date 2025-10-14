@@ -20,6 +20,7 @@ const Users = ({ campaign }: UsersProps) => {
           <UserDigest.Mini
             user={user}
             avatarSize={20}
+            spacing={6}
             hasAvatar
             disabled
             showLogbook={false}
