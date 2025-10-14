@@ -71,6 +71,8 @@ const BaseSetArticleChannelsDialog = ({
     providerId?: string | null
     __typename?: string
   }
+
+  // All available channels
   const topicChannels: TopicChannel[] = (data?.channels ?? [])
     .filter((channel) => channel.__typename === 'TopicChannel')
     .map((c) => c as unknown as TopicChannel)
@@ -97,6 +99,8 @@ const BaseSetArticleChannelsDialog = ({
   for (const [, list] of childrenByParentId) {
     list.sort(sortByEnabledThenName)
   }
+
+  // This article's current active channels
   const articleChannels =
     data?.article?.classification?.topicChannel?.channels?.filter(
       (channel) => channel.enabled
@@ -115,7 +119,9 @@ const BaseSetArticleChannelsDialog = ({
             variables: { id: article.id, channels },
           })
 
-          const unpinChannels = channels.filter(
+          const currentChannelIds =
+            articleChannels?.map(({ channel }) => channel.id) ?? []
+          const unpinChannels = currentChannelIds.filter(
             (channel) => !pinnedChannels.includes(channel)
           )
 
