@@ -1,0 +1,42 @@
+.cover {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.5rem;
+
+  & img {
+    @mixin object-fit-cover;
+
+    background-color: var(--color-grey-lighter);
+  }
+
+  &::after {
+    display: block;
+    padding-bottom: 48.02%;
+    content: '';
+  }
+}
+
+.organizer {
+  @mixin flex-center-start;
+
+  padding-top: var(--sp8);
+}
+
+.title {
+  padding-top: var(--sp8);
+}
+
+.desc {
+  @mixin line-clamp;
+
+  padding-top: var(--sp8);
+  -webkit-line-clamp: 3;
+  font-size: var(--text14);
+  color: var(--color-grey-darker);
+}
+
+.misc {
+  @mixin flex-center-start;
+
+  padding-top: var(--sp8);
+}

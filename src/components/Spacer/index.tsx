@@ -11,6 +11,7 @@ interface SpacerProps {
     | 'sp40'
     | 'sp44'
     | 'sp64'
+    | 'sp78'
 }
 
 export const Spacer: React.FC<SpacerProps> = ({ size = 'sp24' }) => (

@@ -619,6 +619,10 @@
   "7cwoRo": {
     "defaultMessage": "The author has disabled comments for this article"
   },
+  "7hgQbi": {
+    "defaultMessage": "Connecting through literature, exchanging art, and engaging with the community",
+    "description": "src/views/Campaigns/index.tsx"
+  },
   "7jjWxF": {
     "defaultMessage": "No results",
     "description": "src/components/Dialogs/AddArticlesCollectionDialog/SearchingDialogContent.tsx"
@@ -724,6 +728,10 @@
   },
   "9J0iCw": {
     "defaultMessage": "Deleted user"
+  },
+  "9Lr84S": {
+    "defaultMessage": "View all",
+    "description": "src/views/CampaignDetail/OtherCampaigns/SectionHeader/index.tsx"
   },
   "9MEe0P": {
     "defaultMessage": "Do not cancel"
@@ -1109,6 +1117,10 @@
     "defaultMessage": "Your schedule article {articleTitle} has been published",
     "description": "src/components/Notice/ArticleNotice/ScheduledArticlePublishedNotice.tsx"
   },
+  "FVltBy": {
+    "defaultMessage": "Curators",
+    "description": "src/views/Campaigns/Organizers/SectionHeader/index.tsx"
+  },
   "FWCa4O": {
     "defaultMessage": "Switch to Optimism network now?",
     "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
@@ -1360,6 +1372,10 @@
   "Jv9SoD": {
     "defaultMessage": "Suggest one"
   },
+  "JyfFVp": {
+    "defaultMessage": "Events",
+    "description": "src/views/Campaigns/index.tsx"
+  },
   "K+pFNS": {
     "defaultMessage": "Event period{tz}"
   },
@@ -1608,6 +1624,10 @@
   "OKhRC6": {
     "defaultMessage": "Share"
   },
+  "OO72bT": {
+    "defaultMessage": "In Progress",
+    "description": "src/components/CampaignDigest/Card/Label/index.tsx"
+  },
   "OWCMkI": {
     "defaultMessage": "Your schedule article {articleTitle} published successfully, but failed to submit because the selection event has ended",
     "description": "src/components/Notice/ArticleNotice/ScheduledArticlePublishedNotice.tsx"
@@ -1777,6 +1797,10 @@
   },
   "Rc4Oij": {
     "defaultMessage": "Firebolt"
+  },
+  "RlqC+9": {
+    "defaultMessage": "Registering",
+    "description": "src/components/CampaignDigest/Card/Label/index.tsx"
   },
   "RnKPVm": {
     "defaultMessage": "{articleCount} articles"
@@ -1992,6 +2016,10 @@
   "VBve8d": {
     "defaultMessage": "Settled in Matters"
   },
+  "VMQPwZ": {
+    "defaultMessage": "Ended",
+    "description": "src/views/Campaigns/Feeds/Tabs/index.tsx"
+  },
   "VZsE96": {
     "defaultMessage": "Collection Name"
   },
@@ -2063,6 +2091,10 @@
   "WpvsPu": {
     "defaultMessage": "Subscribe",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
+  },
+  "Wq1mAB": {
+    "defaultMessage": "Participants",
+    "description": "src/components/CampaignDigest/Card/Users/index.tsx"
   },
   "WsPbZT": {
     "defaultMessage": "Continue payout"
@@ -2650,6 +2682,10 @@
     "defaultMessage": "Updated {date}",
     "description": "src/views/User/CollectionDetail/Content.tsx"
   },
+  "h/z+Ml": {
+    "defaultMessage": "In Progress",
+    "description": "src/views/Campaigns/Feeds/Tabs/index.tsx"
+  },
   "h5Y9al": {
     "defaultMessage": "Used for publishing Writing NFTs, cost ≈1 LIKE"
   },
@@ -2763,6 +2799,10 @@
   "jBx/nm": {
     "defaultMessage": "Sign up with email",
     "description": "src/components/Forms/SelectAuthMethodForm/NormalFeed.tsx"
+  },
+  "jL/ZAU": {
+    "defaultMessage": "More events",
+    "description": "src/views/CampaignDetail/OtherCampaigns/SectionHeader/index.tsx"
   },
   "jLkKbI": {
     "defaultMessage": "Reviewing...",
@@ -3562,6 +3602,10 @@
     "defaultMessage": "New discussions",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
   },
+  "xiV3Wz": {
+    "defaultMessage": "More events",
+    "description": "src/views/CampaignDetail/InfoHeader/OtherCampaigns/index.tsx"
+  },
   "xjHiYx": {
     "defaultMessage": "Article revision count reach limit",
     "description": "ARTICLE_REVISION_REACH_LIMIT"
@@ -3677,6 +3721,10 @@
   },
   "zb8Kx1": {
     "defaultMessage": "Announcement, reminder, chattering..."
+  },
+  "ze7hPz": {
+    "defaultMessage": "Apply to curate an event",
+    "description": "src/views/Campaigns/Portal/index.tsx"
   },
   "zllCbU": {
     "defaultMessage": "left a comment in {circleName}",

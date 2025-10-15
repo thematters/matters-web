@@ -59,14 +59,24 @@ absolute.timeISO = (date: Date | string | number) => {
   return format(date, 'HH:mm')
 }
 
-absolute.monthDay = (dateString?: string, lang: Language = 'zh_hant') => {
+absolute.monthDay = (
+  dateString?: string,
+  lang: Language = 'zh_hant',
+  utc8?: boolean
+) => {
   if (!dateString) return null
   const date =
     typeof dateString === 'string' ? parseISO(dateString) : dateString
 
   if (lang === 'en') {
+    if (utc8) {
+      return formatInTimeZone(date, 'Asia/Hong_Kong', 'LLLL d')
+    }
     return format(date, 'LLLL d')
   } else {
+    if (utc8) {
+      return formatInTimeZone(date, 'Asia/Hong_Kong', 'M 月 d 日')
+    }
     return format(date, 'M 月 d 日')
   }
 }

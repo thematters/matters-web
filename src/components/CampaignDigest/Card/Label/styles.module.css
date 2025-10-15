@@ -1,0 +1,17 @@
+.label {
+  padding: var(--sp2) var(--sp4);
+  font-size: var(--text12);
+  border-radius: var(--sp4);
+}
+
+.registering {
+  color: var(--color-warn-yellow);
+  background-color: var(--color-matters-gold-light);
+  border: 1px solid var(--color-warn-yellow-50);
+}
+
+.inProgress {
+  color: var(--color-campaign-blue);
+  background-color: var(--color-campaign-blue-bg);
+  border: 1px solid var(--color-campaign-blue-label);
+}

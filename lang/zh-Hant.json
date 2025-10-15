@@ -619,6 +619,10 @@
   "7cwoRo": {
     "defaultMessage": "因爲作者設置，你無法參與討論。"
   },
+  "7hgQbi": {
+    "defaultMessage": "以文會友・繪畫交流・社群互動",
+    "description": "src/views/Campaigns/index.tsx"
+  },
   "7jjWxF": {
     "defaultMessage": "無結果",
     "description": "src/components/Dialogs/AddArticlesCollectionDialog/SearchingDialogContent.tsx"
@@ -724,6 +728,10 @@
   },
   "9J0iCw": {
     "defaultMessage": "已註銷用戶"
+  },
+  "9Lr84S": {
+    "defaultMessage": "查看全部",
+    "description": "src/views/CampaignDetail/OtherCampaigns/SectionHeader/index.tsx"
   },
   "9MEe0P": {
     "defaultMessage": "不取消"
@@ -1109,6 +1117,10 @@
     "defaultMessage": "你的排程作品 {articleTitle} 已發布成功",
     "description": "src/components/Notice/ArticleNotice/ScheduledArticlePublishedNotice.tsx"
   },
+  "FVltBy": {
+    "defaultMessage": "發起人",
+    "description": "src/views/Campaigns/Organizers/SectionHeader/index.tsx"
+  },
   "FWCa4O": {
     "defaultMessage": "目前非 Optimism 網路，立即切換？",
     "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
@@ -1360,6 +1372,10 @@
   "Jv9SoD": {
     "defaultMessage": "建議頻道"
   },
+  "JyfFVp": {
+    "defaultMessage": "活動",
+    "description": "src/views/Campaigns/index.tsx"
+  },
   "K+pFNS": {
     "defaultMessage": "活動時間{tz}"
   },
@@ -1608,6 +1624,10 @@
   "OKhRC6": {
     "defaultMessage": "分享"
   },
+  "OO72bT": {
+    "defaultMessage": "進行中",
+    "description": "src/components/CampaignDigest/Card/Label/index.tsx"
+  },
   "OWCMkI": {
     "defaultMessage": "你的排程作品 {articleTitle} 已發布成功，由於選擇活動已結束，投稿未能成功",
     "description": "src/components/Notice/ArticleNotice/ScheduledArticlePublishedNotice.tsx"
@@ -1777,6 +1797,10 @@
   },
   "Rc4Oij": {
     "defaultMessage": "火閃電"
+  },
+  "RlqC+9": {
+    "defaultMessage": "報名中",
+    "description": "src/components/CampaignDigest/Card/Label/index.tsx"
   },
   "RnKPVm": {
     "defaultMessage": "{articleCount} 篇文章"
@@ -1992,6 +2016,10 @@
   "VBve8d": {
     "defaultMessage": "搬家到 Matters"
   },
+  "VMQPwZ": {
+    "defaultMessage": "過往結束",
+    "description": "src/views/Campaigns/Feeds/Tabs/index.tsx"
+  },
   "VZsE96": {
     "defaultMessage": "選集名稱"
   },
@@ -2063,6 +2091,10 @@
   "WpvsPu": {
     "defaultMessage": "訂閱",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
+  },
+  "Wq1mAB": {
+    "defaultMessage": "位參與者",
+    "description": "src/components/CampaignDigest/Card/Users/index.tsx"
   },
   "WsPbZT": {
     "defaultMessage": "繼續提現"
@@ -2650,6 +2682,10 @@
     "defaultMessage": "{date}更新",
     "description": "src/views/User/CollectionDetail/Content.tsx"
   },
+  "h/z+Ml": {
+    "defaultMessage": "進行中",
+    "description": "src/views/Campaigns/Feeds/Tabs/index.tsx"
+  },
   "h5Y9al": {
     "defaultMessage": "用以出版 Writing NFT，費用 ≈1 LIKE"
   },
@@ -2763,6 +2799,10 @@
   "jBx/nm": {
     "defaultMessage": "電子郵件註冊",
     "description": "src/components/Forms/SelectAuthMethodForm/NormalFeed.tsx"
+  },
+  "jL/ZAU": {
+    "defaultMessage": "更多活動",
+    "description": "src/views/CampaignDetail/OtherCampaigns/SectionHeader/index.tsx"
   },
   "jLkKbI": {
     "defaultMessage": "報名處理中⋯",
@@ -3562,6 +3602,10 @@
     "defaultMessage": "留言",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
   },
+  "xiV3Wz": {
+    "defaultMessage": "更多活動",
+    "description": "src/views/CampaignDetail/InfoHeader/OtherCampaigns/index.tsx"
+  },
   "xjHiYx": {
     "defaultMessage": "作品編輯次數超出上限",
     "description": "ARTICLE_REVISION_REACH_LIMIT"
@@ -3677,6 +3721,10 @@
   },
   "zb8Kx1": {
     "defaultMessage": "公告、提醒、碎碎念…"
+  },
+  "ze7hPz": {
+    "defaultMessage": "申請舉辦活動",
+    "description": "src/views/Campaigns/Portal/index.tsx"
   },
   "zllCbU": {
     "defaultMessage": "在 {circleName} 中留言",
