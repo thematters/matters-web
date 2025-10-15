@@ -20,6 +20,11 @@ import ArticleFeeds from './ArticleFeeds'
 import { CAMPAIGN_DETAIL_PRIVATE, CAMPAIGN_DETAIL_PUBLIC } from './gql'
 import InfoHeader from './InfoHeader'
 
+const DynamicOtherCampaigns = dynamic(() => import('./OtherCampaigns'), {
+  loading: () => <SpinnerBlock />,
+  ssr: false,
+})
+
 const DynamicSideParticipants = dynamic(() => import('./SideParticipants'), {
   loading: () => <SpinnerBlock />,
   ssr: false,
@@ -83,7 +88,14 @@ const CampaignDetail = () => {
   const path = toPath({ page: 'campaignDetail', campaign })
 
   return (
-    <Layout.Main aside={<DynamicSideParticipants campaign={campaign} />}>
+    <Layout.Main
+      aside={
+        <>
+          {campaign.showOther && <DynamicOtherCampaigns id={campaign.id} />}
+          <DynamicSideParticipants campaign={campaign} />
+        </>
+      }
+    >
       <Head
         title={
           campaign[
@@ -96,6 +108,15 @@ const CampaignDetail = () => {
         }
         path={path.href}
         image={campaign.cover}
+        description={
+          campaign[
+            lang === 'zh_hans'
+              ? 'descriptionZhHans'
+              : lang === 'zh_hant'
+                ? 'descriptionZhHant'
+                : 'descriptionEn'
+          ]
+        }
       />
 
       <InfoHeader campaign={campaign} />

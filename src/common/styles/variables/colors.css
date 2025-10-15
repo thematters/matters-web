@@ -31,6 +31,7 @@
   --color-top-up-yellow: #fff4dc;
   --color-top-up-yellow-darker: #ffe9b8;
   --color-warn-yellow: #dba34f;
+  --color-warn-yellow-50: rgb(219 163 79 / 50%);
   --color-negative-red: #c85c41;
   --color-negative-red-2: #a04a34;
   --color-heart-red: #e95656;
@@ -57,6 +58,7 @@
   --color-line-grey-light: rgb(0 0 0 / 8%);
   --color-line-grey: rgb(0 0 0 / 16%);
   --color-line-grey-dark: rgb(0 0 0 / 24%);
+  --color-other-mask: rgb(0 0 0 / 40%);
   --color-line-matters-green-light: #0d676366;
   --color-line-matters-gold-light: rgb(192 164 107 / 40%);
   --color-line-matters-golod-lighter: rgb(192 164 107 / 20%);
@@ -75,4 +77,5 @@
   --color-new-palette-attention-600: #ddc700;
   --color-new-palette-attention-700: #cab600;
   --color-new-palette-secondary-700: #379f03;
+  --color-new-palette-primary-500: #9280f5;
 }

@@ -40,6 +40,7 @@ type ROUTE_KEY =
   | 'CIRCLE_ANALYTICS'
   // Campaign
   | 'CAMPAIGN_DETAIL'
+  | 'CAMPAIGNS'
   // Me
   | 'ME_DRAFTS'
   | 'ME_PUBLISHED'
@@ -184,6 +185,7 @@ export const ROUTES: {
 
   // Campaign
   { key: 'CAMPAIGN_DETAIL', pathname: '/e/[shortHash]' },
+  { key: 'CAMPAIGNS', pathname: '/events' },
 
   // Auth
   { key: 'LOGIN', pathname: '/login' },

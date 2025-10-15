@@ -19,6 +19,7 @@ export type TextIconColor =
   | 'attention700'
   | 'campaignBlue'
   | 'campaignGreenLabel'
+  | 'newPalettePrimary500'
 
 export interface TextIconProps {
   // icon

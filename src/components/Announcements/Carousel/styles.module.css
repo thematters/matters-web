@@ -79,7 +79,7 @@
 
     @media (--sm-up) {
       & h3 {
-        -webkit-line-clamp: 3;
+        -webkit-line-clamp: 2;
       }
 
       & p {
@@ -103,7 +103,7 @@
   height: 0.125rem;
   margin-right: var(--sp8);
   cursor: pointer;
-  background: var(--color-grey-darker);
+  background: var(--color-grey-scale-white-60);
   border: 1px solid rgb(255 255 255 / 0%);
   border-radius: 1px;
   transition-property: border-color, border-width, background-color;

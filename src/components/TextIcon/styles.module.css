@@ -125,6 +125,10 @@
   color: var(--color-new-palette-attention-700);
 }
 
+.newPalettePrimary500 {
+  color: var(--color-new-palette-primary-500);
+}
+
 /* spacing */
 .spacing2.hasIcon {
   &.textRight > .text {

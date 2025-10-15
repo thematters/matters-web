@@ -1,5 +1,16 @@
+import { useContext } from 'react'
+
 import IMAGE_INTRO from '@/public/static/images/intro.jpg'
-import { Announcements, Head, Layout, Spacer } from '~/components'
+import {
+  Announcements,
+  Head,
+  LanguageContext,
+  Layout,
+  Spacer,
+  useChannels,
+  useRoute,
+  ViewerContext,
+} from '~/components'
 
 import Feed from './Feed'
 import Sidebar from './Sidebar'
@@ -9,11 +20,25 @@ const Home = ({
 }: {
   showRecommendation?: boolean
 } = {}) => {
+  const { isInPath, getQuery } = useRoute()
+  const viewer = useContext(ViewerContext)
+  const isAuthed = viewer.isAuthed
+  const isInNewest = isInPath('NEWEST')
+  const isInChannel = isInPath('CHANNEL')
+  const isInFeatured = isInPath('FEATURED') || (!isAuthed && isInPath('HOME'))
+  const isInHottest = isInPath('HOTTEST')
+  const { lang } = useContext(LanguageContext)
+  const shortHash = getQuery('shortHash')
+  const { channels } = useChannels()
+  const channel = channels?.find((channel) => channel.shortHash === shortHash)
   return (
     <Layout.Main
       aside={
         <>
-          <Spacer size="sp16" />
+          {(isInNewest || isInFeatured || isInHottest) && (
+            <Spacer size="sp44" />
+          )}
+          {isInChannel && <Spacer size="sp16" />}
           <Announcements />
           {showRecommendation && <Sidebar.Authors />}
           {showRecommendation && <Sidebar.Tags />}
@@ -22,7 +47,20 @@ const Home = ({
         </>
       }
     >
-      <Head image={IMAGE_INTRO.src} />
+      <Head
+        image={IMAGE_INTRO.src}
+        title={
+          isInChannel &&
+          (channel?.__typename === 'CurationChannel' ||
+            channel?.__typename === 'TopicChannel')
+            ? lang === 'zh_hans'
+              ? channel.nameZhHans
+              : lang === 'zh_hant'
+                ? channel.nameZhHant
+                : channel.nameEn
+            : undefined
+        }
+      />
 
       <Feed showRecommendation={showRecommendation} />
     </Layout.Main>

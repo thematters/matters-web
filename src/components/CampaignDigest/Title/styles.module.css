@@ -1,0 +1,26 @@
+.text16 {
+  font-size: var(--text16);
+}
+
+.fontNormal {
+  font-weight: var(--font-normal);
+}
+
+.fontMedium {
+  font-weight: var(--font-medium);
+}
+
+.lineClamp {
+  @mixin line-clamp;
+
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+}
+
+.lineClampLine1 {
+  -webkit-line-clamp: 1;
+}
+
+.lineClampLine3 {
+  -webkit-line-clamp: 3;
+}

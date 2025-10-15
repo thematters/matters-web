@@ -2,6 +2,7 @@ import { ApolloError } from '@apollo/client'
 import React from 'react'
 import { useIntl } from 'react-intl'
 
+import { CREATIONS_CHANNEL_SHORT_HASH } from '~/common/enums'
 import { analytics } from '~/common/utils'
 import {
   ArticleDigestFeed,
@@ -11,6 +12,7 @@ import {
   InfiniteScroll,
   List,
   QueryError,
+  useRoute,
 } from '~/components'
 
 import type { MixedFeedArticleEdge } from '../common/useMixedFeed'
@@ -61,7 +63,9 @@ const FeedRenderer: React.FC<FeedRendererProps> = ({
   channelId,
 }) => {
   const intl = useIntl()
-
+  const { getQuery } = useRoute()
+  const shortHash = getQuery('shortHash')
+  const isCreatorChannel = shortHash === CREATIONS_CHANNEL_SHORT_HASH
   if (loading) {
     if (typeof window !== 'undefined') {
       window.scrollTo(0, 0)
@@ -145,6 +149,7 @@ const FeedRenderer: React.FC<FeedRendererProps> = ({
                   hasReadTime={false}
                   hasCircle={false}
                   hasDonationCount={false}
+                  hasCollection={isCreatorChannel}
                   onClick={() =>
                     analytics.trackEvent('click_feed', {
                       type: feedType,

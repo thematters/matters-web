@@ -13,6 +13,7 @@ export const CAMPAIGN_DETAIL_PUBLIC = gql`
       shortHash
       ... on WritingChallenge {
         id
+        showOther
         ...InfoHeaderCampaignPublic
         ...InfoHeaderCampaignPrivate
         ...SideParticipantsCampaignPublic

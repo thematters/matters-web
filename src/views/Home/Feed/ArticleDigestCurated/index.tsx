@@ -1,6 +1,7 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
 import Link from 'next/link'
+import { useContext } from 'react'
 import { useIntl } from 'react-intl'
 
 import IconEditorPin from '@/public/static/icons/24px/editor-pin.svg'
@@ -11,6 +12,7 @@ import {
   Card,
   CardProps,
   Icon,
+  LanguageContext,
   Media,
   ResponsiveImage,
   Tooltip,
@@ -34,6 +36,14 @@ export type ArticleDigestCuratedProps = {
   onClickAuthor?: () => void
 } & CardProps
 
+type CampaignFragment = {
+  __typename?: 'WritingChallenge'
+  id: string
+  nameZhHans: string
+  nameZhHant: string
+  nameEn: string
+}
+
 const fragments = {
   article: gql`
     fragment ArticleDigestCuratedArticle on Article {
@@ -48,6 +58,17 @@ const fragments = {
         userName
         ...UserDigestMiniUser
       }
+      campaigns {
+        campaign {
+          id
+          ... on WritingChallenge {
+            name
+            nameZhHant: name(input: { language: zh_hant })
+            nameZhHans: name(input: { language: zh_hans })
+            nameEn: name(input: { language: en })
+          }
+        }
+      }
       ...ArticleDigestTitleArticle
       ...CuratedFooterActionsArticle
     }
@@ -55,6 +76,18 @@ const fragments = {
     ${ArticleDigestTitle.fragments.article}
     ${FooterActions.fragments.article}
   `,
+}
+
+const getCampaignName = (campaign: CampaignFragment, lang: string) => {
+  if (!campaign) return null
+  switch (lang) {
+    case 'zh_hans':
+      return campaign.nameZhHans
+    case 'zh_hant':
+      return campaign.nameZhHant
+    default:
+      return campaign.nameEn
+  }
 }
 
 export const ArticleDigestCurated = ({
@@ -67,6 +100,7 @@ export const ArticleDigestCurated = ({
   ...cardProps
 }: ArticleDigestCuratedProps) => {
   const intl = useIntl()
+  const { lang } = useContext(LanguageContext)
   const isBanned = article.articleState === 'banned'
   const cover = !isBanned ? article.displayCover : null
   const path = toPath({
@@ -78,6 +112,12 @@ export const ArticleDigestCurated = ({
   const coverClasses = classNames(styles.cover, {
     [styles.hasCover]: hasCover,
   })
+
+  const campaign = article.campaigns?.[0]?.campaign
+  const campaignName = getCampaignName(
+    campaign as unknown as CampaignFragment,
+    lang
+  )
 
   return (
     <Card
@@ -104,6 +144,10 @@ export const ArticleDigestCurated = ({
                 <CoverIcon shortHash={article.shortHash} size="lg" />
               </Media>
             </>
+          )}
+
+          {campaignName && (
+            <div className={styles.campaignName}>{campaignName}</div>
           )}
 
           {pinned && (

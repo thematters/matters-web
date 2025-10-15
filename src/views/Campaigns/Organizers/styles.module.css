@@ -1,0 +1,5 @@
+.container {
+  & :global(.list-item > .card) {
+    margin: var(--sp8) calc(var(--sp8) * -1);
+  }
+}

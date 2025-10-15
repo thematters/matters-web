@@ -1,0 +1,11 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: var(--sp24) var(--sp24);
+  padding-top: var(--sp20);
+  padding-bottom: var(--sp20);
+
+  @media (--sm-up) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

@@ -28,12 +28,24 @@ export const fragments = {
             ...DigestTitleCircle
           }
         }
+        collections(input: { first: null }) {
+          edges {
+            node {
+              id
+              title
+              articles(input: { first: 0 }) {
+                totalCount
+              }
+            }
+          }
+        }
         campaigns {
           campaign {
             id
             shortHash
             ... on WritingChallenge {
               id
+              name
               nameZhHant: name(input: { language: zh_hant })
               nameZhHans: name(input: { language: zh_hans })
               nameEn: name(input: { language: en })

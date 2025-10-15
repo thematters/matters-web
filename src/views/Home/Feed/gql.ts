@@ -88,7 +88,7 @@ export const FEED_ARTICLES_PUBLIC = {
       viewer {
         id
         recommendation {
-          feed: hottest(input: { first: 20, after: $after, newAlgo: true }) {
+          feed: hottest(input: { first: 20, after: $after }) {
             ...FeedArticleConnection
           }
         }
