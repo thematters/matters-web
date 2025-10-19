@@ -1,6 +1,7 @@
 import gql from 'graphql-tag'
 import _isEmpty from 'lodash/isEmpty'
 import _pickBy from 'lodash/pickBy'
+import dynamic from 'next/dynamic'
 import { useContext } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
@@ -11,6 +12,7 @@ import {
   Dropdown,
   Icon,
   Menu,
+  Spinner,
   SubmitReport,
   toast,
   ViewerContext,
@@ -21,6 +23,15 @@ import { MomentDigestDropdownActionsMomentFragment } from '~/gql/graphql'
 
 import DeleteMoment from './DeleteMoment'
 import { DeleteMomentDialogProps } from './DeleteMoment/Dialog'
+
+const isAdminView = process.env.NEXT_PUBLIC_ADMIN_VIEW === 'true'
+
+const DynamicToggleSpamButton = dynamic(
+  () => import('~/components/ToggleSpam'),
+  {
+    loading: () => <Spinner />,
+  }
+)
 
 const fragments = {
   moment: gql`
@@ -54,14 +65,27 @@ type BaseDropdownActionsProps = DropdownActionsProps & Controls & DialogProps
 const BaseDropdownActions = ({
   hasDelete,
   hasReport,
+  moment,
 
   openDeleteMomentDialog,
   openSubmitReportDialog,
 }: BaseDropdownActionsProps) => {
+  const viewer = useContext(ViewerContext)
+
   const Content = () => (
     <Menu>
       {hasReport && <SubmitReport.Button openDialog={openSubmitReportDialog} />}
       {hasDelete && <DeleteMoment.Button openDialog={openDeleteMomentDialog} />}
+
+      {/**********
+       * Admin
+       ************/}
+      {isAdminView && viewer.isAdmin && (
+        <>
+          <Menu.Divider />
+          <DynamicToggleSpamButton type="moment" id={moment.id} />
+        </>
+      )}
     </Menu>
   )
 
@@ -111,7 +135,11 @@ const DropdownActions = (props: DropdownActionsProps) => {
     })
   }
 
-  if (_isEmpty(_pickBy(controls)) || isArchived) {
+  if (_isEmpty(_pickBy(controls)) && !viewer.isAdmin) {
+    return null
+  }
+
+  if (isArchived) {
     return null
   }
 
@@ -119,7 +147,11 @@ const DropdownActions = (props: DropdownActionsProps) => {
     BaseDropdownActions as React.ComponentType<object>,
     SubmitReport.Dialog,
     { id: moment.id },
-    ({ openDialog }) => ({ openSubmitReportDialog: openDialog })
+    ({ openDialog }) => ({
+      ...props,
+      ...controls,
+      openSubmitReportDialog: openDialog,
+    })
   )
 
   const WithDeleteMoment = withDialog<
