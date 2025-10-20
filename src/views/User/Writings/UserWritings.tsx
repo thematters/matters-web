@@ -56,7 +56,12 @@ const UserWritings = () => {
     }
 
     const publiceEdges = publicData.user?.writings?.edges || []
-    const publicIds = publiceEdges.map(({ node }) => node.id)
+    const publicIds = publiceEdges
+      .filter(
+        ({ node }) =>
+          node.__typename === 'Article' || node.__typename === 'Moment'
+      )
+      .map(({ node }) => (node as { id: string }).id)
 
     client.query({
       query: USER_WRITINGS_PRIVATE,
@@ -75,7 +80,7 @@ const UserWritings = () => {
     const momentEdges = publiceEdges.filter(
       ({ node }) => node.__typename === 'Moment'
     )
-    const publicIds = momentEdges.map(({ node }) => node.id)
+    const publicIds = momentEdges.map(({ node }) => (node as { id: string }).id)
 
     client.query({
       query: USER_MOMENTS_REACTIVE_DATA,
@@ -221,34 +226,41 @@ const UserWritings = () => {
         >
           <section ref={listRef}>
             <List>
-              {writingEdges.map(({ node }, i) => (
-                <List.Item
-                  key={node.id}
-                  id={`${USER_PROFILE_WRITINGS_DIGEST_FEED_PREFIX}${node.shortHash}`}
-                >
-                  {node.__typename === 'Article' && (
-                    <ArticleDigestFeed
-                      article={node}
-                      inUserArticles
-                      hasAuthor={false}
-                      hasEdit={true}
-                      hasAddCollection={true}
-                      hasArchive={true}
-                      onClick={() =>
-                        analytics.trackEvent('click_feed', {
-                          type: 'user_article',
-                          contentType: 'article',
-                          location: i,
-                          id: node.id,
-                        })
-                      }
-                    />
-                  )}
-                  {node.__typename === 'Moment' && (
-                    <MomentDigestFeed moment={node} />
-                  )}
-                </List.Item>
-              ))}
+              {writingEdges.map(({ node }, i) => {
+                // Type guard to ensure we only have Article or Moment types
+                if (node.__typename === 'Comment') {
+                  return null
+                }
+
+                return (
+                  <List.Item
+                    key={node.id}
+                    id={`${USER_PROFILE_WRITINGS_DIGEST_FEED_PREFIX}${node.shortHash}`}
+                  >
+                    {node.__typename === 'Article' && (
+                      <ArticleDigestFeed
+                        article={node}
+                        inUserArticles
+                        hasAuthor={false}
+                        hasEdit={true}
+                        hasAddCollection={true}
+                        hasArchive={true}
+                        onClick={() =>
+                          analytics.trackEvent('click_feed', {
+                            type: 'user_article',
+                            contentType: 'article',
+                            location: i,
+                            id: node.id,
+                          })
+                        }
+                      />
+                    )}
+                    {node.__typename === 'Moment' && (
+                      <MomentDigestFeed moment={node} />
+                    )}
+                  </List.Item>
+                )
+              })}
             </List>
           </section>
         </InfiniteScroll>

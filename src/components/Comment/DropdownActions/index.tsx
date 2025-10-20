@@ -1,6 +1,7 @@
 import gql from 'graphql-tag'
 import _isEmpty from 'lodash/isEmpty'
 import _pickBy from 'lodash/pickBy'
+import dynamic from 'next/dynamic'
 import { useContext } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
@@ -12,6 +13,7 @@ import {
   Dropdown,
   Icon,
   Menu,
+  Spinner,
   SubmitReport,
   toast,
   ViewerContext,
@@ -28,6 +30,15 @@ import CopyCommentButton from './CopyCommentButton'
 import DeleteComment from './DeleteComment'
 import type { DeleteCommentDialogProps } from './DeleteComment/Dialog'
 import PinButton from './PinButton'
+
+const isAdminView = process.env.NEXT_PUBLIC_ADMIN_VIEW === 'true'
+
+const DynamicToggleSpamButton = dynamic(
+  () => import('~/components/ToggleSpam'),
+  {
+    loading: () => <Spinner />,
+  }
+)
 
 export type DropdownActionsControls = {
   /**
@@ -51,6 +62,7 @@ interface Controls {
   hasPin: boolean
   hasDelete: boolean
   hasReport: boolean
+  hasAdmin: boolean
 }
 
 interface DialogProps {
@@ -143,6 +155,7 @@ const BaseDropdownActions = ({
   hasPin,
   hasDelete,
   hasReport,
+  hasAdmin,
 
   openDeleteCommentDialog,
   openSubmitReportDialog,
@@ -172,6 +185,16 @@ const BaseDropdownActions = ({
       {(_hasPin || hasReport) && hasDelete && <Menu.Divider />}
       {hasDelete && (
         <DeleteComment.Button openDialog={openDeleteCommentDialog} />
+      )}
+
+      {/**********
+       * Admin
+       ************/}
+      {hasAdmin && (
+        <>
+          <Menu.Divider />
+          <DynamicToggleSpamButton type="comment" id={comment.id} />
+        </>
       )}
     </Menu>
   )
@@ -224,6 +247,7 @@ const DropdownActions = (props: DropdownActionsProps) => {
     hasPin: hasPin && !!(isTargetAuthor && isActive && !isDescendantComment),
     hasDelete: (isCommentAuthor || (isTargetAuthor && isMoment)) && isActive,
     hasReport: !isCommentAuthor && !(isTargetAuthor && isMoment),
+    hasAdmin: isAdminView && viewer.isAdmin,
   }
 
   const forbid = () => {
@@ -234,7 +258,11 @@ const DropdownActions = (props: DropdownActionsProps) => {
     })
   }
 
-  if (_isEmpty(_pickBy(controls)) || isArchived) {
+  if (_isEmpty(_pickBy(controls)) && !viewer.isAdmin) {
+    return null
+  }
+
+  if (isArchived) {
     return null
   }
 
