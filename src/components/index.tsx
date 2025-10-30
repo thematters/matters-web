@@ -49,6 +49,7 @@ export * from './Tag'
 export * from './TextIcon'
 export * from './Title'
 export * from './Toast'
+export * from './ToggleSpam'
 export * from './Truncate'
 
 /**

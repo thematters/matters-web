@@ -111,8 +111,8 @@ const DynamicToggleAdArticleButton = dynamic(
   }
 )
 
-const DynamicToggleSpamArticleButton = dynamic(
-  () => import('./ToggleSpamArticle'),
+const DynamicToggleSpamButton = dynamic(
+  () => import('~/components/ToggleSpam'),
   {
     loading: () => <Spinner />,
   }
@@ -379,7 +379,10 @@ const BaseDropdownActions = ({
             type="icymi"
             openDialog={openToggleRecommendArticleDialog}
           />
-          <DynamicToggleSpamArticleButton shortHash={article.shortHash} />
+          <DynamicToggleSpamButton
+            type="article"
+            shortHash={article.shortHash}
+          />
           <DynamicToggleAdArticleButton shortHash={article.shortHash} />
           <DynamicToggleRestrictUserButton
             id={article.author.id}
