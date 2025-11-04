@@ -14,6 +14,7 @@ export const CAMPAIGN_DETAIL_PUBLIC = gql`
       ... on WritingChallenge {
         id
         showOther
+        showAd
         ...InfoHeaderCampaignPublic
         ...InfoHeaderCampaignPrivate
         ...SideParticipantsCampaignPublic
