@@ -619,10 +619,6 @@
   "7cwoRo": {
     "defaultMessage": "The author has disabled comments for this article"
   },
-  "7hgQbi": {
-    "defaultMessage": "Connecting through literature, exchanging art, and engaging with the community",
-    "description": "src/views/Campaigns/index.tsx"
-  },
   "7jjWxF": {
     "defaultMessage": "No results",
     "description": "src/components/Dialogs/AddArticlesCollectionDialog/SearchingDialogContent.tsx"
@@ -2369,6 +2365,10 @@
   "bTNYGv": {
     "defaultMessage": "Comment",
     "description": "src/components/Forms/ArticleCommentForm/index.tsx"
+  },
+  "bUM803": {
+    "defaultMessage": "Creation + Interaction + Community = Unlimited Inspiration",
+    "description": "src/views/Campaigns/index.tsx"
   },
   "beLe/F": {
     "defaultMessage": "Broadcast"
