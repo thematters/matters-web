@@ -131,6 +131,7 @@
 
       &.threeLines {
         -webkit-line-clamp: 3;
+        white-space: pre-line;
       }
     }
 
