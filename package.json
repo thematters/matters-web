@@ -108,7 +108,7 @@
     "use-debounce": "^10.0.5",
     "validator": "^13.15.15",
     "viem": "^2.31.0",
-    "wagmi": "^2.15.6"
+    "wagmi": "^2.19.3"
   },
   "devDependencies": {
     "@babel/plugin-proposal-optional-chaining": "^7.21.0",
