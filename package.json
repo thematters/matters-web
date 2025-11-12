@@ -106,7 +106,7 @@
     "react-stickynode": "^5.0.2",
     "url-loader": "^4.1.1",
     "use-debounce": "^10.0.5",
-    "validator": "^13.15.15",
+    "validator": "^13.15.23",
     "viem": "^2.31.0",
     "wagmi": "^2.15.6"
   },
