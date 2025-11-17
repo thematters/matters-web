@@ -59,6 +59,10 @@ export const Billboard = ({ tokenId, type }: BillboardProps) => {
     registryAddress,
   })
 
+  console.log('data', data)
+  console.log('mount', mount)
+  console.log('adsenseFilled', adsenseFilled)
+
   if (!mount) {
     return null
   }

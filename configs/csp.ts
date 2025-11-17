@@ -39,6 +39,7 @@ const SCRIPT_SRC = [
 
   // Google AdSense
   'pagead2.googlesyndication.com',
+  '*.googlesyndication.com',
   '*.adtrafficquality.google',
   '*.doubleclick.net',
   'tpc.googlesyndication.com',
