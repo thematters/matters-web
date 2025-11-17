@@ -26,8 +26,10 @@ export const Billboard = ({ tokenId, type }: BillboardProps) => {
   const [mount, setMount] = useState(false)
   const [adsenseFilled, setAdsenseFilled] = useState(false)
   const router = useRouter()
-  const GOOGLE_ADS_ELIGIBLE_ADDRESS =
-    '0xE5c5260D776A0a549a1E289B70798B888DBA0a40'
+  const GOOGLE_ADS_ELIGIBLE_ADDRESSES = [
+    '0xE5c5260D776A0a549a1E289B70798B888DBA0a40',
+    '0x1bDFcf1ee3c4fd5833C049676182074dFfc973E9',
+  ].map((address) => address.toLowerCase())
 
   // The current version of wagmi does not support SSR, leading to dehydration
   // warnings since the SSR and CSR are out-of-sync. The `useEffect` ensure
@@ -68,7 +70,7 @@ export const Billboard = ({ tokenId, type }: BillboardProps) => {
   }
 
   if (
-    data.bidder?.toLowerCase() === GOOGLE_ADS_ELIGIBLE_ADDRESS.toLowerCase()
+    GOOGLE_ADS_ELIGIBLE_ADDRESSES.includes(data.bidder?.toLowerCase() ?? '')
   ) {
     return (
       <div className={styles.billboard}>
