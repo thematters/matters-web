@@ -167,6 +167,8 @@ const CONNECT_SRC = [
   '*.ingest.us.sentry.io',
 
   // Google AdSense
+  'pagead2.googlesyndication.com',
+  '*.googlesyndication.com',
   '*.adtrafficquality.google',
   'adservice.google.com',
   '*.doubleclick.net',
