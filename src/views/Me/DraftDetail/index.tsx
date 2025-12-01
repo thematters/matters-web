@@ -6,14 +6,17 @@ import { useIntl } from 'react-intl'
 
 import {
   ASSET_TYPE,
+  BREAKPOINTS,
   ENTITY_TYPE,
   ERROR_CODES,
   MAX_ARTICLE_CONTENT_LENGTH,
   PATHS,
+  STORAGE_KEY_EDITOR_OPTION_DRAWER,
 } from '~/common/enums'
 import {
   containsFigureTag,
   parseFormSubmitErrors,
+  storage,
   stripHtml,
 } from '~/common/utils'
 import {
@@ -25,6 +28,7 @@ import {
   Media,
   SpinnerBlock,
   useDirectImageUpload,
+  useMediaQuery,
   useRoute,
   useUnloadConfirm,
 } from '~/components'
@@ -120,9 +124,22 @@ const BaseDraftDetail = () => {
   const [contentLength, setContentLength] = useState(0)
   const isOverLength = contentLength > MAX_ARTICLE_CONTENT_LENGTH
 
-  const [isOpenOptionDrawer, setIsOpenOptionDrawer] = useState(false)
+  // Init state of option drawer
+  const isSmUp = useMediaQuery(`(min-width: ${BREAKPOINTS.MD}px)`)
+  const optionDrawerStorage = storage.get(STORAGE_KEY_EDITOR_OPTION_DRAWER) as
+    | boolean
+    | null
+  const optionDrawerInitState =
+    isSmUp &&
+    (typeof optionDrawerStorage !== 'boolean' ? true : optionDrawerStorage)
+  const [isOpenOptionDrawer, setIsOpenOptionDrawer] = useState(
+    optionDrawerInitState
+  )
   const toggleOptionDrawer = () => {
-    setIsOpenOptionDrawer((prevState) => !prevState)
+    setIsOpenOptionDrawer((prevState) => {
+      storage.set(STORAGE_KEY_EDITOR_OPTION_DRAWER, !prevState)
+      return !prevState
+    })
   }
 
   useUnloadConfirm({ block: saveStatus === 'saving' && !isNewDraft() })
