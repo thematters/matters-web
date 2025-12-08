@@ -5,10 +5,13 @@ import { useContext, useEffect, useState } from 'react'
 
 import {
   ASSET_TYPE,
+  BREAKPOINTS,
   ENTITY_TYPE,
   MAX_ARTICLE_CONTENT_LENGTH,
   MAX_ARTICLE_REVISION_COUNT,
+  STORAGE_KEY_EDITOR_OPTION_DRAWER,
 } from '~/common/enums'
+import { storage } from '~/common/utils'
 import {
   DrawerProvider,
   EmptyLayout,
@@ -18,6 +21,7 @@ import {
   SpinnerBlock,
   Throw404,
   useDirectImageUpload,
+  useMediaQuery,
   useMutation,
   useRoute,
   ViewerContext,
@@ -86,9 +90,21 @@ const Editor = dynamic(
 )
 
 const BaseEdit = ({ article }: { article: Article }) => {
-  const [isOpenOptionDrawer, setIsOpenOptionDrawer] = useState(false)
+  const isSmUp = useMediaQuery(`(min-width: ${BREAKPOINTS.MD}px)`)
+  const optionDrawerStorage = storage.get(STORAGE_KEY_EDITOR_OPTION_DRAWER) as
+    | boolean
+    | null
+  const optionDrawerInitState =
+    isSmUp &&
+    (typeof optionDrawerStorage !== 'boolean' ? true : optionDrawerStorage)
+  const [isOpenOptionDrawer, setIsOpenOptionDrawer] = useState(
+    optionDrawerInitState
+  )
   const toggleOptionDrawer = () => {
-    setIsOpenOptionDrawer((prevState) => !prevState)
+    setIsOpenOptionDrawer((prevState) => {
+      storage.set(STORAGE_KEY_EDITOR_OPTION_DRAWER, !prevState)
+      return !prevState
+    })
   }
   const { getQuery } = useRoute()
   const [showReviseDialog, setShowReviseDialog] = useState(true)
