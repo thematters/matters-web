@@ -2,7 +2,7 @@ import { Button, ButtonProps } from '~/components'
 
 export type DrawerTextButtonProps = {
   text: React.ReactNode
-  color?: 'black'
+  color?: 'black' | 'greyDarker'
 } & ButtonProps
 
 export const TextButton: React.FC<DrawerTextButtonProps> = ({
@@ -17,6 +17,13 @@ export const TextButton: React.FC<DrawerTextButtonProps> = ({
         ...buttonProps,
         textColor: 'black',
         textActiveColor: 'greyDarker',
+      }
+      break
+    case 'greyDarker':
+      buttonProps = {
+        ...buttonProps,
+        textColor: 'greyDarker',
+        textActiveColor: 'black',
       }
       break
   }
