@@ -120,6 +120,28 @@ describe('utils/text/article/makeSummary', () => {
     expect(makeSummary(MENTIONS, maxLength)).toEqual('看起來 10 拍 @用戶…')
   })
 
+  it('should preserve leading quotation marks like 「', () => {
+    const titleWithQuotation =
+      '「重構生活」七日書完結｜大滿貫、參加獎名單｜11 月 18 日晚上作家周慧講座'
+    const maxUnits = 20
+
+    const result = makeSummary(titleWithQuotation, maxUnits)
+    expect(result).toContain('「')
+    expect(result.startsWith('「')).toBe(true)
+  })
+
+  it('should trim trailing punctuation but preserve leading punctuation', () => {
+    const textWithTrailingPunctuation =
+      'Hello, world. This is a longer text that will be truncated.'
+    const result1 = makeSummary(textWithTrailingPunctuation, 2)
+    expect(result1).not.toMatch(/\.…$/)
+    expect(result1).toMatch(/…$/)
+
+    const textWithLeadingPunctuation = '「重構生活」七日書完結'
+    const result2 = makeSummary(textWithLeadingPunctuation, 5)
+    expect(result2.startsWith('「')).toBe(true)
+  })
+
   it('should return the title as is if it has fewer words than the maximum', () => {
     const maxLength = 100
 

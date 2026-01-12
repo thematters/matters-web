@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react'
-import { useIntl } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 
+import IconRight from '@/public/static/icons/24px/right.svg'
 import { KEYVALUE } from '~/common/enums'
-import { Drawer, useNativeEventListener } from '~/components'
+import { Drawer, Icon, TextIcon, useNativeEventListener } from '~/components'
 
 import { getOptionTabByType, OptionTab } from '../Hooks'
 import { OptionContent, OptionContentProps } from '../OptionContent'
@@ -71,6 +72,25 @@ export const OptionDrawer: React.FC<OptionDrawerProps> = ({
       <Drawer.Header
         title={title || defaultTitle}
         closeDrawer={toggleDrawer}
+        rightBtn={
+          <Drawer.TextButton
+            color="greyDarker"
+            onClick={toggleDrawer}
+            aria-label={intl.formatMessage({
+              defaultMessage: 'Collapse',
+              id: 'W/V6+Y',
+            })}
+            text={
+              <TextIcon
+                size={20}
+                icon={<Icon icon={IconRight} size={24} />}
+                placement="left"
+              >
+                <FormattedMessage defaultMessage="Collapse" id="W/V6+Y" />
+              </TextIcon>
+            }
+          />
+        }
         fixedWidth
       />
       <Drawer.Content fixedWidth>

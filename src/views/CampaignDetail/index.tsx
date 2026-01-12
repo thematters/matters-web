@@ -17,6 +17,7 @@ import { QueryError } from '~/components/GQL'
 import { CampaignDetailPublicQuery } from '~/gql/graphql'
 
 import ArticleFeeds from './ArticleFeeds'
+import Billboard from './Billboard'
 import { CAMPAIGN_DETAIL_PRIVATE, CAMPAIGN_DETAIL_PUBLIC } from './gql'
 import InfoHeader from './InfoHeader'
 
@@ -93,6 +94,7 @@ const CampaignDetail = () => {
         <>
           {campaign.showOther && <DynamicOtherCampaigns id={campaign.id} />}
           <DynamicSideParticipants campaign={campaign} />
+          {campaign.showAd && <Billboard />}
         </>
       }
     >

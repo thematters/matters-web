@@ -100,12 +100,7 @@ export const makeSummary = (
   let hasMore = false
 
   function trimSpacesAndPunctuations(str: string) {
-    return str
-      .trim()
-      .replace(
-        new RegExp(`^[${REGEXP_PUNCTUATION}]+|[${REGEXP_PUNCTUATION}]+$`, 'g'),
-        ''
-      )
+    return str.trim().replace(new RegExp(`[${REGEXP_PUNCTUATION}]+$`, 'g'), '')
   }
 
   // Process each token
