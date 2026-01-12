@@ -1,0 +1,12 @@
+.archived {
+  font-size: var(--text14);
+  font-weight: var(--font-medium);
+}
+
+.displayName {
+  @mixin line-clamp;
+
+  font-size: var(--text14);
+  font-weight: var(--font-medium);
+  color: var(--color-black);
+}

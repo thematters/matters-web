@@ -2,28 +2,28 @@ import gql from 'graphql-tag'
 
 import { ArticleNoticeFragment } from '~/gql/graphql'
 
-import ArticleMentionedYouNotice from './ArticleMentionedYouNotice'
-import ArticleNewAppreciationNotice from './ArticleNewAppreciationNotice'
+import ArticleMentionedYou from './ArticleMentionedYou'
+import ArticleNewAppreciation from './ArticleNewAppreciation'
 import ArticleNewSubscriberNotice from './ArticleNewSubscriberNotice'
-import ArticlePublishedNotice from './ArticlePublishedNotice'
+import ArticlePublished from './ArticlePublished'
 import CircleNewArticle from './CircleNewArticle'
 import RevisedArticleNotPublishedNotice from './RevisedArticleNotPublishedNotice'
 import RevisedArticlePublishedNotice from './RevisedArticlePublishedNotice'
-import ScheduledArticlePublishedNotice from './ScheduledArticlePublishedNotice'
-import TopicChannelFeedbackAcceptedNotice from './TopicChannelFeedbackAcceptedNotice'
+import ScheduledArticlePublished from './ScheduledArticlePublished'
+import TopicChannelFeedbackAccepted from './TopicChannelFeedbackAccepted'
 
 const ArticleNotice = ({ notice }: { notice: ArticleNoticeFragment }) => {
   switch (notice.articleNoticeType) {
     case 'ArticlePublished':
-      return <ArticlePublishedNotice notice={notice} />
+      return <ArticlePublished notice={notice} />
     case 'ScheduledArticlePublished':
-      return <ScheduledArticlePublishedNotice notice={notice} />
+      return <ScheduledArticlePublished notice={notice} />
     case 'ArticleMentionedYou':
-      return <ArticleMentionedYouNotice notice={notice} />
+      return <ArticleMentionedYou notice={notice} />
     case 'ArticleNewSubscriber':
       return <ArticleNewSubscriberNotice notice={notice} />
     case 'ArticleNewAppreciation':
-      return <ArticleNewAppreciationNotice notice={notice} />
+      return <ArticleNewAppreciation notice={notice} />
     case 'RevisedArticlePublished':
       return <RevisedArticlePublishedNotice notice={notice} />
     case 'RevisedArticleNotPublished':
@@ -31,7 +31,7 @@ const ArticleNotice = ({ notice }: { notice: ArticleNoticeFragment }) => {
     case 'CircleNewArticle':
       return <CircleNewArticle notice={notice} />
     case 'TopicChannelFeedbackAccepted':
-      return <TopicChannelFeedbackAcceptedNotice notice={notice} />
+      return <TopicChannelFeedbackAccepted notice={notice} />
     default:
       return null
   }
@@ -44,25 +44,25 @@ ArticleNotice.fragments = {
       unread
       __typename
       articleNoticeType: type
-      ...ArticleMentionedYouNotice
-      ...ArticleNewAppreciationNotice
+      ...ArticleMentionedYou
+      ...ArticleNewAppreciation
       ...ArticleNewSubscriberNotice
-      ...ArticlePublishedNotice
-      ...ScheduledArticlePublishedNotice
+      ...ArticlePublished
+      ...ScheduledArticlePublished
       ...RevisedArticleNotPublishedNotice
       ...RevisedArticlePublishedNotice
       ...CircleNewArticleNotice
-      ...TopicChannelFeedbackAcceptedNotice
+      ...TopicChannelFeedbackAccepted
     }
-    ${ArticleMentionedYouNotice.fragments.notice}
-    ${ArticleNewAppreciationNotice.fragments.notice}
+    ${ArticleMentionedYou.fragments.notice}
+    ${ArticleNewAppreciation.fragments.notice}
     ${ArticleNewSubscriberNotice.fragments.notice}
-    ${ArticlePublishedNotice.fragments.notice}
-    ${ScheduledArticlePublishedNotice.fragments.notice}
+    ${ArticlePublished.fragments.notice}
+    ${ScheduledArticlePublished.fragments.notice}
     ${RevisedArticleNotPublishedNotice.fragments.notice}
     ${RevisedArticlePublishedNotice.fragments.notice}
     ${CircleNewArticle.fragments.notice}
-    ${TopicChannelFeedbackAcceptedNotice.fragments.notice}
+    ${TopicChannelFeedbackAccepted.fragments.notice}
   `,
 }
 

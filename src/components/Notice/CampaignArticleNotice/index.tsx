@@ -2,7 +2,7 @@ import gql from 'graphql-tag'
 
 import { CampaignArticleNoticeFragment } from '~/gql/graphql'
 
-import CampaignArticleFeaturedNotice from './CampaignArticleFeaturedNotice'
+import CampaignArticleFeatured from './CampaignArticleFeatured'
 
 const CampaignArticleNotice = ({
   notice,
@@ -11,7 +11,7 @@ const CampaignArticleNotice = ({
 }) => {
   switch (notice.campaignArticleNoticeType) {
     case 'CampaignArticleFeatured':
-      return <CampaignArticleFeaturedNotice notice={notice} />
+      return <CampaignArticleFeatured notice={notice} />
     default:
       return null
   }
@@ -24,9 +24,9 @@ CampaignArticleNotice.fragments = {
       unread
       __typename
       campaignArticleNoticeType: type
-      ...CampaignArticleFeaturedNotice
+      ...CampaignArticleFeatured
     }
-    ${CampaignArticleFeaturedNotice.fragments.notice}
+    ${CampaignArticleFeatured.fragments.notice}
   `,
 }
 

@@ -23,8 +23,8 @@ MomentNotice.fragments = {
       unread
       __typename
       momentNoticeType: type
-      ...MomentLikedNotice
-      ...MomentMentionedYouNotice
+      ...MomentLiked
+      ...MomentMentionedYou
     }
     ${MomentLiked.fragments.notice}
     ${MomentMentionedYou.fragments.notice}

@@ -1,0 +1,44 @@
+.container {
+  position: relative;
+  display: inline-block;
+  flex-shrink: 0;
+  border-radius: 50%;
+
+  & svg {
+    margin-right: var(--sp8);
+  }
+}
+
+.ring {
+  position: absolute;
+  right: 3px;
+  bottom: -5px;
+  width: var(--sp20);
+  height: var(--sp20);
+  border: 1px solid var(--color-white);
+  border-radius: 50%;
+}
+
+.noticeUser {
+  background-image: var(--avatar-notice-user);
+}
+
+.noticeAppreciation {
+  background-image: var(--avatar-notice-appreciation);
+}
+
+.noticeCircle {
+  background-image: var(--avatar-notice-circle);
+}
+
+.noticeComment {
+  background-image: var(--avatar-notice-comment);
+}
+
+.noticeLike {
+  background-image: var(--avatar-notice-like);
+}
+
+.noticeTx {
+  background-image: var(--avatar-notice-tx);
+}

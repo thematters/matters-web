@@ -1,20 +1,18 @@
 import gql from 'graphql-tag'
-import Link from 'next/link'
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { TEST_ID } from '~/common/enums'
 import { toPath } from '~/common/utils'
 import { ViewerContext } from '~/components'
 import { CircleNewBroadcastCommentsFragment } from '~/gql/graphql'
 
+import ActorAction from '../ActorAction'
+import CommentCard from '../CommentCard'
 import NoticeActorAvatar from '../NoticeActorAvatar'
+import NoticeCard from '../NoticeCard'
 import NoticeCircleCard from '../NoticeCircleCard'
 import NoticeCircleName from '../NoticeCircleName'
-import NoticeContentDigest from '../NoticeContentDigest'
 import NoticeDate from '../NoticeDate'
-import NoticeDigest from '../NoticeDigest'
-import NoticeHeadActors from '../NoticeHeadActors'
 
 type CircleNewBroadcastCommentsType = {
   notice: CircleNewBroadcastCommentsFragment
@@ -38,14 +36,15 @@ const CircleNewBroadcastComments = ({
     return null
   }
 
-  const actorsCount = notice.actors.length
-  const isMultiActors = actorsCount > 1
+  // const actorsCount = notice.actors.length
+  // const isMultiActors = actorsCount > 1
 
   const latestComment = [
     ...(comments || []),
     ...(replies || []),
     ...(mentions || []),
   ].filter(Boolean)[0]
+
   const circleCommentPath = toPath({
     page: 'commentDetail',
     comment: latestComment,
@@ -54,8 +53,9 @@ const CircleNewBroadcastComments = ({
 
   if (isCircleOwner) {
     return (
-      <NoticeDigest
+      <NoticeCard
         notice={notice}
+        type="circle"
         action={
           <>
             {replyCount && !mentionCount && (
@@ -74,21 +74,15 @@ const CircleNewBroadcastComments = ({
             )}
           </>
         }
-        content={
-          !isMultiActors ? (
-            <Link {...circleCommentPath}>
-              <NoticeContentDigest content={latestComment.content || ''} />
-            </Link>
-          ) : undefined
-        }
-        testId={TEST_ID.NOTICE_CIRCLE_NEW_BROADCAST_COMMENTS}
+        content={<CommentCard comment={latestComment} line={3} />}
       />
     )
   }
 
   return (
-    <NoticeDigest
+    <NoticeCard
       notice={notice}
+      type="circle"
       action={
         <>
           {replyCount && !mentionCount && (
@@ -123,14 +117,7 @@ const CircleNewBroadcastComments = ({
           )}
         </>
       }
-      content={
-        !isMultiActors ? (
-          <Link {...circleCommentPath}>
-            <NoticeContentDigest content={latestComment.content || ''} />
-          </Link>
-        ) : undefined
-      }
-      testId={TEST_ID.NOTICE_CIRCLE_NEW_BROADCAST_COMMENTS}
+      content={<CommentCard comment={latestComment} line={3} />}
     />
   )
 }
@@ -142,7 +129,7 @@ CircleNewBroadcastComments.fragments = {
       ...NoticeDate
       actors {
         ...NoticeActorAvatarUser
-        ...NoticeHeadActorsUser
+        ...ActorActionUser
       }
       circle: target {
         ...NoticeCircleCard
@@ -154,6 +141,7 @@ CircleNewBroadcastComments.fragments = {
         parentComment {
           id
         }
+        ...CommentCardComment
       }
       replies {
         id
@@ -165,6 +153,7 @@ CircleNewBroadcastComments.fragments = {
         author {
           id
         }
+        ...CommentCardComment
       }
       mentions {
         id
@@ -173,11 +162,13 @@ CircleNewBroadcastComments.fragments = {
         parentComment {
           id
         }
+        ...CommentCardComment
       }
     }
     ${NoticeActorAvatar.fragments.user}
-    ${NoticeHeadActors.fragments.user}
+    ${ActorAction.fragments.user}
     ${NoticeCircleCard.fragments.circle}
+    ${CommentCard.fragments.comment}
     ${NoticeDate.fragments.notice}
   `,
 }

@@ -1,0 +1,34 @@
+.content {
+  @mixin line-clamp;
+
+  text-overflow: ellipsis;
+  color: var(--color-black);
+
+  &.lineClamp2 {
+    -webkit-line-clamp: 2;
+  }
+
+  &.lineClamp3 {
+    -webkit-line-clamp: 3;
+  }
+
+  &.black {
+    color: var(--color-black);
+  }
+
+  &.grey {
+    color: var(--color-grey);
+  }
+
+  &.border {
+    @mixin border-left-grey;
+
+    padding-left: var(--sp12);
+    border-left-style: solid;
+    border-left-width: 3px;
+  }
+
+  &.strike {
+    text-decoration: line-through;
+  }
+}

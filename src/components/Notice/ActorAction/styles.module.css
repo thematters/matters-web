@@ -1,0 +1,11 @@
+.name {
+  font-size: var(--text14);
+  font-weight: var(--font-medium);
+}
+
+.action {
+  flex: 0 0 auto;
+  font-size: var(--text14);
+  color: var(--color-grey-darker);
+  white-space: nowrap;
+}

@@ -1,0 +1,21 @@
+.noticeContentDigest {
+  @mixin line-clamp;
+
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 3;
+  color: var(--color-black);
+
+  &.noticeContentDigestBlack {
+    color: var(--color-black);
+  }
+
+  &.noticeContentDigestGrey {
+    @mixin border-left-grey;
+
+    padding-left: var(--sp12);
+    -webkit-line-clamp: 2;
+    color: var(--color-grey);
+    border-left-style: solid;
+    border-left-width: 3px;
+  }
+}

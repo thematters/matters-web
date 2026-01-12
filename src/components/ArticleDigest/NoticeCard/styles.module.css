@@ -1,0 +1,19 @@
+.container {
+  @mixin flex-center-start;
+
+  column-gap: var(--sp4);
+  color: var(--color-grey);
+}
+
+.black {
+  color: var(--color-black);
+}
+
+.border {
+  @mixin border-left-grey;
+
+  padding-left: var(--sp12);
+  color: var(--color-grey);
+  border-left-style: solid;
+  border-left-width: 3px;
+}
