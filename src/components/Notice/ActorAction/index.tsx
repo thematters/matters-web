@@ -16,10 +16,6 @@ type ActorActionProps = {
 const ActorAction = ({ actors, action, type }: ActorActionProps) => {
   const isSystem = type === 'system'
 
-  if (!action) {
-    return null
-  }
-
   return (
     <>
       {!isSystem && (
