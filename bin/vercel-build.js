@@ -40,14 +40,7 @@ function setEnvLocal(key, value) {
 }
 
 // Check the branch and configure environment accordingly
-if (gitCommitRef && gitCommitRef === 'release/next') {
-  // Production release/next branch
-  // Deployed to web-next.matters.town
-  console.log('Configuring for production (release/next)')
-  exec('npm run gen:type:prod')
-  exec('cp -va .env.prod .env.local')
-  appendToEnvLocal('NEXT_PUBLIC_SITE_DOMAIN', 'web-next.matters.town')
-} else if (gitCommitRef && gitCommitRef === 'release/next-beta') {
+if (gitCommitRef && gitCommitRef === 'release/next-beta') {
   // Production release/next-beta branch
   // Deployed to beta-new-home.matters.town
   console.log('Configuring for production (release/next-beta)')
