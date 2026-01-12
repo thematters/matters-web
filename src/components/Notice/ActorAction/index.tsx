@@ -19,10 +19,10 @@ const ActorAction = ({ actors, action, type }: ActorActionProps) => {
   return (
     <>
       {!isSystem && (
-        <>
+        <span className={styles.container}>
           <ActorName user={actors[0]} />
-          <span className={styles.action}>&nbsp;{action}</span>
-        </>
+          <span className={styles.action}>{action}</span>
+        </span>
       )}
       {isSystem && (
         <span className={styles.name}>

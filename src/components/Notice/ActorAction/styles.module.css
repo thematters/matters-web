@@ -1,3 +1,9 @@
+.container {
+  display: inline-flex;
+  align-items: baseline;
+  line-height: var(--line-height-base-loose);
+}
+
 .name {
   font-size: var(--text14);
   font-weight: var(--font-medium);
