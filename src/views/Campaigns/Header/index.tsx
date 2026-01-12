@@ -14,8 +14,8 @@ const Header = () => {
       </h1>
       <p className={styles.description}>
         <FormattedMessage
-          defaultMessage="Connecting through literature, exchanging art, and engaging with the community"
-          id="7hgQbi"
+          defaultMessage="Creation + Interaction + Community = Unlimited Inspiration"
+          id="bUM803"
           description="src/views/Campaigns/index.tsx"
         />
       </p>

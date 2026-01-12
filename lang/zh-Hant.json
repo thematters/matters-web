@@ -619,10 +619,6 @@
   "7cwoRo": {
     "defaultMessage": "因爲作者設置，你無法參與討論。"
   },
-  "7hgQbi": {
-    "defaultMessage": "以文會友・繪畫交流・社群互動",
-    "description": "src/views/Campaigns/index.tsx"
-  },
   "7jjWxF": {
     "defaultMessage": "無結果",
     "description": "src/components/Dialogs/AddArticlesCollectionDialog/SearchingDialogContent.tsx"
@@ -2017,7 +2013,7 @@
     "defaultMessage": "搬家到 Matters"
   },
   "VMQPwZ": {
-    "defaultMessage": "過往結束",
+    "defaultMessage": "過往活動",
     "description": "src/views/Campaigns/Feeds/Tabs/index.tsx"
   },
   "VZsE96": {
@@ -2369,6 +2365,10 @@
   "bTNYGv": {
     "defaultMessage": "評論",
     "description": "src/components/Forms/ArticleCommentForm/index.tsx"
+  },
+  "bUM803": {
+    "defaultMessage": "創作＋互動＋社群＝靈感無限",
+    "description": "src/views/Campaigns/index.tsx"
   },
   "beLe/F": {
     "defaultMessage": "廣播"
