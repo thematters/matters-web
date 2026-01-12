@@ -99,8 +99,13 @@ jobs:
 
       # === `master` branch ===
       - name: Build (production)
-        if: github.base_ref == 'master' || github.base_ref == 'main' || github.base_ref == 'release/next'
+        if: github.base_ref == 'master' || github.base_ref == 'main'
         run: cp .env.prod .env.local && npm run build
+
+      # === `webnext` branch ===
+      - name: Build (webnext)
+        if: github.base_ref == 'release/next'
+        run: cp .env.prod-next .env.local && npm run build
 
       - name: Setup AWS
         if: github.base_ref == 'develop' || github.base_ref == 'master' || github.base_ref == 'main' || github.base_ref == 'release/next'
@@ -159,7 +164,7 @@ jobs:
         with:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          application_name: matters-stage
+          application_name: matters-prod
           environment_name: ${{ secrets.AWS_EB_ENV_NAME_WEBNEXT }}
           version_label: matters-web-webnext-${{ hashFiles('deploy.zip') }}
           version_description: ${{ github.SHA }}
