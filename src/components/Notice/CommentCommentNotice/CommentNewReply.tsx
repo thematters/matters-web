@@ -44,7 +44,7 @@ const CommentNewReply = ({ notice }: { notice: CommentNewReplyFragment }) => {
           content={
             <>
               <ArticleCard article={replyCommentArticle} />
-              <CommentCard comment={notice.comment} color="grey" />
+              <CommentCard comment={notice.comment} color="grey" hasBorder={true} />
               <CommentCard comment={notice.reply} />
             </>
           }

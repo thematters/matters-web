@@ -32,7 +32,6 @@ const ArticleNewCollected = ({
           <ArticleCard article={notice.article} />
           <ArticleCard
             article={notice.collection}
-            color="black"
             hasIcon={false}
             hasBorder={true}
           />

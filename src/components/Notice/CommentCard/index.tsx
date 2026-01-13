@@ -57,10 +57,12 @@ const CommentCard = ({
   comment,
   color = 'black',
   line = 2,
+  hasBorder,
 }: {
   comment: NoticeCommentFragment | null
   color?: 'black' | 'grey'
   line?: number
+  hasBorder?: boolean
 }) => {
   const intl = useIntl()
   const { router } = useRoute()
@@ -171,6 +173,7 @@ const CommentCard = ({
           content={comment.content || ''}
           color={color}
           line={line}
+          hasBorder={hasBorder}
         />
       </section>
     </Link>
