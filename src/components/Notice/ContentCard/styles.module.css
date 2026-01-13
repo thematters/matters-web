@@ -2,6 +2,7 @@
   @mixin line-clamp;
 
   text-overflow: ellipsis;
+  line-height: var(--line-height-base-loose);
   color: var(--color-black);
 
   &.lineClamp2 {

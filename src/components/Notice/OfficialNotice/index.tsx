@@ -4,13 +4,14 @@ import { OfficialAnnouncementFragment } from '~/gql/graphql'
 
 import NoticeCard from '../NoticeCard'
 import NoticeDate from '../NoticeDate'
+import styles from './styles.module.css'
 
 const OfficialAnnouncement = ({
   notice,
 }: {
   notice: OfficialAnnouncementFragment
 }) => {
-  const Message = () => <p>{notice.message}</p>
+  const Message = () => <p className={styles.text}>{notice.message}</p>
 
   return (
     <NoticeCard
