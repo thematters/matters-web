@@ -34,8 +34,11 @@ const CollectionCard = ({
     <Card {...path} spacing={[0, 0]} bgColor="none">
       <section className={containerClasses}>
         <Icon icon={IconBook} size={16} />
-        <Link {...path} className="u-link-active-green">
-          <h3 className={styles.title}>{notice.collection.title}</h3>
+        <Link
+          {...path}
+          className={['u-link-active-green', styles.title].join(' ')}
+        >
+          {notice.collection.title}
         </Link>
       </section>
     </Card>
