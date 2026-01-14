@@ -17,7 +17,7 @@
 
   text-overflow: ellipsis;
   -webkit-line-clamp: 2;
-  line-height: var(--line-height-base-loose);
+  line-height: calc(22 / 14);
 }
 
 .assets {

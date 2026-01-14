@@ -2,6 +2,7 @@
   @mixin flex-center-start;
 
   column-gap: var(--sp4);
+  line-height: calc(22 / 14);
   color: var(--color-grey);
 }
 
