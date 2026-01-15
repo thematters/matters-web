@@ -1,5 +1,6 @@
 .container {
   display: inline-flex;
+  column-gap: var(--sp4);
   align-items: baseline;
   line-height: calc(22 / 14);
 }

@@ -9,7 +9,11 @@ import styles from './styles.module.css'
 
 const ActorName = ({ user }: { user: NoticeActorNameUserFragment | null }) => {
   if (!user) {
-    return null
+    return (
+      <span className={styles.anonymous}>
+        <FormattedMessage defaultMessage="Anonymous User" id="GclYG/" />
+      </span>
+    )
   }
 
   const isArchived = user?.status?.state === 'archived'
