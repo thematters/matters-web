@@ -4,7 +4,7 @@ import { ArticleNoticeFragment } from '~/gql/graphql'
 
 import ArticleMentionedYou from './ArticleMentionedYou'
 import ArticleNewAppreciation from './ArticleNewAppreciation'
-import ArticleNewSubscriberNotice from './ArticleNewSubscriberNotice'
+import ArticleNewSubscriber from './ArticleNewSubscriber'
 import ArticlePublished from './ArticlePublished'
 import CircleNewArticle from './CircleNewArticle'
 import RevisedArticleNotPublishedNotice from './RevisedArticleNotPublishedNotice'
@@ -21,7 +21,7 @@ const ArticleNotice = ({ notice }: { notice: ArticleNoticeFragment }) => {
     case 'ArticleMentionedYou':
       return <ArticleMentionedYou notice={notice} />
     case 'ArticleNewSubscriber':
-      return <ArticleNewSubscriberNotice notice={notice} />
+      return <ArticleNewSubscriber notice={notice} />
     case 'ArticleNewAppreciation':
       return <ArticleNewAppreciation notice={notice} />
     case 'RevisedArticlePublished':
@@ -46,7 +46,7 @@ ArticleNotice.fragments = {
       articleNoticeType: type
       ...ArticleMentionedYou
       ...ArticleNewAppreciation
-      ...ArticleNewSubscriberNotice
+      ...ArticleNewSubscriber
       ...ArticlePublished
       ...ScheduledArticlePublished
       ...RevisedArticleNotPublishedNotice
@@ -56,7 +56,7 @@ ArticleNotice.fragments = {
     }
     ${ArticleMentionedYou.fragments.notice}
     ${ArticleNewAppreciation.fragments.notice}
-    ${ArticleNewSubscriberNotice.fragments.notice}
+    ${ArticleNewSubscriber.fragments.notice}
     ${ArticlePublished.fragments.notice}
     ${ScheduledArticlePublished.fragments.notice}
     ${RevisedArticleNotPublishedNotice.fragments.notice}

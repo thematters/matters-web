@@ -13,4 +13,5 @@
   font-weight: var(--font-medium);
   line-height: calc(22 / 14);
   color: var(--color-black);
+  word-break: break-all;
 }
