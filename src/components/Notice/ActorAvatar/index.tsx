@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 import IconLogoGraph from '@/public/static/icons/logo-graph.svg'
 import IMAGE_NOTICE_APPRECIATION from '@/public/static/images/notice-appreciation.svg?url'
 import IMAGE_NOTICE_CIRCLE from '@/public/static/images/notice-circle.svg?url'
@@ -5,10 +7,10 @@ import IMAGE_NOTICE_COMMENT from '@/public/static/images/notice-comment.svg?url'
 import IMAGE_NOTICE_LIKE from '@/public/static/images/notice-like.svg?url'
 import IMAGE_NOTICE_TX from '@/public/static/images/notice-tx.svg?url'
 import IMAGE_NOTICE_USER from '@/public/static/images/notice-user.svg?url'
-import { Icon } from '~/components'
+import { toPath } from '~/common/utils'
+import { Avatar, Icon } from '~/components'
 import { NoticeActorAvatarUserFragment } from '~/gql/graphql'
 
-import NoticeActorAvatar from '../NoticeActorAvatar'
 import styles from './styles.module.css'
 
 type ActorAvatarProps = {
@@ -18,10 +20,7 @@ type ActorAvatarProps = {
 
 const ActorAvatar = ({ actors, type }: ActorAvatarProps) => {
   const actor = actors[0]
-
-  // const actorsCount = actors.length
-  // const isAnonymous = actorsCount <= 0
-  // const isMultiActors = actorsCount > 1
+  const iconSize = 40
 
   const style = {
     '--avatar-notice-appreciation': `url(${IMAGE_NOTICE_APPRECIATION.src})`,
@@ -54,13 +53,22 @@ const ActorAvatar = ({ actors, type }: ActorAvatarProps) => {
               ? [styles.ring, styles.noticeTx]
               : []
 
-  return (
-    <section style={style} className={styles.container}>
-      {!isSystem && <NoticeActorAvatar user={actor} />}
-      {isSystem && <Icon icon={IconLogoGraph} size={40} />}
+  const path = toPath({
+    page: 'userProfile',
+    userName: actor?.userName || '',
+  })
 
-      <span className={typeStyles.join(' ')} />
-    </section>
+  return (
+    <>
+      {isSystem && <Icon icon={IconLogoGraph} size={iconSize} />}
+      {!isSystem && (
+        <Link {...path} className={styles.container} style={style}>
+          <Avatar size={iconSize} user={actor} />
+
+          <span className={typeStyles.join(' ')} />
+        </Link>
+      )}
+    </>
   )
 }
 

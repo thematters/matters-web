@@ -133,7 +133,7 @@ const Notices = ({ isOpen }: NoticesProps) => {
 
   return (
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore} eof>
-      <List spacing={['xloose', 0]}>
+      <List spacing={['xxxloose', 0]} hasBorder={false}>
         {edges.map(
           ({ node }) =>
             shouldRenderNode(node, renderableTypes) && (

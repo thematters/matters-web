@@ -1,11 +1,14 @@
 .container {
   display: flex;
-  column-gap: 8px;
+  column-gap: var(--sp16);
   align-items: stretch;
-  overflow: hidden;
 
   & .avatar {
     flex: 0 0 auto;
+
+    & div {
+      display: flex;
+    }
   }
 
   & .content {

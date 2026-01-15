@@ -1,17 +1,10 @@
 .container {
   position: relative;
-  display: inline-block;
-  flex-shrink: 0;
-  border-radius: 50%;
-
-  & svg {
-    margin-right: var(--sp8);
-  }
 }
 
 .ring {
   position: absolute;
-  right: 3px;
+  right: -5px;
   bottom: -5px;
   width: var(--sp20);
   height: var(--sp20);
