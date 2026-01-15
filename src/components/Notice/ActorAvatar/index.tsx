@@ -60,7 +60,11 @@ const ActorAvatar = ({ actors, type }: ActorAvatarProps) => {
 
   return (
     <>
-      {isSystem && <Icon icon={IconLogoGraph} size={iconSize} />}
+      {isSystem && (
+        <section className={styles.container}>
+          <Icon icon={IconLogoGraph} size={iconSize} />
+        </section>
+      )}
       {!isSystem && (
         <Link {...path} className={styles.container} style={style}>
           <Avatar size={iconSize} user={actor} />

@@ -1,5 +1,7 @@
 .container {
   position: relative;
+  display: flex;
+  padding: var(--sp2) 0;
 }
 
 .ring {
