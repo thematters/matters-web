@@ -100,11 +100,11 @@ const BaseSetArticleChannelsDialog = ({
     list.sort(sortByEnabledThenName)
   }
 
-  // This article's current active channels
-  const articleChannels =
-    data?.article?.classification?.topicChannel?.channels?.filter(
-      (channel) => channel.enabled
-    )
+  const allArticleChannels =
+    data?.article?.classification?.topicChannel?.channels
+  const activeArticleChannels = allArticleChannels?.filter(
+    (channel) => channel.enabled
+  )
 
   const formId = useId()
 
@@ -120,7 +120,7 @@ const BaseSetArticleChannelsDialog = ({
           })
 
           const currentChannelIds =
-            articleChannels?.map(({ channel }) => channel.id) ?? []
+            activeArticleChannels?.map(({ channel }) => channel.id) ?? []
           const unpinChannels = currentChannelIds.filter(
             (channel) => !pinnedChannels.includes(channel)
           )
@@ -265,20 +265,24 @@ const BaseSetArticleChannelsDialog = ({
   )
 
   useEffect(() => {
-    if (!articleChannels || articleChannels.length === 0) {
+    if (!allArticleChannels || allArticleChannels.length === 0) {
       return
     }
 
     setFieldValue(
       'channels',
-      articleChannels.filter((c) => c.enabled).map((c) => c.channel.id)
+      allArticleChannels.filter((c) => c.enabled).map((c) => c.channel.id)
     )
 
     setFieldValue(
       'pinnedChannels',
-      articleChannels.filter((c) => c.pinned).map((c) => c.channel.id)
+      allArticleChannels.filter((c) => c.pinned).map((c) => c.channel.id)
     )
-  }, [articleChannels?.join(',')])
+  }, [
+    allArticleChannels
+      ?.map((c) => `${c.channel.id}:${c.enabled}:${c.pinned}`)
+      .join(','),
+  ])
 
   return (
     <>
