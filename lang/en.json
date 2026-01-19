@@ -1632,6 +1632,10 @@
   "O7ozeo": {
     "defaultMessage": "Update profile"
   },
+  "O9lnpa": {
+    "defaultMessage": "mentioned you in broadcast comment",
+    "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
+  },
   "ODncRd": {
     "defaultMessage": "Claiming..."
   },
@@ -3621,6 +3625,10 @@
   },
   "wbcwKd": {
     "defaultMessage": "View All"
+  },
+  "wcWAWv": {
+    "defaultMessage": "commented in broadcast",
+    "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
   },
   "wclk7z": {
     "defaultMessage": "Summary to help readers quickly grasp the topic"

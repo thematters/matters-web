@@ -1632,6 +1632,10 @@
   "O7ozeo": {
     "defaultMessage": "修改个人资料"
   },
+  "O9lnpa": {
+    "defaultMessage": "在围炉广播中留言并提及你",
+    "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
+  },
   "ODncRd": {
     "defaultMessage": "提领中..."
   },
@@ -3385,7 +3389,7 @@
     "description": "src/components/Forms/EmailLoginForm/index.tsx"
   },
   "tEeEJT": {
-    "defaultMessage": "Your work {articleTitle} has been published to decentralized network",
+    "defaultMessage": "你的作品 {articleTitle} 已发布到 IPFS",
     "description": "src/components/Notice/ArticleNotice/ArticlePublishedNotice.tsx"
   },
   "tFeVR6": {
@@ -3621,6 +3625,10 @@
   },
   "wbcwKd": {
     "defaultMessage": "查看全部"
+  },
+  "wcWAWv": {
+    "defaultMessage": "在围炉广播中留言",
+    "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
   },
   "wclk7z": {
     "defaultMessage": "摘要，让读者快速掌握主题"

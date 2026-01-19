@@ -36,9 +36,6 @@ const CircleNewBroadcastComments = ({
     return null
   }
 
-  // const actorsCount = notice.actors.length
-  // const isMultiActors = actorsCount > 1
-
   const latestComment = [
     ...(comments || []),
     ...(replies || []),
@@ -60,15 +57,15 @@ const CircleNewBroadcastComments = ({
           <>
             {replyCount && !mentionCount && (
               <FormattedMessage
-                defaultMessage="commented in your circle broadcast"
-                id="Y+spJC"
+                defaultMessage="commented in broadcast"
+                id="wcWAWv"
                 description="src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
               />
             )}
             {replyCount && mentionCount && (
               <FormattedMessage
-                defaultMessage="mentioned you in your circle broadcast comment"
-                id="XQTBu6"
+                defaultMessage="mentioned you in broadcast comment"
+                id="O9lnpa"
                 description="src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
               />
             )}
