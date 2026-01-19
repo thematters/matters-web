@@ -30,7 +30,12 @@ const BaseMomentCard = ({ moment }: MomentCardProps) => {
   const slicedAssets = hasMoreAssets ? assets.slice(0, 3) : assets
 
   return (
-    <section className={styles.container}>
+    <section
+      className={[
+        styles.container,
+        hasAssetsOnly ? styles.extraSpacing : '',
+      ].join(' ')}
+    >
       {hasContentOnly && (
         <section
           className={styles.text}

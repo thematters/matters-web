@@ -44,3 +44,7 @@
 .strike {
   text-decoration: line-through;
 }
+
+.extraSpacing {
+  margin: var(--sp2) 0;
+}
