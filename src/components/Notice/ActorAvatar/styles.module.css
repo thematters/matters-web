@@ -1,0 +1,39 @@
+.container {
+  position: relative;
+  display: flex;
+  padding: var(--sp2) 0;
+}
+
+.ring {
+  position: absolute;
+  right: -5px;
+  bottom: -5px;
+  width: var(--sp20);
+  height: var(--sp20);
+  border: 1px solid var(--color-white);
+  border-radius: 50%;
+}
+
+.noticeUser {
+  background-image: var(--avatar-notice-user);
+}
+
+.noticeAppreciation {
+  background-image: var(--avatar-notice-appreciation);
+}
+
+.noticeCircle {
+  background-image: var(--avatar-notice-circle);
+}
+
+.noticeComment {
+  background-image: var(--avatar-notice-comment);
+}
+
+.noticeLike {
+  background-image: var(--avatar-notice-like);
+}
+
+.noticeTx {
+  background-image: var(--avatar-notice-tx);
+}

@@ -22,7 +22,6 @@ import {
 import {
   BackToHomeButton,
   CommentEditorProvider,
-  DrawerProvider,
   EmptyLayout,
   Error,
   getErrorCodes,
@@ -597,11 +596,9 @@ const ArticleDetail = ({
    * Render:Article
    */
   return (
-    <DrawerProvider>
-      <CommentEditorProvider>
-        <BaseArticleDetail article={article} privateFetched={privateFetched} />
-      </CommentEditorProvider>
-    </DrawerProvider>
+    <CommentEditorProvider>
+      <BaseArticleDetail article={article} privateFetched={privateFetched} />
+    </CommentEditorProvider>
   )
 }
 

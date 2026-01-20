@@ -7,7 +7,12 @@ import IconNavCreate from '@/public/static/icons/24px/nav-create.svg'
 import IconNavSearch from '@/public/static/icons/24px/nav-search.svg'
 import IconNavSearchActive from '@/public/static/icons/24px/nav-search-active.svg'
 import IconLogo from '@/public/static/icons/logo.svg'
-import { PATHS, TEST_ID, Z_INDEX } from '~/common/enums'
+import {
+  OPEN_GLOBAL_NOTICE_DRAWER,
+  PATHS,
+  TEST_ID,
+  Z_INDEX,
+} from '~/common/enums'
 import { toPath } from '~/common/utils'
 import {
   Button,
@@ -89,30 +94,71 @@ const CreateButton = ({
 interface NotificationButtonProps {
   isInNotification: boolean
   iconSize: 26 | 30
+  isSmUp: boolean
 }
 
-const NotificationButton = ({
+// const NotificationButton = ({
+//   isInNotification,
+//   iconSize,
+// }: NotificationButtonProps) => (
+//   <NavButton
+//     name={<FormattedMessage defaultMessage="Notifications" id="NAidKb" />}
+//     icon={
+//       <section className={styles.notificationIcon}>
+//         <UnreadIcon.Notification iconSize={iconSize} />
+//       </section>
+//     }
+//     activeIcon={
+//       <section className={styles.notificationIcon}>
+//         <UnreadIcon.Notification iconSize={iconSize} active />
+//       </section>
+//     }
+//     active={isInNotification}
+//     href={PATHS.ME_NOTIFICATIONS}
+//     showTooltip={false}
+//     testId={TEST_ID.GLOBAL_NAV_NOTIFICATIONS}
+//   />
+// )
+
+const NoticeButton = ({
   isInNotification,
   iconSize,
-}: NotificationButtonProps) => (
-  <NavButton
-    name={<FormattedMessage defaultMessage="Notifications" id="NAidKb" />}
-    icon={
-      <section className={styles.notificationIcon}>
-        <UnreadIcon.Notification iconSize={iconSize} />
-      </section>
+  isSmUp,
+}: NotificationButtonProps) => {
+  const handleClick = () => {
+    if (!isSmUp || isInNotification) {
+      return
     }
-    activeIcon={
-      <section className={styles.notificationIcon}>
-        <UnreadIcon.Notification iconSize={iconSize} active />
-      </section>
-    }
-    active={isInNotification}
-    href={PATHS.ME_NOTIFICATIONS}
-    showTooltip={false}
-    testId={TEST_ID.GLOBAL_NAV_NOTIFICATIONS}
-  />
-)
+    window.dispatchEvent(
+      new CustomEvent(OPEN_GLOBAL_NOTICE_DRAWER, {
+        detail: {},
+      })
+    )
+  }
+
+  const props = {
+    ...(isSmUp ? { onClick: handleClick } : { href: PATHS.ME_NOTIFICATIONS }),
+  }
+
+  return (
+    <NavButton
+      name={<FormattedMessage defaultMessage="Notifications" id="NAidKb" />}
+      icon={
+        <section className={styles.notificationIcon}>
+          <UnreadIcon.Notification iconSize={iconSize} />
+        </section>
+      }
+      activeIcon={
+        <section className={styles.notificationIcon}>
+          <UnreadIcon.Notification iconSize={iconSize} active />
+        </section>
+      }
+      active={isInNotification}
+      showTooltip={false}
+      {...props}
+    />
+  )
+}
 
 interface UserMenuProps {
   viewer: Viewer
@@ -216,9 +262,18 @@ const AuthenticatedNav = ({
       )}
     </Dropdown>
 
+    {/* Deprecated
     <NotificationButton
       isInNotification={isInNotification}
       iconSize={isSmUp ? 30 : 26}
+      isSmUp={isSmUp}
+    />
+    */}
+
+    <NoticeButton
+      isInNotification={isInNotification}
+      iconSize={isSmUp ? 30 : 26}
+      isSmUp={isSmUp}
     />
     <UserMenu viewer={viewer} avatarSize={isSmUp ? 30 : 26} />
   </>

@@ -1,0 +1,17 @@
+.archived,
+.anonymous {
+  font-size: var(--text14);
+  font-weight: var(--font-medium);
+  line-height: calc(22 / 14);
+  color: var(--color-black);
+}
+
+.displayName {
+  @mixin line-clamp;
+
+  font-size: var(--text14);
+  font-weight: var(--font-medium);
+  line-height: calc(22 / 14);
+  color: var(--color-black);
+  word-break: break-all;
+}

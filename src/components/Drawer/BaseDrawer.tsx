@@ -18,6 +18,7 @@ type BaseDrawerProps = {
   enableOverlay?: boolean
   className?: string
   size?: number | string
+  spacing?: number | string
 }
 
 const getDirectionStyle = (
@@ -76,6 +77,7 @@ export const BaseDrawer = ({
   enableOverlay = false,
   className,
   size,
+  spacing,
 }: BaseDrawerProps) => {
   const drawerStyles: CSSProperties = {
     transitionDuration: `${duration}ms`,
@@ -84,6 +86,7 @@ export const BaseDrawer = ({
 
   const containerClasses = classNames({
     [styles.baseDrawerContainer]: true,
+    [styles[`spacing${spacing}`]]: !!spacing,
     open: isOpen, // for read timer to identify the state
   })
 

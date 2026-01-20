@@ -6,6 +6,7 @@ import { useChannels } from '~/components/Context'
 
 import AuthHeader from './AuthHeader'
 import FixedMain from './FixedMain'
+import GlobalDrawer from './GlobalDrawer'
 import { GlobalNav } from './GlobalNav'
 import Header from './Header'
 import Notice from './Notice'
@@ -255,6 +256,8 @@ export const Layout: React.FC<LayoutProps> & {
           {children}
         </main>
       </div>
+
+      <GlobalDrawer />
     </>
   )
 }

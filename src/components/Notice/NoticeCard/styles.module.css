@@ -1,0 +1,50 @@
+.container {
+  display: flex;
+  column-gap: var(--sp16);
+  align-items: stretch;
+
+  & .avatar {
+    flex: 0 0 auto;
+
+    & div {
+      display: flex;
+    }
+  }
+
+  & .content {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    font-size: var(--text14);
+
+    &:has(.info) {
+      row-gap: var(--sp4);
+      justify-content: flex-start;
+    }
+
+    & .info {
+      display: flex;
+      flex-direction: column;
+      row-gap: var(--sp4);
+      justify-content: flex-start;
+    }
+  }
+}
+
+.actor {
+  display: flex;
+  column-gap: var(--sp16);
+  align-items: center;
+
+  & .act {
+    display: flex;
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  & .time {
+    flex: 0 0 auto;
+  }
+}

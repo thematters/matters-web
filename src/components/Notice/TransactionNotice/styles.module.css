@@ -1,0 +1,27 @@
+.amount {
+  display: flex;
+  column-gap: var(--sp8);
+  align-self: flex-start;
+  padding: var(--sp6) var(--sp8);
+  line-height: 1;
+  color: var(--color-white);
+  border-radius: var(--sp6);
+}
+
+.divider {
+  width: 1px;
+  height: 100%;
+  background-color: rgb(255 255 255 / 60%);
+}
+
+.hkd {
+  background-color: var(--color-matters-gold);
+}
+
+.like {
+  background-color: var(--color-likecoin);
+}
+
+.usdt {
+  background-color: var(--color-usdt);
+}

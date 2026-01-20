@@ -2,7 +2,7 @@ import gql from 'graphql-tag'
 
 import { ArticleArticleNoticeFragment } from '~/gql/graphql'
 
-import ArticleNewCollectedNotice from './ArticleNewCollectedNotice'
+import ArticleNewCollected from './ArticleNewCollected'
 
 const ArticleArticleNotice = ({
   notice,
@@ -11,7 +11,7 @@ const ArticleArticleNotice = ({
 }) => {
   switch (notice.articleArticleNoticeType) {
     case 'ArticleNewCollected':
-      return <ArticleNewCollectedNotice notice={notice} />
+      return <ArticleNewCollected notice={notice} />
     default:
       return null
   }
@@ -24,9 +24,9 @@ ArticleArticleNotice.fragments = {
       unread
       __typename
       articleArticleNoticeType: type
-      ...ArticleNewCollectedNotice
+      ...ArticleNewCollected
     }
-    ${ArticleNewCollectedNotice.fragments.notice}
+    ${ArticleNewCollected.fragments.notice}
   `,
 }
 
