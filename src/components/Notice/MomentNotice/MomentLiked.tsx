@@ -1,7 +1,6 @@
 import gql from 'graphql-tag'
 import { FormattedMessage } from 'react-intl'
 
-import { TEST_ID } from '~/common/enums'
 import { MomentLikedFragment, MomentState } from '~/gql/graphql'
 
 import ActorAction from '../ActorAction'
@@ -9,14 +8,14 @@ import MomentCard from '../MomentCard'
 import NoticeActorAvatar from '../NoticeActorAvatar'
 import NoticeCard from '../NoticeCard'
 import NoticeDate from '../NoticeDate'
-import NoticeDigest from '../NoticeDigest'
 import NoticeMomentTitle from '../NoticeMomentTitle'
 
 const MomentLiked = ({ notice }: { notice: MomentLikedFragment }) => {
   if (notice.moment.state === MomentState.Archived) {
     return (
-      <NoticeDigest
+      <NoticeCard
         notice={notice}
+        type="like"
         action={
           <FormattedMessage
             defaultMessage="liked your deleted moment"
@@ -24,7 +23,7 @@ const MomentLiked = ({ notice }: { notice: MomentLikedFragment }) => {
             id="5RPoaZ"
           />
         }
-        testId={TEST_ID.NOTICE_MOMENT_LIKED}
+        content={<MomentCard moment={notice.moment} />}
       />
     )
   }
