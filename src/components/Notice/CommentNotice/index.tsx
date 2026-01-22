@@ -2,27 +2,27 @@ import gql from 'graphql-tag'
 
 import { CommentNoticeFragment } from '~/gql/graphql'
 
-import ArticleNewCommentNotice from './ArticleNewCommentNotice'
-import CircleNewBroadcastNotice from './CircleNewBroadcastNotice'
-import CommentLikedNotice from './CommentLikedNotice'
-import CommentMentionedYouNotice from './CommentMentionedYouNotice'
+import ArticleNewComment from './ArticleNewComment'
+import CircleNewBroadcast from './CircleNewBroadcast'
+import CommentLiked from './CommentLiked'
+import CommentMentionedYou from './CommentMentionedYou'
 import CommentPinnedNotice from './CommentPinnedNotice'
-import MomentNewCommentNotice from './MomentNewCommentNotice'
+import MomentNewComment from './MomentNewComment'
 
 const CommentNotice = ({ notice }: { notice: CommentNoticeFragment }) => {
   switch (notice.commentNoticeType) {
     case 'CommentMentionedYou':
-      return <CommentMentionedYouNotice notice={notice} />
+      return <CommentMentionedYou notice={notice} />
     case 'CommentPinned':
       return <CommentPinnedNotice notice={notice} />
     case 'ArticleNewComment':
-      return <ArticleNewCommentNotice notice={notice} />
+      return <ArticleNewComment notice={notice} />
     case 'CircleNewBroadcast':
-      return <CircleNewBroadcastNotice notice={notice} />
+      return <CircleNewBroadcast notice={notice} />
     case 'CommentLiked':
-      return <CommentLikedNotice notice={notice} />
+      return <CommentLiked notice={notice} />
     case 'MomentNewComment':
-      return <MomentNewCommentNotice notice={notice} />
+      return <MomentNewComment notice={notice} />
     default:
       return null
   }
@@ -35,19 +35,19 @@ CommentNotice.fragments = {
       unread
       __typename
       commentNoticeType: type
-      ...CommentMentionedYouNotice
+      ...CommentMentionedYou
       ...CommentPinnedNotice
-      ...ArticleNewCommentNotice
-      ...CircleNewBroadcastNotice
-      ...CommentLikedNotice
-      ...MomentNewCommentNotice
+      ...ArticleNewComment
+      ...CircleNewBroadcast
+      ...CommentLiked
+      ...MomentNewComment
     }
-    ${CommentMentionedYouNotice.fragments.notice}
+    ${CommentMentionedYou.fragments.notice}
     ${CommentPinnedNotice.fragments.notice}
-    ${ArticleNewCommentNotice.fragments.notice}
-    ${CircleNewBroadcastNotice.fragments.notice}
-    ${CommentLikedNotice.fragments.notice}
-    ${MomentNewCommentNotice.fragments.notice}
+    ${ArticleNewComment.fragments.notice}
+    ${CircleNewBroadcast.fragments.notice}
+    ${CommentLiked.fragments.notice}
+    ${MomentNewComment.fragments.notice}
   `,
 }
 

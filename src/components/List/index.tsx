@@ -5,7 +5,7 @@ import { capitalizeFirstLetter } from '~/common/utils'
 
 import styles from './styles.module.css'
 
-type ListSpacing = 0 | 'base' | 'baseLoose' | 'loose' | 'xloose'
+type ListSpacing = 0 | 'base' | 'baseLoose' | 'loose' | 'xloose' | 'xxxloose'
 
 interface ListItemProps {
   [key: string]: any

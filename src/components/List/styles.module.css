@@ -57,6 +57,13 @@
     }
   }
 
+  &.spacingYXxxloose {
+    & > :global(.list-item) {
+      padding-bottom: calc(var(--sp40) / 2);
+      margin-bottom: calc(var(--sp40) / 2);
+    }
+  }
+
   &.spacingXBase {
     & > :global(.list-item) {
       padding-right: var(--sp16);

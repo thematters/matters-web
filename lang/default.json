@@ -213,6 +213,10 @@
   "0xVT+0": {
     "defaultMessage": "Curated"
   },
+  "11nXAM": {
+    "defaultMessage": "Your schedule article published successfully, but failed to submit because the selection event has ended",
+    "description": "src/components/Notice/ArticleNotice/ScheduledArticlePublishedNotice.tsx"
+  },
   "18HJlm": {
     "defaultMessage": "Tag"
   },
@@ -298,6 +302,10 @@
   },
   "2J3mz4": {
     "defaultMessage": "Add to event featured"
+  },
+  "2LRzPc": {
+    "defaultMessage": "Matters",
+    "description": "src/components/Notice/ActorAction/index.tsx"
   },
   "2P5JII": {
     "defaultMessage": "Disconnect",
@@ -477,6 +485,9 @@
   },
   "5jlQTx": {
     "defaultMessage": "Manage Invitation"
+  },
+  "5mu8HJ": {
+    "defaultMessage": "Moment deleted"
   },
   "5rxHb7": {
     "defaultMessage": "May contain pornography, violence, gore, etc. Click here to expand all.",
@@ -929,6 +940,10 @@
     "defaultMessage": "Copy comment",
     "description": "src/components/Comment/DropdownActions/index.tsx"
   },
+  "CZJdSn": {
+    "defaultMessage": "mentioned you in a comment",
+    "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
+  },
   "CbRvzm": {
     "defaultMessage": "Schedule publish"
   },
@@ -998,6 +1013,10 @@
   },
   "DjIpR6": {
     "defaultMessage": "Set Cover"
+  },
+  "DoOt1q": {
+    "defaultMessage": "Your channel suggestion has been accepted by the editor. Thank you for supporting Matters!",
+    "description": "src/components/Notice/ArticleNotice/TopicChannelFeedbackAcceptedNotice.tsx"
   },
   "Dom0EF": {
     "defaultMessage": "Verification successful",
@@ -1180,6 +1199,10 @@
     "defaultMessage": "Subscription cancellations",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
   },
+  "Gju939": {
+    "defaultMessage": "mentioned you",
+    "description": "src/components/Notice/ArticleNotice/ArticleMentionedYouNotice.tsx"
+  },
   "Gt7K6r": {
     "defaultMessage": "Wallet address",
     "description": "src/views/Me/Settings/Settings/Wallet/index.tsx"
@@ -1208,6 +1231,10 @@
   },
   "HBxXD/": {
     "defaultMessage": "License"
+  },
+  "HDkifr": {
+    "defaultMessage": "Your schedule article has been published",
+    "description": "src/components/Notice/ArticleNotice/ScheduledArticlePublishedNotice.tsx"
   },
   "HFVDeB": {
     "defaultMessage": "Related Tags",
@@ -1420,6 +1447,10 @@
   "KhbWu2": {
     "defaultMessage": "Your suggestion has been submitted to the editor."
   },
+  "KkMtuC": {
+    "defaultMessage": "Claim for free",
+    "description": "src/components/Notice/TransactionNotice/PaymentReceivedDonationNotice.tsx"
+  },
   "KlJEP9": {
     "defaultMessage": "Wallet connected",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
@@ -1600,6 +1631,10 @@
   },
   "O7ozeo": {
     "defaultMessage": "Update profile"
+  },
+  "O9lnpa": {
+    "defaultMessage": "mentioned you in broadcast comment",
+    "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
   },
   "ODncRd": {
     "defaultMessage": "Claiming..."
@@ -1897,6 +1932,10 @@
   "T9oZC8": {
     "defaultMessage": "Are you sure you want to delete this collection ‘{collection}’?"
   },
+  "TDcpi1": {
+    "defaultMessage": "Great! Your work has been featured in the event!",
+    "description": "src/components/Notice/CampaignArticleNotice/CampaignArticleFeaturedNotice.tsx"
+  },
   "TF1OhT": {
     "defaultMessage": "This login code has expired, please try to resend"
   },
@@ -2147,6 +2186,10 @@
   },
   "XZ8IJ3": {
     "defaultMessage": "After the modification is completed, the new version will be released to IPFS again. You can view the historical version from \"IPFS\" under the article title."
+  },
+  "Xcz2mz": {
+    "defaultMessage": "mentioned you in your circle",
+    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
   "XdLnXf": {
     "defaultMessage": "Insufficient wallet balance.",
@@ -2574,6 +2617,10 @@
     "defaultMessage": "Confirm",
     "description": "src/views/CampaignDetail/Apply/Dialog/index.tsx"
   },
+  "fAhR69": {
+    "defaultMessage": "invites you to join the circle {circleName}",
+    "description": "src/components/Notice/CircleNotice/CircleInvitationNotice.tsx"
+  },
   "fBzH+2": {
     "defaultMessage": "Disallow readers to respond to this article (you can enable responses later by editing this article)"
   },
@@ -2808,6 +2855,10 @@
     "defaultMessage": "Reviewing...",
     "description": "type:apply"
   },
+  "jOgBV9": {
+    "defaultMessage": "replied you",
+    "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
+  },
   "jiB0Z2": {
     "defaultMessage": "Unable to bind wallet",
     "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
@@ -2868,6 +2919,10 @@
   "kS3vTS": {
     "defaultMessage": "Liker ID",
     "description": "src/views/Me/Settings/Misc/LikerID.tsx"
+  },
+  "kSWA0M": {
+    "defaultMessage": "commented in your circle",
+    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
   "kc79d3": {
     "defaultMessage": "Topics"
@@ -3085,6 +3140,13 @@
   "oEHAIT": {
     "defaultMessage": "Cancel schedule",
     "description": "confirm cancel schedule button"
+  },
+  "oKcye/": {
+    "defaultMessage": "mentioned you in a moment"
+  },
+  "oNi7K5": {
+    "defaultMessage": "Your schedule article published successfully, but some full collections failed to be added",
+    "description": "src/components/Notice/ArticleNotice/ScheduledArticlePublishedNotice.tsx"
   },
   "ob+HDS": {
     "defaultMessage": "View Circle"
@@ -3349,6 +3411,9 @@
   "tQV8l8": {
     "defaultMessage": "Unknown Error"
   },
+  "tWCQCd": {
+    "defaultMessage": "The contract has sent {amount} USDT to the connected wallet"
+  },
   "tZKvnZ": {
     "defaultMessage": "Unlike moment"
   },
@@ -3382,6 +3447,10 @@
   },
   "uQrkG8": {
     "defaultMessage": "3 steps, migrate to Matters immediately"
+  },
+  "uQxskc": {
+    "defaultMessage": "Your work has been published to IPFS",
+    "description": "src/components/Notice/ArticleNotice/ArticlePublished.tsx"
   },
   "uVCg1l": {
     "defaultMessage": "Explore Matters"
@@ -3421,6 +3490,10 @@
   },
   "v+hbfO": {
     "defaultMessage": "fixed amount"
+  },
+  "v2dMFZ": {
+    "defaultMessage": "mentioned you",
+    "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
   },
   "v4ddaP": {
     "defaultMessage": "Bind your wallet immediately, and link it to your personal account",
@@ -3515,6 +3588,10 @@
     "defaultMessage": "left a comment in {circleName} and mentioned you",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
+  "wHAfde": {
+    "defaultMessage": "Your schedule article published successfully, some archived articles failed to be curated",
+    "description": "src/components/Notice/ArticleNotice/ScheduledArticlePublishedNotice.tsx"
+  },
   "wK4kLf": {
     "defaultMessage": "Continue",
     "description": "src/components/Forms/EmailSignUpForm/Init.tsx"
@@ -3548,6 +3625,10 @@
   },
   "wbcwKd": {
     "defaultMessage": "View All"
+  },
+  "wcWAWv": {
+    "defaultMessage": "commented in broadcast",
+    "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
   },
   "wclk7z": {
     "defaultMessage": "Summary to help readers quickly grasp the topic"

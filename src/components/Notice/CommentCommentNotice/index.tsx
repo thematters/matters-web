@@ -2,7 +2,7 @@ import gql from 'graphql-tag'
 
 import { CommentCommentNoticeFragment } from '~/gql/graphql'
 
-import CommentNewReplyNotice from './CommentNewReplyNotice'
+import CommentNewReply from './CommentNewReply'
 
 const CommentCommentNotice = ({
   notice,
@@ -11,7 +11,7 @@ const CommentCommentNotice = ({
 }) => {
   switch (notice.commentCommentNoticeType) {
     case 'CommentNewReply':
-      return <CommentNewReplyNotice notice={notice} />
+      return <CommentNewReply notice={notice} />
     default:
       return null
   }
@@ -24,9 +24,9 @@ CommentCommentNotice.fragments = {
       unread
       __typename
       commentCommentNoticeType: type
-      ...CommentNewReplyNotice
+      ...CommentNewReply
     }
-    ${CommentNewReplyNotice.fragments.notice}
+    ${CommentNewReply.fragments.notice}
   `,
 }
 

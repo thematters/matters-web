@@ -91,6 +91,7 @@ NoticeMomentTitle.fragments = {
       shortHash
       assets {
         id
+        path
       }
     }
   `,

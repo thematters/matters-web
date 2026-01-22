@@ -24,6 +24,10 @@
     backdrop-filter: blur(12px);
     will-change: transform, visibility;
   }
+
+  & .spacing40 {
+    padding: 0 var(--sp40);
+  }
 }
 
 .drawer {

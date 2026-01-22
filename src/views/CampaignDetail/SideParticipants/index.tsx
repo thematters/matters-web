@@ -9,7 +9,6 @@ import { analytics, toPath } from '~/common/utils'
 import {
   Avatar,
   Button,
-  DrawerProvider,
   Icon,
   TextIcon,
   Tooltip,
@@ -181,13 +180,11 @@ const SideParticipants = ({ campaign }: SideParticipantsProps) => {
           )}
         </section>
       </section>
-      <DrawerProvider>
-        <DynamicParticipantsDrawer
-          isOpen={openDrawer}
-          onClose={toggleDrawer}
-          totalParticipants={totalCount}
-        />
-      </DrawerProvider>
+      <DynamicParticipantsDrawer
+        isOpen={openDrawer}
+        onClose={toggleDrawer}
+        totalParticipants={totalCount}
+      />
     </>
   )
 }

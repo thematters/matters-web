@@ -1,0 +1,16 @@
+.container {
+  @mixin flex-center-start;
+
+  column-gap: var(--sp4);
+  color: var(--color-grey);
+}
+
+.title {
+  @mixin line-clamp;
+
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 1;
+  font-size: var(--text14);
+  font-weight: var(--font-normal);
+  line-height: calc(22 / 14);
+}
