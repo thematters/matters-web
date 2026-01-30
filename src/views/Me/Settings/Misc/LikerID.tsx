@@ -8,6 +8,10 @@ const LikerID = () => {
   const viewer = useContext(ViewerContext)
   const likerId = viewer.liker.likerId
 
+  if (!likerId) {
+    return null
+  }
+
   return (
     <LikeCoinDialog>
       {({ openDialog }) => (
