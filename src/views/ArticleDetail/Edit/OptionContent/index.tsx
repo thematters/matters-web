@@ -214,20 +214,6 @@ const EditSensitive = ({
   )
 }
 
-const EditISCN = ({
-  iscnPublish,
-  toggleISCN,
-  iscnPublishSaving,
-}: OptionItemProps) => {
-  return (
-    <Sidebar.ISCN
-      iscnPublish={iscnPublish}
-      toggleISCN={toggleISCN}
-      iscnPublishSaving={iscnPublishSaving}
-    />
-  )
-}
-
 const EditCircle = ({
   circle,
   editAccess,
@@ -305,7 +291,6 @@ export const OptionContent = (
             <EditCanComment {...props} disabled={disabled} />
             <EditSupportSetting {...props} disabled={disabled} />
             <EditSensitive {...props} disabled={disabled} />
-            <EditISCN {...props} disabled={disabled} />
             {hasOwnCircle && <EditCircle {...props} disabled={disabled} />}
           </>
         )}
