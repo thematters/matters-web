@@ -26,12 +26,24 @@ import {
 
 import type { ArchiveUserDialogProps } from './ArchiveUser/Dialog'
 import type {
+  OpenToggleFreezeUserDialogWithProps,
+  ToggleFreezeUserDialogProps,
+} from './ToggleFreezeUser/Dialog'
+import type {
   OpenToggleRestrictUserDialogWithProps,
   ToggleRestrictUserDialogProps,
 } from './ToggleRestrictUser/Dialog'
 
 const isAdminView = process.env.NEXT_PUBLIC_ADMIN_VIEW === 'true'
 
+const DynamicToggleFreezeUserButton = dynamic(
+  () => import('./ToggleFreezeUser/Button'),
+  { loading: () => <SpinnerBlock /> }
+)
+const DynamicToggleFreezeUserDialog = dynamic(
+  () => import('./ToggleFreezeUser/Dialog'),
+  { loading: () => <SpinnerBlock /> }
+)
 const DynamicToggleRestrictUserButton = dynamic(
   () => import('./ToggleRestrictUser/Button'),
   { loading: () => <SpinnerBlock /> }
@@ -65,6 +77,7 @@ interface Controls {
 }
 
 interface AdminProps {
+  openToggleFreezeDialog: (props: OpenToggleFreezeUserDialogWithProps) => void
   openToggleRestrictDialog: (
     props: OpenToggleRestrictUserDialogWithProps
   ) => void
@@ -108,6 +121,7 @@ const BaseDropdownActions = ({
   openShareDialog,
 
   // admin
+  openToggleFreezeDialog,
   openToggleRestrictDialog,
   openArchiveDialog,
 }: BaseDropdownActionsProps) => {
@@ -137,6 +151,10 @@ const BaseDropdownActions = ({
           <DynamicToggleRestrictUserButton
             id={user.id}
             openDialog={openToggleRestrictDialog}
+          />
+          <DynamicToggleFreezeUserButton
+            id={user.id}
+            openDialog={openToggleFreezeDialog}
           />
           <DynamicArchiveUserButton openDialog={openArchiveDialog} />
         </>
@@ -241,10 +259,22 @@ const DropdownActions = ({ user, isMe, isInAside }: DropdownActionsProps) => {
   /**
    * ADMIN ONLY
    */
+  const WithToggleFreeze = withDialog<
+    Omit<ToggleFreezeUserDialogProps, 'children'>
+  >(
+    WithBlockUser,
+    DynamicToggleFreezeUserDialog as React.ComponentType<
+      Omit<ToggleFreezeUserDialogProps, 'children'> & {
+        children: (props: { openDialog: () => void }) => React.ReactNode
+      }
+    >,
+    { id: user.id, userName: user.userName! },
+    ({ openDialog }) => ({ openToggleFreezeDialog: openDialog })
+  )
   const WithToggleRestrict = withDialog<
     Omit<ToggleRestrictUserDialogProps, 'children'>
   >(
-    WithBlockUser,
+    WithToggleFreeze,
     DynamicToggleRestrictUserDialog as React.ComponentType<
       Omit<ToggleRestrictUserDialogProps, 'children'> & {
         children: (props: { openDialog: () => void }) => React.ReactNode

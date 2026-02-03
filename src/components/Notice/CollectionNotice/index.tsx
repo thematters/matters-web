@@ -2,10 +2,10 @@ import gql from 'graphql-tag'
 
 import { CollectionNoticeFragment } from '~/gql/graphql'
 
-import CollectionNewLikeNotice from './CollectionLikeNotice'
+import CollectionNewLike from './CollectionLike'
 
 const CollectionNotice = ({ notice }: { notice: CollectionNoticeFragment }) => {
-  return <CollectionNewLikeNotice notice={notice} />
+  return <CollectionNewLike notice={notice} />
 }
 
 CollectionNotice.fragments = {
@@ -14,9 +14,9 @@ CollectionNotice.fragments = {
       id
       unread
       __typename
-      ...CollectionNewLikeNotice
+      ...CollectionNewLike
     }
-    ${CollectionNewLikeNotice.fragments.notice}
+    ${CollectionNewLike.fragments.notice}
   `,
 }
 

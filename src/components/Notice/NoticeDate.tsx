@@ -7,7 +7,7 @@ import styles from './styles.module.css'
 
 const NoticeDate = ({ notice }: { notice: NoticeDateFragment }) => (
   <section className={styles.date}>
-    <DateTime date={notice.createdAt} color="grey" />
+    <DateTime date={notice.createdAt} size="xs" color="grey" minimal={true} />
   </section>
 )
 

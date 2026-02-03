@@ -213,6 +213,10 @@
   "0xVT+0": {
     "defaultMessage": "已關聯"
   },
+  "11nXAM": {
+    "defaultMessage": "你的排程作品已發布成功，由於選擇活動已結束，投稿未能成功",
+    "description": "src/components/Notice/ArticleNotice/ScheduledArticlePublishedNotice.tsx"
+  },
   "18HJlm": {
     "defaultMessage": "標籤"
   },
@@ -298,6 +302,10 @@
   },
   "2J3mz4": {
     "defaultMessage": "加到活動精選"
+  },
+  "2LRzPc": {
+    "defaultMessage": "系統消息",
+    "description": "src/components/Notice/ActorAction/index.tsx"
   },
   "2P5JII": {
     "defaultMessage": "解綁",
@@ -477,6 +485,9 @@
   },
   "5jlQTx": {
     "defaultMessage": "邀請管理"
+  },
+  "5mu8HJ": {
+    "defaultMessage": "動態已刪除"
   },
   "5rxHb7": {
     "defaultMessage": "可能包含色情、暴力、血腥等，點此展開全部",
@@ -929,6 +940,10 @@
     "defaultMessage": "複製留言",
     "description": "src/components/Comment/DropdownActions/index.tsx"
   },
+  "CZJdSn": {
+    "defaultMessage": "在動態留言中提及你",
+    "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
+  },
   "CbRvzm": {
     "defaultMessage": "排程發布"
   },
@@ -998,6 +1013,10 @@
   },
   "DjIpR6": {
     "defaultMessage": "選擇封面"
+  },
+  "DoOt1q": {
+    "defaultMessage": "你的頻道建議已被編輯採納，感謝你對 Matters 的支持～",
+    "description": "src/components/Notice/ArticleNotice/TopicChannelFeedbackAcceptedNotice.tsx"
   },
   "Dom0EF": {
     "defaultMessage": "驗證成功",
@@ -1180,6 +1199,10 @@
     "defaultMessage": "退訂",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
   },
+  "Gju939": {
+    "defaultMessage": "在作品中提及了你",
+    "description": "src/components/Notice/ArticleNotice/ArticleMentionedYouNotice.tsx"
+  },
   "Gt7K6r": {
     "defaultMessage": "錢包地址",
     "description": "src/views/Me/Settings/Settings/Wallet/index.tsx"
@@ -1208,6 +1231,10 @@
   },
   "HBxXD/": {
     "defaultMessage": "版權聲明"
+  },
+  "HDkifr": {
+    "defaultMessage": "你的排程作品已發布成功",
+    "description": "src/components/Notice/ArticleNotice/ScheduledArticlePublishedNotice.tsx"
   },
   "HFVDeB": {
     "defaultMessage": "相關標籤",
@@ -1420,6 +1447,10 @@
   "KhbWu2": {
     "defaultMessage": "已將你的建議提交給編輯"
   },
+  "KkMtuC": {
+    "defaultMessage": "免費提領",
+    "description": "src/components/Notice/TransactionNotice/PaymentReceivedDonationNotice.tsx"
+  },
   "KlJEP9": {
     "defaultMessage": "錢包已綁定",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
@@ -1600,6 +1631,10 @@
   },
   "O7ozeo": {
     "defaultMessage": "修改個人資料"
+  },
+  "O9lnpa": {
+    "defaultMessage": "在圍爐廣播中留言並提及你",
+    "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
   },
   "ODncRd": {
     "defaultMessage": "提領中..."
@@ -1897,6 +1932,10 @@
   "T9oZC8": {
     "defaultMessage": "確認要刪除該選集「{collection}」嗎？"
   },
+  "TDcpi1": {
+    "defaultMessage": "太棒了，你的作品已被列為活動精選！",
+    "description": "src/components/Notice/CampaignArticleNotice/CampaignArticleFeaturedNotice.tsx"
+  },
   "TF1OhT": {
     "defaultMessage": "臨時密碼已過期，請嘗試重新發送"
   },
@@ -2148,6 +2187,10 @@
   "XZ8IJ3": {
     "defaultMessage": "完成修改後，新版會再次發佈到 IPFS，你可以從文章標題下的「IPFS」進入查看歷史版本。"
   },
+  "Xcz2mz": {
+    "defaultMessage": "在你的圍爐中留言並提及你",
+    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
+  },
   "XdLnXf": {
     "defaultMessage": "錢包餘額不足",
     "description": "PAYMENT_BALANCE_INSUFFICIENT"
@@ -2186,7 +2229,7 @@
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
   },
   "Y+spJC": {
-    "defaultMessage": "在你的圍爐中留言",
+    "defaultMessage": "在你的圍爐廣播中留言",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
   },
   "Y47aYU": {
@@ -2574,6 +2617,10 @@
     "defaultMessage": "確認參加",
     "description": "src/views/CampaignDetail/Apply/Dialog/index.tsx"
   },
+  "fAhR69": {
+    "defaultMessage": "邀你加入圍爐 {circleName}",
+    "description": "src/components/Notice/CircleNotice/CircleInvitationNotice.tsx"
+  },
   "fBzH+2": {
     "defaultMessage": "不允許讀者評論本文（可通過編輯打開評論功能）"
   },
@@ -2808,6 +2855,10 @@
     "defaultMessage": "報名處理中⋯",
     "description": "type:apply"
   },
+  "jOgBV9": {
+    "defaultMessage": "回覆了你",
+    "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
+  },
   "jiB0Z2": {
     "defaultMessage": "無法綁定錢包",
     "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
@@ -2868,6 +2919,10 @@
   "kS3vTS": {
     "defaultMessage": "Liker ID",
     "description": "src/views/Me/Settings/Misc/LikerID.tsx"
+  },
+  "kSWA0M": {
+    "defaultMessage": "在你的圍爐中留言",
+    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
   "kc79d3": {
     "defaultMessage": "熱門標籤"
@@ -3086,6 +3141,13 @@
     "defaultMessage": "取消排程",
     "description": "confirm cancel schedule button"
   },
+  "oKcye/": {
+    "defaultMessage": "在動態中提及你"
+  },
+  "oNi7K5": {
+    "defaultMessage": "你的排程作品已發布成功，部分已滿選集未能加入成功",
+    "description": "src/components/Notice/ArticleNotice/ScheduledArticlePublishedNotice.tsx"
+  },
   "ob+HDS": {
     "defaultMessage": "馬上逛逛"
   },
@@ -3152,7 +3214,7 @@
     "defaultMessage": "最大金額爲 HKD {max}"
   },
   "qCotH5": {
-    "defaultMessage": "在動態中留言",
+    "defaultMessage": "在動態下留言",
     "description": "src/components/Notice/CommentNotice/MomentNewCommentNotice.tsx"
   },
   "qNuRmA": {
@@ -3349,6 +3411,9 @@
   "tQV8l8": {
     "defaultMessage": "未知錯誤"
   },
+  "tWCQCd": {
+    "defaultMessage": "交易合約已將 {amount} USDT 發送至綁定錢包"
+  },
   "tZKvnZ": {
     "defaultMessage": "取消喜歡動態"
   },
@@ -3382,6 +3447,10 @@
   },
   "uQrkG8": {
     "defaultMessage": "三個步驟，立即搬家到 Matters"
+  },
+  "uQxskc": {
+    "defaultMessage": "你的作品已發佈到 IPFS",
+    "description": "src/components/Notice/ArticleNotice/ArticlePublished.tsx"
   },
   "uVCg1l": {
     "defaultMessage": "玩轉 Matters 實用指南"
@@ -3421,6 +3490,10 @@
   },
   "v+hbfO": {
     "defaultMessage": "固定金額"
+  },
+  "v2dMFZ": {
+    "defaultMessage": "在評論中提及了你",
+    "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
   },
   "v4ddaP": {
     "defaultMessage": "立即綁定錢包，與個人帳戶連結",
@@ -3515,6 +3588,10 @@
     "defaultMessage": "在 {circleName} 中留言提及你",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
+  "wHAfde": {
+    "defaultMessage": "你的排程作品已發布成功，部分已封存作品未能關聯成功",
+    "description": "src/components/Notice/ArticleNotice/ScheduledArticlePublishedNotice.tsx"
+  },
   "wK4kLf": {
     "defaultMessage": "註冊",
     "description": "src/components/Forms/EmailSignUpForm/Init.tsx"
@@ -3548,6 +3625,10 @@
   },
   "wbcwKd": {
     "defaultMessage": "查看全部"
+  },
+  "wcWAWv": {
+    "defaultMessage": "在圍爐廣播中留言",
+    "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
   },
   "wclk7z": {
     "defaultMessage": "摘要，讓讀者快速掌握主題"

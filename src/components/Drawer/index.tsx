@@ -18,6 +18,7 @@ export type DrawerProps = {
   duration?: number
   enableOverlay?: boolean
   direction?: 'left' | 'right'
+  spacing?: number | string
 }
 
 export const Drawer: React.ComponentType<
@@ -34,6 +35,7 @@ export const Drawer: React.ComponentType<
   duration = 300,
   enableOverlay = false,
   direction = 'right',
+  spacing,
 }) => {
   const [showDrawer, setShowDrawer] = useState(isOpen)
   const { hasOpeningDrawer, setHasOpeningDrawer } = useDrawerContext()
@@ -94,6 +96,7 @@ export const Drawer: React.ComponentType<
       enableOverlay={enableOverlay}
       duration={duration}
       size={size}
+      spacing={spacing}
     >
       {children}
     </BaseDrawer>

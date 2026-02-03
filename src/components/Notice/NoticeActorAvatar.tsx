@@ -8,7 +8,7 @@ export const NoticeActorAvatar = ({
 }: {
   user?: NoticeActorAvatarUserFragment
 }) => {
-  return <UserDigest.Mini user={user} avatarSize={32} hasAvatar />
+  return <UserDigest.Mini user={user} avatarSize={40} hasAvatar />
 }
 
 NoticeActorAvatar.fragments = {

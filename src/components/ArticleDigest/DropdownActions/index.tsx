@@ -37,6 +37,10 @@ import { SubmitReportDialogProps } from '~/components/Dialogs/SubmitReportDialog
 import { DropdownActionsArticleFragment } from '~/gql/graphql'
 import { ArchiveUserDialogProps } from '~/views/User/UserProfile/DropdownActions/ArchiveUser/Dialog'
 import {
+  OpenToggleFreezeUserDialogWithProps,
+  ToggleFreezeUserDialogProps,
+} from '~/views/User/UserProfile/DropdownActions/ToggleFreezeUser/Dialog'
+import {
   OpenToggleRestrictUserDialogWithProps,
   ToggleRestrictUserDialogProps,
 } from '~/views/User/UserProfile/DropdownActions/ToggleRestrictUser/Dialog'
@@ -75,6 +79,16 @@ const DynamicToggleRecommendArticleButton = dynamic(
 )
 const DynamicToggleRecommendArticleDialog = dynamic(
   () => import('./ToggleRecommendArticle/Dialog'),
+  { loading: () => <Spinner /> }
+)
+const DynamicToggleFreezeUserButton = dynamic(
+  () =>
+    import('~/views/User/UserProfile/DropdownActions/ToggleFreezeUser/Button'),
+  { loading: () => <Spinner /> }
+)
+const DynamicToggleFreezeUserDialog = dynamic(
+  () =>
+    import('~/views/User/UserProfile/DropdownActions/ToggleFreezeUser/Dialog'),
   { loading: () => <Spinner /> }
 )
 const DynamicToggleRestrictUserButton = dynamic(
@@ -198,6 +212,9 @@ interface AdminProps {
   openToggleRecommendArticleDialog: (
     props: OpenToggleRecommendArticleDialogWithProps
   ) => void
+  openToggleFreezeUserDialog: (
+    props: OpenToggleFreezeUserDialogWithProps
+  ) => void
   openToggleRestrictUserDialog: (
     props: OpenToggleRestrictUserDialogWithProps
   ) => void
@@ -252,6 +269,7 @@ const BaseDropdownActions = ({
 
   // admin
   openToggleRecommendArticleDialog,
+  openToggleFreezeUserDialog,
   openToggleRestrictUserDialog,
   openArchiveUserDialog,
   openSetArticleChannelsDialog,
@@ -387,6 +405,10 @@ const BaseDropdownActions = ({
           <DynamicToggleRestrictUserButton
             id={article.author.id}
             openDialog={openToggleRestrictUserDialog}
+          />
+          <DynamicToggleFreezeUserButton
+            id={article.author.id}
+            openDialog={openToggleFreezeUserDialog}
           />
           <DynamicArchiveUserButton openDialog={openArchiveUserDialog} />
         </>
@@ -592,8 +614,23 @@ const DropdownActions = (props: DropdownActionsProps) => {
     })
   )
 
-  const WithArchiveUser = withDialog<Omit<ArchiveUserDialogProps, 'children'>>(
+  const WithToggleFreezeUser = withDialog<
+    Omit<ToggleFreezeUserDialogProps, 'children'>
+  >(
     WithToggleRetrictUser,
+    DynamicToggleFreezeUserDialog as React.ComponentType<
+      Omit<ToggleFreezeUserDialogProps, 'children'> & {
+        children: (props: { openDialog: () => void }) => React.ReactNode
+      }
+    >,
+    { id: article.author.id, userName: article.author.userName! },
+    ({ openDialog }) => ({
+      openToggleFreezeUserDialog: openDialog,
+    })
+  )
+
+  const WithArchiveUser = withDialog<Omit<ArchiveUserDialogProps, 'children'>>(
+    WithToggleFreezeUser,
     DynamicArchiveUserDialog,
     { id: article.author.id, userName: article.author.userName! },
     ({ openDialog }) => ({ openArchiveUserDialog: openDialog })

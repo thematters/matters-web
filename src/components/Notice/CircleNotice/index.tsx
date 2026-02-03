@@ -2,21 +2,21 @@ import gql from 'graphql-tag'
 
 import { CircleNoticeFragment } from '~/gql/graphql'
 
-import CircleInvitationNotice from './CircleInvitationNotice'
 import CircleNewBroadcastComments from './CircleNewBroadcastComments'
 import CircleNewDiscussionComments from './CircleNewDiscussionComments'
-import CircleNewUserNotice from './CircleNewUserNotice'
+import CircleNewInvitation from './CircleNewInvitation'
+import CircleNewUser from './CircleNewUser'
 
 const CircleNotice = ({ notice }: { notice: CircleNoticeFragment }) => {
   switch (notice.circleNoticeType) {
     case 'CircleNewSubscriber':
-      return <CircleNewUserNotice notice={notice} userType="subscriber" />
+      return <CircleNewUser notice={notice} userType="subscriber" />
     case 'CircleNewFollower':
-      return <CircleNewUserNotice notice={notice} userType="follower" />
+      return <CircleNewUser notice={notice} userType="follower" />
     case 'CircleNewUnsubscriber':
-      return <CircleNewUserNotice notice={notice} userType="unsubscriber" />
+      return <CircleNewUser notice={notice} userType="unsubscriber" />
     case 'CircleInvitation':
-      return <CircleInvitationNotice notice={notice} />
+      return <CircleNewInvitation notice={notice} />
     case 'CircleNewBroadcastComments':
       return <CircleNewBroadcastComments notice={notice} />
     case 'CircleNewDiscussionComments':
@@ -33,13 +33,13 @@ CircleNotice.fragments = {
       unread
       __typename
       circleNoticeType: type
-      ...CircleNewUserNotice
-      ...CircleInvitationNotice
+      ...CircleNewUser
+      ...CircleNewInvitation
       ...CircleNewBroadcastComments
       ...CircleNewDiscussionComments
     }
-    ${CircleNewUserNotice.fragments.notice}
-    ${CircleInvitationNotice.fragments.notice}
+    ${CircleNewUser.fragments.notice}
+    ${CircleNewInvitation.fragments.notice}
     ${CircleNewBroadcastComments.fragments.notice}
     ${CircleNewDiscussionComments.fragments.notice}
   `,

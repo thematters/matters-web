@@ -2,17 +2,17 @@ import gql from 'graphql-tag'
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { TEST_ID } from '~/common/enums'
 import { toPath } from '~/common/utils'
 import { ViewerContext } from '~/components'
 import { CircleNewDiscussionCommentsFragment } from '~/gql/graphql'
 
+import ActorAction from '../ActorAction'
+import CommentCard from '../CommentCard'
 import NoticeActorAvatar from '../NoticeActorAvatar'
+import NoticeCard from '../NoticeCard'
 import NoticeCircleCard from '../NoticeCircleCard'
 import NoticeCircleName from '../NoticeCircleName'
 import NoticeDate from '../NoticeDate'
-import NoticeDigest from '../NoticeDigest'
-import NoticeHeadActors from '../NoticeHeadActors'
 
 type CircleNewDiscussionCommentsType = {
   notice: CircleNewDiscussionCommentsFragment
@@ -51,35 +51,37 @@ const CircleNewDiscussionComments = ({
 
   if (isCircleOwner) {
     return (
-      <NoticeDigest
+      <NoticeCard
         notice={notice}
+        type="circle"
         action={
           <>
             {(newDiscussionCount || replyCount) && !mentionCount && (
               <FormattedMessage
-                defaultMessage="left a comment in your circle"
-                id="6Vznnt"
+                defaultMessage="commented in your circle"
                 description="src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
+                id="kSWA0M"
               />
             )}
 
             {(newDiscussionCount || replyCount) && mentionCount && (
               <FormattedMessage
-                defaultMessage="left comments and mentioned you in your circle"
-                id="V8msLJ"
+                defaultMessage="mentioned you in your circle"
                 description="src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
+                id="Xcz2mz"
               />
             )}
           </>
         }
-        testId={TEST_ID.NOTICE_CIRCLE_NEW_DISCUSSION_COMMENTS}
+        content={<CommentCard comment={latestComment} line={3} />}
       />
     )
   }
 
   return (
-    <NoticeDigest
+    <NoticeCard
       notice={notice}
+      type="circle"
       action={
         <>
           {(newDiscussionCount || replyCount) && !mentionCount && (
@@ -114,7 +116,7 @@ const CircleNewDiscussionComments = ({
           )}
         </>
       }
-      testId={TEST_ID.NOTICE_CIRCLE_NEW_DISCUSSION_COMMENTS}
+      content={<CommentCard comment={latestComment} line={3} />}
     />
   )
 }
@@ -126,7 +128,7 @@ CircleNewDiscussionComments.fragments = {
       ...NoticeDate
       actors {
         ...NoticeActorAvatarUser
-        ...NoticeHeadActorsUser
+        ...ActorActionUser
       }
       circle: target {
         ...NoticeCircleCard
@@ -137,6 +139,7 @@ CircleNewDiscussionComments.fragments = {
         parentComment {
           id
         }
+        ...CommentCardComment
       }
       replies {
         id
@@ -149,6 +152,7 @@ CircleNewDiscussionComments.fragments = {
             id
           }
         }
+        ...CommentCardComment
       }
       mentions {
         id
@@ -156,11 +160,13 @@ CircleNewDiscussionComments.fragments = {
         parentComment {
           id
         }
+        ...CommentCardComment
       }
     }
     ${NoticeActorAvatar.fragments.user}
-    ${NoticeHeadActors.fragments.user}
+    ${ActorAction.fragments.user}
     ${NoticeCircleCard.fragments.circle}
+    ${CommentCard.fragments.comment}
     ${NoticeDate.fragments.notice}
   `,
 }

@@ -17,6 +17,7 @@ import {
   wagmiConfig,
 } from '~/common/utils'
 import {
+  DrawerProvider,
   Error,
   FeaturesProvider,
   LanguageProvider,
@@ -148,7 +149,9 @@ const Root = ({
                   <FetchPolicyProvider>
                     <ChannelsProvider channels={channels || []}>
                       {shouldApplyLayout ? (
-                        <Layout>{children}</Layout>
+                        <DrawerProvider>
+                          <Layout>{children}</Layout>
+                        </DrawerProvider>
                       ) : (
                         children
                       )}

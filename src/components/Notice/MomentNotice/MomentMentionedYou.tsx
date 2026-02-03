@@ -2,18 +2,20 @@ import gql from 'graphql-tag'
 import { FormattedMessage } from 'react-intl'
 
 import { TEST_ID } from '~/common/enums'
-import { MomentMentionedYouNoticeFragment, MomentState } from '~/gql/graphql'
+import { MomentMentionedYouFragment, MomentState } from '~/gql/graphql'
 
+import ActorAction from '../ActorAction'
+import MomentCard from '../MomentCard'
 import NoticeActorAvatar from '../NoticeActorAvatar'
+import NoticeCard from '../NoticeCard'
 import NoticeDate from '../NoticeDate'
 import NoticeDigest from '../NoticeDigest'
-import NoticeHeadActors from '../NoticeHeadActors'
 import NoticeMomentTitle from '../NoticeMomentTitle'
 
-const MomentMentionedYouNotice = ({
+const MomentMentionedYou = ({
   notice,
 }: {
-  notice: MomentMentionedYouNoticeFragment
+  notice: MomentMentionedYouFragment
 }) => {
   const moment = notice.moment
 
@@ -34,40 +36,42 @@ const MomentMentionedYouNotice = ({
   }
 
   return (
-    <NoticeDigest
+    <NoticeCard
       notice={notice}
+      type="comment"
       action={
         <FormattedMessage
-          defaultMessage="mentioned you in a moment at"
-          id="Qlzm0s"
+          defaultMessage="mentioned you in a moment"
+          id="oKcye/"
         />
       }
-      title={<NoticeMomentTitle moment={notice.moment} />}
-      testId={TEST_ID.NOTICE_MOMENT_MENTIONED}
+      content={<MomentCard moment={notice.moment} />}
     />
   )
 }
 
-MomentMentionedYouNotice.fragments = {
+MomentMentionedYou.fragments = {
   notice: gql`
-    fragment MomentMentionedYouNotice on MomentNotice {
+    fragment MomentMentionedYou on MomentNotice {
       id
       ...NoticeDate
       actors {
         ...NoticeActorAvatarUser
-        ...NoticeHeadActorsUser
+        ...ActorActionUser
       }
       moment: target {
         id
         state
         ...NoticeMomentTitle
+        ...MomentCardMoment
       }
     }
     ${NoticeActorAvatar.fragments.user}
-    ${NoticeHeadActors.fragments.user}
+    ${ActorAction.fragments.user}
     ${NoticeDate.fragments.notice}
     ${NoticeMomentTitle.fragments.moment}
+    ${MomentCard.fragments.moment}
   `,
 }
 
-export default MomentMentionedYouNotice
+export default MomentMentionedYou
