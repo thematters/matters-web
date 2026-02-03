@@ -76,7 +76,6 @@ const SupportAuthor = (props: SupportAuthorProps) => {
   const [windowRef, setWindowRef] = useState<Window | undefined>(undefined)
   const { currStep, forward: _forward } = useStep<SupportStep>('setAmount')
   const hasAuthorLikeID = !!recipient.liker.likerId
-  const supportCurrency = storage.get<CURRENCY>(SUPPORT_TAB_PREFERENCE_KEY)
 
   const { address } = useAccount()
   const { isUnsupportedNetwork } = useCurationNetwork()
@@ -87,9 +86,12 @@ const SupportAuthor = (props: SupportAuthorProps) => {
   }
 
   const [amount, setAmount] = useState<number>(0)
-  const [currency, setCurrency] = useState<CURRENCY>(
-    supportCurrency || CURRENCY.HKD
-  )
+  const [currency, setCurrency] = useState<CURRENCY>(() => {
+    const supportCurrency = storage.get<CURRENCY>(SUPPORT_TAB_PREFERENCE_KEY)
+    return !supportCurrency || supportCurrency === CURRENCY.LIKE
+      ? CURRENCY.HKD
+      : supportCurrency
+  })
 
   const switchCurrency = async (currency: CURRENCY) => {
     setAmount(0)
