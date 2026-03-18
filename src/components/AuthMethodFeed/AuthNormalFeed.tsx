@@ -4,9 +4,10 @@ import { FormattedMessage } from 'react-intl'
 
 import IconGoogle2 from '@/public/static/icons/24px/google2.svg'
 import IconMail from '@/public/static/icons/24px/mail.svg'
+import IconThreads from '@/public/static/icons/24px/threads.svg'
 import IconX2 from '@/public/static/icons/24px/x2.svg'
 import { PATHS } from '~/common/enums'
-import { googleOauthUrl, sleep, twitterOauthUrl } from '~/common/utils'
+import { googleOauthUrl, sleep, threadsOauthUrl, twitterOauthUrl } from '~/common/utils'
 import { Icon, Spinner, useRoute } from '~/components'
 
 import { OAUTH_REQUEST_TOKEN } from '../GQL/queries/oauthRequestToken'
@@ -23,6 +24,7 @@ export const AuthNormalFeed = ({ gotoEmailSignup, gotoEmailLogin }: Props) => {
   const [loadingState, setLoadingState] = useState('')
   const isGoogleLoading = loadingState === 'Google'
   const isTwitterLoading = loadingState === 'Twitter'
+  const isThreadsLoading = loadingState === 'Threads'
 
   useEffect(() => {
     return setLoadingState('')
@@ -55,6 +57,12 @@ export const AuthNormalFeed = ({ gotoEmailSignup, gotoEmailLogin }: Props) => {
     }
   }
 
+  const gotoThreads = async () => {
+    setLoadingState('Threads')
+    const url = await threadsOauthUrl(oauthType)
+    router.push(url)
+  }
+
   return (
     <>
       <ul className={styles.feed}>
@@ -83,6 +91,17 @@ export const AuthNormalFeed = ({ gotoEmailSignup, gotoEmailLogin }: Props) => {
           </span>
           <span className={styles.name}>X</span>
           {isTwitterLoading && (
+            <span className={styles.right}>
+              <Spinner color="grey" size={22} />
+            </span>
+          )}
+        </li>
+        <li className={styles.item} role="button" onClick={gotoThreads}>
+          <span className={styles.icon}>
+            <Icon icon={IconThreads} size={22} />
+          </span>
+          <span className={styles.name}>Threads</span>
+          {isThreadsLoading && (
             <span className={styles.right}>
               <Spinner color="grey" size={22} />
             </span>

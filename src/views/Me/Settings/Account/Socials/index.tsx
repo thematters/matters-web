@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import IconGoogle2 from '@/public/static/icons/24px/google2.svg'
+import IconThreads from '@/public/static/icons/24px/threads.svg'
 import IconTimes from '@/public/static/icons/24px/times.svg'
 import IconX2 from '@/public/static/icons/24px/x2.svg'
 import {
@@ -16,6 +17,7 @@ import {
   isSafari,
   sleep,
   storage,
+  threadsOauthUrl,
   twitterOauthUrl,
 } from '~/common/utils'
 import {
@@ -43,11 +45,15 @@ const Socials = () => {
   const twitterId = viewer.info.socialAccounts.find(
     (s) => s.type === SocialAccountType.Twitter
   )?.userName
+  const threadsId = viewer.info.socialAccounts.find(
+    (s) => s.type === SocialAccountType.Threads
+  )?.userName
 
   const { router } = useRoute()
   const [loadingState, setLoadingState] = useState('')
   const isGoogleLoading = loadingState === 'Google'
   const isTwitterLoading = loadingState === 'Twitter'
+  const isThreadsLoading = loadingState === 'Threads'
 
   const oauthType = 'bind'
 
@@ -74,6 +80,12 @@ const Socials = () => {
       await sleep(3 * 1000)
       gotoTwitter()
     }
+  }
+
+  const gotoThreads = async () => {
+    setLoadingState('Threads')
+    const url = await threadsOauthUrl(oauthType)
+    router.push(url)
   }
 
   useEffect(() => {
@@ -212,6 +224,48 @@ const Socials = () => {
                       </SettingsButton>
                     )}
                     {isTwitterLoading && (
+                      <Spinner color="greyLight" size={20} />
+                    )}
+                  </>
+                )
+              }
+            />
+          )
+        }}
+      </RemoveSocialLoginDialog>
+
+      {/* Threads */}
+      <RemoveSocialLoginDialog type={SocialAccountType.Threads}>
+        {({ openDialog }) => {
+          return (
+            <TableView.Cell
+              title={
+                <TextIcon
+                  icon={<Icon icon={IconThreads} size={22} />}
+                  spacing={12}
+                >
+                  Threads
+                </TextIcon>
+              }
+              rightText={threadsId ? `@${threadsId}` : undefined}
+              rightIcon={
+                threadsId ? (
+                  <Icon icon={IconTimes} size={20} color="greyDarker" />
+                ) : undefined
+              }
+              onClick={threadsId ? () => openDialog() : undefined}
+              right={
+                threadsId ? undefined : (
+                  <>
+                    {!isThreadsLoading && (
+                      <SettingsButton onClick={gotoThreads}>
+                        <FormattedMessage
+                          defaultMessage="Connect"
+                          id="+vVZ/G"
+                        />
+                      </SettingsButton>
+                    )}
+                    {isThreadsLoading && (
                       <Spinner color="greyLight" size={20} />
                     )}
                   </>
