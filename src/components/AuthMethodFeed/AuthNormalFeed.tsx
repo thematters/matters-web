@@ -7,7 +7,13 @@ import IconMail from '@/public/static/icons/24px/mail.svg'
 import IconThreads from '@/public/static/icons/24px/threads.svg'
 import IconX2 from '@/public/static/icons/24px/x2.svg'
 import { PATHS } from '~/common/enums'
-import { googleOauthUrl, sleep, threadsOauthUrl, twitterOauthUrl } from '~/common/utils'
+import {
+  analytics,
+  googleOauthUrl,
+  sleep,
+  threadsOauthUrl,
+  twitterOauthUrl,
+} from '~/common/utils'
 import { Icon, Spinner, useRoute } from '~/components'
 
 import { OAUTH_REQUEST_TOKEN } from '../GQL/queries/oauthRequestToken'
@@ -58,6 +64,7 @@ export const AuthNormalFeed = ({ gotoEmailSignup, gotoEmailLogin }: Props) => {
   }
 
   const gotoThreads = async () => {
+    analytics.trackEvent('click_button', { type: 'login_threads' })
     setLoadingState('Threads')
     const url = await threadsOauthUrl(oauthType)
     router.push(url)

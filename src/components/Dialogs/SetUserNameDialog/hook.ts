@@ -30,7 +30,8 @@ export const useAvailableUserName = ({
     (s) => s.type === SocialAccountType.Threads
   )?.userName
 
-  const presetUserName = (viewer.info.email as string) || googleId || twitterId || threadsId
+  const presetUserName =
+    (viewer.info.email as string) || googleId || twitterId || threadsId
 
   const [loading, setLoading] = useState(enable && !!presetUserName)
   const [index, setIndex] = useState(0)
