@@ -13,6 +13,7 @@ import {
   OAUTH_STORAGE_BIND_STATE_UNAVAILABLE,
 } from '~/common/enums'
 import {
+  analytics,
   googleOauthUrl,
   isSafari,
   sleep,
@@ -83,6 +84,7 @@ const Socials = () => {
   }
 
   const gotoThreads = async () => {
+    analytics.trackEvent('click_button', { type: 'bind_threads' })
     setLoadingState('Threads')
     const url = await threadsOauthUrl(oauthType)
     router.push(url)
