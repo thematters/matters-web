@@ -4,14 +4,15 @@ import { FormattedMessage } from 'react-intl'
 
 import IconGoogle2 from '@/public/static/icons/24px/google2.svg'
 import IconMail from '@/public/static/icons/24px/mail.svg'
-import IconThreads from '@/public/static/icons/24px/threads.svg'
+// temporarily hidden: Threads login
+// import IconThreads from '@/public/static/icons/24px/threads.svg'
 import IconX2 from '@/public/static/icons/24px/x2.svg'
 import { PATHS } from '~/common/enums'
 import {
-  analytics,
+  // analytics,
   googleOauthUrl,
   sleep,
-  threadsOauthUrl,
+  // threadsOauthUrl,
   twitterOauthUrl,
 } from '~/common/utils'
 import { Icon, Spinner, useRoute } from '~/components'
@@ -30,7 +31,7 @@ export const AuthNormalFeed = ({ gotoEmailSignup, gotoEmailLogin }: Props) => {
   const [loadingState, setLoadingState] = useState('')
   const isGoogleLoading = loadingState === 'Google'
   const isTwitterLoading = loadingState === 'Twitter'
-  const isThreadsLoading = loadingState === 'Threads'
+  // const isThreadsLoading = loadingState === 'Threads'
 
   useEffect(() => {
     return setLoadingState('')
@@ -63,12 +64,12 @@ export const AuthNormalFeed = ({ gotoEmailSignup, gotoEmailLogin }: Props) => {
     }
   }
 
-  const gotoThreads = async () => {
-    analytics.trackEvent('click_button', { type: 'login_threads' })
-    setLoadingState('Threads')
-    const url = await threadsOauthUrl(oauthType)
-    router.push(url)
-  }
+  // const gotoThreads = async () => {
+  //   analytics.trackEvent('click_button', { type: 'login_threads' })
+  //   setLoadingState('Threads')
+  //   const url = await threadsOauthUrl(oauthType)
+  //   router.push(url)
+  // }
 
   return (
     <>
@@ -103,6 +104,7 @@ export const AuthNormalFeed = ({ gotoEmailSignup, gotoEmailLogin }: Props) => {
             </span>
           )}
         </li>
+        {/*
         <li className={styles.item} role="button" onClick={gotoThreads}>
           <span className={styles.icon}>
             <Icon icon={IconThreads} size={22} />
@@ -114,6 +116,7 @@ export const AuthNormalFeed = ({ gotoEmailSignup, gotoEmailLogin }: Props) => {
             </span>
           )}
         </li>
+        */}
       </ul>
       <section className={styles.info}>
         <section className={styles.title}>
