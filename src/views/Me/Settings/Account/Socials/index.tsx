@@ -3,7 +3,8 @@ import { useContext, useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import IconGoogle2 from '@/public/static/icons/24px/google2.svg'
-import IconThreads from '@/public/static/icons/24px/threads.svg'
+// temporarily hidden: Threads bind/unbind
+// import IconThreads from '@/public/static/icons/24px/threads.svg'
 import IconTimes from '@/public/static/icons/24px/times.svg'
 import IconX2 from '@/public/static/icons/24px/x2.svg'
 import {
@@ -13,12 +14,12 @@ import {
   OAUTH_STORAGE_BIND_STATE_UNAVAILABLE,
 } from '~/common/enums'
 import {
-  analytics,
+  // analytics,
   googleOauthUrl,
   isSafari,
   sleep,
   storage,
-  threadsOauthUrl,
+  // threadsOauthUrl,
   twitterOauthUrl,
 } from '~/common/utils'
 import {
@@ -46,15 +47,15 @@ const Socials = () => {
   const twitterId = viewer.info.socialAccounts.find(
     (s) => s.type === SocialAccountType.Twitter
   )?.userName
-  const threadsId = viewer.info.socialAccounts.find(
-    (s) => s.type === SocialAccountType.Threads
-  )?.userName
+  // const threadsId = viewer.info.socialAccounts.find(
+  //   (s) => s.type === SocialAccountType.Threads
+  // )?.userName
 
   const { router } = useRoute()
   const [loadingState, setLoadingState] = useState('')
   const isGoogleLoading = loadingState === 'Google'
   const isTwitterLoading = loadingState === 'Twitter'
-  const isThreadsLoading = loadingState === 'Threads'
+  // const isThreadsLoading = loadingState === 'Threads'
 
   const oauthType = 'bind'
 
@@ -83,12 +84,12 @@ const Socials = () => {
     }
   }
 
-  const gotoThreads = async () => {
-    analytics.trackEvent('click_button', { type: 'bind_threads' })
-    setLoadingState('Threads')
-    const url = await threadsOauthUrl(oauthType)
-    router.push(url)
-  }
+  // const gotoThreads = async () => {
+  //   analytics.trackEvent('click_button', { type: 'bind_threads' })
+  //   setLoadingState('Threads')
+  //   const url = await threadsOauthUrl(oauthType)
+  //   router.push(url)
+  // }
 
   useEffect(() => {
     const bindResult = storage.remove<{
@@ -237,6 +238,7 @@ const Socials = () => {
       </RemoveSocialLoginDialog>
 
       {/* Threads */}
+      {/*
       <RemoveSocialLoginDialog type={SocialAccountType.Threads}>
         {({ openDialog }) => {
           return (
@@ -277,6 +279,7 @@ const Socials = () => {
           )
         }}
       </RemoveSocialLoginDialog>
+      */}
     </>
   )
 }
