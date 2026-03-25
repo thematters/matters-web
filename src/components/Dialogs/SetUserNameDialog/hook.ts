@@ -26,12 +26,12 @@ export const useAvailableUserName = ({
   const twitterId = viewer.info.socialAccounts.find(
     (s) => s.type === SocialAccountType.Twitter
   )?.userName
-  const threadsId = viewer.info.socialAccounts.find(
-    (s) => s.type === SocialAccountType.Threads
-  )?.userName
+  // temporarily hidden: Threads
+  // const threadsId = viewer.info.socialAccounts.find(
+  //   (s) => s.type === SocialAccountType.Threads
+  // )?.userName
 
-  const presetUserName =
-    (viewer.info.email as string) || googleId || twitterId || threadsId
+  const presetUserName = (viewer.info.email as string) || googleId || twitterId // || threadsId
 
   const [loading, setLoading] = useState(enable && !!presetUserName)
   const [index, setIndex] = useState(0)
