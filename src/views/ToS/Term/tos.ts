@@ -126,6 +126,7 @@ const ToS: { zh_hant: string; zh_hans: string; en: string } = {
 
 <p><i>隱私政策</i></p>
 <p>4.10    您同意，您通過平台和/或使用平台和/或服務時向MATTERS提供的所有信息受隱私政策的約束，並且您准許MATTERS在遵守隱私政策的範圍內就您的信息採取任何行動。</p>
+<p>4.11    如果您通過第三方服務（例如 X（前稱 Twitter）、Google、Facebook、Instagram、RSS）連接、連結或登錄到 MATTERS，您將指示該服務向我們發送信息，例如您在該服務的註冊信息、電子郵件、ID 和個人資料信息，或者根據您在該服務的隱私設置所授權的信息。</p>
 
 <p><b><u>5. 平台上的內容</u></b></p>
 
