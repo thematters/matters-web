@@ -24,6 +24,20 @@ describe('utils/comment/filterComments', () => {
     expect(result.length).toEqual(0)
   })
 
+  it('should not filter out community watch removed comments', () => {
+    const comments = [
+      {
+        ...MOCK_COMMENT,
+        state: CommentState.Banned,
+        communityWatchAction: {
+          uuid: 'community-watch-action-uuid',
+        },
+      },
+    ]
+    const result = filterComments(comments)
+    expect(result.length).toEqual(comments.length)
+  })
+
   it('should filter out comment that are decendant', () => {
     const comments = [
       {
