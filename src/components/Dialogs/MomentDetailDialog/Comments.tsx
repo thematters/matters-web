@@ -89,7 +89,9 @@ const Comments = ({ moment, editing }: CommentsProps) => {
   )
 
   const activeCommentsEdges =
-    comments.edges?.filter(({ node }) => node.state === 'active') || []
+    comments.edges?.filter(
+      ({ node }) => node.state === 'active' || node.communityWatchAction
+    ) || []
 
   const CommentsList = (
     <>

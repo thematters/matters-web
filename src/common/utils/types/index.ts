@@ -41,4 +41,37 @@ export default gql`
     zh_hans
     zh_hant
   }
+
+  # Temporary schema extension for Community Watch development.
+  # matters-web CI generates GraphQL types against deployed schemas. Keep this
+  # block until the server schema exposing these fields is deployed there.
+  extend enum UserFeatureFlagType {
+    communityWatch
+  }
+
+  enum CommunityWatchRemoveCommentReason {
+    porn_ad
+    spam_ad
+  }
+
+  type CommunityWatchAction {
+    createdAt: DateTime!
+    reason: CommunityWatchRemoveCommentReason!
+    uuid: ID!
+  }
+
+  input CommunityWatchRemoveCommentInput {
+    id: ID!
+    reason: CommunityWatchRemoveCommentReason!
+  }
+
+  extend type Comment {
+    communityWatchAction: CommunityWatchAction
+  }
+
+  extend type Mutation {
+    communityWatchRemoveComment(
+      input: CommunityWatchRemoveCommentInput!
+    ): Comment!
+  }
 `

@@ -32,6 +32,10 @@
   "+GAaxB": {
     "defaultMessage": "The article has been archived due to violation of terms"
   },
+  "+Gk0O1": {
+    "defaultMessage": "操作失敗，請稍後再試",
+    "description": "src/components/Comment/DropdownActions/CommunityWatchRemoveComment.tsx"
+  },
   "+IYfVH": {
     "defaultMessage": "Remove from event featured"
   },
@@ -164,6 +168,10 @@
   },
   "0PpH2v": {
     "defaultMessage": "Authorize in Wallet"
+  },
+  "0SLJni": {
+    "defaultMessage": "所有處理都會公開留痕",
+    "description": "src/components/Comment/DropdownActions/index.tsx"
   },
   "0SQatS": {
     "defaultMessage": "View all",
@@ -419,6 +427,10 @@
   },
   "4CrCbD": {
     "defaultMessage": "Community"
+  },
+  "4E1vEv": {
+    "defaultMessage": "色情廣告",
+    "description": "src/components/Comment/DropdownActions/CommunityWatchRemoveComment.tsx"
   },
   "4KuZ0o": {
     "defaultMessage": "Asset not found",
@@ -2574,6 +2586,10 @@
   "eNv3Wm": {
     "defaultMessage": "Your work has been recommended to the channels: {channelNames}"
   },
+  "eRTBgt": {
+    "defaultMessage": "本則貼文已由守望相助隊檢舉",
+    "description": "src/components/Comment/Content/index.tsx"
+  },
   "eTpiYa": {
     "defaultMessage": "No data yet."
   },
@@ -3137,6 +3153,10 @@
     "defaultMessage": "Invalid Email",
     "description": "USER_EMAIL_INVALID"
   },
+  "oA2Pur": {
+    "defaultMessage": "濫發廣告",
+    "description": "src/components/Comment/DropdownActions/CommunityWatchRemoveComment.tsx"
+  },
   "oEHAIT": {
     "defaultMessage": "Cancel schedule",
     "description": "confirm cancel schedule button"
@@ -3307,6 +3327,10 @@
   "rJqgwV": {
     "defaultMessage": "Edit",
     "description": "src/components/Dialogs/ReviseArticleDialog/index.tsx"
+  },
+  "rW+2ID": {
+    "defaultMessage": "已由守望相助隊檢舉",
+    "description": "src/components/Comment/DropdownActions/CommunityWatchRemoveComment.tsx"
   },
   "rXnmeE": {
     "defaultMessage": "Confirm and Send"
