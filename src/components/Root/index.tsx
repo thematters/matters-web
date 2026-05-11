@@ -29,7 +29,10 @@ import {
   ViewerProvider,
 } from '~/components'
 import { ChannelsProvider, FetchPolicyProvider } from '~/components/Context'
-import { RootQueryPrivateQuery } from '~/gql/graphql'
+import {
+  RootQueryPrivateQuery,
+  RootQueryPrivateQueryVariables,
+} from '~/gql/graphql'
 
 import { ROOT_QUERY_PRIVATE } from './gql'
 
@@ -93,8 +96,14 @@ const Root = ({
 
   const referralCode = getQuery(REFERRAL_QUERY_REFERRAL_KEY)
 
-  const { loading, data, error } =
-    useQuery<RootQueryPrivateQuery>(ROOT_QUERY_PRIVATE)
+  const { loading, data, error } = useQuery<
+    RootQueryPrivateQuery,
+    RootQueryPrivateQueryVariables
+  >(ROOT_QUERY_PRIVATE, {
+    variables: {
+      includeViewerOss: false,
+    },
+  })
   const viewer = data?.viewer
   const official = data?.official
   const channels = data?.channels
