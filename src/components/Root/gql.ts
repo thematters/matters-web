@@ -31,7 +31,7 @@ const fragments = {
 }
 
 export const ROOT_QUERY_PRIVATE = gql`
-  query RootQueryPrivate {
+  query RootQueryPrivate($includeViewerOss: Boolean!) {
     viewer {
       ...ViewerPublic
       ...ViewerPrivate

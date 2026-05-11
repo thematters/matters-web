@@ -30,7 +30,7 @@ const ViewerFragments = {
           id
           name
         }
-        oss {
+        oss @include(if: $includeViewerOss) {
           featureFlags {
             type
           }
