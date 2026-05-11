@@ -48,6 +48,7 @@ import {
   DigestTagFragment,
   DirectImageUploadDoneMutation,
   DirectImageUploadMutation,
+  FederationArticleSettingState,
   PublishState as PublishStateType,
   QueryEditArticleAssetsQuery,
   QueryEditArticleQuery,
@@ -217,6 +218,11 @@ const BaseEdit = ({ article }: { article: Article }) => {
 
   const [indented, setIndented] = useState<boolean>(article.indentFirstLine)
 
+  const [federationSetting, setFederationSetting] =
+    useState<FederationArticleSettingState>(
+      article.federationSetting?.state || FederationArticleSettingState.Inherit
+    )
+
   const revisionCountLeft =
     MAX_ARTICLE_REVISION_COUNT - (article?.revisionCount || 0)
   const isOverRevisionLimit = revisionCountLeft <= 0
@@ -291,6 +297,12 @@ const BaseEdit = ({ article }: { article: Article }) => {
     iscnPublish,
     toggleISCN: () => setIscnPublish(!iscnPublish),
     iscnPublishSaving: false,
+  }
+
+  const federationSettingProps = {
+    federationSetting,
+    federationSettingSaving: false,
+    editFederationSetting: setFederationSetting,
   }
 
   const [singleFileUpload] =
@@ -389,6 +401,7 @@ const BaseEdit = ({ article }: { article: Article }) => {
           tab={tab}
           setTab={setTab}
           article={article}
+          viewerData={viewerData}
           ownCircles={ownCircles}
           ownCollections={ownCollections}
           campaigns={selectableCampaigns || []}
@@ -405,6 +418,7 @@ const BaseEdit = ({ article }: { article: Article }) => {
           {...supportSettingProps}
           {...sensitiveProps}
           {...iscnProps}
+          {...federationSettingProps}
         />
       </OptionsPage>
     )
@@ -501,6 +515,7 @@ const BaseEdit = ({ article }: { article: Article }) => {
               isOpen={isOpenOptionDrawer}
               toggleDrawer={toggleOptionDrawer}
               article={article}
+              viewerData={viewerData}
               ownCircles={ownCircles}
               ownCollections={ownCollections}
               campaigns={selectableCampaigns || []}
@@ -517,6 +532,7 @@ const BaseEdit = ({ article }: { article: Article }) => {
               {...supportSettingProps}
               {...sensitiveProps}
               {...iscnProps}
+              {...federationSettingProps}
             />
           </Media>
         </Layout.Main>

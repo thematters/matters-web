@@ -1693,6 +1693,9 @@
     "defaultMessage": "评论",
     "description": "src/views/ArticleDetail/index.tsx"
   },
+  "OvzONl": {
+    "defaultMessage": "Off"
+  },
   "OwMuXW": {
     "defaultMessage": "取消定时发布"
   },
@@ -1810,6 +1813,9 @@
   "R410ei": {
     "defaultMessage": "验证码错误",
     "description": "CODE_INVALID"
+  },
+  "R6sMIX": {
+    "defaultMessage": "Fediverse"
   },
   "R7yHDl": {
     "defaultMessage": "围炉营收",
@@ -2427,6 +2433,9 @@
   },
   "beLe/F": {
     "defaultMessage": "广播"
+  },
+  "bubFD6": {
+    "defaultMessage": "Only public articles can be exported. Private or paywalled articles stay blocked by the server."
   },
   "c/z318": {
     "defaultMessage": "邮箱或密码错误",
@@ -3171,6 +3180,9 @@
   "ob+HDS": {
     "defaultMessage": "马上逛逛"
   },
+  "oh7tJ1": {
+    "defaultMessage": "Allow eligible public articles to be exported to Fediverse."
+  },
   "ohbnFU": {
     "defaultMessage": "社交登录",
     "description": "src/views/Me/Settings/Settings/index.tsx"
@@ -3728,6 +3740,9 @@
     "defaultMessage": "名称不正确",
     "description": "DISPLAYNAME_INVALID"
   },
+  "y/bmsG": {
+    "defaultMessage": "Allow"
+  },
   "y0b6Kp": {
     "defaultMessage": "付费",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
@@ -3768,6 +3783,9 @@
   "ydQPbv": {
     "defaultMessage": "进入围炉",
     "description": "src/components/CircleDigest/Price/index.tsx"
+  },
+  "yktxJN": {
+    "defaultMessage": "Follow author setting"
   },
   "yoRaUc": {
     "defaultMessage": "退款",

@@ -47,6 +47,57 @@ export default gql`
   # block until the server schema exposing these fields is deployed there.
   extend enum UserFeatureFlagType {
     communityWatch
+    fediverseBeta
+  }
+
+  enum FederationAuthorSettingState {
+    enabled
+    disabled
+  }
+
+  enum FederationArticleSettingState {
+    inherit
+    enabled
+    disabled
+  }
+
+  type UserFederationSetting {
+    userId: ID!
+    state: FederationAuthorSettingState!
+    updatedBy: ID
+  }
+
+  type ArticleFederationSetting {
+    articleId: ID!
+    state: FederationArticleSettingState!
+    updatedBy: ID
+  }
+
+  extend type User {
+    federationSetting: UserFederationSetting
+  }
+
+  extend type Article {
+    federationSetting: ArticleFederationSetting
+  }
+
+  input SetViewerFederationSettingInput {
+    state: FederationAuthorSettingState!
+  }
+
+  input SetArticleFederationSettingInput {
+    id: ID!
+    state: FederationArticleSettingState!
+  }
+
+  extend type Mutation {
+    setViewerFederationSetting(
+      input: SetViewerFederationSettingInput!
+    ): UserFederationSetting!
+
+    setArticleFederationSetting(
+      input: SetArticleFederationSettingInput!
+    ): ArticleFederationSetting!
   }
 
   enum CommunityWatchRemoveCommentReason {
