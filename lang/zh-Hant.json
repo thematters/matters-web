@@ -32,6 +32,10 @@
   "+GAaxB": {
     "defaultMessage": "作品因違反社區約章被封存"
   },
+  "+Gk0O1": {
+    "defaultMessage": "操作失敗，請稍後再試",
+    "description": "src/components/Comment/DropdownActions/CommunityWatchRemoveComment.tsx"
+  },
   "+IYfVH": {
     "defaultMessage": "移除活動精選"
   },
@@ -164,6 +168,10 @@
   },
   "0PpH2v": {
     "defaultMessage": "去錢包授權"
+  },
+  "0SLJni": {
+    "defaultMessage": "所有處理都會公開留痕",
+    "description": "src/components/Comment/DropdownActions/index.tsx"
   },
   "0SQatS": {
     "defaultMessage": "看全部",
@@ -419,6 +427,10 @@
   },
   "4CrCbD": {
     "defaultMessage": "自治"
+  },
+  "4E1vEv": {
+    "defaultMessage": "色情廣告",
+    "description": "src/components/Comment/DropdownActions/CommunityWatchRemoveComment.tsx"
   },
   "4KuZ0o": {
     "defaultMessage": "資源不存在",
@@ -1681,6 +1693,9 @@
     "defaultMessage": "評論",
     "description": "src/views/ArticleDetail/index.tsx"
   },
+  "OvzONl": {
+    "defaultMessage": "Off"
+  },
   "OwMuXW": {
     "defaultMessage": "取消排程"
   },
@@ -1798,6 +1813,9 @@
   "R410ei": {
     "defaultMessage": "驗證碼錯誤",
     "description": "CODE_INVALID"
+  },
+  "R6sMIX": {
+    "defaultMessage": "Fediverse"
   },
   "R7yHDl": {
     "defaultMessage": "圍爐營收",
@@ -2416,6 +2434,9 @@
   "beLe/F": {
     "defaultMessage": "廣播"
   },
+  "bubFD6": {
+    "defaultMessage": "Only public articles can be exported. Private or paywalled articles stay blocked by the server."
+  },
   "c/z318": {
     "defaultMessage": "郵件地址或密碼錯誤",
     "description": "src/components/Forms/EmailLoginForm/index.tsx"
@@ -2573,6 +2594,10 @@
   },
   "eNv3Wm": {
     "defaultMessage": "已推薦你的這篇作品到頻道：{channelNames}"
+  },
+  "eRTBgt": {
+    "defaultMessage": "本則貼文已由守望相助隊檢舉",
+    "description": "src/components/Comment/Content/index.tsx"
   },
   "eTpiYa": {
     "defaultMessage": "尚無支持數據"
@@ -3137,6 +3162,10 @@
     "defaultMessage": "電子信箱不正確",
     "description": "USER_EMAIL_INVALID"
   },
+  "oA2Pur": {
+    "defaultMessage": "濫發廣告",
+    "description": "src/components/Comment/DropdownActions/CommunityWatchRemoveComment.tsx"
+  },
   "oEHAIT": {
     "defaultMessage": "取消排程",
     "description": "confirm cancel schedule button"
@@ -3150,6 +3179,9 @@
   },
   "ob+HDS": {
     "defaultMessage": "馬上逛逛"
+  },
+  "oh7tJ1": {
+    "defaultMessage": "Allow eligible public articles to be exported to Fediverse."
   },
   "ohbnFU": {
     "defaultMessage": "社交登入",
@@ -3307,6 +3339,10 @@
   "rJqgwV": {
     "defaultMessage": "開始修改",
     "description": "src/components/Dialogs/ReviseArticleDialog/index.tsx"
+  },
+  "rW+2ID": {
+    "defaultMessage": "已由守望相助隊檢舉",
+    "description": "src/components/Comment/DropdownActions/CommunityWatchRemoveComment.tsx"
   },
   "rXnmeE": {
     "defaultMessage": "確認發送"
@@ -3704,6 +3740,9 @@
     "defaultMessage": "名稱不正確",
     "description": "DISPLAYNAME_INVALID"
   },
+  "y/bmsG": {
+    "defaultMessage": "Allow"
+  },
   "y0b6Kp": {
     "defaultMessage": "付費",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
@@ -3744,6 +3783,9 @@
   "ydQPbv": {
     "defaultMessage": "進入圍爐",
     "description": "src/components/CircleDigest/Price/index.tsx"
+  },
+  "yktxJN": {
+    "defaultMessage": "Follow author setting"
   },
   "yoRaUc": {
     "defaultMessage": "退款",

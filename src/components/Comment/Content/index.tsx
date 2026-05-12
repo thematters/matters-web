@@ -1,9 +1,14 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
+import Link from 'next/link'
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { COMMENT_TYPE_TEXT, TEST_ID } from '~/common/enums'
+import {
+  COMMENT_TYPE_TEXT,
+  TEST_ID,
+  toCommunityWatchRecordUrl,
+} from '~/common/enums'
 import { Expandable, LanguageContext } from '~/components'
 import {
   CommentContentCommentPrivateFragment,
@@ -31,6 +36,9 @@ const fragments = {
         id
         content
         state
+        communityWatchAction {
+          uuid
+        }
       }
     `,
     private: gql`
@@ -57,12 +65,27 @@ export const CommentContent = ({
   const { lang } = useContext(LanguageContext)
   const { content, state } = comment
   const isBlocked = comment.author?.isBlocked
+  const communityWatchAction = comment.communityWatchAction
 
   const contentClasses = classNames({
     [styles.content]: true,
     [size ? styles[`text${size}`] : '']: !!size,
     [styles.inactive]: state === 'archived' || state === 'banned',
   })
+
+  if (state === 'banned' && communityWatchAction?.uuid) {
+    return (
+      <p className={contentClasses}>
+        <Link href={toCommunityWatchRecordUrl(communityWatchAction.uuid)}>
+          <FormattedMessage
+            defaultMessage="本則貼文已由守望相助隊檢舉"
+            id="eRTBgt"
+            description="src/components/Comment/Content/index.tsx"
+          />
+        </Link>
+      </p>
+    )
+  }
 
   if (state === 'banned') {
     return (

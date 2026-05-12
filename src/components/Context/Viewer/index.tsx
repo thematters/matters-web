@@ -30,6 +30,11 @@ const ViewerFragments = {
           id
           name
         }
+        oss @include(if: $includeViewerOss) {
+          featureFlags {
+            type
+          }
+        }
         info {
           createdAt
           description
@@ -97,6 +102,7 @@ export type Viewer = ViewerUser & {
   isFrozen: boolean
   isInactive: boolean
   isCivicLiker: boolean
+  isCommunityWatch: boolean
   isAdmin: boolean
   shouldSetupLikerID: boolean
 }
@@ -111,6 +117,9 @@ export const processViewer = (viewer: ViewerUser): Viewer => {
   const isFrozen = state === 'frozen'
   const isInactive = isAuthed && (isBanned || isFrozen || isArchived)
   const isCivicLiker = viewer.liker.civicLiker
+  const isCommunityWatch = !!viewer.oss?.featureFlags.some(
+    ({ type }) => type === 'communityWatch'
+  )
   const isAdmin = viewer.status?.role === 'admin'
   const shouldSetupLikerID = isAuthed && !viewer.liker.likerId
 
@@ -134,6 +143,7 @@ export const processViewer = (viewer: ViewerUser): Viewer => {
     isFrozen,
     isInactive,
     isCivicLiker,
+    isCommunityWatch,
     isAdmin,
     shouldSetupLikerID,
   }

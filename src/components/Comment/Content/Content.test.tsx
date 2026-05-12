@@ -68,4 +68,26 @@ describe('<Comemnt.Content>', () => {
       screen.getByText('This comment has been deleted by the author')
     ).toBeInTheDocument()
   })
+
+  it('should render a Community Watch placeholder link', () => {
+    render(
+      <CommentContent
+        comment={{
+          ...MOCK_COMMENT,
+          state: CommentState.Banned,
+          communityWatchAction: {
+            uuid: 'community-watch-action-uuid',
+          },
+        }}
+      />
+    )
+
+    const $link = screen.getByRole('link', {
+      name: '本則貼文已由守望相助隊檢舉',
+    })
+    expect($link).toHaveAttribute(
+      'href',
+      'https://community-watch.matters.town/records/community-watch-action-uuid'
+    )
+  })
 })

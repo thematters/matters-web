@@ -68,6 +68,10 @@ export const MOCK_USER = {
     totalCount: 0,
   },
   ownCircles: null,
+  oss: {
+    __typename: 'UserOSS' as any,
+    featureFlags: [],
+  },
   isFollower: false,
   isFollowee: false,
   isBlocking: false,
