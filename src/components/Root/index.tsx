@@ -101,7 +101,7 @@ const Root = ({
     RootQueryPrivateQueryVariables
   >(ROOT_QUERY_PRIVATE, {
     variables: {
-      includeViewerOss: false,
+      includeViewerOss: true,
     },
   })
   const viewer = data?.viewer
