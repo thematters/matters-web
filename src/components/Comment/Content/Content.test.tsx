@@ -87,7 +87,7 @@ describe('<Comemnt.Content>', () => {
     })
     expect($link).toHaveAttribute(
       'href',
-      'https://community-watch.matters.town/records/community-watch-action-uuid'
+      'https://community-watch.matters.town/records/community-watch-action-uuid/'
     )
   })
 })
