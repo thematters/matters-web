@@ -11,6 +11,7 @@ import {
   DigestRichCirclePublicFragment,
   DraftDetailViewerQueryQuery,
   EditorSelectCampaignFragment,
+  UserFeatureFlagType,
 } from '~/gql/graphql'
 import { EditMetaDraftFragment } from '~/gql/graphql'
 
@@ -241,6 +242,9 @@ export const OptionContent = (
   const isPublished = props.draft.publishState === 'published'
   const disabled = isPending || isPublished
   const hasOwnCollections = (props.ownCollections?.length || 0) > 0
+  const isFediverseBeta = !!props.draftViewer?.viewer?.oss?.featureFlags.some(
+    ({ type }) => type === UserFeatureFlagType.FediverseBeta
+  )
 
   return (
     <section>
@@ -290,6 +294,7 @@ export const OptionContent = (
             <EditDraftLicense {...props} disabled={disabled} />
             <EditDraftCanComment {...props} disabled={disabled} />
             <EditDraftSupportSetting {...props} disabled={disabled} />
+            {isFediverseBeta && <Sidebar.FederationSetting />}
             <EditDraftSensitive {...props} disabled={disabled} />
             <EditDraftCircle {...props} disabled={disabled} />
           </>
