@@ -1,3 +1,4 @@
+import { useQuery } from '@apollo/client'
 import gql from 'graphql-tag'
 import { FormattedMessage } from 'react-intl'
 
@@ -13,18 +14,33 @@ import {
 } from '~/components'
 import {
   FederationArticleSettingState,
+  FederationAuthorSettingState,
   SetArticleFederationSettingMutation,
   SetArticleFederationSettingMutationVariables,
+  SetViewerFederationSettingMutation,
+  SetViewerFederationSettingMutationVariables,
+  ViewerFederationSettingQuery,
 } from '~/gql/graphql'
 
 import Box from '../Box'
 
 export type SidebarFederationSettingProps = {
-  articleId: string
+  articleId?: string
   federationSetting?: FederationArticleSettingState | null
-  federationSettingSaving: boolean
-  editFederationSetting: (state: FederationArticleSettingState) => void
+  federationSettingSaving?: boolean
+  editFederationSetting?: (state: FederationArticleSettingState) => void
 }
+
+const VIEWER_FEDERATION_SETTING = gql`
+  query EditorViewerFederationSetting {
+    viewer {
+      id
+      federationSetting {
+        state
+      }
+    }
+  }
+`
 
 const SET_ARTICLE_FEDERATION_SETTING = gql`
   mutation SetArticleFederationSetting(
@@ -37,17 +53,35 @@ const SET_ARTICLE_FEDERATION_SETTING = gql`
   }
 `
 
+const SET_VIEWER_FEDERATION_SETTING = gql`
+  mutation SetViewerFederationSetting(
+    $input: SetViewerFederationSettingInput!
+  ) {
+    setViewerFederationSetting(input: $input) {
+      userId
+      state
+    }
+  }
+`
+
 const labels = {
-  [FederationArticleSettingState.Inherit]: (
-    <FormattedMessage defaultMessage="Follow author setting" id="yktxJN" />
-  ),
   [FederationArticleSettingState.Enabled]: (
-    <FormattedMessage defaultMessage="Allow" id="y/bmsG" />
+    <FormattedMessage defaultMessage="開啟" id="mMji02" />
   ),
   [FederationArticleSettingState.Disabled]: (
-    <FormattedMessage defaultMessage="Off" id="OvzONl" />
+    <FormattedMessage defaultMessage="關閉" id="DnOjES" />
   ),
 }
+
+const toArticleSetting = (state?: FederationAuthorSettingState | null) =>
+  state === FederationAuthorSettingState.Enabled
+    ? FederationArticleSettingState.Enabled
+    : FederationArticleSettingState.Disabled
+
+const toAuthorSetting = (state: FederationArticleSettingState) =>
+  state === FederationArticleSettingState.Enabled
+    ? FederationAuthorSettingState.Enabled
+    : FederationAuthorSettingState.Disabled
 
 const SidebarFederationSetting: React.FC<SidebarFederationSettingProps> = ({
   articleId,
@@ -55,32 +89,61 @@ const SidebarFederationSetting: React.FC<SidebarFederationSettingProps> = ({
   federationSettingSaving,
   editFederationSetting,
 }) => {
+  const { data, loading: viewerLoading } =
+    useQuery<ViewerFederationSettingQuery>(VIEWER_FEDERATION_SETTING, {
+      fetchPolicy: 'cache-and-network',
+    })
   const [setArticleFederationSetting, { loading }] = useMutation<
     SetArticleFederationSettingMutation,
     SetArticleFederationSettingMutationVariables
   >(SET_ARTICLE_FEDERATION_SETTING)
+  const [setViewerFederationSetting, { loading: viewerSaving }] = useMutation<
+    SetViewerFederationSettingMutation,
+    SetViewerFederationSettingMutationVariables
+  >(SET_VIEWER_FEDERATION_SETTING)
 
+  const authorDefaultState = toArticleSetting(
+    data?.viewer?.federationSetting?.state
+  )
   const currentState =
-    federationSetting || FederationArticleSettingState.Inherit
-  const saving = federationSettingSaving || loading
+    federationSetting &&
+    federationSetting !== FederationArticleSettingState.Inherit
+      ? federationSetting
+      : authorDefaultState
+  const saving = !!federationSettingSaving || loading || viewerSaving
+  const disabled = saving || viewerLoading || (!articleId && !data?.viewer?.id)
 
   const updateSetting = async (state: FederationArticleSettingState) => {
-    if (state === currentState || saving) {
+    if (state === currentState || disabled) {
       return
     }
 
     try {
-      await setArticleFederationSetting({
-        variables: { input: { id: articleId, state } },
-        optimisticResponse: {
-          setArticleFederationSetting: {
-            __typename: 'ArticleFederationSetting',
-            articleId,
-            state,
+      if (articleId) {
+        await setArticleFederationSetting({
+          variables: { input: { id: articleId, state } },
+          optimisticResponse: {
+            setArticleFederationSetting: {
+              __typename: 'ArticleFederationSetting',
+              articleId,
+              state,
+            },
           },
-        },
-      })
-      editFederationSetting(state)
+        })
+        editFederationSetting?.(state)
+      } else if (data?.viewer?.id) {
+        const authorState = toAuthorSetting(state)
+        await setViewerFederationSetting({
+          variables: { input: { state: authorState } },
+          optimisticResponse: {
+            setViewerFederationSetting: {
+              __typename: 'UserFederationSetting',
+              userId: data.viewer.id,
+              state: authorState,
+            },
+          },
+        })
+      }
     } catch {
       toast.error({
         message: (
@@ -92,15 +155,6 @@ const SidebarFederationSetting: React.FC<SidebarFederationSettingProps> = ({
 
   const Content = () => (
     <Menu>
-      <Menu.Item
-        text={labels[FederationArticleSettingState.Inherit]}
-        onClick={() => updateSetting(FederationArticleSettingState.Inherit)}
-        weight={
-          currentState === FederationArticleSettingState.Inherit
-            ? 'bold'
-            : 'normal'
-        }
-      />
       <Menu.Item
         text={labels[FederationArticleSettingState.Enabled]}
         onClick={() => updateSetting(FederationArticleSettingState.Enabled)}
@@ -124,11 +178,11 @@ const SidebarFederationSetting: React.FC<SidebarFederationSettingProps> = ({
 
   return (
     <Box
-      title={<FormattedMessage defaultMessage="Fediverse" id="R6sMIX" />}
+      title={<FormattedMessage defaultMessage="分享到聯邦宇宙" id="tsUFZX" />}
       subtitle={
         <FormattedMessage
-          defaultMessage="Only public articles can be exported. Private or paywalled articles stay blocked by the server."
-          id="bubFD6"
+          defaultMessage="Threads, Mastodon, Misskey 這些地方的粉絲也會看到"
+          id="ZAoAcG"
         />
       }
       rightButton={
@@ -139,7 +193,7 @@ const SidebarFederationSetting: React.FC<SidebarFederationSettingProps> = ({
               size={[null, '1.5rem']}
               spacing={[0, 8]}
               bgColor="white"
-              disabled={saving}
+              disabled={disabled}
               aria-haspopup="listbox"
               ref={ref}
             >

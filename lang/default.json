@@ -1026,6 +1026,9 @@
   "DjIpR6": {
     "defaultMessage": "Set Cover"
   },
+  "DnOjES": {
+    "defaultMessage": "關閉"
+  },
   "DoOt1q": {
     "defaultMessage": "Your channel suggestion has been accepted by the editor. Thank you for supporting Matters!",
     "description": "src/components/Notice/ArticleNotice/TopicChannelFeedbackAcceptedNotice.tsx"
@@ -1693,9 +1696,6 @@
     "defaultMessage": "Comment",
     "description": "src/views/ArticleDetail/index.tsx"
   },
-  "OvzONl": {
-    "defaultMessage": "Off"
-  },
   "OwMuXW": {
     "defaultMessage": "Cancel schedule"
   },
@@ -2294,6 +2294,9 @@
     "defaultMessage": "Archived for violation.",
     "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
   },
+  "ZAoAcG": {
+    "defaultMessage": "Threads, Mastodon, Misskey 這些地方的粉絲也會看到"
+  },
   "ZAs170": {
     "defaultMessage": "Profile",
     "description": "src/views/Circle/Settings/index.tsx"
@@ -2433,9 +2436,6 @@
   },
   "beLe/F": {
     "defaultMessage": "Broadcast"
-  },
-  "bubFD6": {
-    "defaultMessage": "Only public articles can be exported. Private or paywalled articles stay blocked by the server."
   },
   "c/z318": {
     "defaultMessage": "Incorrect email or password",
@@ -3059,6 +3059,9 @@
     "defaultMessage": "Remove bookmark",
     "description": "src/components/Buttons/TagBookmark/Unbookmark.tsx"
   },
+  "mMji02": {
+    "defaultMessage": "開啟"
+  },
   "mPe6DK": {
     "defaultMessage": "subscribed your circle",
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
@@ -3453,6 +3456,9 @@
   "tZKvnZ": {
     "defaultMessage": "Unlike moment"
   },
+  "tsUFZX": {
+    "defaultMessage": "分享到聯邦宇宙"
+  },
   "tzq2+W": {
     "defaultMessage": "Send",
     "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/PreSend.tsx"
@@ -3740,9 +3746,6 @@
     "defaultMessage": "Invalid display name",
     "description": "DISPLAYNAME_INVALID"
   },
-  "y/bmsG": {
-    "defaultMessage": "Allow"
-  },
   "y0b6Kp": {
     "defaultMessage": "Pay",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
@@ -3783,9 +3786,6 @@
   "ydQPbv": {
     "defaultMessage": "Enter",
     "description": "src/components/CircleDigest/Price/index.tsx"
-  },
-  "yktxJN": {
-    "defaultMessage": "Follow author setting"
   },
   "yoRaUc": {
     "defaultMessage": "Refund",
