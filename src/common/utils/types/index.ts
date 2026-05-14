@@ -50,6 +50,10 @@ export default gql`
     fediverseBeta
   }
 
+  extend enum BadgeType {
+    community_watch
+  }
+
   enum FederationAuthorSettingState {
     enabled
     disabled

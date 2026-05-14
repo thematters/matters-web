@@ -106,6 +106,9 @@ export const UserProfile = () => {
   const hasSeedBadge = badges.some((b) => b.type === 'seed')
   const hasArchitectBadge = badges.some((b) => b.type === 'architect')
   const hasGoldenMotorBadge = badges.some((b) => b.type === 'golden_motor')
+  const hasCommunityWatchBadge = badges.some(
+    (b) => b.type === 'community_watch'
+  )
   const hasTraveloggersBadge = !!user.info.cryptoWallet?.hasNFTs
   const nomadBadgeType = badges.filter((b) =>
     ['nomad1', 'nomad2', 'nomad3', 'nomad4'].includes(b.type)
@@ -214,6 +217,7 @@ export const UserProfile = () => {
                 hasSeedBadge={hasSeedBadge}
                 hasGoldenMotorBadge={hasGoldenMotorBadge}
                 hasArchitectBadge={hasArchitectBadge}
+                hasCommunityWatchBadge={hasCommunityWatchBadge}
                 isCivicLiker={isCivicLiker}
               >
                 {({ openDialog }) => (
@@ -230,6 +234,7 @@ export const UserProfile = () => {
                       hasSeedBadge={hasSeedBadge}
                       hasGoldenMotorBadge={hasGoldenMotorBadge}
                       hasArchitectBadge={hasArchitectBadge}
+                      hasCommunityWatchBadge={hasCommunityWatchBadge}
                       isCivicLiker={isCivicLiker}
                     />
                   </section>

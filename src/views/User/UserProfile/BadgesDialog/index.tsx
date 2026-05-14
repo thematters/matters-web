@@ -39,6 +39,7 @@ export const BaseBadgesDialog = ({
   hasSeedBadge,
   hasGoldenMotorBadge,
   hasArchitectBadge,
+  hasCommunityWatchBadge,
   isCivicLiker,
 }: BadgesDialogProps) => {
   const { show, openDialog, closeDialog } = useDialogSwitch(true)
@@ -93,6 +94,7 @@ export const BaseBadgesDialog = ({
                 hasSeedBadge={hasSeedBadge}
                 hasGoldenMotorBadge={hasGoldenMotorBadge}
                 hasArchitectBadge={hasArchitectBadge}
+                hasCommunityWatchBadge={hasCommunityWatchBadge}
                 isCivicLiker={isCivicLiker}
                 gotoNomadBadge={() => setStep('nomad')}
                 gotoGrandBadge={() => setStep('grand')}
