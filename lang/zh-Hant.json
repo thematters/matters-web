@@ -2344,6 +2344,10 @@
     "defaultMessage": "讀者數量：訪問過作品頁的不重複的登入用戶數加匿名 IP 數（數據週期更新，可能存在延遲）",
     "description": "src/views/Me/Works/Published/SortTabs.tsx"
   },
+  "a5ZQOK": {
+    "defaultMessage": "查看公開紀錄",
+    "description": "src/components/Comment/DropdownActions/CommunityWatchRemoveComment.tsx"
+  },
   "aCTmEO": {
     "defaultMessage": "我還沒有錢包",
     "description": "src/components/Forms/SelectAuthMethodForm/WalletFeed.tsx"

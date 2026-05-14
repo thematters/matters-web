@@ -2,6 +2,7 @@ import gql from 'graphql-tag'
 import { FormattedMessage } from 'react-intl'
 
 import IconCircleMinus from '@/public/static/icons/24px/circle-minus.svg'
+import { toCommunityWatchRecordUrl } from '~/common/enums/communityWatch'
 import { Icon, Menu, toast, useMutation } from '~/components'
 import {
   CommentState,
@@ -33,7 +34,7 @@ const CommunityWatchRemoveComment = ({ id }: { id: string }) => {
 
   const submit = async (reason: CommunityWatchRemoveCommentReason) => {
     try {
-      await removeComment({
+      const result = await removeComment({
         variables: { id, reason },
         optimisticResponse: {
           communityWatchRemoveComment: {
@@ -49,6 +50,9 @@ const CommunityWatchRemoveComment = ({ id }: { id: string }) => {
           },
         },
       })
+      const recordUuid =
+        result.data?.communityWatchRemoveComment.communityWatchAction?.uuid
+
       toast.success({
         message: (
           <FormattedMessage
@@ -57,6 +61,27 @@ const CommunityWatchRemoveComment = ({ id }: { id: string }) => {
             description="src/components/Comment/DropdownActions/CommunityWatchRemoveComment.tsx"
           />
         ),
+        actions:
+          recordUuid && recordUuid !== 'pending'
+            ? [
+                {
+                  content: (
+                    <FormattedMessage
+                      defaultMessage="查看公開紀錄"
+                      id="a5ZQOK"
+                      description="src/components/Comment/DropdownActions/CommunityWatchRemoveComment.tsx"
+                    />
+                  ),
+                  onClick: () => {
+                    window.open(
+                      toCommunityWatchRecordUrl(recordUuid),
+                      '_blank',
+                      'noopener,noreferrer'
+                    )
+                  },
+                },
+              ]
+            : undefined,
       })
     } catch (error) {
       console.error(error)
