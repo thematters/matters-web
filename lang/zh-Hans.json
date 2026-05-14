@@ -1029,6 +1029,9 @@
   "DjIpR6": {
     "defaultMessage": "选择封面"
   },
+  "DnOjES": {
+    "defaultMessage": "關閉"
+  },
   "DoOt1q": {
     "defaultMessage": "你的频道建议已被编辑采纳，感谢你对 Matters 的支持～",
     "description": "src/components/Notice/ArticleNotice/TopicChannelFeedbackAcceptedNotice.tsx"
@@ -1696,9 +1699,6 @@
     "defaultMessage": "评论",
     "description": "src/views/ArticleDetail/index.tsx"
   },
-  "OvzONl": {
-    "defaultMessage": "Off"
-  },
   "OwMuXW": {
     "defaultMessage": "取消定时发布"
   },
@@ -2297,6 +2297,9 @@
     "defaultMessage": "因违反用户协定而被封存，",
     "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
   },
+  "ZAoAcG": {
+    "defaultMessage": "Threads, Mastodon, Misskey 這些地方的粉絲也會看到"
+  },
   "ZAs170": {
     "defaultMessage": "基本资料",
     "description": "src/views/Circle/Settings/index.tsx"
@@ -2436,9 +2439,6 @@
   },
   "beLe/F": {
     "defaultMessage": "广播"
-  },
-  "bubFD6": {
-    "defaultMessage": "Only public articles can be exported. Private or paywalled articles stay blocked by the server."
   },
   "c/z318": {
     "defaultMessage": "邮箱或密码错误",
@@ -3062,6 +3062,9 @@
     "defaultMessage": "取消收藏",
     "description": "src/components/Buttons/TagBookmark/Unbookmark.tsx"
   },
+  "mMji02": {
+    "defaultMessage": "開啟"
+  },
   "mPe6DK": {
     "defaultMessage": "订阅了你的围炉",
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
@@ -3456,6 +3459,9 @@
   "tZKvnZ": {
     "defaultMessage": "取消喜欢动态"
   },
+  "tsUFZX": {
+    "defaultMessage": "分享到聯邦宇宙"
+  },
   "tzq2+W": {
     "defaultMessage": "寄出邀请",
     "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/PreSend.tsx"
@@ -3743,9 +3749,6 @@
     "defaultMessage": "名称不正确",
     "description": "DISPLAYNAME_INVALID"
   },
-  "y/bmsG": {
-    "defaultMessage": "Allow"
-  },
   "y0b6Kp": {
     "defaultMessage": "付费",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
@@ -3786,9 +3789,6 @@
   "ydQPbv": {
     "defaultMessage": "进入围炉",
     "description": "src/components/CircleDigest/Price/index.tsx"
-  },
-  "yktxJN": {
-    "defaultMessage": "Follow author setting"
   },
   "yoRaUc": {
     "defaultMessage": "退款",
