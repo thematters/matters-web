@@ -1,3 +1,6 @@
-export const ROOT_QUERY_PRIVATE_VARIABLES = {
-  includeViewerOss: true,
-}
+import { COOKIE_TOKEN_NAME } from '~/common/enums'
+import { getIsomorphicCookie } from '~/common/utils'
+
+export const getRootQueryPrivateVariables = (cookie: string) => ({
+  includeViewerOss: !!getIsomorphicCookie(cookie, COOKIE_TOKEN_NAME),
+})
