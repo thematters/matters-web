@@ -9,22 +9,59 @@ on:
   workflow_dispatch:
     inputs:
       vercel_preview_url:
-        description: 'Vercel Preview for E2E Testing'
-        required: true
+        description: 'Vercel Preview for E2E Testing. Used by the preview webhook.'
+        required: false
         type: string
       pr_number:
         description: 'The ID of the pull request'
-        required: true
+        required: false
         type: string
       pr_sha:
         description: 'The SHA of the pull request'
-        required: true
+        required: false
         type: string
+      target_env:
+        description: 'Target environment'
+        required: false
+        default: preview
+        type: choice
+        options:
+          - preview
+          - staging
+          - production
+      test_profile:
+        description: 'E2E test profile'
+        required: false
+        default: default
+        type: choice
+        options:
+          - default
+          - smoke
+          - staging
+          - mutation
+          - prod-smoke
+      base_url:
+        description: 'Override web URL. Defaults to preview URL, matters.icu, or matters.town.'
+        required: false
+        type: string
+      api_url:
+        description: 'Override GraphQL URL. Defaults to workflow secret, staging API, or production API.'
+        required: false
+        type: string
+      production_mutation_approved:
+        description: 'Allow production profiles that may mutate data. Requires explicit human approval.'
+        required: false
+        default: false
+        type: boolean
 
 env:
   PLAYWRIGHT_RUNTIME_ENV: ci
-  PLAYWRIGHT_TEST_BASE_URL: ${{ github.event.inputs.vercel_preview_url }}
-  PLAYWRIGHT_TEST_API_URL: ${{ secrets.PLAYWRIGHT_TEST_API_URL }}
+  PLAYWRIGHT_TARGET_ENV: ${{ github.event.inputs.target_env || 'preview' }}
+  PLAYWRIGHT_TEST_PROFILE: ${{ github.event.inputs.test_profile || 'default' }}
+  PLAYWRIGHT_BASE_URL_INPUT: ${{ github.event.inputs.base_url || github.event.inputs.vercel_preview_url }}
+  PLAYWRIGHT_API_URL_INPUT: ${{ github.event.inputs.api_url }}
+  PLAYWRIGHT_TEST_API_URL_SECRET: ${{ secrets.PLAYWRIGHT_TEST_API_URL }}
+  PLAYWRIGHT_PRODUCTION_MUTATION_APPROVED: ${{ github.event.inputs.production_mutation_approved || 'false' }}
   PLAYWRIGHT_AUTH_EMAIL_ALICE: ${{ secrets.PLAYWRIGHT_AUTH_EMAIL_ALICE }}
   PLAYWRIGHT_AUTH_PWD_ALICE: ${{ secrets.PLAYWRIGHT_AUTH_PWD_ALICE }}
   PLAYWRIGHT_AUTH_EMAIL_BOB: ${{ secrets.PLAYWRIGHT_AUTH_EMAIL_BOB }}
@@ -51,6 +88,7 @@ jobs:
           cache: 'npm'
 
       - name: Create check run for PR
+        if: github.event.inputs.pr_sha != ''
         uses: guibranco/github-status-action-v2@v1.1.13
         with:
           authToken: ${{ secrets.GITHUB_TOKEN }}
@@ -87,16 +125,92 @@ jobs:
         run: npm run test:e2e:prepare
         if: steps.playwright_cache.outputs.cache-hit != 'true'
 
+      - name: Resolve E2E target
+        run: |
+          set -euo pipefail
+
+          target_env="${PLAYWRIGHT_TARGET_ENV:-preview}"
+          test_profile="${PLAYWRIGHT_TEST_PROFILE:-default}"
+          base_url="${PLAYWRIGHT_BASE_URL_INPUT:-}"
+          api_url="${PLAYWRIGHT_API_URL_INPUT:-}"
+          production_mutation_approved="${PLAYWRIGHT_PRODUCTION_MUTATION_APPROVED:-false}"
+
+          case "$target_env" in
+            preview)
+              api_url="${api_url:-${PLAYWRIGHT_TEST_API_URL_SECRET:-}}"
+              ;;
+            staging)
+              base_url="${base_url:-https://matters.icu}"
+              api_url="${api_url:-https://server.matters.icu/graphql}"
+              ;;
+            production)
+              base_url="${base_url:-https://matters.town}"
+              api_url="${api_url:-https://server.matters.town/graphql}"
+              ;;
+            *)
+              echo "Unsupported target_env: $target_env" >&2
+              exit 1
+              ;;
+          esac
+
+          if [[ -z "$base_url" ]]; then
+            echo "Missing E2E web URL. Provide vercel_preview_url or base_url." >&2
+            exit 1
+          fi
+
+          if [[ -z "$api_url" ]]; then
+            echo "Missing E2E GraphQL URL. Provide api_url or PLAYWRIGHT_TEST_API_URL secret." >&2
+            exit 1
+          fi
+
+          if [[ "$target_env" == "production" && "$production_mutation_approved" != "true" && "$test_profile" != "prod-smoke" ]]; then
+            echo "Production E2E without approval is restricted to test_profile=prod-smoke." >&2
+            exit 1
+          fi
+
+          case "$test_profile" in
+            default)
+              command="npm run test:e2e"
+              ;;
+            smoke)
+              command="npm run test:e2e:smoke"
+              ;;
+            staging)
+              command="npm run test:e2e:staging"
+              ;;
+            mutation)
+              command="npm run test:e2e:mutation"
+              ;;
+            prod-smoke)
+              command="npm run test:e2e:prod-smoke"
+              ;;
+            *)
+              echo "Unsupported test_profile: $test_profile" >&2
+              exit 1
+              ;;
+          esac
+
+          echo "PLAYWRIGHT_TEST_BASE_URL=$base_url" >> "$GITHUB_ENV"
+          echo "PLAYWRIGHT_TEST_API_URL=$api_url" >> "$GITHUB_ENV"
+          echo "PLAYWRIGHT_E2E_COMMAND=$command" >> "$GITHUB_ENV"
+
+          echo "Resolved E2E target:"
+          echo "- target_env=$target_env"
+          echo "- test_profile=$test_profile"
+          echo "- base_url=$base_url"
+          echo "- api_url=$api_url"
+          echo "- command=$command"
+
       - name: Generate Types (Develop)
-        if: github.base_ref != 'master' && github.base_ref != 'main'
+        if: env.PLAYWRIGHT_TARGET_ENV != 'production' && github.base_ref != 'master' && github.base_ref != 'main'
         run: npm run gen:type
 
       - name: Generate Types (production)
-        if: github.base_ref == 'master' || github.base_ref == 'main'
+        if: env.PLAYWRIGHT_TARGET_ENV == 'production' || github.base_ref == 'master' || github.base_ref == 'main'
         run: npm run gen:type:prod
 
       - name: Run Playwright tests
-        run: npm run test:e2e
+        run: $PLAYWRIGHT_E2E_COMMAND
 
       - name: Output Playwright tests
         uses: actions/upload-artifact@v4
@@ -132,6 +246,9 @@ jobs:
               let commentBody = `## E2E Test Report: ${testStatus}\n\n`;
               commentBody += `**Branch:** \`${branch}\`\n`;
               commentBody += `**Commit:** \`${{ github.event.inputs.pr_sha }}\`\n\n`;
+              commentBody += `**Target:** \`${process.env.PLAYWRIGHT_TARGET_ENV}\`\n`;
+              commentBody += `**Profile:** \`${process.env.PLAYWRIGHT_TEST_PROFILE}\`\n`;
+              commentBody += `**Base URL:** \`${process.env.PLAYWRIGHT_TEST_BASE_URL}\`\n\n`;
 
               if (branchAliasUrl) {
                 commentBody += `[View Branch-specific E2E Report](${branchAliasUrl})\n\n`;
@@ -150,7 +267,7 @@ jobs:
 
       - name: Update check run status
         uses: guibranco/github-status-action-v2@v1.1.13
-        if: always()
+        if: always() && github.event.inputs.pr_sha != ''
         with:
           authToken: ${{ secrets.GITHUB_TOKEN }}
           context: 'Test E2E / e2e'

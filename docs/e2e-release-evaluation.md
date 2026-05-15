@@ -45,6 +45,30 @@ PLAYWRIGHT_TEST_API_URL=<graphql-url>
 
 The E2E workflow already uses a Vercel preview URL as `PLAYWRIGHT_TEST_BASE_URL` and uploads the Playwright HTML report.
 
+## GitHub Actions Profiles
+
+`.github/workflows/test_e2e.yml` supports the existing Vercel preview webhook and manual release-evaluation runs.
+
+The preview webhook can keep sending:
+
+| Input                | Purpose                |
+| -------------------- | ---------------------- |
+| `vercel_preview_url` | Preview web URL.       |
+| `pr_number`          | PR number to comment.  |
+| `pr_sha`             | Commit SHA for status. |
+
+Manual release-evaluation runs can also provide:
+
+| Input                          | Values                                                  | Notes                                                                      |
+| ------------------------------ | ------------------------------------------------------- | -------------------------------------------------------------------------- |
+| `target_env`                   | `preview`, `staging`, `production`                      | Defaults to `preview`.                                                     |
+| `test_profile`                 | `default`, `smoke`, `staging`, `mutation`, `prod-smoke` | Defaults to the existing full E2E behavior.                                |
+| `base_url`                     | Any web URL                                             | Optional. Defaults to preview URL, `matters.icu`, or `matters.town`.       |
+| `api_url`                      | Any GraphQL URL                                         | Optional. Defaults to the workflow secret, staging API, or production API. |
+| `production_mutation_approved` | `true` or `false`                                       | Must be `true` before production can run anything except `prod-smoke`.     |
+
+Production runs without explicit mutation approval are restricted to `test_profile=prod-smoke`.
+
 ## Environment Targets
 
 | Layer      | Web URL                | GraphQL URL                                  | Default Policy                                                |
