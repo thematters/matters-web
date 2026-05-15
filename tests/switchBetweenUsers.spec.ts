@@ -11,7 +11,7 @@ import {
   UserProfilePage,
   users,
 } from './helpers'
-test.describe('Switch between multiple users', () => {
+test.describe('Switch between multiple users @auth-smoke @regression @mutation', () => {
   authedTest('Same context', async ({ alicePage: page, isMobile }) => {
     test.skip(!!isMobile, 'Desktop only!')
     await pageGoto(page, '/newest')
