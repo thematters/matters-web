@@ -29,12 +29,10 @@ import {
   ViewerProvider,
 } from '~/components'
 import { ChannelsProvider, FetchPolicyProvider } from '~/components/Context'
-import {
-  RootQueryPrivateQuery,
-  RootQueryPrivateQueryVariables,
-} from '~/gql/graphql'
+import { RootQueryPrivateQuery } from '~/gql/graphql'
 
 import { ROOT_QUERY_PRIVATE } from './gql'
+import { ROOT_QUERY_PRIVATE_VARIABLES } from './variables'
 
 const DynamicToaster = dynamic(
   () => import('~/components/Toast').then((mod) => mod.Toaster),
@@ -96,14 +94,12 @@ const Root = ({
 
   const referralCode = getQuery(REFERRAL_QUERY_REFERRAL_KEY)
 
-  const { loading, data, error } = useQuery<
-    RootQueryPrivateQuery,
-    RootQueryPrivateQueryVariables
-  >(ROOT_QUERY_PRIVATE, {
-    variables: {
-      includeViewerOss: false,
-    },
-  })
+  const { loading, data, error } = useQuery<RootQueryPrivateQuery>(
+    ROOT_QUERY_PRIVATE,
+    {
+      variables: ROOT_QUERY_PRIVATE_VARIABLES,
+    }
+  )
   const viewer = data?.viewer
   const official = data?.official
   const channels = data?.channels
