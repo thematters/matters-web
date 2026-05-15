@@ -32,7 +32,7 @@ import { ChannelsProvider, FetchPolicyProvider } from '~/components/Context'
 import { RootQueryPrivateQuery } from '~/gql/graphql'
 
 import { ROOT_QUERY_PRIVATE } from './gql'
-import { ROOT_QUERY_PRIVATE_VARIABLES } from './variables'
+import { getRootQueryPrivateVariables } from './variables'
 
 const DynamicToaster = dynamic(
   () => import('~/components/Toast').then((mod) => mod.Toaster),
@@ -93,11 +93,13 @@ const Root = ({
     !isInArticleDetailEdit
 
   const referralCode = getQuery(REFERRAL_QUERY_REFERRAL_KEY)
+  const cookie =
+    headers?.cookie || (typeof document !== 'undefined' ? document.cookie : '')
 
   const { loading, data, error } = useQuery<RootQueryPrivateQuery>(
     ROOT_QUERY_PRIVATE,
     {
-      variables: ROOT_QUERY_PRIVATE_VARIABLES,
+      variables: getRootQueryPrivateVariables(cookie),
     }
   )
   const viewer = data?.viewer
