@@ -4,7 +4,7 @@ import { stripSpaces } from '~/common/utils/text'
 
 import { HomePage } from './helpers'
 
-test.describe('Homepage', () => {
+test.describe('Homepage @smoke', () => {
   test('has article feed in newest feed', async ({ page }) => {
     const home = new HomePage(page)
     await home.goto()

@@ -30,6 +30,10 @@ Useful commands:
 npm run test:unit
 npm run build
 npm run test:e2e
+npm run test:e2e:smoke
+npm run test:e2e:staging
+npm run test:e2e:mutation
+npm run test:e2e:prod-smoke
 ```
 
 Playwright target variables:
@@ -43,53 +47,56 @@ The E2E workflow already uses a Vercel preview URL as `PLAYWRIGHT_TEST_BASE_URL`
 
 ## Environment Targets
 
-| Layer | Web URL | GraphQL URL | Default Policy |
-| --- | --- | --- | --- |
-| Preview | Vercel preview URL | Usually `https://server.matters.icu/graphql` | PR-level browser regression with test accounts. |
-| Staging | `https://matters.icu` | `https://server.matters.icu/graphql` | Full acceptance; disposable staging mutation data is allowed. |
-| Production | `https://matters.town` | `https://server.matters.town/graphql` | Read-only smoke by default. |
+| Layer      | Web URL                | GraphQL URL                                  | Default Policy                                                |
+| ---------- | ---------------------- | -------------------------------------------- | ------------------------------------------------------------- |
+| Preview    | Vercel preview URL     | Usually `https://server.matters.icu/graphql` | PR-level browser regression with test accounts.               |
+| Staging    | `https://matters.icu`  | `https://server.matters.icu/graphql`         | Full acceptance; disposable staging mutation data is allowed. |
+| Production | `https://matters.town` | `https://server.matters.town/graphql`        | Read-only smoke by default.                                   |
 
 Production tests must not create articles, update settings, run admin actions, touch payments, change moderation state, or send outbound federation unless explicit human approval is recorded.
 
 ## Recommended Tag Model
 
-Existing specs should be tagged before they are used as an automated release gate across staging and production.
+Existing specs are tagged so they can be selected as automated release gates across preview, staging, and production.
 
-| Tag | Meaning | Production Default |
-| --- | --- | --- |
-| `@smoke` | Read-only core route and rendering checks. | Allowed. |
-| `@auth-smoke` | Login/session checks using safe test accounts. | Approval required. |
-| `@regression` | Broader user journeys. | Usually not run on production. |
-| `@mutation` | Creates or edits content/settings. | Not allowed by default. |
-| `@admin` | Staff/admin permission checks. | Not allowed by default. |
-| `@payment` | Payment/support flow. | Not allowed by default. |
-| `@feature:<name>` | Feature-specific checks. | Depends on other tags. |
+| Tag               | Meaning                                        | Production Default             |
+| ----------------- | ---------------------------------------------- | ------------------------------ |
+| `@smoke`          | Read-only core route and rendering checks.     | Allowed.                       |
+| `@auth-smoke`     | Login/session checks using safe test accounts. | Approval required.             |
+| `@regression`     | Broader user journeys.                         | Usually not run on production. |
+| `@mutation`       | Creates or edits content/settings.             | Not allowed by default.        |
+| `@admin`          | Staff/admin permission checks.                 | Not allowed by default.        |
+| `@payment`        | Payment/support flow.                          | Not allowed by default.        |
+| `@feature:<name>` | Feature-specific checks.                       | Depends on other tags.         |
 
-Suggested first pass:
+Current first pass:
 
-| File | Suggested Tags | Notes |
-| --- | --- | --- |
-| `tests/homepage.spec.ts` | `@smoke` | Good production read-only candidate. |
-| `tests/authentication.spec.ts` | `@auth-smoke`, `@mutation` for OTP/account creation | Account creation must not run on production by default. |
-| `tests/commentArticle.spec.ts` | `@mutation` | Staging only by default. |
-| `tests/supportArticle.spec.ts` | `@payment`, `@mutation` | Needs payment test boundary and approval. |
-| `tests/mutateUser.spec.ts` | `@mutation` | Staging only by default. |
-| `tests/switchBetweenUsers.spec.ts` | `@auth-smoke`, `@regression` | Production only with approved test accounts. |
+| File                               | Suggested Tags                                      | Notes                                                              |
+| ---------------------------------- | --------------------------------------------------- | ------------------------------------------------------------------ |
+| `tests/homepage.spec.ts`           | `@smoke`                                            | Production read-only candidate.                                    |
+| `tests/authentication.spec.ts`     | `@auth-smoke`, `@mutation` for OTP/account creation | Account creation must not run on production by default.            |
+| `tests/commentArticle.spec.ts`     | `@mutation`                                         | Staging only by default.                                           |
+| `tests/supportArticle.spec.ts`     | `@payment`, `@mutation`                             | Needs payment test boundary and approval.                          |
+| `tests/mutateUser.spec.ts`         | `@mutation`                                         | Staging only by default.                                           |
+| `tests/switchBetweenUsers.spec.ts` | `@auth-smoke`, `@regression`, `@mutation`           | Sends comments, so production is blocked by default.               |
+| `tests/mutateArticle.spec.ts`      | `@mutation`                                         | Currently ignored by Playwright config, but tagged for future use. |
 
-## Proposed Scripts
+## Tagged Scripts
 
-These are the intended next scripts once tags are added:
+These scripts select tagged test profiles:
 
 ```json
 {
-  "test:e2e:smoke": "playwright test --grep @smoke",
+  "test:e2e:smoke": "playwright test --grep @smoke --no-deps",
   "test:e2e:staging": "playwright test --grep \"@smoke|@auth-smoke|@regression\"",
   "test:e2e:mutation": "playwright test --grep @mutation",
-  "test:e2e:prod-smoke": "playwright test --grep @smoke --grep-invert \"@mutation|@admin|@payment\""
+  "test:e2e:prod-smoke": "playwright test --grep @smoke --grep-invert \"@mutation|@admin|@payment\" --no-deps"
 }
 ```
 
 Do not add production mutation scripts unless the workflow also enforces an explicit approval flag.
+
+`--no-deps` is intentional for read-only smoke profiles. The default Chromium project depends on `tests/sessions.setup.ts`, and that setup logs in and updates test account language through `PLAYWRIGHT_TEST_API_URL`. Production read-only smoke must avoid that setup unless explicit production account mutation approval exists.
 
 ## Example Runs
 
