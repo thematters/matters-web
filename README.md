@@ -48,7 +48,9 @@
 
 ## Testing
 
-See [Playwright Testing Guide](https://www.notion.so/matterslab/Playwright-Testing-Guide-60caa248d5ce4d70938b7b2f2c7e9139).
+See [E2E Release Evaluation](docs/e2e-release-evaluation.md) for the repo-local Playwright and release-gate guide.
+
+The older Notion guide is still useful for background context: [Playwright Testing Guide](https://www.notion.so/matterslab/Playwright-Testing-Guide-60caa248d5ce4d70938b7b2f2c7e9139).
 
 ## Conventions
 
