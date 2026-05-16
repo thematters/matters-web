@@ -3210,6 +3210,10 @@
   "orIq4X": {
     "defaultMessage": "More than 100 supports"
   },
+  "p/Sz0T": {
+    "defaultMessage": "Restore comment",
+    "description": "src/components/Comment/Content/index.tsx"
+  },
   "p5qZnJ": {
     "defaultMessage": "liked",
     "description": "src/components/Notice/ArticleNotice/ArticleNewAppreciationNotice.tsx"
@@ -3474,6 +3478,10 @@
     "defaultMessage": "My circle",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
   },
+  "u4QNpM": {
+    "defaultMessage": "Failed to restore comment. Please try again later.",
+    "description": "src/components/Comment/Content/index.tsx"
+  },
   "u5aHb4": {
     "defaultMessage": "Copy Link"
   },
@@ -3568,6 +3576,10 @@
   },
   "vH8sCb": {
     "defaultMessage": "Circle"
+  },
+  "vJQzbe": {
+    "defaultMessage": "Comment restored",
+    "description": "src/components/Comment/Content/index.tsx"
   },
   "vJd1we": {
     "defaultMessage": "Comment not found",
