@@ -3210,6 +3210,10 @@
   "orIq4X": {
     "defaultMessage": "支持超过 100 次"
   },
+  "p/Sz0T": {
+    "defaultMessage": "恢复留言",
+    "description": "src/components/Comment/Content/index.tsx"
+  },
   "p5qZnJ": {
     "defaultMessage": "赞赏了",
     "description": "src/components/Notice/ArticleNotice/ArticleNewAppreciationNotice.tsx"
@@ -3474,6 +3478,10 @@
     "defaultMessage": "我的围炉",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
   },
+  "u4QNpM": {
+    "defaultMessage": "恢复失败，请稍后再试",
+    "description": "src/components/Comment/Content/index.tsx"
+  },
   "u5aHb4": {
     "defaultMessage": "复制链接"
   },
@@ -3568,6 +3576,10 @@
   },
   "vH8sCb": {
     "defaultMessage": "我的围炉"
+  },
+  "vJQzbe": {
+    "defaultMessage": "已恢复留言",
+    "description": "src/components/Comment/Content/index.tsx"
   },
   "vJd1we": {
     "defaultMessage": "评论不存在",
