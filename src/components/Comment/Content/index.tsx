@@ -1,3 +1,4 @@
+import { useApolloClient } from '@apollo/client'
 import classNames from 'classnames'
 import gql from 'graphql-tag'
 import Link from 'next/link'
@@ -9,10 +10,19 @@ import {
   TEST_ID,
   toCommunityWatchRecordUrl,
 } from '~/common/enums'
-import { Expandable, LanguageContext } from '~/components'
+import {
+  Button,
+  Expandable,
+  LanguageContext,
+  toast,
+  useMutation,
+  ViewerContext,
+} from '~/components'
 import {
   CommentContentCommentPrivateFragment,
   CommentContentCommentPublicFragment,
+  CommentState,
+  RestoreCommunityWatchCommentMutation,
 } from '~/gql/graphql'
 
 import Collapsed from './Collapsed'
@@ -53,6 +63,90 @@ const fragments = {
   },
 }
 
+const RESTORE_COMMUNITY_WATCH_COMMENT = gql`
+  mutation RestoreCommunityWatchComment($uuid: ID!, $note: String) {
+    restoreCommunityWatchComment(input: { uuid: $uuid, note: $note }) {
+      uuid
+      actionState
+      reviewState
+      commentId
+    }
+  }
+`
+
+const CommunityWatchRestoreButton = ({
+  commentId,
+  actionUuid,
+}: {
+  commentId: string
+  actionUuid: string
+}) => {
+  const client = useApolloClient()
+  const [restoreComment, { loading }] =
+    useMutation<RestoreCommunityWatchCommentMutation>(
+      RESTORE_COMMUNITY_WATCH_COMMENT
+    )
+
+  const restore = async () => {
+    try {
+      await restoreComment({
+        variables: {
+          uuid: actionUuid,
+          note: 'Restored from Matters frontend admin action',
+        },
+        update: (cache) => {
+          cache.modify({
+            id: cache.identify({ __typename: 'Comment', id: commentId }),
+            fields: {
+              state: () => CommentState.Active,
+              communityWatchAction: () => null,
+            },
+          })
+        },
+      })
+      await client.refetchQueries({ include: 'active' })
+
+      toast.success({
+        message: (
+          <FormattedMessage
+            defaultMessage="已恢復留言"
+            id="vJQzbe"
+            description="src/components/Comment/Content/index.tsx"
+          />
+        ),
+      })
+    } catch (error) {
+      console.error(error)
+      toast.error({
+        message: (
+          <FormattedMessage
+            defaultMessage="恢復失敗，請稍後再試"
+            id="u4QNpM"
+            description="src/components/Comment/Content/index.tsx"
+          />
+        ),
+      })
+    }
+  }
+
+  return (
+    <Button
+      className={styles.restoreButton}
+      disabled={loading}
+      onClick={restore}
+      spacing={[0, 0]}
+      textColor="green"
+      textActiveColor="greenDark"
+    >
+      <FormattedMessage
+        defaultMessage="恢復留言"
+        id="p/Sz0T"
+        description="src/components/Comment/Content/index.tsx"
+      />
+    </Button>
+  )
+}
+
 export const CommentContent = ({
   comment,
   size,
@@ -63,6 +157,7 @@ export const CommentContent = ({
   expandable = true,
 }: ContentProps) => {
   const { lang } = useContext(LanguageContext)
+  const viewer = useContext(ViewerContext)
   const { content, state } = comment
   const isBlocked = comment.author?.isBlocked
   const communityWatchAction = comment.communityWatchAction
@@ -83,6 +178,12 @@ export const CommentContent = ({
             description="src/components/Comment/Content/index.tsx"
           />
         </Link>
+        {viewer.isAdmin && (
+          <CommunityWatchRestoreButton
+            commentId={comment.id}
+            actionUuid={communityWatchAction.uuid}
+          />
+        )}
       </p>
     )
   }
