@@ -219,22 +219,6 @@ const EditSensitive = ({
   )
 }
 
-const EditFederationSetting = ({
-  article,
-  federationSetting,
-  federationSettingSaving,
-  editFederationSetting,
-}: OptionItemProps) => {
-  return (
-    <Sidebar.FederationSetting
-      articleId={article.id}
-      federationSetting={federationSetting}
-      federationSettingSaving={federationSettingSaving}
-      editFederationSetting={editFederationSetting}
-    />
-  )
-}
-
 const EditCircle = ({
   circle,
   editAccess,

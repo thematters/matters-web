@@ -1817,9 +1817,6 @@
     "defaultMessage": "验证码错误",
     "description": "CODE_INVALID"
   },
-  "R6sMIX": {
-    "defaultMessage": "Fediverse"
-  },
   "R7yHDl": {
     "defaultMessage": "围炉营收",
     "description": "src/components/Transaction/index.tsx"
@@ -3198,9 +3195,6 @@
   },
   "ob+HDS": {
     "defaultMessage": "马上逛逛"
-  },
-  "oh7tJ1": {
-    "defaultMessage": "Allow eligible public articles to be exported to Fediverse."
   },
   "ohbnFU": {
     "defaultMessage": "社交登录",
