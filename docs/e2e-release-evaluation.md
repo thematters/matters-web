@@ -17,6 +17,29 @@ For `matters-web`, report these separately:
 - Production approval state.
 - `matters.town` production smoke result.
 
+## Required Role Matrix
+
+Every staging acceptance and production smoke must include three viewer states:
+
+| Viewer State           | Required Checks                                                                 |
+| ---------------------- | ------------------------------------------------------------------------------- |
+| Logged-out visitor     | Homepage, article page, and public profile render without GraphQL auth errors.  |
+| Normal logged-in user  | Homepage, article page, public profile, notifications entry, and own draft/settings pages render without GraphQL auth errors. |
+| Admin or staff account | Admin-only controls render only in admin view and do not leak into normal web.   |
+
+This matrix is required even when the feature under release targets only admins or a trusted group. Global viewer queries, navigation, and shared dropdowns can still affect normal users.
+
+## GraphQL Permission Boundary
+
+Frontend queries that run in normal web routes must not read `oss` fields or other admin-only schema fields. In particular:
+
+- Do not use `viewer.oss`, `user.oss`, `article.oss`, `comment.oss`, or `moment.oss` in shared viewer initialization or normal user routes.
+- Do not use `UserFeatureFlagType` as a frontend permission source outside admin-only management surfaces.
+- For a normal-user UI gate, use a public-safe field or add a dedicated safe GraphQL field on the server.
+- Server mutations must still perform the final permission check; frontend gating is only presentation.
+
+Admin-only `oss` queries are allowed only when both conditions are true: the component is rendered behind `NEXT_PUBLIC_ADMIN_VIEW === 'true'`, and the viewer is checked as admin before the component is mounted.
+
 ## Existing E2E Surface
 
 - Specs: `tests/*.spec.ts`
@@ -55,6 +78,8 @@ The E2E workflow already uses a Vercel preview URL as `PLAYWRIGHT_TEST_BASE_URL`
 
 Production tests must not create articles, update settings, run admin actions, touch payments, change moderation state, or send outbound federation unless explicit human approval is recorded.
 
+Production smoke should assert visible page state, not network quiescence. Public production pages may keep analytics, ads, or other long-running requests open, so `networkidle` alone is not a reliable health signal.
+
 ## Recommended Tag Model
 
 Existing specs are tagged so they can be selected as automated release gates across preview, staging, and production.
@@ -73,7 +98,7 @@ Current first pass:
 
 | File                               | Suggested Tags                                      | Notes                                                              |
 | ---------------------------------- | --------------------------------------------------- | ------------------------------------------------------------------ |
-| `tests/homepage.spec.ts`           | `@smoke`                                            | Production read-only candidate.                                    |
+| `tests/homepage.spec.ts`           | `@smoke`, `@regression`                             | Keep production smoke to critical page/feed rendering only; sidebar shuffle and other volatile controls belong in regression. |
 | `tests/authentication.spec.ts`     | `@auth-smoke`, `@mutation` for OTP/account creation | Account creation must not run on production by default.            |
 | `tests/commentArticle.spec.ts`     | `@mutation`                                         | Staging only by default.                                           |
 | `tests/supportArticle.spec.ts`     | `@payment`, `@mutation`                             | Needs payment test boundary and approval.                          |

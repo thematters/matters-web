@@ -17,8 +17,6 @@ import {
   DigestRichCirclePublicFragment,
   DraftDetailViewerQueryQuery,
   EditorSelectCampaignFragment,
-  FederationArticleSettingState,
-  UserFeatureFlagType,
 } from '~/gql/graphql'
 
 import { Article } from '..'
@@ -47,11 +45,7 @@ export type OptionContentProps = {
       replyToDonator: string | null
     ) => void
   } & SidebarSensitiveProps &
-  SidebarISCNProps & {
-    federationSetting?: FederationArticleSettingState | null
-    federationSettingSaving: boolean
-    editFederationSetting: (state: FederationArticleSettingState) => void
-  }
+  SidebarISCNProps
 
 type OptionItemProps = OptionContentProps & { disabled: boolean }
 
@@ -220,22 +214,6 @@ const EditSensitive = ({
   )
 }
 
-const EditFederationSetting = ({
-  article,
-  federationSetting,
-  federationSettingSaving,
-  editFederationSetting,
-}: OptionItemProps) => {
-  return (
-    <Sidebar.FederationSetting
-      articleId={article.id}
-      federationSetting={federationSetting}
-      federationSettingSaving={federationSettingSaving}
-      editFederationSetting={editFederationSetting}
-    />
-  )
-}
-
 const EditCircle = ({
   circle,
   editAccess,
@@ -267,9 +245,6 @@ export const OptionContent = (
   const isSettings = tab === 'settings'
   const hasOwnCollections = (props.ownCollections?.length || 0) > 0
   const hasOwnCircle = props.ownCircles && props.ownCircles.length >= 1
-  const isFediverseBeta = !!props.viewerData?.viewer?.oss?.featureFlags.some(
-    ({ type }) => type === UserFeatureFlagType.FediverseBeta
-  )
   const disabled = false
 
   return (
@@ -315,9 +290,6 @@ export const OptionContent = (
             <EditLicense {...props} disabled={disabled} />
             <EditCanComment {...props} disabled={disabled} />
             <EditSupportSetting {...props} disabled={disabled} />
-            {isFediverseBeta && (
-              <EditFederationSetting {...props} disabled={disabled} />
-            )}
             <EditSensitive {...props} disabled={disabled} />
             {hasOwnCircle && <EditCircle {...props} disabled={disabled} />}
           </>

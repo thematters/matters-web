@@ -13,13 +13,13 @@ import {
   useMutation,
 } from '~/components'
 import {
+  EditorViewerFederationSettingQuery,
   FederationArticleSettingState,
   FederationAuthorSettingState,
   SetArticleFederationSettingMutation,
   SetArticleFederationSettingMutationVariables,
   SetViewerFederationSettingMutation,
   SetViewerFederationSettingMutationVariables,
-  ViewerFederationSettingQuery,
 } from '~/gql/graphql'
 
 import Box from '../Box'
@@ -90,7 +90,7 @@ const SidebarFederationSetting: React.FC<SidebarFederationSettingProps> = ({
   editFederationSetting,
 }) => {
   const { data, loading: viewerLoading } =
-    useQuery<ViewerFederationSettingQuery>(VIEWER_FEDERATION_SETTING, {
+    useQuery<EditorViewerFederationSettingQuery>(VIEWER_FEDERATION_SETTING, {
       fetchPolicy: 'cache-and-network',
     })
   const [setArticleFederationSetting, { loading }] = useMutation<
