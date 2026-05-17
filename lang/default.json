@@ -1817,9 +1817,6 @@
     "defaultMessage": "Incorrect verification code",
     "description": "CODE_INVALID"
   },
-  "R6sMIX": {
-    "defaultMessage": "Fediverse"
-  },
   "R7yHDl": {
     "defaultMessage": "Circle Revenue",
     "description": "src/components/Transaction/index.tsx"
@@ -3189,9 +3186,6 @@
   },
   "ob+HDS": {
     "defaultMessage": "View Circle"
-  },
-  "oh7tJ1": {
-    "defaultMessage": "Allow eligible public articles to be exported to Fediverse."
   },
   "ohbnFU": {
     "defaultMessage": "Social Login",

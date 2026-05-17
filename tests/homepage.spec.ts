@@ -4,8 +4,8 @@ import { stripSpaces } from '~/common/utils/text'
 
 import { HomePage } from './helpers'
 
-test.describe('Homepage @smoke', () => {
-  test('has article feed in newest feed', async ({ page }) => {
+test.describe('Homepage', () => {
+  test('has article feed in newest feed @smoke', async ({ page }) => {
     const home = new HomePage(page)
     await home.goto()
 
@@ -18,7 +18,7 @@ test.describe('Homepage @smoke', () => {
     await expect(home.feedArticles.first()).toBeVisible()
   })
 
-  test('can switch to featured feed', async ({ page }) => {
+  test('can switch to featured feed @smoke', async ({ page }) => {
     const home = new HomePage(page)
     await home.goto()
 
@@ -32,7 +32,7 @@ test.describe('Homepage @smoke', () => {
     expect(await home.tabFeatured.getAttribute('aria-selected')).toBe('true')
   })
 
-  test('sidebar users can be shuffled', async ({ page }) => {
+  test('sidebar users can be shuffled @regression', async ({ page }) => {
     const home = new HomePage(page)
     await home.goto()
 

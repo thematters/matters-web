@@ -27,7 +27,7 @@ export class HomePage {
   }
 
   async goto() {
-    await pageGoto(this.page, '/newest')
+    await pageGoto(this.page, '/newest', 'domcontentloaded')
   }
 
   async shuffleSidebarUsers() {
