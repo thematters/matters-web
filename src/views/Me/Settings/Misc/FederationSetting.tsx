@@ -57,7 +57,7 @@ const FederationSetting = () => {
     }
   }, [viewer?.federationSetting?.state])
 
-  if (!loading && !isFediverseBeta) {
+  if (!isFediverseBeta) {
     return null
   }
 
