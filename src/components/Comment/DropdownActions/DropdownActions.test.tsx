@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest'
 import { TEST_ID } from '~/common/enums'
 import { cleanup, fireEvent, render, screen } from '~/common/utils/test'
 import { processViewer, ViewerContext } from '~/components'
-import { CommentState, UserFeatureFlagType } from '~/gql/graphql'
+import { BadgeType, CommentState } from '~/gql/graphql'
 import { MOCK_COMMENT, MOCK_USER } from '~/stories/mocks'
 
 import DropdownActions from './'
@@ -88,14 +88,9 @@ describe('<Comment/DropdownActions>', () => {
   it('should render community watch actions for community watch members', async () => {
     const viewer = processViewer({
       ...MOCK_USER,
-      oss: {
-        ...MOCK_USER.oss,
-        featureFlags: [
-          {
-            __typename: 'UserFeatureFlag',
-            type: UserFeatureFlagType.CommunityWatch,
-          },
-        ],
+      info: {
+        ...MOCK_USER.info,
+        badges: [{ __typename: 'Badge', type: BadgeType.CommunityWatch }],
       },
     })
 
