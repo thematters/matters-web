@@ -11,7 +11,6 @@ import {
   DigestRichCirclePublicFragment,
   DraftDetailViewerQueryQuery,
   EditorSelectCampaignFragment,
-  UserFeatureFlagType,
 } from '~/gql/graphql'
 import { EditMetaDraftFragment } from '~/gql/graphql'
 
@@ -242,9 +241,7 @@ export const OptionContent = (
   const isPublished = props.draft.publishState === 'published'
   const disabled = isPending || isPublished
   const hasOwnCollections = (props.ownCollections?.length || 0) > 0
-  const isFediverseBeta = !!props.draftViewer?.viewer?.oss?.featureFlags.some(
-    ({ type }) => type === UserFeatureFlagType.FediverseBeta
-  )
+  const isFediverseBeta = !!props.draftViewer?.viewer?.features.fediverseBeta
 
   return (
     <section>

@@ -1932,6 +1932,9 @@
   "Sj+TN8": {
     "defaultMessage": "Announcement"
   },
+  "Su1LcW": {
+    "defaultMessage": "開啟後，新發佈作品預設可輸出到 Fediverse。"
+  },
   "SuRTsQ": {
     "defaultMessage": "Register for ISCN"
   },
@@ -2264,6 +2267,9 @@
   },
   "Y9IYvj": {
     "defaultMessage": "No suitable channels"
+  },
+  "YC2b3b": {
+    "defaultMessage": "Fediverse 聯邦發佈"
   },
   "YDMrKK": {
     "defaultMessage": "Users"
@@ -3059,6 +3065,9 @@
     "defaultMessage": "Hottest",
     "description": "src/views/Circle/Analytics/ContentAnalytics/index.tsx"
   },
+  "mFn/Vv": {
+    "defaultMessage": "已更新 Fediverse 設定"
+  },
   "mJEqC/": {
     "defaultMessage": "Go to {href}"
   },
@@ -3595,6 +3604,9 @@
   },
   "vX2bDy": {
     "defaultMessage": "Collect Article"
+  },
+  "vXgChH": {
+    "defaultMessage": "操作失敗，請稍後再試"
   },
   "va8Rnw": {
     "defaultMessage": "The author has closed the comment section"
