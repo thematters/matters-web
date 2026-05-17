@@ -46,7 +46,7 @@ const unfollow = async (page: Page) => {
 
 test.describe.configure({ mode: 'serial' })
 
-test.describe('User Mutation', () => {
+test.describe('User Mutation @mutation', () => {
   authedTest(
     'Bob can follow and unfollow Alice',
     async ({ alicePage, bobPage, isMobile }) => {

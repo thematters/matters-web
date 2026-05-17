@@ -32,6 +32,10 @@
   "+GAaxB": {
     "defaultMessage": "作品因違反社區約章被封存"
   },
+  "+Gk0O1": {
+    "defaultMessage": "操作失敗，請稍後再試",
+    "description": "src/components/Comment/DropdownActions/CommunityWatchRemoveComment.tsx"
+  },
   "+IYfVH": {
     "defaultMessage": "移除活動精選"
   },
@@ -164,6 +168,10 @@
   },
   "0PpH2v": {
     "defaultMessage": "去錢包授權"
+  },
+  "0SLJni": {
+    "defaultMessage": "所有處理都會公開留痕",
+    "description": "src/components/Comment/DropdownActions/index.tsx"
   },
   "0SQatS": {
     "defaultMessage": "看全部",
@@ -419,6 +427,10 @@
   },
   "4CrCbD": {
     "defaultMessage": "自治"
+  },
+  "4E1vEv": {
+    "defaultMessage": "色情廣告",
+    "description": "src/components/Comment/DropdownActions/CommunityWatchRemoveComment.tsx"
   },
   "4KuZ0o": {
     "defaultMessage": "資源不存在",
@@ -713,6 +725,9 @@
   "9+vzKn": {
     "defaultMessage": "編輯",
     "description": "src/components/CircleComment/DropdownActions/index.tsx"
+  },
+  "90M7k0": {
+    "defaultMessage": "馬特市守望相助隊"
   },
   "91AzwP": {
     "defaultMessage": "僅支持 JPEG、PNG、GIF 和 WebP 圖片"
@@ -1013,6 +1028,9 @@
   },
   "DjIpR6": {
     "defaultMessage": "選擇封面"
+  },
+  "DnOjES": {
+    "defaultMessage": "關閉"
   },
   "DoOt1q": {
     "defaultMessage": "你的頻道建議已被編輯採納，感謝你對 Matters 的支持～",
@@ -1799,6 +1817,9 @@
     "defaultMessage": "驗證碼錯誤",
     "description": "CODE_INVALID"
   },
+  "R6sMIX": {
+    "defaultMessage": "Fediverse"
+  },
   "R7yHDl": {
     "defaultMessage": "圍爐營收",
     "description": "src/components/Transaction/index.tsx"
@@ -2276,6 +2297,9 @@
     "defaultMessage": "因違反用戶協定而被封存，",
     "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
   },
+  "ZAoAcG": {
+    "defaultMessage": "Threads, Mastodon, Misskey 這些地方的粉絲也會看到"
+  },
   "ZAs170": {
     "defaultMessage": "基本資料",
     "description": "src/views/Circle/Settings/index.tsx"
@@ -2319,6 +2343,10 @@
   "a1+ca6": {
     "defaultMessage": "讀者數量：訪問過作品頁的不重複的登入用戶數加匿名 IP 數（數據週期更新，可能存在延遲）",
     "description": "src/views/Me/Works/Published/SortTabs.tsx"
+  },
+  "a5ZQOK": {
+    "defaultMessage": "查看公開紀錄",
+    "description": "src/components/Comment/DropdownActions/CommunityWatchRemoveComment.tsx"
   },
   "aCTmEO": {
     "defaultMessage": "我還沒有錢包",
@@ -2573,6 +2601,10 @@
   },
   "eNv3Wm": {
     "defaultMessage": "已推薦你的這篇作品到頻道：{channelNames}"
+  },
+  "eRTBgt": {
+    "defaultMessage": "本則貼文已由守望相助隊檢舉",
+    "description": "src/components/Comment/Content/index.tsx"
   },
   "eTpiYa": {
     "defaultMessage": "尚無支持數據"
@@ -3034,6 +3066,9 @@
     "defaultMessage": "取消收藏",
     "description": "src/components/Buttons/TagBookmark/Unbookmark.tsx"
   },
+  "mMji02": {
+    "defaultMessage": "開啟"
+  },
   "mPe6DK": {
     "defaultMessage": "訂閱了你的圍爐",
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
@@ -3137,6 +3172,10 @@
     "defaultMessage": "電子信箱不正確",
     "description": "USER_EMAIL_INVALID"
   },
+  "oA2Pur": {
+    "defaultMessage": "濫發廣告",
+    "description": "src/components/Comment/DropdownActions/CommunityWatchRemoveComment.tsx"
+  },
   "oEHAIT": {
     "defaultMessage": "取消排程",
     "description": "confirm cancel schedule button"
@@ -3150,6 +3189,9 @@
   },
   "ob+HDS": {
     "defaultMessage": "馬上逛逛"
+  },
+  "oh7tJ1": {
+    "defaultMessage": "Allow eligible public articles to be exported to Fediverse."
   },
   "ohbnFU": {
     "defaultMessage": "社交登入",
@@ -3167,6 +3209,10 @@
   },
   "orIq4X": {
     "defaultMessage": "支持超過 100 次"
+  },
+  "p/Sz0T": {
+    "defaultMessage": "恢復留言",
+    "description": "src/components/Comment/Content/index.tsx"
   },
   "p5qZnJ": {
     "defaultMessage": "讚賞了",
@@ -3308,6 +3354,10 @@
     "defaultMessage": "開始修改",
     "description": "src/components/Dialogs/ReviseArticleDialog/index.tsx"
   },
+  "rW+2ID": {
+    "defaultMessage": "已由守望相助隊檢舉",
+    "description": "src/components/Comment/DropdownActions/CommunityWatchRemoveComment.tsx"
+  },
   "rXnmeE": {
     "defaultMessage": "確認發送"
   },
@@ -3417,6 +3467,9 @@
   "tZKvnZ": {
     "defaultMessage": "取消喜歡動態"
   },
+  "tsUFZX": {
+    "defaultMessage": "分享到聯邦宇宙"
+  },
   "tzq2+W": {
     "defaultMessage": "寄出邀請",
     "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/PreSend.tsx"
@@ -3424,6 +3477,10 @@
   "u+cgOo": {
     "defaultMessage": "我的圍爐",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
+  },
+  "u4QNpM": {
+    "defaultMessage": "恢復失敗，請稍後再試",
+    "description": "src/components/Comment/Content/index.tsx"
   },
   "u5aHb4": {
     "defaultMessage": "複製連結"
@@ -3519,6 +3576,10 @@
   },
   "vH8sCb": {
     "defaultMessage": "我的圍爐"
+  },
+  "vJQzbe": {
+    "defaultMessage": "已恢復留言",
+    "description": "src/components/Comment/Content/index.tsx"
   },
   "vJd1we": {
     "defaultMessage": "評論不存在",

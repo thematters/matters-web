@@ -32,6 +32,10 @@
   "+GAaxB": {
     "defaultMessage": "The article has been archived due to violation of terms"
   },
+  "+Gk0O1": {
+    "defaultMessage": "操作失敗，請稍後再試",
+    "description": "src/components/Comment/DropdownActions/CommunityWatchRemoveComment.tsx"
+  },
   "+IYfVH": {
     "defaultMessage": "Remove from event featured"
   },
@@ -164,6 +168,10 @@
   },
   "0PpH2v": {
     "defaultMessage": "Authorize in Wallet"
+  },
+  "0SLJni": {
+    "defaultMessage": "所有處理都會公開留痕",
+    "description": "src/components/Comment/DropdownActions/index.tsx"
   },
   "0SQatS": {
     "defaultMessage": "View all",
@@ -419,6 +427,10 @@
   },
   "4CrCbD": {
     "defaultMessage": "Community"
+  },
+  "4E1vEv": {
+    "defaultMessage": "色情廣告",
+    "description": "src/components/Comment/DropdownActions/CommunityWatchRemoveComment.tsx"
   },
   "4KuZ0o": {
     "defaultMessage": "Asset not found",
@@ -713,6 +725,9 @@
   "9+vzKn": {
     "defaultMessage": "Edit",
     "description": "src/components/CircleComment/DropdownActions/index.tsx"
+  },
+  "90M7k0": {
+    "defaultMessage": "馬特市守望相助隊"
   },
   "91AzwP": {
     "defaultMessage": "Only JPEG, PNG, and GIF and WebP images are supported."
@@ -1013,6 +1028,9 @@
   },
   "DjIpR6": {
     "defaultMessage": "Set Cover"
+  },
+  "DnOjES": {
+    "defaultMessage": "關閉"
   },
   "DoOt1q": {
     "defaultMessage": "Your channel suggestion has been accepted by the editor. Thank you for supporting Matters!",
@@ -1799,6 +1817,9 @@
     "defaultMessage": "Incorrect verification code",
     "description": "CODE_INVALID"
   },
+  "R6sMIX": {
+    "defaultMessage": "Fediverse"
+  },
   "R7yHDl": {
     "defaultMessage": "Circle Revenue",
     "description": "src/components/Transaction/index.tsx"
@@ -2276,6 +2297,9 @@
     "defaultMessage": "Archived for violation.",
     "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
   },
+  "ZAoAcG": {
+    "defaultMessage": "Threads, Mastodon, Misskey 這些地方的粉絲也會看到"
+  },
   "ZAs170": {
     "defaultMessage": "Profile",
     "description": "src/views/Circle/Settings/index.tsx"
@@ -2319,6 +2343,10 @@
   "a1+ca6": {
     "defaultMessage": "Number of readers: unique registered users plus number of anonymous IP addresses visited the article (Data will be updated periodically and may be delayed)",
     "description": "src/views/Me/Works/Published/SortTabs.tsx"
+  },
+  "a5ZQOK": {
+    "defaultMessage": "查看公開紀錄",
+    "description": "src/components/Comment/DropdownActions/CommunityWatchRemoveComment.tsx"
   },
   "aCTmEO": {
     "defaultMessage": "I don't have a wallet yet",
@@ -2573,6 +2601,10 @@
   },
   "eNv3Wm": {
     "defaultMessage": "Your work has been recommended to the channels: {channelNames}"
+  },
+  "eRTBgt": {
+    "defaultMessage": "本則貼文已由守望相助隊檢舉",
+    "description": "src/components/Comment/Content/index.tsx"
   },
   "eTpiYa": {
     "defaultMessage": "No data yet."
@@ -3034,6 +3066,9 @@
     "defaultMessage": "Remove bookmark",
     "description": "src/components/Buttons/TagBookmark/Unbookmark.tsx"
   },
+  "mMji02": {
+    "defaultMessage": "開啟"
+  },
   "mPe6DK": {
     "defaultMessage": "subscribed your circle",
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
@@ -3137,6 +3172,10 @@
     "defaultMessage": "Invalid Email",
     "description": "USER_EMAIL_INVALID"
   },
+  "oA2Pur": {
+    "defaultMessage": "濫發廣告",
+    "description": "src/components/Comment/DropdownActions/CommunityWatchRemoveComment.tsx"
+  },
   "oEHAIT": {
     "defaultMessage": "Cancel schedule",
     "description": "confirm cancel schedule button"
@@ -3150,6 +3189,9 @@
   },
   "ob+HDS": {
     "defaultMessage": "View Circle"
+  },
+  "oh7tJ1": {
+    "defaultMessage": "Allow eligible public articles to be exported to Fediverse."
   },
   "ohbnFU": {
     "defaultMessage": "Social Login",
@@ -3167,6 +3209,10 @@
   },
   "orIq4X": {
     "defaultMessage": "More than 100 supports"
+  },
+  "p/Sz0T": {
+    "defaultMessage": "恢復留言",
+    "description": "src/components/Comment/Content/index.tsx"
   },
   "p5qZnJ": {
     "defaultMessage": "liked",
@@ -3308,6 +3354,10 @@
     "defaultMessage": "Edit",
     "description": "src/components/Dialogs/ReviseArticleDialog/index.tsx"
   },
+  "rW+2ID": {
+    "defaultMessage": "已由守望相助隊檢舉",
+    "description": "src/components/Comment/DropdownActions/CommunityWatchRemoveComment.tsx"
+  },
   "rXnmeE": {
     "defaultMessage": "Confirm and Send"
   },
@@ -3417,6 +3467,9 @@
   "tZKvnZ": {
     "defaultMessage": "Unlike moment"
   },
+  "tsUFZX": {
+    "defaultMessage": "分享到聯邦宇宙"
+  },
   "tzq2+W": {
     "defaultMessage": "Send",
     "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/PreSend.tsx"
@@ -3424,6 +3477,10 @@
   "u+cgOo": {
     "defaultMessage": "My circle",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
+  },
+  "u4QNpM": {
+    "defaultMessage": "恢復失敗，請稍後再試",
+    "description": "src/components/Comment/Content/index.tsx"
   },
   "u5aHb4": {
     "defaultMessage": "Copy Link"
@@ -3519,6 +3576,10 @@
   },
   "vH8sCb": {
     "defaultMessage": "Circle"
+  },
+  "vJQzbe": {
+    "defaultMessage": "已恢復留言",
+    "description": "src/components/Comment/Content/index.tsx"
   },
   "vJd1we": {
     "defaultMessage": "Comment not found",

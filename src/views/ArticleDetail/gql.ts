@@ -45,7 +45,7 @@ const articlePublicFragment = gql`
     canComment
     indentFirstLine
     commentCount
-    comments(input: { filter: { state: active, parentComment: null } }) {
+    comments(input: { filter: { parentComment: null } }) {
       totalCount
     }
     license

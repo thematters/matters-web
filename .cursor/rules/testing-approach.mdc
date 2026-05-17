@@ -24,6 +24,17 @@ Matters Web uses a combination of unit, component, and end-to-end (E2E) tests.
 - `npm run test:e2e`: Run end-to-end tests
 - `npm run test:unit:coverage`: Generate coverage report
 
+## Release Evaluation Boundary
+
+Use the shared release evaluation standard when testing feature launches:
+
+- Preview and PR checks should use the Vercel preview URL through `PLAYWRIGHT_TEST_BASE_URL`.
+- `matters.icu` is the staging acceptance target and may use disposable test data.
+- `matters.town` production checks are read-only by default; production mutations, admin actions, payment actions, moderation changes, or outbound delivery require explicit human approval.
+- Keep CI status, staging acceptance, production deployment, and production smoke-test results separate.
+
+See [docs/e2e-release-evaluation.md](mdc:docs/e2e-release-evaluation.md) for the repo-local guide.
+
 ## Testing Utilities
 
 - Mock data and fixtures for testing

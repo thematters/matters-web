@@ -12,6 +12,9 @@ import styles from './styles.module.css'
  */
 interface Comment {
   state: string
+  communityWatchAction?: {
+    uuid: string
+  } | null
   parentComment?: {
     id: string
   } | null
@@ -25,7 +28,8 @@ const filterComment = (comment: Comment) => {
   // skip if comment's state is active or collapse
   if (
     comment.state === CommentState.Active ||
-    comment.state === CommentState.Collapsed
+    comment.state === CommentState.Collapsed ||
+    (comment.state === CommentState.Banned && comment.communityWatchAction)
   ) {
     return true
   }
