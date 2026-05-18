@@ -1,17 +1,11 @@
-import { MockedProvider } from '@apollo/client/testing'
-import { render, screen, waitFor } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import { useContext } from 'react'
 import { describe, expect, it } from 'vitest'
 
-import { UserFeatureFlagType } from '~/gql/graphql'
+import { BadgeType } from '~/gql/graphql'
 import { MOCK_USER } from '~/stories/mocks'
 
-import {
-  processViewer,
-  VIEWER_FEATURE_FLAGS,
-  ViewerContext,
-  ViewerProvider,
-} from './'
+import { processViewer, ViewerContext, ViewerProvider } from './'
 
 const ViewerProbe = () => {
   const viewer = useContext(ViewerContext)
@@ -20,67 +14,39 @@ const ViewerProbe = () => {
 }
 
 describe('Viewer', () => {
-  it('treats missing OSS feature flags as not Community Watch', () => {
-    const viewer = { ...MOCK_USER, oss: undefined }
-
-    expect(processViewer(viewer).isCommunityWatch).toBe(false)
+  it('treats missing Community Watch badge as not Community Watch', () => {
+    expect(processViewer(MOCK_USER).isCommunityWatch).toBe(false)
   })
 
-  it('detects Community Watch from optional OSS feature flags', () => {
+  it('detects Community Watch from the public user badge', () => {
     expect(
       processViewer({
         ...MOCK_USER,
-        oss: {
-          ...MOCK_USER.oss,
-          featureFlags: [
-            {
-              __typename: 'UserFeatureFlag',
-              type: UserFeatureFlagType.CommunityWatch,
-            },
-          ],
+        info: {
+          ...MOCK_USER.info,
+          badges: [{ __typename: 'Badge', type: BadgeType.CommunityWatch }],
         },
       }).isCommunityWatch
     ).toBe(true)
   })
 
-  it('loads Community Watch feature flags outside the root query', async () => {
-    const viewer = { ...MOCK_USER, oss: undefined }
-
+  it('provides Community Watch state without an extra OSS query', () => {
     render(
-      <MockedProvider
-        mocks={[
+      <ViewerProvider
+        viewer={
           {
-            request: { query: VIEWER_FEATURE_FLAGS },
-            result: {
-              data: {
-                viewer: {
-                  __typename: 'User',
-                  id: viewer.id,
-                  oss: {
-                    __typename: 'UserOSS',
-                    featureFlags: [
-                      {
-                        __typename: 'UserFeatureFlag',
-                        type: UserFeatureFlagType.CommunityWatch,
-                      },
-                    ],
-                  },
-                },
-              },
+            ...MOCK_USER,
+            info: {
+              ...MOCK_USER.info,
+              badges: [{ __typename: 'Badge', type: BadgeType.CommunityWatch }],
             },
-          },
-        ]}
+          } as never
+        }
       >
-        <ViewerProvider viewer={viewer as never}>
-          <ViewerProbe />
-        </ViewerProvider>
-      </MockedProvider>
+        <ViewerProbe />
+      </ViewerProvider>
     )
 
-    expect(screen.getByText('no')).toBeInTheDocument()
-
-    await waitFor(() => {
-      expect(screen.getByText('yes')).toBeInTheDocument()
-    })
+    expect(screen.getByText('yes')).toBeInTheDocument()
   })
 })
