@@ -28,6 +28,8 @@ import {
 import Collapsed from './Collapsed'
 import styles from './styles.module.css'
 
+const isAdminView = () => process.env.NEXT_PUBLIC_ADMIN_VIEW === 'true'
+
 interface ContentProps {
   comment: CommentContentCommentPublicFragment &
     Partial<CommentContentCommentPrivateFragment>
@@ -178,7 +180,7 @@ export const CommentContent = ({
             description="src/components/Comment/Content/index.tsx"
           />
         </Link>
-        {viewer.isAdmin && (
+        {isAdminView() && viewer.isAdmin && (
           <CommunityWatchRestoreButton
             commentId={comment.id}
             actionUuid={communityWatchAction.uuid}
