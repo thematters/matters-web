@@ -18,7 +18,6 @@ import {
   DraftDetailViewerQueryQuery,
   EditorSelectCampaignFragment,
   FederationArticleSettingState,
-  UserFeatureFlagType,
 } from '~/gql/graphql'
 
 import { Article } from '..'
@@ -220,22 +219,6 @@ const EditSensitive = ({
   )
 }
 
-const EditFederationSetting = ({
-  article,
-  federationSetting,
-  federationSettingSaving,
-  editFederationSetting,
-}: OptionItemProps) => {
-  return (
-    <Sidebar.FederationSetting
-      articleId={article.id}
-      federationSetting={federationSetting}
-      federationSettingSaving={federationSettingSaving}
-      editFederationSetting={editFederationSetting}
-    />
-  )
-}
-
 const EditCircle = ({
   circle,
   editAccess,
@@ -256,6 +239,22 @@ const EditCircle = ({
   )
 }
 
+const EditFederationSetting = ({
+  article,
+  federationSetting,
+  federationSettingSaving,
+  editFederationSetting,
+}: OptionItemProps) => {
+  return (
+    <Sidebar.FederationSetting
+      articleId={article.id}
+      federationSetting={federationSetting}
+      federationSettingSaving={federationSettingSaving}
+      editFederationSetting={editFederationSetting}
+    />
+  )
+}
+
 export const OptionContent = (
   props: OptionContentProps & {
     tab: OptionTab
@@ -267,9 +266,7 @@ export const OptionContent = (
   const isSettings = tab === 'settings'
   const hasOwnCollections = (props.ownCollections?.length || 0) > 0
   const hasOwnCircle = props.ownCircles && props.ownCircles.length >= 1
-  const isFediverseBeta = !!props.viewerData?.viewer?.oss?.featureFlags.some(
-    ({ type }) => type === UserFeatureFlagType.FediverseBeta
-  )
+  const isFediverseBeta = !!props.viewerData?.viewer?.features.fediverseBeta
   const disabled = false
 
   return (

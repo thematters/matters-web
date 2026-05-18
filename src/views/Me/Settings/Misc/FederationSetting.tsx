@@ -8,7 +8,6 @@ import {
   FederationAuthorSettingState,
   SetViewerFederationSettingMutation,
   SetViewerFederationSettingMutationVariables,
-  UserFeatureFlagType,
   ViewerFederationSettingQuery,
 } from '~/gql/graphql'
 
@@ -16,13 +15,11 @@ const VIEWER_FEDERATION_SETTING = gql`
   query ViewerFederationSetting {
     viewer {
       id
+      features {
+        fediverseBeta
+      }
       federationSetting {
         state
-      }
-      oss {
-        featureFlags {
-          type
-        }
       }
     }
   }
@@ -52,9 +49,7 @@ const FederationSetting = () => {
   >(SET_VIEWER_FEDERATION_SETTING)
 
   const viewer = data?.viewer
-  const isFediverseBeta = !!viewer?.oss?.featureFlags.some(
-    ({ type }) => type === UserFeatureFlagType.FediverseBeta
-  )
+  const isFediverseBeta = !!viewer?.features.fediverseBeta
 
   useEffect(() => {
     if (viewer?.federationSetting?.state) {
@@ -62,7 +57,7 @@ const FederationSetting = () => {
     }
   }, [viewer?.federationSetting?.state])
 
-  if (!loading && !isFediverseBeta) {
+  if (!isFediverseBeta) {
     return null
   }
 
@@ -89,38 +84,42 @@ const FederationSetting = () => {
         },
       })
       setSetting(state)
+      toast.success({
+        message: intl.formatMessage({
+          defaultMessage: '已更新 Fediverse 設定',
+          id: 'mFn/Vv',
+        }),
+      })
     } catch {
       toast.error({
-        message: (
-          <FormattedMessage
-            defaultMessage="Failed to edit, please try again."
-            id="USOHRK"
-          />
-        ),
+        message: intl.formatMessage({
+          defaultMessage: '操作失敗，請稍後再試',
+          id: 'vXgChH',
+        }),
       })
     }
   }
 
   return (
     <TableView.Cell
-      title={<FormattedMessage defaultMessage="Fediverse" id="R6sMIX" />}
+      title={
+        <FormattedMessage defaultMessage="Fediverse 聯邦發佈" id="YC2b3b" />
+      }
       subtitle={
         <FormattedMessage
-          defaultMessage="Allow eligible public articles to be exported to Fediverse."
-          id="oh7tJ1"
+          defaultMessage="開啟後，新發佈作品預設可輸出到 Fediverse。"
+          id="Su1LcW"
         />
       }
       right={
         <Switch
-          name="fediverse"
-          label={intl.formatMessage({
-            defaultMessage: 'Fediverse',
-            id: 'R6sMIX',
-          })}
+          name="fediverse-federation-setting"
+          label={
+            <FormattedMessage defaultMessage="Fediverse 聯邦發佈" id="YC2b3b" />
+          }
           checked={enabled}
-          onChange={updateSetting}
           loading={loading || saving}
-          disabled={loading || saving || !viewer?.id}
+          onChange={updateSetting}
         />
       }
     />
