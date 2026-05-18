@@ -70,6 +70,7 @@ const RESTORE_COMMUNITY_WATCH_COMMENT = gql`
     restoreCommunityWatchComment(input: { uuid: $uuid, note: $note }) {
       uuid
       actionState
+      appealState
       reviewState
       commentId
     }
