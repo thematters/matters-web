@@ -8,7 +8,10 @@ import { PASSWORDOR_CODE, REGISTER_CODE } from './helpers/enum'
 test.describe.configure({ mode: 'serial' })
 
 test.describe('Authentication', () => {
-  test('can login in homepage dialog', async ({ page, isMobile }) => {
+  test('can login in homepage dialog @auth-smoke', async ({
+    page,
+    isMobile,
+  }) => {
     await pageGoto(page, '/')
 
     // Expect homepage has "Enter" button
@@ -41,7 +44,7 @@ test.describe('Authentication', () => {
     ).toBeVisible()
   })
 
-  test('can login in login page', async ({ page }) => {
+  test('can login in login page @auth-smoke', async ({ page }) => {
     await login({ page, waitForNavigation: true })
     await expect(page).toHaveURL('/')
 
@@ -51,7 +54,9 @@ test.describe('Authentication', () => {
     ).toBeVisible()
   })
 
-  test('can login with email and OTP', async ({ page }) => {
+  test('can login with email and OTP @auth-smoke @mutation', async ({
+    page,
+  }) => {
     await pageGoto(page, '/login')
 
     // Login with email & password
@@ -122,7 +127,7 @@ test.describe('Authentication', () => {
   })
 
   authedTest(
-    'can login and logout with worker-scoped fixtures',
+    'can login and logout with worker-scoped fixtures @auth-smoke',
     async ({ alicePage: page, isMobile }) => {
       await pageGoto(page, '/')
 

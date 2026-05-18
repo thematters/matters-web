@@ -18,6 +18,9 @@ const Callback = () => {
       {provider === CALLBACK_PROVIDERS.Twitter && (
         <SocialCallback type={SocialAccountType.Twitter} />
       )}
+      {/*provider === CALLBACK_PROVIDERS.Threads && (
+        <SocialCallback type={SocialAccountType.Threads} />
+      )*/}
       {provider === CALLBACK_PROVIDERS.EmailVerification && (
         <EmailVerification />
       )}

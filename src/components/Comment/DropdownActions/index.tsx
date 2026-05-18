@@ -26,6 +26,7 @@ import {
   CommentDropdownActionsCommentPublicFragment,
 } from '~/gql/graphql'
 
+import CommunityWatchRemoveComment from './CommunityWatchRemoveComment'
 import CopyCommentButton from './CopyCommentButton'
 import DeleteComment from './DeleteComment'
 import type { DeleteCommentDialogProps } from './DeleteComment/Dialog'
@@ -62,6 +63,7 @@ interface Controls {
   hasPin: boolean
   hasDelete: boolean
   hasReport: boolean
+  hasCommunityWatch: boolean
   hasAdmin: boolean
 }
 
@@ -77,6 +79,7 @@ const fragments = {
     public: gql`
       fragment CommentDropdownActionsCommentPublic on Comment {
         id
+        type
         state
         content
         author {
@@ -155,6 +158,7 @@ const BaseDropdownActions = ({
   hasPin,
   hasDelete,
   hasReport,
+  hasCommunityWatch,
   hasAdmin,
 
   openDeleteCommentDialog,
@@ -182,7 +186,25 @@ const BaseDropdownActions = ({
       />
       {_hasPin && <PinButton comment={comment} pinnedComment={pinnedComment} />}
       {hasReport && <SubmitReport.Button openDialog={openSubmitReportDialog} />}
-      {(_hasPin || hasReport) && hasDelete && <Menu.Divider />}
+      {hasCommunityWatch && (
+        <>
+          <Menu.Divider />
+          <CommunityWatchRemoveComment id={comment.id} />
+          <Menu.Item
+            size={14}
+            text={
+              <FormattedMessage
+                defaultMessage="所有處理都會公開留痕"
+                id="0SLJni"
+                description="src/components/Comment/DropdownActions/index.tsx"
+              />
+            }
+          />
+        </>
+      )}
+      {(_hasPin || hasReport || hasCommunityWatch) && hasDelete && (
+        <Menu.Divider />
+      )}
       {hasDelete && (
         <DeleteComment.Button openDialog={openDeleteCommentDialog} />
       )}
@@ -241,12 +263,17 @@ const DropdownActions = (props: DropdownActionsProps) => {
   const isTargetAuthor = viewer.id === targetAuthor?.id
   const isCommentAuthor = viewer.id === comment.author.id
   const isActive = comment.state === 'active'
+  const isCollapsed = comment.state === 'collapsed'
   const isDescendantComment = comment.parentComment
 
   const controls = {
     hasPin: hasPin && !!(isTargetAuthor && isActive && !isDescendantComment),
     hasDelete: (isCommentAuthor || (isTargetAuthor && isMoment)) && isActive,
     hasReport: !isCommentAuthor && !(isTargetAuthor && isMoment),
+    hasCommunityWatch:
+      viewer.isCommunityWatch &&
+      (isActive || isCollapsed) &&
+      (comment.type === 'article' || comment.type === 'moment'),
     hasAdmin: isAdminView && viewer.isAdmin,
   }
 

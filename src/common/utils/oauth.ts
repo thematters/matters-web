@@ -89,6 +89,14 @@ export const twitterOauthUrl = async (type: OauthType, oauthToken: string) => {
   return url
 }
 
+export const threadsOauthUrl = async (type: OauthType) => {
+  const { state } = await generateSocialOauthParams(type)
+  const clientId = process.env.NEXT_PUBLIC_THREADS_CLIENT_ID
+  const redirectUri = `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}/callback/${CALLBACK_PROVIDERS.Threads}`
+  const url = `https://threads.net/oauth/authorize?client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}&response_type=code&scope=threads_basic&state=${state}`
+  return url
+}
+
 export const signupCallbackUrl = (email: string, referralCode?: string) => {
   return `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}/callback/${
     CALLBACK_PROVIDERS.EmailSignup

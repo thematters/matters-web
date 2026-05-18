@@ -11,3 +11,9 @@
 .text15 {
   font-size: var(--text15);
 }
+
+.restoreButton {
+  margin-left: var(--sp8);
+  font-size: inherit;
+  vertical-align: baseline;
+}
