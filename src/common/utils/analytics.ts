@@ -115,6 +115,9 @@ export interface ClickButtonProp {
     | `campaign_detail_tab_${string}`
     | `user_profile_tab_${string}`
     | `follow_tab_${string}`
+    | 'login_threads'
+    | 'bind_threads'
+    | 'unbind_threads'
   pageType?: PageType
   pageComponent?: PageComponent
   note?: string

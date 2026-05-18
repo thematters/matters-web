@@ -26,6 +26,10 @@ import {
 
 import type { ArchiveUserDialogProps } from './ArchiveUser/Dialog'
 import type {
+  OpenToggleCommunityWatchDialogWithProps,
+  ToggleCommunityWatchDialogProps,
+} from './ToggleCommunityWatch/Dialog'
+import type {
   OpenToggleFreezeUserDialogWithProps,
   ToggleFreezeUserDialogProps,
 } from './ToggleFreezeUser/Dialog'
@@ -58,6 +62,14 @@ const DynamicArchiveUserButton = dynamic(() => import('./ArchiveUser/Button'), {
 const DynamicArchiveUserDialog = dynamic(() => import('./ArchiveUser/Dialog'), {
   loading: () => <SpinnerBlock />,
 })
+const DynamicToggleCommunityWatchButton = dynamic(
+  () => import('./ToggleCommunityWatch/Button'),
+  { loading: () => <SpinnerBlock /> }
+)
+const DynamicToggleCommunityWatchDialog = dynamic(
+  () => import('./ToggleCommunityWatch/Dialog'),
+  { loading: () => <SpinnerBlock /> }
+)
 
 interface DropdownActionsProps {
   user: DropdownActionsUserPublicFragment &
@@ -77,6 +89,9 @@ interface Controls {
 }
 
 interface AdminProps {
+  openToggleCommunityWatchDialog: (
+    props: OpenToggleCommunityWatchDialogWithProps
+  ) => void
   openToggleFreezeDialog: (props: OpenToggleFreezeUserDialogWithProps) => void
   openToggleRestrictDialog: (
     props: OpenToggleRestrictUserDialogWithProps
@@ -121,6 +136,7 @@ const BaseDropdownActions = ({
   openShareDialog,
 
   // admin
+  openToggleCommunityWatchDialog,
   openToggleFreezeDialog,
   openToggleRestrictDialog,
   openArchiveDialog,
@@ -148,6 +164,10 @@ const BaseDropdownActions = ({
       {isAdminView && viewer.isAdmin && (
         <>
           <Menu.Divider />
+          <DynamicToggleCommunityWatchButton
+            id={user.id}
+            openDialog={openToggleCommunityWatchDialog}
+          />
           <DynamicToggleRestrictUserButton
             id={user.id}
             openDialog={openToggleRestrictDialog}
@@ -259,10 +279,22 @@ const DropdownActions = ({ user, isMe, isInAside }: DropdownActionsProps) => {
   /**
    * ADMIN ONLY
    */
+  const WithToggleCommunityWatch = withDialog<
+    Omit<ToggleCommunityWatchDialogProps, 'children'>
+  >(
+    WithBlockUser,
+    DynamicToggleCommunityWatchDialog as React.ComponentType<
+      Omit<ToggleCommunityWatchDialogProps, 'children'> & {
+        children: (props: { openDialog: () => void }) => React.ReactNode
+      }
+    >,
+    { id: user.id, userName: user.userName! },
+    ({ openDialog }) => ({ openToggleCommunityWatchDialog: openDialog })
+  )
   const WithToggleFreeze = withDialog<
     Omit<ToggleFreezeUserDialogProps, 'children'>
   >(
-    WithBlockUser,
+    WithToggleCommunityWatch,
     DynamicToggleFreezeUserDialog as React.ComponentType<
       Omit<ToggleFreezeUserDialogProps, 'children'> & {
         children: (props: { openDialog: () => void }) => React.ReactNode

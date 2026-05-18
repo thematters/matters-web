@@ -29,6 +29,7 @@ import { BadgeNomadDialog } from '../BadgeNomadDialog'
 import {
   ArchitectBadge,
   CivicLikerBadge,
+  CommunityWatchBadge,
   GoldenMotorBadge,
   GrandBadge,
   NomadBadge,
@@ -116,6 +117,9 @@ export const AsideUserProfile = () => {
   const hasSeedBadge = badges.some((b) => b.type === 'seed')
   const hasArchitectBadge = badges.some((b) => b.type === 'architect')
   const hasGoldenMotorBadge = badges.some((b) => b.type === 'golden_motor')
+  const hasCommunityWatchBadge = badges.some(
+    (b) => b.type === 'community_watch'
+  )
   const hasTraveloggersBadge = !!user.info.cryptoWallet?.hasNFTs
   const nomadBadgeType = badges.filter((b) =>
     ['nomad1', 'nomad2', 'nomad3', 'nomad4'].includes(b.type)
@@ -252,6 +256,7 @@ export const AsideUserProfile = () => {
           hasSeedBadge ||
           hasGoldenMotorBadge ||
           hasArchitectBadge ||
+          hasCommunityWatchBadge ||
           hasGrandBadge ||
           isCivicLiker ||
           user?.info.ethAddress) && (
@@ -278,6 +283,7 @@ export const AsideUserProfile = () => {
             {hasSeedBadge && <SeedBadge hasTooltip />}
             {hasGoldenMotorBadge && <GoldenMotorBadge hasTooltip />}
             {hasArchitectBadge && <ArchitectBadge hasTooltip />}
+            {hasCommunityWatchBadge && <CommunityWatchBadge hasTooltip />}
             {isCivicLiker && <CivicLikerBadge hasTooltip />}
 
             {user?.info.ethAddress && (

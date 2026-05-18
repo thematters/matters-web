@@ -4,6 +4,7 @@ import Circle from './Circle'
 import Collections from './Collections'
 import Connections from './Connections'
 import Cover from './Cover'
+import FederationSetting from './FederationSetting'
 import Indent from './Indent'
 import ISCN from './ISCN'
 import License from './License'
@@ -15,6 +16,7 @@ import Tags from './Tags'
 const Sidebar = {
   CanComment,
   Cover,
+  FederationSetting,
   Tags,
   Connections,
   Management,

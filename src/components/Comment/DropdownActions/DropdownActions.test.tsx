@@ -2,8 +2,9 @@ import { describe, expect, it } from 'vitest'
 
 import { TEST_ID } from '~/common/enums'
 import { cleanup, fireEvent, render, screen } from '~/common/utils/test'
-import { CommentState } from '~/gql/graphql'
-import { MOCK_COMMENT } from '~/stories/mocks'
+import { processViewer, ViewerContext } from '~/components'
+import { BadgeType, CommentState } from '~/gql/graphql'
+import { MOCK_COMMENT, MOCK_USER } from '~/stories/mocks'
 
 import DropdownActions from './'
 
@@ -82,5 +83,35 @@ describe('<Comment/DropdownActions>', () => {
     fireEvent.click($deleteButton)
     const $dialog = screen.getByTestId(TEST_ID.DIALOG_COMMENT_DELETE)
     expect($dialog).toBeInTheDocument()
+  })
+
+  it('should render community watch actions for community watch members', async () => {
+    const viewer = processViewer({
+      ...MOCK_USER,
+      info: {
+        ...MOCK_USER.info,
+        badges: [{ __typename: 'Badge', type: BadgeType.CommunityWatch }],
+      },
+    })
+
+    render(
+      <ViewerContext.Provider value={viewer}>
+        <DropdownActions
+          comment={{ ...MOCK_COMMENT, state: CommentState.Active }}
+        />
+      </ViewerContext.Provider>
+    )
+
+    const $button = screen.getByLabelText('More Actions')
+    expect($button).toBeInTheDocument()
+    fireEvent.click($button)
+
+    expect(
+      screen.getByRole('menuitem', { name: '色情廣告' })
+    ).toBeInTheDocument()
+    expect(
+      screen.getByRole('menuitem', { name: '濫發廣告' })
+    ).toBeInTheDocument()
+    expect(screen.getByText('所有處理都會公開留痕')).toBeInTheDocument()
   })
 })

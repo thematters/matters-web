@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
+// temporarily hidden: Threads
+// import { analytics } from '~/common/utils'
 import { Dialog, toast, useMutation } from '~/components'
 import { RemoveSocialLoginMutation, SocialAccountType } from '~/gql/graphql'
 
@@ -30,6 +32,10 @@ const RemoveSocailLoginDialogContent: React.FC<Props> = ({
   const isFailure = step === 'failure'
 
   const remove = async () => {
+    // temporarily hidden: Threads
+    // if (type === SocialAccountType.Threads) {
+    //   analytics.trackEvent('click_button', { type: 'unbind_threads' })
+    // }
     try {
       await removeLogin({
         variables: {

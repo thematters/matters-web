@@ -14,7 +14,7 @@ import {
   waitForAPIResponse,
 } from './helpers'
 
-test.describe('Mutate article', () => {
+test.describe('Mutate article @mutation', () => {
   authedTest(
     "Alice's article is appreciation by Bob, and received notification",
     async ({ alicePage, bobPage, isMobile }) => {

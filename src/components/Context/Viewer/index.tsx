@@ -97,6 +97,7 @@ export type Viewer = ViewerUser & {
   isFrozen: boolean
   isInactive: boolean
   isCivicLiker: boolean
+  isCommunityWatch: boolean
   isAdmin: boolean
   shouldSetupLikerID: boolean
 }
@@ -111,6 +112,8 @@ export const processViewer = (viewer: ViewerUser): Viewer => {
   const isFrozen = state === 'frozen'
   const isInactive = isAuthed && (isBanned || isFrozen || isArchived)
   const isCivicLiker = viewer.liker.civicLiker
+  const isCommunityWatch =
+    viewer.info.badges?.some(({ type }) => type === 'community_watch') ?? false
   const isAdmin = viewer.status?.role === 'admin'
   const shouldSetupLikerID = isAuthed && !viewer.liker.likerId
 
@@ -134,6 +137,7 @@ export const processViewer = (viewer: ViewerUser): Viewer => {
     isFrozen,
     isInactive,
     isCivicLiker,
+    isCommunityWatch,
     isAdmin,
     shouldSetupLikerID,
   }

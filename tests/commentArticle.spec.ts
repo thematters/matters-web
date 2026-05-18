@@ -11,7 +11,7 @@ import {
   UserProfilePage,
 } from './helpers'
 
-test.describe('Comment to article', () => {
+test.describe('Comment to article @mutation', () => {
   authedTest(
     "Alice's article is commented by Bob, and received notification",
     async ({ alicePage, bobPage, isMobile }) => {
