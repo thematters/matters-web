@@ -1,34 +1,13 @@
-import { useQuery } from '@apollo/client'
 import * as Sentry from '@sentry/nextjs'
 import gql from 'graphql-tag'
 import React from 'react'
 
 import {
-  UserFeatureFlagType,
   ViewerUserPrivateFragment,
   ViewerUserPublicFragment,
 } from '~/gql/graphql'
 
 export type ViewerUser = ViewerUserPublicFragment & ViewerUserPrivateFragment
-
-type ViewerFeatureFlags = {
-  __typename?: string
-  featureFlags: Array<{
-    __typename?: string
-    type: UserFeatureFlagType
-  }>
-}
-
-type ViewerUserWithOptionalOss = ViewerUser & {
-  oss?: ViewerFeatureFlags
-}
-
-type ViewerFeatureFlagsQuery = {
-  viewer?: {
-    id: string
-    oss?: ViewerFeatureFlags
-  } | null
-}
 
 const ViewerFragments = {
   user: {
@@ -110,20 +89,7 @@ const ViewerFragments = {
   },
 }
 
-export const VIEWER_FEATURE_FLAGS = gql`
-  query ViewerFeatureFlags {
-    viewer {
-      id
-      oss {
-        featureFlags {
-          type
-        }
-      }
-    }
-  }
-`
-
-export type Viewer = ViewerUserWithOptionalOss & {
+export type Viewer = ViewerUser & {
   isAuthed: boolean
   isActive: boolean
   isArchived: boolean
@@ -136,7 +102,7 @@ export type Viewer = ViewerUserWithOptionalOss & {
   shouldSetupLikerID: boolean
 }
 
-export const processViewer = (viewer: ViewerUserWithOptionalOss): Viewer => {
+export const processViewer = (viewer: ViewerUser): Viewer => {
   // User state
   const isAuthed = !!viewer.id
   const state = viewer?.status?.state
@@ -146,9 +112,8 @@ export const processViewer = (viewer: ViewerUserWithOptionalOss): Viewer => {
   const isFrozen = state === 'frozen'
   const isInactive = isAuthed && (isBanned || isFrozen || isArchived)
   const isCivicLiker = viewer.liker.civicLiker
-  const isCommunityWatch = !!viewer.oss?.featureFlags.some(
-    ({ type }) => type === UserFeatureFlagType.CommunityWatch
-  )
+  const isCommunityWatch =
+    viewer.info.badges?.some(({ type }) => type === 'community_watch') ?? false
   const isAdmin = viewer.status?.role === 'admin'
   const shouldSetupLikerID = isAuthed && !viewer.liker.likerId
 
@@ -187,19 +152,10 @@ export const ViewerProvider = ({
   viewer,
 }: {
   children: React.ReactNode
-  viewer: ViewerUserWithOptionalOss
+  viewer: ViewerUser
 }) => {
-  const shouldFetchFeatureFlags = !!viewer.id && !viewer.oss
-  const { data } = useQuery<ViewerFeatureFlagsQuery>(VIEWER_FEATURE_FLAGS, {
-    skip: !shouldFetchFeatureFlags,
-    errorPolicy: 'ignore',
-  })
-  const viewerWithFeatureFlags = data?.viewer?.oss
-    ? { ...viewer, oss: data.viewer.oss }
-    : viewer
-
   return (
-    <ViewerContext.Provider value={processViewer(viewerWithFeatureFlags)}>
+    <ViewerContext.Provider value={processViewer(viewer)}>
       {children}
     </ViewerContext.Provider>
   )
