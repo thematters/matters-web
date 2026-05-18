@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest'
+import { afterEach, describe, expect, it, vi } from 'vitest'
 
 import { cleanup, render, screen } from '~/common/utils/test'
 import { processViewer, ViewerContext } from '~/components'
@@ -8,6 +8,10 @@ import { MOCK_COMMENT, MOCK_USER } from '~/stories/mocks'
 import { CommentContent } from './'
 
 describe('<Comemnt.Content>', () => {
+  afterEach(() => {
+    vi.unstubAllEnvs()
+  })
+
   it('should render a Comment.Content', () => {
     render(<CommentContent comment={MOCK_COMMENT} />)
 
@@ -95,7 +99,37 @@ describe('<Comemnt.Content>', () => {
     ).not.toBeInTheDocument()
   })
 
-  it('should render a Community Watch restore button for admins', () => {
+  it('should not render a Community Watch restore button for admins outside admin view', () => {
+    const admin = processViewer({
+      ...MOCK_USER,
+      status: {
+        ...MOCK_USER.status,
+        role: UserRole.Admin,
+      },
+    })
+
+    render(
+      <ViewerContext.Provider value={admin}>
+        <CommentContent
+          comment={{
+            ...MOCK_COMMENT,
+            state: CommentState.Banned,
+            communityWatchAction: {
+              uuid: 'community-watch-action-uuid',
+            },
+          }}
+        />
+      </ViewerContext.Provider>
+    )
+
+    expect(
+      screen.queryByRole('button', { name: /恢復留言|Restore comment/ })
+    ).not.toBeInTheDocument()
+  })
+
+  it('should render a Community Watch restore button for admins in admin view', () => {
+    vi.stubEnv('NEXT_PUBLIC_ADMIN_VIEW', 'true')
+
     const admin = processViewer({
       ...MOCK_USER,
       status: {
