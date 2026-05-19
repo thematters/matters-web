@@ -40,26 +40,11 @@
       font-weight: var(--font-semibold);
     }
   }
-
-  & .price {
-    @mixin border-left-grey;
-
-    flex-shrink: 0;
-    padding-left: var(--sp24);
-    margin-left: var(--sp24);
-    font-size: var(--text16);
-    font-weight: var(--font-medium);
-    color: var(--color-matters-gold);
-
-    & .amount {
-      font-size: var(--text32);
-      line-height: 2.25rem;
-    }
-  }
 }
 
 .description {
   padding: 0 var(--sp16);
+  margin-bottom: var(--sp24);
 
   @media (--sm-up) {
     padding: 0;

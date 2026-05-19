@@ -14,7 +14,6 @@ import { CircleInvitationFragment } from '~/gql/graphql'
 
 import CircleInvitationInvitee from './Invitee'
 import CircleInvitationPeriod from './Period'
-import CircleInvitationResendButton from './Resend'
 import styles from './styles.module.css'
 
 interface CircleInvitationProps {
@@ -62,20 +61,12 @@ const CircleInvitationFailedInfo = () => (
  * ```
  */
 export const CircleInvitation = ({ invitation }: CircleInvitationProps) => {
-  const { circle, freePeriod, invitee, acceptedAt, state } = invitation
+  const { freePeriod, invitee, acceptedAt, state } = invitation
 
   if (!invitee) {
     return null
   }
 
-  const invitees = [
-    {
-      id: invitee.__typename === 'User' ? invitee.id : null,
-      email: invitee.__typename === 'Person' ? invitee.email : null,
-    },
-  ]
-
-  const isPending = state === 'pending'
   const isFailed = state === 'transfer_failed'
   const isSucceeded = state === 'transfer_succeeded'
 
@@ -89,14 +80,6 @@ export const CircleInvitation = ({ invitation }: CircleInvitationProps) => {
             acceptedAt={acceptedAt}
             state={state}
           />
-
-          {isPending && (
-            <CircleInvitationResendButton
-              circleId={circle.id}
-              freePeriod={freePeriod}
-              invitees={invitees}
-            />
-          )}
 
           {isFailed && <CircleInvitationFailedInfo />}
 
@@ -119,9 +102,6 @@ CircleInvitation.fragments = {
   invitation: gql`
     fragment CircleInvitation on Invitation {
       id
-      circle {
-        id
-      }
       freePeriod
       invitee {
         ... on Person {
