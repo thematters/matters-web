@@ -103,7 +103,10 @@ const FederationSetting = () => {
   return (
     <TableView.Cell
       title={
-        <FormattedMessage defaultMessage="Fediverse 聯邦發佈" id="YC2b3b" />
+        <FormattedMessage
+          defaultMessage="Fediverse 聯邦發佈"
+          id="YC2b3b"
+        />
       }
       subtitle={
         <FormattedMessage
@@ -115,7 +118,10 @@ const FederationSetting = () => {
         <Switch
           name="fediverse-federation-setting"
           label={
-            <FormattedMessage defaultMessage="Fediverse 聯邦發佈" id="YC2b3b" />
+            <FormattedMessage
+              defaultMessage="Fediverse 聯邦發佈"
+              id="YC2b3b"
+            />
           }
           checked={enabled}
           loading={loading || saving}
