@@ -1,5 +1,5 @@
 import { EmptyLayout, Throw404, useRoute } from '~/components'
-import CircleWorks from '~/views/Circle/Works'
+// import CircleWorks from '~/views/Circle/Works'
 import UserWritings from '~/views/User/Writings'
 
 const NameIndex = () => {
@@ -7,9 +7,10 @@ const NameIndex = () => {
 
   if (isPathStartWith('/@', true)) {
     return <UserWritings />
-  } else if (isPathStartWith('/~', true)) {
-    return <CircleWorks />
   }
+  // else if (isPathStartWith('/~', true)) {
+  //   return <CircleWorks />
+  // }
 
   return (
     <EmptyLayout>
