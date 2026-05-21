@@ -44,6 +44,7 @@ const Home = ({
           {showRecommendation && <Sidebar.Tags />}
           <Sidebar.Billboard />
           <Spacer size="sp32" />
+          <span>.</span>
         </>
       }
     >
