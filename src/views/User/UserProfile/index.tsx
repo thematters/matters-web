@@ -28,7 +28,8 @@ import { UserProfileUserPublicQuery } from '~/gql/graphql'
 import UserTabs from '../UserTabs'
 import { Badges } from './Badges'
 import { BadgesDialog } from './BadgesDialog'
-import CircleWidget from './CircleWidget'
+// FEATURE IS SUNSETTING: circle entry on user profile is hidden
+// import CircleWidget from './CircleWidget'
 import DropdownActions from './DropdownActions'
 import { FollowersDialog } from './FollowersDialog'
 import { FollowingDialog } from './FollowingDialog'
@@ -102,7 +103,8 @@ export const UserProfile = () => {
   }
 
   const badges = user.info.badges || []
-  const circles = user.ownCircles || []
+  // FEATURE IS SUNSETTING: circle entry on user profile is hidden
+  // const circles = user.ownCircles || []
   const hasSeedBadge = badges.some((b) => b.type === 'seed')
   const hasArchitectBadge = badges.some((b) => b.type === 'architect')
   const hasGoldenMotorBadge = badges.some((b) => b.type === 'golden_motor')
@@ -303,12 +305,13 @@ export const UserProfile = () => {
               </p>
             </Expandable>
 
-            <CircleWidget
+            {/* FEATURE IS SUNSETTING: circle entry on user profile is hidden */}
+            {/* <CircleWidget
               circles={circles}
               isMe={isMe}
               hasDescription={false}
               hasFooter={false}
-            />
+            /> */}
           </section>
         </Media>
       </section>

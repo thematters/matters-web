@@ -10,7 +10,8 @@ interface FeedTypeProps {
 }
 
 const FeedType = ({ type, setFeedType }: FeedTypeProps) => {
-  const isCircle = type === 'circle'
+  // FEATURE IS SUNSETTING: circle tab is hidden
+  // const isCircle = type === 'circle'
   const isUser = type === 'user'
 
   return (
@@ -20,9 +21,10 @@ const FeedType = ({ type, setFeedType }: FeedTypeProps) => {
           <Translate zh_hant="作者" zh_hans="作者" en="Authors" />
         </Tabs.Tab>
 
-        <Tabs.Tab onClick={() => setFeedType('circle')} selected={isCircle}>
+        {/* FEATURE IS SUNSETTING: circle tab is hidden */}
+        {/* <Tabs.Tab onClick={() => setFeedType('circle')} selected={isCircle}>
           <Translate zh_hant="圍爐" zh_hans="围炉" en="Circles" />
-        </Tabs.Tab>
+        </Tabs.Tab> */}
       </Tabs>
     </section>
   )
