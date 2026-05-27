@@ -1,10 +1,18 @@
-import { Protected } from '~/components'
-import MeSettingsNotificationsCircle from '~/views/Me/Settings/Notifications/CircleSettings'
+import { EmptyLayout, Throw404 } from '~/components'
+// import { Protected } from '~/components'
+// import MeSettingsNotificationsCircle from '~/views/Me/Settings/Notifications/CircleSettings'
 
-const ProtectedMeSettingsNotificationsCircle = () => (
-  <Protected>
-    <MeSettingsNotificationsCircle />
-  </Protected>
+const MeSettingsNotificationsCirclePage = () => (
+  <EmptyLayout>
+    <Throw404 />
+  </EmptyLayout>
 )
 
-export default ProtectedMeSettingsNotificationsCircle
+// const ProtectedMeSettingsNotificationsCircle = () => (
+//   <Protected>
+//     <MeSettingsNotificationsCircle />
+//   </Protected>
+// )
+
+export default MeSettingsNotificationsCirclePage
+// export default ProtectedMeSettingsNotificationsCircle

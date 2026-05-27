@@ -2,7 +2,8 @@ import { useState } from 'react'
 
 import { Dialog, Spacer } from '~/components'
 
-import CirclesFeed from '../CirclesFeed'
+// FEATURE IS SUNSETTING: circle tab is hidden
+// import CirclesFeed from '../CirclesFeed'
 import FeedType, { FollowingFeedType } from '../FeedType'
 import UsersFeed from '../UsersFeed'
 
@@ -13,7 +14,8 @@ const FollowingDialogContent = () => {
     <Dialog.Content noSpacing>
       <FeedType type={feedType} setFeedType={setFeedType} />
       <Spacer size="sp8" />
-      {feedType === 'circle' && <CirclesFeed />}
+      {/* FEATURE IS SUNSETTING: circle tab is hidden */}
+      {/* {feedType === 'circle' && <CirclesFeed />} */}
       {feedType === 'user' && <UsersFeed />}
     </Dialog.Content>
   )

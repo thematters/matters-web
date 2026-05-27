@@ -316,7 +316,9 @@ export const OptionContent = (
               <EditFederationSetting {...props} disabled={disabled} />
             )}
             <EditSensitive {...props} disabled={disabled} />
-            {hasOwnCircle && <EditCircle {...props} disabled={disabled} />}
+            {hasOwnCircle && !!props.article.access.circle && (
+              <EditCircle {...props} disabled={disabled} />
+            )}
           </>
         )}
       </section>

@@ -2,7 +2,8 @@ import { useQuery } from '@apollo/client'
 import gql from 'graphql-tag'
 import { FormattedMessage } from 'react-intl'
 
-import { PATHS } from '~/common/enums'
+// FEATURE IS SUNSETTING: circle notifications entry is hidden
+// import { PATHS } from '~/common/enums'
 import { SpinnerBlock, Switch, TableView, useMutation } from '~/components'
 import {
   UpdateViewerNotificationsGeneralMutation,
@@ -248,7 +249,8 @@ const NotificationsGeneralSettings = () => {
       <Email toggle={toggle} settings={settings} />
 
       {/* Entry: circle notifications */}
-      <TableView
+      {/* FEATURE IS SUNSETTING: circle notifications entry is hidden */}
+      {/* <TableView
         groupName={
           <FormattedMessage
             defaultMessage="Circle"
@@ -269,7 +271,7 @@ const NotificationsGeneralSettings = () => {
           }
           href={PATHS.ME_SETTINGS_NOTIFICATIONS_CIRCLE}
         />
-      </TableView>
+      </TableView> */}
     </>
   )
 }
