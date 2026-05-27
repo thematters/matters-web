@@ -2806,6 +2806,10 @@
     "defaultMessage": "Articles have been collected",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
+  "hifvI7": {
+    "defaultMessage": "Circle locked work",
+    "description": "src/views/ArticleDetail/Wall/Circle/index.tsx"
+  },
   "hk2aiz": {
     "defaultMessage": "followed your circle",
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
@@ -3707,10 +3711,6 @@
   "x7O1/5": {
     "defaultMessage": "This ID has been taken, please try another one",
     "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
-  },
-  "hifvI7": {
-    "defaultMessage": "Circle locked work",
-    "description": "src/views/ArticleDetail/Wall/Circle/index.tsx"
   },
   "xDhqHi": {
     "defaultMessage": "Confirm",
