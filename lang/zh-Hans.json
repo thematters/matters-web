@@ -2806,6 +2806,10 @@
     "defaultMessage": "作品被关联",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
+  "hifvI7": {
+    "defaultMessage": "围炉上锁作品",
+    "description": "src/views/ArticleDetail/Wall/Circle/index.tsx"
+  },
   "hk2aiz": {
     "defaultMessage": "关注了你的围炉",
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
@@ -3707,10 +3711,6 @@
   "x7O1/5": {
     "defaultMessage": "ID 已被使用，请修改后再试",
     "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
-  },
-  "hifvI7": {
-    "defaultMessage": "围炉上锁作品",
-    "description": "src/views/ArticleDetail/Wall/Circle/index.tsx"
   },
   "xDhqHi": {
     "defaultMessage": "确认送出",
