@@ -4,7 +4,8 @@ import baseToast from 'react-hot-toast'
 import { FormattedMessage } from 'react-intl'
 import { useAccount, useDisconnect } from 'wagmi'
 
-import IconCircle from '@/public/static/icons/24px/circle.svg'
+// FEATURE IS SUNSETTING: circle entry in side drawer me menu is hidden
+// import IconCircle from '@/public/static/icons/24px/circle.svg'
 import IconData from '@/public/static/icons/24px/data.svg'
 import IconDraft from '@/public/static/icons/24px/draft.svg'
 import IconHistory from '@/public/static/icons/24px/history.svg'
@@ -39,13 +40,14 @@ const Top: React.FC = () => {
     userName: viewer.userName || '',
   })
 
-  const circle = viewer.ownCircles && viewer.ownCircles[0]
-  const circlePath =
-    circle &&
-    toPath({
-      page: 'circleDetail',
-      circle,
-    })
+  // FEATURE IS SUNSETTING: circle entry in side drawer me menu is hidden
+  // const circle = viewer.ownCircles && viewer.ownCircles[0]
+  // const circlePath =
+  //   circle &&
+  //   toPath({
+  //     page: 'circleDetail',
+  //     circle,
+  //   })
 
   return (
     <Menu>
@@ -81,7 +83,8 @@ const Top: React.FC = () => {
         is="link"
       />
 
-      {circlePath && (
+      {/* FEATURE IS SUNSETTING: circle entry in side drawer me menu is hidden */}
+      {/* {circlePath && (
         <Menu.Item
           {...menuItemProps}
           text={<FormattedMessage defaultMessage="Circle" id="vH8sCb" />}
@@ -89,7 +92,7 @@ const Top: React.FC = () => {
           href={circlePath.href}
           is="link"
         />
-      )}
+      )} */}
 
       <Menu.Item
         {...menuItemProps}

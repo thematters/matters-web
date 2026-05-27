@@ -192,29 +192,6 @@ const EditDraftSupportSetting = ({ draft }: OptionItemProps) => {
   )
 }
 
-const EditDraftCircle = ({ draft, ownCircles }: OptionItemProps) => {
-  const { edit, saving } = useEditDraftAccess(ownCircles && ownCircles[0])
-
-  const hasOwnCircle = ownCircles && ownCircles.length >= 1
-  const circle = draft.access?.circle
-
-  if (!hasOwnCircle) {
-    return null
-  }
-
-  const checked = ownCircles?.[0].id === circle?.id
-
-  return (
-    <Sidebar.Circle
-      license={draft.license}
-      circle={ownCircles?.[0]}
-      editAccess={edit}
-      checked={checked}
-      saving={saving}
-    />
-  )
-}
-
 const EditDraftSensitive = ({ draft }: OptionItemProps) => {
   const { edit, saving } = useEditDraftSensitiveByAuthor()
   const sensitive = draft.sensitiveByAuthor
@@ -293,7 +270,6 @@ export const OptionContent = (
             <EditDraftSupportSetting {...props} disabled={disabled} />
             {isFediverseBeta && <Sidebar.FederationSetting />}
             <EditDraftSensitive {...props} disabled={disabled} />
-            <EditDraftCircle {...props} disabled={disabled} />
           </>
         )}
       </section>

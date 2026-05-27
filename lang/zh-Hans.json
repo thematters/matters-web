@@ -9,10 +9,6 @@
     "defaultMessage": "请验证邮箱",
     "description": "src/views/Me/Settings/Settings/Password/index.tsx"
   },
-  "+5O5ev": {
-    "defaultMessage": "「{circleName}」所有作品",
-    "description": "src/views/ArticleDetail/Wall/Circle/index.tsx"
-  },
   "+5sU+5": {
     "defaultMessage": "侵权"
   },
@@ -2810,6 +2806,10 @@
     "defaultMessage": "作品被关联",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
+  "hifvI7": {
+    "defaultMessage": "围炉上锁作品",
+    "description": "src/views/ArticleDetail/Wall/Circle/index.tsx"
+  },
   "hk2aiz": {
     "defaultMessage": "关注了你的围炉",
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
@@ -2946,10 +2946,6 @@
   },
   "kHMa3H": {
     "defaultMessage": "密码不一致"
-  },
-  "kPylKK": {
-    "defaultMessage": "围炉",
-    "description": "src/views/Me/Settings/Notifications/index.tsx"
   },
   "kS3vTS": {
     "defaultMessage": "Liker ID",
@@ -3577,9 +3573,6 @@
     "defaultMessage": "去绑定",
     "description": "src/components/Dialogs/BindEmailHintDialog/Content.tsx"
   },
-  "vH8sCb": {
-    "defaultMessage": "我的围炉"
-  },
   "vJQzbe": {
     "defaultMessage": "已恢复留言",
     "description": "src/components/Comment/Content/index.tsx"
@@ -3718,10 +3711,6 @@
   "x7O1/5": {
     "defaultMessage": "ID 已被使用，请修改后再试",
     "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
-  },
-  "x7kxvC": {
-    "defaultMessage": "订阅解锁",
-    "description": "src/views/ArticleDetail/Wall/Circle/index.tsx"
   },
   "xDhqHi": {
     "defaultMessage": "确认送出",
