@@ -9,10 +9,6 @@
     "defaultMessage": "Please verify email first",
     "description": "src/views/Me/Settings/Settings/Password/index.tsx"
   },
-  "+5O5ev": {
-    "defaultMessage": "{circleName}",
-    "description": "src/views/ArticleDetail/Wall/Circle/index.tsx"
-  },
   "+5sU+5": {
     "defaultMessage": "Tort"
   },
@@ -2810,6 +2806,10 @@
     "defaultMessage": "Articles have been collected",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
+  "hifvI7": {
+    "defaultMessage": "Circle locked work",
+    "description": "src/views/ArticleDetail/Wall/Circle/index.tsx"
+  },
   "hk2aiz": {
     "defaultMessage": "followed your circle",
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
@@ -2946,10 +2946,6 @@
   },
   "kHMa3H": {
     "defaultMessage": "The new password and confirmation password do not match."
-  },
-  "kPylKK": {
-    "defaultMessage": "Circle",
-    "description": "src/views/Me/Settings/Notifications/index.tsx"
   },
   "kS3vTS": {
     "defaultMessage": "Liker ID",
@@ -3577,9 +3573,6 @@
     "defaultMessage": "Connect",
     "description": "src/components/Dialogs/BindEmailHintDialog/Content.tsx"
   },
-  "vH8sCb": {
-    "defaultMessage": "Circle"
-  },
   "vJQzbe": {
     "defaultMessage": "已恢復留言",
     "description": "src/components/Comment/Content/index.tsx"
@@ -3718,10 +3711,6 @@
   "x7O1/5": {
     "defaultMessage": "This ID has been taken, please try another one",
     "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
-  },
-  "x7kxvC": {
-    "defaultMessage": "Subscribe to unlock all articles of",
-    "description": "src/views/ArticleDetail/Wall/Circle/index.tsx"
   },
   "xDhqHi": {
     "defaultMessage": "Confirm",
