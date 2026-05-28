@@ -11,6 +11,8 @@ import {
 
 const isLocal = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'local'
 const nextAssetDomain = process.env.NEXT_PUBLIC_NEXT_ASSET_DOMAIN || ''
+const personhoodCrossOriginIsolated =
+  process.env.NEXT_PUBLIC_PERSONHOOD_CROSS_ORIGIN_ISOLATED === 'true'
 
 const nextConfig: NextConfig = {
   experimental: {
@@ -22,6 +24,23 @@ const nextConfig: NextConfig = {
 
   headers: async () => {
     return [
+      ...(personhoodCrossOriginIsolated
+        ? [
+            {
+              source: '/me/settings/personhood/feasibility',
+              headers: [
+                {
+                  key: 'Cross-Origin-Opener-Policy',
+                  value: 'same-origin',
+                },
+                {
+                  key: 'Cross-Origin-Embedder-Policy',
+                  value: 'require-corp',
+                },
+              ],
+            },
+          ]
+        : []),
       {
         source: '/(.*)',
         headers: [
