@@ -9,6 +9,9 @@ import {
 } from '~/server/personhood/twFido'
 
 type ResultBody = {
+  appId?: unknown
+  challenge?: unknown
+  challengeExpiresAt?: unknown
   spTicket?: unknown
 }
 
@@ -16,6 +19,13 @@ type ResultResponse =
   | {
       cert?: string
       certSize: number
+      proofInput?: {
+        appId: string
+        cert: string
+        challenge: string
+        challengeExpiresAt?: string
+        signedResponse: string
+      }
       signedResponse?: string
       signedResponseSize: number
       status: 'signed'
@@ -85,6 +95,15 @@ const handler = async (
     res.status(200).json({
       cert: config.returnProofInput ? cert : undefined,
       certSize: Buffer.byteLength(cert, 'base64'),
+      proofInput: config.returnProofInput
+        ? createProofInput({
+            appId: body.appId,
+            cert,
+            challenge: body.challenge,
+            challengeExpiresAt: body.challengeExpiresAt,
+            signedResponse,
+          })
+        : undefined,
       signedResponse: config.returnProofInput ? signedResponse : undefined,
       signedResponseSize: Buffer.byteLength(signedResponse, 'base64'),
       status: 'signed',
@@ -104,6 +123,38 @@ const parseBody = (body: unknown): ResultBody => {
     return JSON.parse(body) as ResultBody
   }
   return (body || {}) as ResultBody
+}
+
+const createProofInput = ({
+  appId,
+  cert,
+  challenge,
+  challengeExpiresAt,
+  signedResponse,
+}: {
+  appId: unknown
+  cert: string
+  challenge: unknown
+  challengeExpiresAt: unknown
+  signedResponse: string
+}) => {
+  if (
+    typeof appId !== 'string' ||
+    typeof challenge !== 'string' ||
+    !appId ||
+    !challenge
+  ) {
+    return undefined
+  }
+
+  return {
+    appId,
+    cert,
+    challenge,
+    challengeExpiresAt:
+      typeof challengeExpiresAt === 'string' ? challengeExpiresAt : undefined,
+    signedResponse,
+  }
 }
 
 const isSameOriginRequest = (req: NextApiRequest) => {

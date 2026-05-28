@@ -39,6 +39,18 @@ type TwFidoTicketResponse = {
   }
 }
 
+export type PersonhoodChallenge = {
+  appId: string
+  challenge: string
+  expiresAt?: string
+}
+
+type ChallengeResponse = {
+  app_id?: string
+  challenge?: string
+  expires_at?: string
+}
+
 export type TwFidoConfig = {
   aesKeyBase64: string
   apiBaseUrl: string
@@ -48,6 +60,7 @@ export type TwFidoConfig = {
   serviceId: string
   signType: 'PKCS#1' | 'PKCS#7' | 'RAW'
   timeLimit: string
+  verifierUrl?: string
 }
 
 export const normalizeTwFidoIdNum = (idNum: unknown) => {
@@ -87,6 +100,9 @@ export const getTwFidoConfig = (): TwFidoConfig => {
 
   const apiBaseUrl =
     process.env.PERSONHOOD_FIDO_API_BASE_URL || DEFAULT_API_BASE_URL
+  const verifierUrl =
+    process.env.PERSONHOOD_VERIFIER_URL ||
+    process.env.NEXT_PUBLIC_PERSONHOOD_VERIFIER_URL
 
   return {
     aesKeyBase64,
@@ -98,6 +114,7 @@ export const getTwFidoConfig = (): TwFidoConfig => {
     serviceId,
     signType,
     timeLimit: process.env.PERSONHOOD_FIDO_TIME_LIMIT || DEFAULT_TIME_LIMIT,
+    verifierUrl: verifierUrl ? verifierUrl.replace(/\/$/, '') : undefined,
   }
 }
 
@@ -109,6 +126,36 @@ export const assertTwFidoEnabled = () => {
 
 export const buildSignData = (appId: string) =>
   Buffer.from(appId, 'utf8').toString('base64')
+
+export const createPersonhoodChallenge = async (
+  config: TwFidoConfig
+): Promise<PersonhoodChallenge> => {
+  if (!config.verifierUrl) {
+    return {
+      appId: config.appId,
+      challenge: '',
+    }
+  }
+
+  const json = await postJson<ChallengeResponse>(
+    `${config.verifierUrl}/challenge`,
+    {}
+  )
+
+  if (!json.app_id || !json.challenge) {
+    throw new Error('personhood_verifier_invalid_challenge')
+  }
+
+  if (Buffer.byteLength(json.app_id, 'utf8') !== 31) {
+    throw new Error('personhood_verifier_invalid_app_id')
+  }
+
+  return {
+    appId: json.app_id,
+    challenge: json.challenge,
+    expiresAt: json.expires_at,
+  }
+}
 
 export const decodeSpTicket = (spTicket: string): TwFidoTicketPayload => {
   const separator = spTicket.lastIndexOf('.')
@@ -155,14 +202,17 @@ export const buildTwFidoDeeplink = ({
 }
 
 export const createSpTicket = async ({
+  appId,
   config,
   idNum,
 }: {
+  appId?: string
   config: TwFidoConfig
   idNum: string
 }) => {
   const transactionId = crypto.randomUUID()
-  const signData = buildSignData(config.appId)
+  const signAppId = appId || config.appId
+  const signData = buildSignData(signAppId)
   const checksumPayload = [
     transactionId,
     config.serviceId,
