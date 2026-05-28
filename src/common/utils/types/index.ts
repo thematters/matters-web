@@ -51,6 +51,7 @@ export default gql`
   }
 
   extend enum BadgeType {
+    carbon_based
     community_watch
   }
 
@@ -71,11 +72,6 @@ export default gql`
     updatedBy: ID
   }
 
-  type UserFeatures {
-    fediverseBeta: Boolean!
-    communityWatch: Boolean!
-  }
-
   type ArticleFederationSetting {
     articleId: ID!
     state: FederationArticleSettingState!
@@ -84,7 +80,6 @@ export default gql`
 
   extend type User {
     federationSetting: UserFederationSetting
-    features: UserFeatures!
   }
 
   extend type Article {

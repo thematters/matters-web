@@ -28,6 +28,7 @@ import { BadgeGrandDialog } from '../BadgeGrandDialog'
 import { BadgeNomadDialog } from '../BadgeNomadDialog'
 import {
   ArchitectBadge,
+  CarbonBasedBadge,
   CivicLikerBadge,
   CommunityWatchBadge,
   GoldenMotorBadge,
@@ -36,8 +37,7 @@ import {
   SeedBadge,
   TraveloggersBadge,
 } from '../Badges'
-// FEATURE IS SUNSETTING: circle entry on aside user profile is hidden
-// import CircleWidget from '../CircleWidget'
+import CircleWidget from '../CircleWidget'
 import DropdownActions from '../DropdownActions'
 import { FollowersDialog } from '../FollowersDialog'
 import { FollowingDialog } from '../FollowingDialog'
@@ -114,14 +114,14 @@ export const AsideUserProfile = () => {
   }
 
   const badges = user.info.badges || []
-  // FEATURE IS SUNSETTING: circle entry on aside user profile is hidden
-  // const circles = user.ownCircles || []
+  const circles = user.ownCircles || []
   const hasSeedBadge = badges.some((b) => b.type === 'seed')
   const hasArchitectBadge = badges.some((b) => b.type === 'architect')
   const hasGoldenMotorBadge = badges.some((b) => b.type === 'golden_motor')
   const hasCommunityWatchBadge = badges.some(
     (b) => b.type === 'community_watch'
   )
+  const hasCarbonBasedBadge = badges.some((b) => b.type === 'carbon_based')
   const hasTraveloggersBadge = !!user.info.cryptoWallet?.hasNFTs
   const nomadBadgeType = badges.filter((b) =>
     ['nomad1', 'nomad2', 'nomad3', 'nomad4'].includes(b.type)
@@ -259,6 +259,7 @@ export const AsideUserProfile = () => {
           hasGoldenMotorBadge ||
           hasArchitectBadge ||
           hasCommunityWatchBadge ||
+          hasCarbonBasedBadge ||
           hasGrandBadge ||
           isCivicLiker ||
           user?.info.ethAddress) && (
@@ -286,6 +287,7 @@ export const AsideUserProfile = () => {
             {hasGoldenMotorBadge && <GoldenMotorBadge hasTooltip />}
             {hasArchitectBadge && <ArchitectBadge hasTooltip />}
             {hasCommunityWatchBadge && <CommunityWatchBadge hasTooltip />}
+            {hasCarbonBasedBadge && <CarbonBasedBadge hasTooltip />}
             {isCivicLiker && <CivicLikerBadge hasTooltip />}
 
             {user?.info.ethAddress && (
@@ -372,12 +374,11 @@ export const AsideUserProfile = () => {
         )}
       </section>
 
-      {/* FEATURE IS SUNSETTING: circle entry on aside user profile is hidden */}
-      {/* {isInUserPage && (
+      {isInUserPage && (
         <footer className={styles.footer}>
           <CircleWidget circles={circles} isMe={isMe} />
         </footer>
-      )} */}
+      )}
     </section>
   )
 }
