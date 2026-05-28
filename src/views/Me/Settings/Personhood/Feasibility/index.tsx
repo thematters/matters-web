@@ -49,6 +49,8 @@ type FeasibilityReport = {
 type SpTicketResponse = {
   appId: string
   apiBaseUrl: string
+  challenge: string
+  challengeExpiresAt?: string
   deeplink: string
   expiresAt?: string
   signType: string
@@ -62,6 +64,13 @@ type SignResultResponse =
   | {
       cert?: string
       certSize: number
+      proofInput?: {
+        appId: string
+        cert: string
+        challenge: string
+        challengeExpiresAt?: string
+        signedResponse: string
+      }
       signedResponse?: string
       signedResponseSize: number
       status: 'signed'
@@ -268,7 +277,12 @@ const PersonhoodFeasibility = () => {
 
       try {
         const response = await fetch('/api/personhood/tw-fido/result', {
-          body: JSON.stringify({ spTicket: ticket }),
+          body: JSON.stringify({
+            appId: twFido.ticket?.appId,
+            challenge: twFido.ticket?.challenge,
+            challengeExpiresAt: twFido.ticket?.challengeExpiresAt,
+            spTicket: ticket,
+          }),
           headers: {
             'content-type': 'application/json',
           },
@@ -283,7 +297,7 @@ const PersonhoodFeasibility = () => {
         if (body.status === 'signed') {
           setTwFido((current) => ({
             ...current,
-            proofInputReady: !!body.cert && !!body.signedResponse,
+            proofInputReady: !!body.proofInput,
             result: body,
             status: 'signed',
           }))
@@ -303,7 +317,12 @@ const PersonhoodFeasibility = () => {
         }))
       }
     },
-    [twFido.ticket?.spTicket]
+    [
+      twFido.ticket?.appId,
+      twFido.ticket?.challenge,
+      twFido.ticket?.challengeExpiresAt,
+      twFido.ticket?.spTicket,
+    ]
   )
 
   const createTicket = useCallback(async () => {
@@ -477,6 +496,14 @@ const PersonhoodFeasibility = () => {
             <div>
               <dt>APP_ID</dt>
               <dd>{twFido.ticket?.appId || 'not created'}</dd>
+            </div>
+            <div>
+              <dt>Challenge</dt>
+              <dd>{twFido.ticket?.challenge || 'not created'}</dd>
+            </div>
+            <div>
+              <dt>Challenge expires</dt>
+              <dd>{twFido.ticket?.challengeExpiresAt || 'not created'}</dd>
             </div>
             <div>
               <dt>Ticket ID</dt>

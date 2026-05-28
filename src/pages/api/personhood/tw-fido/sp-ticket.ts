@@ -3,6 +3,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import {
   assertTwFidoEnabled,
   buildTwFidoDeeplink,
+  createPersonhoodChallenge,
   createSpTicket,
   getTwFidoConfig,
   normalizeTwFidoIdNum,
@@ -17,6 +18,8 @@ type SpTicketResponse =
   | {
       appId: string
       apiBaseUrl: string
+      challenge: string
+      challengeExpiresAt?: string
       deeplink: string
       expiresAt?: string
       signType: string
@@ -60,7 +63,12 @@ const handler = async (
         : `https://${req.headers.host}/me/settings/personhood/feasibility`
 
     const config = getTwFidoConfig()
-    const ticket = await createSpTicket({ config, idNum })
+    const challenge = await createPersonhoodChallenge(config)
+    const ticket = await createSpTicket({
+      appId: challenge.appId,
+      config,
+      idNum,
+    })
     const deeplink = buildTwFidoDeeplink({
       returnUrl,
       spTicket: ticket.spTicket,
@@ -68,7 +76,9 @@ const handler = async (
 
     res.status(200).json({
       apiBaseUrl: config.apiBaseUrl,
-      appId: config.appId,
+      appId: challenge.appId,
+      challenge: challenge.challenge,
+      challengeExpiresAt: challenge.expiresAt,
       deeplink,
       expiresAt: ticket.ticketPayload.expiration_time,
       signType: config.signType,
