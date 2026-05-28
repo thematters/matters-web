@@ -64,8 +64,12 @@ export const normalizeTwFidoIdNum = (idNum: unknown) => {
 }
 
 export const getTwFidoConfig = (): TwFidoConfig => {
-  const serviceId = process.env.PERSONHOOD_FIDO_SP_SERVICE_ID
-  const aesKeyBase64 = process.env.PERSONHOOD_FIDO_AES_KEY_BASE64
+  const serviceId =
+    process.env.PERSONHOOD_FIDO_SP_SERVICE_ID || process.env.FIDO_SP_SERVICE_ID
+  const aesKeyBase64 =
+    process.env.PERSONHOOD_FIDO_AES_KEY_BASE64 ||
+    process.env.FIDO_AES_KEY_BASE64 ||
+    process.env.FIDO_AES_KEY
 
   if (!serviceId || !aesKeyBase64) {
     throw new Error('personhood_tw_fido_missing_config')
