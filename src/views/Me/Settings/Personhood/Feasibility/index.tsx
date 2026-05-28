@@ -574,7 +574,7 @@ const PersonhoodFeasibility = () => {
             >
               <FormattedMessage
                 defaultMessage="Open proof helper"
-                id="EvoJwW"
+                id="y1YAx4"
               />
             </a>
             <button
@@ -588,7 +588,7 @@ const PersonhoodFeasibility = () => {
               ) : (
                 <FormattedMessage
                   defaultMessage="Copy helper link"
-                  id="XJDx6G"
+                  id="RcFIF3"
                 />
               )}
             </button>
