@@ -132,7 +132,7 @@ const PersonhoodFeasibility = () => {
     proofInputReady: false,
     status: 'idle',
   })
-  const pollingRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const pollingRef = useRef<number | null>(null)
 
   const reportText = useMemo(() => JSON.stringify(report, null, 2), [report])
   const canCreateTicket =

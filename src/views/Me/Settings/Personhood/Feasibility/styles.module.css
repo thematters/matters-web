@@ -14,8 +14,8 @@
 
   & p {
     margin: 0;
-    color: var(--color-grey-darker);
     font-size: var(--text14);
+    color: var(--color-grey-darker);
   }
 }
 
@@ -35,10 +35,10 @@
   min-width: 120px;
   min-height: 40px;
   padding: 0 var(--sp16);
-  border-radius: 6px;
   font-size: var(--text14);
   font-weight: var(--font-medium);
   text-align: center;
+  border-radius: 6px;
 }
 
 .button,
@@ -57,8 +57,8 @@
 .buttonSecondary:disabled,
 .linkButton[aria-disabled='true'] {
   cursor: not-allowed;
-  opacity: 0.5;
   pointer-events: none;
+  opacity: 0.5;
 }
 
 .formRow {
@@ -74,18 +74,18 @@
   gap: var(--sp4);
 
   & span {
-    color: var(--color-grey-darker);
     font-size: var(--text12);
+    color: var(--color-grey-darker);
   }
 
   & input {
     min-height: 40px;
     padding: 0 var(--sp12);
-    border: 1px solid var(--color-grey-lighter);
-    border-radius: 6px;
     font-family: monospace;
     font-size: var(--text14);
     text-transform: uppercase;
+    border: 1px solid var(--color-grey-lighter);
+    border-radius: 6px;
   }
 }
 
@@ -102,8 +102,8 @@
   }
 
   & dt {
-    color: var(--color-grey-darker);
     font-size: var(--text12);
+    color: var(--color-grey-darker);
   }
 
   & dd {
@@ -120,16 +120,16 @@
   margin: 0;
   overflow: auto;
   background: var(--color-black);
-  border-radius: 6px;
-  color: var(--color-white);
   font-size: var(--text12);
   line-height: 1.5;
+  color: var(--color-white);
   white-space: pre-wrap;
+  border-radius: 6px;
 }
 
 .error {
   margin: var(--sp8) 0 0;
-  color: var(--color-negative-red);
   font-size: var(--text14);
+  color: var(--color-negative-red);
   overflow-wrap: anywhere;
 }
