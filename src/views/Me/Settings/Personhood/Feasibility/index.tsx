@@ -81,6 +81,22 @@ type SignResultResponse =
       status: 'pending'
     }
 
+type ProofInput = NonNullable<
+  Extract<SignResultResponse, { status: 'signed' }>['proofInput']
+>
+
+type HelperHandoffPayload = {
+  certChainProvingKeyUrl: string
+  certChainType: 'rs4096'
+  linkVerifyUrl: string
+  proofInput: ProofInput
+  returnUrl: string
+  smtSnapshotUrl: string
+  source: 'matters-web'
+  userSigProvingKeyUrl: string
+  version: 1
+}
+
 type TwFidoState = {
   error?: string
   idNum: string
@@ -92,12 +108,54 @@ type TwFidoState = {
 }
 
 const POLL_INTERVAL_MS = 4000
+const HELPER_DEEPLINK_BASE = 'openac://prove'
+const CERT_CHAIN_PROVING_KEY_URL =
+  'https://github.com/zkmopro/zkID/releases/download/latest/cert_chain_rs4096_proving.key.gz'
+const USER_SIG_PROVING_KEY_URL =
+  'https://github.com/zkmopro/zkID/releases/download/latest/user_sig_rs2048_proving.key.gz'
+const SMT_SNAPSHOT_URL =
+  'https://github.com/moven0831/moica-revocation-smt/releases/download/snapshot-latest/g3-tree-snapshot.json.gz'
 
 const bytesToMiB = (bytes?: number) => {
   if (!bytes) {
     return '0 MiB'
   }
   return `${Math.round(bytes / 1024 / 1024)} MiB`
+}
+
+const encodeBase64Url = (value: string) => {
+  const bytes = new TextEncoder().encode(value)
+  let binary = ''
+  bytes.forEach((byte) => {
+    binary += String.fromCharCode(byte)
+  })
+  return window
+    .btoa(binary)
+    .replace(/\+/g, '-')
+    .replace(/\//g, '_')
+    .replace(/=+$/, '')
+}
+
+const buildHelperHandoffUrl = (proofInput: ProofInput) => {
+  if (typeof window === 'undefined') {
+    return undefined
+  }
+
+  const payload: HelperHandoffPayload = {
+    certChainProvingKeyUrl: CERT_CHAIN_PROVING_KEY_URL,
+    certChainType: 'rs4096',
+    linkVerifyUrl: `${window.location.origin}/api/personhood/zkid/link-verify`,
+    proofInput,
+    returnUrl: window.location.href,
+    smtSnapshotUrl: SMT_SNAPSHOT_URL,
+    source: 'matters-web',
+    userSigProvingKeyUrl: USER_SIG_PROVING_KEY_URL,
+    version: 1,
+  }
+  const encoded = encodeBase64Url(JSON.stringify(payload))
+  const url = new URL(HELPER_DEEPLINK_BASE)
+  url.searchParams.set('payload', encoded)
+  return url.toString()
 }
 
 const createInitialReport = (): FeasibilityReport => {
@@ -135,6 +193,7 @@ const PersonhoodFeasibility = () => {
   const [report, setReport] = useState<FeasibilityReport>(createInitialReport)
   const [running, setRunning] = useState<'basic' | 'wasm' | null>(null)
   const [copied, setCopied] = useState(false)
+  const [helperCopied, setHelperCopied] = useState(false)
   const [twFido, setTwFido] = useState<TwFidoState>({
     idNum: '',
     pollCount: 0,
@@ -260,6 +319,15 @@ const PersonhoodFeasibility = () => {
     setCopied(true)
     window.setTimeout(() => setCopied(false), 1600)
   }, [reportText])
+
+  const copyHelperLink = useCallback(async (helperUrl?: string) => {
+    if (!helperUrl || !navigator.clipboard) {
+      return
+    }
+    await navigator.clipboard.writeText(helperUrl)
+    setHelperCopied(true)
+    window.setTimeout(() => setHelperCopied(false), 1600)
+  }, [])
 
   const pollSignResult = useCallback(
     async (spTicket?: string) => {
@@ -393,6 +461,16 @@ const PersonhoodFeasibility = () => {
   const wasmProbe = report.checks.wasmMemoryProbe
   const signedResult =
     twFido.result?.status === 'signed' ? twFido.result : undefined
+  const helperHandoffUrl = useMemo(
+    () =>
+      signedResult?.proofInput
+        ? buildHelperHandoffUrl(signedResult.proofInput)
+        : undefined,
+    [signedResult?.proofInput]
+  )
+  const helperHandoffBytes = helperHandoffUrl
+    ? new TextEncoder().encode(helperHandoffUrl).byteLength
+    : 0
 
   return (
     <Layout.Main>
@@ -488,6 +566,34 @@ const PersonhoodFeasibility = () => {
             </button>
           </section>
 
+          <section className={styles.actions}>
+            <a
+              aria-disabled={!helperHandoffUrl}
+              className={styles.linkButton}
+              href={helperHandoffUrl || undefined}
+            >
+              <FormattedMessage
+                defaultMessage="Open proof helper"
+                id="y1YAx4"
+              />
+            </a>
+            <button
+              className={styles.buttonSecondary}
+              disabled={!helperHandoffUrl}
+              onClick={() => copyHelperLink(helperHandoffUrl)}
+              type="button"
+            >
+              {helperCopied ? (
+                <FormattedMessage defaultMessage="Copied" id="p556q3" />
+              ) : (
+                <FormattedMessage
+                  defaultMessage="Copy helper link"
+                  id="RcFIF3"
+                />
+              )}
+            </button>
+          </section>
+
           <dl className={styles.metrics}>
             <div>
               <dt>Status</dt>
@@ -520,6 +626,14 @@ const PersonhoodFeasibility = () => {
             <div>
               <dt>Proof input</dt>
               <dd>{twFido.proofInputReady ? 'ready' : 'server held'}</dd>
+            </div>
+            <div>
+              <dt>Helper handoff</dt>
+              <dd>{helperHandoffUrl ? 'ready' : 'not ready'}</dd>
+            </div>
+            <div>
+              <dt>Helper URL bytes</dt>
+              <dd>{helperHandoffBytes}</dd>
             </div>
             <div>
               <dt>Certificate bytes</dt>
