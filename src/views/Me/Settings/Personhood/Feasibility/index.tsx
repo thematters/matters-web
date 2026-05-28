@@ -380,7 +380,7 @@ const PersonhoodFeasibility = () => {
       <Layout.Header
         left={
           <Layout.Header.Title>
-            <FormattedMessage defaultMessage="Personhood" id="SHrdDe" />
+            <FormattedMessage defaultMessage="Personhood" id="fbxogW" />
           </Layout.Header.Title>
         }
       />
@@ -388,7 +388,7 @@ const PersonhoodFeasibility = () => {
       <Head
         title={intl.formatMessage({
           defaultMessage: 'Personhood',
-          id: 'SHrdDe',
+          id: 'fbxogW',
         })}
       />
 
@@ -400,13 +400,13 @@ const PersonhoodFeasibility = () => {
             <h2>
               <FormattedMessage
                 defaultMessage="TW FidO mobile flow"
-                id="X1EbqK"
+                id="C1yL+d"
               />
             </h2>
             <p>
               <FormattedMessage
                 defaultMessage="Create a signing ticket, open the TW FidO app, then return here for the proof input check."
-                id="3W+dzP"
+                id="t2rFN5"
               />
             </p>
           </header>
@@ -414,7 +414,7 @@ const PersonhoodFeasibility = () => {
           <div className={styles.formRow}>
             <label className={styles.field}>
               <span>
-                <FormattedMessage defaultMessage="ID number" id="Pk3r4Y" />
+                <FormattedMessage defaultMessage="ID number" id="pw6gGa" />
               </span>
               <input
                 autoCapitalize="characters"
@@ -440,9 +440,9 @@ const PersonhoodFeasibility = () => {
               type="button"
             >
               {twFido.status === 'creating' ? (
-                <FormattedMessage defaultMessage="Creating" id="rR3s8X" />
+                <FormattedMessage defaultMessage="Creating" id="xhfdqv" />
               ) : (
-                <FormattedMessage defaultMessage="Create ticket" id="SG9hky" />
+                <FormattedMessage defaultMessage="Create ticket" id="ABDljA" />
               )}
             </button>
           </div>
@@ -453,7 +453,7 @@ const PersonhoodFeasibility = () => {
               className={styles.linkButton}
               href={twFido.ticket?.deeplink || undefined}
             >
-              <FormattedMessage defaultMessage="Open TW FidO" id="k0USfY" />
+              <FormattedMessage defaultMessage="Open TW FidO" id="G/jeUL" />
             </a>
             <button
               className={styles.buttonSecondary}
@@ -462,9 +462,9 @@ const PersonhoodFeasibility = () => {
               type="button"
             >
               {twFido.status === 'polling' ? (
-                <FormattedMessage defaultMessage="Checking" id="gN4pBl" />
+                <FormattedMessage defaultMessage="Checking" id="lTleCS" />
               ) : (
-                <FormattedMessage defaultMessage="Check result" id="bM0zey" />
+                <FormattedMessage defaultMessage="Check result" id="VFQGq7" />
               )}
             </button>
           </section>
@@ -510,12 +510,12 @@ const PersonhoodFeasibility = () => {
         <section className={styles.panel}>
           <header className={styles.header}>
             <h2>
-              <FormattedMessage defaultMessage="PWA feasibility" id="TGe3wU" />
+              <FormattedMessage defaultMessage="PWA feasibility" id="DCgQVz" />
             </h2>
             <p>
               <FormattedMessage
                 defaultMessage="Browser signals for the carbon based badge prover."
-                id="FRyXpx"
+                id="DW68ct"
               />
             </p>
           </header>
@@ -527,7 +527,7 @@ const PersonhoodFeasibility = () => {
               onClick={runBasicChecks}
               type="button"
             >
-              <FormattedMessage defaultMessage="Run checks" id="1cza4C" />
+              <FormattedMessage defaultMessage="Run checks" id="CFtbZu" />
             </button>
             <button
               className={styles.button}
@@ -535,7 +535,7 @@ const PersonhoodFeasibility = () => {
               onClick={runWasmProbe}
               type="button"
             >
-              <FormattedMessage defaultMessage="WASM memory" id="gxHC1l" />
+              <FormattedMessage defaultMessage="WASM memory" id="N73cBw" />
             </button>
             <button
               className={styles.buttonSecondary}
@@ -544,9 +544,9 @@ const PersonhoodFeasibility = () => {
               type="button"
             >
               {copied ? (
-                <FormattedMessage defaultMessage="Copied" id="m/wW4D" />
+                <FormattedMessage defaultMessage="Copied" id="p556q3" />
               ) : (
-                <FormattedMessage defaultMessage="Copy report" id="qh8Srq" />
+                <FormattedMessage defaultMessage="Copy report" id="/H/Ei0" />
               )}
             </button>
           </section>

@@ -38,10 +38,10 @@ const Reasons = {
     />
   ),
   [ReportReason.CommunityWatchPornAd]: (
-    <FormattedMessage defaultMessage="Pornographic advertising" id="7wo7pQ" />
+    <FormattedMessage defaultMessage="Pornographic advertising" id="USq+mM" />
   ),
   [ReportReason.CommunityWatchSpamAd]: (
-    <FormattedMessage defaultMessage="Spam advertising" id="qFeujU" />
+    <FormattedMessage defaultMessage="Spam advertising" id="scWFV3" />
   ),
   [ReportReason.Other]: (
     <FormattedMessage defaultMessage="Other malicious behavior" id="yOhatg" />
