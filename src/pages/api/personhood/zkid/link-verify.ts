@@ -1,10 +1,16 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
+import { requestMattersGraphQL } from '~/server/personhood/mattersGraphql'
 import { assertTwFidoEnabled } from '~/server/personhood/twFido'
 
 type LinkVerifyBody = {
+  cert_chain_proof?: unknown
+  cert_chain_type?: unknown
   certChainProof?: unknown
   certChainType?: unknown
+  handoff_token?: unknown
+  handoffToken?: unknown
+  user_sig_proof?: unknown
   userSigProof?: unknown
 }
 
@@ -13,6 +19,30 @@ type LinkVerifyResponse =
   | {
       error: string
     }
+
+type ClaimPersonhoodBadgeData = {
+  claimPersonhoodBadge: {
+    id: string
+    info: {
+      badges: Array<{ type: string }>
+    }
+  }
+}
+
+const CLAIM_PERSONHOOD_BADGE = [
+  'mutation ClaimPersonhoodBadge($input: ClaimPersonhoodBadgeInput!) {',
+  `
+    claimPersonhoodBadge(input: $input) {
+      id
+      info {
+        badges {
+          type
+        }
+      }
+    }
+  `,
+  '}',
+].join('\n')
 
 export const config = {
   api: {
@@ -40,47 +70,38 @@ const handler = async (
   try {
     assertTwFidoEnabled()
 
-    const verifierUrl =
-      process.env.PERSONHOOD_VERIFIER_URL ||
-      process.env.NEXT_PUBLIC_PERSONHOOD_VERIFIER_URL
-    if (!verifierUrl) {
-      res.status(500).json({ error: 'personhood_verifier_missing_config' })
-      return
-    }
-
     const body = parseBody(req.body)
+    const handoffToken = getString(body.handoffToken, body.handoff_token)
+    const certChainProof = getString(body.certChainProof, body.cert_chain_proof)
+    const userSigProof = getString(body.userSigProof, body.user_sig_proof)
     if (
-      typeof body.certChainProof !== 'string' ||
-      typeof body.userSigProof !== 'string'
+      typeof handoffToken !== 'string' ||
+      typeof certChainProof !== 'string' ||
+      typeof userSigProof !== 'string'
     ) {
-      res.status(400).json({ error: 'missing_proofs' })
+      res.status(400).json({ error: 'missing_claim_payload' })
       return
     }
 
     const certChainType =
-      typeof body.certChainType === 'string' ? body.certChainType : 'rs4096'
+      getString(body.certChainType, body.cert_chain_type) || 'rs4096'
 
-    const upstream = await fetch(
-      `${verifierUrl.replace(/\/$/, '')}/link-verify`,
-      {
-        body: JSON.stringify({
-          cert_chain_proof: body.certChainProof,
-          cert_chain_type: certChainType,
-          user_sig_proof: body.userSigProof,
-        }),
-        headers: {
-          'content-type': 'application/json',
+    const data = await requestMattersGraphQL<ClaimPersonhoodBadgeData>({
+      query: CLAIM_PERSONHOOD_BADGE,
+      variables: {
+        input: {
+          certChainProof,
+          certChainType,
+          handoffToken,
+          userSigProof,
         },
-        method: 'POST',
-      }
-    )
-    const text = await upstream.text()
+      },
+    })
 
-    try {
-      res.status(upstream.status).json(JSON.parse(text))
-    } catch {
-      res.status(upstream.status).json({ error: text || 'invalid_response' })
-    }
+    res.status(200).json({
+      status: 'claimed',
+      user: data.claimPersonhoodBadge,
+    })
   } catch (error) {
     const message = error instanceof Error ? error.message : 'unknown_error'
     res
@@ -97,6 +118,9 @@ const parseBody = (body: unknown): LinkVerifyBody => {
   }
   return (body || {}) as LinkVerifyBody
 }
+
+const getString = (...values: unknown[]) =>
+  values.find((value): value is string => typeof value === 'string')
 
 const isSameOriginRequest = (req: NextApiRequest) => {
   const origin = req.headers.origin

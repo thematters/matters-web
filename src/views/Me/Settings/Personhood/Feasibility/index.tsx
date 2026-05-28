@@ -88,6 +88,7 @@ type ProofInput = NonNullable<
 type HelperHandoffPayload = {
   certChainProvingKeyUrl: string
   certChainType: 'rs4096'
+  handoffToken: string
   linkVerifyUrl: string
   proofInput: ProofInput
   returnUrl: string
@@ -99,6 +100,13 @@ type HelperHandoffPayload = {
 
 type TwFidoState = {
   error?: string
+  handoff?: {
+    challenge: string
+    error?: string
+    expiresAt?: string
+    status: 'creating' | 'ready'
+    token?: string
+  }
   idNum: string
   pollCount: number
   proofInputReady: boolean
@@ -136,7 +144,10 @@ const encodeBase64Url = (value: string) => {
     .replace(/=+$/, '')
 }
 
-const buildHelperHandoffUrl = (proofInput: ProofInput) => {
+const buildHelperHandoffUrl = (
+  proofInput: ProofInput,
+  handoffToken: string
+) => {
   if (typeof window === 'undefined') {
     return undefined
   }
@@ -144,6 +155,7 @@ const buildHelperHandoffUrl = (proofInput: ProofInput) => {
   const payload: HelperHandoffPayload = {
     certChainProvingKeyUrl: CERT_CHAIN_PROVING_KEY_URL,
     certChainType: 'rs4096',
+    handoffToken,
     linkVerifyUrl: `${window.location.origin}/api/personhood/zkid/link-verify`,
     proofInput,
     returnUrl: window.location.href,
@@ -329,6 +341,53 @@ const PersonhoodFeasibility = () => {
     window.setTimeout(() => setHelperCopied(false), 1600)
   }, [])
 
+  const createHandoff = useCallback(async (proofInput: ProofInput) => {
+    setTwFido((current) => ({
+      ...current,
+      handoff: {
+        challenge: proofInput.challenge,
+        status: 'creating',
+      },
+    }))
+
+    try {
+      const response = await fetch('/api/personhood/zkid/handoff', {
+        body: JSON.stringify({
+          challenge: proofInput.challenge,
+          challengeExpiresAt: proofInput.challengeExpiresAt,
+        }),
+        headers: {
+          'content-type': 'application/json',
+        },
+        method: 'POST',
+      })
+      const body = await response.json()
+
+      if (!response.ok) {
+        throw new Error(body.error || `HTTP ${response.status}`)
+      }
+
+      setTwFido((current) => ({
+        ...current,
+        handoff: {
+          challenge: proofInput.challenge,
+          expiresAt: body.expiresAt,
+          status: 'ready',
+          token: body.token,
+        },
+      }))
+    } catch (error) {
+      setTwFido((current) => ({
+        ...current,
+        handoff: {
+          challenge: proofInput.challenge,
+          error: error instanceof Error ? error.message : 'Unknown error',
+          status: 'ready',
+        },
+      }))
+    }
+  }, [])
+
   const pollSignResult = useCallback(
     async (spTicket?: string) => {
       const ticket = spTicket || twFido.ticket?.spTicket
@@ -365,6 +424,7 @@ const PersonhoodFeasibility = () => {
         if (body.status === 'signed') {
           setTwFido((current) => ({
             ...current,
+            handoff: undefined,
             proofInputReady: !!body.proofInput,
             result: body,
             status: 'signed',
@@ -402,6 +462,7 @@ const PersonhoodFeasibility = () => {
     setTwFido((current) => ({
       ...current,
       error: undefined,
+      handoff: undefined,
       pollCount: 0,
       proofInputReady: false,
       result: undefined,
@@ -457,16 +518,33 @@ const PersonhoodFeasibility = () => {
     }
   }, [pollSignResult, twFido.status, twFido.ticket])
 
+  useEffect(() => {
+    if (twFido.result?.status !== 'signed' || !twFido.result.proofInput) {
+      return
+    }
+
+    if (twFido.handoff?.challenge === twFido.result.proofInput.challenge) {
+      return
+    }
+
+    createHandoff(twFido.result.proofInput)
+  }, [
+    createHandoff,
+    twFido.handoff?.challenge,
+    twFido.result,
+    twFido.result?.status,
+  ])
+
   const storage = report.checks.storageEstimate
   const wasmProbe = report.checks.wasmMemoryProbe
   const signedResult =
     twFido.result?.status === 'signed' ? twFido.result : undefined
   const helperHandoffUrl = useMemo(
     () =>
-      signedResult?.proofInput
-        ? buildHelperHandoffUrl(signedResult.proofInput)
+      signedResult?.proofInput && twFido.handoff?.token
+        ? buildHelperHandoffUrl(signedResult.proofInput, twFido.handoff.token)
         : undefined,
-    [signedResult?.proofInput]
+    [signedResult?.proofInput, twFido.handoff?.token]
   )
   const helperHandoffBytes = helperHandoffUrl
     ? new TextEncoder().encode(helperHandoffUrl).byteLength
@@ -629,7 +707,15 @@ const PersonhoodFeasibility = () => {
             </div>
             <div>
               <dt>Helper handoff</dt>
-              <dd>{helperHandoffUrl ? 'ready' : 'not ready'}</dd>
+              <dd>
+                {helperHandoffUrl
+                  ? 'ready'
+                  : twFido.handoff?.status || 'not ready'}
+              </dd>
+            </div>
+            <div>
+              <dt>Handoff expires</dt>
+              <dd>{twFido.handoff?.expiresAt || 'not created'}</dd>
             </div>
             <div>
               <dt>Helper URL bytes</dt>
@@ -645,7 +731,11 @@ const PersonhoodFeasibility = () => {
             </div>
           </dl>
 
-          {twFido.error && <p className={styles.error}>{twFido.error}</p>}
+          {(twFido.error || twFido.handoff?.error) && (
+            <p className={styles.error}>
+              {twFido.error || twFido.handoff?.error}
+            </p>
+          )}
         </section>
 
         <section className={styles.panel}>
