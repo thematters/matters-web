@@ -1,6 +1,7 @@
 import classNames from 'classnames'
 import { FormattedMessage } from 'react-intl'
 
+import IconCarbonBasedBadge from '@/public/static/icons/24px/badge-carbon-based.svg'
 import IconCommunityWatchBadge from '@/public/static/icons/24px/badge-community-watch.svg'
 import IconGrand from '@/public/static/icons/24px/badge-grand.svg'
 import IconNomad1Badge from '@/public/static/icons/24px/badge-nomad1-moon.svg'
@@ -91,6 +92,11 @@ export const TraveloggersBadge = withBadge({
 export const CommunityWatchBadge = withBadge({
   icon: IconCommunityWatchBadge,
   name: <FormattedMessage defaultMessage="馬特市守望相助隊" id="90M7k0" />,
+})
+
+export const CarbonBasedBadge = withBadge({
+  icon: IconCarbonBasedBadge,
+  name: <FormattedMessage defaultMessage="碳基生物" id="5fjmnA" />,
 })
 
 export const NomadBadge = ({
@@ -255,6 +261,7 @@ export interface BadgesOptions {
   hasGoldenMotorBadge?: boolean
   hasArchitectBadge?: boolean
   hasCommunityWatchBadge?: boolean
+  hasCarbonBasedBadge?: boolean
   isCivicLiker?: boolean
 }
 
@@ -270,6 +277,7 @@ export const Badges = ({
   hasGoldenMotorBadge,
   hasArchitectBadge,
   hasCommunityWatchBadge,
+  hasCarbonBasedBadge,
   isCivicLiker,
 }: BadgesOptions) =>
   isInDialog ? (
@@ -293,6 +301,7 @@ export const Badges = ({
         hasGoldenMotorBadge ||
         hasArchitectBadge ||
         hasCommunityWatchBadge ||
+        hasCarbonBasedBadge ||
         isCivicLiker) && (
         <section className={styles.badgesGroup}>
           {hasTraveloggersBadge && <TraveloggersBadge isInDialog />}
@@ -300,6 +309,7 @@ export const Badges = ({
           {hasGoldenMotorBadge && <GoldenMotorBadge isInDialog />}
           {hasArchitectBadge && <ArchitectBadge isInDialog />}
           {hasCommunityWatchBadge && <CommunityWatchBadge isInDialog />}
+          {hasCarbonBasedBadge && <CarbonBasedBadge isInDialog />}
           {isCivicLiker && <CivicLikerBadge isInDialog />}
         </section>
       )}
@@ -313,6 +323,7 @@ export const Badges = ({
       {hasGoldenMotorBadge && <GoldenMotorBadge />}
       {hasArchitectBadge && <ArchitectBadge />}
       {hasCommunityWatchBadge && <CommunityWatchBadge />}
+      {hasCarbonBasedBadge && <CarbonBasedBadge />}
       {isCivicLiker && <CivicLikerBadge />}
     </span>
   )
