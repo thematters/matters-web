@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import { Head, Layout, Spacer } from '~/components'
@@ -46,6 +46,44 @@ type FeasibilityReport = {
   }
 }
 
+type SpTicketResponse = {
+  appId: string
+  apiBaseUrl: string
+  deeplink: string
+  expiresAt?: string
+  signType: string
+  spTicket: string
+  spTicketId: string
+  status: 'ticket_created'
+  transactionId: string
+}
+
+type SignResultResponse =
+  | {
+      cert?: string
+      certSize: number
+      signedResponse?: string
+      signedResponseSize: number
+      status: 'signed'
+    }
+  | {
+      errorCode: string
+      message?: string
+      status: 'pending'
+    }
+
+type TwFidoState = {
+  error?: string
+  idNum: string
+  pollCount: number
+  proofInputReady: boolean
+  result?: SignResultResponse
+  status: 'idle' | 'creating' | 'ticket_created' | 'polling' | 'signed'
+  ticket?: SpTicketResponse
+}
+
+const POLL_INTERVAL_MS = 4000
+
 const bytesToMiB = (bytes?: number) => {
   if (!bytes) {
     return '0 MiB'
@@ -88,8 +126,19 @@ const PersonhoodFeasibility = () => {
   const [report, setReport] = useState<FeasibilityReport>(createInitialReport)
   const [running, setRunning] = useState<'basic' | 'wasm' | null>(null)
   const [copied, setCopied] = useState(false)
+  const [twFido, setTwFido] = useState<TwFidoState>({
+    idNum: '',
+    pollCount: 0,
+    proofInputReady: false,
+    status: 'idle',
+  })
+  const pollingRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   const reportText = useMemo(() => JSON.stringify(report, null, 2), [report])
+  const canCreateTicket =
+    twFido.status !== 'creating' &&
+    twFido.status !== 'polling' &&
+    /^[A-Z][0-9A-Z]{9}$/.test(twFido.idNum.trim().toUpperCase())
 
   const runBasicChecks = useCallback(async () => {
     if (typeof window === 'undefined') {
@@ -203,8 +252,128 @@ const PersonhoodFeasibility = () => {
     window.setTimeout(() => setCopied(false), 1600)
   }, [reportText])
 
+  const pollSignResult = useCallback(
+    async (spTicket?: string) => {
+      const ticket = spTicket || twFido.ticket?.spTicket
+      if (!ticket) {
+        return
+      }
+
+      setTwFido((current) => ({
+        ...current,
+        error: undefined,
+        pollCount: current.pollCount + 1,
+        status: 'polling',
+      }))
+
+      try {
+        const response = await fetch('/api/personhood/tw-fido/result', {
+          body: JSON.stringify({ spTicket: ticket }),
+          headers: {
+            'content-type': 'application/json',
+          },
+          method: 'POST',
+        })
+        const body = await response.json()
+
+        if (!response.ok) {
+          throw new Error(body.error || `HTTP ${response.status}`)
+        }
+
+        if (body.status === 'signed') {
+          setTwFido((current) => ({
+            ...current,
+            proofInputReady: !!body.cert && !!body.signedResponse,
+            result: body,
+            status: 'signed',
+          }))
+          return
+        }
+
+        setTwFido((current) => ({
+          ...current,
+          result: body,
+          status: 'ticket_created',
+        }))
+      } catch (error) {
+        setTwFido((current) => ({
+          ...current,
+          error: error instanceof Error ? error.message : 'Unknown error',
+          status: current.ticket ? 'ticket_created' : 'idle',
+        }))
+      }
+    },
+    [twFido.ticket?.spTicket]
+  )
+
+  const createTicket = useCallback(async () => {
+    if (!canCreateTicket || typeof window === 'undefined') {
+      return
+    }
+
+    const idNum = twFido.idNum.trim().toUpperCase()
+    setTwFido((current) => ({
+      ...current,
+      error: undefined,
+      pollCount: 0,
+      proofInputReady: false,
+      result: undefined,
+      status: 'creating',
+      ticket: undefined,
+    }))
+
+    try {
+      const response = await fetch('/api/personhood/tw-fido/sp-ticket', {
+        body: JSON.stringify({
+          idNum,
+          returnUrl: window.location.href,
+        }),
+        headers: {
+          'content-type': 'application/json',
+        },
+        method: 'POST',
+      })
+      const body = await response.json()
+
+      if (!response.ok) {
+        throw new Error(body.error || `HTTP ${response.status}`)
+      }
+
+      setTwFido((current) => ({
+        ...current,
+        idNum,
+        status: 'ticket_created',
+        ticket: body,
+      }))
+    } catch (error) {
+      setTwFido((current) => ({
+        ...current,
+        error: error instanceof Error ? error.message : 'Unknown error',
+        status: 'idle',
+      }))
+    }
+  }, [canCreateTicket, twFido.idNum])
+
+  useEffect(() => {
+    if (twFido.status !== 'ticket_created' || !twFido.ticket) {
+      return
+    }
+
+    pollingRef.current = window.setTimeout(() => {
+      pollSignResult(twFido.ticket?.spTicket)
+    }, POLL_INTERVAL_MS)
+
+    return () => {
+      if (pollingRef.current) {
+        window.clearTimeout(pollingRef.current)
+      }
+    }
+  }, [pollSignResult, twFido.status, twFido.ticket])
+
   const storage = report.checks.storageEstimate
   const wasmProbe = report.checks.wasmMemoryProbe
+  const signedResult =
+    twFido.result?.status === 'signed' ? twFido.result : undefined
 
   return (
     <Layout.Main>
@@ -226,6 +395,118 @@ const PersonhoodFeasibility = () => {
       <SettingsTabs />
 
       <section className={settingsStyles.container}>
+        <section className={styles.panel}>
+          <header className={styles.header}>
+            <h2>
+              <FormattedMessage
+                defaultMessage="TW FidO mobile flow"
+                id="X1EbqK"
+              />
+            </h2>
+            <p>
+              <FormattedMessage
+                defaultMessage="Create a signing ticket, open the TW FidO app, then return here for the proof input check."
+                id="3W+dzP"
+              />
+            </p>
+          </header>
+
+          <div className={styles.formRow}>
+            <label className={styles.field}>
+              <span>
+                <FormattedMessage defaultMessage="ID number" id="Pk3r4Y" />
+              </span>
+              <input
+                autoCapitalize="characters"
+                autoComplete="off"
+                autoCorrect="off"
+                inputMode="text"
+                onChange={(event) =>
+                  setTwFido((current) => ({
+                    ...current,
+                    idNum: event.target.value,
+                  }))
+                }
+                placeholder="A123456789"
+                spellCheck={false}
+                type="text"
+                value={twFido.idNum}
+              />
+            </label>
+            <button
+              className={styles.button}
+              disabled={!canCreateTicket}
+              onClick={createTicket}
+              type="button"
+            >
+              {twFido.status === 'creating' ? (
+                <FormattedMessage defaultMessage="Creating" id="rR3s8X" />
+              ) : (
+                <FormattedMessage defaultMessage="Create ticket" id="SG9hky" />
+              )}
+            </button>
+          </div>
+
+          <section className={styles.actions}>
+            <a
+              aria-disabled={!twFido.ticket}
+              className={styles.linkButton}
+              href={twFido.ticket?.deeplink || undefined}
+            >
+              <FormattedMessage defaultMessage="Open TW FidO" id="k0USfY" />
+            </a>
+            <button
+              className={styles.buttonSecondary}
+              disabled={!twFido.ticket || twFido.status === 'polling'}
+              onClick={() => pollSignResult()}
+              type="button"
+            >
+              {twFido.status === 'polling' ? (
+                <FormattedMessage defaultMessage="Checking" id="gN4pBl" />
+              ) : (
+                <FormattedMessage defaultMessage="Check result" id="bM0zey" />
+              )}
+            </button>
+          </section>
+
+          <dl className={styles.metrics}>
+            <div>
+              <dt>Status</dt>
+              <dd>{twFido.status}</dd>
+            </div>
+            <div>
+              <dt>APP_ID</dt>
+              <dd>{twFido.ticket?.appId || 'not created'}</dd>
+            </div>
+            <div>
+              <dt>Ticket ID</dt>
+              <dd>{twFido.ticket?.spTicketId || 'not created'}</dd>
+            </div>
+            <div>
+              <dt>Sign type</dt>
+              <dd>{twFido.ticket?.signType || 'not created'}</dd>
+            </div>
+            <div>
+              <dt>Poll count</dt>
+              <dd>{twFido.pollCount}</dd>
+            </div>
+            <div>
+              <dt>Proof input</dt>
+              <dd>{twFido.proofInputReady ? 'ready' : 'server held'}</dd>
+            </div>
+            <div>
+              <dt>Certificate bytes</dt>
+              <dd>{signedResult?.certSize || 0}</dd>
+            </div>
+            <div>
+              <dt>Signature bytes</dt>
+              <dd>{signedResult?.signedResponseSize || 0}</dd>
+            </div>
+          </dl>
+
+          {twFido.error && <p className={styles.error}>{twFido.error}</p>}
+        </section>
+
         <section className={styles.panel}>
           <header className={styles.header}>
             <h2>

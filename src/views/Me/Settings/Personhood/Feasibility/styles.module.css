@@ -1,5 +1,6 @@
 .panel {
   padding: var(--sp16);
+  margin-bottom: var(--sp16);
   border: 1px solid var(--color-grey-lighter);
   border-radius: 8px;
 }
@@ -26,16 +27,22 @@
 }
 
 .button,
-.buttonSecondary {
+.buttonSecondary,
+.linkButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   min-width: 120px;
   min-height: 40px;
   padding: 0 var(--sp16);
   border-radius: 6px;
   font-size: var(--text14);
   font-weight: var(--font-medium);
+  text-align: center;
 }
 
-.button {
+.button,
+.linkButton {
   color: var(--color-white);
   background: var(--color-matters-green);
 }
@@ -47,9 +54,39 @@
 }
 
 .button:disabled,
-.buttonSecondary:disabled {
+.buttonSecondary:disabled,
+.linkButton[aria-disabled='true'] {
   cursor: not-allowed;
   opacity: 0.5;
+  pointer-events: none;
+}
+
+.formRow {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: var(--sp8);
+  align-items: end;
+  margin: var(--sp16) 0 0;
+}
+
+.field {
+  display: grid;
+  gap: var(--sp4);
+
+  & span {
+    color: var(--color-grey-darker);
+    font-size: var(--text12);
+  }
+
+  & input {
+    min-height: 40px;
+    padding: 0 var(--sp12);
+    border: 1px solid var(--color-grey-lighter);
+    border-radius: 6px;
+    font-family: monospace;
+    font-size: var(--text14);
+    text-transform: uppercase;
+  }
 }
 
 .metrics {
@@ -88,4 +125,11 @@
   font-size: var(--text12);
   line-height: 1.5;
   white-space: pre-wrap;
+}
+
+.error {
+  margin: var(--sp8) 0 0;
+  color: var(--color-negative-red);
+  font-size: var(--text14);
+  overflow-wrap: anywhere;
 }
