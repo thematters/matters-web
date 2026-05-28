@@ -37,6 +37,9 @@ const Reasons = {
       id="e3qUqn"
     />
   ),
+  [ReportReason.CommunityWatchPornAd]: (
+    <FormattedMessage defaultMessage="Pornographic advertising" id="7wo7pQ" />
+  ),
   [ReportReason.Other]: (
     <FormattedMessage defaultMessage="Other malicious behavior" id="yOhatg" />
   ),

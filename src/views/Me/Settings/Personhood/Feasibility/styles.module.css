@@ -56,8 +56,8 @@
 .button:disabled,
 .buttonSecondary:disabled,
 .linkButton[aria-disabled='true'] {
-  cursor: not-allowed;
   pointer-events: none;
+  cursor: not-allowed;
   opacity: 0.5;
 }
 
@@ -119,9 +119,9 @@
   padding: var(--sp16);
   margin: 0;
   overflow: auto;
-  background: var(--color-black);
   font-size: var(--text12);
   line-height: 1.5;
+  background: var(--color-black);
   color: var(--color-white);
   white-space: pre-wrap;
   border-radius: 6px;
