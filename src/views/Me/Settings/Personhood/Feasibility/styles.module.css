@@ -133,3 +133,10 @@
   color: var(--color-negative-red);
   overflow-wrap: anywhere;
 }
+
+.hint {
+  margin: calc(-1 * var(--sp8)) 0 var(--sp16);
+  font-size: var(--text12);
+  line-height: 1.5;
+  color: var(--color-grey-darker);
+}
