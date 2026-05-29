@@ -103,6 +103,9 @@
   "/GyMKa": {
     "defaultMessage": "Share Article"
   },
+  "/H/Ei0": {
+    "defaultMessage": "Copy report"
+  },
   "/IMR+8": {
     "defaultMessage": "Top Supporters"
   },
@@ -373,6 +376,9 @@
   "3EeDnu": {
     "defaultMessage": "Paste JSFiddle or CodePen link, and press enter"
   },
+  "3HKaQ4": {
+    "defaultMessage": "The next slice mounts the zkID in-browser worker here and submits the proof to Matters."
+  },
   "3KNMbJ": {
     "defaultMessage": "Articles"
   },
@@ -486,6 +492,9 @@
   },
   "5XFd/5": {
     "defaultMessage": "Manage Circle"
+  },
+  "5fjmnA": {
+    "defaultMessage": "碳基生物"
   },
   "5iii3x": {
     "defaultMessage": "Circle：",
@@ -811,6 +820,9 @@
     "defaultMessage": "Payment suspended or returned by card issuer when there are doubts about the transaction",
     "description": "src/components/Transaction/index.tsx"
   },
+  "ABDljA": {
+    "defaultMessage": "Create ticket"
+  },
   "AEiogR": {
     "defaultMessage": "This Google account is connected to a Matters account. Sign in to that account to disconnect it then try again",
     "description": "USER_SOCIAL_ACCOUNT_EXISTS"
@@ -922,6 +934,9 @@
   "C/4nS6": {
     "defaultMessage": "Connect and claim"
   },
+  "C1yL+d": {
+    "defaultMessage": "TW FidO mobile flow"
+  },
   "C3NKBg": {
     "defaultMessage": "Connected to {type}",
     "description": "src/views/Me/Settings/Settings/Socials/index.tsx"
@@ -936,6 +951,9 @@
   "CD688y": {
     "defaultMessage": "bookmarked",
     "description": "src/components/Notice/ArticleNotice/ArticleNewSubscriberNotice.tsx"
+  },
+  "CFtbZu": {
+    "defaultMessage": "Run checks"
   },
   "CNMDU5": {
     "defaultMessage": "ID must be between {MIN_USER_NAME_LENGTH} and {MAX_USER_NAME_LENGTH} characters long"
@@ -1000,6 +1018,9 @@
   "D9tEst": {
     "defaultMessage": "Matters Architect"
   },
+  "DCgQVz": {
+    "defaultMessage": "PWA feasibility"
+  },
   "DP3yqI": {
     "defaultMessage": "Donation count"
   },
@@ -1009,6 +1030,9 @@
   },
   "DUvMii": {
     "defaultMessage": "Customize your call-to-support prompt to audience, or thank-you card for those who supported you."
+  },
+  "DW68ct": {
+    "defaultMessage": "Browser signals for the carbon based badge prover."
   },
   "DX0YH3": {
     "defaultMessage": "Wallet successfully bound",
@@ -1178,6 +1202,9 @@
     "defaultMessage": "This ID cannot be modified. Are you sure you want to use {id} as your Matters ID?",
     "description": "src/components/Dialogs/SetUserNameDialog/ConfirmStep.tsx"
   },
+  "G/jeUL": {
+    "defaultMessage": "Open TW FidO"
+  },
   "G/yZLu": {
     "defaultMessage": "Remove"
   },
@@ -1320,6 +1347,9 @@
   },
   "HzB4Lk": {
     "defaultMessage": "Tell readers why you edited this time..."
+  },
+  "I3v/Va": {
+    "defaultMessage": "PWA proof handoff"
   },
   "IJ9YcQ": {
     "defaultMessage": "Unlink",
@@ -1578,6 +1608,9 @@
     "defaultMessage": "Confirm in Wallet",
     "description": "src/components/Forms/PaymentForm/PayTo/Confirm/index.tsx"
   },
+  "N73cBw": {
+    "defaultMessage": "WASM memory"
+  },
   "NACY16": {
     "defaultMessage": "Why need to set up a wallet?",
     "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
@@ -1627,6 +1660,9 @@
   "NlX31w": {
     "defaultMessage": "After deletion, the {commentType} will be removed immediately",
     "description": "src/components/CircleComment/DropdownActions/DeleteComment/Dialog.tsx"
+  },
+  "NloKwX": {
+    "defaultMessage": "Proof worker"
   },
   "NmhF45": {
     "defaultMessage": "Adding tags helps readers find your articles. Add or create new tags."
@@ -1840,6 +1876,9 @@
     "defaultMessage": "Please confirm transaction password",
     "description": "src/components/Forms/PaymentForm/SetPassword/index.tsx"
   },
+  "RYc4X0": {
+    "defaultMessage": "Browser proof"
+  },
   "Rc4Oij": {
     "defaultMessage": "Firebolt"
   },
@@ -2025,6 +2064,9 @@
   "USOHRK": {
     "defaultMessage": "Failed to edit, please try again."
   },
+  "USq+mM": {
+    "defaultMessage": "Pornographic advertising"
+  },
   "UUJzml": {
     "defaultMessage": "Logbook 2.0 has just launched. If you are an owner of Traveloggers, and haven't claimed, you may claim one from the new Logbook page:"
   },
@@ -2057,6 +2099,9 @@
     "defaultMessage": "Publishing, please wait...",
     "description": "src/components/Editor/PreviewDialog/index.tsx"
   },
+  "V3oaoZ": {
+    "defaultMessage": "After TW FidO signs, continue in this browser. No native proof helper is required for this PWA path."
+  },
   "V5OMr4": {
     "defaultMessage": "What is a digital wallet?",
     "description": "src/components/Forms/SelectAuthMethodForm/WalletFeed.tsx"
@@ -2067,6 +2112,9 @@
   },
   "VBve8d": {
     "defaultMessage": "Settled in Matters"
+  },
+  "VFQGq7": {
+    "defaultMessage": "Check result"
   },
   "VMQPwZ": {
     "defaultMessage": "Ended",
@@ -2292,6 +2340,9 @@
   "Z39z+x": {
     "defaultMessage": "{displayName} won't be able to comment your article. Besides, he or she can't @ you and subscribe your circle. You can manage blocked list in settings."
   },
+  "Z4R3Lq": {
+    "defaultMessage": "This browser page is missing a required PWA proving capability."
+  },
   "Z7JXlF": {
     "defaultMessage": "Archived for violation.",
     "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
@@ -2450,6 +2501,9 @@
   "cAP9g5": {
     "defaultMessage": "pinned your comment in {commentArticle}",
     "description": "src/components/Notice/CommentNotice/CommentPinnedNotice.tsx"
+  },
+  "cB6zjC": {
+    "defaultMessage": "Signed TW FidO proof input is kept in this browser for the next proving step."
   },
   "cCpbBu": {
     "defaultMessage": "Popular Channel Authors"
@@ -2683,6 +2737,9 @@
   },
   "fWZYP5": {
     "defaultMessage": "Pinned"
+  },
+  "fbxogW": {
+    "defaultMessage": "Personhood"
   },
   "fko+MR": {
     "defaultMessage": "Retry claiming"
@@ -2962,6 +3019,9 @@
     "defaultMessage": "Remove",
     "description": "src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
   },
+  "kqQp7b": {
+    "defaultMessage": "No signed proof input was found. Return to the TW FidO step and check the result again."
+  },
   "ksIL/T": {
     "defaultMessage": "Kind reminder: This wallet address is different from the wallet address you use to log in to Matters"
   },
@@ -3010,6 +3070,9 @@
   },
   "lO7wKc": {
     "defaultMessage": "Not yet"
+  },
+  "lTleCS": {
+    "defaultMessage": "Checking"
   },
   "lYVn31": {
     "defaultMessage": "This work has been added to the schedule. Please go to the \"My Works\" page to confirm"
@@ -3213,6 +3276,9 @@
     "defaultMessage": "Restore comment",
     "description": "src/components/Comment/Content/index.tsx"
   },
+  "p556q3": {
+    "defaultMessage": "Copied"
+  },
   "p5qZnJ": {
     "defaultMessage": "liked",
     "description": "src/components/Notice/ArticleNotice/ArticleNewAppreciationNotice.tsx"
@@ -3240,6 +3306,9 @@
   },
   "ptTHBL": {
     "defaultMessage": "Call-to-Support"
+  },
+  "pw6gGa": {
+    "defaultMessage": "ID number"
   },
   "pzTOmv": {
     "defaultMessage": "Followers"
@@ -3401,6 +3470,9 @@
   "sbhWw+": {
     "defaultMessage": "Schedule publication"
   },
+  "scWFV3": {
+    "defaultMessage": "Spam advertising"
+  },
   "sfj+KG": {
     "defaultMessage": "The results are mainly based on the records on the chain and will be synchronized to Matters later.",
     "description": "src/components/Forms/PaymentForm/Processing/index.tsx"
@@ -3432,6 +3504,9 @@
   },
   "t2EpN/": {
     "defaultMessage": "Request on {network} network will be confirmed and synced to Matters in a bit"
+  },
+  "t2rFN5": {
+    "defaultMessage": "Create a signing ticket, open the TW FidO app, then return here for the proof input check."
   },
   "tBt9u0": {
     "defaultMessage": "Sign in",
@@ -3739,6 +3814,9 @@
     "defaultMessage": "New discussions",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
   },
+  "xhfdqv": {
+    "defaultMessage": "Creating"
+  },
   "xiV3Wz": {
     "defaultMessage": "More events",
     "description": "src/views/CampaignDetail/InfoHeader/OtherCampaigns/index.tsx"
@@ -3828,9 +3906,15 @@
     "defaultMessage": "Archived Work",
     "description": "src/components/Notice/NoticeArticleTitle.tsx"
   },
+  "z9jdNT": {
+    "defaultMessage": "Start browser proof"
+  },
   "zAK5G+": {
     "defaultMessage": "The login link has been sent to {email}",
     "description": "src/components/Forms/Verification/LinkSent.tsx"
+  },
+  "zCCJPu": {
+    "defaultMessage": "Run browser proof"
   },
   "zE51j6": {
     "defaultMessage": "Failed to publish, please try again."
