@@ -21,7 +21,7 @@ const handler = (_req: NextApiRequest, res: NextApiResponse) => {
       "img-src 'none'",
       "connect-src 'self'",
       "style-src 'unsafe-inline'",
-      "script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'",
+      "script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' blob:",
       "worker-src 'self' blob:",
     ].join('; ')
   )
@@ -179,7 +179,7 @@ const getHtml = () => `<!doctype html>
       <h2>Handoff</h2>
       <dl id="handoff"></dl>
       <p id="message" class="error"></p>
-      <button id="run" disabled>Run proof preflight</button>
+      <button id="run" disabled>Run browser proof</button>
       <button id="copy" class="secondary">Copy report</button>
       <a id="back" class="button secondary" href="/me/settings/personhood/prove">Back</a>
     </section>
@@ -262,6 +262,10 @@ const getHtml = () => `<!doctype html>
         const proofWorker = {
           status: 'pending',
           inputStatus: 'not_started',
+          warmupStatus: 'pending',
+          witnessStatus: 'pending',
+          proofStatus: 'pending',
+          submitStatus: 'pending',
         };
 
         const readiness = {
@@ -301,7 +305,7 @@ const getHtml = () => `<!doctype html>
           messageEl.textContent = 'The browser handoff has expired. Return to Matters and request a fresh TW FidO signature.';
         } else {
           messageEl.textContent = readiness.crossOriginIsolated
-            ? 'Isolated prover container is ready. Run the browser proof preflight to mount the zkID worker and build circuit inputs.'
+            ? 'Isolated prover container is ready. Run the browser proof to build zkID inputs, generate proofs, and submit the claim.'
             : 'This page is not isolated. Browser proof cannot run here.';
           messageEl.className = readiness.crossOriginIsolated ? '' : 'error';
         }
@@ -321,10 +325,17 @@ const getHtml = () => `<!doctype html>
             metric('Signature payload', formatBytes(encodedBytes(handoff?.proofInput?.signedResponse))),
             metric('Proof worker', proofWorker.status),
             metric('Input builder', proofWorker.inputStatus),
+            metric('Warmup', proofWorker.warmupStatus || 'pending'),
+            metric('Witness', proofWorker.witnessStatus || 'pending'),
+            metric('Proof', proofWorker.proofStatus || 'pending'),
+            metric('Submit', proofWorker.submitStatus || 'pending'),
             metric('Issuer bits', proofWorker.issuerBits ? String(proofWorker.issuerBits) : 'pending'),
             metric('Certificate serial', proofWorker.serialParsed ? 'parsed' : 'pending'),
             metric('Cert input', proofWorker.certInputBytes ? formatBytes(proofWorker.certInputBytes) : 'pending'),
-            metric('User-sig input', proofWorker.userSigInputBytes ? formatBytes(proofWorker.userSigInputBytes) : 'pending')
+            metric('User-sig input', proofWorker.userSigInputBytes ? formatBytes(proofWorker.userSigInputBytes) : 'pending'),
+            metric('Cert proof', proofWorker.certProofBytes ? formatBytes(proofWorker.certProofBytes) : 'pending'),
+            metric('User-sig proof', proofWorker.userSigProofBytes ? formatBytes(proofWorker.userSigProofBytes) : 'pending'),
+            metric('Total time', proofWorker.totalMs ? Math.round(proofWorker.totalMs / 1000) + ' s' : 'pending')
           );
         };
 
@@ -363,8 +374,21 @@ const getHtml = () => `<!doctype html>
           const moduleUrl = new URL(assetBase + '/spartan2_wasm.js', location.origin).href;
           const wasmUrl = new URL(assetBase + '/spartan2_wasm_bg.wasm', location.origin).href;
           const issuerCertUrl = new URL(assetBase + '/moica-g3.cer', location.origin).href;
+          const witnessCalculatorUrl = new URL(assetBase + '/witness_calculator.js', location.origin).href;
+          const certPkUrl = new URL(assetBase + '/cert_chain_rs4096_proving.key.gz', location.origin).href;
+          const userSigPkUrl = new URL(assetBase + '/user_sig_rs2048_proving.key.gz', location.origin).href;
+          const certWitnessUrl = new URL(assetBase + '/certChainRS4096.wasm.gz', location.origin).href;
+          const userSigWitnessUrl = new URL(assetBase + '/userSigRS2048.wasm.gz', location.origin).href;
 
           return \`
+            const assetCacheName = 'matters-personhood-prover-assets-v1';
+            const witnessCalculators = new Map();
+            let witnessBuilder;
+
+            const postProgress = (stage, status, extra = {}) => {
+              self.postMessage({ type: 'progress', stage, status, ...extra });
+            };
+
             const base64ToBytes = (value) => {
               const normalized = String(value || '').replace(/-/g, '+').replace(/_/g, '/');
               const padded = normalized.padEnd(Math.ceil(normalized.length / 4) * 4, '=');
@@ -374,18 +398,159 @@ const getHtml = () => `<!doctype html>
               return bytes;
             };
 
+            const bytesToBase64 = (bytes) => {
+              let binary = '';
+              const chunkSize = 0x8000;
+              for (let i = 0; i < bytes.length; i += chunkSize) {
+                binary += String.fromCharCode(...bytes.subarray(i, i + chunkSize));
+              }
+              return btoa(binary);
+            };
+
             const byteLength = (value) => new TextEncoder().encode(value).byteLength;
+
+            const gzipIsize = (bytes) => {
+              if (bytes.byteLength < 4) throw new Error('gzip asset is too small');
+              const view = new DataView(bytes.buffer, bytes.byteOffset + bytes.byteLength - 4, 4);
+              return view.getUint32(0, true);
+            };
+
+            const cachedFetch = async (url) => {
+              const request = new Request(url, { cache: 'force-cache' });
+              if ('caches' in self) {
+                const cache = await caches.open(assetCacheName);
+                const cached = await cache.match(request);
+                if (cached) return cached;
+                const response = await fetch(request);
+                if (!response.ok) {
+                  throw new Error('Fetch failed for ' + url + ': ' + response.status);
+                }
+                await cache.put(request, response.clone()).catch(() => {});
+                return response;
+              }
+              const response = await fetch(request);
+              if (!response.ok) {
+                throw new Error('Fetch failed for ' + url + ': ' + response.status);
+              }
+              return response;
+            };
+
+            const fetchBytes = async (url) => {
+              const response = await cachedFetch(url);
+              return new Uint8Array(await response.arrayBuffer());
+            };
+
+            const decompressGzipToBytes = async (compressed, label) => {
+              postProgress('warmup', 'decompressing_' + label);
+              const reader = new Blob([compressed])
+                .stream()
+                .pipeThrough(new DecompressionStream('gzip'))
+                .getReader();
+              const chunks = [];
+              let total = 0;
+              for (;;) {
+                const next = await reader.read();
+                if (next.done) break;
+                chunks.push(next.value);
+                total += next.value.byteLength;
+              }
+              const out = new Uint8Array(total);
+              let offset = 0;
+              for (const chunk of chunks) {
+                out.set(chunk, offset);
+                offset += chunk.byteLength;
+              }
+              return out;
+            };
+
+            const loadBuilder = async () => {
+              if (witnessBuilder) return witnessBuilder;
+              const response = await cachedFetch(\${JSON.stringify(witnessCalculatorUrl)});
+              const rawSource = await response.text();
+              const source = rawSource.replace(
+                'a = flatArray(input);',
+                'let a = flatArray(input);'
+              );
+              const wrapped = [
+                'const module = { exports: undefined };',
+                source,
+                'export default module.exports;',
+              ].join(String.fromCharCode(10));
+              const blobUrl = URL.createObjectURL(new Blob([wrapped], {
+                type: 'text/javascript',
+              }));
+              try {
+                const mod = await import(blobUrl);
+                witnessBuilder = mod.default;
+                return witnessBuilder;
+              } finally {
+                URL.revokeObjectURL(blobUrl);
+              }
+            };
+
+            const calculateWitness = async (kind, inputJson, witnessWasmBytes) => {
+              let calculator = witnessCalculators.get(kind);
+              if (!calculator) {
+                const builder = await loadBuilder();
+                calculator = await builder(witnessWasmBytes.slice().buffer, {
+                  sanityCheck: true,
+                });
+                witnessCalculators.set(kind, calculator);
+              }
+              return calculator.calculateWTNSBin(JSON.parse(inputJson), true);
+            };
+
+            const loadProvingKey = async (zkid, kind, url, label) => {
+              postProgress('warmup', 'downloading_' + label);
+              const compressed = await fetchBytes(url);
+              const totalSize = gzipIsize(compressed);
+              postProgress('warmup', 'loading_' + label, {
+                asset: label,
+                bytesDone: 0,
+                bytesTotal: totalSize,
+              });
+              zkid.load_pk_begin(kind, totalSize, true);
+              let committed = false;
+              let bytesDone = 0;
+              try {
+                const reader = new Blob([compressed])
+                  .stream()
+                  .pipeThrough(new DecompressionStream('gzip'))
+                  .getReader();
+                for (;;) {
+                  const next = await reader.read();
+                  if (next.done) break;
+                  bytesDone += next.value.byteLength;
+                  zkid.load_pk_chunk(kind, next.value);
+                  postProgress('warmup', 'loading_' + label, {
+                    asset: label,
+                    bytesDone,
+                    bytesTotal: totalSize,
+                  });
+                }
+                zkid.load_pk_finish(kind);
+                committed = true;
+              } finally {
+                if (!committed) {
+                  try {
+                    zkid.load_pk_cancel(kind);
+                  } catch {}
+                }
+              }
+            };
 
             self.onmessage = async (event) => {
               const handoff = event.data?.handoff;
+              const startedAt = performance.now();
               try {
-                self.postMessage({ type: 'progress', status: 'importing_wasm' });
+                postProgress('input', 'importing_wasm');
                 const zkid = await import(\${JSON.stringify(moduleUrl)});
 
-                self.postMessage({ type: 'progress', status: 'initializing_wasm' });
+                postProgress('input', 'initializing_wasm');
                 await zkid.default(\${JSON.stringify(wasmUrl)});
+                zkid.wasm_init?.();
 
-                self.postMessage({ type: 'progress', status: 'loading_certificates' });
+                postProgress('input', 'loading_certificates');
                 const userCertDer = base64ToBytes(handoff.proofInput.cert);
                 const issuerCertRes = await fetch(\${JSON.stringify(issuerCertUrl)}, {
                   cache: 'force-cache',
@@ -395,7 +560,7 @@ const getHtml = () => `<!doctype html>
                 }
                 const issuerCertDer = new Uint8Array(await issuerCertRes.arrayBuffer());
 
-                self.postMessage({ type: 'progress', status: 'building_inputs' });
+                postProgress('input', 'building_inputs');
                 const serialHex = zkid.cert_serial_hex(userCertDer);
                 const issuerBits = zkid.cert_modulus_bits(issuerCertDer);
                 const appIdBytes = new TextEncoder().encode(handoff.proofInput.appId);
@@ -420,6 +585,96 @@ const getHtml = () => `<!doctype html>
                   certInputBytes: byteLength(certJson),
                   userSigInputBytes: byteLength(userSigJson),
                 });
+
+                const certKind = zkid.CircuitKind.CertChainRs4096;
+                const userSigKind = zkid.CircuitKind.UserSigRs2048;
+
+                await loadProvingKey(
+                  zkid,
+                  certKind,
+                  \${JSON.stringify(certPkUrl)},
+                  'cert_pk'
+                );
+                await loadProvingKey(
+                  zkid,
+                  userSigKind,
+                  \${JSON.stringify(userSigPkUrl)},
+                  'user_sig_pk'
+                );
+
+                postProgress('warmup', 'downloading_cert_witness');
+                const certWitnessWasm = await decompressGzipToBytes(
+                  await fetchBytes(\${JSON.stringify(certWitnessUrl)}),
+                  'cert_witness'
+                );
+                postProgress('warmup', 'downloading_user_sig_witness');
+                const userSigWitnessWasm = await decompressGzipToBytes(
+                  await fetchBytes(\${JSON.stringify(userSigWitnessUrl)}),
+                  'user_sig_witness'
+                );
+                postProgress('warmup', 'ready');
+
+                postProgress('witness', 'cert_chain');
+                const certWitnessStart = performance.now();
+                const certWitness = await calculateWitness('certChainRS4096', certJson, certWitnessWasm);
+                const certWitnessMs = performance.now() - certWitnessStart;
+
+                postProgress('proof', 'cert_chain');
+                const certProveStart = performance.now();
+                const certProofOut = zkid.prove(certKind, certWitness);
+                const certProveMs = performance.now() - certProveStart;
+                const certProofBytes = new Uint8Array(certProofOut.proof);
+
+                postProgress('witness', 'user_sig');
+                const userSigWitnessStart = performance.now();
+                const userSigWitness = await calculateWitness('userSigRS2048', userSigJson, userSigWitnessWasm);
+                const userSigWitnessMs = performance.now() - userSigWitnessStart;
+
+                postProgress('proof', 'user_sig');
+                const userSigProveStart = performance.now();
+                const userSigProofOut = zkid.prove(userSigKind, userSigWitness);
+                const userSigProveMs = performance.now() - userSigProveStart;
+                const userSigProofBytes = new Uint8Array(userSigProofOut.proof);
+
+                self.postMessage({
+                  type: 'proof_ready',
+                  certProofBytes: certProofBytes.byteLength,
+                  userSigProofBytes: userSigProofBytes.byteLength,
+                  certWitnessMs,
+                  certProveMs,
+                  userSigWitnessMs,
+                  userSigProveMs,
+                });
+
+                postProgress('submit', 'submitting');
+                const linkVerifyUrl = handoff.linkVerifyUrl || '/api/personhood/zkid/link-verify';
+                const submitResponse = await fetch(linkVerifyUrl, {
+                  method: 'POST',
+                  credentials: 'same-origin',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({
+                    handoffToken: handoff.handoffToken,
+                    certChainType: 'rs4096',
+                    certChainProof: bytesToBase64(certProofBytes),
+                    userSigProof: bytesToBase64(userSigProofBytes),
+                  }),
+                });
+                const submitText = await submitResponse.text();
+                let submitJson;
+                try {
+                  submitJson = submitText ? JSON.parse(submitText) : {};
+                } catch {
+                  submitJson = { raw: submitText };
+                }
+                if (!submitResponse.ok) {
+                  throw new Error('Submit failed ' + submitResponse.status + ': ' + (submitJson.error || submitResponse.statusText));
+                }
+                self.postMessage({
+                  type: 'complete',
+                  claimStatus: submitJson.status || 'claimed',
+                  badges: submitJson.user?.info?.badges?.map((badge) => badge.type) || [],
+                  totalMs: performance.now() - startedAt,
+                });
               } catch (error) {
                 self.postMessage({
                   type: 'error',
@@ -433,8 +688,15 @@ const getHtml = () => `<!doctype html>
         runEl.addEventListener('click', () => {
           if (!canRun || !handoff) return;
           runEl.disabled = true;
-          setWorkerState({ status: 'running', inputStatus: 'starting' });
-          messageEl.textContent = 'Starting zkID browser worker preflight.';
+          setWorkerState({
+            status: 'running',
+            inputStatus: 'starting',
+            warmupStatus: 'pending',
+            witnessStatus: 'pending',
+            proofStatus: 'pending',
+            submitStatus: 'pending',
+          });
+          messageEl.textContent = 'Starting zkID browser proof. Keep this page open until the claim result appears.';
           messageEl.className = '';
 
           const workerUrl = URL.createObjectURL(new Blob([createWorkerSource()], {
@@ -444,7 +706,20 @@ const getHtml = () => `<!doctype html>
           worker.onmessage = (event) => {
             const data = event.data || {};
             if (data.type === 'progress') {
-              setWorkerState({ inputStatus: data.status });
+              if (data.stage === 'input') {
+                setWorkerState({ inputStatus: data.status });
+              } else if (data.stage === 'warmup') {
+                const suffix = data.bytesTotal
+                  ? ' ' + Math.round((data.bytesDone / data.bytesTotal) * 100) + '%'
+                  : '';
+                setWorkerState({ warmupStatus: data.status + suffix });
+              } else if (data.stage === 'witness') {
+                setWorkerState({ witnessStatus: data.status });
+              } else if (data.stage === 'proof') {
+                setWorkerState({ proofStatus: data.status });
+              } else if (data.stage === 'submit') {
+                setWorkerState({ submitStatus: data.status });
+              }
               return;
             }
             if (data.type === 'input_ready') {
@@ -457,15 +732,38 @@ const getHtml = () => `<!doctype html>
                 certInputBytes: data.certInputBytes,
                 userSigInputBytes: data.userSigInputBytes,
               });
-              messageEl.textContent = 'zkID worker mounted and circuit inputs are ready. Full witness and proof generation is the next slice.';
+              return;
+            }
+            if (data.type === 'proof_ready') {
+              setWorkerState({
+                status: 'proof_ready',
+                witnessStatus: 'ready',
+                proofStatus: 'ready',
+                certProofBytes: data.certProofBytes,
+                userSigProofBytes: data.userSigProofBytes,
+                certWitnessMs: data.certWitnessMs,
+                certProveMs: data.certProveMs,
+                userSigWitnessMs: data.userSigWitnessMs,
+                userSigProveMs: data.userSigProveMs,
+              });
+              messageEl.textContent = 'Proofs are ready. Submitting claim to Matters.';
+              return;
+            }
+            if (data.type === 'complete') {
+              setWorkerState({
+                status: data.claimStatus || 'claimed',
+                submitStatus: 'claimed',
+                badges: data.badges || [],
+                totalMs: data.totalMs,
+              });
+              messageEl.textContent = 'Personhood proof accepted. Return to Matters to view the badge.';
               worker.terminate();
               URL.revokeObjectURL(workerUrl);
-              runEl.disabled = false;
               return;
             }
             if (data.type === 'error') {
-              setWorkerState({ status: 'error', inputStatus: data.message || 'failed' });
-              messageEl.textContent = data.message || 'zkID worker preflight failed.';
+              setWorkerState({ status: 'error', submitStatus: data.message || 'failed' });
+              messageEl.textContent = data.message || 'zkID browser proof failed.';
               messageEl.className = 'error';
               worker.terminate();
               URL.revokeObjectURL(workerUrl);
