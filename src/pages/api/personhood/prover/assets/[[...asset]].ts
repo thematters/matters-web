@@ -1,4 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
+import { Readable } from 'stream'
+import type { ReadableStream as NodeReadableStream } from 'stream/web'
 import { gunzipSync } from 'zlib'
 
 type ProverAsset = {
@@ -6,6 +8,7 @@ type ProverAsset = {
   patch?: (body: Buffer) => Buffer
   url: string
   gzip?: boolean
+  passthrough?: boolean
 }
 
 const ZKID_RELEASE = 'https://github.com/zkmopro/zkID/releases/download/latest'
@@ -25,6 +28,31 @@ const ASSETS: Record<string, ProverAsset> = {
   'moica-g3.cer': {
     contentType: 'application/pkix-cert',
     url: 'https://moica.nat.gov.tw/repository/Certs/MOICA-G3.cer',
+  },
+  'witness_calculator.js': {
+    contentType: 'application/javascript; charset=utf-8',
+    gzip: true,
+    url: `${ZKID_RELEASE}/witness_calculator.js.gz`,
+  },
+  'cert_chain_rs4096_proving.key.gz': {
+    contentType: 'application/gzip',
+    passthrough: true,
+    url: `${ZKID_RELEASE}/cert_chain_rs4096_proving.key.gz`,
+  },
+  'user_sig_rs2048_proving.key.gz': {
+    contentType: 'application/gzip',
+    passthrough: true,
+    url: `${ZKID_RELEASE}/user_sig_rs2048_proving.key.gz`,
+  },
+  'certChainRS4096.wasm.gz': {
+    contentType: 'application/gzip',
+    passthrough: true,
+    url: `${ZKID_RELEASE}/certChainRS4096.wasm.gz`,
+  },
+  'userSigRS2048.wasm.gz': {
+    contentType: 'application/gzip',
+    passthrough: true,
+    url: `${ZKID_RELEASE}/userSigRS2048.wasm.gz`,
   },
 }
 
@@ -58,17 +86,26 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       return
     }
 
-    const raw = Buffer.from(await upstream.arrayBuffer())
-    const body = asset.patch
-      ? asset.patch(asset.gzip ? gunzipSync(raw) : raw)
-      : asset.gzip
-        ? gunzipSync(raw)
-        : raw
+    if (asset.passthrough) {
+      sendAssetHeaders(res, asset.contentType, upstream.headers)
+      res.status(200)
+      if (req.method === 'HEAD') {
+        res.end()
+        return
+      }
+      if (!upstream.body) {
+        res.end()
+        return
+      }
+      Readable.fromWeb(upstream.body as unknown as NodeReadableStream).pipe(res)
+      return
+    }
 
-    res.setHeader('Content-Type', asset.contentType)
-    res.setHeader('Cache-Control', 'public, max-age=3600, immutable')
-    res.setHeader('Cross-Origin-Resource-Policy', 'same-origin')
-    res.setHeader('X-Content-Type-Options', 'nosniff')
+    const raw = Buffer.from(await upstream.arrayBuffer())
+    const source = asset.passthrough ? raw : asset.gzip ? gunzipSync(raw) : raw
+    const body = asset.patch ? asset.patch(source) : source
+
+    sendAssetHeaders(res, asset.contentType, upstream.headers)
     res.status(200).send(body)
   } catch (error) {
     res.status(502).json({
@@ -81,11 +118,23 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 export default handler
 
 function sendJs(res: NextApiResponse, source: string) {
-  res.setHeader('Content-Type', 'application/javascript; charset=utf-8')
-  res.setHeader('Cache-Control', 'public, max-age=3600, immutable')
+  sendAssetHeaders(res, 'application/javascript; charset=utf-8')
+  res.status(200).send(source)
+}
+
+function sendAssetHeaders(
+  res: NextApiResponse,
+  contentType: string,
+  upstreamHeaders?: Headers
+) {
+  const contentLength = upstreamHeaders?.get('content-length')
+  if (contentLength) {
+    res.setHeader('Content-Length', contentLength)
+  }
+  res.setHeader('Content-Type', contentType)
+  res.setHeader('Cache-Control', 'public, max-age=14400, immutable')
   res.setHeader('Cross-Origin-Resource-Policy', 'same-origin')
   res.setHeader('X-Content-Type-Options', 'nosniff')
-  res.status(200).send(source)
 }
 
 function patchSpartan2WasmJs(body: Buffer) {
