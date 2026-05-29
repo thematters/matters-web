@@ -9,6 +9,7 @@ import {
   BROWSER_PROOF_ROUTE,
   type BrowserProofHandoff,
   clearBrowserProofHandoff,
+  ISOLATED_PROVER_ROUTE,
   loadBrowserProofHandoff,
 } from '../handoff'
 import styles from './styles.module.css'
@@ -185,6 +186,10 @@ const PersonhoodProve = () => {
     window.location.assign(handoff?.returnUrl || FEASIBILITY_ROUTE)
   }, [handoff?.returnUrl])
 
+  const openIsolatedProver = useCallback(() => {
+    window.location.assign(ISOLATED_PROVER_ROUTE)
+  }, [])
+
   const readinessStatus = getReadinessStatus(readiness)
   const storage = readiness?.checks.storageEstimate
 
@@ -353,14 +358,22 @@ const PersonhoodProve = () => {
             </h2>
             <p>
               <FormattedMessage
-                defaultMessage="The next slice mounts the zkID in-browser worker here and submits the proof to Matters."
-                id="3HKaQ4"
+                defaultMessage="Open the isolated browser container. It does not load the normal Matters bundle, so cross-origin isolation can be enabled for the zkID worker."
+                id="dWt8c/"
               />
             </p>
           </header>
 
-          <button className={styles.button} disabled type="button">
-            <FormattedMessage defaultMessage="Run browser proof" id="zCCJPu" />
+          <button
+            className={styles.button}
+            disabled={!handoff}
+            onClick={openIsolatedProver}
+            type="button"
+          >
+            <FormattedMessage
+              defaultMessage="Open isolated prover"
+              id="atmn17"
+            />
           </button>
         </section>
 

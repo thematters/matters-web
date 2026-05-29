@@ -22,6 +22,7 @@ export type BrowserProofHandoff = {
 }
 
 export const BROWSER_PROOF_ROUTE = '/me/settings/personhood/prove'
+export const ISOLATED_PROVER_ROUTE = '/api/personhood/prover'
 export const BROWSER_PROOF_HANDOFF_STORAGE_KEY =
   'matters.personhood.browserProofHandoff.v1'
 
