@@ -103,6 +103,9 @@
   "/GyMKa": {
     "defaultMessage": "分享作品"
   },
+  "/H/Ei0": {
+    "defaultMessage": "Copy report"
+  },
   "/IMR+8": {
     "defaultMessage": "支持排行榜"
   },
@@ -373,6 +376,9 @@
   "3EeDnu": {
     "defaultMessage": "贴上 JSFiddle 或 CodePen 链接后，Enter 进行新增"
   },
+  "3HKaQ4": {
+    "defaultMessage": "The next slice mounts the zkID in-browser worker here and submits the proof to Matters."
+  },
   "3KNMbJ": {
     "defaultMessage": "写文章"
   },
@@ -486,6 +492,9 @@
   },
   "5XFd/5": {
     "defaultMessage": "管理围炉"
+  },
+  "5fjmnA": {
+    "defaultMessage": "碳基生物"
   },
   "5iii3x": {
     "defaultMessage": "围炉：",
@@ -811,6 +820,9 @@
     "defaultMessage": "信用卡交易内容有疑虑时，发卡机构暂停或退回的款项",
     "description": "src/components/Transaction/index.tsx"
   },
+  "ABDljA": {
+    "defaultMessage": "Create ticket"
+  },
   "AEiogR": {
     "defaultMessage": "该 Google 账号已关联至其他 Matters 账号，请登录该账号解绑后再试",
     "description": "USER_SOCIAL_ACCOUNT_EXISTS"
@@ -922,6 +934,9 @@
   "C/4nS6": {
     "defaultMessage": "绑定并提领"
   },
+  "C1yL+d": {
+    "defaultMessage": "TW FidO mobile flow"
+  },
   "C3NKBg": {
     "defaultMessage": "{type} 已绑定",
     "description": "src/views/Me/Settings/Settings/Socials/index.tsx"
@@ -936,6 +951,9 @@
   "CD688y": {
     "defaultMessage": "收藏了",
     "description": "src/components/Notice/ArticleNotice/ArticleNewSubscriberNotice.tsx"
+  },
+  "CFtbZu": {
+    "defaultMessage": "Run checks"
   },
   "CNMDU5": {
     "defaultMessage": "ID 字符数须介于 {MIN_USER_NAME_LENGTH} 到 {MAX_USER_NAME_LENGTH} 之间"
@@ -1000,6 +1018,9 @@
   "D9tEst": {
     "defaultMessage": "马特市建筑师"
   },
+  "DCgQVz": {
+    "defaultMessage": "PWA feasibility"
+  },
   "DP3yqI": {
     "defaultMessage": "支持人数"
   },
@@ -1009,6 +1030,9 @@
   },
   "DUvMii": {
     "defaultMessage": "可自订号召支持的内容，以及收到支持后的感谢文字"
+  },
+  "DW68ct": {
+    "defaultMessage": "Browser signals for the carbon based badge prover."
   },
   "DX0YH3": {
     "defaultMessage": "已成功绑定钱包",
@@ -1178,6 +1202,9 @@
     "defaultMessage": "ID 设置后无法修改，确认使用 {id} 作为 Matters ID 吗？",
     "description": "src/components/Dialogs/SetUserNameDialog/ConfirmStep.tsx"
   },
+  "G/jeUL": {
+    "defaultMessage": "Open TW FidO"
+  },
   "G/yZLu": {
     "defaultMessage": "移除"
   },
@@ -1320,6 +1347,9 @@
   },
   "HzB4Lk": {
     "defaultMessage": "告知读者你此次编辑的更动有哪些⋯"
+  },
+  "I3v/Va": {
+    "defaultMessage": "PWA proof handoff"
   },
   "IJ9YcQ": {
     "defaultMessage": "取消链接",
@@ -1578,6 +1608,9 @@
     "defaultMessage": "去钱包确认",
     "description": "src/components/Forms/PaymentForm/PayTo/Confirm/index.tsx"
   },
+  "N73cBw": {
+    "defaultMessage": "WASM memory"
+  },
   "NACY16": {
     "defaultMessage": "为什么需要设定钱包 ?",
     "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
@@ -1627,6 +1660,9 @@
   "NlX31w": {
     "defaultMessage": "确认删除后，{commentType}会立即消失。",
     "description": "src/components/CircleComment/DropdownActions/DeleteComment/Dialog.tsx"
+  },
+  "NloKwX": {
+    "defaultMessage": "Proof worker"
   },
   "NmhF45": {
     "defaultMessage": "通过添加标签帮助读者更好地找到你的作品。如果没有合适的标签，你可以创建新的。"
@@ -1840,6 +1876,9 @@
     "defaultMessage": "请再次输入交易密码",
     "description": "src/components/Forms/PaymentForm/SetPassword/index.tsx"
   },
+  "RYc4X0": {
+    "defaultMessage": "Browser proof"
+  },
   "Rc4Oij": {
     "defaultMessage": "火闪电"
   },
@@ -2025,6 +2064,9 @@
   "USOHRK": {
     "defaultMessage": "修改失败，请稍候重试"
   },
+  "USq+mM": {
+    "defaultMessage": "Pornographic advertising"
+  },
   "UUJzml": {
     "defaultMessage": "Logbook 2.0 刚刚推出。如果你是 Traveloggers 的所有者，且尚未领取，你可以从新的日志页面领取："
   },
@@ -2057,6 +2099,9 @@
     "defaultMessage": "发布中，请稍候⋯",
     "description": "src/components/Editor/PreviewDialog/index.tsx"
   },
+  "V3oaoZ": {
+    "defaultMessage": "After TW FidO signs, continue in this browser. No native proof helper is required for this PWA path."
+  },
   "V5OMr4": {
     "defaultMessage": "什么是数字钱包？",
     "description": "src/components/Forms/SelectAuthMethodForm/WalletFeed.tsx"
@@ -2067,6 +2112,9 @@
   },
   "VBve8d": {
     "defaultMessage": "搬家到 Matters"
+  },
+  "VFQGq7": {
+    "defaultMessage": "Check result"
   },
   "VMQPwZ": {
     "defaultMessage": "过往活动",
@@ -2292,6 +2340,9 @@
   "Z39z+x": {
     "defaultMessage": "封锁之后，{displayName} 将无法评论你的作品，不能 @ 你，并且不能加入你的围炉。你可以在设置里管理你的封锁用户列表"
   },
+  "Z4R3Lq": {
+    "defaultMessage": "This browser page is missing a required PWA proving capability."
+  },
   "Z7JXlF": {
     "defaultMessage": "因违反用户协定而被封存，",
     "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
@@ -2450,6 +2501,9 @@
   "cAP9g5": {
     "defaultMessage": "将你的评论在 {commentArticle} 中置顶",
     "description": "src/components/Notice/CommentNotice/CommentPinnedNotice.tsx"
+  },
+  "cB6zjC": {
+    "defaultMessage": "Signed TW FidO proof input is kept in this browser for the next proving step."
   },
   "cCpbBu": {
     "defaultMessage": "频道热门作者"
@@ -2683,6 +2737,9 @@
   },
   "fWZYP5": {
     "defaultMessage": "置顶"
+  },
+  "fbxogW": {
+    "defaultMessage": "Personhood"
   },
   "fko+MR": {
     "defaultMessage": "重试提领"
@@ -2962,6 +3019,9 @@
     "defaultMessage": "确认移出",
     "description": "src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
   },
+  "kqQp7b": {
+    "defaultMessage": "No signed proof input was found. Return to the TW FidO step and check the result again."
+  },
   "ksIL/T": {
     "defaultMessage": "贴心提醒：此钱包地址不同于您用于登录 Matters 的钱包地址"
   },
@@ -3010,6 +3070,9 @@
   },
   "lO7wKc": {
     "defaultMessage": "再想想"
+  },
+  "lTleCS": {
+    "defaultMessage": "Checking"
   },
   "lYVn31": {
     "defaultMessage": "此作品已加入定时发布，请前往「我的创作」页确认"
@@ -3213,6 +3276,9 @@
     "defaultMessage": "恢复留言",
     "description": "src/components/Comment/Content/index.tsx"
   },
+  "p556q3": {
+    "defaultMessage": "Copied"
+  },
   "p5qZnJ": {
     "defaultMessage": "赞赏了",
     "description": "src/components/Notice/ArticleNotice/ArticleNewAppreciationNotice.tsx"
@@ -3240,6 +3306,9 @@
   },
   "ptTHBL": {
     "defaultMessage": "支持号召"
+  },
+  "pw6gGa": {
+    "defaultMessage": "ID number"
   },
   "pzTOmv": {
     "defaultMessage": "关注者"
@@ -3401,6 +3470,9 @@
   "sbhWw+": {
     "defaultMessage": "定时发布"
   },
+  "scWFV3": {
+    "defaultMessage": "Spam advertising"
+  },
   "sfj+KG": {
     "defaultMessage": "结果以链上记录为主，稍后同步至 Matters",
     "description": "src/components/Forms/PaymentForm/Processing/index.tsx"
@@ -3432,6 +3504,9 @@
   },
   "t2EpN/": {
     "defaultMessage": "持续与 {network} 网络同步，稍后更新至 Matters"
+  },
+  "t2rFN5": {
+    "defaultMessage": "Create a signing ticket, open the TW FidO app, then return here for the proof input check."
   },
   "tBt9u0": {
     "defaultMessage": "登录",
@@ -3739,6 +3814,9 @@
     "defaultMessage": "留言",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
   },
+  "xhfdqv": {
+    "defaultMessage": "Creating"
+  },
   "xiV3Wz": {
     "defaultMessage": "更多活动",
     "description": "src/views/CampaignDetail/InfoHeader/OtherCampaigns/index.tsx"
@@ -3828,9 +3906,15 @@
     "defaultMessage": "已归档作品",
     "description": "src/components/Notice/NoticeArticleTitle.tsx"
   },
+  "z9jdNT": {
+    "defaultMessage": "Start browser proof"
+  },
   "zAK5G+": {
     "defaultMessage": "登录链接已发送至 {email}",
     "description": "src/components/Forms/Verification/LinkSent.tsx"
+  },
+  "zCCJPu": {
+    "defaultMessage": "Run browser proof"
   },
   "zE51j6": {
     "defaultMessage": "发布失败"
