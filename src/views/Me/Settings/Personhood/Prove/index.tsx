@@ -42,9 +42,13 @@ type BrowserProofReadiness = {
 
 const FEASIBILITY_ROUTE = '/me/settings/personhood/feasibility'
 
-const bytesToKiB = (bytes?: number) => {
+const bytesToPayloadSize = (bytes?: number) => {
   if (!bytes) {
-    return '0 KiB'
+    return '0 B'
+  }
+
+  if (bytes < 1024) {
+    return `${bytes} B`
   }
 
   return `${Math.round(bytes / 1024)} KiB`
@@ -305,12 +309,16 @@ const PersonhoodProve = () => {
             </div>
             <div>
               <dt>Cert payload</dt>
-              <dd>{bytesToKiB(encodedBytes(handoff?.proofInput.cert))}</dd>
+              <dd>
+                {bytesToPayloadSize(encodedBytes(handoff?.proofInput.cert))}
+              </dd>
             </div>
             <div>
               <dt>Signature payload</dt>
               <dd>
-                {bytesToKiB(encodedBytes(handoff?.proofInput.signedResponse))}
+                {bytesToPayloadSize(
+                  encodedBytes(handoff?.proofInput.signedResponse)
+                )}
               </dd>
             </div>
             <div>
@@ -331,8 +339,8 @@ const PersonhoodProve = () => {
           {readinessStatus === 'blocked' && (
             <p className={styles.error}>
               <FormattedMessage
-                defaultMessage="This browser page is missing a required PWA proving capability."
-                id="Z4R3Lq"
+                defaultMessage="Browser handoff is ready. Browser proving is pending until the prover runs in a cross-origin isolated page."
+                id="FXgOAP"
               />
             </p>
           )}
