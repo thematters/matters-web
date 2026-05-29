@@ -117,6 +117,7 @@ type TwFidoState = {
 
 const POLL_INTERVAL_MS = 4000
 const TW_FIDO_SESSION_STORAGE_KEY = 'matters.personhood.twFidoSession.v1'
+const TW_FIDO_SESSION_MAX_AGE_MS = 15 * 60 * 1000
 const HELPER_DEEPLINK_BASE = 'openac://prove'
 const CERT_CHAIN_PROVING_KEY_URL =
   'https://github.com/zkmopro/zkID/releases/download/latest/cert_chain_rs4096_proving.key.gz'
@@ -195,28 +196,47 @@ const isExpiredTicket = (ticket: SpTicketResponse) => {
   return expiresAt ? Date.now() > expiresAt : false
 }
 
+const isExpiredStoredSession = (stored: StoredTwFidoSession) => {
+  const savedAt = parseTime(stored.savedAt)
+  return (
+    isExpiredTicket(stored.ticket) ||
+    (savedAt ? Date.now() - savedAt > TW_FIDO_SESSION_MAX_AGE_MS : false)
+  )
+}
+
+const getTwFidoSessionStorages = () => {
+  if (typeof window === 'undefined') {
+    return []
+  }
+
+  return [window.localStorage, window.sessionStorage]
+}
+
 const loadStoredTwFidoSession = () => {
   if (typeof window === 'undefined') {
     return undefined
   }
 
-  try {
-    const raw = window.sessionStorage.getItem(TW_FIDO_SESSION_STORAGE_KEY)
-    if (!raw) {
-      return undefined
-    }
+  for (const storage of getTwFidoSessionStorages()) {
+    try {
+      const raw = storage.getItem(TW_FIDO_SESSION_STORAGE_KEY)
+      if (!raw) {
+        continue
+      }
 
-    const stored = JSON.parse(raw) as StoredTwFidoSession
-    if (!stored.ticket || isExpiredTicket(stored.ticket)) {
-      window.sessionStorage.removeItem(TW_FIDO_SESSION_STORAGE_KEY)
-      return undefined
-    }
+      const stored = JSON.parse(raw) as StoredTwFidoSession
+      if (!stored.ticket || isExpiredStoredSession(stored)) {
+        storage.removeItem(TW_FIDO_SESSION_STORAGE_KEY)
+        continue
+      }
 
-    return stored
-  } catch {
-    window.sessionStorage.removeItem(TW_FIDO_SESSION_STORAGE_KEY)
-    return undefined
+      return stored
+    } catch {
+      storage.removeItem(TW_FIDO_SESSION_STORAGE_KEY)
+    }
   }
+
+  return undefined
 }
 
 const saveTwFidoSession = (ticket: SpTicketResponse) => {
@@ -224,13 +244,18 @@ const saveTwFidoSession = (ticket: SpTicketResponse) => {
     return
   }
 
-  window.sessionStorage.setItem(
-    TW_FIDO_SESSION_STORAGE_KEY,
-    JSON.stringify({
-      savedAt: new Date().toISOString(),
-      ticket,
-    } satisfies StoredTwFidoSession)
-  )
+  const value = JSON.stringify({
+    savedAt: new Date().toISOString(),
+    ticket,
+  } satisfies StoredTwFidoSession)
+
+  for (const storage of getTwFidoSessionStorages()) {
+    try {
+      storage.setItem(TW_FIDO_SESSION_STORAGE_KEY, value)
+    } catch {
+      // Keep the flow usable if one storage backend is unavailable.
+    }
+  }
 }
 
 const clearTwFidoSession = () => {
@@ -238,8 +263,28 @@ const clearTwFidoSession = () => {
     return
   }
 
-  window.sessionStorage.removeItem(TW_FIDO_SESSION_STORAGE_KEY)
+  for (const storage of getTwFidoSessionStorages()) {
+    try {
+      storage.removeItem(TW_FIDO_SESSION_STORAGE_KEY)
+    } catch {
+      // Ignore storage cleanup failures.
+    }
+  }
 }
+
+const isMobileSafari = () => {
+  if (typeof window === 'undefined') {
+    return false
+  }
+
+  const ua = window.navigator.userAgent
+  return /iP(ad|hone|od)/.test(ua) && /Safari/.test(ua)
+}
+
+const getHelperUnavailableMessage = () =>
+  isMobileSafari()
+    ? 'Safari could not find an installed proof helper for openac://prove. Install the OpenAC helper app or copy the helper link for testing.'
+    : 'Could not open proof helper. Install the OpenAC helper app or copy the helper link for testing.'
 
 const createInitialReport = (): FeasibilityReport => {
   if (typeof window === 'undefined') {
@@ -514,7 +559,6 @@ const PersonhoodFeasibility = () => {
         }
 
         if (body.status === 'signed') {
-          clearTwFidoSession()
           setTwFido((current) => ({
             ...current,
             handoff: undefined,
@@ -552,6 +596,7 @@ const PersonhoodFeasibility = () => {
     }
 
     const idNum = twFido.idNum.trim().toUpperCase()
+    clearTwFidoSession()
     setTwFido((current) => ({
       ...current,
       error: undefined,
@@ -765,6 +810,9 @@ const PersonhoodFeasibility = () => {
               )}
             </button>
           </section>
+          {helperHandoffUrl && (
+            <p className={styles.hint}>{getHelperUnavailableMessage()}</p>
+          )}
 
           <dl className={styles.metrics}>
             <div>
