@@ -116,6 +116,7 @@ type TwFidoState = {
 }
 
 const POLL_INTERVAL_MS = 4000
+const TW_FIDO_SESSION_STORAGE_KEY = 'matters.personhood.twFidoSession.v1'
 const HELPER_DEEPLINK_BASE = 'openac://prove'
 const CERT_CHAIN_PROVING_KEY_URL =
   'https://github.com/zkmopro/zkID/releases/download/latest/cert_chain_rs4096_proving.key.gz'
@@ -123,6 +124,11 @@ const USER_SIG_PROVING_KEY_URL =
   'https://github.com/zkmopro/zkID/releases/download/latest/user_sig_rs2048_proving.key.gz'
 const SMT_SNAPSHOT_URL =
   'https://github.com/moven0831/moica-revocation-smt/releases/download/snapshot-latest/g3-tree-snapshot.json.gz'
+
+type StoredTwFidoSession = {
+  savedAt: string
+  ticket: SpTicketResponse
+}
 
 const bytesToMiB = (bytes?: number) => {
   if (!bytes) {
@@ -168,6 +174,71 @@ const buildHelperHandoffUrl = (
   const url = new URL(HELPER_DEEPLINK_BASE)
   url.searchParams.set('payload', encoded)
   return url.toString()
+}
+
+const parseTime = (value?: string) => {
+  if (!value) {
+    return undefined
+  }
+
+  const numeric = Number(value)
+  if (Number.isFinite(numeric)) {
+    return numeric > 1_000_000_000_000 ? numeric : numeric * 1000
+  }
+
+  const parsed = Date.parse(value)
+  return Number.isNaN(parsed) ? undefined : parsed
+}
+
+const isExpiredTicket = (ticket: SpTicketResponse) => {
+  const expiresAt = parseTime(ticket.expiresAt)
+  return expiresAt ? Date.now() > expiresAt : false
+}
+
+const loadStoredTwFidoSession = () => {
+  if (typeof window === 'undefined') {
+    return undefined
+  }
+
+  try {
+    const raw = window.sessionStorage.getItem(TW_FIDO_SESSION_STORAGE_KEY)
+    if (!raw) {
+      return undefined
+    }
+
+    const stored = JSON.parse(raw) as StoredTwFidoSession
+    if (!stored.ticket || isExpiredTicket(stored.ticket)) {
+      window.sessionStorage.removeItem(TW_FIDO_SESSION_STORAGE_KEY)
+      return undefined
+    }
+
+    return stored
+  } catch {
+    window.sessionStorage.removeItem(TW_FIDO_SESSION_STORAGE_KEY)
+    return undefined
+  }
+}
+
+const saveTwFidoSession = (ticket: SpTicketResponse) => {
+  if (typeof window === 'undefined') {
+    return
+  }
+
+  window.sessionStorage.setItem(
+    TW_FIDO_SESSION_STORAGE_KEY,
+    JSON.stringify({
+      savedAt: new Date().toISOString(),
+      ticket,
+    } satisfies StoredTwFidoSession)
+  )
+}
+
+const clearTwFidoSession = () => {
+  if (typeof window === 'undefined') {
+    return
+  }
+
+  window.sessionStorage.removeItem(TW_FIDO_SESSION_STORAGE_KEY)
 }
 
 const createInitialReport = (): FeasibilityReport => {
@@ -219,6 +290,27 @@ const PersonhoodFeasibility = () => {
     twFido.status !== 'creating' &&
     twFido.status !== 'polling' &&
     /^[A-Z][0-9A-Z]{9}$/.test(twFido.idNum.trim().toUpperCase())
+
+  useEffect(() => {
+    const stored = loadStoredTwFidoSession()
+    if (!stored) {
+      return
+    }
+
+    setTwFido((current) => {
+      if (current.ticket || current.status !== 'idle') {
+        return current
+      }
+
+      return {
+        ...current,
+        pollCount: 0,
+        proofInputReady: false,
+        status: 'ticket_created',
+        ticket: stored.ticket,
+      }
+    })
+  }, [])
 
   const runBasicChecks = useCallback(async () => {
     if (typeof window === 'undefined') {
@@ -422,6 +514,7 @@ const PersonhoodFeasibility = () => {
         }
 
         if (body.status === 'signed') {
+          clearTwFidoSession()
           setTwFido((current) => ({
             ...current,
             handoff: undefined,
@@ -487,6 +580,7 @@ const PersonhoodFeasibility = () => {
         throw new Error(body.error || `HTTP ${response.status}`)
       }
 
+      saveTwFidoSession(body)
       setTwFido((current) => ({
         ...current,
         idNum,
