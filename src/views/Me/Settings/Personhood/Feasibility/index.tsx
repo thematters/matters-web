@@ -5,6 +5,12 @@ import { Head, Layout, Spacer } from '~/components'
 
 import SettingsTabs from '../../SettingsTabs'
 import settingsStyles from '../../styles.module.css'
+import {
+  BROWSER_PROOF_ROUTE,
+  buildBrowserProofHandoff,
+  type PersonhoodProofInput,
+  saveBrowserProofHandoff,
+} from '../handoff'
 import styles from './styles.module.css'
 
 type StorageEstimateReport = {
@@ -64,13 +70,7 @@ type SignResultResponse =
   | {
       cert?: string
       certSize: number
-      proofInput?: {
-        appId: string
-        cert: string
-        challenge: string
-        challengeExpiresAt?: string
-        signedResponse: string
-      }
+      proofInput?: PersonhoodProofInput
       signedResponse?: string
       signedResponseSize: number
       status: 'signed'
@@ -84,19 +84,6 @@ type SignResultResponse =
 type ProofInput = NonNullable<
   Extract<SignResultResponse, { status: 'signed' }>['proofInput']
 >
-
-type HelperHandoffPayload = {
-  certChainProvingKeyUrl: string
-  certChainType: 'rs4096'
-  handoffToken: string
-  linkVerifyUrl: string
-  proofInput: ProofInput
-  returnUrl: string
-  smtSnapshotUrl: string
-  source: 'matters-web'
-  userSigProvingKeyUrl: string
-  version: 1
-}
 
 type TwFidoState = {
   error?: string
@@ -118,13 +105,6 @@ type TwFidoState = {
 const POLL_INTERVAL_MS = 4000
 const TW_FIDO_SESSION_STORAGE_KEY = 'matters.personhood.twFidoSession.v1'
 const TW_FIDO_SESSION_MAX_AGE_MS = 15 * 60 * 1000
-const HELPER_DEEPLINK_BASE = 'openac://prove'
-const CERT_CHAIN_PROVING_KEY_URL =
-  'https://github.com/zkmopro/zkID/releases/download/latest/cert_chain_rs4096_proving.key.gz'
-const USER_SIG_PROVING_KEY_URL =
-  'https://github.com/zkmopro/zkID/releases/download/latest/user_sig_rs2048_proving.key.gz'
-const SMT_SNAPSHOT_URL =
-  'https://github.com/moven0831/moica-revocation-smt/releases/download/snapshot-latest/g3-tree-snapshot.json.gz'
 
 type StoredTwFidoSession = {
   savedAt: string
@@ -136,45 +116,6 @@ const bytesToMiB = (bytes?: number) => {
     return '0 MiB'
   }
   return `${Math.round(bytes / 1024 / 1024)} MiB`
-}
-
-const encodeBase64Url = (value: string) => {
-  const bytes = new TextEncoder().encode(value)
-  let binary = ''
-  bytes.forEach((byte) => {
-    binary += String.fromCharCode(byte)
-  })
-  return window
-    .btoa(binary)
-    .replace(/\+/g, '-')
-    .replace(/\//g, '_')
-    .replace(/=+$/, '')
-}
-
-const buildHelperHandoffUrl = (
-  proofInput: ProofInput,
-  handoffToken: string
-) => {
-  if (typeof window === 'undefined') {
-    return undefined
-  }
-
-  const payload: HelperHandoffPayload = {
-    certChainProvingKeyUrl: CERT_CHAIN_PROVING_KEY_URL,
-    certChainType: 'rs4096',
-    handoffToken,
-    linkVerifyUrl: `${window.location.origin}/api/personhood/zkid/link-verify`,
-    proofInput,
-    returnUrl: window.location.href,
-    smtSnapshotUrl: SMT_SNAPSHOT_URL,
-    source: 'matters-web',
-    userSigProvingKeyUrl: USER_SIG_PROVING_KEY_URL,
-    version: 1,
-  }
-  const encoded = encodeBase64Url(JSON.stringify(payload))
-  const url = new URL(HELPER_DEEPLINK_BASE)
-  url.searchParams.set('payload', encoded)
-  return url.toString()
 }
 
 const parseTime = (value?: string) => {
@@ -272,20 +213,6 @@ const clearTwFidoSession = () => {
   }
 }
 
-const isMobileSafari = () => {
-  if (typeof window === 'undefined') {
-    return false
-  }
-
-  const ua = window.navigator.userAgent
-  return /iP(ad|hone|od)/.test(ua) && /Safari/.test(ua)
-}
-
-const getHelperUnavailableMessage = () =>
-  isMobileSafari()
-    ? 'Safari could not find an installed proof helper for openac://prove. Install the OpenAC helper app or copy the helper link for testing.'
-    : 'Could not open proof helper. Install the OpenAC helper app or copy the helper link for testing.'
-
 const createInitialReport = (): FeasibilityReport => {
   if (typeof window === 'undefined') {
     return {
@@ -321,7 +248,7 @@ const PersonhoodFeasibility = () => {
   const [report, setReport] = useState<FeasibilityReport>(createInitialReport)
   const [running, setRunning] = useState<'basic' | 'wasm' | null>(null)
   const [copied, setCopied] = useState(false)
-  const [helperCopied, setHelperCopied] = useState(false)
+  const [browserProofError, setBrowserProofError] = useState<string>()
   const [twFido, setTwFido] = useState<TwFidoState>({
     idNum: '',
     pollCount: 0,
@@ -468,15 +395,6 @@ const PersonhoodFeasibility = () => {
     setCopied(true)
     window.setTimeout(() => setCopied(false), 1600)
   }, [reportText])
-
-  const copyHelperLink = useCallback(async (helperUrl?: string) => {
-    if (!helperUrl || !navigator.clipboard) {
-      return
-    }
-    await navigator.clipboard.writeText(helperUrl)
-    setHelperCopied(true)
-    window.setTimeout(() => setHelperCopied(false), 1600)
-  }, [])
 
   const createHandoff = useCallback(async (proofInput: ProofInput) => {
     setTwFido((current) => ({
@@ -678,16 +596,48 @@ const PersonhoodFeasibility = () => {
   const wasmProbe = report.checks.wasmMemoryProbe
   const signedResult =
     twFido.result?.status === 'signed' ? twFido.result : undefined
-  const helperHandoffUrl = useMemo(
-    () =>
-      signedResult?.proofInput && twFido.handoff?.token
-        ? buildHelperHandoffUrl(signedResult.proofInput, twFido.handoff.token)
-        : undefined,
-    [signedResult?.proofInput, twFido.handoff?.token]
-  )
-  const helperHandoffBytes = helperHandoffUrl
-    ? new TextEncoder().encode(helperHandoffUrl).byteLength
+  const browserProofHandoff = useMemo(() => {
+    if (
+      typeof window === 'undefined' ||
+      !signedResult?.proofInput ||
+      !twFido.handoff?.token
+    ) {
+      return undefined
+    }
+
+    return buildBrowserProofHandoff({
+      handoffExpiresAt: twFido.handoff.expiresAt,
+      handoffToken: twFido.handoff.token,
+      origin: window.location.origin,
+      proofInput: signedResult.proofInput,
+      returnUrl: window.location.href,
+    })
+  }, [
+    signedResult?.proofInput,
+    twFido.handoff?.expiresAt,
+    twFido.handoff?.token,
+  ])
+  const canStartBrowserProof = !!browserProofHandoff
+  const browserHandoffBytes = browserProofHandoff
+    ? new TextEncoder().encode(JSON.stringify(browserProofHandoff)).byteLength
     : 0
+  const startBrowserProof = useCallback(() => {
+    setBrowserProofError(undefined)
+
+    if (!browserProofHandoff || typeof window === 'undefined') {
+      setBrowserProofError('Browser proof handoff is not ready.')
+      return
+    }
+
+    try {
+      saveBrowserProofHandoff(browserProofHandoff)
+      window.location.assign(BROWSER_PROOF_ROUTE)
+    } catch (error) {
+      setBrowserProofError(
+        error instanceof Error ? error.message : 'Could not save handoff.'
+      )
+    }
+  }, [browserProofHandoff])
 
   return (
     <Layout.Main>
@@ -784,35 +734,24 @@ const PersonhoodFeasibility = () => {
           </section>
 
           <section className={styles.actions}>
-            <a
-              aria-disabled={!helperHandoffUrl}
-              className={styles.linkButton}
-              href={helperHandoffUrl || undefined}
-            >
-              <FormattedMessage
-                defaultMessage="Open proof helper"
-                id="y1YAx4"
-              />
-            </a>
             <button
-              className={styles.buttonSecondary}
-              disabled={!helperHandoffUrl}
-              onClick={() => copyHelperLink(helperHandoffUrl)}
+              className={styles.button}
+              disabled={!canStartBrowserProof}
+              onClick={startBrowserProof}
               type="button"
             >
-              {helperCopied ? (
-                <FormattedMessage defaultMessage="Copied" id="p556q3" />
-              ) : (
-                <FormattedMessage
-                  defaultMessage="Copy helper link"
-                  id="RcFIF3"
-                />
-              )}
+              <FormattedMessage
+                defaultMessage="Start browser proof"
+                id="z9jdNT"
+              />
             </button>
           </section>
-          {helperHandoffUrl && (
-            <p className={styles.hint}>{getHelperUnavailableMessage()}</p>
-          )}
+          <p className={styles.hint}>
+            <FormattedMessage
+              defaultMessage="After TW FidO signs, continue in this browser. No native proof helper is required for this PWA path."
+              id="V3oaoZ"
+            />
+          </p>
 
           <dl className={styles.metrics}>
             <div>
@@ -848,9 +787,9 @@ const PersonhoodFeasibility = () => {
               <dd>{twFido.proofInputReady ? 'ready' : 'server held'}</dd>
             </div>
             <div>
-              <dt>Helper handoff</dt>
+              <dt>Browser handoff</dt>
               <dd>
-                {helperHandoffUrl
+                {browserProofHandoff
                   ? 'ready'
                   : twFido.handoff?.status || 'not ready'}
               </dd>
@@ -860,8 +799,8 @@ const PersonhoodFeasibility = () => {
               <dd>{twFido.handoff?.expiresAt || 'not created'}</dd>
             </div>
             <div>
-              <dt>Helper URL bytes</dt>
-              <dd>{helperHandoffBytes}</dd>
+              <dt>Handoff bytes</dt>
+              <dd>{browserHandoffBytes}</dd>
             </div>
             <div>
               <dt>Certificate bytes</dt>
@@ -873,9 +812,9 @@ const PersonhoodFeasibility = () => {
             </div>
           </dl>
 
-          {(twFido.error || twFido.handoff?.error) && (
+          {(twFido.error || twFido.handoff?.error || browserProofError) && (
             <p className={styles.error}>
-              {twFido.error || twFido.handoff?.error}
+              {twFido.error || twFido.handoff?.error || browserProofError}
             </p>
           )}
         </section>

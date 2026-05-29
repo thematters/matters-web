@@ -60,6 +60,7 @@ type ROUTE_KEY =
   | 'ME_SETTINGS_MISC'
   | 'ME_SETTINGS_BLOCKED'
   | 'ME_SETTINGS_PERSONHOOD_FEASIBILITY'
+  | 'ME_SETTINGS_PERSONHOOD_PROVE'
   | 'ME_DRAFT_NEW'
   | 'ME_DRAFT_DETAIL'
   | 'ME_DRAFT_DETAIL_OPTIONS'
@@ -117,6 +118,10 @@ export const PROTECTED_ROUTES: {
   {
     key: 'ME_SETTINGS_PERSONHOOD_FEASIBILITY',
     pathname: '/me/settings/personhood/feasibility',
+  },
+  {
+    key: 'ME_SETTINGS_PERSONHOOD_PROVE',
+    pathname: '/me/settings/personhood/prove',
   },
 
   // Article

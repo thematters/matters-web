@@ -26,20 +26,21 @@ const nextConfig: NextConfig = {
     return [
       ...(personhoodCrossOriginIsolated
         ? [
-            {
-              source: '/me/settings/personhood/feasibility',
-              headers: [
-                {
-                  key: 'Cross-Origin-Opener-Policy',
-                  value: 'same-origin',
-                },
-                {
-                  key: 'Cross-Origin-Embedder-Policy',
-                  value: 'require-corp',
-                },
-              ],
-            },
-          ]
+            '/me/settings/personhood/feasibility',
+            '/me/settings/personhood/prove',
+          ].map((source) => ({
+            source,
+            headers: [
+              {
+                key: 'Cross-Origin-Opener-Policy',
+                value: 'same-origin',
+              },
+              {
+                key: 'Cross-Origin-Embedder-Policy',
+                value: 'require-corp',
+              },
+            ],
+          }))
         : []),
       {
         source: '/(.*)',
