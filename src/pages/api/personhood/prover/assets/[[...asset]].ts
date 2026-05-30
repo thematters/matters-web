@@ -73,8 +73,14 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   try {
+    const headers: HeadersInit = { Accept: '*/*' }
+    const range = req.headers.range
+    if (typeof range === 'string') {
+      headers.Range = range
+    }
+
     const upstream = await fetch(asset.url, {
-      headers: { Accept: '*/*' },
+      headers,
     })
 
     if (!upstream.ok) {
@@ -88,7 +94,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     if (asset.passthrough) {
       sendAssetHeaders(res, asset.contentType, upstream.headers)
-      res.status(200)
+      res.status(upstream.status)
       if (req.method === 'HEAD') {
         res.end()
         return
