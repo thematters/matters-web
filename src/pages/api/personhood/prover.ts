@@ -415,24 +415,25 @@ const getHtml = () => `<!doctype html>
               return view.getUint32(0, true);
             };
 
+            const fetchChecked = async (url, { cache = 'force-cache' } = {}) => {
+              const response = await fetch(new Request(url, { cache }));
+              if (!response.ok) {
+                throw new Error('Fetch failed for ' + url + ': ' + response.status);
+              }
+              return response;
+            };
+
             const cachedFetch = async (url) => {
               const request = new Request(url, { cache: 'force-cache' });
               if ('caches' in self) {
                 const cache = await caches.open(assetCacheName);
                 const cached = await cache.match(request);
                 if (cached) return cached;
-                const response = await fetch(request);
-                if (!response.ok) {
-                  throw new Error('Fetch failed for ' + url + ': ' + response.status);
-                }
+                const response = await fetchChecked(url);
                 await cache.put(request, response.clone()).catch(() => {});
                 return response;
               }
-              const response = await fetch(request);
-              if (!response.ok) {
-                throw new Error('Fetch failed for ' + url + ': ' + response.status);
-              }
-              return response;
+              return fetchChecked(url);
             };
 
             const fetchBytes = async (url) => {
@@ -500,10 +501,12 @@ const getHtml = () => `<!doctype html>
               return calculator.calculateWTNSBin(JSON.parse(inputJson), true);
             };
 
-            const loadProvingKey = async (zkid, kind, url, label) => {
+            const loadProvingKey = async (zkid, kind, url, label, totalSize) => {
               postProgress('warmup', 'downloading_' + label);
-              const compressed = await fetchBytes(url);
-              const totalSize = gzipIsize(compressed);
+              const response = await fetchChecked(url, { cache: 'no-store' });
+              if (!response.body) {
+                throw new Error('Fetch returned no body for ' + label);
+              }
               postProgress('warmup', 'loading_' + label, {
                 asset: label,
                 bytesDone: 0,
@@ -513,8 +516,7 @@ const getHtml = () => `<!doctype html>
               let committed = false;
               let bytesDone = 0;
               try {
-                const reader = new Blob([compressed])
-                  .stream()
+                const reader = response.body
                   .pipeThrough(new DecompressionStream('gzip'))
                   .getReader();
                 for (;;) {
@@ -589,52 +591,63 @@ const getHtml = () => `<!doctype html>
                 const certKind = zkid.CircuitKind.CertChainRs4096;
                 const userSigKind = zkid.CircuitKind.UserSigRs2048;
 
+                postProgress('warmup', 'downloading_cert_witness');
+                let certWitnessWasm = await decompressGzipToBytes(
+                  await fetchBytes(\${JSON.stringify(certWitnessUrl)}),
+                  'cert_witness'
+                );
+
                 await loadProvingKey(
                   zkid,
                   certKind,
                   \${JSON.stringify(certPkUrl)},
-                  'cert_pk'
+                  'cert_pk',
+                  693663394
                 );
-                await loadProvingKey(
-                  zkid,
-                  userSigKind,
-                  \${JSON.stringify(userSigPkUrl)},
-                  'user_sig_pk'
-                );
-
-                postProgress('warmup', 'downloading_cert_witness');
-                const certWitnessWasm = await decompressGzipToBytes(
-                  await fetchBytes(\${JSON.stringify(certWitnessUrl)}),
-                  'cert_witness'
-                );
-                postProgress('warmup', 'downloading_user_sig_witness');
-                const userSigWitnessWasm = await decompressGzipToBytes(
-                  await fetchBytes(\${JSON.stringify(userSigWitnessUrl)}),
-                  'user_sig_witness'
-                );
-                postProgress('warmup', 'ready');
 
                 postProgress('witness', 'cert_chain');
                 const certWitnessStart = performance.now();
-                const certWitness = await calculateWitness('certChainRS4096', certJson, certWitnessWasm);
+                let certWitness = await calculateWitness('certChainRS4096', certJson, certWitnessWasm);
+                certWitnessWasm = null;
+                witnessCalculators.delete('certChainRS4096');
                 const certWitnessMs = performance.now() - certWitnessStart;
 
                 postProgress('proof', 'cert_chain');
                 const certProveStart = performance.now();
                 const certProofOut = zkid.prove(certKind, certWitness);
+                certWitness = null;
                 const certProveMs = performance.now() - certProveStart;
                 const certProofBytes = new Uint8Array(certProofOut.proof);
+                zkid.drop_pk(certKind);
+
+                postProgress('warmup', 'downloading_user_sig_witness');
+                let userSigWitnessWasm = await decompressGzipToBytes(
+                  await fetchBytes(\${JSON.stringify(userSigWitnessUrl)}),
+                  'user_sig_witness'
+                );
+
+                await loadProvingKey(
+                  zkid,
+                  userSigKind,
+                  \${JSON.stringify(userSigPkUrl)},
+                  'user_sig_pk',
+                  274677850
+                );
 
                 postProgress('witness', 'user_sig');
                 const userSigWitnessStart = performance.now();
-                const userSigWitness = await calculateWitness('userSigRS2048', userSigJson, userSigWitnessWasm);
+                let userSigWitness = await calculateWitness('userSigRS2048', userSigJson, userSigWitnessWasm);
+                userSigWitnessWasm = null;
+                witnessCalculators.delete('userSigRS2048');
                 const userSigWitnessMs = performance.now() - userSigWitnessStart;
 
                 postProgress('proof', 'user_sig');
                 const userSigProveStart = performance.now();
                 const userSigProofOut = zkid.prove(userSigKind, userSigWitness);
+                userSigWitness = null;
                 const userSigProveMs = performance.now() - userSigProveStart;
                 const userSigProofBytes = new Uint8Array(userSigProofOut.proof);
+                zkid.drop_pk(userSigKind);
 
                 self.postMessage({
                   type: 'proof_ready',
