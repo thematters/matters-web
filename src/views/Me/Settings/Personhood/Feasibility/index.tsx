@@ -8,6 +8,7 @@ import settingsStyles from '../../styles.module.css'
 import {
   BROWSER_PROOF_ROUTE,
   buildBrowserProofHandoff,
+  buildIsolatedProverUrl,
   type PersonhoodProofInput,
   saveBrowserProofHandoff,
 } from '../handoff'
@@ -249,6 +250,7 @@ const PersonhoodFeasibility = () => {
   const [running, setRunning] = useState<'basic' | 'wasm' | null>(null)
   const [copied, setCopied] = useState(false)
   const [browserProofError, setBrowserProofError] = useState<string>()
+  const [desktopLinkCopied, setDesktopLinkCopied] = useState(false)
   const [twFido, setTwFido] = useState<TwFidoState>({
     idNum: '',
     pollCount: 0,
@@ -621,6 +623,20 @@ const PersonhoodFeasibility = () => {
   const browserHandoffBytes = browserProofHandoff
     ? new TextEncoder().encode(JSON.stringify(browserProofHandoff)).byteLength
     : 0
+  const desktopProverUrl = useMemo(() => {
+    if (!browserProofHandoff || typeof window === 'undefined') {
+      return undefined
+    }
+
+    return buildIsolatedProverUrl({
+      handoff: browserProofHandoff,
+      origin: window.location.origin,
+    })
+  }, [browserProofHandoff])
+  const desktopProverLinkBytes = desktopProverUrl
+    ? new TextEncoder().encode(desktopProverUrl).byteLength
+    : 0
+
   const startBrowserProof = useCallback(() => {
     setBrowserProofError(undefined)
 
@@ -638,6 +654,25 @@ const PersonhoodFeasibility = () => {
       )
     }
   }, [browserProofHandoff])
+
+  const copyDesktopProverLink = useCallback(async () => {
+    setBrowserProofError(undefined)
+
+    if (!desktopProverUrl) {
+      setBrowserProofError('Desktop proof link is not ready.')
+      return
+    }
+
+    try {
+      await navigator.clipboard?.writeText(desktopProverUrl)
+      setDesktopLinkCopied(true)
+      window.setTimeout(() => setDesktopLinkCopied(false), 1600)
+    } catch (error) {
+      setBrowserProofError(
+        error instanceof Error ? error.message : 'Could not copy desktop link.'
+      )
+    }
+  }, [desktopProverUrl])
 
   return (
     <Layout.Main>
@@ -745,11 +780,26 @@ const PersonhoodFeasibility = () => {
                 id="z9jdNT"
               />
             </button>
+            <button
+              className={styles.buttonSecondary}
+              disabled={!desktopProverUrl}
+              onClick={copyDesktopProverLink}
+              type="button"
+            >
+              {desktopLinkCopied ? (
+                <FormattedMessage defaultMessage="Copied" id="p556q3" />
+              ) : (
+                <FormattedMessage
+                  defaultMessage="Copy Mac proof link"
+                  id="Dx5Sas"
+                />
+              )}
+            </button>
           </section>
           <p className={styles.hint}>
             <FormattedMessage
-              defaultMessage="After TW FidO signs, continue in this browser. No native proof helper is required for this PWA path."
-              id="V3oaoZ"
+              defaultMessage="After TW FidO signs, continue here on desktop, or copy the Mac proof link to a desktop browser."
+              id="5YuSaZ"
             />
           </p>
 
@@ -801,6 +851,10 @@ const PersonhoodFeasibility = () => {
             <div>
               <dt>Handoff bytes</dt>
               <dd>{browserHandoffBytes}</dd>
+            </div>
+            <div>
+              <dt>Mac link bytes</dt>
+              <dd>{desktopProverLinkBytes}</dd>
             </div>
             <div>
               <dt>Certificate bytes</dt>
