@@ -139,7 +139,8 @@ export const createPersonhoodChallenge = async (
 
   const json = await postJson<ChallengeResponse>(
     `${config.verifierUrl}/challenge`,
-    {}
+    {},
+    'challenge'
   )
 
   if (!json.app_id || !json.challenge) {
@@ -242,7 +243,8 @@ export const createSpTicket = async ({
 
   const json = await postJson<TwFidoTicketResponse>(
     `${config.apiBaseUrl}/moise/sp/getSpTicket`,
-    body
+    body,
+    'getSpTicket'
   )
   if (json.error_code !== '0') {
     throw new Error(
@@ -283,7 +285,8 @@ export const getSignResult = async ({
       sp_service_id: config.serviceId,
       sp_ticket_id: ticketPayload.sp_ticket_id,
       transaction_id: ticketPayload.transaction_id,
-    }
+    },
+    'getAthOrSignResult'
   )
 }
 
@@ -317,25 +320,53 @@ const computeSpChecksum = (payload: string, aesKeyBase64: string) => {
   return Buffer.concat([iv, ciphertext, tag]).toString('hex')
 }
 
-const postJson = async <T>(url: string, body: object): Promise<T> => {
-  const response = await fetch(url, {
-    body: JSON.stringify(body),
-    headers: {
-      'content-type': 'application/json; charset=utf-8',
-    },
-    method: 'POST',
-  })
+const postJson = async <T>(
+  url: string,
+  body: object,
+  label: string
+): Promise<T> => {
+  let response: Response
+  try {
+    response = await fetch(url, {
+      body: JSON.stringify(body),
+      headers: {
+        'content-type': 'application/json; charset=utf-8',
+      },
+      method: 'POST',
+    })
+  } catch (error) {
+    throw new Error(`${label}_fetch_failed_${formatFetchCause(error)}`)
+  }
+
   const text = await response.text()
 
   let json: unknown
   try {
     json = JSON.parse(text)
   } catch {
-    throw new Error(`tw_fido_invalid_json_response_${response.status}`)
+    throw new Error(`${label}_invalid_json_response_${response.status}`)
   }
 
   if (!response.ok) {
-    throw new Error(`tw_fido_http_${response.status}`)
+    throw new Error(`${label}_http_${response.status}`)
   }
   return json as T
+}
+
+const formatFetchCause = (error: unknown) => {
+  if (!(error instanceof Error)) {
+    return 'unknown'
+  }
+
+  const cause = (error as Error & { cause?: unknown }).cause
+  if (cause && typeof cause === 'object') {
+    const code = 'code' in cause ? String(cause.code) : undefined
+    const message =
+      'message' in cause && typeof cause.message === 'string'
+        ? cause.message
+        : undefined
+    return [code, message].filter(Boolean).join('_') || error.message
+  }
+
+  return error.message || 'unknown'
 }
