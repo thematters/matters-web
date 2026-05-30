@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 const HANDOFF_STORAGE_KEY = 'matters.personhood.browserProofHandoff.v1'
+const RUN_STATE_STORAGE_KEY = 'matters.personhood.browserProofRunState.v1'
 const PROVER_ASSET_BASE = '/api/personhood/prover/assets'
 
 const handler = (_req: NextApiRequest, res: NextApiResponse) => {
@@ -192,6 +193,7 @@ const getHtml = () => `<!doctype html>
     <script>
       (() => {
         const storageKey = ${JSON.stringify(HANDOFF_STORAGE_KEY)};
+        const runStateKey = ${JSON.stringify(RUN_STATE_STORAGE_KEY)};
         const assetBase = ${JSON.stringify(PROVER_ASSET_BASE)};
         const maxAgeMs = 15 * 60 * 1000;
         const readinessEl = document.getElementById('readiness');
@@ -201,6 +203,7 @@ const getHtml = () => `<!doctype html>
         const backEl = document.getElementById('back');
         const copyEl = document.getElementById('copy');
         const runEl = document.getElementById('run');
+        const forceRun = new URLSearchParams(window.location.search).get('force') === '1';
 
         const parseTime = (value) => {
           if (!value) return undefined;
@@ -246,6 +249,31 @@ const getHtml = () => `<!doctype html>
           return undefined;
         };
 
+        const getStoredRunState = () => {
+          try {
+            const raw = window.localStorage.getItem(runStateKey);
+            return raw ? JSON.parse(raw) : undefined;
+          } catch {
+            window.localStorage.removeItem(runStateKey);
+            return undefined;
+          }
+        };
+
+        const storeRunState = (state) => {
+          try {
+            window.localStorage.setItem(runStateKey, JSON.stringify({
+              ...state,
+              updatedAt: new Date().toISOString(),
+            }));
+          } catch {}
+        };
+
+        const clearRunState = () => {
+          try {
+            window.localStorage.removeItem(runStateKey);
+          } catch {}
+        };
+
         const isExpired = (handoff) => {
           if (!handoff) return false;
           const savedAt = parseTime(handoff.savedAt);
@@ -268,6 +296,14 @@ const getHtml = () => `<!doctype html>
           submitStatus: 'pending',
         };
 
+        const userAgent = navigator.userAgent;
+        const isIOS = /iPad|iPhone|iPod/.test(userAgent) ||
+          /iPad|iPhone|iPod/.test(navigator.platform) ||
+          (/Macintosh/.test(userAgent) && navigator.maxTouchPoints > 1);
+        const isSafari = /Safari\\//.test(userAgent) &&
+          !/CriOS|FxiOS|EdgiOS|OPiOS/.test(userAgent);
+        const highMemoryRisk = isIOS && isSafari;
+
         const readiness = {
           checkedAt: new Date().toISOString(),
           secureContext: window.isSecureContext,
@@ -278,12 +314,29 @@ const getHtml = () => `<!doctype html>
           indexedDB: 'indexedDB' in window,
           decompressionStream: 'DecompressionStream' in window,
           cacheStorage: 'caches' in window,
-          userAgent: navigator.userAgent,
+          userAgent,
           platform: navigator.platform,
           language: navigator.language,
+          highMemoryRisk,
+          forceRun,
         };
         const handoff = getStoredHandoff();
         const expired = isExpired(handoff);
+        const previousRunState = getStoredRunState();
+        const previousRunUpdatedAt = parseTime(previousRunState?.updatedAt);
+        const previousRunIsRecent = previousRunUpdatedAt
+          ? Date.now() - previousRunUpdatedAt < maxAgeMs
+          : false;
+        const previousRunWasInterrupted = previousRunIsRecent &&
+          previousRunState?.status === 'running';
+
+        if (previousRunWasInterrupted) {
+          Object.assign(proofWorker, {
+            ...previousRunState.proofWorker,
+            status: 'interrupted',
+            submitStatus: 'browser_reload_or_crash',
+          });
+        }
 
         readinessEl.append(
           metric('Secure context', readiness.secureContext ? 'yes' : 'no'),
@@ -292,7 +345,9 @@ const getHtml = () => `<!doctype html>
           metric('WebAssembly', readiness.webAssembly ? 'yes' : 'no'),
           metric('Worker', readiness.worker ? 'yes' : 'no'),
           metric('IndexedDB', readiness.indexedDB ? 'yes' : 'no'),
-          metric('DecompressionStream', readiness.decompressionStream ? 'yes' : 'no')
+          metric('DecompressionStream', readiness.decompressionStream ? 'yes' : 'no'),
+          metric('High memory risk', readiness.highMemoryRisk ? 'yes' : 'no'),
+          metric('Force run', readiness.forceRun ? 'yes' : 'no')
         );
 
         if (handoff?.returnUrl) {
@@ -303,6 +358,12 @@ const getHtml = () => `<!doctype html>
           messageEl.textContent = 'No browser handoff was found. Return to Matters and start from the proof page.';
         } else if (expired) {
           messageEl.textContent = 'The browser handoff has expired. Return to Matters and request a fresh TW FidO signature.';
+        } else if (previousRunWasInterrupted && highMemoryRisk && !forceRun) {
+          messageEl.textContent = 'The last browser proof was interrupted after Safari reloaded this page. This iPhone browser cannot safely run the current RS4096 proof in-browser yet.';
+          messageEl.className = 'error';
+        } else if (highMemoryRisk && !forceRun) {
+          messageEl.textContent = 'This iPhone Safari page has the required browser APIs, but the current RS4096 proving key is too large to run safely in-browser. Use a desktop prover for now.';
+          messageEl.className = 'error';
         } else {
           messageEl.textContent = readiness.crossOriginIsolated
             ? 'Isolated prover container is ready. Run the browser proof to build zkID inputs, generate proofs, and submit the claim.'
@@ -311,7 +372,8 @@ const getHtml = () => `<!doctype html>
         }
 
         const canRun = !!handoff && !expired && readiness.crossOriginIsolated &&
-          readiness.sharedArrayBuffer && readiness.webAssembly && readiness.worker;
+          readiness.sharedArrayBuffer && readiness.webAssembly && readiness.worker &&
+          (!highMemoryRisk || forceRun);
         runEl.disabled = !canRun;
 
         const renderHandoff = () => {
@@ -321,6 +383,7 @@ const getHtml = () => `<!doctype html>
             metric('APP_ID', handoff?.proofInput?.appId || 'missing'),
             metric('Challenge expires', handoff?.proofInput?.challengeExpiresAt || 'missing'),
             metric('Handoff expires', handoff?.handoffExpiresAt || 'missing'),
+            metric('Previous run', previousRunWasInterrupted ? 'interrupted' : 'none'),
             metric('Cert payload', formatBytes(encodedBytes(handoff?.proofInput?.cert))),
             metric('Signature payload', formatBytes(encodedBytes(handoff?.proofInput?.signedResponse))),
             metric('Proof worker', proofWorker.status),
@@ -345,6 +408,10 @@ const getHtml = () => `<!doctype html>
           location: '/api/personhood/prover',
           readiness,
           proofWorker,
+          previousRunState: previousRunWasInterrupted ? previousRunState : undefined,
+          unsupportedReason: highMemoryRisk && !forceRun
+            ? 'ios_safari_rs4096_memory_risk'
+            : undefined,
           handoff: handoff
             ? {
                 appId: handoff.proofInput?.appId,
@@ -366,6 +433,15 @@ const getHtml = () => `<!doctype html>
 
         const setWorkerState = (patch) => {
           Object.assign(proofWorker, patch);
+          if (proofWorker.status === 'running' || proofWorker.status === 'input_ready' ||
+              proofWorker.status === 'proof_ready') {
+            storeRunState({
+              status: 'running',
+              proofWorker,
+              pageUrl: location.href,
+              userAgent,
+            });
+          }
           renderHandoff();
           renderReport();
         };
@@ -709,6 +785,12 @@ const getHtml = () => `<!doctype html>
             proofStatus: 'pending',
             submitStatus: 'pending',
           });
+          storeRunState({
+            status: 'running',
+            proofWorker,
+            pageUrl: location.href,
+            userAgent,
+          });
           messageEl.textContent = 'Starting zkID browser proof. Keep this page open until the claim result appears.';
           messageEl.className = '';
 
@@ -769,6 +851,7 @@ const getHtml = () => `<!doctype html>
                 badges: data.badges || [],
                 totalMs: data.totalMs,
               });
+              clearRunState();
               messageEl.textContent = 'Personhood proof accepted. Return to Matters to view the badge.';
               worker.terminate();
               URL.revokeObjectURL(workerUrl);
@@ -776,6 +859,12 @@ const getHtml = () => `<!doctype html>
             }
             if (data.type === 'error') {
               setWorkerState({ status: 'error', submitStatus: data.message || 'failed' });
+              storeRunState({
+                status: 'error',
+                proofWorker,
+                pageUrl: location.href,
+                userAgent,
+              });
               messageEl.textContent = data.message || 'zkID browser proof failed.';
               messageEl.className = 'error';
               worker.terminate();
@@ -785,6 +874,12 @@ const getHtml = () => `<!doctype html>
           };
           worker.onerror = (event) => {
             setWorkerState({ status: 'error', inputStatus: event.message || 'worker crashed' });
+            storeRunState({
+              status: 'error',
+              proofWorker,
+              pageUrl: location.href,
+              userAgent,
+            });
             messageEl.textContent = event.message || 'zkID worker crashed.';
             messageEl.className = 'error';
             worker.terminate();
