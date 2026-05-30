@@ -2,6 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 
 const HANDOFF_STORAGE_KEY = 'matters.personhood.browserProofHandoff.v1'
 const RUN_STATE_STORAGE_KEY = 'matters.personhood.browserProofRunState.v1'
+const HANDOFF_FRAGMENT_KEY = 'personhood_handoff'
 const PROVER_ASSET_BASE = '/api/personhood/prover/assets'
 
 const handler = (_req: NextApiRequest, res: NextApiResponse) => {
@@ -194,6 +195,7 @@ const getHtml = () => `<!doctype html>
       (() => {
         const storageKey = ${JSON.stringify(HANDOFF_STORAGE_KEY)};
         const runStateKey = ${JSON.stringify(RUN_STATE_STORAGE_KEY)};
+        const handoffFragmentKey = ${JSON.stringify(HANDOFF_FRAGMENT_KEY)};
         const assetBase = ${JSON.stringify(PROVER_ASSET_BASE)};
         const maxAgeMs = 15 * 60 * 1000;
         const readinessEl = document.getElementById('readiness');
@@ -204,6 +206,7 @@ const getHtml = () => `<!doctype html>
         const copyEl = document.getElementById('copy');
         const runEl = document.getElementById('run');
         const forceRun = new URLSearchParams(window.location.search).get('force') === '1';
+        let fragmentImportError;
 
         const parseTime = (value) => {
           if (!value) return undefined;
@@ -236,7 +239,55 @@ const getHtml = () => `<!doctype html>
           return item;
         };
 
+        const base64UrlToBytes = (value) => {
+          const normalized = value.replace(/-/g, '+').replace(/_/g, '/');
+          const padded = normalized.padEnd(Math.ceil(normalized.length / 4) * 4, '=');
+          const raw = atob(padded);
+          const bytes = new Uint8Array(raw.length);
+          for (let i = 0; i < raw.length; i += 1) bytes[i] = raw.charCodeAt(i);
+          return bytes;
+        };
+
+        const getFragmentHandoff = () => {
+          if (!window.location.hash) return undefined;
+          const fragment = window.location.hash.startsWith('#')
+            ? window.location.hash.slice(1)
+            : window.location.hash;
+          const params = new URLSearchParams(fragment);
+          const encoded = params.get(handoffFragmentKey);
+          if (!encoded) return undefined;
+
+          try {
+            const handoff = JSON.parse(
+              new TextDecoder().decode(base64UrlToBytes(encoded))
+            );
+            if (!handoff?.proofInput || !handoff?.handoffToken) {
+              throw new Error('invalid handoff');
+            }
+            return handoff;
+          } catch {
+            fragmentImportError = 'The desktop proof handoff link is invalid. Return to Matters and copy a fresh link.';
+            return undefined;
+          }
+        };
+
         const getStoredHandoff = () => {
+          const fragmentHandoff = getFragmentHandoff();
+          if (fragmentHandoff) {
+            const value = JSON.stringify(fragmentHandoff);
+            for (const storage of [window.sessionStorage, window.localStorage]) {
+              try {
+                storage.setItem(storageKey, value);
+              } catch {}
+            }
+            window.history.replaceState(
+              null,
+              document.title,
+              window.location.pathname + window.location.search
+            );
+            return fragmentHandoff;
+          }
+
           for (const storage of [window.sessionStorage, window.localStorage]) {
             try {
               const raw = storage.getItem(storageKey);
@@ -354,7 +405,10 @@ const getHtml = () => `<!doctype html>
           backEl.href = handoff.returnUrl;
         }
 
-        if (!handoff) {
+        if (fragmentImportError) {
+          messageEl.textContent = fragmentImportError;
+          messageEl.className = 'error';
+        } else if (!handoff) {
           messageEl.textContent = 'No browser handoff was found. Return to Matters and start from the proof page.';
         } else if (expired) {
           messageEl.textContent = 'The browser handoff has expired. Return to Matters and request a fresh TW FidO signature.';

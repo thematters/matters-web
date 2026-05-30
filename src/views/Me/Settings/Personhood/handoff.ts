@@ -25,6 +25,7 @@ export const BROWSER_PROOF_ROUTE = '/me/settings/personhood/prove'
 export const ISOLATED_PROVER_ROUTE = '/api/personhood/prover'
 export const BROWSER_PROOF_HANDOFF_STORAGE_KEY =
   'matters.personhood.browserProofHandoff.v1'
+export const BROWSER_PROOF_HANDOFF_FRAGMENT_KEY = 'personhood_handoff'
 
 export const CERT_CHAIN_PROVING_KEY_URL =
   'https://github.com/zkmopro/zkID/releases/download/latest/cert_chain_rs4096_proving.key.gz'
@@ -113,6 +114,43 @@ export const saveBrowserProofHandoff = (handoff: BrowserProofHandoff) => {
     }
   }
 }
+
+const bytesToBase64Url = (bytes: Uint8Array) => {
+  let binary = ''
+  const chunkSize = 0x8000
+  for (let i = 0; i < bytes.length; i += chunkSize) {
+    binary += String.fromCharCode(...bytes.subarray(i, i + chunkSize))
+  }
+  return btoa(binary).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '')
+}
+
+const base64UrlToBytes = (value: string) => {
+  const normalized = value.replace(/-/g, '+').replace(/_/g, '/')
+  const padded = normalized.padEnd(Math.ceil(normalized.length / 4) * 4, '=')
+  const raw = atob(padded)
+  const bytes = new Uint8Array(raw.length)
+  for (let i = 0; i < raw.length; i += 1) {
+    bytes[i] = raw.charCodeAt(i)
+  }
+  return bytes
+}
+
+export const encodeBrowserProofHandoff = (handoff: BrowserProofHandoff) =>
+  bytesToBase64Url(new TextEncoder().encode(JSON.stringify(handoff)))
+
+export const decodeBrowserProofHandoff = (encoded: string) =>
+  JSON.parse(
+    new TextDecoder().decode(base64UrlToBytes(encoded))
+  ) as BrowserProofHandoff
+
+export const buildIsolatedProverUrl = ({
+  handoff,
+  origin,
+}: {
+  handoff: BrowserProofHandoff
+  origin: string
+}) =>
+  `${origin}${ISOLATED_PROVER_ROUTE}#${BROWSER_PROOF_HANDOFF_FRAGMENT_KEY}=${encodeBrowserProofHandoff(handoff)}`
 
 export const loadBrowserProofHandoff = () => {
   if (typeof window === 'undefined') {
