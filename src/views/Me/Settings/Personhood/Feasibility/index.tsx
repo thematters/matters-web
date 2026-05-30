@@ -251,6 +251,7 @@ const PersonhoodFeasibility = () => {
   const [copied, setCopied] = useState(false)
   const [browserProofError, setBrowserProofError] = useState<string>()
   const [desktopLinkCopied, setDesktopLinkCopied] = useState(false)
+  const [twFidoLinkCopied, setTwFidoLinkCopied] = useState(false)
   const [twFido, setTwFido] = useState<TwFidoState>({
     idNum: '',
     pollCount: 0,
@@ -397,6 +398,36 @@ const PersonhoodFeasibility = () => {
     setCopied(true)
     window.setTimeout(() => setCopied(false), 1600)
   }, [reportText])
+
+  const openTwFido = useCallback(() => {
+    setBrowserProofError(undefined)
+
+    if (!twFido.ticket?.deeplink) {
+      setBrowserProofError('TW FidO link is not ready.')
+      return
+    }
+
+    window.location.href = twFido.ticket.deeplink
+  }, [twFido.ticket?.deeplink])
+
+  const copyTwFidoLink = useCallback(async () => {
+    setBrowserProofError(undefined)
+
+    if (!twFido.ticket?.deeplink) {
+      setBrowserProofError('TW FidO link is not ready.')
+      return
+    }
+
+    try {
+      await navigator.clipboard?.writeText(twFido.ticket.deeplink)
+      setTwFidoLinkCopied(true)
+      window.setTimeout(() => setTwFidoLinkCopied(false), 1600)
+    } catch (error) {
+      setBrowserProofError(
+        error instanceof Error ? error.message : 'Could not copy TW FidO link.'
+      )
+    }
+  }, [twFido.ticket?.deeplink])
 
   const createHandoff = useCallback(async (proofInput: ProofInput) => {
     setTwFido((current) => ({
@@ -747,13 +778,14 @@ const PersonhoodFeasibility = () => {
           </div>
 
           <section className={styles.actions}>
-            <a
-              aria-disabled={!twFido.ticket}
-              className={styles.linkButton}
-              href={twFido.ticket?.deeplink || undefined}
+            <button
+              className={styles.button}
+              disabled={!twFido.ticket}
+              onClick={openTwFido}
+              type="button"
             >
               <FormattedMessage defaultMessage="Open TW FidO" id="G/jeUL" />
-            </a>
+            </button>
             <button
               className={styles.buttonSecondary}
               disabled={!twFido.ticket || twFido.status === 'polling'}
@@ -764,6 +796,21 @@ const PersonhoodFeasibility = () => {
                 <FormattedMessage defaultMessage="Checking" id="lTleCS" />
               ) : (
                 <FormattedMessage defaultMessage="Check result" id="VFQGq7" />
+              )}
+            </button>
+            <button
+              className={styles.buttonSecondary}
+              disabled={!twFido.ticket}
+              onClick={copyTwFidoLink}
+              type="button"
+            >
+              {twFidoLinkCopied ? (
+                <FormattedMessage defaultMessage="Copied" id="p556q3" />
+              ) : (
+                <FormattedMessage
+                  defaultMessage="Copy TW FidO link"
+                  id="ol0msv"
+                />
               )}
             </button>
           </section>
