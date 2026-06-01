@@ -95,6 +95,7 @@ const useLayoutType = () => {
     isHome ||
     isInPath('FEATURED') ||
     isInPath('HOTTEST') ||
+    isInPath('HOTTEST_MOMENTS') ||
     isInPath('NEWEST') ||
     isInPath('CHANNEL') ||
     isInPath('FOLLOW') ||

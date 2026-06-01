@@ -603,6 +603,9 @@
     "defaultMessage": "編輯",
     "description": "src/components/CircleComment/DropdownActions/EditButton.tsx"
   },
+  "6wdAti": {
+    "defaultMessage": "還沒有動態"
+  },
   "73iajM": {
     "defaultMessage": "出錯了，請檢查你輸入的內容",
     "description": "BAD_USER_INPUT"
@@ -613,6 +616,9 @@
   "79Ydsg": {
     "defaultMessage": "提現撤銷",
     "description": "src/components/Transaction/index.tsx"
+  },
+  "7DJ8wF": {
+    "defaultMessage": "加入動態頻道"
   },
   "7HPPqs": {
     "defaultMessage": "。{SuggestButton}?"
@@ -1321,6 +1327,9 @@
   "HzB4Lk": {
     "defaultMessage": "告知讀者你此次編輯的更動有哪些⋯"
   },
+  "I1eVEY": {
+    "defaultMessage": "已送出申請,待審核"
+  },
   "IJ9YcQ": {
     "defaultMessage": "取消連結",
     "description": "src/components/Editor"
@@ -1514,6 +1523,9 @@
   },
   "LWE7oq": {
     "defaultMessage": "草稿儲存中，確定要離開嗎？"
+  },
+  "LXZyce": {
+    "defaultMessage": "你已經申請過了，請耐心等候審核"
   },
   "Lb0JsC": {
     "defaultMessage": "你封鎖了該用戶"
@@ -1764,6 +1776,9 @@
   },
   "Q8Qw5B": {
     "defaultMessage": "描述"
+  },
+  "QHRze5": {
+    "defaultMessage": "動態"
   },
   "QKJWqd": {
     "defaultMessage": "收藏",
@@ -2067,6 +2082,9 @@
   },
   "VBve8d": {
     "defaultMessage": "搬家到 Matters"
+  },
+  "VDclc3": {
+    "defaultMessage": "你已加入動態頻道，即日起發出的動態將顯示於此頻道"
   },
   "VMQPwZ": {
     "defaultMessage": "過往活動",
@@ -2529,6 +2547,10 @@
   "d5bM8A": {
     "defaultMessage": "投稿日程⋯"
   },
+  "d95AX1": {
+    "defaultMessage": "我再想想",
+    "description": "src/views/HottestMoments/Apply/Dialog/index.tsx"
+  },
   "dAPUJp": {
     "defaultMessage": "流星雨的絢爛光芒足以點亮夜空。流星號徽章紀念你曾參與「遊牧者計畫」。",
     "description": "src/views/User/UserProfile/BadgeNomadLabel/index.tsx"
@@ -2801,6 +2823,10 @@
   "hWq/ii": {
     "defaultMessage": "餘額不足：",
     "description": "src/components/Balance/index.tsx"
+  },
+  "hdbKK1": {
+    "defaultMessage": "動態",
+    "description": "src/components/Layout/SideChannelNav/index.tsx"
   },
   "hgtWIO": {
     "defaultMessage": "作品被關聯",
@@ -3463,6 +3489,9 @@
   "tWCQCd": {
     "defaultMessage": "交易合約已將 {amount} USDT 發送至綁定錢包"
   },
+  "tYDhrI": {
+    "defaultMessage": "申請通過之後，個人發出的動態將顯示於此頻道"
+  },
   "tZKvnZ": {
     "defaultMessage": "取消喜歡動態"
   },
@@ -3823,6 +3852,9 @@
   },
   "z3uIHQ": {
     "defaultMessage": "取消點讚"
+  },
+  "z5UXPc": {
+    "defaultMessage": "申請加入"
   },
   "z91BKe": {
     "defaultMessage": "已封存作品",

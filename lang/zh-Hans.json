@@ -603,6 +603,9 @@
     "defaultMessage": "编辑评论",
     "description": "src/components/CircleComment/DropdownActions/EditButton.tsx"
   },
+  "6wdAti": {
+    "defaultMessage": "还没有动态"
+  },
   "73iajM": {
     "defaultMessage": "出错了，请检查你输入的内容",
     "description": "BAD_USER_INPUT"
@@ -613,6 +616,9 @@
   "79Ydsg": {
     "defaultMessage": "提现撤销",
     "description": "src/components/Transaction/index.tsx"
+  },
+  "7DJ8wF": {
+    "defaultMessage": "加入动态频道"
   },
   "7HPPqs": {
     "defaultMessage": "。{SuggestButton}?"
@@ -1321,6 +1327,9 @@
   "HzB4Lk": {
     "defaultMessage": "告知读者你此次编辑的更动有哪些⋯"
   },
+  "I1eVEY": {
+    "defaultMessage": "已送出申请,待审核"
+  },
   "IJ9YcQ": {
     "defaultMessage": "取消链接",
     "description": "src/components/Editor"
@@ -1514,6 +1523,9 @@
   },
   "LWE7oq": {
     "defaultMessage": "草稿保存中，确定要离开吗？"
+  },
+  "LXZyce": {
+    "defaultMessage": "你已经申请过了，请耐心等候审核"
   },
   "Lb0JsC": {
     "defaultMessage": "你屏蔽了该用户"
@@ -1764,6 +1776,9 @@
   },
   "Q8Qw5B": {
     "defaultMessage": "描述"
+  },
+  "QHRze5": {
+    "defaultMessage": "动态"
   },
   "QKJWqd": {
     "defaultMessage": "收藏",
@@ -2067,6 +2082,9 @@
   },
   "VBve8d": {
     "defaultMessage": "搬家到 Matters"
+  },
+  "VDclc3": {
+    "defaultMessage": "你已加入动态频道，即日起发出的动态将显示于此频道"
   },
   "VMQPwZ": {
     "defaultMessage": "过往活动",
@@ -2529,6 +2547,10 @@
   "d5bM8A": {
     "defaultMessage": "投稿日程⋯"
   },
+  "d95AX1": {
+    "defaultMessage": "我再想想",
+    "description": "src/views/HottestMoments/Apply/Dialog/index.tsx"
+  },
   "dAPUJp": {
     "defaultMessage": "流星雨的绚烂光芒足以点亮夜空。流星号徽章纪念你曾参与「游牧者计划」。",
     "description": "src/views/User/UserProfile/BadgeNomadLabel/index.tsx"
@@ -2801,6 +2823,10 @@
   "hWq/ii": {
     "defaultMessage": "余额不足：",
     "description": "src/components/Balance/index.tsx"
+  },
+  "hdbKK1": {
+    "defaultMessage": "动态",
+    "description": "src/components/Layout/SideChannelNav/index.tsx"
   },
   "hgtWIO": {
     "defaultMessage": "作品被关联",
@@ -3463,6 +3489,9 @@
   "tWCQCd": {
     "defaultMessage": "交易合約已将 {amount} USDT 发送至绑定钱包"
   },
+  "tYDhrI": {
+    "defaultMessage": "申请通过之后，个人发出的动态将显示于此频道"
+  },
   "tZKvnZ": {
     "defaultMessage": "取消喜欢动态"
   },
@@ -3823,6 +3852,9 @@
   },
   "z3uIHQ": {
     "defaultMessage": "取消点赞"
+  },
+  "z5UXPc": {
+    "defaultMessage": "申请加入"
   },
   "z91BKe": {
     "defaultMessage": "已归档作品",

@@ -603,6 +603,9 @@
     "defaultMessage": "Edit",
     "description": "src/components/CircleComment/DropdownActions/EditButton.tsx"
   },
+  "6wdAti": {
+    "defaultMessage": "No moments yet"
+  },
   "73iajM": {
     "defaultMessage": "Oops. Something went wrong. Please try again later.",
     "description": "BAD_USER_INPUT"
@@ -613,6 +616,9 @@
   "79Ydsg": {
     "defaultMessage": "Payout Canceled",
     "description": "src/components/Transaction/index.tsx"
+  },
+  "7DJ8wF": {
+    "defaultMessage": "Join the Moments channel"
   },
   "7HPPqs": {
     "defaultMessage": ". {SuggestButton}?"
@@ -1321,6 +1327,9 @@
   "HzB4Lk": {
     "defaultMessage": "Tell readers why you edited this time..."
   },
+  "I1eVEY": {
+    "defaultMessage": "Application submitted, pending review"
+  },
   "IJ9YcQ": {
     "defaultMessage": "Unlink",
     "description": "src/components/Editor"
@@ -1514,6 +1523,9 @@
   },
   "LWE7oq": {
     "defaultMessage": "Saving draft, are you sure you want to leave?"
+  },
+  "LXZyce": {
+    "defaultMessage": "You have already applied, please wait for the review."
   },
   "Lb0JsC": {
     "defaultMessage": "You have blocked that user"
@@ -1764,6 +1776,9 @@
   },
   "Q8Qw5B": {
     "defaultMessage": "Description"
+  },
+  "QHRze5": {
+    "defaultMessage": "Moments"
   },
   "QKJWqd": {
     "defaultMessage": "Bookmark",
@@ -2067,6 +2082,9 @@
   },
   "VBve8d": {
     "defaultMessage": "Settled in Matters"
+  },
+  "VDclc3": {
+    "defaultMessage": "You have joined the Moments channel. The moments you post will now appear in this channel."
   },
   "VMQPwZ": {
     "defaultMessage": "Ended",
@@ -2529,6 +2547,10 @@
   "d5bM8A": {
     "defaultMessage": "Select Date..."
   },
+  "d95AX1": {
+    "defaultMessage": "Let me think about it",
+    "description": "src/views/HottestMoments/Apply/Dialog/index.tsx"
+  },
   "dAPUJp": {
     "defaultMessage": "The dazzling light of a meteor shower is enough to illuminate the night sky. The Meteor Canoe badge signifies your participation in the Nomad Matters.",
     "description": "src/views/User/UserProfile/BadgeNomadLabel/index.tsx"
@@ -2801,6 +2823,10 @@
   "hWq/ii": {
     "defaultMessage": "Insufficient:",
     "description": "src/components/Balance/index.tsx"
+  },
+  "hdbKK1": {
+    "defaultMessage": "Moments",
+    "description": "src/components/Layout/SideChannelNav/index.tsx"
   },
   "hgtWIO": {
     "defaultMessage": "Articles have been collected",
@@ -3463,6 +3489,9 @@
   "tWCQCd": {
     "defaultMessage": "The contract has sent {amount} USDT to the connected wallet"
   },
+  "tYDhrI": {
+    "defaultMessage": "Once you request to join and are approved, the moments you post will appear in this channel."
+  },
   "tZKvnZ": {
     "defaultMessage": "Unlike moment"
   },
@@ -3823,6 +3852,9 @@
   },
   "z3uIHQ": {
     "defaultMessage": "Undo upvote"
+  },
+  "z5UXPc": {
+    "defaultMessage": "Apply to join"
   },
   "z91BKe": {
     "defaultMessage": "Archived Work",
