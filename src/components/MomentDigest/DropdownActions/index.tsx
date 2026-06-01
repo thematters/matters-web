@@ -229,18 +229,15 @@ const DropdownActions = (props: DropdownActionsProps) => {
     })
   )
 
-  const WithDeleteMoment = withDialog<Omit<DeleteMomentDialogProps, 'children'>>(
-    WithReport,
-    DeleteMoment.Dialog,
-    { moment },
-    ({ openDialog }) => {
-      return {
-        ...props,
-        ...controls,
-        openDeleteMomentDialog: isFrozen ? forbid : openDialog,
-      }
+  const WithDeleteMoment = withDialog<
+    Omit<DeleteMomentDialogProps, 'children'>
+  >(WithReport, DeleteMoment.Dialog, { moment }, ({ openDialog }) => {
+    return {
+      ...props,
+      ...controls,
+      openDeleteMomentDialog: isFrozen ? forbid : openDialog,
     }
-  )
+  })
 
   const WithToggleRestrictUser = withDialog<
     Omit<ToggleRestrictUserDialogProps, 'children'>
