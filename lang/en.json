@@ -376,9 +376,6 @@
   "3EeDnu": {
     "defaultMessage": "Paste JSFiddle or CodePen link, and press enter"
   },
-  "3HKaQ4": {
-    "defaultMessage": "The next slice mounts the zkID in-browser worker here and submits the proof to Matters."
-  },
   "3KNMbJ": {
     "defaultMessage": "Articles"
   },
@@ -492,6 +489,9 @@
   },
   "5XFd/5": {
     "defaultMessage": "Manage Circle"
+  },
+  "5YuSaZ": {
+    "defaultMessage": "After TW FidO signs, continue here on desktop, or copy the Mac proof link to a desktop browser."
   },
   "5fjmnA": {
     "defaultMessage": "碳基生物"
@@ -612,6 +612,9 @@
     "defaultMessage": "Edit",
     "description": "src/components/CircleComment/DropdownActions/EditButton.tsx"
   },
+  "6wdAti": {
+    "defaultMessage": "No moments yet"
+  },
   "73iajM": {
     "defaultMessage": "Oops. Something went wrong. Please try again later.",
     "description": "BAD_USER_INPUT"
@@ -622,6 +625,9 @@
   "79Ydsg": {
     "defaultMessage": "Payout Canceled",
     "description": "src/components/Transaction/index.tsx"
+  },
+  "7DJ8wF": {
+    "defaultMessage": "Join the Moments channel"
   },
   "7HPPqs": {
     "defaultMessage": ". {SuggestButton}?"
@@ -1074,6 +1080,9 @@
   "DtO278": {
     "defaultMessage": "We’ve detected that several of your recent works have been recommended to related channels. They may not appear at the same time"
   },
+  "Dx5Sas": {
+    "defaultMessage": "Copy Mac proof link"
+  },
   "DyuHBH": {
     "defaultMessage": "Unpin from profile",
     "description": "src/components/CollectionDigest/DropdownActions/PinButton.tsx"
@@ -1177,6 +1186,9 @@
   "FWCa4O": {
     "defaultMessage": "Switch to Optimism network now?",
     "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
+  },
+  "FXgOAP": {
+    "defaultMessage": "Browser handoff is ready. Browser proving is pending until the prover runs in a cross-origin isolated page."
   },
   "Fe682o": {
     "defaultMessage": "Next Month (Estimation)",
@@ -1347,6 +1359,9 @@
   },
   "HzB4Lk": {
     "defaultMessage": "Tell readers why you edited this time..."
+  },
+  "I1eVEY": {
+    "defaultMessage": "Application submitted, pending review"
   },
   "I3v/Va": {
     "defaultMessage": "PWA proof handoff"
@@ -1544,6 +1559,9 @@
   },
   "LWE7oq": {
     "defaultMessage": "Saving draft, are you sure you want to leave?"
+  },
+  "LXZyce": {
+    "defaultMessage": "You have already applied, please wait for the review."
   },
   "Lb0JsC": {
     "defaultMessage": "You have blocked that user"
@@ -1800,6 +1818,9 @@
   },
   "Q8Qw5B": {
     "defaultMessage": "Description"
+  },
+  "QHRze5": {
+    "defaultMessage": "Moments"
   },
   "QKJWqd": {
     "defaultMessage": "Bookmark",
@@ -2099,9 +2120,6 @@
     "defaultMessage": "Publishing, please wait...",
     "description": "src/components/Editor/PreviewDialog/index.tsx"
   },
-  "V3oaoZ": {
-    "defaultMessage": "After TW FidO signs, continue in this browser. No native proof helper is required for this PWA path."
-  },
   "V5OMr4": {
     "defaultMessage": "What is a digital wallet?",
     "description": "src/components/Forms/SelectAuthMethodForm/WalletFeed.tsx"
@@ -2112,6 +2130,9 @@
   },
   "VBve8d": {
     "defaultMessage": "Settled in Matters"
+  },
+  "VDclc3": {
+    "defaultMessage": "You have joined the Moments channel. The moments you post will now appear in this channel."
   },
   "VFQGq7": {
     "defaultMessage": "Check result"
@@ -2340,9 +2361,6 @@
   "Z39z+x": {
     "defaultMessage": "{displayName} won't be able to comment your article. Besides, he or she can't @ you and subscribe your circle. You can manage blocked list in settings."
   },
-  "Z4R3Lq": {
-    "defaultMessage": "This browser page is missing a required PWA proving capability."
-  },
   "Z7JXlF": {
     "defaultMessage": "Archived for violation.",
     "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
@@ -2445,6 +2463,9 @@
   "aqX2Bt": {
     "defaultMessage": "go to the homepage",
     "description": "src/views/Callback/UI.tsx"
+  },
+  "atmn17": {
+    "defaultMessage": "Open isolated prover"
   },
   "awW+lk": {
     "defaultMessage": "Processing",
@@ -2583,6 +2604,10 @@
   "d5bM8A": {
     "defaultMessage": "Select Date..."
   },
+  "d95AX1": {
+    "defaultMessage": "Let me think about it",
+    "description": "src/views/HottestMoments/Apply/Dialog/index.tsx"
+  },
   "dAPUJp": {
     "defaultMessage": "The dazzling light of a meteor shower is enough to illuminate the night sky. The Meteor Canoe badge signifies your participation in the Nomad Matters.",
     "description": "src/views/User/UserProfile/BadgeNomadLabel/index.tsx"
@@ -2618,6 +2643,9 @@
   "dVbKzB": {
     "defaultMessage": "Comments and replies",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
+  },
+  "dWt8c/": {
+    "defaultMessage": "Open the isolated browser container. It does not load the normal Matters bundle, so cross-origin isolation can be enabled for the zkID worker."
   },
   "dZlT9q": {
     "defaultMessage": "Your work has been recommended to the channels: {channelNames}. Are you satisfied with the result?"
@@ -2858,6 +2886,10 @@
   "hWq/ii": {
     "defaultMessage": "Insufficient: ",
     "description": "src/components/Balance/index.tsx"
+  },
+  "hdbKK1": {
+    "defaultMessage": "Moments",
+    "description": "src/components/Layout/SideChannelNav/index.tsx"
   },
   "hgtWIO": {
     "defaultMessage": "Articles have been collected",
@@ -3263,6 +3295,9 @@
     "defaultMessage": "Following",
     "description": "src/components/UserProfile/index.tsx"
   },
+  "ol0msv": {
+    "defaultMessage": "Copy TW FidO link"
+  },
   "on+DYO": {
     "defaultMessage": "Confirm application"
   },
@@ -3537,6 +3572,9 @@
   },
   "tWCQCd": {
     "defaultMessage": "The contract has sent {amount} USDT to the connected wallet"
+  },
+  "tYDhrI": {
+    "defaultMessage": "Once you request to join and are approved, the moments you post will appear in this channel."
   },
   "tZKvnZ": {
     "defaultMessage": "Unlike moment"
@@ -3902,6 +3940,9 @@
   "z3uIHQ": {
     "defaultMessage": "Undo upvote"
   },
+  "z5UXPc": {
+    "defaultMessage": "Apply to join"
+  },
   "z91BKe": {
     "defaultMessage": "Archived Work",
     "description": "src/components/Notice/NoticeArticleTitle.tsx"
@@ -3912,9 +3953,6 @@
   "zAK5G+": {
     "defaultMessage": "The login link has been sent to {email}",
     "description": "src/components/Forms/Verification/LinkSent.tsx"
-  },
-  "zCCJPu": {
-    "defaultMessage": "Run browser proof"
   },
   "zE51j6": {
     "defaultMessage": "Failed to publish, please try again."
