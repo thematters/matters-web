@@ -1,0 +1,17 @@
+.headers {
+  @mixin flex-center-space-between;
+
+  padding-top: var(--sp20);
+  background-color: var(--color-white);
+
+  & .title {
+    font-size: var(--text18);
+    font-weight: var(--font-medium);
+    line-height: 1.75rem;
+    color: var(--color-black);
+  }
+}
+
+.apply {
+  flex-shrink: 0;
+}

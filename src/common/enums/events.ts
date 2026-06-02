@@ -81,6 +81,7 @@ export enum UNIVERSAL_AUTH_TRIGGER {
   momentLike = 'momentLike',
   applyCampaign = 'applyCampaign',
   collectionLike = 'collectionLike',
+  applyMomentFeed = 'applyMomentFeed',
 }
 
 // Editor

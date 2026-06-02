@@ -65,6 +65,7 @@ const ViewerFragments = {
     private: gql`
       fragment ViewerUserPrivate on User {
         id
+        isMomentFeedApplied
         info {
           socialAccounts {
             type
