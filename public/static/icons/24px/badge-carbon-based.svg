@@ -1,0 +1,11 @@
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Carbon Based">
+<circle id="Outer" cx="12" cy="12" r="12" fill="white"/>
+<circle id="Inner" cx="12" cy="12" r="10.85" fill="#2F8F6B"/>
+<path id="Left Strand" d="M9.4 5.75C9.1 8.22 10.2 9.48 12 11.1C13.8 12.72 14.9 14.02 14.6 16.48C14.43 17.88 13.57 18.88 12.65 19.42" stroke="white" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Right Strand" d="M14.6 5.75C14.9 8.22 13.8 9.48 12 11.1C10.2 12.72 9.1 14.02 9.4 16.48C9.57 17.88 10.43 18.88 11.35 19.42" stroke="white" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Rung Top" d="M9.98 8.1H14.02" stroke="white" stroke-width="1.35" stroke-linecap="round"/>
+<path id="Rung Middle" d="M9.92 13.15H14.08" stroke="white" stroke-width="1.35" stroke-linecap="round"/>
+<path id="Rung Bottom" d="M10.35 15.65H13.65" stroke="white" stroke-width="1.35" stroke-linecap="round"/>
+</g>
+</svg>

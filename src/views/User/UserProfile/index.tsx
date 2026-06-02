@@ -28,8 +28,7 @@ import { UserProfileUserPublicQuery } from '~/gql/graphql'
 import UserTabs from '../UserTabs'
 import { Badges } from './Badges'
 import { BadgesDialog } from './BadgesDialog'
-// FEATURE IS SUNSETTING: circle entry on user profile is hidden
-// import CircleWidget from './CircleWidget'
+import CircleWidget from './CircleWidget'
 import DropdownActions from './DropdownActions'
 import { FollowersDialog } from './FollowersDialog'
 import { FollowingDialog } from './FollowingDialog'
@@ -103,14 +102,14 @@ export const UserProfile = () => {
   }
 
   const badges = user.info.badges || []
-  // FEATURE IS SUNSETTING: circle entry on user profile is hidden
-  // const circles = user.ownCircles || []
+  const circles = user.ownCircles || []
   const hasSeedBadge = badges.some((b) => b.type === 'seed')
   const hasArchitectBadge = badges.some((b) => b.type === 'architect')
   const hasGoldenMotorBadge = badges.some((b) => b.type === 'golden_motor')
   const hasCommunityWatchBadge = badges.some(
     (b) => b.type === 'community_watch'
   )
+  const hasCarbonBasedBadge = badges.some((b) => b.type === 'carbon_based')
   const hasTraveloggersBadge = !!user.info.cryptoWallet?.hasNFTs
   const nomadBadgeType = badges.filter((b) =>
     ['nomad1', 'nomad2', 'nomad3', 'nomad4'].includes(b.type)
@@ -220,6 +219,7 @@ export const UserProfile = () => {
                 hasGoldenMotorBadge={hasGoldenMotorBadge}
                 hasArchitectBadge={hasArchitectBadge}
                 hasCommunityWatchBadge={hasCommunityWatchBadge}
+                hasCarbonBasedBadge={hasCarbonBasedBadge}
                 isCivicLiker={isCivicLiker}
               >
                 {({ openDialog }) => (
@@ -237,6 +237,7 @@ export const UserProfile = () => {
                       hasGoldenMotorBadge={hasGoldenMotorBadge}
                       hasArchitectBadge={hasArchitectBadge}
                       hasCommunityWatchBadge={hasCommunityWatchBadge}
+                      hasCarbonBasedBadge={hasCarbonBasedBadge}
                       isCivicLiker={isCivicLiker}
                     />
                   </section>
@@ -305,13 +306,12 @@ export const UserProfile = () => {
               </p>
             </Expandable>
 
-            {/* FEATURE IS SUNSETTING: circle entry on user profile is hidden */}
-            {/* <CircleWidget
+            <CircleWidget
               circles={circles}
               isMe={isMe}
               hasDescription={false}
               hasFooter={false}
-            /> */}
+            />
           </section>
         </Media>
       </section>

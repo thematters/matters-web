@@ -72,6 +72,7 @@ const useLayoutType = () => {
     isInPath('ME_SETTINGS_NOTIFICATIONS_CIRCLE') ||
     isInPath('ME_SETTINGS_MISC') ||
     isInPath('ME_SETTINGS_BLOCKED') ||
+    isInPath('ME_SETTINGS_PERSONHOOD_FEASIBILITY') ||
     isInPath('ME_DRAFT_DETAIL') ||
     // Moment
     isInPath('MOMENT_DETAIL') ||

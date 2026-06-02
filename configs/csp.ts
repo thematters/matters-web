@@ -13,8 +13,21 @@ export const SENTRY_CSP_REPORT_GROUP = 'csp-endpoint'
 
 const DEFAULT_SRC = ["'self'", process.env.NEXT_PUBLIC_NEXT_ASSET_DOMAIN]
 
+const getCspHost = (url?: string) => {
+  if (!url) {
+    return undefined
+  }
+
+  try {
+    return new URL(url).hostname
+  } catch {
+    return url
+  }
+}
+
 const SCRIPT_SRC = [
   "'self'",
+  "'wasm-unsafe-eval'",
 
   // Next.js Assets
   process.env.NEXT_PUBLIC_NEXT_ASSET_DOMAIN,
@@ -121,6 +134,8 @@ const CONNECT_SRC = [
 
   // Next.js Assets
   process.env.NEXT_PUBLIC_NEXT_ASSET_DOMAIN,
+  getCspHost(process.env.NEXT_PUBLIC_PERSONHOOD_ASSET_URL),
+  getCspHost(process.env.NEXT_PUBLIC_PERSONHOOD_VERIFIER_URL),
 
   // API
   process.env.NEXT_PUBLIC_API_URL,
@@ -213,6 +228,8 @@ const PREFETCH_SRC = [
   process.env.NEXT_PUBLIC_NEXT_ASSET_DOMAIN,
 ]
 
+const WORKER_SRC = ["'self'", 'blob:']
+
 export const CSP_POLICY = Object.entries({
   'default-src': DEFAULT_SRC,
   'script-src': SCRIPT_SRC,
@@ -223,6 +240,7 @@ export const CSP_POLICY = Object.entries({
   'connect-src': CONNECT_SRC,
   'frame-src': FRAME_SRC,
   'prefetch-src': PREFETCH_SRC,
+  'worker-src': WORKER_SRC,
   'report-uri': SENTRY_REPORT_URI,
   'report-to': SENTRY_CSP_REPORT_GROUP,
 })
