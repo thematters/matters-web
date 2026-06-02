@@ -376,9 +376,6 @@
   "3EeDnu": {
     "defaultMessage": "貼上 JSFiddle 或 CodePen 連結後，Enter 進行新增"
   },
-  "3HKaQ4": {
-    "defaultMessage": "The next slice mounts the zkID in-browser worker here and submits the proof to Matters."
-  },
   "3KNMbJ": {
     "defaultMessage": "写文章"
   },
@@ -492,6 +489,9 @@
   },
   "5XFd/5": {
     "defaultMessage": "管理圍爐"
+  },
+  "5YuSaZ": {
+    "defaultMessage": "After TW FidO signs, continue here on desktop, or copy the Mac proof link to a desktop browser."
   },
   "5fjmnA": {
     "defaultMessage": "碳基生物"
@@ -612,6 +612,9 @@
     "defaultMessage": "編輯",
     "description": "src/components/CircleComment/DropdownActions/EditButton.tsx"
   },
+  "6wdAti": {
+    "defaultMessage": "還沒有動態"
+  },
   "73iajM": {
     "defaultMessage": "出錯了，請檢查你輸入的內容",
     "description": "BAD_USER_INPUT"
@@ -622,6 +625,9 @@
   "79Ydsg": {
     "defaultMessage": "提現撤銷",
     "description": "src/components/Transaction/index.tsx"
+  },
+  "7DJ8wF": {
+    "defaultMessage": "加入動態頻道"
   },
   "7HPPqs": {
     "defaultMessage": "。{SuggestButton}?"
@@ -1074,6 +1080,9 @@
   "DtO278": {
     "defaultMessage": "檢測到近期你的多篇文章被推薦到相關頻道，它們有可能不會同時出現"
   },
+  "Dx5Sas": {
+    "defaultMessage": "Copy Mac proof link"
+  },
   "DyuHBH": {
     "defaultMessage": "取消代表作",
     "description": "src/components/CollectionDigest/DropdownActions/PinButton.tsx"
@@ -1177,6 +1186,9 @@
   "FWCa4O": {
     "defaultMessage": "目前非 Optimism 網路，立即切換？",
     "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
+  },
+  "FXgOAP": {
+    "defaultMessage": "Browser handoff is ready. Browser proving is pending until the prover runs in a cross-origin isolated page."
   },
   "Fe682o": {
     "defaultMessage": "下月預期營收",
@@ -1347,6 +1359,9 @@
   },
   "HzB4Lk": {
     "defaultMessage": "告知讀者你此次編輯的更動有哪些⋯"
+  },
+  "I1eVEY": {
+    "defaultMessage": "已送出申請,待審核"
   },
   "I3v/Va": {
     "defaultMessage": "PWA proof handoff"
@@ -1544,6 +1559,9 @@
   },
   "LWE7oq": {
     "defaultMessage": "草稿儲存中，確定要離開嗎？"
+  },
+  "LXZyce": {
+    "defaultMessage": "你已經申請過了，請耐心等候審核"
   },
   "Lb0JsC": {
     "defaultMessage": "你封鎖了該用戶"
@@ -1800,6 +1818,9 @@
   },
   "Q8Qw5B": {
     "defaultMessage": "個人簡介"
+  },
+  "QHRze5": {
+    "defaultMessage": "動態"
   },
   "QKJWqd": {
     "defaultMessage": "收藏",
@@ -2099,9 +2120,6 @@
     "defaultMessage": "發布中，請稍候⋯",
     "description": "src/components/Editor/PreviewDialog/index.tsx"
   },
-  "V3oaoZ": {
-    "defaultMessage": "After TW FidO signs, continue in this browser. No native proof helper is required for this PWA path."
-  },
   "V5OMr4": {
     "defaultMessage": "什麼是數字錢包？",
     "description": "src/components/Forms/SelectAuthMethodForm/WalletFeed.tsx"
@@ -2112,6 +2130,9 @@
   },
   "VBve8d": {
     "defaultMessage": "搬家到 Matters"
+  },
+  "VDclc3": {
+    "defaultMessage": "你已加入動態頻道，即日起發出的動態將顯示於此頻道"
   },
   "VFQGq7": {
     "defaultMessage": "Check result"
@@ -2340,9 +2361,6 @@
   "Z39z+x": {
     "defaultMessage": "封鎖之後，{displayName} 將無法評論你的作品，不能 @ 你，並且不能加入你的圍爐。你可以在設置裏管理你的封鎖用戶列表。`"
   },
-  "Z4R3Lq": {
-    "defaultMessage": "This browser page is missing a required PWA proving capability."
-  },
   "Z7JXlF": {
     "defaultMessage": "因違反用戶協定而被封存，",
     "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
@@ -2445,6 +2463,9 @@
   "aqX2Bt": {
     "defaultMessage": "前往首頁",
     "description": "src/views/Callback/UI.tsx"
+  },
+  "atmn17": {
+    "defaultMessage": "Open isolated prover"
   },
   "awW+lk": {
     "defaultMessage": "進行中…",
@@ -2583,6 +2604,10 @@
   "d5bM8A": {
     "defaultMessage": "投稿日程⋯"
   },
+  "d95AX1": {
+    "defaultMessage": "我再想想",
+    "description": "src/views/HottestMoments/Apply/Dialog/index.tsx"
+  },
   "dAPUJp": {
     "defaultMessage": "流星雨的絢爛光芒足以點亮夜空。流星號徽章紀念你曾參與「遊牧者計畫」。",
     "description": "src/views/User/UserProfile/BadgeNomadLabel/index.tsx"
@@ -2618,6 +2643,9 @@
   "dVbKzB": {
     "defaultMessage": "作品或評論提及我",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
+  },
+  "dWt8c/": {
+    "defaultMessage": "Open the isolated browser container. It does not load the normal Matters bundle, so cross-origin isolation can be enabled for the zkID worker."
   },
   "dZlT9q": {
     "defaultMessage": "已推薦你的這篇作品到頻道：{channelNames}，你對結果滿意嗎？"
@@ -2858,6 +2886,10 @@
   "hWq/ii": {
     "defaultMessage": "餘額不足：",
     "description": "src/components/Balance/index.tsx"
+  },
+  "hdbKK1": {
+    "defaultMessage": "動態",
+    "description": "src/components/Layout/SideChannelNav/index.tsx"
   },
   "hgtWIO": {
     "defaultMessage": "作品被關聯",
@@ -3263,6 +3295,9 @@
     "defaultMessage": "關注中",
     "description": "src/components/UserProfile/index.tsx"
   },
+  "ol0msv": {
+    "defaultMessage": "Copy TW FidO link"
+  },
   "on+DYO": {
     "defaultMessage": "確認報名"
   },
@@ -3537,6 +3572,9 @@
   },
   "tWCQCd": {
     "defaultMessage": "交易合約已將 {amount} USDT 發送至綁定錢包"
+  },
+  "tYDhrI": {
+    "defaultMessage": "申請通過之後，個人發出的動態將顯示於此頻道"
   },
   "tZKvnZ": {
     "defaultMessage": "取消喜歡動態"
@@ -3902,6 +3940,9 @@
   "z3uIHQ": {
     "defaultMessage": "取消點讚"
   },
+  "z5UXPc": {
+    "defaultMessage": "申請加入"
+  },
   "z91BKe": {
     "defaultMessage": "已封存作品",
     "description": "src/components/Notice/NoticeArticleTitle.tsx"
@@ -3912,9 +3953,6 @@
   "zAK5G+": {
     "defaultMessage": "登入連結已發送至 {email}",
     "description": "src/components/Forms/Verification/LinkSent.tsx"
-  },
-  "zCCJPu": {
-    "defaultMessage": "Run browser proof"
   },
   "zE51j6": {
     "defaultMessage": "發布失敗"
