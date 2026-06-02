@@ -1,0 +1,93 @@
+name: Set Develop Personhood Env
+
+on:
+  workflow_dispatch:
+    inputs:
+      enabled:
+        description: 'Enable TW FidO personhood routes on matters.icu'
+        required: true
+        default: 'true'
+        type: choice
+        options:
+          - 'true'
+          - 'false'
+      return_proof_input:
+        description: 'Return verifier proof input to the mobile helper'
+        required: true
+        default: 'true'
+        type: choice
+        options:
+          - 'true'
+          - 'false'
+      verifier_url:
+        description: 'zkID verifier base URL for matters.icu'
+        required: true
+        type: string
+
+concurrency:
+  group: set-develop-personhood-env
+  cancel-in-progress: false
+
+jobs:
+  set-develop-env:
+    name: Set matters.icu develop personhood env
+    runs-on: ubuntu-latest
+    environment: develop
+    permissions:
+      contents: read
+    steps:
+      - name: Validate input
+        run: |
+          case "${{ inputs.enabled }}" in
+            true|false) ;;
+            *) echo "Unsupported enabled value: ${{ inputs.enabled }}" >&2; exit 1 ;;
+          esac
+
+          case "${{ inputs.return_proof_input }}" in
+            true|false) ;;
+            *) echo "Unsupported return_proof_input value: ${{ inputs.return_proof_input }}" >&2; exit 1 ;;
+          esac
+
+          node -e "const url = new URL(process.argv[1]); if (url.protocol !== 'https:') throw new Error('verifier_url must be https')" "${{ inputs.verifier_url }}"
+
+          if [ -z "${{ secrets.PERSONHOOD_FIDO_SP_SERVICE_ID }}" ]; then
+            echo "Missing PERSONHOOD_FIDO_SP_SERVICE_ID environment secret" >&2
+            exit 1
+          fi
+
+          if [ -z "${{ secrets.PERSONHOOD_FIDO_AES_KEY_BASE64 }}" ]; then
+            echo "Missing PERSONHOOD_FIDO_AES_KEY_BASE64 environment secret" >&2
+            exit 1
+          fi
+
+      - name: Setup AWS
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION_DEV }}
+
+      - name: Update develop Elastic Beanstalk environment
+        run: |
+          aws elasticbeanstalk update-environment \
+            --environment-name "${{ secrets.AWS_EB_ENV_NAME_DEV }}" \
+            --option-settings \
+              Namespace=aws:elasticbeanstalk:application:environment,OptionName=PERSONHOOD_TW_FIDO_ENABLED,Value="${{ inputs.enabled }}" \
+              Namespace=aws:elasticbeanstalk:application:environment,OptionName=PERSONHOOD_TW_FIDO_RETURN_PROOF_INPUT,Value="${{ inputs.return_proof_input }}" \
+              Namespace=aws:elasticbeanstalk:application:environment,OptionName=PERSONHOOD_FIDO_SP_SERVICE_ID,Value="${{ secrets.PERSONHOOD_FIDO_SP_SERVICE_ID }}" \
+              Namespace=aws:elasticbeanstalk:application:environment,OptionName=PERSONHOOD_FIDO_AES_KEY_BASE64,Value="${{ secrets.PERSONHOOD_FIDO_AES_KEY_BASE64 }}" \
+              Namespace=aws:elasticbeanstalk:application:environment,OptionName=PERSONHOOD_VERIFIER_URL,Value="${{ inputs.verifier_url }}" \
+            >/tmp/update-environment.json
+
+      - name: Wait for develop environment
+        run: |
+          aws elasticbeanstalk wait environment-updated \
+            --environment-names "${{ secrets.AWS_EB_ENV_NAME_DEV }}"
+
+      - name: Verify develop setting
+        run: |
+          aws elasticbeanstalk describe-configuration-settings \
+            --application-name matters-stage \
+            --environment-name "${{ secrets.AWS_EB_ENV_NAME_DEV }}" \
+            --query "ConfigurationSettings[0].OptionSettings[?Namespace=='aws:elasticbeanstalk:application:environment' && contains(['PERSONHOOD_TW_FIDO_ENABLED','PERSONHOOD_TW_FIDO_RETURN_PROOF_INPUT','PERSONHOOD_FIDO_SP_SERVICE_ID','PERSONHOOD_VERIFIER_URL'], OptionName)].{OptionName:OptionName,Value:Value}" \
+            --output table
