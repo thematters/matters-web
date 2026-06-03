@@ -59,6 +59,9 @@ const fragments = {
         author {
           id
           isBlocked
+          status {
+            state
+          }
         }
       }
     `,

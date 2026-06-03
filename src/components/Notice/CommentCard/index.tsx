@@ -87,6 +87,22 @@ const CommentCard = ({
     return null
   }
 
+  if (comment.author?.status?.state === 'archived' && (moment || article)) {
+    return (
+      <section>
+        <ContentCard
+          content={intl.formatMessage({
+            defaultMessage: 'Comment deleted',
+            description: 'src/components/Notice/NoticeComment.tsx/moment',
+            id: 'Ci7dxf',
+          })}
+          color={color}
+          hasStrike={true}
+        />
+      </section>
+    )
+  }
+
   if (comment.state === 'archived' && moment) {
     return (
       <section>
