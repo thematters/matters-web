@@ -20,6 +20,15 @@ import {
 } from '~/components'
 import { SubmitReportDialogProps } from '~/components/Dialogs/SubmitReportDialog/Dialog'
 import { MomentDigestDropdownActionsMomentFragment } from '~/gql/graphql'
+import { ArchiveUserDialogProps } from '~/views/User/UserProfile/DropdownActions/ArchiveUser/Dialog'
+import {
+  OpenToggleFreezeUserDialogWithProps,
+  ToggleFreezeUserDialogProps,
+} from '~/views/User/UserProfile/DropdownActions/ToggleFreezeUser/Dialog'
+import {
+  OpenToggleRestrictUserDialogWithProps,
+  ToggleRestrictUserDialogProps,
+} from '~/views/User/UserProfile/DropdownActions/ToggleRestrictUser/Dialog'
 
 import DeleteMoment from './DeleteMoment'
 import { DeleteMomentDialogProps } from './DeleteMoment/Dialog'
@@ -33,10 +42,55 @@ const DynamicToggleSpamButton = dynamic(
   }
 )
 
+const DynamicToggleAdMomentButton = dynamic(() => import('./ToggleAdMoment'), {
+  loading: () => <Spinner />,
+})
+
+const DynamicRevokeMomentFeedButton = dynamic(
+  () => import('./RevokeMomentFeed'),
+  {
+    loading: () => <Spinner />,
+  }
+)
+
+const DynamicToggleFreezeUserButton = dynamic(
+  () =>
+    import('~/views/User/UserProfile/DropdownActions/ToggleFreezeUser/Button'),
+  { loading: () => <Spinner /> }
+)
+const DynamicToggleFreezeUserDialog = dynamic(
+  () =>
+    import('~/views/User/UserProfile/DropdownActions/ToggleFreezeUser/Dialog'),
+  { loading: () => <Spinner /> }
+)
+const DynamicToggleRestrictUserButton = dynamic(
+  () =>
+    import(
+      '~/views/User/UserProfile/DropdownActions/ToggleRestrictUser/Button'
+    ),
+  { loading: () => <Spinner /> }
+)
+const DynamicToggleRestrictUserDialog = dynamic(
+  () =>
+    import(
+      '~/views/User/UserProfile/DropdownActions/ToggleRestrictUser/Dialog'
+    ),
+  { loading: () => <Spinner /> }
+)
+const DynamicArchiveUserButton = dynamic(
+  () => import('~/views/User/UserProfile/DropdownActions/ArchiveUser/Button'),
+  { loading: () => <Spinner /> }
+)
+const DynamicArchiveUserDialog = dynamic(
+  () => import('~/views/User/UserProfile/DropdownActions/ArchiveUser/Dialog'),
+  { loading: () => <Spinner /> }
+)
+
 const fragments = {
   moment: gql`
     fragment MomentDigestDropdownActionsMoment on Moment {
       id
+      shortHash
       state
       author {
         id
@@ -58,6 +112,13 @@ interface Controls {
 interface DialogProps {
   openDeleteMomentDialog: () => void
   openSubmitReportDialog: () => void
+  openToggleRestrictUserDialog: (
+    props: OpenToggleRestrictUserDialogWithProps
+  ) => void
+  openToggleFreezeUserDialog: (
+    props: OpenToggleFreezeUserDialogWithProps
+  ) => void
+  openArchiveUserDialog: () => void
 }
 
 type BaseDropdownActionsProps = DropdownActionsProps & Controls & DialogProps
@@ -69,6 +130,9 @@ const BaseDropdownActions = ({
 
   openDeleteMomentDialog,
   openSubmitReportDialog,
+  openToggleRestrictUserDialog,
+  openToggleFreezeUserDialog,
+  openArchiveUserDialog,
 }: BaseDropdownActionsProps) => {
   const viewer = useContext(ViewerContext)
 
@@ -84,6 +148,17 @@ const BaseDropdownActions = ({
         <>
           <Menu.Divider />
           <DynamicToggleSpamButton type="moment" id={moment.id} />
+          <DynamicToggleAdMomentButton shortHash={moment.shortHash} />
+          <DynamicRevokeMomentFeedButton userId={moment.author.id} />
+          <DynamicToggleRestrictUserButton
+            id={moment.author.id}
+            openDialog={openToggleRestrictUserDialog}
+          />
+          <DynamicToggleFreezeUserButton
+            id={moment.author.id}
+            openDialog={openToggleFreezeUserDialog}
+          />
+          <DynamicArchiveUserButton openDialog={openArchiveUserDialog} />
         </>
       )}
     </Menu>
@@ -164,7 +239,44 @@ const DropdownActions = (props: DropdownActionsProps) => {
     }
   })
 
-  return <WithDeleteMoment />
+  const WithToggleRestrictUser = withDialog<
+    Omit<ToggleRestrictUserDialogProps, 'children'>
+  >(
+    WithDeleteMoment,
+    DynamicToggleRestrictUserDialog as React.ComponentType<
+      Omit<ToggleRestrictUserDialogProps, 'children'> & {
+        children: (props: { openDialog: () => void }) => React.ReactNode
+      }
+    >,
+    { id: moment.author.id, userName: moment.author.userName! },
+    ({ openDialog }) => ({
+      openToggleRestrictUserDialog: openDialog,
+    })
+  )
+
+  const WithToggleFreezeUser = withDialog<
+    Omit<ToggleFreezeUserDialogProps, 'children'>
+  >(
+    WithToggleRestrictUser,
+    DynamicToggleFreezeUserDialog as React.ComponentType<
+      Omit<ToggleFreezeUserDialogProps, 'children'> & {
+        children: (props: { openDialog: () => void }) => React.ReactNode
+      }
+    >,
+    { id: moment.author.id, userName: moment.author.userName! },
+    ({ openDialog }) => ({
+      openToggleFreezeUserDialog: openDialog,
+    })
+  )
+
+  const WithArchiveUser = withDialog<Omit<ArchiveUserDialogProps, 'children'>>(
+    WithToggleFreezeUser,
+    DynamicArchiveUserDialog,
+    { id: moment.author.id, userName: moment.author.userName! },
+    ({ openDialog }) => ({ openArchiveUserDialog: openDialog })
+  )
+
+  return <WithArchiveUser />
 }
 
 DropdownActions.fragments = fragments

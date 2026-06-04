@@ -6,6 +6,7 @@ export const MOCK_USER = {
   id: 'VXNlcjox', // User:1
   userName: 'matty',
   displayName: 'Matty',
+  isMomentFeedApplied: false,
   avatar:
     'https://imagedelivery.net/kDRCweMmqLnTPNlbum-pYA/prod/avatar/19b36f6e-6311-4cd6-b703-c143a4a49113.png/public',
   liker: {
