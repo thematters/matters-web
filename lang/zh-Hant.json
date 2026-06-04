@@ -627,7 +627,7 @@
     "description": "src/components/Transaction/index.tsx"
   },
   "7DJ8wF": {
-    "defaultMessage": "加入動態頻道"
+    "defaultMessage": "加入閒聊頻道"
   },
   "7HPPqs": {
     "defaultMessage": "。{SuggestButton}?"
@@ -1820,7 +1820,7 @@
     "defaultMessage": "描述"
   },
   "QHRze5": {
-    "defaultMessage": "動態"
+    "defaultMessage": "閒聊"
   },
   "QKJWqd": {
     "defaultMessage": "收藏",
@@ -2132,7 +2132,7 @@
     "defaultMessage": "搬家到 Matters"
   },
   "VDclc3": {
-    "defaultMessage": "你已加入動態頻道，即日起發出的動態將顯示於此頻道"
+    "defaultMessage": "你已加入閒聊頻道，即日起發出的閒聊將顯示於此頻道"
   },
   "VFQGq7": {
     "defaultMessage": "Check result"
@@ -2888,7 +2888,7 @@
     "description": "src/components/Balance/index.tsx"
   },
   "hdbKK1": {
-    "defaultMessage": "動態",
+    "defaultMessage": "閒聊",
     "description": "src/components/Layout/SideChannelNav/index.tsx"
   },
   "hgtWIO": {

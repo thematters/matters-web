@@ -627,7 +627,7 @@
     "description": "src/components/Transaction/index.tsx"
   },
   "7DJ8wF": {
-    "defaultMessage": "加入动态频道"
+    "defaultMessage": "加入闲聊频道"
   },
   "7HPPqs": {
     "defaultMessage": "。{SuggestButton}?"
@@ -1820,7 +1820,7 @@
     "defaultMessage": "描述"
   },
   "QHRze5": {
-    "defaultMessage": "动态"
+    "defaultMessage": "闲聊"
   },
   "QKJWqd": {
     "defaultMessage": "收藏",
@@ -2132,7 +2132,7 @@
     "defaultMessage": "搬家到 Matters"
   },
   "VDclc3": {
-    "defaultMessage": "你已加入动态频道，即日起发出的动态将显示于此频道"
+    "defaultMessage": "你已加入闲聊频道，即日起发出的闲聊将显示于此频道"
   },
   "VFQGq7": {
     "defaultMessage": "Check result"
@@ -2888,7 +2888,7 @@
     "description": "src/components/Balance/index.tsx"
   },
   "hdbKK1": {
-    "defaultMessage": "动态",
+    "defaultMessage": "闲聊",
     "description": "src/components/Layout/SideChannelNav/index.tsx"
   },
   "hgtWIO": {
