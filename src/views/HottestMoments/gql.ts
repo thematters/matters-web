@@ -13,10 +13,12 @@ const momentConnectionFragment = gql`
       cursor
       node {
         ...MomentDigestFeedMomentPublic
+        ...MomentDigestFeedMomentPrivate
       }
     }
   }
   ${MomentDigestFeed.fragments.moment.public}
+  ${MomentDigestFeed.fragments.moment.private}
 `
 
 export const HOTTEST_MOMENTS_PUBLIC = gql`
