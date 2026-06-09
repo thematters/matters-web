@@ -13,7 +13,10 @@ import {
   ViewerContext,
 } from '~/components'
 import { useReadTimer } from '~/components/Hook'
-import { ReadArticleMutation } from '~/gql/graphql'
+import {
+  QuoteImageArticleFragment,
+  ReadArticleMutation,
+} from '~/gql/graphql'
 
 import styles from './styles.module.css'
 
@@ -27,10 +30,12 @@ const READ_ARTICLE = gql`
 
 const Content = ({
   articleId,
+  article,
   content,
   indentFirstLine,
 }: {
   articleId: string
+  article?: QuoteImageArticleFragment | null
   content: string
   indentFirstLine: boolean
 }) => {
@@ -140,6 +145,7 @@ const Content = ({
         {!isInArticleDetailHistory && contentContainer.current && (
           <TextSelectionPopover
             targetElement={contentContainer.current as HTMLElement}
+            article={article}
           />
         )}
       </Media>
