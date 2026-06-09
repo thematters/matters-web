@@ -19,6 +19,8 @@ const styleNames = defineMessages({
   ink: { defaultMessage: 'Ink', id: 'QuoteImage.style.ink' },
   pine: { defaultMessage: 'Pine', id: 'QuoteImage.style.pine' },
   mint: { defaultMessage: 'Mint', id: 'QuoteImage.style.mint' },
+  violet: { defaultMessage: 'Violet', id: 'QuoteImage.style.violet' },
+  slate: { defaultMessage: 'Slate', id: 'QuoteImage.style.slate' },
 })
 const sizeNames = defineMessages({
   square: { defaultMessage: 'Square 1:1', id: 'QuoteImage.size.square' },
