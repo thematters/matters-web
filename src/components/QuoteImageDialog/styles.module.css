@@ -1,0 +1,180 @@
+/* === 金句卡片本體（固定 1080px 設計尺寸） === */
+.card {
+  position: relative;
+  overflow: hidden;
+  display: block;
+}
+
+.inner {
+  position: absolute;
+  top: 118px;
+  left: 110px;
+  right: 110px;
+  bottom: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.mark {
+  font-size: 120px;
+  line-height: 0.6;
+  margin-bottom: 18px;
+  font-family: 'Noto Serif TC', 'Songti TC', serif;
+  opacity: 0.9;
+}
+
+.quote {
+  /* font-size / color / line-height 由元件 inline 指定 */
+}
+
+.author {
+  margin-top: 44px;
+  font-size: 40px;
+  font-weight: 600;
+}
+
+.author .dash {
+  margin-right: 14px;
+  opacity: 0.7;
+}
+
+.foot {
+  position: absolute;
+  left: 110px;
+  right: 110px;
+  bottom: 90px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 32px;
+}
+
+.title {
+  display: -webkit-box;
+  max-width: 640px;
+  font-size: 30px;
+  font-family: 'PingFang TC', sans-serif;
+  line-height: 1.5;
+  opacity: 0.95;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.title .label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 22px;
+  letter-spacing: 0.2em;
+  opacity: 0.6;
+}
+
+.brand {
+  margin-top: 14px;
+  font-size: 24px;
+  font-family: 'PingFang TC', sans-serif;
+  opacity: 0.7;
+}
+
+.brandLogo {
+  margin-top: 16px;
+}
+
+.brandLogo svg {
+  display: block;
+  width: auto;
+  height: 60px;
+}
+
+.qr {
+  flex: 0 0 auto;
+  width: 150px;
+  height: 150px;
+  padding: 12px;
+  border-radius: 14px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+.qr img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* === 對話框內容 === */
+.preview {
+  display: flex;
+  justify-content: center;
+  padding: var(--sp24, 24px);
+  background: var(--color-grey-lighter);
+  border-radius: var(--sp12, 12px);
+}
+
+.stage {
+  transform-origin: top left;
+}
+
+.truncHint {
+  margin: var(--sp12, 12px) 0 0;
+  font-size: var(--text13, 13px);
+  color: var(--color-function-warn, #dba34f);
+}
+
+.group {
+  margin-top: var(--sp16, 16px);
+}
+
+.groupLabel {
+  display: block;
+  margin-bottom: var(--sp8, 8px);
+  font-size: var(--text13, 13px);
+  font-weight: var(--font-semibold, 600);
+  color: var(--color-grey-darker);
+}
+
+.opts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp8, 8px);
+}
+
+.opt {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 12px;
+  font-size: var(--text14, 14px);
+  background: var(--color-white);
+  border: 1.5px solid var(--color-grey-light);
+  border-radius: 9px;
+  cursor: pointer;
+}
+
+.opt.active {
+  font-weight: var(--font-semibold, 600);
+  color: var(--color-brand-legacy-green, #0d6763);
+  background: var(--color-brand-legacy-green-lighter, #f2faf7);
+  border-color: var(--color-brand-legacy-green, #0d6763);
+}
+
+.swatch {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+}
+
+.sizeName {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.sizeNote {
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--color-grey-dark);
+}

@@ -2,15 +2,23 @@ import classNames from 'classnames'
 import { useEffect, useRef, useState } from 'react'
 
 import IconComment from '@/public/static/icons/24px/comment.svg'
+import IconImage from '@/public/static/icons/24px/image.svg'
 import { OPEN_COMMENT_LIST_DRAWER } from '~/common/enums'
 import { isElementInViewport } from '~/common/utils'
 import { analytics } from '~/common/utils'
-import { Icon, useCommentEditorContext } from '~/components'
+import {
+  Icon,
+  isSevenDayBookArticle,
+  QuoteImageDialog,
+  useCommentEditorContext,
+} from '~/components'
+import { QuoteImageArticleFragment } from '~/gql/graphql'
 
 import styles from './styles.module.css'
 
 interface TextSelectionPopoverProps {
   targetElement: HTMLElement
+  article?: QuoteImageArticleFragment | null
 }
 
 const isSelectionCrossingParagraphs = (selection: Selection): boolean => {
@@ -53,8 +61,10 @@ const isValidSelection = (
 
 export const TextSelectionPopover = ({
   targetElement,
+  article,
 }: TextSelectionPopoverProps) => {
   const [selection, setSelection] = useState<string>()
+  const [selectionText, setSelectionText] = useState<string>('')
   const [position, setPosition] = useState<Record<string, number>>() // { x, y }
   const ref = useRef<HTMLDivElement>(null)
   const { fallbackEditor, getCurrentEditor } = useCommentEditorContext()
@@ -117,6 +127,9 @@ export const TextSelectionPopover = ({
     } else {
       setSelection(activeSelection?.toString() || '')
     }
+
+    // 金句卡片用純文字
+    setSelectionText(activeSelection?.toString() || '')
 
     const rect = (activeSelection as Selection)
       .getRangeAt(0)
@@ -186,10 +199,33 @@ export const TextSelectionPopover = ({
           <button onClick={onQuote} className={styles.quoteButton}>
             <Icon icon={IconComment} size={20} />
           </button>
-          {/* <span className={styles.divider} />
-          <button onClick={onShare} className={styles.shareButton}>
-            <IconX20 size={20} />
-          </button> */}
+
+          <span className={styles.divider} />
+
+          <QuoteImageDialog
+            quote={selectionText}
+            author={article?.author?.displayName || ''}
+            title={article?.title || ''}
+            shareLink={
+              typeof window !== 'undefined' ? window.location.href : ''
+            }
+            isSevenDayBook={isSevenDayBookArticle(article)}
+          >
+            {({ openDialog }) => (
+              <button
+                onClick={() => {
+                  analytics.trackEvent('click_button', {
+                    type: 'article_content_quote_image',
+                    pageType: 'article_detail',
+                  })
+                  openDialog()
+                }}
+                className={styles.shareButton}
+              >
+                <Icon icon={IconImage} size={20} />
+              </button>
+            )}
+          </QuoteImageDialog>
         </div>
       )}
     </div>
