@@ -12,6 +12,8 @@ export const fragments = {
       id
       title
       shortHash
+      # 版權 gate：「作者保留所有權利」(ARR) 時僅作者本人可生成金句卡片
+      license
       author {
         id
         displayName
