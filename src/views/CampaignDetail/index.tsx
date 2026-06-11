@@ -33,6 +33,11 @@ const DynamicDiscussion = dynamic(() => import('./Discussion'), {
   ssr: false,
 })
 
+const DynamicQuoteWall = dynamic(() => import('./QuoteWall'), {
+  loading: () => <SpinnerBlock />,
+  ssr: false,
+})
+
 const DynamicSideParticipants = dynamic(() => import('./SideParticipants'), {
   loading: () => <SpinnerBlock />,
   ssr: false,
@@ -104,12 +109,16 @@ const CampaignDetail = () => {
         <>
           {campaign.showOther && <DynamicOtherCampaigns id={campaign.id} />}
           <DynamicSideParticipants campaign={campaign} />
-          {/* desktop: discussion sits in the right aside, below the avatars */}
+          {/* desktop: quote wall + discussion sit in the right aside, below
+              the avatars (quote wall first — it's the lighter "trailer") */}
           {isMdUp && (
-            <DynamicDiscussion
-              campaignId={campaign.id}
-              shortHash={campaign.shortHash}
-            />
+            <>
+              <DynamicQuoteWall shortHash={campaign.shortHash} />
+              <DynamicDiscussion
+                campaignId={campaign.id}
+                shortHash={campaign.shortHash}
+              />
+            </>
           )}
           {campaign.showAd && <Billboard />}
         </>
@@ -140,15 +149,18 @@ const CampaignDetail = () => {
 
       <InfoHeader campaign={campaign} />
 
-      {/* mobile: the aside is hidden, so the discussion shrinks to a one-line
-          entry under the header (still on the first screen); tapping it opens
-          the full discussion dialog */}
+      {/* mobile: the aside is hidden, so the quote wall + discussion shrink to
+          one-line entries under the header (still on the first screen);
+          tapping either opens its full dialog */}
       {!isMdUp && (
-        <DynamicDiscussion
-          campaignId={campaign.id}
-          shortHash={campaign.shortHash}
-          entry="chip"
-        />
+        <>
+          <DynamicQuoteWall shortHash={campaign.shortHash} entry="chip" />
+          <DynamicDiscussion
+            campaignId={campaign.id}
+            shortHash={campaign.shortHash}
+            entry="chip"
+          />
+        </>
       )}
 
       <ArticleFeeds campaign={campaign} />
