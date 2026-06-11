@@ -234,6 +234,9 @@ export const TextSelectionPopover = ({
       title={article?.title || ''}
       shareLink={typeof window !== 'undefined' ? window.location.href : ''}
       isSevenDayBook={isSevenDayBookArticle(article)}
+      articleId={article?.id}
+      // 只有活動文章可上牆（伺服器會再驗證）
+      canPostToWall={!!article?.campaigns?.length}
     >
       {({ openDialog }) => (
         <button
