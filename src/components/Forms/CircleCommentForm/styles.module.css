@@ -10,5 +10,17 @@
 }
 
 .footer {
-  text-align: right;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--sp8);
+}
+
+.counter {
+  font-size: var(--text12);
+  color: var(--color-grey);
+}
+
+.counter[data-over='true'] {
+  color: var(--color-red);
 }

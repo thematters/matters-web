@@ -90,6 +90,9 @@ const fragments = {
               id
             }
           }
+          ... on WritingChallenge {
+            id
+          }
         }
         ...CircleCommentPinButtonComment
       }
@@ -110,6 +113,9 @@ const fragments = {
               id
               isBlocking
             }
+          }
+          ... on WritingChallenge {
+            id
           }
         }
       }
@@ -185,6 +191,8 @@ const DropdownActions = (props: DropdownActionsProps) => {
   const { isArchived, isBanned, isFrozen } = viewer
 
   const circle = comment.node.__typename === 'Circle' ? comment.node : undefined
+  const campaign =
+    comment.node.__typename === 'WritingChallenge' ? comment.node : undefined
   const targetAuthor = circle?.owner
 
   const isTargetAuthor = viewer.id === targetAuthor?.id
@@ -222,7 +230,8 @@ const DropdownActions = (props: DropdownActionsProps) => {
     BaseDropdownActions as React.ComponentType<object>,
     CircleCommentFormDialog,
     {
-      circleId: circle?.id || '',
+      circleId: circle?.id,
+      campaignId: campaign?.id,
       type,
       commentId: comment.id,
       defaultContent: comment.content,
