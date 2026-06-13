@@ -13,10 +13,7 @@ import {
   ViewerContext,
 } from '~/components'
 import { useReadTimer } from '~/components/Hook'
-import {
-  QuoteImageArticleFragment,
-  ReadArticleMutation,
-} from '~/gql/graphql'
+import { QuoteImageArticleFragment, ReadArticleMutation } from '~/gql/graphql'
 
 import styles from './styles.module.css'
 

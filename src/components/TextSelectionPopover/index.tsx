@@ -82,8 +82,7 @@ export const TextSelectionPopover = ({
   // 版權 gate：「作者保留所有權利」(ARR) 時僅作者本人可生成金句卡片；
   // CC 系列授權允許（卡片本身已忠實引用＋標註作者＋帶原文連結）
   const isAuthor = !!viewer.id && viewer.id === article?.author?.id
-  const canQuoteImage =
-    isAuthor || article?.license !== ArticleLicenseType.Arr
+  const canQuoteImage = isAuthor || article?.license !== ArticleLicenseType.Arr
 
   useEffect(() => {
     const editor = getCurrentEditor?.()
@@ -267,7 +266,7 @@ export const TextSelectionPopover = ({
               <Icon icon={IconComment} size={20} />
               <FormattedMessage
                 defaultMessage="Quote"
-                id="9ZBatB"
+                id="uDdAD+"
                 description="src/components/TextSelectionPopover/index.tsx"
               />
             </button>
@@ -280,7 +279,7 @@ export const TextSelectionPopover = ({
                     <Icon icon={IconImage} size={20} />
                     <FormattedMessage
                       defaultMessage="Quote card"
-                      id="iJfVZG"
+                      id="/LjM9M"
                       description="src/components/TextSelectionPopover/index.tsx"
                     />
                   </>,

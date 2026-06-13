@@ -13,24 +13,24 @@ import styles from './styles.module.css'
 const PREVIEW_WIDTH = 320 // 預覽寬度（卡片以此等比縮放顯示）
 
 const styleNames = defineMessages({
-  warm: { defaultMessage: 'Cream', id: 'QuoteImage.style.warm' },
-  sky: { defaultMessage: 'Sky', id: 'QuoteImage.style.sky' },
-  coral: { defaultMessage: 'Coral', id: 'QuoteImage.style.coral' },
-  ink: { defaultMessage: 'Ink', id: 'QuoteImage.style.ink' },
-  pine: { defaultMessage: 'Pine', id: 'QuoteImage.style.pine' },
-  mint: { defaultMessage: 'Mint', id: 'QuoteImage.style.mint' },
-  violet: { defaultMessage: 'Violet', id: 'QuoteImage.style.violet' },
-  slate: { defaultMessage: 'Slate', id: 'QuoteImage.style.slate' },
+  warm: { defaultMessage: 'Cream', id: 'lY48xg' },
+  sky: { defaultMessage: 'Sky', id: '/uJdnC' },
+  coral: { defaultMessage: 'Coral', id: 'bGxO22' },
+  ink: { defaultMessage: 'Ink', id: 'QWkEED' },
+  pine: { defaultMessage: 'Pine', id: 'K3+ihp' },
+  mint: { defaultMessage: 'Mint', id: 'OwO+Nr' },
+  violet: { defaultMessage: 'Violet', id: '3cxMQp' },
+  slate: { defaultMessage: 'Slate', id: 'iLKG5w' },
 })
 const sizeNames = defineMessages({
-  square: { defaultMessage: 'Square 1:1', id: 'QuoteImage.size.square' },
-  portrait: { defaultMessage: 'Portrait 4:5', id: 'QuoteImage.size.portrait' },
-  story: { defaultMessage: 'Story 9:16', id: 'QuoteImage.size.story' },
+  square: { defaultMessage: 'Square 1:1', id: 'iII6Ry' },
+  portrait: { defaultMessage: 'Portrait 4:5', id: 'em7860' },
+  story: { defaultMessage: 'Story 9:16', id: 'CZciVV' },
 })
 const sizeNotes = defineMessages({
-  square: { defaultMessage: 'IG / FB post', id: 'QuoteImage.sizeNote.square' },
-  portrait: { defaultMessage: 'IG post · most eye-catching', id: 'QuoteImage.sizeNote.portrait' },
-  story: { defaultMessage: 'IG / FB story · Threads', id: 'QuoteImage.sizeNote.story' },
+  square: { defaultMessage: 'IG / FB post', id: 'A6dqhl' },
+  portrait: { defaultMessage: 'IG post · most eye-catching', id: 'Oawtbo' },
+  story: { defaultMessage: 'IG / FB story · Threads', id: '6RAJ7U' },
 })
 
 export type QuoteImageDialogContentProps = {
@@ -126,9 +126,8 @@ const QuoteImageDialogContent: React.FC<QuoteImageDialogContentProps> = ({
   return (
     <>
       <Dialog.Header
-        title={
-          <FormattedMessage defaultMessage="Share Quote" id="QuoteImage.title" />
-        }
+        title={<FormattedMessage defaultMessage="Share Quote" id="1DQn89" />}
+        closeDialog={closeDialog}
       />
 
       <Dialog.Content>
@@ -158,7 +157,7 @@ const QuoteImageDialogContent: React.FC<QuoteImageDialogContentProps> = ({
           <p className={styles.truncHint}>
             <FormattedMessage
               defaultMessage="You selected {original} characters; only the first {max} are shown. A concise quote works best."
-              id="QuoteImage.truncated"
+              id="e4AtHq"
               values={{ original, max: MAX_QUOTE_LEN }}
             />
           </p>
@@ -166,7 +165,7 @@ const QuoteImageDialogContent: React.FC<QuoteImageDialogContentProps> = ({
 
         <section className={styles.group}>
           <span className={styles.groupLabel}>
-            <FormattedMessage defaultMessage="Style" id="QuoteImage.styleLabel" />
+            <FormattedMessage defaultMessage="Style" id="7mL9QE" />
           </span>
           <div className={styles.opts}>
             {QUOTE_STYLES.map((s) => (
@@ -176,8 +175,13 @@ const QuoteImageDialogContent: React.FC<QuoteImageDialogContentProps> = ({
                 className={`${styles.opt} ${s.id === styleId ? styles.active : ''}`}
                 onClick={() => setStyleId(s.id)}
               >
-                <span className={styles.swatch} style={{ background: s.swatch }} />
-                {intl.formatMessage(styleNames[s.id as keyof typeof styleNames])}
+                <span
+                  className={styles.swatch}
+                  style={{ background: s.swatch }}
+                />
+                {intl.formatMessage(
+                  styleNames[s.id as keyof typeof styleNames]
+                )}
               </button>
             ))}
           </div>
@@ -185,7 +189,7 @@ const QuoteImageDialogContent: React.FC<QuoteImageDialogContentProps> = ({
 
         <section className={styles.group}>
           <span className={styles.groupLabel}>
-            <FormattedMessage defaultMessage="Size" id="QuoteImage.sizeLabel" />
+            <FormattedMessage defaultMessage="Size" id="agOXPD" />
           </span>
           <div className={styles.opts}>
             {QUOTE_SIZES.map((s) => (
@@ -196,9 +200,13 @@ const QuoteImageDialogContent: React.FC<QuoteImageDialogContentProps> = ({
                 onClick={() => setSizeId(s.id)}
               >
                 <span className={styles.sizeName}>
-                  {intl.formatMessage(sizeNames[s.id as keyof typeof sizeNames])}
+                  {intl.formatMessage(
+                    sizeNames[s.id as keyof typeof sizeNames]
+                  )}
                   <span className={styles.sizeNote}>
-                    {intl.formatMessage(sizeNotes[s.id as keyof typeof sizeNotes])}
+                    {intl.formatMessage(
+                      sizeNotes[s.id as keyof typeof sizeNotes]
+                    )}
                   </span>
                 </span>
               </button>
@@ -211,14 +219,12 @@ const QuoteImageDialogContent: React.FC<QuoteImageDialogContentProps> = ({
         btns={
           <>
             <Dialog.RoundedButton
-              text={
-                <FormattedMessage defaultMessage="Download" id="QuoteImage.download" />
-              }
+              text={<FormattedMessage defaultMessage="Download" id="5q3qC0" />}
               color="green"
               onClick={onDownload}
             />
             <Dialog.RoundedButton
-              text={<FormattedMessage defaultMessage="Share" id="6gXdHy" />}
+              text={<FormattedMessage defaultMessage="Share" id="OKhRC6" />}
               color="greyDarker"
               onClick={onShare}
             />
@@ -227,14 +233,12 @@ const QuoteImageDialogContent: React.FC<QuoteImageDialogContentProps> = ({
         smUpBtns={
           <>
             <Dialog.TextButton
-              text={
-                <FormattedMessage defaultMessage="Download" id="QuoteImage.download" />
-              }
+              text={<FormattedMessage defaultMessage="Download" id="5q3qC0" />}
               color="green"
               onClick={onDownload}
             />
             <Dialog.TextButton
-              text={<FormattedMessage defaultMessage="Share" id="6gXdHy" />}
+              text={<FormattedMessage defaultMessage="Share" id="OKhRC6" />}
               color="greyDarker"
               onClick={onShare}
             />

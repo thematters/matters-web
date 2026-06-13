@@ -31,14 +31,22 @@ export type QuoteCardProps = {
  * 由 Content 以 CSS transform 縮放預覽、以 html-to-image 原尺寸截圖。
  */
 export const QuoteCard = forwardRef<HTMLDivElement, QuoteCardProps>(
-  ({ quote, author, title, qrDataUrl, style: s, size, isSevenDayBook }, ref) => {
+  (
+    { quote, author, title, qrDataUrl, style: s, size, isSevenDayBook },
+    ref
+  ) => {
     const { text } = clampQuote(quote)
     const fontFamily = s.font === 'serif' ? FONT_SERIF : FONT_SANS
-    const letterSpacing = s.wide ? '0.06em' : s.font === 'serif' ? '0.02em' : 'normal'
+    const letterSpacing = s.wide
+      ? '0.06em'
+      : s.font === 'serif'
+        ? '0.02em'
+        : 'normal'
     const lineHeight = s.airy ? 1.8 : 1.65
     const fontSize = fitFontSize(text.length, s.airy)
 
-    const Logo = s.logo === 'white' ? SevenDayBookLogoWhite : SevenDayBookLogoDark
+    const Logo =
+      s.logo === 'white' ? SevenDayBookLogoWhite : SevenDayBookLogoDark
 
     return (
       <div
@@ -62,10 +70,7 @@ export const QuoteCard = forwardRef<HTMLDivElement, QuoteCardProps>(
           >
             {text}
           </div>
-          <div
-            className={styles.author}
-            style={{ color: s.accent }}
-          >
+          <div className={styles.author} style={{ color: s.accent }}>
             <span className={styles.dash}>—</span>
             {author}
           </div>
