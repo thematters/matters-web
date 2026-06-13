@@ -11,10 +11,7 @@ import QuoteCard from './QuoteCard'
 import styles from './styles.module.css'
 
 type QuotesConnection = NonNullable<
-  Extract<
-    NonNullable<CampaignQuotesQuery['campaign']>,
-    { __typename: 'WritingChallenge' }
-  >['quotes']
+  NonNullable<CampaignQuotesQuery['campaign']>['quotes']
 >
 type Quote = NonNullable<QuotesConnection['edges']>[0]['node']
 
@@ -63,8 +60,7 @@ const QuoteWall = ({ shortHash, entry = 'module' }: QuoteWallProps) => {
             aria-haspopup="dialog"
           >
             <span>
-              ✨{' '}
-              <FormattedMessage defaultMessage="Quote wall" id="QuoteWall.title" />
+              ✨ <FormattedMessage defaultMessage="Quote wall" id="1HLo+Y" />
               <span className={styles.count}>{totalCount}</span>
             </span>
             <span className={styles.chevron}>›</span>
@@ -78,8 +74,7 @@ const QuoteWall = ({ shortHash, entry = 'module' }: QuoteWallProps) => {
     <section className={styles.quoteWall}>
       <header className={styles.header}>
         <h2 className={styles.title}>
-          ✨{' '}
-          <FormattedMessage defaultMessage="Quote wall" id="QuoteWall.title" />
+          ✨ <FormattedMessage defaultMessage="Quote wall" id="1HLo+Y" />
         </h2>
         <a
           className={styles.museum}
@@ -87,7 +82,7 @@ const QuoteWall = ({ shortHash, entry = 'module' }: QuoteWallProps) => {
           target="_blank"
           rel="noreferrer"
         >
-          <FormattedMessage defaultMessage="Full wall →" id="QuoteWall.fullWall" />
+          <FormattedMessage defaultMessage="Full wall →" id="Ds+7ro" />
         </a>
       </header>
 
@@ -110,7 +105,7 @@ const QuoteWall = ({ shortHash, entry = 'module' }: QuoteWallProps) => {
               <TextIcon size={14} weight="medium">
                 <FormattedMessage
                   defaultMessage="View all {count} quotes"
-                  id="QuoteWall.viewAll"
+                  id="epZb9X"
                   values={{ count: totalCount }}
                 />
               </TextIcon>

@@ -23,10 +23,7 @@ import { CAMPAIGN_DISCUSSION_COMMENTS } from './gql'
 import styles from './styles.module.css'
 
 type DiscussionConnection = NonNullable<
-  Extract<
-    NonNullable<CampaignDiscussionCommentsQuery['campaign']>,
-    { __typename: 'WritingChallenge' }
-  >['discussion']
+  NonNullable<CampaignDiscussionCommentsQuery['campaign']>['discussion']
 >
 type Comment = NonNullable<DiscussionConnection['edges']>[0]['node']
 
@@ -82,7 +79,7 @@ const BaseDiscussionDialog = ({
 
   const submitCallback = () => {
     toast.info({
-      message: <FormattedMessage defaultMessage="Comment sent" id="iSUeWj" />,
+      message: <FormattedMessage defaultMessage="Comment sent" id="fyKoL1" />,
     })
     refetch()
     afterSubmit?.()
@@ -98,7 +95,7 @@ const BaseDiscussionDialog = ({
             <>
               <FormattedMessage
                 defaultMessage="Discussion"
-                id="aLkBs2"
+                id="2/u1aP"
                 description="src/views/CampaignDetail/Discussion"
               />{' '}
               {totalCount > 0 && (
@@ -121,7 +118,7 @@ const BaseDiscussionDialog = ({
               type="campaignDiscussion"
               placeholder={intl.formatMessage({
                 defaultMessage: 'Share your thoughts with other participants',
-                id: 'b3aGfp',
+                id: 'dHVTYM',
                 description: 'src/views/CampaignDetail/Discussion',
               })}
               submitCallback={submitCallback}
@@ -134,7 +131,7 @@ const BaseDiscussionDialog = ({
             <EmptyComment
               description={intl.formatMessage({
                 defaultMessage: 'No discussion yet',
-                id: 'Mh+PgK',
+                id: '/0OJlF',
                 description: 'src/views/CampaignDetail/Discussion',
               })}
             />

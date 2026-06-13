@@ -48,7 +48,12 @@ interface CampaignStageArgs {
 
 interface CommentArgs {
   id: string
-  type: 'article' | 'circleDiscussion' | 'circleBroadcast' | 'moment' // comment type: article/discussion/broadcast
+  type:
+    | 'article'
+    | 'circleDiscussion'
+    | 'circleBroadcast'
+    | 'moment'
+    | 'campaignDiscussion' // comment type: article/discussion/broadcast/campaign
   parentComment?: {
     id: string
   } | null

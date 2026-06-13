@@ -37,7 +37,7 @@ const QuoteCard = ({ quote, index = 0, afterRetract }: QuoteCardProps) => {
         message: (
           <FormattedMessage
             defaultMessage="Quote retracted from the wall"
-            id="QuoteWall.retracted"
+            id="TIWVxK"
           />
         ),
       })
@@ -45,7 +45,7 @@ const QuoteCard = ({ quote, index = 0, afterRetract }: QuoteCardProps) => {
     } catch {
       toast.error({
         message: (
-          <FormattedMessage defaultMessage="Failed to retract" id="QuoteWall.retractFailed" />
+          <FormattedMessage defaultMessage="Failed to retract" id="iSjuti" />
         ),
       })
     }
@@ -67,7 +67,7 @@ const QuoteCard = ({ quote, index = 0, afterRetract }: QuoteCardProps) => {
           {quote.article.title ? `《${quote.article.title}》` : ''}
         </span>
         <Link {...path} className={styles.back}>
-          <FormattedMessage defaultMessage="To article ↩" id="QuoteWall.toArticle" />
+          <FormattedMessage defaultMessage="To article ↩" id="Thr8QX" />
         </Link>
       </figcaption>
 
@@ -78,7 +78,7 @@ const QuoteCard = ({ quote, index = 0, afterRetract }: QuoteCardProps) => {
               <FormattedMessage defaultMessage="Cancel" id="47FYwb" />
             </Button>
             <Button textColor="red" onClick={onRetract}>
-              <FormattedMessage defaultMessage="Confirm retract" id="QuoteWall.confirmRetract" />
+              <FormattedMessage defaultMessage="Confirm retract" id="Z82+dw" />
             </Button>
           </span>
         ) : (
@@ -87,7 +87,7 @@ const QuoteCard = ({ quote, index = 0, afterRetract }: QuoteCardProps) => {
             spacing={[0, 0]}
             onClick={() => setConfirming(true)}
           >
-            <FormattedMessage defaultMessage="Retract" id="QuoteWall.retract" />
+            <FormattedMessage defaultMessage="Retract" id="3jmniZ" />
           </Button>
         ))}
     </figure>

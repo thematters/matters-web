@@ -5,7 +5,7 @@ import gql from 'graphql-tag'
 export const CAMPAIGN_QUOTES = gql`
   query CampaignQuotes(
     $shortHash: String!
-    $first: Int = 12
+    $first: first_Int_min_0_max_50 = 12
     $random: Boolean
   ) {
     campaign(input: { shortHash: $shortHash }) {

@@ -6,7 +6,7 @@ import { type QuoteImageDialogContentProps } from './Content'
 
 export type QuoteImageDialogProps = {
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
-} & Omit<QuoteImageDialogContentProps, 'closeDialog'>
+} & QuoteImageDialogContentProps
 
 const DynamicContent = dynamic(() => import('./Content'), {
   ssr: false,
@@ -21,7 +21,7 @@ const BaseDialog = ({ children, ...props }: QuoteImageDialogProps) => {
       {children({ openDialog })}
 
       <Dialog isOpen={show} onDismiss={closeDialog}>
-        <DynamicContent {...props} closeDialog={closeDialog} />
+        <DynamicContent {...props} />
       </Dialog>
     </>
   )

@@ -586,6 +586,9 @@
     "defaultMessage": "Notifications",
     "description": "src/views/Me/Settings/Settings/SettingsTabs/index.tsx"
   },
+  "6gXdHy": {
+    "defaultMessage": "Share"
+  },
   "6kMb9Z": {
     "defaultMessage": "On-chain records"
   },
@@ -785,6 +788,10 @@
   "9WRlF4": {
     "defaultMessage": "Send"
   },
+  "9ZBatB": {
+    "defaultMessage": "Quote",
+    "description": "src/components/TextSelectionPopover/index.tsx"
+  },
   "9aorag": {
     "defaultMessage": "Unlike collection"
   },
@@ -861,6 +868,10 @@
   },
   "AlHYvk": {
     "defaultMessage": "{type} edited"
+  },
+  "Aq0aMp": {
+    "defaultMessage": "Only participants can join the discussion.",
+    "description": "src/views/CampaignDetail/Discussion"
   },
   "At8Qd2": {
     "defaultMessage": "Account",
@@ -1605,6 +1616,10 @@
   "Mgl1bT": {
     "defaultMessage": "OAuth authorize"
   },
+  "Mh+PgK": {
+    "defaultMessage": "No discussion yet",
+    "description": "src/views/CampaignDetail/Discussion"
+  },
   "Mn7GEf": {
     "defaultMessage": "Selected activities related to you in the past 24 hours",
     "description": "src/views/Me/Settings/Notifications/Email.tsx"
@@ -1862,6 +1877,108 @@
   },
   "Qlzm0s": {
     "defaultMessage": "mentioned you in a moment at"
+  },
+  "QuoteImage.download": {
+    "defaultMessage": "Download"
+  },
+  "QuoteImage.onWall": {
+    "defaultMessage": "On the wall ✓"
+  },
+  "QuoteImage.postToWall": {
+    "defaultMessage": "Post to wall"
+  },
+  "QuoteImage.postedToWall": {
+    "defaultMessage": "Posted to the quote wall"
+  },
+  "QuoteImage.size.portrait": {
+    "defaultMessage": "Portrait 4:5"
+  },
+  "QuoteImage.size.square": {
+    "defaultMessage": "Square 1:1"
+  },
+  "QuoteImage.size.story": {
+    "defaultMessage": "Story 9:16"
+  },
+  "QuoteImage.sizeLabel": {
+    "defaultMessage": "Size"
+  },
+  "QuoteImage.sizeNote.portrait": {
+    "defaultMessage": "IG post · most eye-catching"
+  },
+  "QuoteImage.sizeNote.square": {
+    "defaultMessage": "IG / FB post"
+  },
+  "QuoteImage.sizeNote.story": {
+    "defaultMessage": "IG / FB story · Threads"
+  },
+  "QuoteImage.style.coral": {
+    "defaultMessage": "Coral"
+  },
+  "QuoteImage.style.ink": {
+    "defaultMessage": "Ink"
+  },
+  "QuoteImage.style.mint": {
+    "defaultMessage": "Mint"
+  },
+  "QuoteImage.style.pine": {
+    "defaultMessage": "Pine"
+  },
+  "QuoteImage.style.sky": {
+    "defaultMessage": "Sky"
+  },
+  "QuoteImage.style.slate": {
+    "defaultMessage": "Slate"
+  },
+  "QuoteImage.style.violet": {
+    "defaultMessage": "Violet"
+  },
+  "QuoteImage.style.warm": {
+    "defaultMessage": "Cream"
+  },
+  "QuoteImage.styleLabel": {
+    "defaultMessage": "Style"
+  },
+  "QuoteImage.title": {
+    "defaultMessage": "Share Quote"
+  },
+  "QuoteImage.truncated": {
+    "defaultMessage": "You selected {original} characters; only the first {max} are shown. A concise quote works best."
+  },
+  "QuoteImage.wallFailed": {
+    "defaultMessage": "Failed to post to the wall"
+  },
+  "QuoteImage.wallQuota": {
+    "defaultMessage": "Wall quota reached for today — come back tomorrow!"
+  },
+  "QuoteWall.confirmRetract": {
+    "defaultMessage": "Confirm retract"
+  },
+  "QuoteWall.fullWall": {
+    "defaultMessage": "Full wall →"
+  },
+  "QuoteWall.museum": {
+    "defaultMessage": "Full wall / Museum →"
+  },
+  "QuoteWall.retract": {
+    "defaultMessage": "Retract"
+  },
+  "QuoteWall.retractFailed": {
+    "defaultMessage": "Failed to retract"
+  },
+  "QuoteWall.retracted": {
+    "defaultMessage": "Quote retracted from the wall"
+  },
+  "QuoteWall.shuffle": {
+    "defaultMessage": "🔀 Shuffle"
+  },
+  "QuoteWall.title": {
+    "defaultMessage": "Quote wall"
+  },
+  "QuoteWall.toArticle": {
+    "defaultMessage": "To article ↩"
+  },
+  "QuoteWall.viewAll": {
+    "defaultMessage": "View all {count} quotes"
   },
   "QvPc1q": {
     "defaultMessage": "Upload Cover"
@@ -2155,6 +2272,10 @@
     "defaultMessage": "Drafts",
     "description": "src/views/Me/Works/WorksTabs/index.tsx"
   },
+  "Vj0Hbd": {
+    "defaultMessage": "View all {count} comments",
+    "description": "src/views/CampaignDetail/Discussion"
+  },
   "VmYzLr": {
     "defaultMessage": "{total} members"
   },
@@ -2427,6 +2548,10 @@
   "aKEiNd": {
     "defaultMessage": "You missed the registration period, you can still join as a latecomer. Apply earlier next time for the chance to get the badge."
   },
+  "aLkBs2": {
+    "defaultMessage": "Discussion",
+    "description": "src/views/CampaignDetail/Discussion"
+  },
   "aOFCqL": {
     "defaultMessage": "Most comments",
     "description": "src/views/Me/Works/Published/SortTabs.tsx"
@@ -2485,6 +2610,10 @@
   "b0RNGM": {
     "defaultMessage": "Your article {articleTitle} has been listed as a feature of event in 7 days. Come and view more wonderful articles!",
     "description": "src/components/Notice/CampaignArticleNotice/CampaignArticleFeaturedNotice.tsx"
+  },
+  "b3aGfp": {
+    "defaultMessage": "Share your thoughts with other participants",
+    "description": "src/views/CampaignDetail/Discussion"
   },
   "b6x6lm": {
     "defaultMessage": "Enter a clear and concise title"
@@ -2922,12 +3051,19 @@
   "iIitRg": {
     "defaultMessage": "Tag not bookmarked yet"
   },
+  "iJfVZG": {
+    "defaultMessage": "Quote card",
+    "description": "src/components/TextSelectionPopover/index.tsx"
+  },
   "iNZdM/": {
     "defaultMessage": "Switch to support creators with the Optimism network {br} Make support more convenient and affordable",
     "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
   },
   "iSM+et": {
     "defaultMessage": "All rights reserved"
+  },
+  "iSUeWj": {
+    "defaultMessage": "Comment sent"
   },
   "iTcMqz": {
     "defaultMessage": "Under the moonlight, dreams are about to come true. The Moonlight Dream badge signifies your participation in the Nomad Matters.",

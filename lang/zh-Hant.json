@@ -586,6 +586,9 @@
     "defaultMessage": "通知",
     "description": "src/views/Me/Settings/Settings/SettingsTabs/index.tsx"
   },
+  "6gXdHy": {
+    "defaultMessage": "Share"
+  },
   "6kMb9Z": {
     "defaultMessage": "鏈上紀錄"
   },
@@ -785,6 +788,10 @@
   "9WRlF4": {
     "defaultMessage": "送出"
   },
+  "9ZBatB": {
+    "defaultMessage": "Quote",
+    "description": "src/components/TextSelectionPopover/index.tsx"
+  },
   "9aorag": {
     "defaultMessage": "取消喜歡選集"
   },
@@ -861,6 +868,10 @@
   },
   "AlHYvk": {
     "defaultMessage": "{type}已編輯"
+  },
+  "Aq0aMp": {
+    "defaultMessage": "Only participants can join the discussion.",
+    "description": "src/views/CampaignDetail/Discussion"
   },
   "At8Qd2": {
     "defaultMessage": "帳號",
@@ -1605,6 +1616,10 @@
   "Mgl1bT": {
     "defaultMessage": "應用授權"
   },
+  "Mh+PgK": {
+    "defaultMessage": "No discussion yet",
+    "description": "src/views/CampaignDetail/Discussion"
+  },
   "Mn7GEf": {
     "defaultMessage": "精選過去 24 小時與你有關的消息",
     "description": "src/views/Me/Settings/Notifications/Email.tsx"
@@ -1862,6 +1877,108 @@
   },
   "Qlzm0s": {
     "defaultMessage": "在動態中提及了你"
+  },
+  "QuoteImage.download": {
+    "defaultMessage": "Download"
+  },
+  "QuoteImage.onWall": {
+    "defaultMessage": "On the wall ✓"
+  },
+  "QuoteImage.postToWall": {
+    "defaultMessage": "Post to wall"
+  },
+  "QuoteImage.postedToWall": {
+    "defaultMessage": "Posted to the quote wall"
+  },
+  "QuoteImage.size.portrait": {
+    "defaultMessage": "Portrait 4:5"
+  },
+  "QuoteImage.size.square": {
+    "defaultMessage": "Square 1:1"
+  },
+  "QuoteImage.size.story": {
+    "defaultMessage": "Story 9:16"
+  },
+  "QuoteImage.sizeLabel": {
+    "defaultMessage": "Size"
+  },
+  "QuoteImage.sizeNote.portrait": {
+    "defaultMessage": "IG post · most eye-catching"
+  },
+  "QuoteImage.sizeNote.square": {
+    "defaultMessage": "IG / FB post"
+  },
+  "QuoteImage.sizeNote.story": {
+    "defaultMessage": "IG / FB story · Threads"
+  },
+  "QuoteImage.style.coral": {
+    "defaultMessage": "Coral"
+  },
+  "QuoteImage.style.ink": {
+    "defaultMessage": "Ink"
+  },
+  "QuoteImage.style.mint": {
+    "defaultMessage": "Mint"
+  },
+  "QuoteImage.style.pine": {
+    "defaultMessage": "Pine"
+  },
+  "QuoteImage.style.sky": {
+    "defaultMessage": "Sky"
+  },
+  "QuoteImage.style.slate": {
+    "defaultMessage": "Slate"
+  },
+  "QuoteImage.style.violet": {
+    "defaultMessage": "Violet"
+  },
+  "QuoteImage.style.warm": {
+    "defaultMessage": "Cream"
+  },
+  "QuoteImage.styleLabel": {
+    "defaultMessage": "Style"
+  },
+  "QuoteImage.title": {
+    "defaultMessage": "Share Quote"
+  },
+  "QuoteImage.truncated": {
+    "defaultMessage": "You selected {original} characters; only the first {max} are shown. A concise quote works best."
+  },
+  "QuoteImage.wallFailed": {
+    "defaultMessage": "Failed to post to the wall"
+  },
+  "QuoteImage.wallQuota": {
+    "defaultMessage": "Wall quota reached for today — come back tomorrow!"
+  },
+  "QuoteWall.confirmRetract": {
+    "defaultMessage": "Confirm retract"
+  },
+  "QuoteWall.fullWall": {
+    "defaultMessage": "Full wall →"
+  },
+  "QuoteWall.museum": {
+    "defaultMessage": "Full wall / Museum →"
+  },
+  "QuoteWall.retract": {
+    "defaultMessage": "Retract"
+  },
+  "QuoteWall.retractFailed": {
+    "defaultMessage": "Failed to retract"
+  },
+  "QuoteWall.retracted": {
+    "defaultMessage": "Quote retracted from the wall"
+  },
+  "QuoteWall.shuffle": {
+    "defaultMessage": "🔀 Shuffle"
+  },
+  "QuoteWall.title": {
+    "defaultMessage": "Quote wall"
+  },
+  "QuoteWall.toArticle": {
+    "defaultMessage": "To article ↩"
+  },
+  "QuoteWall.viewAll": {
+    "defaultMessage": "View all {count} quotes"
   },
   "QvPc1q": {
     "defaultMessage": "上傳封面"
@@ -2155,6 +2272,10 @@
     "defaultMessage": "草稿",
     "description": "src/views/Me/Works/WorksTabs/index.tsx"
   },
+  "Vj0Hbd": {
+    "defaultMessage": "View all {count} comments",
+    "description": "src/views/CampaignDetail/Discussion"
+  },
   "VmYzLr": {
     "defaultMessage": "{total} 個成員"
   },
@@ -2427,6 +2548,10 @@
   "aKEiNd": {
     "defaultMessage": "錯過報名期沒關係，仍然可以用晚鳥身份參與，一起書寫人生故事。下次早點報名，就有機會獲得大滿貫徽章！"
   },
+  "aLkBs2": {
+    "defaultMessage": "Discussion",
+    "description": "src/views/CampaignDetail/Discussion"
+  },
   "aOFCqL": {
     "defaultMessage": "最多評論",
     "description": "src/views/Me/Works/Published/SortTabs.tsx"
@@ -2485,6 +2610,10 @@
   "b0RNGM": {
     "defaultMessage": "你的作品 {articleTitle} 已被列為活動精選，快來看看更多精彩好文！",
     "description": "src/components/Notice/CampaignArticleNotice/CampaignArticleFeaturedNotice.tsx"
+  },
+  "b3aGfp": {
+    "defaultMessage": "Share your thoughts with other participants",
+    "description": "src/views/CampaignDetail/Discussion"
   },
   "b6x6lm": {
     "defaultMessage": "輸入簡單明瞭的標題"
@@ -2922,12 +3051,19 @@
   "iIitRg": {
     "defaultMessage": "尚未收藏標籤"
   },
+  "iJfVZG": {
+    "defaultMessage": "Quote card",
+    "description": "src/components/TextSelectionPopover/index.tsx"
+  },
   "iNZdM/": {
     "defaultMessage": "切換後即可支持創作者，採用 Optimism 網路{br}讓支持更方便且費用低廉",
     "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
   },
   "iSM+et": {
     "defaultMessage": "作者保留所有權利"
+  },
+  "iSUeWj": {
+    "defaultMessage": "Comment sent"
   },
   "iTcMqz": {
     "defaultMessage": "月色之下，夢想即將實現。月之夢徽章紀念你曾參與「遊牧者計畫」。",

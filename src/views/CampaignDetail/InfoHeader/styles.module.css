@@ -23,6 +23,7 @@
 
   &::after {
     display: block;
+
     /* cover height roughly halved, to lift the discussion area up the page */
     padding-bottom: 11%;
     content: '';

@@ -11,9 +11,9 @@
 
 .footer {
   display: flex;
+  gap: var(--sp8);
   align-items: center;
   justify-content: flex-end;
-  gap: var(--sp8);
 }
 
 .counter {

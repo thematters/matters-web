@@ -18,10 +18,7 @@ import QuoteCard from './QuoteCard'
 import styles from './styles.module.css'
 
 type QuotesConnection = NonNullable<
-  Extract<
-    NonNullable<CampaignQuotesQuery['campaign']>,
-    { __typename: 'WritingChallenge' }
-  >['quotes']
+  NonNullable<CampaignQuotesQuery['campaign']>['quotes']
 >
 type Quote = NonNullable<QuotesConnection['edges']>[0]['node']
 
@@ -51,7 +48,9 @@ const BaseQuoteWallDialog = ({
     data?.campaign?.__typename === 'WritingChallenge'
       ? data.campaign
       : undefined
-  const quotes: Quote[] = (campaign?.quotes?.edges || []).map(({ node }) => node)
+  const quotes: Quote[] = (campaign?.quotes?.edges || []).map(
+    ({ node }) => node
+  )
 
   // "shuffle" = refetch a fresh random sample
   const shuffle = () => refetch({ shortHash, first: WALL_TAKE, random: true })
@@ -64,7 +63,7 @@ const BaseQuoteWallDialog = ({
         <Dialog.Header
           title={
             <>
-              <FormattedMessage defaultMessage="Quote wall" id="QuoteWall.title" />{' '}
+              <FormattedMessage defaultMessage="Quote wall" id="1HLo+Y" />{' '}
               {totalCount > 0 && (
                 <span className={styles.count}>{totalCount}</span>
               )}
@@ -81,7 +80,7 @@ const BaseQuoteWallDialog = ({
         <Dialog.Content>
           <div className={styles.dialogTop}>
             <button className={styles.shuffle} onClick={shuffle}>
-              <FormattedMessage defaultMessage="🔀 Shuffle" id="QuoteWall.shuffle" />
+              <FormattedMessage defaultMessage="🔀 Shuffle" id="JBnAOd" />
             </button>
             <a
               className={styles.museum}
@@ -91,7 +90,7 @@ const BaseQuoteWallDialog = ({
             >
               <FormattedMessage
                 defaultMessage="Full wall / Museum →"
-                id="QuoteWall.museum"
+                id="Fx9x/w"
               />
             </a>
           </div>
