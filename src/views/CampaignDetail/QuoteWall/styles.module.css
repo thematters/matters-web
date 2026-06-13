@@ -60,10 +60,10 @@
   gap: var(--sp4);
   padding: var(--sp12);
   margin: 0 0 var(--sp12);
-  break-inside: avoid;
   background: var(--color-yellow-lighter);
   border-radius: var(--sp8);
   box-shadow: 0 1px 3px rgb(0 0 0 / 8%);
+  break-inside: avoid;
 }
 
 .card[data-variant='1'] {
@@ -83,15 +83,15 @@
 }
 
 .quote {
-  margin: 0;
   /* safety net: cap display at 3 lines even within the 80-char limit */
   display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
+  margin: 0;
   overflow: hidden;
+  -webkit-line-clamp: 3;
   font-size: var(--text14);
   line-height: 1.5;
   color: var(--color-grey-darkest);
+  -webkit-box-orient: vertical;
 }
 
 .meta {

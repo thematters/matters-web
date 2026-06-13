@@ -248,6 +248,9 @@
   "1EYCdR": {
     "defaultMessage": "Tags"
   },
+  "1HLo+Y": {
+    "defaultMessage": "Quote wall"
+  },
   "1PORwh": {
     "defaultMessage": "Archived article.",
     "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
@@ -413,6 +416,9 @@
   "3cxMQp": {
     "defaultMessage": "Violet"
   },
+  "3jmniZ": {
+    "defaultMessage": "Retract"
+  },
   "3kbIhS": {
     "defaultMessage": "Untitled"
   },
@@ -492,6 +498,9 @@
   },
   "5IS+ui": {
     "defaultMessage": "Support Setting"
+  },
+  "5IlTNw": {
+    "defaultMessage": "Failed to post to the wall"
   },
   "5JN+nl": {
     "defaultMessage": "Check your inbox",
@@ -1028,6 +1037,9 @@
     "defaultMessage": "Comment deleted",
     "description": "src/components/Notice/NoticeComment.tsx/moment"
   },
+  "Cmc/He": {
+    "defaultMessage": "On the wall ✓"
+  },
   "CnPG8j": {
     "defaultMessage": "Featured"
   },
@@ -1050,6 +1062,9 @@
   },
   "D3idYv": {
     "defaultMessage": "Settings"
+  },
+  "D8FJf9": {
+    "defaultMessage": "Wall quota reached for today — come back tomorrow!"
   },
   "D9/QIR": {
     "defaultMessage": "Register ISCN"
@@ -1112,6 +1127,9 @@
   "DrBuEI": {
     "defaultMessage": "Unpin Broadcast",
     "description": "src/components/CircleComment/DropdownActions/PinButton.tsx"
+  },
+  "Ds+7ro": {
+    "defaultMessage": "Full wall →"
   },
   "DtO278": {
     "defaultMessage": "We’ve detected that several of your recent works have been recommended to related channels. They may not appear at the same time"
@@ -1245,6 +1263,9 @@
   },
   "FuYW4i": {
     "defaultMessage": "Subscribe circle and chat together!"
+  },
+  "Fx9x/w": {
+    "defaultMessage": "Full wall / Museum →"
   },
   "FxrSCh": {
     "defaultMessage": "This ID cannot be modified. Are you sure you want to use {id} as your Matters ID?",
@@ -1424,6 +1445,9 @@
   "IW6zQv": {
     "defaultMessage": "Select Time"
   },
+  "IWLb33": {
+    "defaultMessage": "Posted to the quote wall"
+  },
   "IXycMo": {
     "defaultMessage": "Resend"
   },
@@ -1450,6 +1474,9 @@
   },
   "J7hiLV": {
     "defaultMessage": "The author has not bound the LikeCoin wallet yet"
+  },
+  "JBnAOd": {
+    "defaultMessage": "🔀 Shuffle"
   },
   "JCZFqh": {
     "defaultMessage": "Sign up now and start writing the annual questionnaire. Please check the announcement for event details."
@@ -2064,6 +2091,9 @@
   "TF1OhT": {
     "defaultMessage": "This login code has expired, please try to resend"
   },
+  "TIWVxK": {
+    "defaultMessage": "Quote retracted from the wall"
+  },
   "TInwt3": {
     "defaultMessage": "Disable Responses"
   },
@@ -2094,6 +2124,9 @@
   "TgU+Mf": {
     "defaultMessage": "Optimism is a standalone blockchain. If you have USDT on other chains, you need to transfer them to Optimism. See details in the {tutorial}.",
     "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
+  },
+  "Thr8QX": {
+    "defaultMessage": "To article ↩"
   },
   "TjWWxF": {
     "defaultMessage": "Broadcast sent",
@@ -2416,6 +2449,9 @@
   "Z7JXlF": {
     "defaultMessage": "Archived for violation.",
     "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
+  },
+  "Z82+dw": {
+    "defaultMessage": "Confirm retract"
   },
   "ZAoAcG": {
     "defaultMessage": "Threads, Mastodon, Misskey 這些地方的粉絲也會看到"
@@ -2781,6 +2817,9 @@
   "eov+J2": {
     "defaultMessage": "Custom URL Name"
   },
+  "epZb9X": {
+    "defaultMessage": "View all {count} quotes"
+  },
   "erE5/4": {
     "defaultMessage": "Followed",
     "description": "src/components/Buttons/FollowUser/FollowState.tsx"
@@ -3009,6 +3048,9 @@
   },
   "iSM+et": {
     "defaultMessage": "All rights reserved"
+  },
+  "iSjuti": {
+    "defaultMessage": "Failed to retract"
   },
   "iTcMqz": {
     "defaultMessage": "Under the moonlight, dreams are about to come true. The Moonlight Dream badge signifies your participation in the Nomad Matters.",
@@ -3356,6 +3398,9 @@
   "oA2Pur": {
     "defaultMessage": "濫發廣告",
     "description": "src/components/Comment/DropdownActions/CommunityWatchRemoveComment.tsx"
+  },
+  "oCQmLu": {
+    "defaultMessage": "Post to wall"
   },
   "oEHAIT": {
     "defaultMessage": "Cancel schedule",

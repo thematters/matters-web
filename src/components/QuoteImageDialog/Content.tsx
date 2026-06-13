@@ -139,24 +139,25 @@ const QuoteImageDialogContent: React.FC<QuoteImageDialogContentProps> = ({
         message: (
           <FormattedMessage
             defaultMessage="Posted to the quote wall"
-            id="QuoteImage.postedToWall"
+            id="IWLb33"
           />
         ),
       })
     } catch (error) {
-      const code = (error as { graphQLErrors?: { extensions?: { code?: string } }[] })
-        ?.graphQLErrors?.[0]?.extensions?.code
+      const code = (
+        error as { graphQLErrors?: { extensions?: { code?: string } }[] }
+      )?.graphQLErrors?.[0]?.extensions?.code
       toast.error({
         message:
           code === ERROR_CODES.ACTION_LIMIT_EXCEEDED ? (
             <FormattedMessage
               defaultMessage="Wall quota reached for today — come back tomorrow!"
-              id="QuoteImage.wallQuota"
+              id="D8FJf9"
             />
           ) : (
             <FormattedMessage
               defaultMessage="Failed to post to the wall"
-              id="QuoteImage.wallFailed"
+              id="5IlTNw"
             />
           ),
       })
@@ -284,9 +285,15 @@ const QuoteImageDialogContent: React.FC<QuoteImageDialogContentProps> = ({
               <Dialog.RoundedButton
                 text={
                   posted ? (
-                    <FormattedMessage defaultMessage="On the wall ✓" id="QuoteImage.onWall" />
+                    <FormattedMessage
+                      defaultMessage="On the wall ✓"
+                      id="Cmc/He"
+                    />
                   ) : (
-                    <FormattedMessage defaultMessage="Post to wall" id="QuoteImage.postToWall" />
+                    <FormattedMessage
+                      defaultMessage="Post to wall"
+                      id="oCQmLu"
+                    />
                   )
                 }
                 color="green"
@@ -313,9 +320,15 @@ const QuoteImageDialogContent: React.FC<QuoteImageDialogContentProps> = ({
               <Dialog.TextButton
                 text={
                   posted ? (
-                    <FormattedMessage defaultMessage="On the wall ✓" id="QuoteImage.onWall" />
+                    <FormattedMessage
+                      defaultMessage="On the wall ✓"
+                      id="Cmc/He"
+                    />
                   ) : (
-                    <FormattedMessage defaultMessage="Post to wall" id="QuoteImage.postToWall" />
+                    <FormattedMessage
+                      defaultMessage="Post to wall"
+                      id="oCQmLu"
+                    />
                   )
                 }
                 color="green"

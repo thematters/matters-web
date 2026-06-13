@@ -93,6 +93,7 @@ export interface ClickButtonProp {
     | 'article_content_quote_image'
     | 'quote_image_download'
     | 'quote_image_share'
+    | 'quote_post_to_wall'
     | 'comment_open'
     | 'comment_close'
     | 'comment_placeholder'
