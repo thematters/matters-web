@@ -267,7 +267,7 @@ export const TextSelectionPopover = ({
               <Icon icon={IconComment} size={20} />
               <FormattedMessage
                 defaultMessage="Quote"
-                id="9ZBatB"
+                id="uDdAD+"
                 description="src/components/TextSelectionPopover/index.tsx"
               />
             </button>
@@ -280,7 +280,7 @@ export const TextSelectionPopover = ({
                     <Icon icon={IconImage} size={20} />
                     <FormattedMessage
                       defaultMessage="Quote card"
-                      id="iJfVZG"
+                      id="/LjM9M"
                       description="src/components/TextSelectionPopover/index.tsx"
                     />
                   </>,

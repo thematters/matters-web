@@ -109,6 +109,10 @@
   "/IMR+8": {
     "defaultMessage": "Top Supporters"
   },
+  "/LjM9M": {
+    "defaultMessage": "Quote card",
+    "description": "src/components/TextSelectionPopover/index.tsx"
+  },
   "/MS+jK": {
     "defaultMessage": "Collection",
     "description": "src/components/Editor/PreviewDialog/Collections/index.tsx"
@@ -141,6 +145,9 @@
   "/podGX": {
     "defaultMessage": "Public",
     "description": "src/views/Circle/Analytics/ContentAnalytics/ContentTabs/index.tsx"
+  },
+  "/uJdnC": {
+    "defaultMessage": "Sky"
   },
   "/wKyxw": {
     "defaultMessage": "Failed to republish"
@@ -230,6 +237,9 @@
   "1COpAA": {
     "defaultMessage": "Failed",
     "description": "src/components/Transaction/State/index.tsx"
+  },
+  "1DQn89": {
+    "defaultMessage": "Share Quote"
   },
   "1EYCdR": {
     "defaultMessage": "Tags"
@@ -392,6 +402,9 @@
   "3YAasP": {
     "defaultMessage": "What is Liker ID?"
   },
+  "3cxMQp": {
+    "defaultMessage": "Violet"
+  },
   "3kbIhS": {
     "defaultMessage": "Untitled"
   },
@@ -506,6 +519,9 @@
   "5mu8HJ": {
     "defaultMessage": "Moment deleted"
   },
+  "5q3qC0": {
+    "defaultMessage": "Download"
+  },
   "5rxHb7": {
     "defaultMessage": "May contain pornography, violence, gore, etc. Click here to expand all.",
     "description": "src/views/ArticleDetail/Wall/Sensitive/index.tsx"
@@ -567,6 +583,9 @@
   "6OBAOi": {
     "defaultMessage": "subscribers_empty",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
+  },
+  "6RAJ7U": {
+    "defaultMessage": "IG / FB story · Threads"
   },
   "6Sj2lN": {
     "defaultMessage": "Claim"
@@ -656,6 +675,9 @@
   "7jjWxF": {
     "defaultMessage": "No results",
     "description": "src/components/Dialogs/AddArticlesCollectionDialog/SearchingDialogContent.tsx"
+  },
+  "7mL9QE": {
+    "defaultMessage": "Style"
   },
   "7oytv9": {
     "defaultMessage": "(edited)"
@@ -808,6 +830,9 @@
   },
   "A4P0al": {
     "defaultMessage": "Channel suggestion"
+  },
+  "A6dqhl": {
+    "defaultMessage": "IG / FB post"
   },
   "A6ozr9": {
     "defaultMessage": "Collection name"
@@ -978,6 +1003,9 @@
   "CZJdSn": {
     "defaultMessage": "mentioned you in a comment",
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
+  },
+  "CZciVV": {
+    "defaultMessage": "Story 9:16"
   },
   "CbRvzm": {
     "defaultMessage": "Schedule publish"
@@ -1468,6 +1496,9 @@
   "K2ec8y": {
     "defaultMessage": "Please verify email"
   },
+  "K3+ihp": {
+    "defaultMessage": "Pine"
+  },
   "K3r6DQ": {
     "defaultMessage": "Delete"
   },
@@ -1731,6 +1762,9 @@
     "defaultMessage": "Your schedule article {articleTitle} published successfully, but failed to submit because the selection event has ended",
     "description": "src/components/Notice/ArticleNotice/ScheduledArticlePublishedNotice.tsx"
   },
+  "Oawtbo": {
+    "defaultMessage": "IG post · most eye-catching"
+  },
   "OhSg5a": {
     "defaultMessage": "Sensitive by author"
   },
@@ -1751,6 +1785,9 @@
   },
   "OwMuXW": {
     "defaultMessage": "Cancel schedule"
+  },
+  "OwO+Nr": {
+    "defaultMessage": "Mint"
   },
   "OwtCWk": {
     "defaultMessage": "Must be between {MIN_CIRCLE_DISPLAY_NAME_LENGTH}-{MAX_CIRCLE_DISPLAY_NAME_LENGTH} characters long."
@@ -1844,6 +1881,9 @@
   "QWU/Cf": {
     "defaultMessage": "Billboard is an open and rentable on-chain NFT advertising protocol. Once a rental is completed, the content can be displayed for 14 days. The rental fee is calculated based on the concept of the Harberger tax, and the generated rental income is distributed to the community creators through quadratic funding.",
     "description": "src/components/Dialogs/BillboardDialog/Content.tsx"
+  },
+  "QWkEED": {
+    "defaultMessage": "Ink"
   },
   "QXJQ5G": {
     "defaultMessage": "Please log in again.",
@@ -2451,6 +2491,9 @@
   "afLdf2": {
     "defaultMessage": "Moment"
   },
+  "agOXPD": {
+    "defaultMessage": "Size"
+  },
   "ai7kS4": {
     "defaultMessage": "My Works"
   },
@@ -2496,6 +2539,9 @@
   "bBYO6x": {
     "defaultMessage": "Unblock",
     "description": "src/components/BlockUser/Button/index.tsx"
+  },
+  "bGxO22": {
+    "defaultMessage": "Coral"
   },
   "bQ5vZC": {
     "defaultMessage": "This article has been marked as restricted content by the {actor}.",
@@ -2671,6 +2717,9 @@
   "e3qUqn": {
     "defaultMessage": "Pornography involving minors"
   },
+  "e4AtHq": {
+    "defaultMessage": "You selected {original} characters; only the first {max} are shown. A concise quote works best."
+  },
   "eIlMHB": {
     "defaultMessage": "Allow readers to respond to this article (can NOT be disabled afterwards)"
   },
@@ -2698,6 +2747,9 @@
   },
   "eZ0m39": {
     "defaultMessage": "Enter the amount"
+  },
+  "em7860": {
+    "defaultMessage": "Portrait 4:5"
   },
   "enMIYK": {
     "defaultMessage": "My Page"
@@ -2919,8 +2971,14 @@
   "iEJeQH": {
     "defaultMessage": "Liker ID"
   },
+  "iII6Ry": {
+    "defaultMessage": "Square 1:1"
+  },
   "iIitRg": {
     "defaultMessage": "Tag not bookmarked yet"
+  },
+  "iLKG5w": {
+    "defaultMessage": "Slate"
   },
   "iNZdM/": {
     "defaultMessage": "Switch to support creators with the Optimism network {br} Make support more convenient and affordable",
@@ -3105,6 +3163,9 @@
   },
   "lTleCS": {
     "defaultMessage": "Checking"
+  },
+  "lY48xg": {
+    "defaultMessage": "Cream"
   },
   "lYVn31": {
     "defaultMessage": "This work has been added to the schedule. Please go to the \"My Works\" page to confirm"
@@ -3600,6 +3661,10 @@
   "u9LYjQ": {
     "defaultMessage": "Comment has been deleted",
     "description": "Moment"
+  },
+  "uDdAD+": {
+    "defaultMessage": "Quote",
+    "description": "src/components/TextSelectionPopover/index.tsx"
   },
   "uM5qZr": {
     "defaultMessage": "Likes Given"

@@ -109,6 +109,10 @@
   "/IMR+8": {
     "defaultMessage": "支持排行榜"
   },
+  "/LjM9M": {
+    "defaultMessage": "Quote card",
+    "description": "src/components/TextSelectionPopover/index.tsx"
+  },
   "/MS+jK": {
     "defaultMessage": "選集",
     "description": "src/components/Editor/PreviewDialog/Collections/index.tsx"
@@ -141,6 +145,9 @@
   "/podGX": {
     "defaultMessage": "公開",
     "description": "src/views/Circle/Analytics/ContentAnalytics/ContentTabs/index.tsx"
+  },
+  "/uJdnC": {
+    "defaultMessage": "Sky"
   },
   "/wKyxw": {
     "defaultMessage": "發布失敗"
@@ -230,6 +237,9 @@
   "1COpAA": {
     "defaultMessage": "失敗",
     "description": "src/components/Transaction/State/index.tsx"
+  },
+  "1DQn89": {
+    "defaultMessage": "Share Quote"
   },
   "1EYCdR": {
     "defaultMessage": "標籤"
@@ -392,6 +402,9 @@
   "3YAasP": {
     "defaultMessage": "什麼是 Liker ID？"
   },
+  "3cxMQp": {
+    "defaultMessage": "Violet"
+  },
   "3kbIhS": {
     "defaultMessage": "未命名"
   },
@@ -506,6 +519,9 @@
   "5mu8HJ": {
     "defaultMessage": "動態已刪除"
   },
+  "5q3qC0": {
+    "defaultMessage": "Download"
+  },
   "5rxHb7": {
     "defaultMessage": "可能包含色情、暴力、血腥等，點此展開全部",
     "description": "src/views/ArticleDetail/Wall/Sensitive/index.tsx"
@@ -567,6 +583,9 @@
   "6OBAOi": {
     "defaultMessage": "目前總訂閱人數",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
+  },
+  "6RAJ7U": {
+    "defaultMessage": "IG / FB story · Threads"
   },
   "6Sj2lN": {
     "defaultMessage": "提領支持"
@@ -656,6 +675,9 @@
   "7jjWxF": {
     "defaultMessage": "無結果",
     "description": "src/components/Dialogs/AddArticlesCollectionDialog/SearchingDialogContent.tsx"
+  },
+  "7mL9QE": {
+    "defaultMessage": "Style"
   },
   "7oytv9": {
     "defaultMessage": "（修改過）"
@@ -808,6 +830,9 @@
   },
   "A4P0al": {
     "defaultMessage": "建議頻道"
+  },
+  "A6dqhl": {
+    "defaultMessage": "IG / FB post"
   },
   "A6ozr9": {
     "defaultMessage": "選集名稱"
@@ -978,6 +1003,9 @@
   "CZJdSn": {
     "defaultMessage": "在動態留言中提及你",
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
+  },
+  "CZciVV": {
+    "defaultMessage": "Story 9:16"
   },
   "CbRvzm": {
     "defaultMessage": "排程發布"
@@ -1468,6 +1496,9 @@
   "K2ec8y": {
     "defaultMessage": "請先驗證電子郵件"
   },
+  "K3+ihp": {
+    "defaultMessage": "Pine"
+  },
   "K3r6DQ": {
     "defaultMessage": "刪除"
   },
@@ -1731,6 +1762,9 @@
     "defaultMessage": "你的排程作品 {articleTitle} 已發布成功，由於選擇活動已結束，投稿未能成功",
     "description": "src/components/Notice/ArticleNotice/ScheduledArticlePublishedNotice.tsx"
   },
+  "Oawtbo": {
+    "defaultMessage": "IG post · most eye-catching"
+  },
   "OhSg5a": {
     "defaultMessage": "限制級內容"
   },
@@ -1751,6 +1785,9 @@
   },
   "OwMuXW": {
     "defaultMessage": "取消排程"
+  },
+  "OwO+Nr": {
+    "defaultMessage": "Mint"
   },
   "OwtCWk": {
     "defaultMessage": "僅供輸入 {MIN_CIRCLE_DISPLAY_NAME_LENGTH}-{MAX_CIRCLE_DISPLAY_NAME_LENGTH} 個字元"
@@ -1844,6 +1881,9 @@
   "QWU/Cf": {
     "defaultMessage": "Billboard 是一個公開且可付費租借的鏈上 NFT 廣告協議。租借成功後，可進行 14 天的內容投放。租借費用基於哈柏格稅概念計算，產生的租借收入將以二次方配捐方式回饋給社區創作者。",
     "description": "src/components/Dialogs/BillboardDialog/Content.tsx"
+  },
+  "QWkEED": {
+    "defaultMessage": "Ink"
   },
   "QXJQ5G": {
     "defaultMessage": "授權信息已失效，請重新登入",
@@ -2451,6 +2491,9 @@
   "afLdf2": {
     "defaultMessage": "發動態"
   },
+  "agOXPD": {
+    "defaultMessage": "Size"
+  },
   "ai7kS4": {
     "defaultMessage": "我的創作"
   },
@@ -2496,6 +2539,9 @@
   "bBYO6x": {
     "defaultMessage": "取消封鎖",
     "description": "src/components/BlockUser/Button/index.tsx"
+  },
+  "bGxO22": {
+    "defaultMessage": "Coral"
   },
   "bQ5vZC": {
     "defaultMessage": "此文已被{actor}標示為限制級內容",
@@ -2671,6 +2717,9 @@
   "e3qUqn": {
     "defaultMessage": "涉及未成年人的色情"
   },
+  "e4AtHq": {
+    "defaultMessage": "You selected {original} characters; only the first {max} are shown. A concise quote works best."
+  },
   "eIlMHB": {
     "defaultMessage": "允許讀者評論本文（開啟後無法關閉）"
   },
@@ -2698,6 +2747,9 @@
   },
   "eZ0m39": {
     "defaultMessage": "或輸入自定義金額"
+  },
+  "em7860": {
+    "defaultMessage": "Portrait 4:5"
   },
   "enMIYK": {
     "defaultMessage": "我的"
@@ -2919,8 +2971,14 @@
   "iEJeQH": {
     "defaultMessage": "設置 Liker ID"
   },
+  "iII6Ry": {
+    "defaultMessage": "Square 1:1"
+  },
   "iIitRg": {
     "defaultMessage": "尚未收藏標籤"
+  },
+  "iLKG5w": {
+    "defaultMessage": "Slate"
   },
   "iNZdM/": {
     "defaultMessage": "切換後即可支持創作者，採用 Optimism 網路{br}讓支持更方便且費用低廉",
@@ -3105,6 +3163,9 @@
   },
   "lTleCS": {
     "defaultMessage": "Checking"
+  },
+  "lY48xg": {
+    "defaultMessage": "Cream"
   },
   "lYVn31": {
     "defaultMessage": "此作品已加入排程，請前往「我的創作」頁面確認"
@@ -3600,6 +3661,10 @@
   "u9LYjQ": {
     "defaultMessage": "留言已刪除",
     "description": "Moment"
+  },
+  "uDdAD+": {
+    "defaultMessage": "Quote",
+    "description": "src/components/TextSelectionPopover/index.tsx"
   },
   "uM5qZr": {
     "defaultMessage": "我讚賞的"
