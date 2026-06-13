@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-import { fragments as quoteImageFragments } from '~/components/QuoteImageDialog'
+import { fragments as quoteImageFragments } from '~/components/QuoteImageDialog/gql'
 import { UserDigest } from '~/components/UserDigest'
 
 import { AuthorSidebar } from './AuthorSidebar'
