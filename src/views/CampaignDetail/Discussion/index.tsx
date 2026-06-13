@@ -21,10 +21,7 @@ import { CAMPAIGN_DISCUSSION_COMMENTS, CAMPAIGN_DISCUSSION_VIEWER } from './gql'
 import styles from './styles.module.css'
 
 type DiscussionConnection = NonNullable<
-  Extract<
-    NonNullable<CampaignDiscussionCommentsQuery['campaign']>,
-    { __typename: 'WritingChallenge' }
-  >['discussion']
+  NonNullable<CampaignDiscussionCommentsQuery['campaign']>['discussion']
 >
 type Comment = NonNullable<DiscussionConnection['edges']>[0]['node']
 
@@ -92,7 +89,7 @@ const CampaignDiscussion = ({
 
   const submitCallback = () => {
     toast.info({
-      message: <FormattedMessage defaultMessage="Comment sent" id="iSUeWj" />,
+      message: <FormattedMessage defaultMessage="Comment sent" id="fyKoL1" />,
     })
     refetch()
   }
@@ -118,7 +115,7 @@ const CampaignDiscussion = ({
               💬{' '}
               <FormattedMessage
                 defaultMessage="Discussion"
-                id="aLkBs2"
+                id="2/u1aP"
                 description="src/views/CampaignDetail/Discussion"
               />
               {totalCount > 0 && (
@@ -138,7 +135,7 @@ const CampaignDiscussion = ({
         <h2 className={styles.title}>
           <FormattedMessage
             defaultMessage="Discussion"
-            id="aLkBs2"
+            id="2/u1aP"
             description="src/views/CampaignDetail/Discussion"
           />
           {totalCount > 0 && <span className={styles.count}>{totalCount}</span>}
@@ -151,7 +148,7 @@ const CampaignDiscussion = ({
           type="campaignDiscussion"
           placeholder={intl.formatMessage({
             defaultMessage: 'Share your thoughts with other participants',
-            id: 'b3aGfp',
+            id: 'dHVTYM',
             description: 'src/views/CampaignDetail/Discussion',
           })}
           submitCallback={submitCallback}
@@ -160,7 +157,7 @@ const CampaignDiscussion = ({
         <section className={styles.hint}>
           <FormattedMessage
             defaultMessage="Only participants can join the discussion."
-            id="Aq0aMp"
+            id="VyV+WO"
             description="src/views/CampaignDetail/Discussion"
           />
         </section>
@@ -202,7 +199,7 @@ const CampaignDiscussion = ({
               <TextIcon size={14} weight="medium">
                 <FormattedMessage
                   defaultMessage="View all {count} comments"
-                  id="Vj0Hbd"
+                  id="b8LMpq"
                   description="src/views/CampaignDetail/Discussion"
                   values={{ count: totalCount }}
                 />
