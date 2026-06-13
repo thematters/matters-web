@@ -84,6 +84,10 @@
   "+vVZ/G": {
     "defaultMessage": "Connect"
   },
+  "/0OJlF": {
+    "defaultMessage": "No discussion yet",
+    "description": "src/views/CampaignDetail/Discussion"
+  },
   "/5OvMK": {
     "defaultMessage": "liked your moment"
   },
@@ -278,6 +282,10 @@
   },
   "2/C36c": {
     "defaultMessage": "You do not have permission to perform this action"
+  },
+  "2/u1aP": {
+    "defaultMessage": "Discussion",
+    "description": "src/views/CampaignDetail/Discussion"
   },
   "202PEj": {
     "defaultMessage": "Confirm Matters ID",
@@ -2169,6 +2177,10 @@
     "defaultMessage": "This URL name has already been used, try another one",
     "description": "src/components/Forms/CreateCircleForm/Init.tsx"
   },
+  "VyV+WO": {
+    "defaultMessage": "Only participants can join the discussion.",
+    "description": "src/views/CampaignDetail/Discussion"
+  },
   "VzzYJk": {
     "defaultMessage": "Create"
   },
@@ -2489,6 +2501,10 @@
   "b6x6lm": {
     "defaultMessage": "Enter a clear and concise title"
   },
+  "b8LMpq": {
+    "defaultMessage": "View all {count} comments",
+    "description": "src/views/CampaignDetail/Discussion"
+  },
   "b8ogKp": {
     "defaultMessage": "Add Invitation",
     "description": "src/views/Circle/Settings/ManageInvitation/AddButton/index.tsx"
@@ -2619,6 +2635,10 @@
   "dE4mlL": {
     "defaultMessage": "Submit",
     "description": "src/views/CampaignDetail/Apply/Button/index.tsx"
+  },
+  "dHVTYM": {
+    "defaultMessage": "Share your thoughts with other participants",
+    "description": "src/views/CampaignDetail/Discussion"
   },
   "dK7Dnj": {
     "defaultMessage": "🔥 Claim for free"
@@ -2783,6 +2803,9 @@
   },
   "ftg7GK": {
     "defaultMessage": "Select Date"
+  },
+  "fyKoL1": {
+    "defaultMessage": "Comment sent"
   },
   "g//2O2": {
     "defaultMessage": "Uncollapse",

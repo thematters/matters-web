@@ -84,6 +84,10 @@
   "+vVZ/G": {
     "defaultMessage": "綁定"
   },
+  "/0OJlF": {
+    "defaultMessage": "No discussion yet",
+    "description": "src/views/CampaignDetail/Discussion"
+  },
   "/5OvMK": {
     "defaultMessage": "喜歡你的動態"
   },
@@ -278,6 +282,10 @@
   },
   "2/C36c": {
     "defaultMessage": "你無權進行此操作"
+  },
+  "2/u1aP": {
+    "defaultMessage": "Discussion",
+    "description": "src/views/CampaignDetail/Discussion"
   },
   "202PEj": {
     "defaultMessage": "確認 Matters ID",
@@ -2169,6 +2177,10 @@
     "defaultMessage": "Oops！此網址已被使用了，換一個試試",
     "description": "src/components/Forms/CreateCircleForm/Init.tsx"
   },
+  "VyV+WO": {
+    "defaultMessage": "Only participants can join the discussion.",
+    "description": "src/views/CampaignDetail/Discussion"
+  },
   "VzzYJk": {
     "defaultMessage": "新建"
   },
@@ -2489,6 +2501,10 @@
   "b6x6lm": {
     "defaultMessage": "輸入簡單明瞭的標題"
   },
+  "b8LMpq": {
+    "defaultMessage": "View all {count} comments",
+    "description": "src/views/CampaignDetail/Discussion"
+  },
   "b8ogKp": {
     "defaultMessage": "新增邀請",
     "description": "src/views/Circle/Settings/ManageInvitation/AddButton/index.tsx"
@@ -2619,6 +2635,10 @@
   "dE4mlL": {
     "defaultMessage": "投稿",
     "description": "src/views/CampaignDetail/Apply/Button/index.tsx"
+  },
+  "dHVTYM": {
+    "defaultMessage": "Share your thoughts with other participants",
+    "description": "src/views/CampaignDetail/Discussion"
   },
   "dK7Dnj": {
     "defaultMessage": "🔥 免費提領"
@@ -2783,6 +2803,9 @@
   },
   "ftg7GK": {
     "defaultMessage": "選擇日期"
+  },
+  "fyKoL1": {
+    "defaultMessage": "Comment sent"
   },
   "g//2O2": {
     "defaultMessage": "取消闔上",
