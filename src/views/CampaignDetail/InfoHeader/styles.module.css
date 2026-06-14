@@ -23,11 +23,13 @@
 
   &::after {
     display: block;
-    padding-bottom: 21%;
+
+    /* cover height roughly halved, to lift the discussion area up the page */
+    padding-bottom: 11%;
     content: '';
 
     @media (--sm-up) {
-      padding-bottom: 23.26%;
+      padding-bottom: 12%;
     }
   }
 }

@@ -48,7 +48,12 @@ interface CampaignStageArgs {
 
 interface CommentArgs {
   id: string
-  type: 'article' | 'circleDiscussion' | 'circleBroadcast' | 'moment' // comment type: article/discussion/broadcast
+  type:
+    | 'article'
+    | 'circleDiscussion'
+    | 'circleBroadcast'
+    | 'moment'
+    | 'campaignDiscussion' // comment type: article/discussion/broadcast/campaignDiscussion
   parentComment?: {
     id: string
   } | null
@@ -90,6 +95,7 @@ type ToPathArgs =
       article?: ArticleArgs | null
       circle?: CircleArgs | null
       moment?: MomentArgs | null
+      campaign?: CampaignArgs | null
     }
   | { page: 'draftDetail'; id: string }
   | { page: 'draftDetailOptions'; id: string }
@@ -242,6 +248,13 @@ export const toPath = (
           href = toPath({
             page: type, // 'circleDiscussion' or 'circleBroadcast'
             circle: args.circle!, // as { name: string },
+            fragment,
+          }).href
+          break
+        case 'campaignDiscussion':
+          href = toPath({
+            page: 'campaignDetail',
+            campaign: args.campaign!,
             fragment,
           }).href
           break
