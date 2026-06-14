@@ -41,6 +41,15 @@ const Content = ({
 
   const contentContainer = useRef<HTMLDivElement>(null)
 
+  // `contentContainer.current` is null on first render, and assigning a ref
+  // does not trigger a re-render, so the selection popover would not mount
+  // until some other state change (e.g. scroll) forced one. Gate it on a
+  // mounted flag that flips right after commit, when the ref is set.
+  const [isContentMounted, setIsContentMounted] = useState(false)
+  useEffect(() => {
+    setIsContentMounted(true)
+  }, [])
+
   const { isInPath } = useRoute()
   const isInArticleDetailHistory = isInPath('ARTICLE_DETAIL_HISTORY')
 
@@ -137,11 +146,13 @@ const Content = ({
         data-test-id={TEST_ID.ARTICLE_CONTENT}
       />
       <Media greaterThanOrEqual="md">
-        {!isInArticleDetailHistory && contentContainer.current && (
-          <TextSelectionPopover
-            targetElement={contentContainer.current as HTMLElement}
-          />
-        )}
+        {!isInArticleDetailHistory &&
+          isContentMounted &&
+          contentContainer.current && (
+            <TextSelectionPopover
+              targetElement={contentContainer.current as HTMLElement}
+            />
+          )}
       </Media>
     </>
   )
