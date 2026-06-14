@@ -160,13 +160,15 @@ const Content = ({
       {/* mobile: a floating bubble would fight with the native selection
           menu, so render a fixed bottom action bar instead */}
       <Media lessThan="md">
-        {!isInArticleDetailHistory && contentContainer.current && (
-          <TextSelectionPopover
-            targetElement={contentContainer.current as HTMLElement}
-            article={article}
-            variant="bottomBar"
-          />
-        )}
+        {!isInArticleDetailHistory &&
+          isContentMounted &&
+          contentContainer.current && (
+            <TextSelectionPopover
+              targetElement={contentContainer.current as HTMLElement}
+              article={article}
+              variant="bottomBar"
+            />
+          )}
       </Media>
     </>
   )
