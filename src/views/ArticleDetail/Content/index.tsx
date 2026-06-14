@@ -13,7 +13,7 @@ import {
   ViewerContext,
 } from '~/components'
 import { useReadTimer } from '~/components/Hook'
-import { ReadArticleMutation } from '~/gql/graphql'
+import { QuoteImageArticleFragment, ReadArticleMutation } from '~/gql/graphql'
 
 import styles from './styles.module.css'
 
@@ -27,10 +27,12 @@ const READ_ARTICLE = gql`
 
 const Content = ({
   articleId,
+  article,
   content,
   indentFirstLine,
 }: {
   articleId: string
+  article?: QuoteImageArticleFragment | null
   content: string
   indentFirstLine: boolean
 }) => {
@@ -151,6 +153,20 @@ const Content = ({
           contentContainer.current && (
             <TextSelectionPopover
               targetElement={contentContainer.current as HTMLElement}
+              article={article}
+            />
+          )}
+      </Media>
+      {/* mobile: a floating bubble would fight with the native selection
+          menu, so render a fixed bottom action bar instead */}
+      <Media lessThan="md">
+        {!isInArticleDetailHistory &&
+          isContentMounted &&
+          contentContainer.current && (
+            <TextSelectionPopover
+              targetElement={contentContainer.current as HTMLElement}
+              article={article}
+              variant="bottomBar"
             />
           )}
       </Media>
