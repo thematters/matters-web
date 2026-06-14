@@ -3,8 +3,11 @@ import QRCode from 'qrcode'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { defineMessages, FormattedMessage, useIntl } from 'react-intl'
 
+import { ERROR_CODES } from '~/common/enums'
 import { analytics, isMobile } from '~/common/utils'
-import { Dialog } from '~/components'
+import { Dialog, toast, useMutation } from '~/components'
+import { PUT_QUOTE } from '~/components/GQL/mutations/putQuote'
+import { PutQuoteMutation } from '~/gql/graphql'
 
 import { QuoteCard } from './Card'
 import { clampQuote, MAX_QUOTE_LEN, QUOTE_SIZES, QUOTE_STYLES } from './presets'
@@ -41,6 +44,10 @@ export type QuoteImageDialogContentProps = {
   /** 文章連結，用於產生 QR Code */
   shareLink: string
   isSevenDayBook: boolean
+  /** 文章 id；與 canPostToWall 一起提供時顯示「上牆」按鈕 */
+  articleId?: string
+  /** 文章屬於活動（campaign）才可上牆；伺服器端會再驗證 */
+  canPostToWall?: boolean
 }
 
 const QuoteImageDialogContent: React.FC<QuoteImageDialogContentProps> = ({
@@ -50,6 +57,8 @@ const QuoteImageDialogContent: React.FC<QuoteImageDialogContentProps> = ({
   title,
   shareLink,
   isSevenDayBook,
+  articleId,
+  canPostToWall,
 }) => {
   const intl = useIntl()
   const cardRef = useRef<HTMLDivElement>(null)
@@ -57,6 +66,9 @@ const QuoteImageDialogContent: React.FC<QuoteImageDialogContentProps> = ({
   const [styleId, setStyleId] = useState('pine')
   const [sizeId, setSizeId] = useState('portrait')
   const [qrDataUrl, setQrDataUrl] = useState('')
+  const [putQuote] = useMutation<PutQuoteMutation>(PUT_QUOTE)
+  const [isPosting, setPosting] = useState(false)
+  const [posted, setPosted] = useState(false)
 
   const style = QUOTE_STYLES.find((s) => s.id === styleId) || QUOTE_STYLES[0]
   const size = QUOTE_SIZES.find((s) => s.id === sizeId) || QUOTE_SIZES[1]
@@ -101,6 +113,57 @@ const QuoteImageDialogContent: React.FC<QuoteImageDialogContentProps> = ({
     a.href = url
     a.download = `matters-quote-${style.id}-${size.id}.jpg`
     a.click()
+  }
+
+  const onPostToWall = async () => {
+    if (!articleId || isPosting || posted) return
+    setPosting(true)
+    analytics.trackEvent('click_button', {
+      type: 'quote_post_to_wall',
+      pageType: 'article_detail',
+    })
+
+    // wall stores plain text (no trailing ellipsis — the server verifies the
+    // quote is an excerpt of the article)
+    const wallText = (quote || '')
+      .trim()
+      .replace(/\s+/g, ' ')
+      .slice(0, MAX_QUOTE_LEN)
+
+    try {
+      await putQuote({
+        variables: { input: { articleId, content: wallText } },
+      })
+      setPosted(true)
+      toast.info({
+        message: (
+          <FormattedMessage
+            defaultMessage="Posted to the quote wall"
+            id="IWLb33"
+          />
+        ),
+      })
+    } catch (error) {
+      const code = (
+        error as { graphQLErrors?: { extensions?: { code?: string } }[] }
+      )?.graphQLErrors?.[0]?.extensions?.code
+      toast.error({
+        message:
+          code === ERROR_CODES.ACTION_LIMIT_EXCEEDED ? (
+            <FormattedMessage
+              defaultMessage="Wall quota reached for today — come back tomorrow!"
+              id="D8FJf9"
+            />
+          ) : (
+            <FormattedMessage
+              defaultMessage="Failed to post to the wall"
+              id="5IlTNw"
+            />
+          ),
+      })
+    } finally {
+      setPosting(false)
+    }
   }
 
   const onShare = async () => {
@@ -218,6 +281,27 @@ const QuoteImageDialogContent: React.FC<QuoteImageDialogContentProps> = ({
       <Dialog.Footer
         btns={
           <>
+            {articleId && canPostToWall && (
+              <Dialog.RoundedButton
+                text={
+                  posted ? (
+                    <FormattedMessage
+                      defaultMessage="On the wall ✓"
+                      id="Cmc/He"
+                    />
+                  ) : (
+                    <FormattedMessage
+                      defaultMessage="Post to wall"
+                      id="oCQmLu"
+                    />
+                  )
+                }
+                color="green"
+                loading={isPosting}
+                disabled={isPosting || posted}
+                onClick={onPostToWall}
+              />
+            )}
             <Dialog.RoundedButton
               text={<FormattedMessage defaultMessage="Download" id="5q3qC0" />}
               color="green"
@@ -232,6 +316,27 @@ const QuoteImageDialogContent: React.FC<QuoteImageDialogContentProps> = ({
         }
         smUpBtns={
           <>
+            {articleId && canPostToWall && (
+              <Dialog.TextButton
+                text={
+                  posted ? (
+                    <FormattedMessage
+                      defaultMessage="On the wall ✓"
+                      id="Cmc/He"
+                    />
+                  ) : (
+                    <FormattedMessage
+                      defaultMessage="Post to wall"
+                      id="oCQmLu"
+                    />
+                  )
+                }
+                color="green"
+                loading={isPosting}
+                disabled={isPosting || posted}
+                onClick={onPostToWall}
+              />
+            )}
             <Dialog.TextButton
               text={<FormattedMessage defaultMessage="Download" id="5q3qC0" />}
               color="green"

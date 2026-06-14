@@ -248,6 +248,9 @@
   "1EYCdR": {
     "defaultMessage": "标签"
   },
+  "1HLo+Y": {
+    "defaultMessage": "Quote wall"
+  },
   "1PORwh": {
     "defaultMessage": "仅作者本人可见封存作品，",
     "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
@@ -413,6 +416,9 @@
   "3cxMQp": {
     "defaultMessage": "Violet"
   },
+  "3jmniZ": {
+    "defaultMessage": "Retract"
+  },
   "3kbIhS": {
     "defaultMessage": "未命名"
   },
@@ -492,6 +498,9 @@
   },
   "5IS+ui": {
     "defaultMessage": "支持设置"
+  },
+  "5IlTNw": {
+    "defaultMessage": "Failed to post to the wall"
   },
   "5JN+nl": {
     "defaultMessage": "请检查邮件",
@@ -1028,6 +1037,9 @@
     "defaultMessage": "留言已删除",
     "description": "src/components/Notice/NoticeComment.tsx/moment"
   },
+  "Cmc/He": {
+    "defaultMessage": "On the wall ✓"
+  },
   "CnPG8j": {
     "defaultMessage": "精选"
   },
@@ -1050,6 +1062,9 @@
   },
   "D3idYv": {
     "defaultMessage": "设定"
+  },
+  "D8FJf9": {
+    "defaultMessage": "Wall quota reached for today — come back tomorrow!"
   },
   "D9/QIR": {
     "defaultMessage": "注册 ISCN"
@@ -1112,6 +1127,9 @@
   "DrBuEI": {
     "defaultMessage": "取消置顶",
     "description": "src/components/CircleComment/DropdownActions/PinButton.tsx"
+  },
+  "Ds+7ro": {
+    "defaultMessage": "Full wall →"
   },
   "DtO278": {
     "defaultMessage": "检测到近期你的多篇文章被推荐到相关频道，他们有可能不会同时出现"
@@ -1245,6 +1263,9 @@
   },
   "FuYW4i": {
     "defaultMessage": "成为围炉一员，一起谈天说地"
+  },
+  "Fx9x/w": {
+    "defaultMessage": "Full wall / Museum →"
   },
   "FxrSCh": {
     "defaultMessage": "ID 设置后无法修改，确认使用 {id} 作为 Matters ID 吗？",
@@ -1424,6 +1445,9 @@
   "IW6zQv": {
     "defaultMessage": "选择时间"
   },
+  "IWLb33": {
+    "defaultMessage": "Posted to the quote wall"
+  },
   "IXycMo": {
     "defaultMessage": "重新发送"
   },
@@ -1450,6 +1474,9 @@
   },
   "J7hiLV": {
     "defaultMessage": "作者尚未绑定 LikeCoin 钱包"
+  },
+  "JBnAOd": {
+    "defaultMessage": "🔀 Shuffle"
   },
   "JCZFqh": {
     "defaultMessage": "现在报名，即可开始书写年度问卷，活动细则请查看公告"
@@ -2064,6 +2091,9 @@
   "TF1OhT": {
     "defaultMessage": "临时密码已过期，请尝试重新发送"
   },
+  "TIWVxK": {
+    "defaultMessage": "Quote retracted from the wall"
+  },
   "TInwt3": {
     "defaultMessage": "关闭评论"
   },
@@ -2094,6 +2124,9 @@
   "TgU+Mf": {
     "defaultMessage": "Optimism 是独立运行的区块链，若你在其他链上已有 USDT 货币，需要将它们转移到 Optimism 网络才能使用，详情参考 {tutorial}.",
     "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
+  },
+  "Thr8QX": {
+    "defaultMessage": "To article ↩"
   },
   "TjWWxF": {
     "defaultMessage": "广播已送出",
@@ -2416,6 +2449,9 @@
   "Z7JXlF": {
     "defaultMessage": "因违反用户协定而被封存，",
     "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
+  },
+  "Z82+dw": {
+    "defaultMessage": "Confirm retract"
   },
   "ZAoAcG": {
     "defaultMessage": "Threads, Mastodon, Misskey 這些地方的粉絲也會看到"
@@ -2781,6 +2817,9 @@
   "eov+J2": {
     "defaultMessage": "自定义网址名称"
   },
+  "epZb9X": {
+    "defaultMessage": "View all {count} quotes"
+  },
   "erE5/4": {
     "defaultMessage": "互相关注",
     "description": "src/components/Buttons/FollowUser/FollowState.tsx"
@@ -3009,6 +3048,9 @@
   },
   "iSM+et": {
     "defaultMessage": "作者保留所有权利"
+  },
+  "iSjuti": {
+    "defaultMessage": "Failed to retract"
   },
   "iTcMqz": {
     "defaultMessage": "月色之下，梦想即将实现。月之梦徽章纪念你曾参与「游牧者计划」。",
@@ -3356,6 +3398,9 @@
   "oA2Pur": {
     "defaultMessage": "濫發廣告",
     "description": "src/components/Comment/DropdownActions/CommunityWatchRemoveComment.tsx"
+  },
+  "oCQmLu": {
+    "defaultMessage": "Post to wall"
   },
   "oEHAIT": {
     "defaultMessage": "取消发布",

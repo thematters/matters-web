@@ -88,8 +88,7 @@ export const CircleCommentForm: React.FC<CircleCommentFormProps> = ({
   const maxLength =
     type === 'campaignDiscussion' ? MAX_CAMPAIGN_COMMENT_LENGTH : undefined
   const contentLength = stripHtml(content).length
-  const isOverLength =
-    maxLength !== undefined && contentLength > maxLength
+  const isOverLength = maxLength !== undefined && contentLength > maxLength
   const isValid = contentLength > 0 && !isOverLength
 
   const handleSubmit = async (event?: React.FormEvent<HTMLFormElement>) => {

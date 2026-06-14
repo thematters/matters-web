@@ -14,6 +14,7 @@ export const EXTERNAL_LINKS = {
     isProd
       ? `https://liker.land/${likerId}/civic?utm_source=Matters`
       : `https://rinkeby.liker.land/${likerId}/civic?utm_source=Matters`,
+  SEVEN_DAY_BOOK_QUOTE_WALL: 'https://freewriting.matters.town/memo-wall',
   PLANET: 'https://www.planetable.xyz/',
   ENS_DOCS: 'https://docs.ens.domains/',
   METAMASK: 'https://metamask.io/download/',
