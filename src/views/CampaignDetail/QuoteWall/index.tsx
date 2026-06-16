@@ -20,9 +20,10 @@ const PREVIEW_COUNT = 3
 
 interface QuoteWallProps {
   shortHash: string
-  // 'module': compact wall (desktop right aside). 'chip': one-line entry
-  // (mobile main column) that opens the full wall dialog.
-  entry?: 'module' | 'chip'
+  // 'band': horizontal pull-quote band in the centre column (Option A, every
+  // viewport). 'module': compact wall (legacy desktop right aside). 'chip':
+  // one-line entry (legacy mobile) that opens the full wall dialog.
+  entry?: 'module' | 'chip' | 'band'
 }
 
 const QuoteWall = ({ shortHash, entry = 'module' }: QuoteWallProps) => {
@@ -60,7 +61,7 @@ const QuoteWall = ({ shortHash, entry = 'module' }: QuoteWallProps) => {
             aria-haspopup="dialog"
           >
             <span>
-              ✨ <FormattedMessage defaultMessage="Quote wall" id="1HLo+Y" />
+              <FormattedMessage defaultMessage="Quote wall" id="1HLo+Y" />
               <span className={styles.count}>{totalCount}</span>
             </span>
             <span className={styles.chevron}>›</span>
@@ -70,11 +71,52 @@ const QuoteWall = ({ shortHash, entry = 'module' }: QuoteWallProps) => {
     )
   }
 
+  // centre-column pull-quote band (Option A): a horizontal, scrollable strip
+  // between the campaign header and the article feed, on every viewport
+  if (entry === 'band') {
+    return (
+      <section className={styles.band}>
+        <header className={styles.header}>
+          <h2 className={styles.title}>
+            <FormattedMessage defaultMessage="Quote wall" id="1HLo+Y" />
+          </h2>
+          {totalCount > quotes.length && (
+            <QuoteWallDialog shortHash={shortHash} totalCount={totalCount}>
+              {({ openDialog }) => (
+                <Button
+                  spacing={[4, 0]}
+                  textColor="green"
+                  textActiveColor="greenDark"
+                  onClick={openDialog}
+                  aria-haspopup="dialog"
+                >
+                  <TextIcon size={14} weight="medium">
+                    <FormattedMessage
+                      defaultMessage="View all {count} quotes"
+                      id="epZb9X"
+                      values={{ count: totalCount }}
+                    />
+                  </TextIcon>
+                </Button>
+              )}
+            </QuoteWallDialog>
+          )}
+        </header>
+
+        <div className={styles.bandRow}>
+          {quotes.map((quote, i) => (
+            <QuoteCard key={quote.id} quote={quote} index={i} />
+          ))}
+        </div>
+      </section>
+    )
+  }
+
   return (
     <section className={styles.quoteWall}>
       <header className={styles.header}>
         <h2 className={styles.title}>
-          ✨ <FormattedMessage defaultMessage="Quote wall" id="1HLo+Y" />
+          <FormattedMessage defaultMessage="Quote wall" id="1HLo+Y" />
         </h2>
         <a
           className={styles.museum}

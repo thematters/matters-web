@@ -108,18 +108,15 @@ const CampaignDetail = () => {
       aside={
         <>
           {campaign.showOther && <DynamicOtherCampaigns id={campaign.id} />}
-          <DynamicSideParticipants campaign={campaign} />
-          {/* desktop: quote wall + discussion sit in the right aside, below
-              the avatars (quote wall first — it's the lighter "trailer") */}
+          {/* Option A: discussion sits on top of the right aside, participants
+              below it (quote wall moved to the centre column as a band) */}
           {isMdUp && (
-            <>
-              <DynamicQuoteWall shortHash={campaign.shortHash} />
-              <DynamicDiscussion
-                campaignId={campaign.id}
-                shortHash={campaign.shortHash}
-              />
-            </>
+            <DynamicDiscussion
+              campaignId={campaign.id}
+              shortHash={campaign.shortHash}
+            />
           )}
+          <DynamicSideParticipants campaign={campaign} />
           {campaign.showAd && <Billboard />}
         </>
       }
@@ -149,19 +146,23 @@ const CampaignDetail = () => {
 
       <InfoHeader campaign={campaign} />
 
-      {/* mobile: the aside is hidden, so the quote wall + discussion shrink to
-          one-line entries under the header (still on the first screen);
-          tapping either opens its full dialog */}
+      {/* mobile: the aside is hidden, so discussion + participants shrink to
+          one-line chips under the header (discussion on top, matching the
+          desktop aside order); tapping either opens its dialog/drawer */}
       {!isMdUp && (
         <>
-          <DynamicQuoteWall shortHash={campaign.shortHash} entry="chip" />
           <DynamicDiscussion
             campaignId={campaign.id}
             shortHash={campaign.shortHash}
             entry="chip"
           />
+          <DynamicSideParticipants campaign={campaign} entry="chip" />
         </>
       )}
+
+      {/* Option A: the quote wall is a pull-quote band in the centre column,
+          shown on every viewport, between the header and the article feed */}
+      <DynamicQuoteWall shortHash={campaign.shortHash} entry="band" />
 
       <ArticleFeeds campaign={campaign} />
     </Layout.Main>
