@@ -63,11 +63,11 @@ export const CircleCommentContent = ({
   const { content, state } = comment
   const isBlocked = comment.author?.isBlocked
 
-  // campaign discussion: collapse each comment to 2 lines (then 展開/收回),
-  // and use the plain (non-rich) expand path so the collapse button shows
+  // campaign discussion: clamp each comment to 2 lines, then expand-only (no
+  // collapse, like article comments) via the rich path — keeps the font
+  // consistent between the clamped and expanded states
   const isCampaignDiscussion = type === 'campaignDiscussion'
   const expandLimit = isCampaignDiscussion ? 2 : limit
-  const effectiveIsRichShow = isCampaignDiscussion ? false : isRichShow
 
   const contentClasses = classNames({
     [styles.content]: true,
@@ -103,7 +103,7 @@ export const CircleCommentContent = ({
         <Expandable
           content={content}
           limit={expandLimit}
-          isRichShow={effectiveIsRichShow}
+          isRichShow={isRichShow}
           bgColor={bgColor}
           textIndent={textIndent}
         >
