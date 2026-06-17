@@ -80,25 +80,27 @@ const CampaignDiscussion = ({
         afterSubmit={refetch}
       >
         {({ openDialog }) => (
-          <button
-            type="button"
-            className={styles.chip}
+          // mirror the Apply button's Secondary (outlined green pill) so the
+          // discussion entry sits one clear level below it
+          <Button
+            borderColor="green"
+            textColor="green"
+            borderWidth="sm"
+            size={['100%', '3rem']}
             onClick={openDialog}
             aria-haspopup="dialog"
           >
-            <span>
-              💬{' '}
+            <TextIcon size={16} weight="normal">
               <FormattedMessage
                 defaultMessage="Discussion"
                 id="2/u1aP"
                 description="src/views/CampaignDetail/Discussion"
               />
               {totalCount > 0 && (
-                <span className={styles.count}>{totalCount}</span>
+                <span className={styles.count}> {totalCount}</span>
               )}
-            </span>
-            <span className={styles.chevron}>›</span>
-          </button>
+            </TextIcon>
+          </Button>
         )}
       </DiscussionDialog>
     )
