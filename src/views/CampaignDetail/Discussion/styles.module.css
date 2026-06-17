@@ -10,7 +10,8 @@
 }
 
 .title {
-  font-size: var(--text16);
+  /* match the "參與者" (SideParticipants) section title — same rail level */
+  font-size: var(--text20);
   font-weight: var(--font-medium);
 }
 
@@ -18,6 +19,24 @@
   margin-left: var(--sp4);
   font-weight: var(--font-normal);
   color: var(--color-grey);
+}
+
+/* mobile one-line entry button: keep it from crowding the apply button above */
+.chipEntry {
+  margin-top: var(--sp12);
+}
+
+/* full discussion dialog body: widen the panel from the default `small`
+   (375px) to the design-system dialog `medium` (480px) so avatars + threaded
+   comments aren't cramped; ≤sm it's still a full-width bottom sheet */
+.dialogBody {
+  padding: var(--sp16);
+
+  @media (--sm-up) {
+    width: 30rem; /* 480px (incl. padding) — DS dialog `medium` */
+    max-width: calc(100vw - var(--sp32)); /* keep a 16px gutter at 463–480px */
+    padding: 0 var(--sp20);
+  }
 }
 
 .hint {
@@ -34,27 +53,18 @@
   display: flex;
   flex-direction: column;
   gap: var(--sp16);
+
+  /* cap the height so a busy discussion scrolls instead of pushing the
+     participants list further down the rail; scroll without visible bars */
+  max-height: 20rem;
   padding: 0;
   margin: var(--sp12) 0;
+  overflow: hidden auto;
   list-style: none;
-}
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 
-/* mobile one-line entry */
-.chip {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  padding: var(--sp12) var(--sp16);
-  font-size: var(--text14);
-  font-weight: var(--font-medium);
-  color: var(--color-matters-green);
-  cursor: pointer;
-  background: var(--color-green-lighter);
-  border: 1px solid var(--color-line-matters-green-light);
-  border-radius: var(--sp8);
-}
-
-.chevron {
-  color: var(--color-grey);
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }

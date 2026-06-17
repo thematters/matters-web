@@ -63,9 +63,11 @@ export const CircleCommentContent = ({
   const { content, state } = comment
   const isBlocked = comment.author?.isBlocked
 
-  // campaign discussion: collapse long comments after fewer lines (tunable),
-  // since they are capped at 240 chars and would never hit the default of 10
-  const expandLimit = type === 'campaignDiscussion' ? 4 : limit
+  // campaign discussion: clamp each comment to 2 lines, then expand-only (no
+  // collapse, like article comments) via the rich path — keeps the font
+  // consistent between the clamped and expanded states
+  const isCampaignDiscussion = type === 'campaignDiscussion'
+  const expandLimit = isCampaignDiscussion ? 2 : limit
 
   const contentClasses = classNames({
     [styles.content]: true,
@@ -104,6 +106,9 @@ export const CircleCommentContent = ({
           isRichShow={isRichShow}
           bgColor={bgColor}
           textIndent={textIndent}
+          // match the "展開" button font to the comment text (14px for campaign
+          // discussion); leave other comment types untouched
+          size={isCampaignDiscussion ? size : undefined}
         >
           <section
             className={`${contentClasses} u-content-comment`}

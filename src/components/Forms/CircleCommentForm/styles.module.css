@@ -16,6 +16,20 @@
   justify-content: flex-end;
 }
 
+/* campaign-discussion variant: the footer (counter + submit) sits inside the
+   editor box, bottom-right */
+.contentBoxed {
+  margin-bottom: 0;
+}
+
+.inlineFooter {
+  display: flex;
+  gap: var(--sp8);
+  align-items: center;
+  justify-content: flex-end;
+  margin-top: var(--sp8);
+}
+
 .counter {
   font-size: var(--text12);
   color: var(--color-grey);

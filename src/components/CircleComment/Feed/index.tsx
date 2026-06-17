@@ -97,7 +97,7 @@ const BaseCommentFeed = ({
           <CircleCommentContent
             comment={comment}
             type={type}
-            size={15}
+            size={type === 'campaignDiscussion' ? 14 : 15}
             limit={17}
           />
         </Media>
@@ -105,7 +105,7 @@ const BaseCommentFeed = ({
           <CircleCommentContent
             comment={comment}
             type={type}
-            size={15}
+            size={type === 'campaignDiscussion' ? 14 : 15}
             limit={13}
           />
         </Media>

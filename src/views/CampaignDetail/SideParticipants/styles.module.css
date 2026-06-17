@@ -1,4 +1,13 @@
 .participants {
+  /* dashed top rule marking the seam from the discussion module above; uses
+     the same colour/style as the article-feed list separators (#ddd dashed)
+     so the two rules match. top gap comes from the discussion module's own
+     padding-bottom; padding-top gives the gap below the rule */
+  @mixin border-top-grey-light;
+
+  padding-top: var(--sp16);
+  border-top-style: dashed;
+
   & .header {
     @mixin flex-center-space-between;
 
