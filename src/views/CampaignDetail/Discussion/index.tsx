@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react'
+import { useContext } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import { filterComments } from '~/common/utils'
@@ -11,13 +11,10 @@ import {
   usePublicQuery,
   ViewerContext,
 } from '~/components'
-import {
-  CampaignDiscussionCommentsQuery,
-  CampaignDiscussionViewerQuery,
-} from '~/gql/graphql'
+import { CampaignDiscussionCommentsQuery } from '~/gql/graphql'
 
 import DiscussionDialog from './Dialog'
-import { CAMPAIGN_DISCUSSION_COMMENTS, CAMPAIGN_DISCUSSION_VIEWER } from './gql'
+import { CAMPAIGN_DISCUSSION_COMMENTS } from './gql'
 import styles from './styles.module.css'
 
 type DiscussionConnection = NonNullable<
@@ -45,7 +42,7 @@ const CampaignDiscussion = ({
   const viewer = useContext(ViewerContext)
   const intl = useIntl()
 
-  const { data, refetch, client } =
+  const { data, refetch } =
     usePublicQuery<CampaignDiscussionCommentsQuery>(
       CAMPAIGN_DISCUSSION_COMMENTS,
       { variables: { shortHash, first: PREVIEW_COUNT } },
@@ -61,31 +58,9 @@ const CampaignDiscussion = ({
     (campaign?.discussion?.edges || []).map(({ node }) => node)
   ).slice(0, PREVIEW_COUNT)
 
-  // viewer's participation decides whether they may post
-  const [canComment, setCanComment] = useState(false)
-  useEffect(() => {
-    if (!viewer.isAuthed) {
-      setCanComment(false)
-      return
-    }
-    ;(async () => {
-      try {
-        const { data: viewerData } =
-          await client.query<CampaignDiscussionViewerQuery>({
-            query: CAMPAIGN_DISCUSSION_VIEWER,
-            fetchPolicy: 'network-only',
-            variables: { shortHash },
-          })
-        const c =
-          viewerData?.campaign?.__typename === 'WritingChallenge'
-            ? viewerData.campaign
-            : undefined
-        setCanComment(c?.application?.state === 'succeeded')
-      } catch {
-        setCanComment(false)
-      }
-    })()
-  }, [viewer.id])
+  // the discussion is open to every logged-in user (relaxed from
+  // participant-only); the server enforces the same rule
+  const canComment = viewer.isAuthed
 
   const submitCallback = () => {
     toast.info({
@@ -171,7 +146,7 @@ const CampaignDiscussion = ({
                 comment={comment}
                 type="campaignDiscussion"
                 hasLink
-                hasUpvote={false}
+                hasUpvote
                 hasDownvote={false}
                 hasPin={false}
               />

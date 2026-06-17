@@ -150,7 +150,7 @@ const BaseDiscussionDialog = ({
                       comment={comment}
                       type="campaignDiscussion"
                       hasLink
-                      hasUpvote={false}
+                      hasUpvote
                       hasDownvote={false}
                       hasPin={false}
                     />
