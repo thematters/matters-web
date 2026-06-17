@@ -43,6 +43,8 @@ export interface CircleCommentFormProps {
   submitCallback?: () => void
 
   placeholder?: string
+  // render the submit footer inside the editor box (campaign discussion look)
+  inlineFooter?: boolean
 }
 
 export const CircleCommentForm: React.FC<CircleCommentFormProps> = ({
@@ -57,6 +59,7 @@ export const CircleCommentForm: React.FC<CircleCommentFormProps> = ({
   submitCallback,
 
   placeholder,
+  inlineFooter = false,
 }) => {
   const viewer = useContext(ViewerContext)
   const intl = useIntl()
@@ -150,6 +153,38 @@ export const CircleCommentForm: React.FC<CircleCommentFormProps> = ({
     handleSubmit()
   })
 
+  const footer = (
+    <footer className={inlineFooter ? styles.inlineFooter : styles.footer}>
+      {maxLength !== undefined && (
+        <span
+          className={styles.counter}
+          data-over={isOverLength ? 'true' : undefined}
+        >
+          {contentLength} / {maxLength}
+        </span>
+      )}
+      <Button
+        type="submit"
+        form={formStorageKey}
+        size={[null, '2rem']}
+        spacing={[0, 16]}
+        bgColor="green"
+        disabled={isSubmitting || !isValid}
+      >
+        <TextIcon
+          color="white"
+          size={15}
+          weight="medium"
+          icon={isSubmitting && <Spinner size={14} />}
+        >
+          {isSubmitting ? null : (
+            <Translate zh_hant="送出" zh_hans="送出" en="Send" />
+          )}
+        </TextIcon>
+      </Button>
+    </footer>
+  )
+
   return (
     <form
       className={styles.form}
@@ -161,7 +196,9 @@ export const CircleCommentForm: React.FC<CircleCommentFormProps> = ({
         description: 'src/components/Forms/CommentForm/index.tsx',
       })}
     >
-      <section className={styles.content}>
+      <section
+        className={`${styles.content} ${inlineFooter ? styles.contentBoxed : ''}`}
+      >
         <CommentEditor
           content={content}
           update={onUpdate}
@@ -171,37 +208,10 @@ export const CircleCommentForm: React.FC<CircleCommentFormProps> = ({
             setEditor(editor)
           }}
         />
+        {inlineFooter && footer}
       </section>
 
-      <footer className={styles.footer}>
-        {maxLength !== undefined && (
-          <span
-            className={styles.counter}
-            data-over={isOverLength ? 'true' : undefined}
-          >
-            {contentLength} / {maxLength}
-          </span>
-        )}
-        <Button
-          type="submit"
-          form={formStorageKey}
-          size={[null, '2rem']}
-          spacing={[0, 16]}
-          bgColor="green"
-          disabled={isSubmitting || !isValid}
-        >
-          <TextIcon
-            color="white"
-            size={15}
-            weight="medium"
-            icon={isSubmitting && <Spinner size={14} />}
-          >
-            {isSubmitting ? null : (
-              <Translate zh_hant="送出" zh_hans="送出" en="Send" />
-            )}
-          </TextIcon>
-        </Button>
-      </footer>
+      {!inlineFooter && footer}
     </form>
   )
 }

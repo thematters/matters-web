@@ -63,9 +63,11 @@ export const CircleCommentContent = ({
   const { content, state } = comment
   const isBlocked = comment.author?.isBlocked
 
-  // campaign discussion: collapse long comments after fewer lines (tunable),
-  // since they are capped at 240 chars and would never hit the default of 10
-  const expandLimit = type === 'campaignDiscussion' ? 4 : limit
+  // campaign discussion: collapse each comment to 2 lines (then 展開/收回),
+  // and use the plain (non-rich) expand path so the collapse button shows
+  const isCampaignDiscussion = type === 'campaignDiscussion'
+  const expandLimit = isCampaignDiscussion ? 2 : limit
+  const effectiveIsRichShow = isCampaignDiscussion ? false : isRichShow
 
   const contentClasses = classNames({
     [styles.content]: true,
@@ -101,7 +103,7 @@ export const CircleCommentContent = ({
         <Expandable
           content={content}
           limit={expandLimit}
-          isRichShow={isRichShow}
+          isRichShow={effectiveIsRichShow}
           bgColor={bgColor}
           textIndent={textIndent}
         >

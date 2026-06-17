@@ -116,6 +116,7 @@ const BaseDiscussionDialog = ({
             <CircleCommentForm
               campaignId={campaignId}
               type="campaignDiscussion"
+              inlineFooter
               placeholder={intl.formatMessage({
                 defaultMessage: 'Share your thoughts with other participants',
                 id: 'dHVTYM',

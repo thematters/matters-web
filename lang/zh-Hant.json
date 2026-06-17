@@ -85,7 +85,7 @@
     "defaultMessage": "綁定"
   },
   "/0OJlF": {
-    "defaultMessage": "No discussion yet",
+    "defaultMessage": "還沒有人留言",
     "description": "src/views/CampaignDetail/Discussion"
   },
   "/5OvMK": {
@@ -249,7 +249,7 @@
     "defaultMessage": "標籤"
   },
   "1HLo+Y": {
-    "defaultMessage": "Quote wall"
+    "defaultMessage": "金句牆"
   },
   "1PORwh": {
     "defaultMessage": "僅作者本人可見封存作品，",
@@ -297,7 +297,7 @@
     "defaultMessage": "你無權進行此操作"
   },
   "2/u1aP": {
-    "defaultMessage": "Discussion",
+    "defaultMessage": "討論區",
     "description": "src/views/CampaignDetail/Discussion"
   },
   "202PEj": {
@@ -417,7 +417,7 @@
     "defaultMessage": "Violet"
   },
   "3jmniZ": {
-    "defaultMessage": "Retract"
+    "defaultMessage": "撤下"
   },
   "3kbIhS": {
     "defaultMessage": "未命名"
@@ -1129,7 +1129,7 @@
     "description": "src/components/CircleComment/DropdownActions/PinButton.tsx"
   },
   "Ds+7ro": {
-    "defaultMessage": "Full wall →"
+    "defaultMessage": "看全部 →"
   },
   "DtO278": {
     "defaultMessage": "檢測到近期你的多篇文章被推薦到相關頻道，它們有可能不會同時出現"
@@ -1265,7 +1265,7 @@
     "defaultMessage": "成為圍爐一員，一起談天說地"
   },
   "Fx9x/w": {
-    "defaultMessage": "Full wall / Museum →"
+    "defaultMessage": "完整金句牆／博物館 →"
   },
   "FxrSCh": {
     "defaultMessage": "ID 設置後無法修改，確認使用 {id} 作為 Matters ID 嗎？",
@@ -1476,7 +1476,7 @@
     "defaultMessage": "作者尚未綁定 LikeCoin 錢包"
   },
   "JBnAOd": {
-    "defaultMessage": "🔀 Shuffle"
+    "defaultMessage": "🔀 換一批"
   },
   "JCZFqh": {
     "defaultMessage": "現在報名，即可開始書寫年度問卷，活動細則可查看公告"
@@ -2092,7 +2092,7 @@
     "defaultMessage": "臨時密碼已過期，請嘗試重新發送"
   },
   "TIWVxK": {
-    "defaultMessage": "Quote retracted from the wall"
+    "defaultMessage": "已從金句牆撤下"
   },
   "TInwt3": {
     "defaultMessage": "關閉評論"
@@ -2126,7 +2126,7 @@
     "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
   },
   "Thr8QX": {
-    "defaultMessage": "To article ↩"
+    "defaultMessage": "回原文 ↩"
   },
   "TjWWxF": {
     "defaultMessage": "廣播已送出",
@@ -2251,7 +2251,7 @@
     "description": "src/components/Forms/CreateCircleForm/Init.tsx"
   },
   "VyV+WO": {
-    "defaultMessage": "Only participants can join the discussion.",
+    "defaultMessage": "登入後即可參與討論",
     "description": "src/views/CampaignDetail/Discussion"
   },
   "VzzYJk": {
@@ -2451,7 +2451,7 @@
     "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
   },
   "Z82+dw": {
-    "defaultMessage": "Confirm retract"
+    "defaultMessage": "確認撤下"
   },
   "ZAoAcG": {
     "defaultMessage": "Threads, Mastodon, Misskey 這些地方的粉絲也會看到"
@@ -2581,7 +2581,7 @@
     "defaultMessage": "輸入簡單明瞭的標題"
   },
   "b8LMpq": {
-    "defaultMessage": "View all {count} comments",
+    "defaultMessage": "查看全部 {count} 則留言",
     "description": "src/views/CampaignDetail/Discussion"
   },
   "b8ogKp": {
@@ -2719,7 +2719,7 @@
     "description": "src/views/CampaignDetail/Apply/Button/index.tsx"
   },
   "dHVTYM": {
-    "defaultMessage": "Share your thoughts with other participants",
+    "defaultMessage": "和其他參與者分享想法…",
     "description": "src/views/CampaignDetail/Discussion"
   },
   "dK7Dnj": {
@@ -2818,7 +2818,7 @@
     "defaultMessage": "自定義網址名稱"
   },
   "epZb9X": {
-    "defaultMessage": "View all {count} quotes"
+    "defaultMessage": "查看全部 {count} 則金句"
   },
   "erE5/4": {
     "defaultMessage": "互相追蹤",
@@ -2896,7 +2896,7 @@
     "defaultMessage": "選擇日期"
   },
   "fyKoL1": {
-    "defaultMessage": "Comment sent"
+    "defaultMessage": "留言已送出"
   },
   "g//2O2": {
     "defaultMessage": "取消闔上",
@@ -3050,7 +3050,7 @@
     "defaultMessage": "作者保留所有權利"
   },
   "iSjuti": {
-    "defaultMessage": "Failed to retract"
+    "defaultMessage": "撤下失敗"
   },
   "iTcMqz": {
     "defaultMessage": "月色之下，夢想即將實現。月之夢徽章紀念你曾參與「遊牧者計畫」。",

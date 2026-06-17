@@ -34,8 +34,13 @@
   display: flex;
   flex-direction: column;
   gap: var(--sp16);
+
+  /* cap the height so a busy discussion scrolls instead of pushing the
+     participants list further down the rail */
+  max-height: 20rem;
   padding: 0;
   margin: var(--sp12) 0;
+  overflow-y: auto;
   list-style: none;
 }
 
