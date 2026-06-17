@@ -106,6 +106,9 @@ export const CircleCommentContent = ({
           isRichShow={isRichShow}
           bgColor={bgColor}
           textIndent={textIndent}
+          // match the "展開" button font to the comment text (14px for campaign
+          // discussion); leave other comment types untouched
+          size={isCampaignDiscussion ? size : undefined}
         >
           <section
             className={`${contentClasses} u-content-comment`}
