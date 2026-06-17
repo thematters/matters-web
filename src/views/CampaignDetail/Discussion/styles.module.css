@@ -10,7 +10,8 @@
 }
 
 .title {
-  font-size: var(--text16);
+  /* match the "參與者" (SideParticipants) section title — same rail level */
+  font-size: var(--text20);
   font-weight: var(--font-medium);
 }
 
