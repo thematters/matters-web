@@ -146,18 +146,16 @@ const CampaignDetail = () => {
 
       <InfoHeader campaign={campaign} />
 
-      {/* mobile: the aside is hidden, so discussion + participants shrink to
-          one-line chips under the header (discussion on top, matching the
-          desktop aside order); tapping either opens its dialog/drawer */}
+      {/* mobile: the aside is hidden, so the discussion shrinks to a one-line
+          entry button under the header; tapping it opens the full dialog.
+          (participants already show as an avatar row inside InfoHeader, so we
+          don't repeat them here) */}
       {!isMdUp && (
-        <>
-          <DynamicDiscussion
-            campaignId={campaign.id}
-            shortHash={campaign.shortHash}
-            entry="chip"
-          />
-          <DynamicSideParticipants campaign={campaign} entry="chip" />
-        </>
+        <DynamicDiscussion
+          campaignId={campaign.id}
+          shortHash={campaign.shortHash}
+          entry="chip"
+        />
       )}
 
       {/* Option A: the quote wall is a pull-quote band in the centre column,

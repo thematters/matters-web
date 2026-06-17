@@ -21,6 +21,11 @@
   color: var(--color-grey);
 }
 
+/* mobile one-line entry button: keep it from crowding the apply button above */
+.chipEntry {
+  margin-top: var(--sp12);
+}
+
 .hint {
   padding: var(--sp12);
   margin-bottom: var(--sp12);

@@ -39,7 +39,13 @@
 
   flex-wrap: wrap;
   row-gap: var(--sp8);
-  margin-top: var(--sp24);
+
+  /* tighter gap under the (half-height) cover on mobile; roomier on desktop */
+  margin-top: var(--sp12);
+
+  @media (--md-up) {
+    margin-top: var(--sp24);
+  }
 
   & .name {
     font-size: var(--text18);

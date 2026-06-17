@@ -83,6 +83,7 @@ const CampaignDiscussion = ({
           // mirror the Apply button's Secondary (outlined green pill) so the
           // discussion entry sits one clear level below it
           <Button
+            className={styles.chipEntry}
             borderColor="green"
             textColor="green"
             borderWidth="sm"
@@ -97,7 +98,7 @@ const CampaignDiscussion = ({
                 description="src/views/CampaignDetail/Discussion"
               />
               {totalCount > 0 && (
-                <span className={styles.count}> {totalCount}</span>
+                <span className={styles.count}>{totalCount}</span>
               )}
             </TextIcon>
           </Button>
