@@ -36,12 +36,18 @@
   gap: var(--sp16);
 
   /* cap the height so a busy discussion scrolls instead of pushing the
-     participants list further down the rail */
+     participants list further down the rail; scroll without visible bars */
   max-height: 20rem;
   padding: 0;
   margin: var(--sp12) 0;
-  overflow-y: auto;
+  overflow: hidden auto;
   list-style: none;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 /* mobile one-line entry */

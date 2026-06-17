@@ -148,7 +148,7 @@ const BaseFooterActions = ({
           />
         )}
 
-        {hasUpvote && <UpvoteButton {...buttonProps} />}
+        {hasUpvote && <UpvoteButton type={type} {...buttonProps} />}
 
         {hasDownvote && <DownvoteButton {...buttonProps} />}
       </section>
