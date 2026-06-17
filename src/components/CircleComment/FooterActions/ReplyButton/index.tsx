@@ -44,9 +44,6 @@ const fragments = {
             id
           }
         }
-        ... on WritingChallenge {
-          id
-        }
       }
       parentComment {
         id
@@ -89,7 +86,6 @@ const ReplyButton = ({
 
   const { id, parentComment, author, node } = comment
   const circle = node.__typename === 'Circle' ? node : undefined
-  const campaign = node.__typename === 'WritingChallenge' ? node : undefined
 
   const submitCallback = () => {
     if (replySubmitCallback) {
@@ -130,8 +126,7 @@ const ReplyButton = ({
 
   return (
     <CircleCommentFormDialog
-      circleId={circle?.id}
-      campaignId={campaign?.id}
+      circleId={circle?.id || ''}
       type={type}
       replyToId={id}
       parentId={parentComment?.id || id}

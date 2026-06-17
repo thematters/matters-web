@@ -1,7 +1,6 @@
 import dynamic from 'next/dynamic'
 import { useContext, useEffect } from 'react'
 
-import { BREAKPOINTS } from '~/common/enums'
 import { toPath } from '~/common/utils'
 import {
   EmptyLayout,
@@ -10,7 +9,6 @@ import {
   Layout,
   SpinnerBlock,
   Throw404,
-  useMediaQuery,
   usePublicQuery,
   useRoute,
   ViewerContext,
@@ -28,16 +26,6 @@ const DynamicOtherCampaigns = dynamic(() => import('./OtherCampaigns'), {
   ssr: false,
 })
 
-const DynamicDiscussion = dynamic(() => import('./Discussion'), {
-  loading: () => <SpinnerBlock />,
-  ssr: false,
-})
-
-const DynamicQuoteWall = dynamic(() => import('./QuoteWall'), {
-  loading: () => <SpinnerBlock />,
-  ssr: false,
-})
-
 const DynamicSideParticipants = dynamic(() => import('./SideParticipants'), {
   loading: () => <SpinnerBlock />,
   ssr: false,
@@ -48,9 +36,6 @@ const CampaignDetail = () => {
   const { lang } = useContext(LanguageContext)
   const { getQuery } = useRoute()
   const shortHash = getQuery('shortHash')
-  // desktop (md-up): discussion in the right aside; mobile: in the main column.
-  // rendered once (not double-mounted) to avoid duplicate comment-form ids.
-  const isMdUp = useMediaQuery(`(min-width: ${BREAKPOINTS.MD}px)`)
 
   const { data, loading, error, client } =
     usePublicQuery<CampaignDetailPublicQuery>(
@@ -109,17 +94,6 @@ const CampaignDetail = () => {
         <>
           {campaign.showOther && <DynamicOtherCampaigns id={campaign.id} />}
           <DynamicSideParticipants campaign={campaign} />
-          {/* desktop: quote wall + discussion sit in the right aside, below
-              the avatars (quote wall first — it's the lighter "trailer") */}
-          {isMdUp && (
-            <>
-              <DynamicQuoteWall shortHash={campaign.shortHash} />
-              <DynamicDiscussion
-                campaignId={campaign.id}
-                shortHash={campaign.shortHash}
-              />
-            </>
-          )}
           {campaign.showAd && <Billboard />}
         </>
       }
@@ -148,20 +122,6 @@ const CampaignDetail = () => {
       />
 
       <InfoHeader campaign={campaign} />
-
-      {/* mobile: the aside is hidden, so the quote wall + discussion shrink to
-          one-line entries under the header (still on the first screen);
-          tapping either opens its full dialog */}
-      {!isMdUp && (
-        <>
-          <DynamicQuoteWall shortHash={campaign.shortHash} entry="chip" />
-          <DynamicDiscussion
-            campaignId={campaign.id}
-            shortHash={campaign.shortHash}
-            entry="chip"
-          />
-        </>
-      )}
 
       <ArticleFeeds campaign={campaign} />
     </Layout.Main>
