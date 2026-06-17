@@ -26,6 +26,19 @@
   margin-top: var(--sp12);
 }
 
+/* full discussion dialog body: widen the panel from the default `small`
+   (375px) to the design-system dialog `medium` (480px) so avatars + threaded
+   comments aren't cramped; ≤sm it's still a full-width bottom sheet */
+.dialogBody {
+  padding: var(--sp16);
+
+  @media (--sm-up) {
+    width: 30rem; /* 480px (incl. padding) — DS dialog `medium` */
+    max-width: calc(100vw - var(--sp32)); /* keep a 16px gutter at 463–480px */
+    padding: 0 var(--sp20);
+  }
+}
+
 .hint {
   padding: var(--sp12);
   margin-bottom: var(--sp12);

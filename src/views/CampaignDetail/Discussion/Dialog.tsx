@@ -89,7 +89,7 @@ const BaseDiscussionDialog = ({
     <>
       {children({ openDialog })}
 
-      <Dialog isOpen={show} onDismiss={closeDialog}>
+      <Dialog isOpen={show} onDismiss={closeDialog} fixedWidth={false}>
         <Dialog.Header
           title={
             <>
@@ -111,55 +111,57 @@ const BaseDiscussionDialog = ({
           }
         />
 
-        <Dialog.Content>
-          {canComment && (
-            <CircleCommentForm
-              campaignId={campaignId}
-              type="campaignDiscussion"
-              inlineFooter
-              placeholder={intl.formatMessage({
-                defaultMessage: 'Share your thoughts with other participants',
-                id: 'dHVTYM',
-                description: 'src/views/CampaignDetail/Discussion',
-              })}
-              submitCallback={submitCallback}
-            />
-          )}
+        <Dialog.Content noSpacing>
+          <section className={styles.dialogBody}>
+            {canComment && (
+              <CircleCommentForm
+                campaignId={campaignId}
+                type="campaignDiscussion"
+                inlineFooter
+                placeholder={intl.formatMessage({
+                  defaultMessage: 'Share your thoughts with other participants',
+                  id: 'dHVTYM',
+                  description: 'src/views/CampaignDetail/Discussion',
+                })}
+                submitCallback={submitCallback}
+              />
+            )}
 
-          {loading && <SpinnerBlock />}
+            {loading && <SpinnerBlock />}
 
-          {!loading && comments.length <= 0 && (
-            <EmptyComment
-              description={intl.formatMessage({
-                defaultMessage: 'No discussion yet',
-                id: '/0OJlF',
-                description: 'src/views/CampaignDetail/Discussion',
-              })}
-            />
-          )}
+            {!loading && comments.length <= 0 && (
+              <EmptyComment
+                description={intl.formatMessage({
+                  defaultMessage: 'No discussion yet',
+                  id: '/0OJlF',
+                  description: 'src/views/CampaignDetail/Discussion',
+                })}
+              />
+            )}
 
-          {!loading && comments.length > 0 && (
-            <InfiniteScroll
-              hasNextPage={!!pageInfo?.hasNextPage}
-              loadMore={loadMore}
-              eof
-            >
-              <List spacing={['xloose', 0]}>
-                {comments.map((comment) => (
-                  <List.Item key={comment.id}>
-                    <CircleThreadComment
-                      comment={comment}
-                      type="campaignDiscussion"
-                      hasLink
-                      hasUpvote
-                      hasDownvote={false}
-                      hasPin={false}
-                    />
-                  </List.Item>
-                ))}
-              </List>
-            </InfiniteScroll>
-          )}
+            {!loading && comments.length > 0 && (
+              <InfiniteScroll
+                hasNextPage={!!pageInfo?.hasNextPage}
+                loadMore={loadMore}
+                eof
+              >
+                <List spacing={['xloose', 0]}>
+                  {comments.map((comment) => (
+                    <List.Item key={comment.id}>
+                      <CircleThreadComment
+                        comment={comment}
+                        type="campaignDiscussion"
+                        hasLink
+                        hasUpvote
+                        hasDownvote={false}
+                        hasPin={false}
+                      />
+                    </List.Item>
+                  ))}
+                </List>
+              </InfiniteScroll>
+            )}
+          </section>
         </Dialog.Content>
       </Dialog>
     </>
