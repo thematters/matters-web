@@ -8,6 +8,7 @@ import { OPEN_COMMENT_LIST_DRAWER } from '~/common/enums'
 import { isElementInViewport } from '~/common/utils'
 import { analytics } from '~/common/utils'
 import {
+  canPostQuoteToWall,
   Icon,
   isSevenDayBookArticle,
   QuoteImageDialog,
@@ -234,8 +235,8 @@ export const TextSelectionPopover = ({
       shareLink={typeof window !== 'undefined' ? window.location.href : ''}
       isSevenDayBook={isSevenDayBookArticle(article)}
       articleId={article?.id}
-      // 只有活動文章可上牆（伺服器會再驗證）
-      canPostToWall={!!article?.campaigns?.length}
+      // 只有「開啟金句牆」的活動文章可上牆（後端 enableQuoteWall；伺服器會再驗證）
+      canPostToWall={canPostQuoteToWall(article)}
     >
       {({ openDialog }) => (
         <button

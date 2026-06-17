@@ -53,29 +53,16 @@
   color: var(--color-matters-green);
 }
 
-/* sticky-note card */
+/* pull-quote card: a left green rule, no fill (Option A — uniform, not the
+   old random sticky-note colours) */
 .card {
   display: flex;
   flex-direction: column;
   gap: var(--sp4);
-  padding: var(--sp12);
+  padding-left: var(--sp16);
   margin: 0 0 var(--sp12);
-  background: var(--color-yellow-lighter);
-  border-radius: var(--sp8);
-  box-shadow: 0 1px 3px rgb(0 0 0 / 8%);
+  border-left: 2px solid var(--color-matters-green);
   break-inside: avoid;
-}
-
-.card[data-variant='1'] {
-  background: var(--color-green-lighter);
-}
-
-.card[data-variant='2'] {
-  background: var(--color-red-lighter);
-}
-
-.card[data-variant='3'] {
-  background: var(--color-grey-lighter);
 }
 
 .quoteLink {
@@ -88,8 +75,8 @@
   margin: 0;
   overflow: hidden;
   -webkit-line-clamp: 3;
-  font-size: var(--text14);
-  line-height: 1.5;
+  font-size: var(--text16);
+  line-height: 1.6;
   color: var(--color-grey-darkest);
   -webkit-box-orient: vertical;
 }
@@ -133,4 +120,27 @@
 
 .chevron {
   color: var(--color-grey);
+}
+
+/* centre-column pull-quote band (Option A) */
+.band {
+  padding: var(--sp24) 0 var(--sp8);
+}
+
+.bandRow {
+  display: flex;
+  gap: var(--sp24);
+  padding-bottom: var(--sp4);
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.bandRow::-webkit-scrollbar {
+  display: none;
+}
+
+.bandRow > .card {
+  flex: 0 0 14.375rem; /* 230px */
+  margin: 0;
 }

@@ -33,6 +33,9 @@ const DynamicParticipantsDrawer = dynamic(
 type SideParticipantsProps = {
   campaign: SideParticipantsCampaignPublicFragment &
     Partial<SideParticipantsCampaignPrivateFragment>
+  // 'module': avatar wall in the desktop right aside. 'chip': one-line entry
+  // (mobile main column) that opens the participants drawer.
+  entry?: 'module' | 'chip'
 }
 
 const Participant = ({
@@ -68,7 +71,10 @@ const Participant = ({
   )
 }
 
-const SideParticipants = ({ campaign }: SideParticipantsProps) => {
+const SideParticipants = ({
+  campaign,
+  entry = 'module',
+}: SideParticipantsProps) => {
   const viewer = useContext(ViewerContext)
   const edges = campaign.sideParticipants.edges
   const totalCount = campaign.sideParticipants.totalCount
@@ -116,6 +122,38 @@ const SideParticipants = ({ campaign }: SideParticipantsProps) => {
 
   if (filteredEdges.length <= 0) {
     return null
+  }
+
+  // mobile: one-line entry that opens the participants drawer
+  if (entry === 'chip') {
+    return (
+      <>
+        <button
+          type="button"
+          className={styles.chip}
+          onClick={toggleDrawer}
+          aria-haspopup="dialog"
+        >
+          <span className={styles.chipLeft}>
+            <span className={styles.stack}>
+              {filteredEdges.slice(0, 3).map(({ node, cursor }) => (
+                <Avatar key={cursor} user={node} size={24} />
+              ))}
+            </span>
+            <span>
+              <FormattedMessage defaultMessage="Participants" id="zx0myy" />
+              <span className={styles.chipCount}>{totalCount}</span>
+            </span>
+          </span>
+          <span className={styles.chevron}>›</span>
+        </button>
+        <DynamicParticipantsDrawer
+          isOpen={openDrawer}
+          onClose={toggleDrawer}
+          totalParticipants={totalCount}
+        />
+      </>
+    )
   }
 
   return (

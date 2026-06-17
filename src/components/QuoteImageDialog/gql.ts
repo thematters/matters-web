@@ -25,6 +25,8 @@ export const fragments = {
           shortHash
           ... on WritingChallenge {
             id
+            # 是否開放金句牆（後端 per-campaign 旗標，控管「上牆」）
+            enableQuoteWall
             nameZhHant: name(input: { language: zh_hant })
             nameZhHans: name(input: { language: zh_hans })
             nameEn: name(input: { language: en })
@@ -51,4 +53,18 @@ export const isSevenDayBookArticle = (
     const names = [campaign.nameZhHant, campaign.nameZhHans]
     return names.some((n) => !!n && n.includes('七日書'))
   })
+}
+
+/**
+ * 判斷文章能否「上牆」：所屬活動需開啟金句牆（後端 `enableQuoteWall` 旗標）。
+ * 取代舊的「任何活動文章皆可上牆」，改由 per-campaign 旗標控管（資料驅動）。
+ */
+export const canPostQuoteToWall = (
+  article?: QuoteImageArticleFragment | null
+): boolean => {
+  if (!article?.campaigns?.length) return false
+  return article.campaigns.some(
+    ({ campaign }) =>
+      campaign?.__typename === 'WritingChallenge' && !!campaign.enableQuoteWall
+  )
 }
