@@ -37,7 +37,8 @@ import {
   SeedBadge,
   TraveloggersBadge,
 } from '../Badges'
-import CircleWidget from '../CircleWidget'
+// FEATURE IS SUNSETTING: circle entry on aside user profile is hidden
+// import CircleWidget from '../CircleWidget'
 import DropdownActions from '../DropdownActions'
 import { FollowersDialog } from '../FollowersDialog'
 import { FollowingDialog } from '../FollowingDialog'
@@ -114,7 +115,8 @@ export const AsideUserProfile = () => {
   }
 
   const badges = user.info.badges || []
-  const circles = user.ownCircles || []
+  // FEATURE IS SUNSETTING: circle entry on aside user profile is hidden
+  // const circles = user.ownCircles || []
   const hasSeedBadge = badges.some((b) => b.type === 'seed')
   const hasArchitectBadge = badges.some((b) => b.type === 'architect')
   const hasGoldenMotorBadge = badges.some((b) => b.type === 'golden_motor')
@@ -374,11 +376,12 @@ export const AsideUserProfile = () => {
         )}
       </section>
 
-      {isInUserPage && (
+      {/* FEATURE IS SUNSETTING: circle entry on aside user profile is hidden */}
+      {/* {isInUserPage && (
         <footer className={styles.footer}>
           <CircleWidget circles={circles} isMe={isMe} />
         </footer>
-      )}
+      )} */}
     </section>
   )
 }
