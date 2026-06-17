@@ -6,6 +6,7 @@ import { toPath } from '~/common/utils'
 import {
   EmptyLayout,
   Head,
+  HorizontalRule,
   LanguageContext,
   Layout,
   SpinnerBlock,
@@ -111,10 +112,14 @@ const CampaignDetail = () => {
           {/* Option A: discussion sits on top of the right aside, participants
               below it (quote wall moved to the centre column as a band) */}
           {isMdUp && (
-            <DynamicDiscussion
-              campaignId={campaign.id}
-              shortHash={campaign.shortHash}
-            />
+            <>
+              <DynamicDiscussion
+                campaignId={campaign.id}
+                shortHash={campaign.shortHash}
+              />
+              {/* dashed rule to mark the seam between the two aside sections */}
+              <HorizontalRule />
+            </>
           )}
           <DynamicSideParticipants campaign={campaign} />
           {campaign.showAd && <Billboard />}

@@ -1,4 +1,9 @@
 .participants {
+  /* breathing room below the dashed rule that separates this section from the
+     discussion module above it (the rule's top gap comes from the discussion
+     module's own padding) */
+  margin-top: var(--sp16);
+
   & .header {
     @mixin flex-center-space-between;
 
