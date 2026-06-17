@@ -48,7 +48,16 @@ interface CampaignStageArgs {
 
 interface CommentArgs {
   id: string
-  type: 'article' | 'circleDiscussion' | 'circleBroadcast' | 'moment' // comment type: article/discussion/broadcast
+  // comment type: article/discussion/broadcast/campaignDiscussion.
+  // campaignDiscussion is included so the staging CommentType (which already
+  // exposes it) is assignable here; production omits it and stays a subset.
+  // Full campaignDiscussion routing ships with the develop release.
+  type:
+    | 'article'
+    | 'circleDiscussion'
+    | 'circleBroadcast'
+    | 'moment'
+    | 'campaignDiscussion'
   parentComment?: {
     id: string
   } | null
