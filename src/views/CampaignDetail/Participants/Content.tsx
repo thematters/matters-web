@@ -64,6 +64,12 @@ const ParticipantsContent = ({ type }: Props) => {
     return null
   }
 
+  // TEST ONLY (throwaway branch): pad participants to 55 to preview the drawer
+  const edges55 = Array.from({ length: 55 }, (_, i) => {
+    const e = edges[i % edges.length]
+    return { ...e, cursor: `${e.cursor}-pad${i}` }
+  })
+
   const isViewerApplySucceeded = campaign.application?.state === 'succeeded'
 
   const children = (
@@ -78,7 +84,7 @@ const ParticipantsContent = ({ type }: Props) => {
             />
           </List.Item>
         )}
-        {edges
+        {edges55
           .filter((e) => e.node.id !== viewer.id)
           .map(({ node, cursor }, i) => (
             <List.Item key={cursor}>
