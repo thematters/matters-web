@@ -79,6 +79,9 @@ const BaseCommentFeed = ({
           hasAvatar
           hasDisplayName
           hasUserName={hasUserName}
+          // keep name + @id on one line; in the narrow (indented) reply column
+          // they otherwise wrap to two lines and the gap looks cramped
+          nameNoWrap={type === 'campaignDiscussion'}
         />
 
         <section className={styles.right}>

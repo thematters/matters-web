@@ -168,24 +168,22 @@ const CampaignDiscussion = ({
           afterSubmit={refetch}
         >
           {({ openDialog }) => (
-            <div className={styles.viewAll}>
-              <Button
-                spacing={[8, 0]}
-                textColor="green"
-                textActiveColor="greenDark"
-                onClick={openDialog}
-                aria-haspopup="dialog"
-              >
-                <TextIcon size={14} weight="medium">
-                  <FormattedMessage
-                    defaultMessage="View all {count} comments"
-                    id="b8LMpq"
-                    description="src/views/CampaignDetail/Discussion"
-                    values={{ count: totalCount }}
-                  />
-                </TextIcon>
-              </Button>
-            </div>
+            <Button
+              spacing={[8, 0]}
+              textColor="green"
+              textActiveColor="greenDark"
+              onClick={openDialog}
+              aria-haspopup="dialog"
+            >
+              <TextIcon size={14} weight="medium">
+                <FormattedMessage
+                  defaultMessage="View all {count} comments"
+                  id="b8LMpq"
+                  description="src/views/CampaignDetail/Discussion"
+                  values={{ count: totalCount }}
+                />
+              </TextIcon>
+            </Button>
           )}
         </DiscussionDialog>
       )}

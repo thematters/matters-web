@@ -21,12 +21,6 @@
   color: var(--color-grey);
 }
 
-/* centre the "view all N comments" link under the comment previews */
-.viewAll {
-  display: flex;
-  justify-content: center;
-}
-
 /* mobile one-line entry button: keep it from crowding the apply button above */
 .chipEntry {
   margin-top: var(--sp12);
