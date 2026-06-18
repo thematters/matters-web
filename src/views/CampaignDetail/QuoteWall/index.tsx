@@ -117,7 +117,7 @@ const QuoteWall = ({ shortHash, entry = 'module' }: QuoteWallProps) => {
           <p className={styles.empty}>
             <FormattedMessage
               defaultMessage="Pick a line you love from an article and put it on the wall ✍️"
-              id="kQ2vH9"
+              id="md2Ml3"
               description="src/views/CampaignDetail/QuoteWall band empty-state prompt"
             />
           </p>

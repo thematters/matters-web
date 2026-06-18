@@ -3159,9 +3159,6 @@
   "kHMa3H": {
     "defaultMessage": "密码不一致"
   },
-  "kQ2vH9": {
-    "defaultMessage": "在文章里选一段你喜欢的话，做成金句卡片贴上墙吧 ✍️"
-  },
   "kS3vTS": {
     "defaultMessage": "Liker ID",
     "description": "src/views/Me/Settings/Misc/LikerID.tsx"
@@ -3316,6 +3313,9 @@
   "mbHf/6": {
     "defaultMessage": "已结束",
     "description": "src/views/CampaignDetail/Apply/Button/index.tsx"
+  },
+  "md2Ml3": {
+    "defaultMessage": "在文章里选一段你喜欢的话，做成金句卡片贴上墙吧 ✍️"
   },
   "me1nR+": {
     "defaultMessage": "复制地址"
