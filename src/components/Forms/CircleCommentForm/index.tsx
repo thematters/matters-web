@@ -173,7 +173,9 @@ export const CircleCommentForm: React.FC<CircleCommentFormProps> = ({
       >
         <TextIcon
           color="white"
-          size={15}
+          // match the site's comment submit buttons (ArticleCommentForm = 14);
+          // scoped so circle broadcast/discussion keep their current size
+          size={type === 'campaignDiscussion' ? 14 : 15}
           weight="medium"
           icon={isSubmitting && <Spinner size={14} />}
         >

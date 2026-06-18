@@ -44,5 +44,7 @@
 }
 
 .counter[data-over='true'] {
-  color: var(--color-red);
+  /* site-wide form-error red (ArticleCommentForm / Form.Field use the same);
+     the previous --color-red is undefined, so the counter never turned red */
+  color: var(--color-negative-red);
 }
