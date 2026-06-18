@@ -51,6 +51,11 @@ const BaseCommentFeed = ({
   const { id, replyTo, author, parentComment } = comment
   const nodeId = parentComment ? `${parentComment.id}-${id}` : id
 
+  // the content indent (.contentContainer) is sized for the default 32px
+  // avatar; campaign-discussion replies use a 24px avatar, so tighten the
+  // indent to keep the text aligned under the author name
+  const isCompactIndent = type === 'campaignDiscussion' && avatarSize <= 24
+
   const submitCallback = () => {
     if (replySubmitCallback) {
       replySubmitCallback()
@@ -74,6 +79,9 @@ const BaseCommentFeed = ({
           hasAvatar
           hasDisplayName
           hasUserName={hasUserName}
+          // keep name + @id on one line; in the narrow (indented) reply column
+          // they otherwise wrap to two lines and the gap looks cramped
+          nameNoWrap={type === 'campaignDiscussion'}
         />
 
         <section className={styles.right}>
@@ -87,12 +95,16 @@ const BaseCommentFeed = ({
       </header>
 
       {replyTo && (!parentComment || replyTo.id !== parentComment.id) && (
-        <section className={styles.replyToContainer}>
+        <section
+          className={`${styles.replyToContainer} ${isCompactIndent ? styles.replyToContainerSm : ''}`}
+        >
           <ReplyTo user={replyTo.author} />
         </section>
       )}
 
-      <section className={styles.contentContainer}>
+      <section
+        className={`${styles.contentContainer} ${isCompactIndent ? styles.contentContainerSm : ''}`}
+      >
         <Media lessThan="md">
           <CircleCommentContent
             comment={comment}

@@ -19,7 +19,15 @@
 /* campaign-discussion variant: the footer (counter + submit) sits inside the
    editor box, bottom-right */
 .contentBoxed {
-  margin-bottom: 0;
+  /* keep a gap below the box so the first comment / list isn't glued to it */
+  margin-bottom: var(--sp16);
+}
+
+/* compact the editor inside the campaign-discussion box (the shared editor's
+   default min-height is tall once the footer also sits inside the box).
+   `u-content-comment` is a global class, so this only touches this variant. */
+.contentBoxed :global(.u-content-comment) {
+  min-height: 3rem;
 }
 
 .inlineFooter {
@@ -36,5 +44,7 @@
 }
 
 .counter[data-over='true'] {
-  color: var(--color-red);
+  /* site-wide form-error red (ArticleCommentForm / Form.Field use the same);
+     the previous --color-red is undefined, so the counter never turned red */
+  color: var(--color-negative-red);
 }

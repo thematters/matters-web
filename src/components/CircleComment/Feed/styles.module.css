@@ -25,6 +25,16 @@
   margin-top: var(--sp4);
 }
 
+/* compact indent for 24px-avatar replies (campaign discussion), so the text
+   lines up under the author name instead of sitting half a step further in */
+.replyToContainerSm {
+  margin-left: var(--sp24);
+}
+
+.contentContainerSm {
+  padding-left: var(--sp32);
+}
+
 @keyframes comment-background-fade-out {
   50% {
     background: var(--color-grey-lighter);
