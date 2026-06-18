@@ -144,3 +144,11 @@
   flex: 0 0 14.375rem; /* 230px */
   margin: 0;
 }
+
+/* shown in the band when the wall is enabled but has no quotes yet */
+.empty {
+  padding: var(--sp12) 0 var(--sp16);
+  font-size: var(--text14);
+  line-height: 1.6;
+  color: var(--color-grey-dark);
+}
