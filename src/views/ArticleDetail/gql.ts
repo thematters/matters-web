@@ -1,6 +1,5 @@
 import gql from 'graphql-tag'
 
-import { fragments as quoteImageFragments } from '~/components/QuoteImageDialog/gql'
 import { UserDigest } from '~/components/UserDigest'
 
 import { AuthorSidebar } from './AuthorSidebar'
@@ -78,9 +77,7 @@ const articlePublicFragment = gql`
     ...SupportWidgetArticlePrivate
     ...ChannelArticlePublic
     ...ChannelArticlePrivate
-    ...QuoteImageArticle
   }
-  ${quoteImageFragments.article}
   ${Header.fragments.article}
   ${AuthorSidebar.fragments.article}
   ${MetaInfo.fragments.article}

@@ -3,7 +3,6 @@ import dynamic from 'next/dynamic'
 import { useContext, useState } from 'react'
 import { useIntl } from 'react-intl'
 
-import { MAX_CAMPAIGN_COMMENT_LENGTH } from '~/common/enums'
 import { dom, formStorage, stripHtml } from '~/common/utils'
 import {
   Button,
@@ -25,18 +24,13 @@ const CommentEditor = dynamic(() => import('~/components/Editor/Comment'), {
   loading: () => <SpinnerBlock />,
 })
 
-export type CircleCommentFormType =
-  | 'circleDiscussion'
-  | 'circleBroadcast'
-  | 'campaignDiscussion'
+export type CircleCommentFormType = 'circleDiscussion' | 'circleBroadcast'
 
 export interface CircleCommentFormProps {
   commentId?: string
   replyToId?: string
   parentId?: string
-  // exactly one of circleId / campaignId is set, depending on `type`
-  circleId?: string
-  campaignId?: string
+  circleId: string
   type: CircleCommentFormType
 
   defaultContent?: string | null
@@ -50,7 +44,6 @@ export const CircleCommentForm: React.FC<CircleCommentFormProps> = ({
   replyToId,
   parentId,
   circleId,
-  campaignId,
   type,
 
   defaultContent,
@@ -71,7 +64,7 @@ export const CircleCommentForm: React.FC<CircleCommentFormProps> = ({
 
   const formStorageKey = formStorage.genCircleCommentKey({
     authorId: viewer.id,
-    circleId: circleId ?? campaignId ?? '',
+    circleId,
     type,
     commentId,
     parentId,
@@ -84,12 +77,7 @@ export const CircleCommentForm: React.FC<CircleCommentFormProps> = ({
       defaultContent ||
       ''
   )
-  // campaign discussion comments are capped at 240 chars (like 短動態)
-  const maxLength =
-    type === 'campaignDiscussion' ? MAX_CAMPAIGN_COMMENT_LENGTH : undefined
-  const contentLength = stripHtml(content).length
-  const isOverLength = maxLength !== undefined && contentLength > maxLength
-  const isValid = contentLength > 0 && !isOverLength
+  const isValid = stripHtml(content).length > 0
 
   const handleSubmit = async (event?: React.FormEvent<HTMLFormElement>) => {
     const mentions = dom.getAttributes('data-id', content)
@@ -99,7 +87,6 @@ export const CircleCommentForm: React.FC<CircleCommentFormProps> = ({
         content,
         replyTo: replyToId,
         circleId,
-        campaignId,
         parentId,
         type,
         mentions,
@@ -174,14 +161,6 @@ export const CircleCommentForm: React.FC<CircleCommentFormProps> = ({
       </section>
 
       <footer className={styles.footer}>
-        {maxLength !== undefined && (
-          <span
-            className={styles.counter}
-            data-over={isOverLength ? 'true' : undefined}
-          >
-            {contentLength} / {maxLength}
-          </span>
-        )}
         <Button
           type="submit"
           form={formStorageKey}

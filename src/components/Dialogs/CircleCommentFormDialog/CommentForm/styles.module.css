@@ -11,14 +11,3 @@
   flex-grow: 1;
   overflow-y: auto;
 }
-
-.counter {
-  margin-top: var(--sp8);
-  font-size: var(--text12);
-  color: var(--color-grey);
-  text-align: right;
-}
-
-.counter[data-over='true'] {
-  color: var(--color-red);
-}

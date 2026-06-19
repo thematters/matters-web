@@ -3,19 +3,16 @@ export const COMMENT_TYPE_TEXT = {
     article: '評論',
     circleBroadcast: '廣播',
     circleDiscussion: '眾聊',
-    campaignDiscussion: '留言',
   },
   zh_hans: {
     article: '评论',
     circleBroadcast: '广播',
     circleDiscussion: '众聊',
-    campaignDiscussion: '留言',
   },
   en: {
     article: 'comment',
     circleBroadcast: 'broadcast',
     circleDiscussion: 'thread',
-    campaignDiscussion: 'comment',
   },
 }
 

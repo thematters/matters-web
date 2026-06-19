@@ -67,8 +67,6 @@ export const MAX_ARTICLE_COLLECT_LENGTH = 3
 
 export const MAX_MOMENT_CONTENT_LENGTH = 240
 export const MAX_MOMENT_COMMENT_LENGTH = 240
-// campaign discussion comment length cap (matches 短動態 = 240)
-export const MAX_CAMPAIGN_COMMENT_LENGTH = 240
 export const MAX_FIGURE_CAPTION_LENGTH = 100
 
 export const MAX_TAG_CONTENT_LENGTH = 50
