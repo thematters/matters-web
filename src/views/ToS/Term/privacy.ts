@@ -29,6 +29,7 @@ const Privacy: { zh_hant: string; zh_hans: string; en: string } = {
 <p>3.1 MATTERS將接收、儲存和處理用戶在評估和使用服務時提供的個人信息，並且將採取適當的措施來保護其收集和/或持有的個人信息，以防止未經許可或意外的訪問、處理、刪除、丟失、使用或洩露信息。</p>
 
 <p>3.2 為了保護個人信息，MATTERS將要求所有用戶（或如適用法律所定義的其各自相關人員）在請求訪問和/或修改其個人信息時證明其身份。訪問和修改個人信息的請求應當以書面形式提交並發送至 &lt;ask@matters.town&gt;。MATTERS應當收取合理的費用以抵銷MATTERS在處理相關數據訪問請求時所產生的管理和實際成本費用。如果有合理的理由相信某個人信息不準確，則MATTERS應當採取可行的措施以確保此個人信息不被使用，除非並且直到這個理由不再適用於此類個人信息或者此個人信息被刪除。</p>
+<p>3.2A 若您希望查詢、閱覽、請求複製本、補充或更正、停止蒐集處理利用，或刪除個人資料，請參考 <a href="/appeals">申訴與救濟中心</a>。MATTERS可能需要確認您的身分，並可能基於法律、爭議處理、安全或技術限制保留必要資料。</p>
 
 <p>3.3 如果MATTERS持有的某個人信息不再被需要用於本隱私政策第4.2條中所規定的使用目的，MATTERS應當採取切實可行的措施，在合理可行的條件下盡快停止處理此類個人信息，但如果MATTERS被合理請求保留數據用於（i）存檔目的；（ii）任何實際或潛在的爭議；（iii）遵守相關的法律法規；（iv）執行MATTERS和其用戶之間的任何協議；以及（v）保護MATTERS和其員工的權利、財產和安全，則MATTERS有權保留此個人信息的副本。MATTERS將採取切實可行的措施來保證其保留此個人信息的時間不會超過出於上述目的（包括直接或間接目的）所需要的保留時間。</p>
 
@@ -136,6 +137,7 @@ const Privacy: { zh_hant: string; zh_hans: string; en: string } = {
 <p>3.1 MATTERS将接收、储存和处理用户在评估和使用服务时提供的个人信息，并且将采取适当的措施来保护其收集和/或持有的个人信息，以防止未经许可或意外的访问、处理、删除、丢失、使用或泄露信息。</p>
 
 <p>3.2 为了保护个人信息，MATTERS将要求所有用户（或如适用法律所定义的其各自相关人员）在请求访问和/或修改其个人信息时证明其身份。访问和修改个人信息的请求应当以书面形式提交并發送至 &lt;ask@matters.town&gt; 。MATTERS应当收取合理的费用以抵销MATTERS在处理相关数据访问请求时所产生的管理和实际成本费用。如果有合理的理由相信某个人信息不准确，则MATTERS应当采取可行的措施以确保此个人信息不被使用，除非并且直到这个理由不再适用于此类个人信息或者此个人信息被删除。</p>
+<p>3.2A 若您希望查询、阅览、请求复制本、补充或更正、停止搜集处理利用，或删除个人资料，请参考 <a href="/appeals">申诉与救济中心</a>。MATTERS可能需要确认您的身份，并可能基于法律、争议处理、安全或技术限制保留必要资料。</p>
 
 <p>3.3 如果MATTERS持有的某个人信息不再被需要用于本隐私政策第4.2条中所规定的使用目的，MATTERS应当采取切实可行的措施，在合理可行的条件下尽快停止处理此类个人信息，但如果MATTERS被合理请求保留数据用于（i）存档目的；（ii）任何实际或潜在的争议；（iii）遵守相关的法律法规；（iv）执行MATTERS和其用户之间的任何协议；以及（v）保护MATTERS和其员工的权利、财产和安全，则MATTERS有权保留此个人信息的副本。MATTERS将采取切实可行的措施来保证其保留此个人信息的时间不会超过出于上述目的（包括直接或间接目的）所需要的保留时间。</p>
 
@@ -243,6 +245,7 @@ const Privacy: { zh_hant: string; zh_hans: string; en: string } = {
 <p>3.1 The Data Controller will receive, store and process Personal Information that the Users make available when assessing or using the Services. It will take appropriate steps to protect Personal Information collected and/or held by it against unauthorized or accidental access, processing, erasure, loss, use or disclosure. </p>
 
 <p>3.2 In order to protect the Personal Information, the Data Controller will require all Users (or their respective relevant persons as defined under applicable laws) to prove their identities in relation to their requests to access and/or correct their Personal Information.  Requests for access and correction of Personal Information are to be addressed in writing and sent to &lt;hi@matters.town&gt;. A reasonable fee shall be charged to offset the Data Controller’s administrative and actual costs incurred in complying with the relevant data access requests. Where there are reasonable grounds for believing that any Personal Information is inaccurate, the Data Controller shall take practicable steps to ensure that the Personal Information shall not be used unless and until those grounds cease to be applicable to such Personal Information or the Personal Information shall be erased. </p>
+<p>3.2A If you wish to request access, review, a copy, supplementation or correction, stop collection, processing, or use, or deletion of personal data, please refer to the <a href="/appeals">Appeals and Remedies</a> page. MATTERS may need to verify your identity and may retain necessary data due to legal, dispute handling, safety, or technical limitations.</p>
 
 <p>3.3 Where any Personal Information held by the Data Controller is no longer required for the purposes as stated under clause 4.2 of this Privacy Policy, the Data Controller shall take practicable steps to cease processing such Personal Information as soon as reasonably practicable, provided that the Data Controller may keep copies of such Personal Information as is reasonably required (i) for archival purposes; (ii) for use in relation to any actual or potential dispute; (iii) for compliance with applicable laws and regulations; (iv) for enforcing any agreement the Data Controller has with such User; and (v) for protecting the Data Controller’s and its employees’ rights, property or safety. The Data Controller will take practicable steps to ensure such Personal Information will not be kept longer than is necessary for the fulfillment of the above purposes (including direct or indirect purposes). </p>
 

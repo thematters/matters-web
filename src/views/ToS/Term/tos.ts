@@ -206,7 +206,7 @@ const ToS: { zh_hant: string; zh_hans: string; en: string } = {
 <p>6.9    為避免疑義，MATTERS不對第三方提供的版權資料或第三方的知識產權侵權行為承擔任何責任。</p>
 
 <p><b><u>7. 帳戶終止</u></b></p>
-<p>7.1    MATTERS有權決定暫停（任意時間長度）或終止您對平台和/或服務的訪問，而無需事先通知，並且有權出於任何原因（包括但不限於您違反本條款和社區約章的任何規定）刪除或停用您的帳戶以及隱藏所有相關用戶內容。MATTERS對於有可能因為暫停或終止帳戶而導致的任何損失或損害不承擔任何責任。</p>
+<p>7.1    MATTERS有權決定暫停（任意時間長度）或終止您對平台和/或服務的訪問，而無需事先通知，並且有權出於任何原因（包括但不限於您違反本條款和社區約章的任何規定）刪除或停用您的帳戶以及隱藏所有相關用戶內容。MATTERS對於有可能因為暫停或終止帳戶而導致的任何損失或損害不承擔任何責任。若您希望就帳號或內容限制提出申訴，可參考 <a href="/appeals">申訴與救濟中心</a>。</p>
 <p>7.2    收到您的書面請求後，MATTERS將在切實可行的範圍內盡快終止您的帳戶和/或隱藏您的所有用戶內容（如適用）。</p>
 <p>7.3    如果終止，您將無法訪問您的帳戶（包括但不限於儲值錢包和儲值金額）。如果帳戶終止後您的儲值錢包中有餘額，您須向MATTERS提供書面說明（以及正確儲值錢包密碼），並在終止帳戶日起30天內要求提現所有儲值餘額。如果逾期未收到您的說明，您的儲值餘額將被沒收。為避免疑問，MATTERS持有的記錄應被視為儲值錢包中餘額的最終證據。</p>
 
@@ -249,7 +249,7 @@ const ToS: { zh_hant: string; zh_hans: string; en: string } = {
 <p>12.5    本條款受英屬維爾京群島（British Virgin Islands）法律管轄，並按照英屬維爾京群島法律解釋。本條款的各方不可撤回地同意，英屬維爾京群島法院對與本條款有關或由本條款引起的任何索賠或爭議擁有專屬管轄權。</p>
 <p>12.6    本條款和條件的原始英文版本可能被翻譯成其他語言。如果對本條款的內容或解釋存在爭議，亦或者本條款的英文版本與任何其他語言版本之間存在矛盾或不一致，則在法律允許的範圍內，英語版本適用、優先並具有決定性。</p>
 <p>12.7    本條款應被視為可分割的。如有任何條款被確定為不可執行的或無效的，則應依然在適用法律允許的最大範圍內執行此條款，並且任何條款被確定無效都不應影響任何其他條款的有效性和可執行性。被分割的條款應由盡可能接近原先措辭和意圖的新條款取代。</p>
-<p>12.8    與平台有關的所有投訴、反饋、評論、技術支持請求和其他聯絡信息請直接發送至 &lt;hi@matters.town&gt; 。 </p>
+<p>12.8    與平台有關的所有投訴、反饋、評論、技術支持請求和其他聯絡信息請直接發送至 &lt;hi@matters.town&gt;。檢舉、申訴、個人資料權利、著作權與政府要求相關資訊，請參考 <a href="/appeals">申訴與救濟中心</a>。</p>
 
 </details>
   `,
@@ -457,7 +457,7 @@ const ToS: { zh_hant: string; zh_hans: string; en: string } = {
 <p>6.9    为避免疑义，MATTERS不对第三方提供的版权资料或第三方的知识产权侵权行为承担任何责任。</p>
 
 <p><b><u>7. 帳戶终止</u></b></p>
-<p>7.1    MATTERS有权决定暂停（任意时间长度）或终止您对平台和/或服务的访问，而无需事先通知，并且有权出于任何原因（包括但不限于您违反本条款和社区约章的任何规定）删除或停用您的帳戶以及隐藏所有相关用户内容。MATTERS对于有可能因为暂停或终止帳戶而导致的任何损失或损害不承担任何责任。</p>
+<p>7.1    MATTERS有权决定暂停（任意时间长度）或终止您对平台和/或服务的访问，而无需事先通知，并且有权出于任何原因（包括但不限于您违反本条款和社区约章的任何规定）删除或停用您的帳戶以及隐藏所有相关用户内容。MATTERS对于有可能因为暂停或终止帳戶而导致的任何损失或损害不承担任何责任。若您希望就帐号或内容限制提出申诉，可参考 <a href="/appeals">申诉与救济中心</a>。</p>
 <p>7.2    收到您的书面请求后，MATTERS将在切实可行的范围内尽快终止您的帐户和/或隐藏您的所有用户内容（如适用）。</p>
 <p>7.3    如果终止，您将无法访问您的帐户。如果终止，您将无法访问您的帐户（包括但不限于储值钱包和储值金额）。如果帐户终止后您的储值钱包中有余额，您须向MATTERS提供书面说明（以及正确储值钱包密码），并在终止帐户日起30天内要求提现所有储值余额。如果逾期未收到您的说明，您的储值余额将被没收。为避免疑问，MATTERS持有的记录应被视为储值钱包中余额的最终证据。</p>
 
@@ -499,7 +499,7 @@ const ToS: { zh_hant: string; zh_hans: string; en: string } = {
 <p>12.5    本条款受英属维尔京群岛（British Virgin Islands）法律管辖，并按照英属维尔京群岛法律解释。本条款的各方不可撤回地同意，英属维尔京群岛法院对与本条款有关或由本条款引起的任何索赔或争议拥有专属管辖权。</p>
 <p>12.6    本条款和条件的原始英文版本可能被翻译成其他语言。如果对本条款的内容或解释存在争议，亦或者本条款的英文版本与任何其他语言版本之间存在矛盾或不一致，则在法律允许的范围内，英语版本适用、优先并具有决定性。</p>
 <p>12.7    本条款应被视为可分割的。如有任何条款被确定为不可执行的或无效的，则应依然在适用法律允许的最大范围内执行此条款，并且任何条款被确定无效都不应影响任何其他条款的有效性和可执行性。被分割的条款应由尽可能接近原先措辞和意图的新条款取代。</p>
-<p>12.8    与平台有关的所有投诉、反馈、评论、技术支持请求和其他联络信息请直接发送至 &lt;hi@matters.town&gt; 。 </p>
+<p>12.8    与平台有关的所有投诉、反馈、评论、技术支持请求和其他联络信息请直接发送至 &lt;hi@matters.town&gt;。举报、申诉、个人资料权利、著作权与政府要求相关信息，请参考 <a href="/appeals">申诉与救济中心</a>。</p>
 
 </details>
 `,
@@ -715,7 +715,7 @@ const ToS: { zh_hant: string; zh_hans: string; en: string } = {
 <p>6.9    For the avoidance of doubt, MATTERS does not assume any liability for copyrighted materials provided by third parties or any Intellectual Property Rights infringements by such third parties.</p>
 
 <p><b><u>7. ACCOUNT TERMINATION</u></b></p>
-<p>7.1    MATTERS may suspend (for any duration) or terminate your access to the Platform and/or the Services in its sole discretion, immediately and without prior notice, and delete or deactivate your Account and hide all related User Contents for any reason (including but not limited to your breach of any provision of these Terms and/or the Community Rules) without any responsibility or liability on the part of MATTERS for any loss or damage that may result from such suspension or termination.</p>
+<p>7.1    MATTERS may suspend (for any duration) or terminate your access to the Platform and/or the Services in its sole discretion, immediately and without prior notice, and delete or deactivate your Account and hide all related User Contents for any reason (including but not limited to your breach of any provision of these Terms and/or the Community Rules) without any responsibility or liability on the part of MATTERS for any loss or damage that may result from such suspension or termination. If you wish to appeal an account or content restriction, please refer to the <a href="/appeals">Appeals and Remedies</a> page.</p>
 <p>7.2    Upon receipt of your written request, MATTERS will, as soon as practicable, terminate your Account and/or hide all your User Contents (as applicable).</p>
 <p>7.3    In the event of termination, you will not be able to access your Account (including but not limited to the Stored Value in your Stored Value Wallet). In the event where there is remaining balance in your Stored Value Wallet upon the termination of Account, you must provide MATTERS with written instructions (together with the relevant accurate Stored Value Wallet PIN) to cash-out all remaining balance of Stored Value within thirty (30) calendar days from the termination date in accordance with these Terms. Upon expiration of which, any and all then remaining balance of Stored Value will be forfeited with no liability incurred to you. For the avoidance of doubt, the records held by MATTERS shall be treated as conclusive evidence of the amount of the remaining balance in the Stored Value Wallet.</p>
 
@@ -758,7 +758,7 @@ const ToS: { zh_hant: string; zh_hans: string; en: string } = {
 <p>12.5    These Terms shall be governed by and construed in accordance with the laws of the British Virgin Islands. The Parties hereunder irrevocably agree that the courts of the British Virgin Islands shall have exclusive jurisdiction in relation to any claim or dispute concerning or arising from these Terms.</p>
 <p>12.6    The original English version of these terms and conditions may have been translated into other languages. In the event of a dispute about the contents or interpretation of these Terms or inconsistency or discrepancy between the English version and any other language version of these Terms, the English language version to the extent permitted by law shall apply, prevail and be conclusive. </p>
 <p>12.7    These Terms shall be deemed severable. In the event that any provision is determined to be unenforceable or invalid, such provision shall nonetheless be enforced to the fullest extent permitted by applicable law and such determination shall not affect the validity and enforceability of any other remaining provisions. The severed provisions shall be replaced by a provision approximating as much as possible the original wording and intent.</p>
-<p>12.8    All complaints, feedback, comments, requests for technical support and other communications in relation to the Platform shall be directed to &lt;hi@matters.town&gt;.</p>
+<p>12.8    All complaints, feedback, comments, requests for technical support and other communications in relation to the Platform shall be directed to &lt;hi@matters.town&gt;. For reporting, appeals, personal data rights, copyright, and government request information, please refer to the <a href="/appeals">Appeals and Remedies</a> page.</p>
 
 </details>
 `,
