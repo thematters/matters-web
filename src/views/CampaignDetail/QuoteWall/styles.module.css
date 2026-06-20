@@ -145,10 +145,25 @@
   margin: 0;
 }
 
-/* shown in the band when the wall is enabled but has no quotes yet */
-.empty {
-  padding: var(--sp12) 0 var(--sp16);
+/* empty band: an "invitation card" shaped like a real quote card (left green
+   rule), so the wall keeps its card feel without showing any fake quote */
+.inviteCard {
+  max-width: 22rem;
+  padding: var(--sp12) var(--sp16);
+  margin: var(--sp4) 0 var(--sp8);
+  background: var(--color-green-lighter);
+  border-left: 2px solid var(--color-matters-green);
+  border-radius: 0 var(--sp8) var(--sp8) 0;
+}
+
+.inviteText {
+  margin: 0;
   font-size: var(--text14);
-  line-height: 1.6;
-  color: var(--color-grey-dark);
+  line-height: 1.65;
+  color: var(--color-grey-darker);
+}
+
+.spark {
+  margin-right: var(--sp4);
+  color: var(--color-matters-green);
 }

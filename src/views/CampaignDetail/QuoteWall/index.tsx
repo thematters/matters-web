@@ -114,13 +114,24 @@ const QuoteWall = ({ shortHash, entry = 'module' }: QuoteWallProps) => {
             ))}
           </div>
         ) : (
-          <p className={styles.empty}>
-            <FormattedMessage
-              defaultMessage="Pick a line you love from an article and put it on the wall ✍️"
-              id="md2Ml3"
-              description="src/views/CampaignDetail/QuoteWall band empty-state prompt"
-            />
-          </p>
+          // "invitation card": same shape as a real quote card (left green
+          // rule) so the wall keeps its card feel without showing a fake quote
+          <div className={styles.inviteCard}>
+            <p className={styles.inviteText}>
+              <span className={styles.spark}>✦</span>
+              <FormattedMessage
+                defaultMessage="During the event, the quotes people pick will appear here."
+                id="5FUiH2"
+                description="src/views/CampaignDetail/QuoteWall band empty-state, line 1"
+              />
+              <br />
+              <FormattedMessage
+                defaultMessage="Pick a line you love from an article and put it on the wall ✍️"
+                id="md2Ml3"
+                description="src/views/CampaignDetail/QuoteWall band empty-state prompt"
+              />
+            </p>
+          </div>
         )}
       </section>
     )

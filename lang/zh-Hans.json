@@ -493,6 +493,9 @@
     "defaultMessage": "确认要解绑 {type} 吗？",
     "description": "src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
   },
+  "5FUiH2": {
+    "defaultMessage": "活动期间，大家挑出的金句会出现在这里。"
+  },
   "5IGdjy": {
     "defaultMessage": "目前尚无标签，立即添加提高作品曝光度！"
   },
