@@ -148,8 +148,9 @@
 /* empty band: an "invitation card" shaped like a real quote card (left green
    rule), so the wall keeps its card feel without showing any fake quote */
 .inviteCard {
-  max-width: 22rem;
-  padding: var(--sp12) var(--sp16);
+  /* full width, matching the article list / centre column (not a half-width
+     card) */
+  padding: var(--sp16);
   margin: var(--sp4) 0 var(--sp8);
   background: var(--color-green-lighter);
   border-left: 2px solid var(--color-matters-green);
