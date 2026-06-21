@@ -144,3 +144,27 @@
   flex: 0 0 14.375rem; /* 230px */
   margin: 0;
 }
+
+/* empty band: an "invitation card" shaped like a real quote card (left green
+   rule), so the wall keeps its card feel without showing any fake quote */
+.inviteCard {
+  /* full width, matching the article list / centre column (not a half-width
+     card) */
+  padding: var(--sp16);
+  margin: var(--sp4) 0 var(--sp8);
+  background: var(--color-green-lighter);
+  border-left: 2px solid var(--color-matters-green);
+  border-radius: 0 var(--sp8) var(--sp8) 0;
+}
+
+.inviteText {
+  margin: 0;
+  font-size: var(--text14);
+  line-height: 1.65;
+  color: var(--color-grey-darker);
+}
+
+.spark {
+  margin-right: var(--sp4);
+  color: var(--color-matters-green);
+}

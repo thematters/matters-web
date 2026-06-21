@@ -13,6 +13,7 @@ export const CAMPAIGN_QUOTES = gql`
       ... on WritingChallenge {
         id
         quoteCount
+        enableQuoteWall
         quotes(input: { first: $first, random: $random }) {
           totalCount
           edges {

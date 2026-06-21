@@ -493,6 +493,9 @@
     "defaultMessage": "確認要解綁 {type} 嗎？",
     "description": "src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
   },
+  "5FUiH2": {
+    "defaultMessage": "活動期間，大家挑出的金句會出現在這裡。"
+  },
   "5IGdjy": {
     "defaultMessage": "目前尚無標籤，立即添加提高作品曝光度！"
   },
@@ -3313,6 +3316,9 @@
   "mbHf/6": {
     "defaultMessage": "已結束",
     "description": "src/views/CampaignDetail/Apply/Button/index.tsx"
+  },
+  "md2Ml3": {
+    "defaultMessage": "在文章裡選一段你喜歡的話，做成金句卡片貼上牆吧 ✍️"
   },
   "me1nR+": {
     "defaultMessage": "複製地址"
