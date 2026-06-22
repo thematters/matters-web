@@ -11,21 +11,17 @@ import styles from './styles.module.css'
 
 interface QuoteCardProps {
   quote: QuoteWallQuoteFragment
-  // index drives the rotation / background variety on the wall
-  index?: number
   afterRetract?: () => void
 }
 
-const QuoteCard = ({ quote, index = 0, afterRetract }: QuoteCardProps) => {
+const QuoteCard = ({ quote, afterRetract }: QuoteCardProps) => {
   const viewer = useContext(ViewerContext)
   const [deleteQuote] = useMutation<DeleteQuoteMutation>(DELETE_QUOTE)
   const [confirming, setConfirming] = useState(false)
   const [retracted, setRetracted] = useState(false)
 
-  // the poster, or the source article's author (the words are theirs), may retract
-  const canRetract =
-    !!viewer.id &&
-    (viewer.id === quote.poster.id || viewer.id === quote.article.author.id)
+  // retract is staff-only (site admin); posters/authors cannot self-retract
+  const canRetract = !!viewer.isAdmin
 
   const path = toPath({ page: 'articleDetail', article: quote.article })
 
@@ -56,7 +52,10 @@ const QuoteCard = ({ quote, index = 0, afterRetract }: QuoteCardProps) => {
   }
 
   return (
-    <figure className={styles.card} data-variant={index % 4}>
+    <figure className={styles.card}>
+      <span className={styles.quoteMark} aria-hidden="true">
+        ❝
+      </span>
       <Link {...path} className={styles.quoteLink}>
         <blockquote className={styles.quote}>{quote.content}</blockquote>
       </Link>
@@ -71,25 +70,31 @@ const QuoteCard = ({ quote, index = 0, afterRetract }: QuoteCardProps) => {
         </Link>
       </figcaption>
 
-      {canRetract &&
-        (confirming ? (
-          <span className={styles.retractRow}>
-            <Button textColor="grey" onClick={() => setConfirming(false)}>
-              <FormattedMessage defaultMessage="Cancel" id="47FYwb" />
+      {canRetract && (
+        <div className={styles.retractRow}>
+          {confirming ? (
+            <>
+              <Button textColor="grey" onClick={() => setConfirming(false)}>
+                <FormattedMessage defaultMessage="Cancel" id="47FYwb" />
+              </Button>
+              <Button textColor="red" onClick={onRetract}>
+                <FormattedMessage
+                  defaultMessage="Confirm retract"
+                  id="Z82+dw"
+                />
+              </Button>
+            </>
+          ) : (
+            <Button
+              textColor="grey"
+              spacing={[0, 0]}
+              onClick={() => setConfirming(true)}
+            >
+              <FormattedMessage defaultMessage="Retract" id="3jmniZ" />
             </Button>
-            <Button textColor="red" onClick={onRetract}>
-              <FormattedMessage defaultMessage="Confirm retract" id="Z82+dw" />
-            </Button>
-          </span>
-        ) : (
-          <Button
-            textColor="grey"
-            spacing={[0, 0]}
-            onClick={() => setConfirming(true)}
-          >
-            <FormattedMessage defaultMessage="Retract" id="3jmniZ" />
-          </Button>
-        ))}
+          )}
+        </div>
+      )}
     </figure>
   )
 }

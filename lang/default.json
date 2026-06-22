@@ -493,6 +493,10 @@
     "defaultMessage": "Do you want to disconnect from {type}?",
     "description": "src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
   },
+  "5FUiH2": {
+    "defaultMessage": "During the event, the quotes people pick will appear here.",
+    "description": "src/views/CampaignDetail/QuoteWall band empty-state, line 1"
+  },
   "5IGdjy": {
     "defaultMessage": "Not using tags yet, add tags now to improve discoverability!"
   },
@@ -2613,6 +2617,9 @@
   "beLe/F": {
     "defaultMessage": "Broadcast"
   },
+  "bv9UzQ": {
+    "defaultMessage": "See all quotes"
+  },
   "c/z318": {
     "defaultMessage": "Incorrect email or password",
     "description": "src/components/Forms/EmailLoginForm/index.tsx"
@@ -3313,6 +3320,10 @@
   "mbHf/6": {
     "defaultMessage": "Ended",
     "description": "src/views/CampaignDetail/Apply/Button/index.tsx"
+  },
+  "md2Ml3": {
+    "defaultMessage": "Pick a line you love from an article and put it on the wall ✍️",
+    "description": "src/views/CampaignDetail/QuoteWall band empty-state prompt"
   },
   "me1nR+": {
     "defaultMessage": "Copy Address"

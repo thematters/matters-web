@@ -26,6 +26,25 @@
   color: var(--color-matters-green);
 }
 
+/* "see all quotes" pill in the band header → external museum wall */
+.viewAllLink {
+  flex-shrink: 0;
+  padding: 0.1875rem 0.75rem;
+  font-size: var(--text13);
+  font-weight: var(--font-medium);
+  color: var(--color-matters-green);
+  white-space: nowrap;
+  border: 1px solid var(--color-matters-green);
+  border-radius: 999px;
+}
+
+/* per-campaign "view all" (opens the dialog), centred below the card row */
+.bandViewMore {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--sp12);
+}
+
 /* compact preview: a vertical stack of memo cards */
 .previewWall {
   display: flex;
@@ -53,16 +72,25 @@
   color: var(--color-matters-green);
 }
 
-/* pull-quote card: a left green rule, no fill (Option A — uniform, not the
-   old random sticky-note colours) */
+/* quote card — refined pull-quote: light card, green quote mark, footer with
+   author + back-link split by a thin DS-compliant rule (no 2px green line) */
 .card {
+  position: relative;
   display: flex;
   flex-direction: column;
-  gap: var(--sp4);
-  padding-left: var(--sp16);
-  margin: 0 0 var(--sp12);
-  border-left: 2px solid var(--color-matters-green);
+  padding: var(--sp16);
+  margin: 0;
+  background: var(--color-grey-lighter);
+  border: 1px solid var(--color-grey-light);
+  border-radius: 0.625rem;
   break-inside: avoid;
+}
+
+.quoteMark {
+  font-size: 1.75rem;
+  font-weight: var(--font-semibold);
+  line-height: 1;
+  color: var(--color-matters-green);
 }
 
 .quoteLink {
@@ -70,36 +98,45 @@
 }
 
 .quote {
-  /* safety net: cap display at 3 lines even within the 80-char limit */
+  /* match the campaign description size (text15); cap at 3 lines */
   display: -webkit-box;
-  margin: 0;
+  margin: var(--sp4) 0 0;
   overflow: hidden;
   -webkit-line-clamp: 3;
-  font-size: var(--text16);
-  line-height: 1.6;
+  font-size: var(--text15);
+  line-height: 1.7;
   color: var(--color-grey-darkest);
   -webkit-box-orient: vertical;
 }
 
 .meta {
   display: flex;
-  flex-direction: column;
-  gap: var(--sp4);
+  gap: var(--sp8);
+  align-items: flex-end;
+  justify-content: space-between;
+  padding-top: var(--sp12);
+  margin-top: var(--sp12);
+  border-top: 1px solid var(--color-grey-light);
 }
 
 .author {
   font-size: var(--text12);
+  line-height: 1.5;
   color: var(--color-grey-dark);
 }
 
 .back {
+  flex-shrink: 0;
   font-size: var(--text12);
   color: var(--color-matters-green);
+  white-space: nowrap;
 }
 
+/* admin-only retract */
 .retractRow {
   display: flex;
   gap: var(--sp8);
+  margin-top: var(--sp8);
 }
 
 /* mobile one-line entry */
@@ -141,12 +178,12 @@
 }
 
 .bandRow > .card {
-  flex: 0 0 14.375rem; /* 230px */
+  flex: 0 0 15rem; /* 240px */
   margin: 0;
 }
 
-/* empty band: an "invitation card" shaped like a real quote card (left green
-   rule), so the wall keeps its card feel without showing any fake quote */
+/* empty band: an invitation card (soft green fill + green accent rule) shown
+   while the wall is enabled but still empty — keeps a card feel, no fake quote */
 .inviteCard {
   /* full width, matching the article list / centre column (not a half-width
      card) */

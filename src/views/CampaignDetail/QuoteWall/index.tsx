@@ -84,33 +84,20 @@ const QuoteWall = ({ shortHash, entry = 'module' }: QuoteWallProps) => {
           <h2 className={styles.title}>
             <FormattedMessage defaultMessage="Quote wall" id="1HLo+Y" />
           </h2>
-          {totalCount > quotes.length && (
-            <QuoteWallDialog shortHash={shortHash} totalCount={totalCount}>
-              {({ openDialog }) => (
-                <Button
-                  spacing={[4, 0]}
-                  textColor="green"
-                  textActiveColor="greenDark"
-                  onClick={openDialog}
-                  aria-haspopup="dialog"
-                >
-                  <TextIcon size={14} weight="medium">
-                    <FormattedMessage
-                      defaultMessage="View all {count} quotes"
-                      id="epZb9X"
-                      values={{ count: totalCount }}
-                    />
-                  </TextIcon>
-                </Button>
-              )}
-            </QuoteWallDialog>
-          )}
+          <a
+            className={styles.viewAllLink}
+            href={EXTERNAL_LINKS.SEVEN_DAY_BOOK_QUOTE_WALL}
+            target="_blank"
+            rel="noreferrer"
+          >
+            <FormattedMessage defaultMessage="See all quotes" id="bv9UzQ" />
+          </a>
         </header>
 
         {quotes.length > 0 ? (
           <div className={styles.bandRow}>
-            {quotes.map((quote, i) => (
-              <QuoteCard key={quote.id} quote={quote} index={i} />
+            {quotes.map((quote) => (
+              <QuoteCard key={quote.id} quote={quote} />
             ))}
           </div>
         ) : (
@@ -131,6 +118,30 @@ const QuoteWall = ({ shortHash, entry = 'module' }: QuoteWallProps) => {
                 description="src/views/CampaignDetail/QuoteWall band empty-state prompt"
               />
             </p>
+          </div>
+        )}
+
+        {quotes.length > 0 && totalCount > quotes.length && (
+          <div className={styles.bandViewMore}>
+            <QuoteWallDialog shortHash={shortHash} totalCount={totalCount}>
+              {({ openDialog }) => (
+                <Button
+                  spacing={[4, 0]}
+                  textColor="green"
+                  textActiveColor="greenDark"
+                  onClick={openDialog}
+                  aria-haspopup="dialog"
+                >
+                  <TextIcon size={14} weight="medium">
+                    <FormattedMessage
+                      defaultMessage="View all {count} quotes"
+                      id="epZb9X"
+                      values={{ count: totalCount }}
+                    />
+                  </TextIcon>
+                </Button>
+              )}
+            </QuoteWallDialog>
           </div>
         )}
       </section>
@@ -154,8 +165,8 @@ const QuoteWall = ({ shortHash, entry = 'module' }: QuoteWallProps) => {
       </header>
 
       <div className={styles.previewWall}>
-        {quotes.map((quote, i) => (
-          <QuoteCard key={quote.id} quote={quote} index={i} />
+        {quotes.map((quote) => (
+          <QuoteCard key={quote.id} quote={quote} />
         ))}
       </div>
 

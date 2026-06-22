@@ -2616,6 +2616,9 @@
   "beLe/F": {
     "defaultMessage": "广播"
   },
+  "bv9UzQ": {
+    "defaultMessage": "查看全部金句"
+  },
   "c/z318": {
     "defaultMessage": "邮箱或密码错误",
     "description": "src/components/Forms/EmailLoginForm/index.tsx"

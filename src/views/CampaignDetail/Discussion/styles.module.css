@@ -1,7 +1,9 @@
 .discussion {
   /* no top padding: the aside already gives the first module a top margin, so
-     dropping it lines the "討論區" title up with the cover top in the main column */
-  padding: 0 0 var(--sp16);
+     dropping it lines the "討論區" title up with the cover top in the main column.
+     bottom = sp8: with the "view all" button's own 8px, the gap above the dashed
+     rule matches the participants' sp16 padding-top below it */
+  padding: 0 0 var(--sp8);
 }
 
 .header {
