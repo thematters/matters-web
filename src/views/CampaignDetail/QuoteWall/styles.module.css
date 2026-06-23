@@ -97,12 +97,12 @@
 }
 
 .quote {
-  /* match the article body text: 17px / 1.75 / #333, inheriting the body sans */
+  /* campaign-description size (text15) at a 1.75 line-height, body colour #333 */
   display: -webkit-box;
   margin: 0;
   overflow: hidden;
   -webkit-line-clamp: 3;
-  font-size: var(--font-size-article-base);
+  font-size: var(--text15);
   line-height: var(--line-height-article-base);
   color: var(--color-black);
   -webkit-box-orient: vertical;
