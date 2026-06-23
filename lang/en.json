@@ -416,9 +416,6 @@
   "3cxMQp": {
     "defaultMessage": "Violet"
   },
-  "3jmniZ": {
-    "defaultMessage": "Retract"
-  },
   "3kbIhS": {
     "defaultMessage": "Untitled"
   },
@@ -492,6 +489,10 @@
   "5CcjZy": {
     "defaultMessage": "Do you want to disconnect from {type}?",
     "description": "src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
+  },
+  "5FUiH2": {
+    "defaultMessage": "During the event, the quotes people pick will appear here.",
+    "description": "src/views/CampaignDetail/QuoteWall band empty-state, line 1"
   },
   "5IGdjy": {
     "defaultMessage": "Not using tags yet, add tags now to improve discoverability!"
@@ -2091,9 +2092,6 @@
   "TF1OhT": {
     "defaultMessage": "This login code has expired, please try to resend"
   },
-  "TIWVxK": {
-    "defaultMessage": "Quote retracted from the wall"
-  },
   "TInwt3": {
     "defaultMessage": "Disable Responses"
   },
@@ -2124,9 +2122,6 @@
   "TgU+Mf": {
     "defaultMessage": "Optimism is a standalone blockchain. If you have USDT on other chains, you need to transfer them to Optimism. See details in the {tutorial}.",
     "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
-  },
-  "Thr8QX": {
-    "defaultMessage": "To article ↩"
   },
   "TjWWxF": {
     "defaultMessage": "Broadcast sent",
@@ -2450,9 +2445,6 @@
     "defaultMessage": "Archived for violation.",
     "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
   },
-  "Z82+dw": {
-    "defaultMessage": "Confirm retract"
-  },
   "ZAoAcG": {
     "defaultMessage": "Threads, Mastodon, Misskey 這些地方的粉絲也會看到"
   },
@@ -2612,6 +2604,9 @@
   },
   "beLe/F": {
     "defaultMessage": "Broadcast"
+  },
+  "bv9UzQ": {
+    "defaultMessage": "See all quotes"
   },
   "c/z318": {
     "defaultMessage": "Incorrect email or password",
@@ -3049,9 +3044,6 @@
   "iSM+et": {
     "defaultMessage": "All rights reserved"
   },
-  "iSjuti": {
-    "defaultMessage": "Failed to retract"
-  },
   "iTcMqz": {
     "defaultMessage": "Under the moonlight, dreams are about to come true. The Moonlight Dream badge signifies your participation in the Nomad Matters.",
     "description": "src/views/User/UserProfile/BadgeNomadLabel/index.tsx"
@@ -3313,6 +3305,10 @@
   "mbHf/6": {
     "defaultMessage": "Ended",
     "description": "src/views/CampaignDetail/Apply/Button/index.tsx"
+  },
+  "md2Ml3": {
+    "defaultMessage": "Pick a line you love from an article and put it on the wall ✍️",
+    "description": "src/views/CampaignDetail/QuoteWall band empty-state prompt"
   },
   "me1nR+": {
     "defaultMessage": "Copy Address"
