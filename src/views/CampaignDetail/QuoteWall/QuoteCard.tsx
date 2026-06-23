@@ -53,9 +53,6 @@ const QuoteCard = ({ quote, afterRetract }: QuoteCardProps) => {
 
   return (
     <figure className={styles.card}>
-      <span className={styles.quoteMark} aria-hidden="true">
-        ❝
-      </span>
       {/* stretched link: the whole card navigates to the source article */}
       <Link {...path} className={styles.cardLink}>
         <blockquote className={styles.quote}>{quote.content}</blockquote>

@@ -52,6 +52,10 @@
   column-gap: var(--sp12);
 }
 
+.wall > .card {
+  margin-bottom: var(--sp24);
+}
+
 .dialogTop {
   display: flex;
   align-items: center;
@@ -65,26 +69,17 @@
   color: var(--color-matters-green);
 }
 
-/* quote card — refined pull-quote: light card, green quote mark, an author
-   footer split by a thin DS rule. The whole card is a stretched link to the
-   source article (see .cardLink). */
+/* quote card — pull-quote with a green left rule, no fill/box (the original
+   form). Text follows the article-body standard. The whole card is a stretched
+   link to the source article (see .cardLink). */
 .card {
   position: relative;
   display: flex;
   flex-direction: column;
-  padding: var(--sp16);
+  padding-left: var(--sp16);
   margin: 0;
-  background: var(--color-grey-lighter);
-  border: 1px solid var(--color-grey-light);
-  border-radius: 0.625rem;
+  border-left: 2px solid var(--color-matters-green);
   break-inside: avoid;
-}
-
-.quoteMark {
-  font-size: 1.75rem;
-  font-weight: var(--font-semibold);
-  line-height: 1;
-  color: var(--color-matters-green);
 }
 
 /* stretched link: the ::after overlay makes the whole card clickable while the
@@ -102,28 +97,23 @@
 }
 
 .quote {
-  /* match the article feed summary: text14 / 1.375rem / grey-dark */
+  /* match the article body text: 17px / 1.75 / #333, inheriting the body sans */
   display: -webkit-box;
-  margin: var(--sp4) 0 0;
+  margin: 0;
   overflow: hidden;
   -webkit-line-clamp: 3;
-  font-size: var(--text14);
-  line-height: 1.375rem;
-  color: var(--color-grey-dark);
+  font-size: var(--font-size-article-base);
+  line-height: var(--line-height-article-base);
+  color: var(--color-black);
   -webkit-box-orient: vertical;
 }
 
 .meta {
-  display: flex;
-  gap: var(--sp8);
-  align-items: flex-end;
-  padding-top: var(--sp12);
   margin-top: var(--sp12);
-  border-top: 1px solid var(--color-grey-light);
 }
 
 .author {
-  font-size: var(--text12);
+  font-size: var(--text13);
   line-height: 1.5;
   color: var(--color-grey-dark);
 }
@@ -162,16 +152,15 @@
   padding: var(--sp24) 0 var(--sp8);
 }
 
-/* joined strip: the cards share one outer frame; a thin DS rule divides each
-   quote (no gaps, borders connected) */
+/* band: a row of up to 3 pull-quotes (green left rule), gap-separated; on
+   narrow viewports they keep a min width and scroll horizontally */
 .bandRow {
   display: flex;
+  gap: var(--sp24);
+  padding-bottom: var(--sp4);
   overflow-x: auto;
   scrollbar-width: none;
   -ms-overflow-style: none;
-  background: var(--color-grey-lighter);
-  border: 1px solid var(--color-grey-light);
-  border-radius: 0.625rem;
 }
 
 .bandRow::-webkit-scrollbar {
@@ -179,16 +168,11 @@
 }
 
 .bandRow > .card {
-  flex: 0 0 15rem; /* 240px */
+  /* basis 15rem with grow disabled: 3 fill the row (shrink to fit) yet 1-2
+     stay a fixed width, left-aligned, instead of stretching the full column */
+  flex: 0 1 15rem;
+  min-width: 12rem;
   margin: 0;
-  background: transparent;
-  border: none;
-  border-right: 1px solid var(--color-grey-light);
-  border-radius: 0;
-}
-
-.bandRow > .card:last-child {
-  border-right: none;
 }
 
 /* empty band: an invitation card (soft green fill + green accent rule) shown
