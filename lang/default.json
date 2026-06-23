@@ -416,9 +416,6 @@
   "3cxMQp": {
     "defaultMessage": "Violet"
   },
-  "3jmniZ": {
-    "defaultMessage": "Retract"
-  },
   "3kbIhS": {
     "defaultMessage": "Untitled"
   },
@@ -1190,9 +1187,6 @@
   "EZMrtJ": {
     "defaultMessage": "commented broadcast in {circleName}",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
-  },
-  "EZhPi/": {
-    "defaultMessage": "Manage quotes"
   },
   "Eb1U+/": {
     "defaultMessage": "Topped up successfully"
@@ -2098,9 +2092,6 @@
   "TF1OhT": {
     "defaultMessage": "This login code has expired, please try to resend"
   },
-  "TIWVxK": {
-    "defaultMessage": "Quote retracted from the wall"
-  },
   "TInwt3": {
     "defaultMessage": "Disable Responses"
   },
@@ -2453,9 +2444,6 @@
   "Z7JXlF": {
     "defaultMessage": "Archived for violation.",
     "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
-  },
-  "Z82+dw": {
-    "defaultMessage": "Confirm retract"
   },
   "ZAoAcG": {
     "defaultMessage": "Threads, Mastodon, Misskey 這些地方的粉絲也會看到"
@@ -3055,9 +3043,6 @@
   },
   "iSM+et": {
     "defaultMessage": "All rights reserved"
-  },
-  "iSjuti": {
-    "defaultMessage": "Failed to retract"
   },
   "iTcMqz": {
     "defaultMessage": "Under the moonlight, dreams are about to come true. The Moonlight Dream badge signifies your participation in the Nomad Matters.",

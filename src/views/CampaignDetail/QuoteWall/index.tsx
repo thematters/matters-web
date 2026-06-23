@@ -84,32 +84,14 @@ const QuoteWall = ({ shortHash, entry = 'module' }: QuoteWallProps) => {
           <h2 className={styles.title}>
             <FormattedMessage defaultMessage="Quote wall" id="1HLo+Y" />
           </h2>
-          <div className={styles.headerActions}>
-            {/* admin-only: opens the in-app wall dialog where each quote shows a
-                retract control (canRetract = viewer.isAdmin) */}
-            {viewer.isAdmin && (
-              <QuoteWallDialog shortHash={shortHash} totalCount={totalCount}>
-                {({ openDialog }) => (
-                  <button
-                    type="button"
-                    className={styles.manageLink}
-                    onClick={openDialog}
-                    aria-haspopup="dialog"
-                  >
-                    <FormattedMessage defaultMessage="Manage quotes" id="EZhPi/" />
-                  </button>
-                )}
-              </QuoteWallDialog>
-            )}
-            <a
-              className={styles.viewAllLink}
-              href={EXTERNAL_LINKS.SEVEN_DAY_BOOK_QUOTE_WALL}
-              target="_blank"
-              rel="noreferrer"
-            >
-              <FormattedMessage defaultMessage="See all quotes" id="bv9UzQ" />
-            </a>
-          </div>
+          <a
+            className={styles.viewAllLink}
+            href={EXTERNAL_LINKS.SEVEN_DAY_BOOK_QUOTE_WALL}
+            target="_blank"
+            rel="noreferrer"
+          >
+            <FormattedMessage defaultMessage="See all quotes" id="bv9UzQ" />
+          </a>
         </header>
 
         {quotes.length > 0 ? (

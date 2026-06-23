@@ -416,9 +416,6 @@
   "3cxMQp": {
     "defaultMessage": "Violet"
   },
-  "3jmniZ": {
-    "defaultMessage": "撤下"
-  },
   "3kbIhS": {
     "defaultMessage": "未命名"
   },
@@ -1189,9 +1186,6 @@
   "EZMrtJ": {
     "defaultMessage": "在 {circleName} 的廣播中留言 ",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
-  },
-  "EZhPi/": {
-    "defaultMessage": "管理金句"
   },
   "Eb1U+/": {
     "defaultMessage": "儲值成功"
@@ -2097,9 +2091,6 @@
   "TF1OhT": {
     "defaultMessage": "臨時密碼已過期，請嘗試重新發送"
   },
-  "TIWVxK": {
-    "defaultMessage": "已從金句牆撤下"
-  },
   "TInwt3": {
     "defaultMessage": "關閉評論"
   },
@@ -2452,9 +2443,6 @@
   "Z7JXlF": {
     "defaultMessage": "因違反用戶協定而被封存，",
     "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
-  },
-  "Z82+dw": {
-    "defaultMessage": "確認撤下"
   },
   "ZAoAcG": {
     "defaultMessage": "Threads, Mastodon, Misskey 這些地方的粉絲也會看到"
@@ -3054,9 +3042,6 @@
   },
   "iSM+et": {
     "defaultMessage": "作者保留所有權利"
-  },
-  "iSjuti": {
-    "defaultMessage": "撤下失敗"
   },
   "iTcMqz": {
     "defaultMessage": "月色之下，夢想即將實現。月之夢徽章紀念你曾參與「遊牧者計畫」。",

@@ -26,14 +26,6 @@
   color: var(--color-matters-green);
 }
 
-/* band header right side: admin manage button + the see-all pill */
-.headerActions {
-  display: flex;
-  flex-shrink: 0;
-  gap: var(--sp8);
-  align-items: center;
-}
-
 /* "see all quotes" pill in the band header → external museum wall */
 .viewAllLink {
   flex-shrink: 0;
@@ -43,19 +35,6 @@
   color: var(--color-matters-green);
   white-space: nowrap;
   border: 1px solid var(--color-matters-green);
-  border-radius: 999px;
-}
-
-/* admin-only manage button → opens the in-app dialog to retract quotes;
-   grey pill to distinguish it from the green see-all pill */
-.manageLink {
-  flex-shrink: 0;
-  padding: 0.1875rem 0.75rem;
-  font-size: var(--text13);
-  font-weight: var(--font-medium);
-  color: var(--color-grey-dark);
-  white-space: nowrap;
-  border: 1px solid var(--color-grey-light);
   border-radius: 999px;
 }
 
@@ -104,8 +83,7 @@
 }
 
 /* stretched link: the ::after overlay makes the whole card clickable while the
-   quote text stays the link's accessible name. The admin retract row sits above
-   the overlay via z-index so it stays independently clickable. */
+   quote text stays the link's accessible name. */
 .cardLink {
   color: inherit;
 }
@@ -137,15 +115,6 @@
   font-size: var(--text13);
   line-height: 1.5;
   color: var(--color-grey-dark);
-}
-
-/* admin-only retract */
-.retractRow {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  gap: var(--sp8);
-  margin-top: var(--sp8);
 }
 
 /* mobile one-line entry */
