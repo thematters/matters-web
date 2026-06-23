@@ -1190,6 +1190,9 @@
     "defaultMessage": "在 {circleName} 的广播中留言 ",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
   },
+  "EZhPi/": {
+    "defaultMessage": "管理金句"
+  },
   "Eb1U+/": {
     "defaultMessage": "储值成功"
   },

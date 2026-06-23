@@ -27,7 +27,13 @@ const QuoteCard = ({ quote, afterRetract }: QuoteCardProps) => {
 
   const onRetract = async () => {
     try {
-      await deleteQuote({ variables: { input: { id: quote.id } } })
+      // deleteQuote returns a bare boolean, so Apollo can't evict the quote on
+      // its own; refetch every CampaignQuotes observer (band + dialog) so the
+      // retracted quote and the quoteCount reconcile across the page
+      await deleteQuote({
+        variables: { input: { id: quote.id } },
+        refetchQueries: ['CampaignQuotes'],
+      })
       setRetracted(true)
       toast.info({
         message: (

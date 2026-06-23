@@ -1191,6 +1191,9 @@
     "defaultMessage": "commented broadcast in {circleName}",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
   },
+  "EZhPi/": {
+    "defaultMessage": "Manage quotes"
+  },
   "Eb1U+/": {
     "defaultMessage": "Topped up successfully"
   },
