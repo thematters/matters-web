@@ -240,7 +240,7 @@
     "description": "src/components/Transaction/State/index.tsx"
   },
   "1DQn89": {
-    "defaultMessage": "Share Quote"
+    "defaultMessage": "分享金句"
   },
   "1EYCdR": {
     "defaultMessage": "標籤"
@@ -497,7 +497,7 @@
     "defaultMessage": "支持設置"
   },
   "5IlTNw": {
-    "defaultMessage": "Failed to post to the wall"
+    "defaultMessage": "貼到金句牆失敗"
   },
   "5JN+nl": {
     "defaultMessage": "請檢查郵件",
@@ -534,7 +534,7 @@
     "defaultMessage": "動態已刪除"
   },
   "5q3qC0": {
-    "defaultMessage": "Download"
+    "defaultMessage": "下載"
   },
   "5rxHb7": {
     "defaultMessage": "可能包含色情、暴力、血腥等，點此展開全部",
@@ -688,7 +688,7 @@
     "description": "src/components/Dialogs/AddArticlesCollectionDialog/SearchingDialogContent.tsx"
   },
   "7mL9QE": {
-    "defaultMessage": "Style"
+    "defaultMessage": "樣式"
   },
   "7oytv9": {
     "defaultMessage": "（修改過）"
@@ -1029,7 +1029,7 @@
     "description": "src/components/Notice/NoticeComment.tsx/moment"
   },
   "Cmc/He": {
-    "defaultMessage": "On the wall ✓"
+    "defaultMessage": "已在牆上 ✓"
   },
   "CnPG8j": {
     "defaultMessage": "精選"
@@ -1055,7 +1055,7 @@
     "defaultMessage": "設定"
   },
   "D8FJf9": {
-    "defaultMessage": "Wall quota reached for today — come back tomorrow!"
+    "defaultMessage": "今天上牆額度已用完，明天再來吧！"
   },
   "D9/QIR": {
     "defaultMessage": "註冊 ISCN"
@@ -1437,7 +1437,7 @@
     "defaultMessage": "選擇時間"
   },
   "IWLb33": {
-    "defaultMessage": "Posted to the quote wall"
+    "defaultMessage": "已貼到金句牆"
   },
   "IXycMo": {
     "defaultMessage": "重新發送"
@@ -2525,7 +2525,7 @@
     "defaultMessage": "發動態"
   },
   "agOXPD": {
-    "defaultMessage": "Size"
+    "defaultMessage": "尺寸"
   },
   "ai7kS4": {
     "defaultMessage": "我的創作"
@@ -2756,7 +2756,7 @@
     "defaultMessage": "涉及未成年人的色情"
   },
   "e4AtHq": {
-    "defaultMessage": "You selected {original} characters; only the first {max} are shown. A concise quote works best."
+    "defaultMessage": "你選取了 {original} 個字，只會顯示前 {max} 個字，精煉的金句最理想。"
   },
   "eIlMHB": {
     "defaultMessage": "允許讀者評論本文（開啟後無法關閉）"
@@ -3382,7 +3382,7 @@
     "description": "src/components/Comment/DropdownActions/CommunityWatchRemoveComment.tsx"
   },
   "oCQmLu": {
-    "defaultMessage": "Post to wall"
+    "defaultMessage": "貼上金句牆"
   },
   "oEHAIT": {
     "defaultMessage": "取消排程",
