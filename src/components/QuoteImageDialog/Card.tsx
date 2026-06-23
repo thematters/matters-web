@@ -1,5 +1,6 @@
 import { forwardRef } from 'react'
 
+import IconMattersLogo from '@/public/static/icons/logo.svg'
 import SevenDayBookLogoDark from '@/public/static/images/seven-day-book-logo-dark.svg'
 import SevenDayBookLogoWhite from '@/public/static/images/seven-day-book-logo-white.svg'
 
@@ -19,8 +20,6 @@ export type QuoteCardProps = {
   quote: string
   author: string
   title: string
-  /** QR Code 的 data URL（由 Content 以 qrcode 產生） */
-  qrDataUrl: string
   style: QuoteStyle
   size: QuoteSize
   isSevenDayBook: boolean
@@ -29,12 +28,10 @@ export type QuoteCardProps = {
 /**
  * 金句卡片本體。固定以 1080px 寬度渲染（size.w/size.h），
  * 由 Content 以 CSS transform 縮放預覽、以 html-to-image 原尺寸截圖。
+ * 品牌識別靠頁尾的「Matters」字標（七日書文章改用七日書 logo）。
  */
 export const QuoteCard = forwardRef<HTMLDivElement, QuoteCardProps>(
-  (
-    { quote, author, title, qrDataUrl, style: s, size, isSevenDayBook },
-    ref
-  ) => {
+  ({ quote, author, title, style: s, size, isSevenDayBook }, ref) => {
     const { text } = clampQuote(quote)
     const fontFamily = s.font === 'serif' ? FONT_SERIF : FONT_SANS
     const letterSpacing = s.wide
@@ -45,7 +42,7 @@ export const QuoteCard = forwardRef<HTMLDivElement, QuoteCardProps>(
     const lineHeight = s.airy ? 1.8 : 1.65
     const fontSize = fitFontSize(text.length, s.airy)
 
-    const Logo =
+    const SevenDayBookLogo =
       s.logo === 'white' ? SevenDayBookLogoWhite : SevenDayBookLogoDark
 
     return (
@@ -77,25 +74,19 @@ export const QuoteCard = forwardRef<HTMLDivElement, QuoteCardProps>(
         </div>
 
         <div className={styles.foot}>
-          <div>
-            <div className={styles.title} style={{ color: s.sub }}>
-              <span className={styles.label}>原文</span>
-              {title}
+          <div className={styles.title} style={{ color: s.sub }}>
+            <span className={styles.label}>原文</span>
+            {title}
+          </div>
+          {isSevenDayBook ? (
+            <div className={styles.brandLogo}>
+              <SevenDayBookLogo />
             </div>
-            {isSevenDayBook ? (
-              <div className={styles.brandLogo}>
-                <Logo />
-              </div>
-            ) : (
-              <div className={styles.brand} style={{ color: s.sub }}>
-                Matters · matters.town
-              </div>
-            )}
-          </div>
-          <div className={styles.qr} style={{ background: s.qrLight }}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={qrDataUrl} alt="QR code" />
-          </div>
+          ) : (
+            <div className={styles.wordmark} style={{ color: s.quoteColor }}>
+              <IconMattersLogo />
+            </div>
+          )}
         </div>
       </div>
     )

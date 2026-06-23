@@ -150,9 +150,6 @@
     "defaultMessage": "公开",
     "description": "src/views/Circle/Analytics/ContentAnalytics/ContentTabs/index.tsx"
   },
-  "/uJdnC": {
-    "defaultMessage": "Sky"
-  },
   "/wKyxw": {
     "defaultMessage": "发布失败"
   },
@@ -413,9 +410,6 @@
   "3YAasP": {
     "defaultMessage": "什么是 Liker ID？"
   },
-  "3cxMQp": {
-    "defaultMessage": "Violet"
-  },
   "3jmniZ": {
     "defaultMessage": "撤下"
   },
@@ -603,9 +597,6 @@
   "6OBAOi": {
     "defaultMessage": "目前总订阅人数",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
-  },
-  "6RAJ7U": {
-    "defaultMessage": "IG / FB story · Threads"
   },
   "6Sj2lN": {
     "defaultMessage": "提领支持"
@@ -1023,9 +1014,6 @@
   "CZJdSn": {
     "defaultMessage": "在动态留言中提及你",
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
-  },
-  "CZciVV": {
-    "defaultMessage": "Story 9:16"
   },
   "CbRvzm": {
     "defaultMessage": "定时发布"
@@ -1534,9 +1522,6 @@
   "K2ec8y": {
     "defaultMessage": "请先验证邮箱"
   },
-  "K3+ihp": {
-    "defaultMessage": "Pine"
-  },
   "K3r6DQ": {
     "defaultMessage": "刪除"
   },
@@ -1823,9 +1808,6 @@
   },
   "OwMuXW": {
     "defaultMessage": "取消定时发布"
-  },
-  "OwO+Nr": {
-    "defaultMessage": "Mint"
   },
   "OwtCWk": {
     "defaultMessage": "仅供输入 {MIN_CIRCLE_DISPLAY_NAME_LENGTH}-{MAX_CIRCLE_DISPLAY_NAME_LENGTH} 個字符"
@@ -2595,9 +2577,6 @@
     "defaultMessage": "取消屏蔽",
     "description": "src/components/BlockUser/Button/index.tsx"
   },
-  "bGxO22": {
-    "defaultMessage": "Coral"
-  },
   "bQ5vZC": {
     "defaultMessage": "此文已被{actor}标示为限制级内容",
     "description": "src/views/ArticleDetail/Wall/Sensitive/index.tsx"
@@ -3042,9 +3021,6 @@
   "iIitRg": {
     "defaultMessage": "尚未收藏标签"
   },
-  "iLKG5w": {
-    "defaultMessage": "Slate"
-  },
   "iNZdM/": {
     "defaultMessage": "切换后即可支持创作者，采用 Optimism 网络{br}让支持更方便且费用低廉",
     "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
@@ -3232,9 +3208,6 @@
   "lTleCS": {
     "defaultMessage": "Checking"
   },
-  "lY48xg": {
-    "defaultMessage": "Cream"
-  },
   "lYVn31": {
     "defaultMessage": "此作品已加入定时发布，请前往「我的创作」页确认"
   },
@@ -3256,6 +3229,9 @@
   },
   "lr5qH7": {
     "defaultMessage": "排程于 {date} {time}"
+  },
+  "lrdFIK": {
+    "defaultMessage": "Paper"
   },
   "m+cdhC": {
     "defaultMessage": "最近使用"
@@ -3411,6 +3387,9 @@
   "oEHAIT": {
     "defaultMessage": "取消发布",
     "description": "confirm cancel schedule button"
+  },
+  "oIt05d": {
+    "defaultMessage": "Clay"
   },
   "oKcye/": {
     "defaultMessage": "在动态中提及你"
@@ -3857,6 +3836,9 @@
   "vlEBHB": {
     "defaultMessage": "链接",
     "description": "src/components/Editor"
+  },
+  "vmcSWC": {
+    "defaultMessage": "Sage"
   },
   "vmx+TU": {
     "defaultMessage": "信用卡",

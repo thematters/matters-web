@@ -1,6 +1,5 @@
 import { toJpeg } from 'html-to-image'
-import QRCode from 'qrcode'
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useMemo, useRef, useState } from 'react'
 import { defineMessages, FormattedMessage, useIntl } from 'react-intl'
 
 import { ERROR_CODES } from '~/common/enums'
@@ -16,24 +15,18 @@ import styles from './styles.module.css'
 const PREVIEW_WIDTH = 320 // 預覽寬度（卡片以此等比縮放顯示）
 
 const styleNames = defineMessages({
-  warm: { defaultMessage: 'Cream', id: 'lY48xg' },
-  sky: { defaultMessage: 'Sky', id: '/uJdnC' },
-  coral: { defaultMessage: 'Coral', id: 'bGxO22' },
+  paper: { defaultMessage: 'Paper', id: 'lrdFIK' },
   ink: { defaultMessage: 'Ink', id: 'QWkEED' },
-  pine: { defaultMessage: 'Pine', id: 'K3+ihp' },
-  mint: { defaultMessage: 'Mint', id: 'OwO+Nr' },
-  violet: { defaultMessage: 'Violet', id: '3cxMQp' },
-  slate: { defaultMessage: 'Slate', id: 'iLKG5w' },
+  sage: { defaultMessage: 'Sage', id: 'vmcSWC' },
+  clay: { defaultMessage: 'Clay', id: 'oIt05d' },
 })
 const sizeNames = defineMessages({
   square: { defaultMessage: 'Square 1:1', id: 'iII6Ry' },
   portrait: { defaultMessage: 'Portrait 4:5', id: 'em7860' },
-  story: { defaultMessage: 'Story 9:16', id: 'CZciVV' },
 })
 const sizeNotes = defineMessages({
   square: { defaultMessage: 'IG / FB post', id: 'A6dqhl' },
   portrait: { defaultMessage: 'IG post · most eye-catching', id: 'Oawtbo' },
-  story: { defaultMessage: 'IG / FB story · Threads', id: '6RAJ7U' },
 })
 
 export type QuoteImageDialogContentProps = {
@@ -41,8 +34,8 @@ export type QuoteImageDialogContentProps = {
   quote: string
   author: string
   title: string
-  /** 文章連結，用於產生 QR Code */
-  shareLink: string
+  /** 文章連結（保留給呼叫端相容；卡片移除 QR 後目前未使用） */
+  shareLink?: string
   isSevenDayBook: boolean
   /** 文章 id；與 canPostToWall 一起提供時顯示「上牆」按鈕 */
   articleId?: string
@@ -55,7 +48,6 @@ const QuoteImageDialogContent: React.FC<QuoteImageDialogContentProps> = ({
   quote,
   author,
   title,
-  shareLink,
   isSevenDayBook,
   articleId,
   canPostToWall,
@@ -63,9 +55,8 @@ const QuoteImageDialogContent: React.FC<QuoteImageDialogContentProps> = ({
   const intl = useIntl()
   const cardRef = useRef<HTMLDivElement>(null)
 
-  const [styleId, setStyleId] = useState('pine')
+  const [styleId, setStyleId] = useState('paper')
   const [sizeId, setSizeId] = useState('portrait')
-  const [qrDataUrl, setQrDataUrl] = useState('')
   const [putQuote] = useMutation<PutQuoteMutation>(PUT_QUOTE)
   const [isPosting, setPosting] = useState(false)
   const [posted, setPosted] = useState(false)
@@ -73,21 +64,6 @@ const QuoteImageDialogContent: React.FC<QuoteImageDialogContentProps> = ({
   const style = QUOTE_STYLES.find((s) => s.id === styleId) || QUOTE_STYLES[0]
   const size = QUOTE_SIZES.find((s) => s.id === sizeId) || QUOTE_SIZES[1]
   const { truncated, original } = useMemo(() => clampQuote(quote), [quote])
-
-  // 依風格 / 連結重新產生 QR Code（顏色跟著風格走）
-  useEffect(() => {
-    let active = true
-    QRCode.toDataURL(shareLink || ' ', {
-      margin: 0,
-      width: 300,
-      color: { dark: style.qrDark, light: style.qrLight },
-    })
-      .then((url) => active && setQrDataUrl(url))
-      .catch(() => active && setQrDataUrl(''))
-    return () => {
-      active = false
-    }
-  }, [shareLink, style.qrDark, style.qrLight])
 
   const previewScale = PREVIEW_WIDTH / size.w
 
@@ -208,7 +184,6 @@ const QuoteImageDialogContent: React.FC<QuoteImageDialogContentProps> = ({
               quote={quote}
               author={author}
               title={title}
-              qrDataUrl={qrDataUrl}
               style={style}
               size={size}
               isSevenDayBook={isSevenDayBook}

@@ -150,9 +150,6 @@
     "defaultMessage": "Public",
     "description": "src/views/Circle/Analytics/ContentAnalytics/ContentTabs/index.tsx"
   },
-  "/uJdnC": {
-    "defaultMessage": "Sky"
-  },
   "/wKyxw": {
     "defaultMessage": "Failed to republish"
   },
@@ -413,9 +410,6 @@
   "3YAasP": {
     "defaultMessage": "What is Liker ID?"
   },
-  "3cxMQp": {
-    "defaultMessage": "Violet"
-  },
   "3jmniZ": {
     "defaultMessage": "Retract"
   },
@@ -492,6 +486,10 @@
   "5CcjZy": {
     "defaultMessage": "Do you want to disconnect from {type}?",
     "description": "src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
+  },
+  "5FUiH2": {
+    "defaultMessage": "During the event, the quotes people pick will appear here.",
+    "description": "src/views/CampaignDetail/QuoteWall band empty-state, line 1"
   },
   "5IGdjy": {
     "defaultMessage": "Not using tags yet, add tags now to improve discoverability!"
@@ -600,9 +598,6 @@
   "6OBAOi": {
     "defaultMessage": "subscribers_empty",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
-  },
-  "6RAJ7U": {
-    "defaultMessage": "IG / FB story · Threads"
   },
   "6Sj2lN": {
     "defaultMessage": "Claim"
@@ -1020,9 +1015,6 @@
   "CZJdSn": {
     "defaultMessage": "mentioned you in a comment",
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
-  },
-  "CZciVV": {
-    "defaultMessage": "Story 9:16"
   },
   "CbRvzm": {
     "defaultMessage": "Schedule publish"
@@ -1531,9 +1523,6 @@
   "K2ec8y": {
     "defaultMessage": "Please verify email"
   },
-  "K3+ihp": {
-    "defaultMessage": "Pine"
-  },
   "K3r6DQ": {
     "defaultMessage": "Delete"
   },
@@ -1820,9 +1809,6 @@
   },
   "OwMuXW": {
     "defaultMessage": "Cancel schedule"
-  },
-  "OwO+Nr": {
-    "defaultMessage": "Mint"
   },
   "OwtCWk": {
     "defaultMessage": "Must be between {MIN_CIRCLE_DISPLAY_NAME_LENGTH}-{MAX_CIRCLE_DISPLAY_NAME_LENGTH} characters long."
@@ -2592,9 +2578,6 @@
     "defaultMessage": "Unblock",
     "description": "src/components/BlockUser/Button/index.tsx"
   },
-  "bGxO22": {
-    "defaultMessage": "Coral"
-  },
   "bQ5vZC": {
     "defaultMessage": "This article has been marked as restricted content by the {actor}.",
     "description": "src/views/ArticleDetail/Wall/Sensitive/index.tsx"
@@ -3039,9 +3022,6 @@
   "iIitRg": {
     "defaultMessage": "Tag not bookmarked yet"
   },
-  "iLKG5w": {
-    "defaultMessage": "Slate"
-  },
   "iNZdM/": {
     "defaultMessage": "Switch to support creators with the Optimism network {br} Make support more convenient and affordable",
     "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
@@ -3229,9 +3209,6 @@
   "lTleCS": {
     "defaultMessage": "Checking"
   },
-  "lY48xg": {
-    "defaultMessage": "Cream"
-  },
   "lYVn31": {
     "defaultMessage": "This work has been added to the schedule. Please go to the \"My Works\" page to confirm"
   },
@@ -3253,6 +3230,9 @@
   },
   "lr5qH7": {
     "defaultMessage": "Scheduled for {date} {time}"
+  },
+  "lrdFIK": {
+    "defaultMessage": "Paper"
   },
   "m+cdhC": {
     "defaultMessage": "Recently used"
@@ -3313,6 +3293,10 @@
   "mbHf/6": {
     "defaultMessage": "Ended",
     "description": "src/views/CampaignDetail/Apply/Button/index.tsx"
+  },
+  "md2Ml3": {
+    "defaultMessage": "Pick a line you love from an article and put it on the wall ✍️",
+    "description": "src/views/CampaignDetail/QuoteWall band empty-state prompt"
   },
   "me1nR+": {
     "defaultMessage": "Copy Address"
@@ -3405,6 +3389,9 @@
   "oEHAIT": {
     "defaultMessage": "Cancel schedule",
     "description": "confirm cancel schedule button"
+  },
+  "oIt05d": {
+    "defaultMessage": "Clay"
   },
   "oKcye/": {
     "defaultMessage": "mentioned you in a moment"
@@ -3851,6 +3838,9 @@
   "vlEBHB": {
     "defaultMessage": "Link",
     "description": "src/components/Editor"
+  },
+  "vmcSWC": {
+    "defaultMessage": "Sage"
   },
   "vmx+TU": {
     "defaultMessage": "Credit card",

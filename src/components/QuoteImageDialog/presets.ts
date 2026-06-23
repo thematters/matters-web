@@ -1,6 +1,11 @@
 /**
  * 金句卡片的風格與尺寸設定。
- * 顏色取自 thematters/design-system token；命名採中性色調。
+ *
+ * 配色採「低飽和、書卷氣」的編輯感色調（非 design-system 的 UI token）。
+ * 取捨原因：design-system 的 canonical 品牌色（紫 #7258FF + 螢光綠 #C3F432）
+ * 是給 App 介面用的強訊號色，放大成滿版金句底色會過於吵雜；Matters 官方金句卡
+ * （matters-town-quote-square）本身也走暗色氛圍 + 暖金的沉穩路線。
+ * 品牌識別改由頁尾的「Matters」字標承擔（見 Card.tsx），不靠滿版品牌色。
  */
 
 export type QuoteStyle = {
@@ -15,10 +20,8 @@ export type QuoteStyle = {
   weight?: number
   airy?: boolean
   wide?: boolean
-  /** 七日書 logo 版本：深底用 white，淺底用 dark */
+  /** 深底用 white 版字標 / 七日書 logo，淺底用 dark 版 */
   logo?: 'dark' | 'white'
-  qrDark: string
-  qrLight: string
 }
 
 export type QuoteSize = {
@@ -30,121 +33,55 @@ export type QuoteSize = {
 
 export const QUOTE_STYLES: QuoteStyle[] = [
   {
-    id: 'warm',
-    name: 'Cream',
-    swatch: '#c0a46b',
-    bg: '#faf7f0',
-    quoteColor: '#333333',
-    accent: '#c0a46b',
-    sub: '#c58463',
+    id: 'paper',
+    name: 'Paper',
+    swatch: '#a6814c',
+    bg: '#f6f2e9',
+    quoteColor: '#2c2a26',
+    accent: '#a6814c',
+    sub: '#8a7a5e',
     font: 'serif',
     logo: 'dark',
-    qrDark: '#c0a46b',
-    qrLight: '#faf7f0',
-  },
-  {
-    id: 'sky',
-    name: 'Sky',
-    swatch: '#85d8ff',
-    bg: '#F0F9FE',
-    quoteColor: '#045898',
-    accent: '#1999D0',
-    sub: '#1999D0',
-    font: 'sans',
-    weight: 300,
-    airy: true,
-    logo: 'dark',
-    qrDark: '#1999D0',
-    qrLight: '#F0F9FE',
-  },
-  {
-    id: 'coral',
-    name: 'Coral',
-    swatch: '#dc7871',
-    bg: '#ffe8e8',
-    quoteColor: '#333333',
-    accent: '#dc7871',
-    sub: '#d577aa',
-    font: 'sans',
-    weight: 600,
-    logo: 'dark',
-    qrDark: '#dc7871',
-    qrLight: '#ffe8e8',
   },
   {
     id: 'ink',
     name: 'Ink',
-    swatch: '#000000',
-    bg: '#000000',
-    quoteColor: '#ffffff',
-    accent: '#c0a46b',
-    sub: '#c0a46b',
+    swatch: '#1c1b19',
+    bg: '#1c1b19',
+    quoteColor: '#f2eee5',
+    accent: '#c7a669',
+    sub: '#9a9183',
     font: 'serif',
     wide: true,
     logo: 'white',
-    qrDark: '#c0a46b',
-    qrLight: '#000000',
   },
   {
-    id: 'pine',
-    name: 'Pine',
-    swatch: '#0d6763',
-    bg: '#0d6763',
-    quoteColor: '#faf7f0',
-    accent: '#40bfa5',
-    sub: '#a9d9cf',
+    id: 'sage',
+    name: 'Sage',
+    swatch: '#44574e',
+    bg: '#44574e',
+    quoteColor: '#f0ece1',
+    accent: '#cbb680',
+    sub: '#c2ccc4',
     font: 'serif',
     logo: 'white',
-    qrDark: '#faf7f0',
-    qrLight: '#0d6763',
   },
   {
-    id: 'mint',
-    name: 'Mint',
-    swatch: '#70b388',
-    bg: 'linear-gradient(160deg,#f2faf7 0%,#f2fbd9 100%)',
-    quoteColor: '#246802',
-    accent: '#70b388',
-    sub: '#70b388',
+    id: 'clay',
+    name: 'Clay',
+    swatch: '#b06a4f',
+    bg: '#e3cfc2',
+    quoteColor: '#463a33',
+    accent: '#b06a4f',
+    sub: '#8e6a57',
     font: 'serif',
     logo: 'dark',
-    qrDark: '#246802',
-    qrLight: '#f7fbef',
-  },
-  {
-    id: 'violet',
-    name: 'Violet',
-    swatch: '#5b5080',
-    bg: '#514775',
-    quoteColor: '#f4f1fb',
-    accent: '#c3b6e8',
-    sub: '#d6cdee',
-    font: 'sans',
-    weight: 500,
-    logo: 'white',
-    qrDark: '#f4f1fb',
-    qrLight: '#514775',
-  },
-  {
-    id: 'slate',
-    name: 'Slate',
-    swatch: '#c9cace',
-    bg: '#e7e8ec',
-    quoteColor: '#2b2b2e',
-    accent: '#7f7f88',
-    sub: '#6f6f78',
-    font: 'sans',
-    weight: 400,
-    logo: 'dark',
-    qrDark: '#333333',
-    qrLight: '#e7e8ec',
   },
 ]
 
 export const QUOTE_SIZES: QuoteSize[] = [
   { id: 'square', name: 'Square', w: 1080, h: 1080 },
   { id: 'portrait', name: 'Portrait', w: 1080, h: 1350 },
-  { id: 'story', name: 'Story', w: 1080, h: 1920 },
 ]
 
 /** 金句字數上限（超過自動截斷，金句以精煉為佳） */
