@@ -38,13 +38,6 @@
   border-radius: 999px;
 }
 
-/* per-campaign "view all" (opens the dialog), centred below the card row */
-.bandViewMore {
-  display: flex;
-  justify-content: center;
-  margin-top: var(--sp12);
-}
-
 /* compact preview: a vertical stack of memo cards */
 .previewWall {
   display: flex;
@@ -72,8 +65,9 @@
   color: var(--color-matters-green);
 }
 
-/* quote card — refined pull-quote: light card, green quote mark, footer with
-   author + back-link split by a thin DS-compliant rule (no 2px green line) */
+/* quote card — refined pull-quote: light card, green quote mark, an author
+   footer split by a thin DS rule. The whole card is a stretched link to the
+   source article (see .cardLink). */
 .card {
   position: relative;
   display: flex;
@@ -93,19 +87,29 @@
   color: var(--color-matters-green);
 }
 
-.quoteLink {
+/* stretched link: the ::after overlay makes the whole card clickable while the
+   quote text stays the link's accessible name. The admin retract row sits above
+   the overlay via z-index so it stays independently clickable. */
+.cardLink {
   color: inherit;
 }
 
+.cardLink::after {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  content: '';
+}
+
 .quote {
-  /* match the campaign description size (text15); cap at 3 lines */
+  /* identical to the campaign description: text15 / 1.733rem / grey-dark */
   display: -webkit-box;
   margin: var(--sp4) 0 0;
   overflow: hidden;
   -webkit-line-clamp: 3;
   font-size: var(--text15);
-  line-height: 1.7;
-  color: var(--color-grey-darkest);
+  line-height: 1.733rem;
+  color: var(--color-grey-dark);
   -webkit-box-orient: vertical;
 }
 
@@ -113,7 +117,6 @@
   display: flex;
   gap: var(--sp8);
   align-items: flex-end;
-  justify-content: space-between;
   padding-top: var(--sp12);
   margin-top: var(--sp12);
   border-top: 1px solid var(--color-grey-light);
@@ -125,15 +128,10 @@
   color: var(--color-grey-dark);
 }
 
-.back {
-  flex-shrink: 0;
-  font-size: var(--text12);
-  color: var(--color-matters-green);
-  white-space: nowrap;
-}
-
 /* admin-only retract */
 .retractRow {
+  position: relative;
+  z-index: 1;
   display: flex;
   gap: var(--sp8);
   margin-top: var(--sp8);
@@ -164,13 +162,16 @@
   padding: var(--sp24) 0 var(--sp8);
 }
 
+/* joined strip: the cards share one outer frame; a thin DS rule divides each
+   quote (no gaps, borders connected) */
 .bandRow {
   display: flex;
-  gap: var(--sp24);
-  padding-bottom: var(--sp4);
   overflow-x: auto;
   scrollbar-width: none;
   -ms-overflow-style: none;
+  background: var(--color-grey-lighter);
+  border: 1px solid var(--color-grey-light);
+  border-radius: 0.625rem;
 }
 
 .bandRow::-webkit-scrollbar {
@@ -180,6 +181,14 @@
 .bandRow > .card {
   flex: 0 0 15rem; /* 240px */
   margin: 0;
+  background: transparent;
+  border: none;
+  border-right: 1px solid var(--color-grey-light);
+  border-radius: 0;
+}
+
+.bandRow > .card:last-child {
+  border-right: none;
 }
 
 /* empty band: an invitation card (soft green fill + green accent rule) shown

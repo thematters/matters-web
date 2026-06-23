@@ -120,30 +120,6 @@ const QuoteWall = ({ shortHash, entry = 'module' }: QuoteWallProps) => {
             </p>
           </div>
         )}
-
-        {quotes.length > 0 && totalCount > quotes.length && (
-          <div className={styles.bandViewMore}>
-            <QuoteWallDialog shortHash={shortHash} totalCount={totalCount}>
-              {({ openDialog }) => (
-                <Button
-                  spacing={[4, 0]}
-                  textColor="green"
-                  textActiveColor="greenDark"
-                  onClick={openDialog}
-                  aria-haspopup="dialog"
-                >
-                  <TextIcon size={14} weight="medium">
-                    <FormattedMessage
-                      defaultMessage="View all {count} quotes"
-                      id="epZb9X"
-                      values={{ count: totalCount }}
-                    />
-                  </TextIcon>
-                </Button>
-              )}
-            </QuoteWallDialog>
-          </div>
-        )}
       </section>
     )
   }

@@ -2128,9 +2128,6 @@
     "defaultMessage": "Optimism 是獨立運行的區塊鏈，若你在其他鏈上已有 USDT 貨幣，需要將它們轉移到 Optimism 網絡才能使用，詳情參考 {tutorial}.",
     "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
   },
-  "Thr8QX": {
-    "defaultMessage": "回原文 ↩"
-  },
   "TjWWxF": {
     "defaultMessage": "廣播已送出",
     "description": "src/views/Circle/Broadcast/Broadcast.tsx"

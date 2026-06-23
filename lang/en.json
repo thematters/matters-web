@@ -2129,9 +2129,6 @@
     "defaultMessage": "Optimism is a standalone blockchain. If you have USDT on other chains, you need to transfer them to Optimism. See details in the {tutorial}.",
     "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
   },
-  "Thr8QX": {
-    "defaultMessage": "To article ↩"
-  },
   "TjWWxF": {
     "defaultMessage": "Broadcast sent",
     "description": "src/views/Circle/Broadcast/Broadcast.tsx"

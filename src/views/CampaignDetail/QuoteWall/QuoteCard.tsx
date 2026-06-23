@@ -56,7 +56,8 @@ const QuoteCard = ({ quote, afterRetract }: QuoteCardProps) => {
       <span className={styles.quoteMark} aria-hidden="true">
         ❝
       </span>
-      <Link {...path} className={styles.quoteLink}>
+      {/* stretched link: the whole card navigates to the source article */}
+      <Link {...path} className={styles.cardLink}>
         <blockquote className={styles.quote}>{quote.content}</blockquote>
       </Link>
 
@@ -65,9 +66,6 @@ const QuoteCard = ({ quote, afterRetract }: QuoteCardProps) => {
           — {quote.article.author.userName}
           {quote.article.title ? `《${quote.article.title}》` : ''}
         </span>
-        <Link {...path} className={styles.back}>
-          <FormattedMessage defaultMessage="To article ↩" id="Thr8QX" />
-        </Link>
       </figcaption>
 
       {canRetract && (
