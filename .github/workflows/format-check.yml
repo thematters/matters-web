@@ -1,0 +1,49 @@
+name: Format Check
+
+on:
+  pull_request:
+    branches:
+      - develop
+      - master
+      - main
+      - release/next
+
+jobs:
+  format-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@master
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Cache NPM dependencies
+        uses: actions/cache@v4
+        id: node_modules_cache
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-v18-npm-v4-${{ hashFiles('package-lock.json') }}
+
+      - name: Install Dependencies
+        if: steps.node_modules_cache.outputs.cache-hit != 'true'
+        run: npm ci
+
+      - name: Format Check
+        run: |
+          files=$(git diff --name-only --diff-filter=ACMR \
+            "origin/${{ github.base_ref }}...HEAD" \
+            | grep -E '\.(js|jsx|ts|tsx|json)$' \
+            | grep -vE '^(\.next|build|out|lang|coverage|node_modules)/' \
+            | grep -E '/' || true)
+          if [ -z "$files" ]; then
+            echo "No prettier-managed files changed; skipping."
+            exit 0
+          fi
+          echo "$files"
+          echo "$files" | xargs npx prettier --check
