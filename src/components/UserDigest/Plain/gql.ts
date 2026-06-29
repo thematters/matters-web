@@ -6,6 +6,9 @@ export const fragments = {
       id
       userName
       displayName
+      status {
+        state
+      }
     }
   `,
 }
