@@ -75,6 +75,33 @@ describe('<UserDigest.Rich>', () => {
     expect(handleClick).not.toBeCalled()
   })
 
+  it('should hide original identity for a frozen user', () => {
+    const handleClick = vi.fn()
+
+    render(
+      <UserDigest.Rich
+        user={{
+          ...MOCK_USER,
+          status: { ...MOCK_USER.status, state: UserState.Frozen },
+        }}
+        onClick={handleClick}
+      />
+    )
+
+    const $displayName = screen.getByTestId(
+      TEST_ID.DIGEST_USER_RICH_DISPLAY_NAME
+    )
+    expect($displayName).toHaveTextContent('Account Frozen')
+    expect(screen.queryByText(MOCK_USER.displayName)).not.toBeInTheDocument()
+    expect(
+      screen.queryByText(MOCK_USER.info.description)
+    ).not.toBeInTheDocument()
+
+    fireEvent.click($displayName)
+    expect(mockRouter.asPath).not.toContain(MOCK_USER.userName)
+    expect(handleClick).not.toBeCalled()
+  })
+
   it('should render a UserDigest.Rich with or w/o follow buttons', () => {
     // hide follow button if viewer is the user
     render(<UserDigest.Rich user={MOCK_USER} hasFollow />)
