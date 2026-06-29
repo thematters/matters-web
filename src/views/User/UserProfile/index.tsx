@@ -23,7 +23,7 @@ import {
   useRoute,
   ViewerContext,
 } from '~/components'
-import { UserProfileUserPublicQuery } from '~/gql/graphql'
+import { UserProfileUserPublicQuery, UserState } from '~/gql/graphql'
 
 import UserTabs from '../UserTabs'
 import { Badges } from './Badges'
@@ -129,9 +129,11 @@ export const UserProfile = () => {
   /**
    * Inactive User
    */
-  const isUserArchived = userState === 'archived'
-  if (isUserArchived) {
-    return <Inactive />
+  const isUserArchived = userState === UserState.Archived
+  const isUserFrozen = userState === UserState.Frozen
+  const isUserInactive = isUserArchived || isUserFrozen
+  if (isUserInactive) {
+    return <Inactive state={userState} />
   }
 
   /**

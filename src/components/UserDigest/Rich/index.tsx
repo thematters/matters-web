@@ -12,6 +12,7 @@ import { FollowUserButton } from '~/components/Buttons/FollowUser'
 import {
   UserDigestRichUserPrivateFragment,
   UserDigestRichUserPublicFragment,
+  UserState,
 } from '~/gql/graphql'
 
 import { fragments } from './gql'
@@ -56,20 +57,23 @@ const Rich = ({
 }: UserDigestRichProps) => {
   const { visuallyHiddenProps } = useVisuallyHidden()
 
-  const isArchived = user?.status?.state === 'archived'
+  const userState = user?.status?.state
+  const isArchived = userState === UserState.Archived
+  const isFrozen = userState === UserState.Frozen
+  const isInactive = isArchived || isFrozen
   const containerClasses = classNames({
     [styles.container]: true,
     [styles[`size${capitalizeFirstLetter(size)}`]]: !!size,
-    [styles.disabled]: isArchived,
+    [styles.disabled]: isInactive,
   })
 
   const contentClasses = classNames({
     [styles.content]: true,
     [styles.hasExtraButton]: hasFollow || !!extraButton,
-    [styles.archived]: isArchived,
+    [styles.archived]: isInactive,
   })
 
-  if (isArchived || !user) {
+  if (isInactive || !user) {
     return (
       <Card
         spacing={[12, 12]}
@@ -90,10 +94,17 @@ const Rich = ({
                 data-test-id={TEST_ID.DIGEST_USER_RICH_DISPLAY_NAME}
               >
                 {user ? (
-                  <FormattedMessage
-                    defaultMessage="Account Archived"
-                    id="YS8YSV"
-                  />
+                  isFrozen ? (
+                    <FormattedMessage
+                      defaultMessage="Account Frozen"
+                      id="sE2Ui3"
+                    />
+                  ) : (
+                    <FormattedMessage
+                      defaultMessage="Account Archived"
+                      id="YS8YSV"
+                    />
+                  )
                 ) : (
                   <FormattedMessage
                     defaultMessage="Anonymous User"

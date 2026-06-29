@@ -5,7 +5,7 @@ import { FormattedMessage } from 'react-intl'
 import { TEST_ID } from '~/common/enums'
 import { capitalizeFirstLetter, toPath } from '~/common/utils'
 import { Avatar, AvatarProps, AvatarSize } from '~/components/Avatar'
-import { UserDigestMiniUserFragment } from '~/gql/graphql'
+import { UserDigestMiniUserFragment, UserState } from '~/gql/graphql'
 
 import { fragments } from './gql'
 import styles from './styles.module.css'
@@ -75,7 +75,10 @@ const Mini = ({
 
   onClick,
 }: UserDigestMiniProps) => {
-  const isArchived = user?.status?.state === 'archived'
+  const userState = user?.status?.state
+  const isArchived = userState === UserState.Archived
+  const isFrozen = userState === UserState.Frozen
+  const isInactive = isArchived || isFrozen
   const containerClasses = classNames({
     [styles.container]: true,
     [styles[`text${textSize}`]]: !!textSize,
@@ -84,7 +87,7 @@ const Mini = ({
     [styles[`nameColor${capitalizeFirstLetter(nameColor)}`]]: !!nameColor,
     [styles[`spacing${capitalizeFirstLetter(spacing + '')}`]]: !!spacing,
     [styles.hasAvatar]: hasAvatar,
-    [styles.disabled]: disabled || isArchived,
+    [styles.disabled]: disabled || isInactive,
   })
   const nameClasses = classNames({
     [styles.name]: true,
@@ -92,7 +95,7 @@ const Mini = ({
     [styles.nameNoWrap]: !!nameNoWrap,
   })
 
-  if (isArchived || !user) {
+  if (isInactive || !user) {
     return (
       <span
         className={containerClasses}
@@ -104,10 +107,17 @@ const Mini = ({
           {hasDisplayName && (
             <span className={styles.displayname}>
               {user ? (
-                <FormattedMessage
-                  defaultMessage="Account Archived"
-                  id="YS8YSV"
-                />
+                isFrozen ? (
+                  <FormattedMessage
+                    defaultMessage="Account Frozen"
+                    id="sE2Ui3"
+                  />
+                ) : (
+                  <FormattedMessage
+                    defaultMessage="Account Archived"
+                    id="YS8YSV"
+                  />
+                )
               ) : (
                 <FormattedMessage defaultMessage="Anonymous User" id="GclYG/" />
               )}

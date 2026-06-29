@@ -22,7 +22,7 @@ import {
   useRoute,
   ViewerContext,
 } from '~/components'
-import { UserProfileUserPublicQuery } from '~/gql/graphql'
+import { UserProfileUserPublicQuery, UserState } from '~/gql/graphql'
 
 import { BadgeGrandDialog } from '../BadgeGrandDialog'
 import { BadgeNomadDialog } from '../BadgeNomadDialog'
@@ -136,8 +136,9 @@ export const AsideUserProfile = () => {
 
   const userState = user.status?.state as string
   const isCivicLiker = user.liker.civicLiker
-  const isUserArchived = userState === 'archived'
-  const isUserInactive = isUserArchived
+  const isUserArchived = userState === UserState.Archived
+  const isUserFrozen = userState === UserState.Frozen
+  const isUserInactive = isUserArchived || isUserFrozen
 
   /**
    * Inactive User
@@ -156,6 +157,9 @@ export const AsideUserProfile = () => {
             <h1 className={styles.name}>
               {isUserArchived && (
                 <FormattedMessage defaultMessage="Deleted user" id="9J0iCw" />
+              )}
+              {isUserFrozen && (
+                <FormattedMessage defaultMessage="Frozen user" id="MeqJEO" />
               )}
             </h1>
           </section>

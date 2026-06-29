@@ -1668,6 +1668,9 @@
     "defaultMessage": "绑定钱包",
     "description": "src/components/Dialogs/AddWalletLoginDialog/Content.tsx"
   },
+  "MeqJEO": {
+    "defaultMessage": "Frozen user"
+  },
   "Mgl1bT": {
     "defaultMessage": "应用授权"
   },
@@ -3617,6 +3620,9 @@
   },
   "s2s6tx": {
     "defaultMessage": "作品已成功发布，稍后将同步到 IPFS"
+  },
+  "sE2Ui3": {
+    "defaultMessage": "Account Frozen"
   },
   "sFJ/Is": {
     "defaultMessage": "确认清空当前编辑的内容吗？"
