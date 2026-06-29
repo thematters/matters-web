@@ -1,3 +1,16 @@
+/*
+ * 金句卡用字：昭源宋體 Chiron Sung HK（Tamcy，SIL OFL 1.1）
+ * 子集化為 Big5 Level 1 常用字（次常用/罕見字自動 fallback 至系統襯線）。
+ * 授權：public/static/fonts/ChironSungHK-OFL.txt
+ */
+@font-face {
+  font-family: 'Chiron Sung HK';
+  font-style: normal;
+  font-weight: 400;
+  src: url('/static/fonts/chiron-sung-hk-subset.woff2') format('woff2');
+  font-display: swap;
+}
+
 /* === 金句卡片本體（固定 1080px 設計尺寸） === */
 .card {
   position: relative;
@@ -5,9 +18,19 @@
   overflow: hidden;
 }
 
+/* Matters 交疊圓浮水印（右上出血、淡） */
+.watermark {
+  position: absolute;
+  top: -64px;
+  right: -72px;
+  width: 440px;
+  height: auto;
+  opacity: 0.1;
+}
+
 .inner {
   position: absolute;
-  inset: 118px 110px 300px;
+  inset: 120px 108px 290px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -15,57 +38,41 @@
 }
 
 .mark {
-  margin-bottom: 18px;
-  font-family: 'Noto Serif TC', 'Songti TC', serif;
-  font-size: 120px;
-  line-height: 0.6;
+  margin-bottom: 6px;
+  font-family: 'Chiron Sung HK', 'Noto Serif TC', serif;
+  font-size: 72px;
+  line-height: 0.5;
   opacity: 0.9;
 }
 
 .quote {
-  /* font-size / color / line-height 由元件 inline 指定 */
+  font-weight: 400;
+  line-height: 1.68;
+  letter-spacing: 0.03em;
+
+  /* font-size / color 由元件 inline 指定 */
 }
 
 .author {
-  margin-top: 44px;
-  font-size: 40px;
-  font-weight: 600;
+  margin-top: 40px;
+  font-size: 30px;
+  font-weight: 500;
 }
 
 .author .dash {
-  margin-right: 14px;
+  margin-right: 12px;
   opacity: 0.7;
 }
 
 .foot {
   position: absolute;
-  right: 110px;
-  bottom: 90px;
-  left: 110px;
+  right: 108px;
+  bottom: 88px;
+  left: 108px;
   display: flex;
-  gap: 32px;
+  gap: 24px;
   align-items: flex-end;
   justify-content: space-between;
-}
-
-.title {
-  display: -webkit-box;
-  max-width: 640px;
-  overflow: hidden;
-  -webkit-line-clamp: 2;
-  font-family: 'PingFang TC', sans-serif;
-  font-size: 30px;
-  line-height: 1.5;
-  opacity: 0.95;
-  -webkit-box-orient: vertical;
-}
-
-.title .label {
-  display: block;
-  margin-bottom: 10px;
-  font-size: 22px;
-  letter-spacing: 0.2em;
-  opacity: 0.6;
 }
 
 .brandLogo {
@@ -75,7 +82,7 @@
 .brandLogo svg {
   display: block;
   width: auto;
-  height: 60px;
+  height: 52px;
 }
 
 /* 一般文章頁尾的「Matters」字標（logo.svg 以 currentColor 上色） */
@@ -86,7 +93,23 @@
 .wordmark svg {
   display: block;
   width: auto;
-  height: 44px;
+  height: 38px;
+}
+
+/* 文章 QR Code（白底、掃描回原文） */
+.qr {
+  flex: 0 0 auto;
+  width: 150px;
+  height: 150px;
+  padding: 14px;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgb(0 0 0 / 12%);
+}
+
+.qr img {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
 /* === 對話框內容 === */

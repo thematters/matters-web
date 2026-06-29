@@ -1,5 +1,6 @@
 import { toJpeg } from 'html-to-image'
-import { useMemo, useRef, useState } from 'react'
+import QRCode from 'qrcode'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { defineMessages, FormattedMessage, useIntl } from 'react-intl'
 
 import { ERROR_CODES } from '~/common/enums'
@@ -15,10 +16,11 @@ import styles from './styles.module.css'
 const PREVIEW_WIDTH = 320 // 預覽寬度（卡片以此等比縮放顯示）
 
 const styleNames = defineMessages({
-  paper: { defaultMessage: 'Paper', id: 'lrdFIK' },
-  ink: { defaultMessage: 'Ink', id: 'QWkEED' },
-  sage: { defaultMessage: 'Sage', id: 'vmcSWC' },
-  clay: { defaultMessage: 'Clay', id: 'oIt05d' },
+  sakura: { defaultMessage: 'Sakura', id: 'eOTxIj' },
+  mist: { defaultMessage: 'Mist', id: 'Uy4SD8' },
+  cream: { defaultMessage: 'Cream', id: 'lY48xg' },
+  meadow: { defaultMessage: 'Meadow', id: 'VAtGlr' },
+  lilac: { defaultMessage: 'Lilac', id: '7LFi1V' },
 })
 const sizeNames = defineMessages({
   square: { defaultMessage: 'Square 1:1', id: 'iII6Ry' },
@@ -34,8 +36,8 @@ export type QuoteImageDialogContentProps = {
   quote: string
   author: string
   title: string
-  /** 文章連結（保留給呼叫端相容；卡片移除 QR 後目前未使用） */
-  shareLink?: string
+  /** 文章連結，用於產生卡片上的 QR Code */
+  shareLink: string
   isSevenDayBook: boolean
   /** 文章 id；與 canPostToWall 一起提供時顯示「上牆」按鈕 */
   articleId?: string
@@ -47,7 +49,7 @@ const QuoteImageDialogContent: React.FC<QuoteImageDialogContentProps> = ({
   closeDialog,
   quote,
   author,
-  title,
+  shareLink,
   isSevenDayBook,
   articleId,
   canPostToWall,
@@ -55,8 +57,9 @@ const QuoteImageDialogContent: React.FC<QuoteImageDialogContentProps> = ({
   const intl = useIntl()
   const cardRef = useRef<HTMLDivElement>(null)
 
-  const [styleId, setStyleId] = useState('paper')
+  const [styleId, setStyleId] = useState('sakura')
   const [sizeId, setSizeId] = useState('portrait')
+  const [qrDataUrl, setQrDataUrl] = useState('')
   const [putQuote] = useMutation<PutQuoteMutation>(PUT_QUOTE)
   const [isPosting, setPosting] = useState(false)
   const [posted, setPosted] = useState(false)
@@ -65,10 +68,35 @@ const QuoteImageDialogContent: React.FC<QuoteImageDialogContentProps> = ({
   const size = QUOTE_SIZES.find((s) => s.id === sizeId) || QUOTE_SIZES[1]
   const { truncated, original } = useMemo(() => clampQuote(quote), [quote])
 
+  // 依風格 / 連結重新產生 QR Code（顏色跟著風格走）
+  useEffect(() => {
+    let active = true
+    QRCode.toDataURL(shareLink || ' ', {
+      margin: 0,
+      width: 300,
+      color: { dark: style.qrDark, light: style.qrLight },
+    })
+      .then((url) => active && setQrDataUrl(url))
+      .catch(() => active && setQrDataUrl(''))
+    return () => {
+      active = false
+    }
+  }, [shareLink, style.qrDark, style.qrLight])
+
   const previewScale = PREVIEW_WIDTH / size.w
 
   const generate = async () => {
     if (!cardRef.current) return null
+    // 截圖前確保金句字體（昭源宋體子集）已載入，避免 fallback
+    try {
+      await document.fonts.load(
+        `400 80px 'Chiron Sung HK'`,
+        `${quote}${author}`
+      )
+      await document.fonts.ready
+    } catch {
+      // 字體載入失敗則以系統襯線 fallback 輸出
+    }
     return toJpeg(cardRef.current, {
       quality: 0.95,
       pixelRatio: 2,
@@ -183,7 +211,7 @@ const QuoteImageDialogContent: React.FC<QuoteImageDialogContentProps> = ({
               ref={cardRef}
               quote={quote}
               author={author}
-              title={title}
+              qrDataUrl={qrDataUrl}
               style={style}
               size={size}
               isSevenDayBook={isSevenDayBook}

@@ -665,6 +665,9 @@
   "7JlauX": {
     "defaultMessage": "指南"
   },
+  "7LFi1V": {
+    "defaultMessage": "淡薰紫"
+  },
   "7UqcsO": {
     "defaultMessage": "忘記交易密碼？",
     "description": "src/components/Forms/PaymentForm/PayTo/Confirm/index.tsx"
@@ -1902,9 +1905,6 @@
     "defaultMessage": "Billboard 是一個公開且可付費租借的鏈上 NFT 廣告協議。租借成功後，可進行 14 天的內容投放。租借費用基於哈柏格稅概念計算，產生的租借收入將以二次方配捐方式回饋給社區創作者。",
     "description": "src/components/Dialogs/BillboardDialog/Content.tsx"
   },
-  "QWkEED": {
-    "defaultMessage": "Ink"
-  },
   "QXJQ5G": {
     "defaultMessage": "授權信息已失效，請重新登入",
     "description": "TOKEN_INVALID"
@@ -2182,6 +2182,9 @@
     "defaultMessage": "Optimism 是基於以太坊的第二層（Layer2）擴容方案，能提升交易速度，並降低手續費，同時確保安全性，讓你更輕鬆地支持創作者。",
     "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
   },
+  "Uy4SD8": {
+    "defaultMessage": "霧藍"
+  },
   "V1Lts1": {
     "defaultMessage": "發布中，請稍候⋯",
     "description": "src/components/Editor/PreviewDialog/index.tsx"
@@ -2193,6 +2196,9 @@
   "V8msLJ": {
     "defaultMessage": "在你的圍爐中留言並提及你",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
+  },
+  "VAtGlr": {
+    "defaultMessage": "淺草綠"
   },
   "VBve8d": {
     "defaultMessage": "搬家到 Matters"
@@ -2770,6 +2776,9 @@
   "eNv3Wm": {
     "defaultMessage": "已推薦你的這篇作品到頻道：{channelNames}"
   },
+  "eOTxIj": {
+    "defaultMessage": "櫻花粉"
+  },
   "eRTBgt": {
     "defaultMessage": "本則貼文已由守望相助隊檢舉",
     "description": "src/components/Comment/Content/index.tsx"
@@ -3208,6 +3217,9 @@
   "lTleCS": {
     "defaultMessage": "Checking"
   },
+  "lY48xg": {
+    "defaultMessage": "奶油黃"
+  },
   "lYVn31": {
     "defaultMessage": "此作品已加入排程，請前往「我的創作」頁面確認"
   },
@@ -3229,9 +3241,6 @@
   },
   "lr5qH7": {
     "defaultMessage": "排程於 {date} {time}"
-  },
-  "lrdFIK": {
-    "defaultMessage": "Paper"
   },
   "m+cdhC": {
     "defaultMessage": "近期使用"
@@ -3387,9 +3396,6 @@
   "oEHAIT": {
     "defaultMessage": "取消排程",
     "description": "confirm cancel schedule button"
-  },
-  "oIt05d": {
-    "defaultMessage": "Clay"
   },
   "oKcye/": {
     "defaultMessage": "在動態中提及你"
@@ -3836,9 +3842,6 @@
   "vlEBHB": {
     "defaultMessage": "連結",
     "description": "src/components/Editor"
-  },
-  "vmcSWC": {
-    "defaultMessage": "Sage"
   },
   "vmx+TU": {
     "defaultMessage": "信用卡",

@@ -666,6 +666,9 @@
   "7JlauX": {
     "defaultMessage": "Explore"
   },
+  "7LFi1V": {
+    "defaultMessage": "Lilac"
+  },
   "7UqcsO": {
     "defaultMessage": "Forgot transaction password?",
     "description": "src/components/Forms/PaymentForm/PayTo/Confirm/index.tsx"
@@ -1903,9 +1906,6 @@
     "defaultMessage": "Billboard is an open and rentable on-chain NFT advertising protocol. Once a rental is completed, the content can be displayed for 14 days. The rental fee is calculated based on the concept of the Harberger tax, and the generated rental income is distributed to the community creators through quadratic funding.",
     "description": "src/components/Dialogs/BillboardDialog/Content.tsx"
   },
-  "QWkEED": {
-    "defaultMessage": "Ink"
-  },
   "QXJQ5G": {
     "defaultMessage": "Please log in again.",
     "description": "TOKEN_INVALID"
@@ -2183,6 +2183,9 @@
     "defaultMessage": "Optimism is a Layer 2 scaling solution based on Ethereum that can provide faster and cheaper transactions, while ensuring security, making it easier for you to support creators.",
     "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
   },
+  "Uy4SD8": {
+    "defaultMessage": "Mist"
+  },
   "V1Lts1": {
     "defaultMessage": "Publishing, please wait...",
     "description": "src/components/Editor/PreviewDialog/index.tsx"
@@ -2194,6 +2197,9 @@
   "V8msLJ": {
     "defaultMessage": "left comments and mentioned you in your circle",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
+  },
+  "VAtGlr": {
+    "defaultMessage": "Meadow"
   },
   "VBve8d": {
     "defaultMessage": "Settled in Matters"
@@ -2771,6 +2777,9 @@
   "eNv3Wm": {
     "defaultMessage": "Your work has been recommended to the channels: {channelNames}"
   },
+  "eOTxIj": {
+    "defaultMessage": "Sakura"
+  },
   "eRTBgt": {
     "defaultMessage": "本則貼文已由守望相助隊檢舉",
     "description": "src/components/Comment/Content/index.tsx"
@@ -3209,6 +3218,9 @@
   "lTleCS": {
     "defaultMessage": "Checking"
   },
+  "lY48xg": {
+    "defaultMessage": "Cream"
+  },
   "lYVn31": {
     "defaultMessage": "This work has been added to the schedule. Please go to the \"My Works\" page to confirm"
   },
@@ -3230,9 +3242,6 @@
   },
   "lr5qH7": {
     "defaultMessage": "Scheduled for {date} {time}"
-  },
-  "lrdFIK": {
-    "defaultMessage": "Paper"
   },
   "m+cdhC": {
     "defaultMessage": "Recently used"
@@ -3389,9 +3398,6 @@
   "oEHAIT": {
     "defaultMessage": "Cancel schedule",
     "description": "confirm cancel schedule button"
-  },
-  "oIt05d": {
-    "defaultMessage": "Clay"
   },
   "oKcye/": {
     "defaultMessage": "mentioned you in a moment"
@@ -3838,9 +3844,6 @@
   "vlEBHB": {
     "defaultMessage": "Link",
     "description": "src/components/Editor"
-  },
-  "vmcSWC": {
-    "defaultMessage": "Sage"
   },
   "vmx+TU": {
     "defaultMessage": "Credit card",
