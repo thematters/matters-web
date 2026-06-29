@@ -99,13 +99,8 @@ const BaseQuoteWallDialog = ({
 
           {!loading && quotes.length > 0 && (
             <div className={styles.wall}>
-              {quotes.map((quote, i) => (
-                <QuoteCard
-                  key={quote.id}
-                  quote={quote}
-                  index={i}
-                  afterRetract={shuffle}
-                />
+              {quotes.map((quote) => (
+                <QuoteCard key={quote.id} quote={quote} />
               ))}
             </div>
           )}

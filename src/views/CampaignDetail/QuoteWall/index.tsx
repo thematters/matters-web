@@ -40,12 +40,16 @@ const QuoteWall = ({ shortHash, entry = 'module' }: QuoteWallProps) => {
       ? data.campaign
       : undefined
   const totalCount = campaign?.quoteCount ?? 0
+  const enableQuoteWall = campaign?.enableQuoteWall ?? false
   const quotes: Quote[] = (campaign?.quotes?.edges || [])
     .map(({ node }) => node)
     .slice(0, PREVIEW_COUNT)
 
-  // nothing on the wall yet → hide the module entirely
-  if (totalCount <= 0) {
+  // the centre-column band keeps showing even when the wall is still empty (as
+  // a prompt to post the first quote), as long as the campaign has the wall
+  // enabled; the legacy module/chip entries still hide when empty
+  const showEmptyBand = entry === 'band' && enableQuoteWall
+  if (totalCount <= 0 && !showEmptyBand) {
     return null
   }
 
@@ -80,34 +84,42 @@ const QuoteWall = ({ shortHash, entry = 'module' }: QuoteWallProps) => {
           <h2 className={styles.title}>
             <FormattedMessage defaultMessage="Quote wall" id="1HLo+Y" />
           </h2>
-          {totalCount > quotes.length && (
-            <QuoteWallDialog shortHash={shortHash} totalCount={totalCount}>
-              {({ openDialog }) => (
-                <Button
-                  spacing={[4, 0]}
-                  textColor="green"
-                  textActiveColor="greenDark"
-                  onClick={openDialog}
-                  aria-haspopup="dialog"
-                >
-                  <TextIcon size={14} weight="medium">
-                    <FormattedMessage
-                      defaultMessage="View all {count} quotes"
-                      id="epZb9X"
-                      values={{ count: totalCount }}
-                    />
-                  </TextIcon>
-                </Button>
-              )}
-            </QuoteWallDialog>
-          )}
+          <a
+            className={styles.viewAllLink}
+            href={EXTERNAL_LINKS.SEVEN_DAY_BOOK_QUOTE_WALL}
+            target="_blank"
+            rel="noreferrer"
+          >
+            <FormattedMessage defaultMessage="See all quotes" id="bv9UzQ" />
+          </a>
         </header>
 
-        <div className={styles.bandRow}>
-          {quotes.map((quote, i) => (
-            <QuoteCard key={quote.id} quote={quote} index={i} />
-          ))}
-        </div>
+        {quotes.length > 0 ? (
+          <div className={styles.bandRow}>
+            {quotes.map((quote) => (
+              <QuoteCard key={quote.id} quote={quote} />
+            ))}
+          </div>
+        ) : (
+          // "invitation card": same shape as a real quote card (left green
+          // rule) so the wall keeps its card feel without showing a fake quote
+          <div className={styles.inviteCard}>
+            <p className={styles.inviteText}>
+              <span className={styles.spark}>✦</span>
+              <FormattedMessage
+                defaultMessage="During the event, the quotes people pick will appear here."
+                id="5FUiH2"
+                description="src/views/CampaignDetail/QuoteWall band empty-state, line 1"
+              />
+              <br />
+              <FormattedMessage
+                defaultMessage="Pick a line you love from an article and put it on the wall ✍️"
+                id="md2Ml3"
+                description="src/views/CampaignDetail/QuoteWall band empty-state prompt"
+              />
+            </p>
+          </div>
+        )}
       </section>
     )
   }
@@ -129,8 +141,8 @@ const QuoteWall = ({ shortHash, entry = 'module' }: QuoteWallProps) => {
       </header>
 
       <div className={styles.previewWall}>
-        {quotes.map((quote, i) => (
-          <QuoteCard key={quote.id} quote={quote} index={i} />
+        {quotes.map((quote) => (
+          <QuoteCard key={quote.id} quote={quote} />
         ))}
       </div>
 

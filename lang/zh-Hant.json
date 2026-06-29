@@ -416,9 +416,6 @@
   "3cxMQp": {
     "defaultMessage": "Violet"
   },
-  "3jmniZ": {
-    "defaultMessage": "撤下"
-  },
   "3kbIhS": {
     "defaultMessage": "未命名"
   },
@@ -492,6 +489,9 @@
   "5CcjZy": {
     "defaultMessage": "確認要解綁 {type} 嗎？",
     "description": "src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
+  },
+  "5FUiH2": {
+    "defaultMessage": "活動期間，大家挑出的金句會出現在這裡。"
   },
   "5IGdjy": {
     "defaultMessage": "目前尚無標籤，立即添加提高作品曝光度！"
@@ -2094,9 +2094,6 @@
   "TF1OhT": {
     "defaultMessage": "臨時密碼已過期，請嘗試重新發送"
   },
-  "TIWVxK": {
-    "defaultMessage": "已從金句牆撤下"
-  },
   "TInwt3": {
     "defaultMessage": "關閉評論"
   },
@@ -2127,9 +2124,6 @@
   "TgU+Mf": {
     "defaultMessage": "Optimism 是獨立運行的區塊鏈，若你在其他鏈上已有 USDT 貨幣，需要將它們轉移到 Optimism 網絡才能使用，詳情參考 {tutorial}.",
     "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
-  },
-  "Thr8QX": {
-    "defaultMessage": "回原文 ↩"
   },
   "TjWWxF": {
     "defaultMessage": "廣播已送出",
@@ -2453,9 +2447,6 @@
     "defaultMessage": "因違反用戶協定而被封存，",
     "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
   },
-  "Z82+dw": {
-    "defaultMessage": "確認撤下"
-  },
   "ZAoAcG": {
     "defaultMessage": "Threads, Mastodon, Misskey 這些地方的粉絲也會看到"
   },
@@ -2615,6 +2606,9 @@
   },
   "beLe/F": {
     "defaultMessage": "廣播"
+  },
+  "bv9UzQ": {
+    "defaultMessage": "查看全部金句"
   },
   "c/z318": {
     "defaultMessage": "郵件地址或密碼錯誤",
@@ -3052,9 +3046,6 @@
   "iSM+et": {
     "defaultMessage": "作者保留所有權利"
   },
-  "iSjuti": {
-    "defaultMessage": "撤下失敗"
-  },
   "iTcMqz": {
     "defaultMessage": "月色之下，夢想即將實現。月之夢徽章紀念你曾參與「遊牧者計畫」。",
     "description": "src/views/User/UserProfile/BadgeNomadLabel/index.tsx"
@@ -3316,6 +3307,9 @@
   "mbHf/6": {
     "defaultMessage": "已結束",
     "description": "src/views/CampaignDetail/Apply/Button/index.tsx"
+  },
+  "md2Ml3": {
+    "defaultMessage": "在文章裡選一段你喜歡的話，做成金句卡片貼上牆吧 ✍️"
   },
   "me1nR+": {
     "defaultMessage": "複製地址"
