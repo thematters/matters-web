@@ -1669,7 +1669,7 @@
     "description": "src/components/Dialogs/AddWalletLoginDialog/Content.tsx"
   },
   "MeqJEO": {
-    "defaultMessage": "Frozen user"
+    "defaultMessage": "已冻结用户"
   },
   "Mgl1bT": {
     "defaultMessage": "应用授权"
@@ -3622,7 +3622,7 @@
     "defaultMessage": "作品已成功发布，稍后将同步到 IPFS"
   },
   "sE2Ui3": {
-    "defaultMessage": "Account Frozen"
+    "defaultMessage": "账号已冻结"
   },
   "sFJ/Is": {
     "defaultMessage": "确认清空当前编辑的内容吗？"
