@@ -4,6 +4,7 @@ import { describe, expect, it, vi } from 'vitest'
 import { TEST_ID } from '~/common/enums'
 import { fireEvent, render, screen } from '~/common/utils/test'
 import { UserDigest } from '~/components'
+import { UserState } from '~/gql/graphql'
 import { MOCK_USER } from '~/stories/mocks'
 
 describe('<UserDigest.Mini>', () => {
@@ -60,6 +61,28 @@ describe('<UserDigest.Mini>', () => {
     expect($avatar).toBeInTheDocument()
 
     fireEvent.click($avatar)
+    expect(mockRouter.asPath).not.toContain(MOCK_USER.userName)
+  })
+
+  it('should hide original identity for a frozen user', () => {
+    render(
+      <UserDigest.Mini
+        user={{
+          ...MOCK_USER,
+          status: { ...MOCK_USER.status, state: UserState.Frozen },
+        }}
+        hasAvatar
+        hasDisplayName
+        hasUserName
+      />
+    )
+
+    expect(screen.getByText('Account Frozen')).toBeInTheDocument()
+    expect(screen.queryByText(MOCK_USER.displayName)).not.toBeInTheDocument()
+    expect(screen.queryByText(`@${MOCK_USER.userName}`)).not.toBeInTheDocument()
+
+    const $digest = screen.getByTestId(TEST_ID.DIGEST_USER_MINI)
+    fireEvent.click($digest)
     expect(mockRouter.asPath).not.toContain(MOCK_USER.userName)
   })
 
