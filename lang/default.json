@@ -1558,6 +1558,9 @@
     "defaultMessage": "Connect wallet",
     "description": "src/components/Dialogs/AddWalletLoginDialog/Content.tsx"
   },
+  "MeqJEO": {
+    "defaultMessage": "Frozen user"
+  },
   "Mgl1bT": {
     "defaultMessage": "OAuth authorize"
   },

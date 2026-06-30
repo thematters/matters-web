@@ -127,8 +127,9 @@ export const UserProfile = () => {
    * Inactive User
    */
   const isUserArchived = userState === 'archived'
-  if (isUserArchived) {
-    return <Inactive />
+  const isUserFrozen = userState === 'frozen'
+  if (isUserArchived || isUserFrozen) {
+    return <Inactive state={userState} />
   }
 
   /**

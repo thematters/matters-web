@@ -1558,6 +1558,9 @@
     "defaultMessage": "绑定钱包",
     "description": "src/components/Dialogs/AddWalletLoginDialog/Content.tsx"
   },
+  "MeqJEO": {
+    "defaultMessage": "已冻结用户"
+  },
   "Mgl1bT": {
     "defaultMessage": "应用授权"
   },

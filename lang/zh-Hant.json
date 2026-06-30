@@ -1558,6 +1558,9 @@
     "defaultMessage": "綁定錢包",
     "description": "src/components/Dialogs/AddWalletLoginDialog/Content.tsx"
   },
+  "MeqJEO": {
+    "defaultMessage": "已凍結用戶"
+  },
   "Mgl1bT": {
     "defaultMessage": "應用授權"
   },
