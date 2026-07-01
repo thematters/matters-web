@@ -39,10 +39,12 @@
   margin-bottom: 8px;
 }
 
-/* 下引號靠右對齊，與上引號對稱 */
+/* 下引號：靠右並水平鏡射，與上引號的左對齊對稱 */
 .markClose {
   margin-top: 8px;
   text-align: right;
+  transform: scaleX(-1);
+  transform-origin: right center;
 }
 
 .quote {

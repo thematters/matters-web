@@ -85,21 +85,25 @@ export const QUOTE_SIZES: QuoteSize[] = [
 /** 金句字數上限（超過自動截斷，金句以精煉為佳） */
 export const MAX_QUOTE_LEN = 80
 
-/** 依字數自動縮放字級，確保長句也塞得進安全區、不壓到頁尾 */
-export const fitFontSize = (len: number): number => {
+/**
+ * 依字數自動縮放字級，確保長句也塞得進安全區、不壓到頁尾。
+ * 直式（4:5）較高、可用較大字級；方形（1:1）較矮，長句需縮小才塞得下。
+ */
+export const fitFontSize = (len: number, tall: boolean): number => {
+  const sizes = tall ? [84, 74, 64, 56, 50] : [78, 68, 58, 48, 42]
   if (len <= 16) {
-    return 84
+    return sizes[0]
   }
   if (len <= 30) {
-    return 74
+    return sizes[1]
   }
   if (len <= 48) {
-    return 64
+    return sizes[2]
   }
   if (len <= 64) {
-    return 56
+    return sizes[3]
   }
-  return 50
+  return sizes[4]
 }
 
 export const clampQuote = (raw: string) => {

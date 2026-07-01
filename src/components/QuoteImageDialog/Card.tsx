@@ -40,7 +40,7 @@ export const QuoteCard = forwardRef<HTMLDivElement, QuoteCardProps>(
     ref
   ) => {
     const { text } = clampQuote(quote)
-    const fontSize = fitFontSize(text.length)
+    const fontSize = fitFontSize(text.length, size.h > size.w)
 
     const SevenDayBookLogo =
       s.logo === 'white' ? SevenDayBookLogoWhite : SevenDayBookLogoDark
@@ -68,8 +68,9 @@ export const QuoteCard = forwardRef<HTMLDivElement, QuoteCardProps>(
           >
             {text}
           </div>
+          {/* 下引號：用上引號同字符水平鏡射，確保與上引號左右對稱 */}
           <div className={styles.markClose} style={{ color: s.accent }}>
-            ”
+            “
           </div>
           <div className={styles.author} style={{ color: s.accent }}>
             <span className={styles.dash}>—</span>

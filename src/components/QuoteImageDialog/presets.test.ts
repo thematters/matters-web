@@ -32,20 +32,33 @@ describe('clampQuote', () => {
 })
 
 describe('fitFontSize', () => {
-  it('scales down as the quote gets longer', () => {
-    expect(fitFontSize(10)).toBe(84)
-    expect(fitFontSize(30)).toBe(74)
-    expect(fitFontSize(48)).toBe(64)
-    expect(fitFontSize(64)).toBe(56)
-    expect(fitFontSize(80)).toBe(50)
+  it('scales down as the quote gets longer (portrait)', () => {
+    expect(fitFontSize(10, true)).toBe(84)
+    expect(fitFontSize(30, true)).toBe(74)
+    expect(fitFontSize(48, true)).toBe(64)
+    expect(fitFontSize(64, true)).toBe(56)
+    expect(fitFontSize(80, true)).toBe(50)
+  })
+
+  it('uses a smaller scale for the shorter square canvas', () => {
+    expect(fitFontSize(10, false)).toBe(78)
+    expect(fitFontSize(80, false)).toBe(42)
+    // square is never larger than portrait at the same length
+    for (let len = 0; len <= MAX_QUOTE_LEN; len++) {
+      expect(fitFontSize(len, false)).toBeLessThanOrEqual(
+        fitFontSize(len, true)
+      )
+    }
   })
 
   it('never increases with length', () => {
-    let prev = Infinity
-    for (let len = 0; len <= MAX_QUOTE_LEN; len++) {
-      const size = fitFontSize(len)
-      expect(size).toBeLessThanOrEqual(prev)
-      prev = size
+    for (const tall of [true, false]) {
+      let prev = Infinity
+      for (let len = 0; len <= MAX_QUOTE_LEN; len++) {
+        const size = fitFontSize(len, tall)
+        expect(size).toBeLessThanOrEqual(prev)
+        prev = size
+      }
     }
   })
 })
