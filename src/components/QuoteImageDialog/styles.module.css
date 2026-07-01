@@ -20,7 +20,7 @@
 
 .inner {
   position: absolute;
-  inset: 118px 110px 300px;
+  inset: 118px 110px 280px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -30,7 +30,7 @@
 .mark,
 .markClose {
   font-family: 'Chiron Sung HK', 'Noto Serif TC', 'Songti TC', serif;
-  font-size: 60px;
+  font-size: 80px;
   line-height: 0.6;
   opacity: 0.9;
 }
@@ -39,10 +39,9 @@
   margin-bottom: 8px;
 }
 
-/* 右引號：全形引號墨色偏左，用負右邊距把墨色推回右緣，與左引號對稱 */
+/* 下引號靠右對齊，與上引號對稱 */
 .markClose {
   margin-top: 8px;
-  margin-right: -0.5em;
   text-align: right;
 }
 
@@ -57,7 +56,7 @@
 /* 作者、標題與金句同用昭源宋體（繼承 .card 的 font-family） */
 .author {
   margin-top: 28px;
-  font-size: 40px;
+  font-size: 46px;
   font-weight: 400;
 }
 
@@ -73,7 +72,7 @@
   margin-top: 30px;
   overflow: hidden;
   -webkit-line-clamp: 2;
-  font-size: 28px;
+  font-size: 32px;
   line-height: 1.5;
   opacity: 0.9;
   -webkit-box-orient: vertical;
