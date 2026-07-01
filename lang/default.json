@@ -3019,9 +3019,6 @@
   "iIitRg": {
     "defaultMessage": "Tag not bookmarked yet"
   },
-  "iLKG5w": {
-    "defaultMessage": "Slate"
-  },
   "iNZdM/": {
     "defaultMessage": "Switch to support creators with the Optimism network {br} Make support more convenient and affordable",
     "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
@@ -3773,6 +3770,9 @@
   },
   "uw32VR": {
     "defaultMessage": "tutorial"
+  },
+  "ux2+IE": {
+    "defaultMessage": "Charcoal"
   },
   "v+hbfO": {
     "defaultMessage": "fixed amount"

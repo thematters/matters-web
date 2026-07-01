@@ -33,11 +33,11 @@ describe('clampQuote', () => {
 
 describe('fitFontSize', () => {
   it('scales down as the quote gets longer', () => {
-    expect(fitFontSize(10)).toBe(78)
-    expect(fitFontSize(30)).toBe(66)
-    expect(fitFontSize(48)).toBe(56)
-    expect(fitFontSize(64)).toBe(48)
-    expect(fitFontSize(80)).toBe(42)
+    expect(fitFontSize(10)).toBe(84)
+    expect(fitFontSize(30)).toBe(74)
+    expect(fitFontSize(48)).toBe(64)
+    expect(fitFontSize(64)).toBe(56)
+    expect(fitFontSize(80)).toBe(50)
   })
 
   it('never increases with length', () => {

@@ -64,16 +64,16 @@ export const QUOTE_STYLES: QuoteStyle[] = [
     qrLight: '#f7fbef',
   },
   {
-    id: 'slate',
-    name: 'Slate',
-    swatch: '#c9cace',
-    bg: '#e7e8ec',
-    quoteColor: '#2b2b2e',
-    accent: '#7f7f88',
-    sub: '#6f6f78',
-    logo: 'dark',
-    qrDark: '#333333',
-    qrLight: '#e7e8ec',
+    id: 'charcoal',
+    name: 'Charcoal',
+    swatch: '#1f2023',
+    bg: '#1f2023',
+    quoteColor: '#f0f0f2',
+    accent: '#b3b4ba',
+    sub: '#83848a',
+    logo: 'white',
+    qrDark: '#f0f0f2',
+    qrLight: '#1f2023',
   },
 ]
 
@@ -88,18 +88,18 @@ export const MAX_QUOTE_LEN = 80
 /** 依字數自動縮放字級，確保長句也塞得進安全區、不壓到頁尾 */
 export const fitFontSize = (len: number): number => {
   if (len <= 16) {
-    return 78
+    return 84
   }
   if (len <= 30) {
-    return 66
+    return 74
   }
   if (len <= 48) {
-    return 56
+    return 64
   }
   if (len <= 64) {
-    return 48
+    return 56
   }
-  return 42
+  return 50
 }
 
 export const clampQuote = (raw: string) => {

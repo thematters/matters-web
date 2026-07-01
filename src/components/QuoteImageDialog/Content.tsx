@@ -19,7 +19,7 @@ const styleNames = defineMessages({
   warm: { defaultMessage: 'Cream', id: 'lY48xg' },
   pine: { defaultMessage: 'Pine', id: 'K3+ihp' },
   mint: { defaultMessage: 'Mint', id: 'OwO+Nr' },
-  slate: { defaultMessage: 'Slate', id: 'iLKG5w' },
+  charcoal: { defaultMessage: 'Charcoal', id: 'ux2+IE' },
 })
 const sizeNames = defineMessages({
   square: { defaultMessage: 'Square 1:1', id: 'iII6Ry' },
