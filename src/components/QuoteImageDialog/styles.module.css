@@ -1,3 +1,16 @@
+/*
+ * 金句用字：昭源宋體 Chiron Sung HK（Tamcy，SIL OFL 1.1）
+ * 子集化為 Big5 Level 1 常用字（次常用/罕見字 fallback 至系統襯線）。
+ * 授權：public/static/fonts/ChironSungHK-OFL.txt
+ */
+@font-face {
+  font-family: 'Chiron Sung HK';
+  font-style: normal;
+  font-weight: 400;
+  src: url('/static/fonts/chiron-sung-hk-subset.woff2') format('woff2');
+  font-display: swap;
+}
+
 /* === 金句卡片本體（固定 1080px 設計尺寸） === */
 .card {
   position: relative;
@@ -14,27 +27,54 @@
   overflow: hidden;
 }
 
-.mark {
-  margin-bottom: 18px;
-  font-family: 'Noto Serif TC', 'Songti TC', serif;
-  font-size: 120px;
+.mark,
+.markClose {
+  font-family: 'Chiron Sung HK', 'Noto Serif TC', 'Songti TC', serif;
+  font-size: 96px;
   line-height: 0.6;
   opacity: 0.9;
 }
 
-.quote {
-  /* font-size / color / line-height 由元件 inline 指定 */
+.mark {
+  margin-bottom: 8px;
 }
 
+.markClose {
+  margin-top: 8px;
+  text-align: right;
+}
+
+.quote {
+  font-weight: 400;
+  line-height: 1.7;
+  letter-spacing: 0.03em;
+
+  /* font-size / color 由元件 inline 指定 */
+}
+
+/* 作者、標題與金句同用昭源宋體（繼承 .card 的 font-family） */
 .author {
-  margin-top: 44px;
+  margin-top: 28px;
   font-size: 40px;
-  font-weight: 600;
+  font-weight: 400;
 }
 
 .author .dash {
   margin-right: 14px;
   opacity: 0.7;
+}
+
+/* 文章標題（作者下方，以〈〉標示） */
+.title {
+  display: -webkit-box;
+  max-width: 760px;
+  margin-top: 14px;
+  overflow: hidden;
+  -webkit-line-clamp: 2;
+  font-size: 28px;
+  line-height: 1.5;
+  opacity: 0.9;
+  -webkit-box-orient: vertical;
 }
 
 .foot {
@@ -48,41 +88,22 @@
   justify-content: space-between;
 }
 
-.title {
-  display: -webkit-box;
-  max-width: 640px;
-  overflow: hidden;
-  -webkit-line-clamp: 2;
-  font-family: 'PingFang TC', sans-serif;
-  font-size: 30px;
-  line-height: 1.5;
-  opacity: 0.95;
-  -webkit-box-orient: vertical;
-}
-
-.title .label {
-  display: block;
-  margin-bottom: 10px;
-  font-size: 22px;
-  letter-spacing: 0.2em;
-  opacity: 0.6;
-}
-
-.brand {
-  margin-top: 14px;
-  font-family: 'PingFang TC', sans-serif;
-  font-size: 24px;
-  opacity: 0.7;
-}
-
-.brandLogo {
-  margin-top: 16px;
+/* 直式（4:5）QR / logo 更靠近底部 */
+.portrait .foot {
+  bottom: 60px;
 }
 
 .brandLogo svg {
   display: block;
   width: auto;
-  height: 60px;
+  height: 40px;
+}
+
+/* 一般文章：官方 Matters 字標 */
+.wordmark svg {
+  display: block;
+  width: auto;
+  height: 30px;
 }
 
 .qr {

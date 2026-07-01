@@ -1,5 +1,7 @@
 import { forwardRef } from 'react'
 
+import MattersLetteringBlack from '@/public/static/images/matters-lettering-black.svg'
+import MattersLetteringWhite from '@/public/static/images/matters-lettering-white.svg'
 import SevenDayBookLogoDark from '@/public/static/images/seven-day-book-logo-dark.svg'
 import SevenDayBookLogoWhite from '@/public/static/images/seven-day-book-logo-white.svg'
 
@@ -11,9 +13,8 @@ import {
 } from './presets'
 import styles from './styles.module.css'
 
-const FONT_SERIF = "'Noto Serif TC','Songti TC','Songti SC','NSimSun',serif"
-const FONT_SANS =
-  "'PingFang TC','PingFang SC','Microsoft JhengHei','Noto Sans TC',sans-serif"
+const FONT_SERIF =
+  "'Chiron Sung HK','Noto Serif TC','Songti TC','Songti SC','NSimSun',serif"
 
 export type QuoteCardProps = {
   quote: string
@@ -29,6 +30,9 @@ export type QuoteCardProps = {
 /**
  * 金句卡片本體。固定以 1080px 寬度渲染（size.w/size.h），
  * 由 Content 以 CSS transform 縮放預覽、以 html-to-image 原尺寸截圖。
+ *
+ * 版面：上引號 → 金句（昭源宋體）→ 下引號 → 作者 → 頁尾（標題 + logo、QR）。
+ * logo 依文章來源：七日書用七日書 logo，其餘用官方 Matters 字標。
  */
 export const QuoteCard = forwardRef<HTMLDivElement, QuoteCardProps>(
   (
@@ -36,23 +40,23 @@ export const QuoteCard = forwardRef<HTMLDivElement, QuoteCardProps>(
     ref
   ) => {
     const { text } = clampQuote(quote)
-    const fontFamily = s.font === 'serif' ? FONT_SERIF : FONT_SANS
-    const letterSpacing = s.wide
-      ? '0.06em'
-      : s.font === 'serif'
-        ? '0.02em'
-        : 'normal'
-    const lineHeight = s.airy ? 1.8 : 1.65
-    const fontSize = fitFontSize(text.length, s.airy)
+    const fontSize = fitFontSize(text.length)
 
-    const Logo =
+    const SevenDayBookLogo =
       s.logo === 'white' ? SevenDayBookLogoWhite : SevenDayBookLogoDark
+    const MattersLettering =
+      s.logo === 'white' ? MattersLetteringWhite : MattersLetteringBlack
 
     return (
       <div
         ref={ref}
-        className={styles.card}
-        style={{ width: size.w, height: size.h, background: s.bg, fontFamily }}
+        className={`${styles.card} ${size.h > size.w ? styles.portrait : ''}`}
+        style={{
+          width: size.w,
+          height: size.h,
+          background: s.bg,
+          fontFamily: FONT_SERIF,
+        }}
       >
         <div className={styles.inner}>
           <div className={styles.mark} style={{ color: s.accent }}>
@@ -60,38 +64,32 @@ export const QuoteCard = forwardRef<HTMLDivElement, QuoteCardProps>(
           </div>
           <div
             className={styles.quote}
-            style={{
-              fontSize,
-              lineHeight,
-              color: s.quoteColor,
-              fontWeight: s.weight || 400,
-              letterSpacing,
-            }}
+            style={{ fontSize, color: s.quoteColor }}
           >
             {text}
+          </div>
+          <div className={styles.markClose} style={{ color: s.accent }}>
+            ”
           </div>
           <div className={styles.author} style={{ color: s.accent }}>
             <span className={styles.dash}>—</span>
             {author}
           </div>
+          <div className={styles.title} style={{ color: s.sub }}>
+            〈{title}〉
+          </div>
         </div>
 
         <div className={styles.foot}>
-          <div>
-            <div className={styles.title} style={{ color: s.sub }}>
-              <span className={styles.label}>原文</span>
-              {title}
+          {isSevenDayBook ? (
+            <div className={styles.brandLogo}>
+              <SevenDayBookLogo />
             </div>
-            {isSevenDayBook ? (
-              <div className={styles.brandLogo}>
-                <Logo />
-              </div>
-            ) : (
-              <div className={styles.brand} style={{ color: s.sub }}>
-                Matters · matters.town
-              </div>
-            )}
-          </div>
+          ) : (
+            <div className={styles.wordmark}>
+              <MattersLettering />
+            </div>
+          )}
           <div className={styles.qr} style={{ background: s.qrLight }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={qrDataUrl} alt="QR code" />
