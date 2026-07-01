@@ -300,7 +300,7 @@ const QuoteImageDialogContent: React.FC<QuoteImageDialogContentProps> = ({
                     />
                   )
                 }
-                color="green"
+                color="greyDarker"
                 loading={isPosting}
                 disabled={isPosting || posted}
                 onClick={onPostToWall}
@@ -308,7 +308,7 @@ const QuoteImageDialogContent: React.FC<QuoteImageDialogContentProps> = ({
             )}
             <Dialog.RoundedButton
               text={<FormattedMessage defaultMessage="Download" id="5q3qC0" />}
-              color="green"
+              color="greyDarker"
               onClick={onDownload}
             />
             <Dialog.RoundedButton
@@ -335,7 +335,7 @@ const QuoteImageDialogContent: React.FC<QuoteImageDialogContentProps> = ({
                     />
                   )
                 }
-                color="green"
+                color="greyDarker"
                 loading={isPosting}
                 disabled={isPosting || posted}
                 onClick={onPostToWall}
@@ -343,7 +343,7 @@ const QuoteImageDialogContent: React.FC<QuoteImageDialogContentProps> = ({
             )}
             <Dialog.TextButton
               text={<FormattedMessage defaultMessage="Download" id="5q3qC0" />}
-              color="green"
+              color="greyDarker"
               onClick={onDownload}
             />
             <Dialog.TextButton

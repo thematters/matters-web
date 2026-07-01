@@ -39,8 +39,10 @@
   margin-bottom: 8px;
 }
 
+/* 右引號：全形引號墨色偏左，用負右邊距把墨色推回右緣，與左引號對稱 */
 .markClose {
   margin-top: 8px;
+  margin-right: -0.5em;
   text-align: right;
 }
 
@@ -68,7 +70,7 @@
 .title {
   display: -webkit-box;
   max-width: 760px;
-  margin-top: 14px;
+  margin-top: 30px;
   overflow: hidden;
   -webkit-line-clamp: 2;
   font-size: 28px;
