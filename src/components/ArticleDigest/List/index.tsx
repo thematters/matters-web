@@ -11,7 +11,7 @@ import {
   UserDigestMiniUserFragment,
 } from '~/gql/graphql'
 
-import { ArticleDigestTitle } from '../Title'
+import { ArticleDigestTitle, isArticleAuthorFrozen } from '../Title'
 import styles from './styles.module.css'
 
 export type ArticleDigestListProps = {
@@ -50,6 +50,7 @@ export const ArticleDigestList = ({
   right,
 }: ArticleDigestListProps) => {
   const { author } = article
+  const isAuthorFrozen = isArticleAuthorFrozen(article)
 
   const path = toPath({
     page: 'articleDetail',
@@ -67,10 +68,10 @@ export const ArticleDigestList = ({
 
   return (
     <Card
-      {...path}
+      href={isAuthorFrozen ? undefined : path.href}
       spacing={[0, 0]}
       bgActiveColor="none"
-      onClick={onClick}
+      onClick={isAuthorFrozen ? undefined : onClick}
       testId={TEST_ID.DIGEST_ARTICLE_LIST}
     >
       <section className={styles.container}>
@@ -88,6 +89,7 @@ export const ArticleDigestList = ({
               textSize={14}
               textWeight="normal"
               lineClamp={1}
+              disabled={isAuthorFrozen}
             />
           </section>
 

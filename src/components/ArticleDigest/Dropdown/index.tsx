@@ -13,6 +13,7 @@ import {
   ArticleDigestTitleIs,
   ArticleDigestTitleTextSize,
   ArticleDigestTitleTextWeight,
+  isArticleAuthorFrozen,
 } from '../Title'
 import styles from './styles.module.css'
 
@@ -72,6 +73,7 @@ export const ArticleDigestDropdown = ({
 }: ArticleDigestDropdownProps) => {
   const { articleState: state } = article
   const isBanned = state === 'banned'
+  const isAuthorFrozen = isArticleAuthorFrozen(article)
   const containerClasses = classNames({
     [styles.container]: true,
     [styles.hasExtraButton]: !!extraButton,
@@ -80,7 +82,7 @@ export const ArticleDigestDropdown = ({
     page: 'articleDetail',
     article,
   })
-  const cardDisabled = isBanned || disabled
+  const cardDisabled = isBanned || isAuthorFrozen || disabled
 
   return (
     <Card

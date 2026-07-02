@@ -11,7 +11,7 @@ import {
   ArticleDigestFeedArticlePublicFragment,
 } from '~/gql/graphql'
 
-import { ArticleDigestTitle } from '../Title'
+import { ArticleDigestTitle, isArticleAuthorFrozen } from '../Title'
 import FooterActions, { FooterActionsProps } from './FooterActions'
 import { fragments } from './gql'
 import Placeholder from './Placeholder'
@@ -56,9 +56,14 @@ const BaseArticleDigestFeed = ({
   const { author, summary } = article
   const isBanned = article.articleState === 'banned'
   const isArchived = article.articleState === 'archived'
-  const cover = !isBanned && !isArchived ? article.displayCover : null
+  const isAuthorFrozen = isArticleAuthorFrozen(article)
+  const isArticleLinkDisabled = isBanned || isAuthorFrozen
+  const cover =
+    !isBanned && !isArchived && !isAuthorFrozen ? article.displayCover : null
   const cleanedSummary =
-    isBanned && !isArchived ? '' : makeSummary(summary, MAX_FEED_SUMMARY_LENGTH)
+    isBanned || isAuthorFrozen
+      ? ''
+      : makeSummary(summary, MAX_FEED_SUMMARY_LENGTH)
 
   const path = toPath({
     page: 'articleDetail',
@@ -106,9 +111,15 @@ const BaseArticleDigestFeed = ({
             </section>
           )}
           {!excludesTimeStamp && (
-            <Link {...path}>
-              <DateTime date={article.createdAt} color="grey" minimal />
-            </Link>
+            <>
+              {isArticleLinkDisabled ? (
+                <DateTime date={article.createdAt} color="grey" minimal />
+              ) : (
+                <Link {...path}>
+                  <DateTime date={article.createdAt} color="grey" minimal />
+                </Link>
+              )}
+            </>
           )}
         </header>
       )}
@@ -123,14 +134,21 @@ const BaseArticleDigestFeed = ({
                 lineClamp={2}
                 onClick={onClick}
                 disabledArchived={disabledArchived}
+                disabled={isAuthorFrozen}
               />
             </section>
           </section>
 
           {!(isArchived && disabledArchived) && (
-            <Link {...path} onClick={onClick}>
-              <p className={styles.description}>{cleanedSummary}</p>
-            </Link>
+            <>
+              {isArticleLinkDisabled ? (
+                <p className={styles.description}>{cleanedSummary}</p>
+              ) : (
+                <Link {...path} onClick={onClick}>
+                  <p className={styles.description}>{cleanedSummary}</p>
+                </Link>
+              )}
+            </>
           )}
 
           <Media greaterThanOrEqual="md">{footerActions}</Media>

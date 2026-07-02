@@ -6,7 +6,7 @@ import { FormattedMessage, useIntl } from 'react-intl'
 import { TEST_ID } from '~/common/enums'
 import { capitalizeFirstLetter, toPath } from '~/common/utils'
 import { toast } from '~/components'
-import { ArticleDigestTitleArticleFragment } from '~/gql/graphql'
+import { ArticleDigestTitleArticleFragment, UserState } from '~/gql/graphql'
 
 import styles from './styles.module.css'
 
@@ -40,10 +40,17 @@ const fragments = {
       author {
         id
         userName
+        status {
+          state
+        }
       }
     }
   `,
 }
+
+export const isArticleAuthorFrozen = (
+  article: Pick<ArticleDigestTitleArticleFragment, 'author'>
+) => article.author.status?.state === UserState.Frozen
 
 export const ArticleDigestTitle = ({
   article,
@@ -61,6 +68,7 @@ export const ArticleDigestTitle = ({
 }: ArticleDigestTitleProps) => {
   const intl = useIntl()
   const { articleState: state } = article
+  const isAuthorFrozen = isArticleAuthorFrozen(article)
   const path = toPath({
     page: 'articleDetail',
     article,
@@ -85,7 +93,7 @@ export const ArticleDigestTitle = ({
     [textColor ? styles[`textColor${capitalizeFirstLetter(textColor)}`] : '']:
       !!textColor,
   })
-  const isClickable = !disabled && !isBanned
+  const isClickable = !disabled && !isBanned && !isAuthorFrozen
 
   const titleElement = (
     <>

@@ -3,6 +3,7 @@ import { describe, expect, it, vi } from 'vitest'
 
 import { fireEvent, render, screen } from '~/common/utils/test'
 import { ArticleDigestTitle } from '~/components'
+import { UserState } from '~/gql/graphql'
 import { MOCK_ARTILCE } from '~/stories/mocks'
 
 describe('<ArticleDigest.Title>', () => {
@@ -51,6 +52,30 @@ describe('<ArticleDigest.Title>', () => {
         onClick={handleClickDigest}
       />
     )
+    const $title = screen.getByRole('heading', {
+      name: MOCK_ARTILCE.title,
+    })
+
+    fireEvent.click($title)
+    expect(mockRouter.asPath).not.toContain(MOCK_ARTILCE.shortHash)
+    expect(handleClickDigest).not.toHaveBeenCalled()
+  })
+
+  it('should not link to articles by frozen authors', () => {
+    mockRouter.setCurrentUrl('/')
+    const handleClickDigest = vi.fn()
+    const article = {
+      ...MOCK_ARTILCE,
+      author: {
+        ...MOCK_ARTILCE.author,
+        status: {
+          ...MOCK_ARTILCE.author.status,
+          state: UserState.Frozen,
+        },
+      },
+    }
+
+    render(<ArticleDigestTitle article={article} onClick={handleClickDigest} />)
     const $title = screen.getByRole('heading', {
       name: MOCK_ARTILCE.title,
     })
