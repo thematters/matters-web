@@ -70,7 +70,7 @@ export const QuoteCard = forwardRef<HTMLDivElement, QuoteCardProps>(
           </div>
           {/* 下引號：用上引號同字符水平鏡射，確保與上引號左右對稱 */}
           <div className={styles.markClose} style={{ color: s.accent }}>
-            “
+            <span className={styles.markCloseGlyph}>“</span>
           </div>
           <div className={styles.author} style={{ color: s.accent }}>
             <span className={styles.dash}>—</span>
