@@ -5,7 +5,12 @@ import { FormattedMessage } from 'react-intl'
 import IconDot from '@/public/static/icons/dot.svg'
 import { TEST_ID } from '~/common/enums'
 import { MOMENT_DIGEST_REFERRER } from '~/common/enums/moment'
-import { captureClicks, sessionStorage, toPath } from '~/common/utils'
+import {
+  addUserGeneratedContentLinkRel,
+  captureClicks,
+  sessionStorage,
+  toPath,
+} from '~/common/utils'
 import {
   DateTime,
   Expandable,
@@ -129,7 +134,7 @@ const Container = ({
             <section
               className="u-content-moment"
               dangerouslySetInnerHTML={{
-                __html: content || '',
+                __html: addUserGeneratedContentLinkRel(content || ''),
               }}
               onClick={captureClicks}
             />

@@ -12,6 +12,7 @@ import {
 } from '~/common/enums'
 import { MOMENT_DIGEST_REFERRER } from '~/common/enums/moment'
 import {
+  addUserGeneratedContentLinkRel,
   captureClicks,
   makeMentionElement,
   makeSummary,
@@ -176,7 +177,7 @@ const MomentDetailDialogContent = ({
             <section
               className="u-content-moment detail"
               dangerouslySetInnerHTML={{
-                __html: content || '',
+                __html: addUserGeneratedContentLinkRel(content || ''),
               }}
               onClick={captureClicks}
             />

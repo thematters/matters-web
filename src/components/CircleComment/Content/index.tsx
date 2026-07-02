@@ -4,7 +4,7 @@ import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { COMMENT_TYPE_TEXT, TEST_ID } from '~/common/enums'
-import { captureClicks } from '~/common/utils'
+import { addUserGeneratedContentLinkRel, captureClicks } from '~/common/utils'
 import {
   CircleCommentFormType,
   Expandable,
@@ -113,7 +113,7 @@ export const CircleCommentContent = ({
           <section
             className={`${contentClasses} u-content-comment`}
             dangerouslySetInnerHTML={{
-              __html: content || '',
+              __html: addUserGeneratedContentLinkRel(content || ''),
             }}
             onClick={captureClicks}
             data-test-id={TEST_ID.COMMENT_CONETNT}
