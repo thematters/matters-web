@@ -6,6 +6,60 @@ import {
 
 import { toSizedImageURL } from '../url'
 
+const USER_GENERATED_CONTENT_LINK_REL_TOKENS = [
+  'noopener',
+  'noreferrer',
+  'ugc',
+  'nofollow',
+]
+
+export const USER_GENERATED_CONTENT_LINK_REL =
+  USER_GENERATED_CONTENT_LINK_REL_TOKENS.join(' ')
+
+const normalizeUserGeneratedContentLinkRel = (rel?: string) => {
+  const extraTokens = (rel || '')
+    .split(/\s+/)
+    .filter(
+      (token) =>
+        token && !USER_GENERATED_CONTENT_LINK_REL_TOKENS.includes(token)
+    )
+
+  return [...USER_GENERATED_CONTENT_LINK_REL_TOKENS, ...extraTokens].join(' ')
+}
+
+/**
+ * Mark links inside user-generated HTML as not endorsed by Matters.
+ */
+export const addUserGeneratedContentLinkRel = (content: string) =>
+  content.replace(/<a\b([^>]*)>/gi, (tag, attributes) => {
+    if (/\srel\s*=/i.test(attributes)) {
+      const doubleQuotedRel = /\srel\s*=\s*"([^"]*)"/i
+      const singleQuotedRel = /\srel\s*=\s*'([^']*)'/i
+      const unquotedRel = /\srel\s*=\s*([^\s>]+)/i
+
+      if (doubleQuotedRel.test(attributes)) {
+        return tag.replace(
+          doubleQuotedRel,
+          (_, rel) => ` rel="${normalizeUserGeneratedContentLinkRel(rel)}"`
+        )
+      }
+
+      if (singleQuotedRel.test(attributes)) {
+        return tag.replace(
+          singleQuotedRel,
+          (_, rel) => ` rel='${normalizeUserGeneratedContentLinkRel(rel)}'`
+        )
+      }
+
+      return tag.replace(
+        unquotedRel,
+        (_, rel) => ` rel="${normalizeUserGeneratedContentLinkRel(rel)}"`
+      )
+    }
+
+    return `<a${attributes} rel="${USER_GENERATED_CONTENT_LINK_REL}">`
+  })
+
 /**
  * Strip HTML tags from HTML string to get plain text.
  * @param html - html string
@@ -183,7 +237,7 @@ export const normalizeArticleTitle = (text: string, limit: number) => {
  * @see `<ResponsiveImage>`
  */
 export const optimizeEmbed = (content: string) => {
-  return content
+  return addUserGeneratedContentLinkRel(content)
     .replace(/\<iframe /g, '<iframe loading="lazy" ')
     .replace(/<img\s[^>]*?src\s*=\s*['\"]([^'\"]*?)['\"][^>]*?>/g, (_, src) => {
       return /* html */ `

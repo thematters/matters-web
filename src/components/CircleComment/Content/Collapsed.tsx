@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl'
 
 import IconDown from '@/public/static/icons/24px/down.svg'
 import { TEST_ID } from '~/common/enums'
-import { captureClicks } from '~/common/utils'
+import { addUserGeneratedContentLinkRel, captureClicks } from '~/common/utils'
 import { Button, Icon, TextIcon } from '~/components'
 
 import styles from './styles.module.css'
@@ -27,7 +27,7 @@ const Collapsed = ({
       <div
         className={`${className} u-content-comment`}
         dangerouslySetInnerHTML={{
-          __html: content || '',
+          __html: addUserGeneratedContentLinkRel(content || ''),
         }}
         onClick={captureClicks}
         data-test-id={TEST_ID.COMMENT_CONETNT}

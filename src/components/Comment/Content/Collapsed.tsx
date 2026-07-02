@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { TEST_ID } from '~/common/enums'
+import { addUserGeneratedContentLinkRel } from '~/common/utils'
 import { Button, TextIcon } from '~/components'
 
 import styles from './styles.module.css'
@@ -25,7 +26,7 @@ const Collapsed = ({
       <div
         className={`${className} u-content-comment`}
         dangerouslySetInnerHTML={{
-          __html: content || '',
+          __html: addUserGeneratedContentLinkRel(content || ''),
         }}
         data-test-id={TEST_ID.COMMENT_CONETNT}
       />

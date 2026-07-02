@@ -2,7 +2,11 @@ import Link from 'next/link'
 
 import IconTimes from '@/public/static/icons/24px/times.svg'
 import { TEST_ID } from '~/common/enums'
-import { captureClicks, toPath } from '~/common/utils'
+import {
+  addUserGeneratedContentLinkRel,
+  captureClicks,
+  toPath,
+} from '~/common/utils'
 import { Button, DateTime, Icon } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
 import { MomentDigestDetailMomentFragment } from '~/gql/graphql'
@@ -75,7 +79,7 @@ export const MomentDigestDetail = ({
           data-test-id={TEST_ID.MOMENT_DIGEST_CONTENT}
           onClick={captureClicks}
           dangerouslySetInnerHTML={{
-            __html: content || '',
+            __html: addUserGeneratedContentLinkRel(content || ''),
           }}
         />
       )}
