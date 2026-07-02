@@ -1,7 +1,7 @@
 import _get from 'lodash/get'
 import _has from 'lodash/has'
 
-import { CommentState } from '~/gql/graphql'
+import { CommentState, UserState } from '~/gql/graphql'
 
 import styles from './styles.module.css'
 
@@ -12,6 +12,11 @@ import styles from './styles.module.css'
  */
 interface Comment {
   state: string
+  author?: {
+    status?: {
+      state?: string | null
+    } | null
+  } | null
   communityWatchAction?: {
     uuid: string
   } | null
@@ -25,6 +30,13 @@ type Response = {
 }
 
 const filterComment = (comment: Comment) => {
+  if (
+    comment.author?.status?.state === UserState.Frozen ||
+    comment.author?.status?.state === UserState.Archived
+  ) {
+    return false
+  }
+
   // skip if comment's state is active or collapse
   if (
     comment.state === CommentState.Active ||
