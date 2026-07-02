@@ -3,7 +3,6 @@ import QRCode from 'qrcode'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { defineMessages, FormattedMessage, useIntl } from 'react-intl'
 
-import { ERROR_CODES } from '~/common/enums'
 import { analytics, isMobile } from '~/common/utils'
 import { Dialog, toast, useMutation } from '~/components'
 import { PUT_QUOTE } from '~/components/GQL/mutations/putQuote'
@@ -17,23 +16,17 @@ const PREVIEW_WIDTH = 320 // 預覽寬度（卡片以此等比縮放顯示）
 
 const styleNames = defineMessages({
   warm: { defaultMessage: 'Cream', id: 'lY48xg' },
-  sky: { defaultMessage: 'Sky', id: '/uJdnC' },
-  coral: { defaultMessage: 'Coral', id: 'bGxO22' },
-  ink: { defaultMessage: 'Ink', id: 'QWkEED' },
   pine: { defaultMessage: 'Pine', id: 'K3+ihp' },
   mint: { defaultMessage: 'Mint', id: 'OwO+Nr' },
-  violet: { defaultMessage: 'Violet', id: '3cxMQp' },
-  slate: { defaultMessage: 'Slate', id: 'iLKG5w' },
+  espresso: { defaultMessage: 'Espresso', id: 'zecq9n' },
 })
 const sizeNames = defineMessages({
   square: { defaultMessage: 'Square 1:1', id: 'iII6Ry' },
   portrait: { defaultMessage: 'Portrait 4:5', id: 'em7860' },
-  story: { defaultMessage: 'Story 9:16', id: 'CZciVV' },
 })
 const sizeNotes = defineMessages({
   square: { defaultMessage: 'IG / FB post', id: 'A6dqhl' },
   portrait: { defaultMessage: 'IG post · most eye-catching', id: 'Oawtbo' },
-  story: { defaultMessage: 'IG / FB story · Threads', id: '6RAJ7U' },
 })
 
 export type QuoteImageDialogContentProps = {
@@ -63,7 +56,7 @@ const QuoteImageDialogContent: React.FC<QuoteImageDialogContentProps> = ({
   const intl = useIntl()
   const cardRef = useRef<HTMLDivElement>(null)
 
-  const [styleId, setStyleId] = useState('pine')
+  const [styleId, setStyleId] = useState('warm')
   const [sizeId, setSizeId] = useState('portrait')
   const [qrDataUrl, setQrDataUrl] = useState('')
   const [putQuote] = useMutation<PutQuoteMutation>(PUT_QUOTE)
@@ -93,6 +86,16 @@ const QuoteImageDialogContent: React.FC<QuoteImageDialogContentProps> = ({
 
   const generate = async () => {
     if (!cardRef.current) return null
+    // 截圖前確保金句字體（昭源宋體子集）已載入，避免 fallback
+    try {
+      await document.fonts.load(
+        `400 80px 'Chiron Sung HK'`,
+        `${quote}${author}`
+      )
+      await document.fonts.ready
+    } catch {
+      // 字體載入失敗則以系統襯線 fallback 輸出
+    }
     return toJpeg(cardRef.current, {
       quality: 0.95,
       pixelRatio: 2,
@@ -143,23 +146,15 @@ const QuoteImageDialogContent: React.FC<QuoteImageDialogContentProps> = ({
           />
         ),
       })
-    } catch (error) {
-      const code = (
-        error as { graphQLErrors?: { extensions?: { code?: string } }[] }
-      )?.graphQLErrors?.[0]?.extensions?.code
+    } catch {
+      // 每日／同篇上限已於 matters-server#4867 移除，其餘失敗顯示通用訊息
       toast.error({
-        message:
-          code === ERROR_CODES.ACTION_LIMIT_EXCEEDED ? (
-            <FormattedMessage
-              defaultMessage="Wall quota reached for today — come back tomorrow!"
-              id="D8FJf9"
-            />
-          ) : (
-            <FormattedMessage
-              defaultMessage="Failed to post to the wall"
-              id="5IlTNw"
-            />
-          ),
+        message: (
+          <FormattedMessage
+            defaultMessage="Failed to post to the wall"
+            id="5IlTNw"
+          />
+        ),
       })
     } finally {
       setPosting(false)
@@ -309,7 +304,7 @@ const QuoteImageDialogContent: React.FC<QuoteImageDialogContentProps> = ({
             />
             <Dialog.RoundedButton
               text={<FormattedMessage defaultMessage="Share" id="OKhRC6" />}
-              color="greyDarker"
+              color="green"
               onClick={onShare}
             />
           </>
@@ -344,7 +339,7 @@ const QuoteImageDialogContent: React.FC<QuoteImageDialogContentProps> = ({
             />
             <Dialog.TextButton
               text={<FormattedMessage defaultMessage="Share" id="OKhRC6" />}
-              color="greyDarker"
+              color="green"
               onClick={onShare}
             />
           </>

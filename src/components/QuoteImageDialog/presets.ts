@@ -1,6 +1,7 @@
 /**
  * 金句卡片的風格與尺寸設定。
- * 顏色取自 thematters/design-system token；命名採中性色調。
+ * 保留 ICU 原版 8 色中的 4 色（Cream / Coral / Ink / Slate）。
+ * 金句字體統一為昭源宋體 Chiron Sung HK（見 styles.module.css 的 @font-face）。
  */
 
 export type QuoteStyle = {
@@ -9,14 +10,11 @@ export type QuoteStyle = {
   swatch: string // 風格選擇器上的色塊
   bg: string
   quoteColor: string
-  accent: string
-  sub: string
-  font: 'serif' | 'sans'
-  weight?: number
-  airy?: boolean
-  wide?: boolean
-  /** 七日書 logo 版本：深底用 white，淺底用 dark */
-  logo?: 'dark' | 'white'
+  accent: string // 引號、作者
+  sub: string // 標題等次要文字
+  /** logo / 字標版本：深底用 white、淺底用 dark */
+  logo: 'dark' | 'white'
+  /** QR Code 顏色 */
   qrDark: string
   qrLight: string
 }
@@ -37,53 +35,9 @@ export const QUOTE_STYLES: QuoteStyle[] = [
     quoteColor: '#333333',
     accent: '#c0a46b',
     sub: '#c58463',
-    font: 'serif',
     logo: 'dark',
     qrDark: '#c0a46b',
     qrLight: '#faf7f0',
-  },
-  {
-    id: 'sky',
-    name: 'Sky',
-    swatch: '#85d8ff',
-    bg: '#F0F9FE',
-    quoteColor: '#045898',
-    accent: '#1999D0',
-    sub: '#1999D0',
-    font: 'sans',
-    weight: 300,
-    airy: true,
-    logo: 'dark',
-    qrDark: '#1999D0',
-    qrLight: '#F0F9FE',
-  },
-  {
-    id: 'coral',
-    name: 'Coral',
-    swatch: '#dc7871',
-    bg: '#ffe8e8',
-    quoteColor: '#333333',
-    accent: '#dc7871',
-    sub: '#d577aa',
-    font: 'sans',
-    weight: 600,
-    logo: 'dark',
-    qrDark: '#dc7871',
-    qrLight: '#ffe8e8',
-  },
-  {
-    id: 'ink',
-    name: 'Ink',
-    swatch: '#000000',
-    bg: '#000000',
-    quoteColor: '#ffffff',
-    accent: '#c0a46b',
-    sub: '#c0a46b',
-    font: 'serif',
-    wide: true,
-    logo: 'white',
-    qrDark: '#c0a46b',
-    qrLight: '#000000',
   },
   {
     id: 'pine',
@@ -93,7 +47,6 @@ export const QUOTE_STYLES: QuoteStyle[] = [
     quoteColor: '#faf7f0',
     accent: '#40bfa5',
     sub: '#a9d9cf',
-    font: 'serif',
     logo: 'white',
     qrDark: '#faf7f0',
     qrLight: '#0d6763',
@@ -106,57 +59,51 @@ export const QUOTE_STYLES: QuoteStyle[] = [
     quoteColor: '#246802',
     accent: '#70b388',
     sub: '#70b388',
-    font: 'serif',
     logo: 'dark',
     qrDark: '#246802',
     qrLight: '#f7fbef',
   },
   {
-    id: 'violet',
-    name: 'Violet',
-    swatch: '#5b5080',
-    bg: '#514775',
-    quoteColor: '#f4f1fb',
-    accent: '#c3b6e8',
-    sub: '#d6cdee',
-    font: 'sans',
-    weight: 500,
+    id: 'espresso',
+    name: 'Espresso',
+    swatch: '#2b2620',
+    bg: '#2b2620',
+    quoteColor: '#f2ece1',
+    accent: '#c0a46b',
+    sub: '#9a8d78',
     logo: 'white',
-    qrDark: '#f4f1fb',
-    qrLight: '#514775',
-  },
-  {
-    id: 'slate',
-    name: 'Slate',
-    swatch: '#c9cace',
-    bg: '#e7e8ec',
-    quoteColor: '#2b2b2e',
-    accent: '#7f7f88',
-    sub: '#6f6f78',
-    font: 'sans',
-    weight: 400,
-    logo: 'dark',
-    qrDark: '#333333',
-    qrLight: '#e7e8ec',
+    qrDark: '#f2ece1',
+    qrLight: '#2b2620',
   },
 ]
 
 export const QUOTE_SIZES: QuoteSize[] = [
   { id: 'square', name: 'Square', w: 1080, h: 1080 },
   { id: 'portrait', name: 'Portrait', w: 1080, h: 1350 },
-  { id: 'story', name: 'Story', w: 1080, h: 1920 },
 ]
 
 /** 金句字數上限（超過自動截斷，金句以精煉為佳） */
 export const MAX_QUOTE_LEN = 80
 
-/** 依字數自動縮放字級，確保長句也塞得進安全區、不壓到頁尾 */
-export const fitFontSize = (len: number, airy?: boolean): number => {
-  if (len <= 16) return airy ? 72 : 78
-  if (len <= 30) return airy ? 60 : 66
-  if (len <= 48) return 56
-  if (len <= 64) return 48
-  return 42
+/**
+ * 依字數自動縮放字級，確保長句也塞得進安全區、不壓到頁尾。
+ * 直式（4:5）較高、可用較大字級；方形（1:1）較矮，長句需縮小才塞得下。
+ */
+export const fitFontSize = (len: number, tall: boolean): number => {
+  const sizes = tall ? [84, 74, 64, 56, 50] : [78, 68, 58, 48, 42]
+  if (len <= 16) {
+    return sizes[0]
+  }
+  if (len <= 30) {
+    return sizes[1]
+  }
+  if (len <= 48) {
+    return sizes[2]
+  }
+  if (len <= 64) {
+    return sizes[3]
+  }
+  return sizes[4]
 }
 
 export const clampQuote = (raw: string) => {
