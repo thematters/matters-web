@@ -31,7 +31,9 @@ const QuoteWall = ({ shortHash, entry = 'module' }: QuoteWallProps) => {
 
   const { data } = usePublicQuery<CampaignQuotesQuery>(
     CAMPAIGN_QUOTES,
-    { variables: { shortHash, first: PREVIEW_COUNT, random: true } },
+    // newest-first: show the most recently posted quotes (random off → the
+    // backend orders by id desc)
+    { variables: { shortHash, first: PREVIEW_COUNT, random: false } },
     { publicQuery: !viewer.isAuthed }
   )
 
