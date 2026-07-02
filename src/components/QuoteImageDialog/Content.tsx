@@ -3,7 +3,6 @@ import QRCode from 'qrcode'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { defineMessages, FormattedMessage, useIntl } from 'react-intl'
 
-import { ERROR_CODES } from '~/common/enums'
 import { analytics, isMobile } from '~/common/utils'
 import { Dialog, toast, useMutation } from '~/components'
 import { PUT_QUOTE } from '~/components/GQL/mutations/putQuote'
@@ -147,23 +146,15 @@ const QuoteImageDialogContent: React.FC<QuoteImageDialogContentProps> = ({
           />
         ),
       })
-    } catch (error) {
-      const code = (
-        error as { graphQLErrors?: { extensions?: { code?: string } }[] }
-      )?.graphQLErrors?.[0]?.extensions?.code
+    } catch {
+      // 每日／同篇上限已於 matters-server#4867 移除，其餘失敗顯示通用訊息
       toast.error({
-        message:
-          code === ERROR_CODES.ACTION_LIMIT_EXCEEDED ? (
-            <FormattedMessage
-              defaultMessage="Wall quota reached for today — come back tomorrow!"
-              id="D8FJf9"
-            />
-          ) : (
-            <FormattedMessage
-              defaultMessage="Failed to post to the wall"
-              id="5IlTNw"
-            />
-          ),
+        message: (
+          <FormattedMessage
+            defaultMessage="Failed to post to the wall"
+            id="5IlTNw"
+          />
+        ),
       })
     } finally {
       setPosting(false)
