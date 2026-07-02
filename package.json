@@ -45,7 +45,7 @@
   "dependencies": {
     "@apollo/client": "^3.13.8",
     "@artsy/fresnel": "^8.1.0",
-    "@matters/matters-editor": "^0.3.1",
+    "@matters/matters-editor": "^0.3.3",
     "@next/bundle-analyzer": "^15.3.3",
     "@sentry/nextjs": "^9.28.0",
     "@storybook/addon-styling-webpack": "^1.0.1",
