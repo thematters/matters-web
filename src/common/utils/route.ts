@@ -48,7 +48,15 @@ interface CampaignStageArgs {
 
 interface CommentArgs {
   id: string
-  type: 'article' | 'circleDiscussion' | 'circleBroadcast' | 'moment' // comment type: article/discussion/broadcast
+  // comment type; mirrors GraphQL CommentType. campaignDiscussion has no
+  // dedicated comment route yet, so toPath's commentDetail switch leaves it
+  // unhandled (falls through) until that feature lands.
+  type:
+    | 'article'
+    | 'circleDiscussion'
+    | 'circleBroadcast'
+    | 'moment'
+    | 'campaignDiscussion'
   parentComment?: {
     id: string
   } | null
