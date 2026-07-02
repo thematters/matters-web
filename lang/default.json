@@ -3771,9 +3771,6 @@
   "uw32VR": {
     "defaultMessage": "tutorial"
   },
-  "ux2+IE": {
-    "defaultMessage": "Charcoal"
-  },
   "v+hbfO": {
     "defaultMessage": "fixed amount"
   },
@@ -4101,6 +4098,9 @@
   "ze7hPz": {
     "defaultMessage": "Apply to curate an event",
     "description": "src/views/Campaigns/Portal/index.tsx"
+  },
+  "zecq9n": {
+    "defaultMessage": "Espresso"
   },
   "zllCbU": {
     "defaultMessage": "left a comment in {circleName}",

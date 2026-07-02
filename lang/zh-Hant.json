@@ -3769,9 +3769,6 @@
   "uw32VR": {
     "defaultMessage": "教學指南"
   },
-  "ux2+IE": {
-    "defaultMessage": "炭黑"
-  },
   "v+hbfO": {
     "defaultMessage": "固定金額"
   },
@@ -4099,6 +4096,9 @@
   "ze7hPz": {
     "defaultMessage": "申請舉辦活動",
     "description": "src/views/Campaigns/Portal/index.tsx"
+  },
+  "zecq9n": {
+    "defaultMessage": "深咖"
   },
   "zllCbU": {
     "defaultMessage": "在 {circleName} 中留言",
