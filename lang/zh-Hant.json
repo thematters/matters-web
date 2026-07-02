@@ -3342,6 +3342,9 @@
     "defaultMessage": "圍爐名稱已被使用",
     "description": "DUPLICATE_CIRCLE"
   },
+  "nBpgyU": {
+    "defaultMessage": "已下載金句圖，貼文時可一併附上；文章連結請從選單分享。"
+  },
   "nGBrvw": {
     "defaultMessage": "我的收藏"
   },

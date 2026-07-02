@@ -3344,6 +3344,9 @@
     "defaultMessage": "This circle is already taken.",
     "description": "DUPLICATE_CIRCLE"
   },
+  "nBpgyU": {
+    "defaultMessage": "Quote image downloaded — attach it to your post, and share the link from the menu."
+  },
   "nGBrvw": {
     "defaultMessage": "Bookmarks"
   },
