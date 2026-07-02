@@ -54,7 +54,9 @@ interface FormValues {
 const SubmitReportDialog = ({ id, children }: SubmitReportDialogProps) => {
   const { show, openDialog, closeDialog: _closeDialog } = useDialogSwitch(true)
   const formId = useId()
-  const order = [
+  // only the user-facing reasons; internal reasons (e.g. CommunityWatchPornAd)
+  // are intentionally excluded from the public report dialog
+  const order: Array<keyof typeof Reasons> = [
     ReportReason.Tort,
     ReportReason.DiscriminationInsultHatred,
     ReportReason.PornographyInvolvingMinors,
