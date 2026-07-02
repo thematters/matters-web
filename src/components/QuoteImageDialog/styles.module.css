@@ -202,3 +202,20 @@
   font-weight: 400;
   color: var(--color-grey-dark);
 }
+
+/* === 上牆成功頁 === */
+.complete {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp12, 12px);
+  align-items: center;
+  padding: var(--sp16, 16px) 0;
+  text-align: center;
+}
+
+.completeHint {
+  margin: 0;
+  font-size: var(--text16, 16px);
+  line-height: 1.6;
+  color: var(--color-grey-darker);
+}

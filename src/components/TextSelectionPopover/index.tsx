@@ -9,6 +9,7 @@ import { isElementInViewport } from '~/common/utils'
 import { analytics } from '~/common/utils'
 import {
   canPostQuoteToWall,
+  getQuoteWallCampaign,
   Icon,
   isSevenDayBookArticle,
   QuoteImageDialog,
@@ -237,6 +238,8 @@ export const TextSelectionPopover = ({
       articleId={article?.id}
       // 只有「開啟金句牆」的活動文章可上牆（後端 enableQuoteWall；伺服器會再驗證）
       canPostToWall={canPostQuoteToWall(article)}
+      // 上牆成功後導回的活動頁（開啟金句牆的那個活動）
+      campaign={getQuoteWallCampaign(article)}
     >
       {({ openDialog }) => (
         <button

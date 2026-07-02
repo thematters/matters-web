@@ -3,12 +3,14 @@ import QRCode from 'qrcode'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { defineMessages, FormattedMessage, useIntl } from 'react-intl'
 
-import { analytics, isMobile } from '~/common/utils'
-import { Dialog, toast, useMutation } from '~/components'
+import { analytics } from '~/common/utils'
+import { Dialog, ShareDialog, toast, useMutation } from '~/components'
 import { PUT_QUOTE } from '~/components/GQL/mutations/putQuote'
 import { PutQuoteMutation } from '~/gql/graphql'
 
 import { QuoteCard } from './Card'
+import Complete from './Complete'
+import { QuoteWallCampaign } from './gql'
 import { clampQuote, MAX_QUOTE_LEN, QUOTE_SIZES, QUOTE_STYLES } from './presets'
 import styles from './styles.module.css'
 
@@ -41,6 +43,8 @@ export type QuoteImageDialogContentProps = {
   articleId?: string
   /** 文章屬於活動（campaign）才可上牆；伺服器端會再驗證 */
   canPostToWall?: boolean
+  /** 上牆的活動（開啟金句牆者）；上牆成功後導回活動頁 */
+  campaign?: QuoteWallCampaign | null
 }
 
 const QuoteImageDialogContent: React.FC<QuoteImageDialogContentProps> = ({
@@ -52,6 +56,7 @@ const QuoteImageDialogContent: React.FC<QuoteImageDialogContentProps> = ({
   isSevenDayBook,
   articleId,
   canPostToWall,
+  campaign,
 }) => {
   const intl = useIntl()
   const cardRef = useRef<HTMLDivElement>(null)
@@ -137,15 +142,8 @@ const QuoteImageDialogContent: React.FC<QuoteImageDialogContentProps> = ({
       await putQuote({
         variables: { input: { articleId, content: wallText } },
       })
+      // 上牆成功後切換到成功頁（含「前往活動頁」），取代原本的 toast
       setPosted(true)
-      toast.info({
-        message: (
-          <FormattedMessage
-            defaultMessage="Posted to the quote wall"
-            id="IWLb33"
-          />
-        ),
-      })
     } catch {
       // 每日／同篇上限已於 matters-server#4867 移除，其餘失敗顯示通用訊息
       toast.error({
@@ -161,24 +159,16 @@ const QuoteImageDialogContent: React.FC<QuoteImageDialogContentProps> = ({
     }
   }
 
-  const onShare = async () => {
-    const url = await generate()
-    if (!url) return
+  const onShareClick = () => {
     analytics.trackEvent('click_button', {
       type: 'quote_image_share',
       pageType: 'article_detail',
     })
-    try {
-      const blob = await (await fetch(url)).blob()
-      const file = new File([blob], 'matters-quote.jpg', { type: 'image/jpeg' })
-      if (isMobile() && navigator.canShare?.({ files: [file] })) {
-        await navigator.share({ files: [file] })
-        return
-      }
-    } catch {
-      // fall through to download
-    }
-    await onDownload()
+  }
+
+  // 上牆成功後改顯示成功頁（打勾 +「前往活動頁」）
+  if (posted) {
+    return <Complete campaign={campaign} closeDialog={closeDialog} />
   }
 
   return (
@@ -279,21 +269,11 @@ const QuoteImageDialogContent: React.FC<QuoteImageDialogContentProps> = ({
             {articleId && canPostToWall && (
               <Dialog.RoundedButton
                 text={
-                  posted ? (
-                    <FormattedMessage
-                      defaultMessage="On the wall ✓"
-                      id="Cmc/He"
-                    />
-                  ) : (
-                    <FormattedMessage
-                      defaultMessage="Post to wall"
-                      id="oCQmLu"
-                    />
-                  )
+                  <FormattedMessage defaultMessage="Post to wall" id="oCQmLu" />
                 }
                 color="green"
                 loading={isPosting}
-                disabled={isPosting || posted}
+                disabled={isPosting}
                 onClick={onPostToWall}
               />
             )}
@@ -302,11 +282,20 @@ const QuoteImageDialogContent: React.FC<QuoteImageDialogContentProps> = ({
               color="green"
               onClick={onDownload}
             />
-            <Dialog.RoundedButton
-              text={<FormattedMessage defaultMessage="Share" id="OKhRC6" />}
-              color="green"
-              onClick={onShare}
-            />
+            <ShareDialog title={title}>
+              {({ openDialog }) => (
+                <Dialog.RoundedButton
+                  text={
+                    <FormattedMessage defaultMessage="Share" id="OKhRC6" />
+                  }
+                  color="green"
+                  onClick={() => {
+                    onShareClick()
+                    openDialog()
+                  }}
+                />
+              )}
+            </ShareDialog>
           </>
         }
         smUpBtns={
@@ -314,21 +303,11 @@ const QuoteImageDialogContent: React.FC<QuoteImageDialogContentProps> = ({
             {articleId && canPostToWall && (
               <Dialog.TextButton
                 text={
-                  posted ? (
-                    <FormattedMessage
-                      defaultMessage="On the wall ✓"
-                      id="Cmc/He"
-                    />
-                  ) : (
-                    <FormattedMessage
-                      defaultMessage="Post to wall"
-                      id="oCQmLu"
-                    />
-                  )
+                  <FormattedMessage defaultMessage="Post to wall" id="oCQmLu" />
                 }
                 color="green"
                 loading={isPosting}
-                disabled={isPosting || posted}
+                disabled={isPosting}
                 onClick={onPostToWall}
               />
             )}
@@ -337,11 +316,18 @@ const QuoteImageDialogContent: React.FC<QuoteImageDialogContentProps> = ({
               color="green"
               onClick={onDownload}
             />
-            <Dialog.TextButton
-              text={<FormattedMessage defaultMessage="Share" id="OKhRC6" />}
-              color="green"
-              onClick={onShare}
-            />
+            <ShareDialog title={title}>
+              {({ openDialog }) => (
+                <Dialog.TextButton
+                  text={<FormattedMessage defaultMessage="Share" id="OKhRC6" />}
+                  color="green"
+                  onClick={() => {
+                    onShareClick()
+                    openDialog()
+                  }}
+                />
+              )}
+            </ShareDialog>
           </>
         }
       />
