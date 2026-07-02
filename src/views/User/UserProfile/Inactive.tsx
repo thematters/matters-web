@@ -5,7 +5,8 @@ import { Avatar, Cover, Media } from '~/components'
 
 import styles from './styles.module.css'
 
-const Inactive = () => {
+const Inactive = ({ state }: { state?: string }) => {
+  const isFrozen = state === 'frozen'
   return (
     <section className={styles.userProfile}>
       <Cover fallbackCover={IMAGE_COVER.src} />
@@ -20,7 +21,11 @@ const Inactive = () => {
         <section className={styles.info}>
           <section className={styles.displayName}>
             <h1 className={styles.name}>
-              <FormattedMessage defaultMessage="Deleted user" id="9J0iCw" />
+              {isFrozen ? (
+                <FormattedMessage defaultMessage="Frozen user" id="MeqJEO" />
+              ) : (
+                <FormattedMessage defaultMessage="Deleted user" id="9J0iCw" />
+              )}
             </h1>
           </section>
         </section>
