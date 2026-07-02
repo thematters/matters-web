@@ -150,9 +150,6 @@
     "defaultMessage": "Public",
     "description": "src/views/Circle/Analytics/ContentAnalytics/ContentTabs/index.tsx"
   },
-  "/uJdnC": {
-    "defaultMessage": "Sky"
-  },
   "/wKyxw": {
     "defaultMessage": "Failed to republish"
   },
@@ -413,9 +410,6 @@
   "3YAasP": {
     "defaultMessage": "What is Liker ID?"
   },
-  "3cxMQp": {
-    "defaultMessage": "Violet"
-  },
   "3kbIhS": {
     "defaultMessage": "Untitled"
   },
@@ -601,9 +595,6 @@
   "6OBAOi": {
     "defaultMessage": "subscribers_empty",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
-  },
-  "6RAJ7U": {
-    "defaultMessage": "IG / FB story · Threads"
   },
   "6Sj2lN": {
     "defaultMessage": "Claim"
@@ -1022,9 +1013,6 @@
     "defaultMessage": "mentioned you in a comment",
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
   },
-  "CZciVV": {
-    "defaultMessage": "Story 9:16"
-  },
   "CbRvzm": {
     "defaultMessage": "Schedule publish"
   },
@@ -1063,9 +1051,6 @@
   },
   "D3idYv": {
     "defaultMessage": "Settings"
-  },
-  "D8FJf9": {
-    "defaultMessage": "Wall quota reached for today — come back tomorrow!"
   },
   "D9/QIR": {
     "defaultMessage": "Register ISCN"
@@ -1921,9 +1906,6 @@
     "defaultMessage": "Billboard is an open and rentable on-chain NFT advertising protocol. Once a rental is completed, the content can be displayed for 14 days. The rental fee is calculated based on the concept of the Harberger tax, and the generated rental income is distributed to the community creators through quadratic funding.",
     "description": "src/components/Dialogs/BillboardDialog/Content.tsx"
   },
-  "QWkEED": {
-    "defaultMessage": "Ink"
-  },
   "QXJQ5G": {
     "defaultMessage": "Please log in again.",
     "description": "TOKEN_INVALID"
@@ -2587,9 +2569,6 @@
     "defaultMessage": "Unblock",
     "description": "src/components/BlockUser/Button/index.tsx"
   },
-  "bGxO22": {
-    "defaultMessage": "Coral"
-  },
   "bQ5vZC": {
     "defaultMessage": "This article has been marked as restricted content by the {actor}.",
     "description": "src/views/ArticleDetail/Wall/Sensitive/index.tsx"
@@ -3036,9 +3015,6 @@
   },
   "iIitRg": {
     "defaultMessage": "Tag not bookmarked yet"
-  },
-  "iLKG5w": {
-    "defaultMessage": "Slate"
   },
   "iNZdM/": {
     "defaultMessage": "Switch to support creators with the Optimism network {br} Make support more convenient and affordable",
@@ -4119,6 +4095,9 @@
   "ze7hPz": {
     "defaultMessage": "Apply to curate an event",
     "description": "src/views/Campaigns/Portal/index.tsx"
+  },
+  "zecq9n": {
+    "defaultMessage": "Espresso"
   },
   "zllCbU": {
     "defaultMessage": "left a comment in {circleName}",
