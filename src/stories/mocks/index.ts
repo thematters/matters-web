@@ -75,6 +75,7 @@ export const MOCK_USER = {
   isFollower: false,
   isFollowee: false,
   isBlocking: false,
+  isMomentFeedApplied: false,
 }
 
 // Circle
