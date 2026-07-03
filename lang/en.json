@@ -1026,9 +1026,6 @@
     "defaultMessage": "Comment deleted",
     "description": "src/components/Notice/NoticeComment.tsx/moment"
   },
-  "Cmc/He": {
-    "defaultMessage": "On the wall ✓"
-  },
   "CnPG8j": {
     "defaultMessage": "Featured"
   },
@@ -1048,6 +1045,9 @@
   },
   "D+uyeZ": {
     "defaultMessage": "Unsubscribe circle will immediately lose your membership, The next billing date (the 1st of each month) will not incur any charges."
+  },
+  "D0pP8T": {
+    "defaultMessage": "Go to the event page"
   },
   "D3idYv": {
     "defaultMessage": "Settings"
@@ -1267,6 +1267,9 @@
     "defaultMessage": "Image",
     "description": "src/components/Editor"
   },
+  "GGd44x": {
+    "defaultMessage": "Your quote is now on the quote wall."
+  },
   "GHxtae": {
     "defaultMessage": "Wallet",
     "description": "src/components/Forms/SelectAuthMethodForm/AuthTabs.tsx"
@@ -1298,6 +1301,9 @@
   "Gju939": {
     "defaultMessage": "mentioned you",
     "description": "src/components/Notice/ArticleNotice/ArticleMentionedYouNotice.tsx"
+  },
+  "GpR55j": {
+    "defaultMessage": "Your quote is now on the wall of “{name}”."
   },
   "Gt7K6r": {
     "defaultMessage": "Wallet address",
