@@ -220,6 +220,9 @@
   "0xVT+0": {
     "defaultMessage": "Curated"
   },
+  "115cw4": {
+    "defaultMessage": "Unavailable user"
+  },
   "11nXAM": {
     "defaultMessage": "Your schedule article published successfully, but failed to submit because the selection event has ended",
     "description": "src/components/Notice/ArticleNotice/ScheduledArticlePublishedNotice.tsx"

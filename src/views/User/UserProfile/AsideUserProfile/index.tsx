@@ -67,6 +67,7 @@ export const AsideUserProfile = () => {
   const { data, loading, client } = usePublicQuery<UserProfileUserPublicQuery>(
     USER_PROFILE_PUBLIC,
     {
+      fetchPolicy: 'no-cache',
       variables: { userName },
     }
   )
@@ -138,7 +139,8 @@ export const AsideUserProfile = () => {
   const isCivicLiker = user.liker.civicLiker
   const isUserArchived = userState === UserState.Archived
   const isUserFrozen = userState === UserState.Frozen
-  const isUserInactive = isUserArchived || isUserFrozen
+  const isUserBanned = userState === UserState.Banned
+  const isUserInactive = isUserArchived || isUserFrozen || isUserBanned
 
   /**
    * Inactive User
@@ -160,6 +162,12 @@ export const AsideUserProfile = () => {
               )}
               {isUserFrozen && (
                 <FormattedMessage defaultMessage="Frozen user" id="MeqJEO" />
+              )}
+              {isUserBanned && (
+                <FormattedMessage
+                  defaultMessage="Unavailable user"
+                  id="115cw4"
+                />
               )}
             </h1>
           </section>
