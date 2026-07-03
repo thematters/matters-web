@@ -37,7 +37,10 @@ const Complete: React.FC<CompleteProps> = ({ campaign, closeDialog }) => {
     <>
       <Dialog.Header
         title={
-          <FormattedMessage defaultMessage="Posted to the quote wall" id="IWLb33" />
+          <FormattedMessage
+            defaultMessage="Posted to the quote wall"
+            id="IWLb33"
+          />
         }
       />
 
