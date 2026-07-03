@@ -228,6 +228,9 @@
   "0xVT+0": {
     "defaultMessage": "已關聯"
   },
+  "115cw4": {
+    "defaultMessage": "用戶已停用"
+  },
   "11nXAM": {
     "defaultMessage": "你的排程作品已發布成功，由於選擇活動已結束，投稿未能成功",
     "description": "src/components/Notice/ArticleNotice/ScheduledArticlePublishedNotice.tsx"
