@@ -1026,9 +1026,6 @@
     "defaultMessage": "留言已刪除",
     "description": "src/components/Notice/NoticeComment.tsx/moment"
   },
-  "Cmc/He": {
-    "defaultMessage": "已在牆上 ✓"
-  },
   "CnPG8j": {
     "defaultMessage": "精選"
   },
@@ -1048,6 +1045,9 @@
   },
   "D+uyeZ": {
     "defaultMessage": "選擇離開圍爐，你將馬上失去成員資格。下一個賬單日（每月 1 日）將不會扣除費用。"
+  },
+  "D0pP8T": {
+    "defaultMessage": "前往活動頁"
   },
   "D3idYv": {
     "defaultMessage": "設定"
@@ -1267,6 +1267,9 @@
     "defaultMessage": "影像",
     "description": "src/components/Editor"
   },
+  "GGd44x": {
+    "defaultMessage": "你的金句已貼上金句牆。"
+  },
   "GHxtae": {
     "defaultMessage": "數字錢包",
     "description": "src/components/Forms/SelectAuthMethodForm/AuthTabs.tsx"
@@ -1298,6 +1301,9 @@
   "Gju939": {
     "defaultMessage": "在作品中提及了你",
     "description": "src/components/Notice/ArticleNotice/ArticleMentionedYouNotice.tsx"
+  },
+  "GpR55j": {
+    "defaultMessage": "你的金句已貼上「{name}」的金句牆。"
   },
   "Gt7K6r": {
     "defaultMessage": "錢包地址",
