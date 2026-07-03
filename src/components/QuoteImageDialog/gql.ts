@@ -68,3 +68,36 @@ export const canPostQuoteToWall = (
       campaign?.__typename === 'WritingChallenge' && !!campaign.enableQuoteWall
   )
 }
+
+/** 上牆成功後導回活動頁所需的最小活動資料 */
+export type QuoteWallCampaign = {
+  id: string
+  shortHash: string
+  nameZhHant?: string | null
+  nameZhHans?: string | null
+  nameEn?: string | null
+}
+
+/**
+ * 取得文章「上牆」的那個活動（第一個開啟金句牆的 WritingChallenge），
+ * 供上牆成功後的成功頁顯示活動名稱並導回活動頁。
+ */
+export const getQuoteWallCampaign = (
+  article?: QuoteImageArticleFragment | null
+): QuoteWallCampaign | null => {
+  const match = article?.campaigns?.find(
+    ({ campaign }) =>
+      campaign?.__typename === 'WritingChallenge' && !!campaign.enableQuoteWall
+  )
+  const campaign = match?.campaign
+  if (!campaign || campaign.__typename !== 'WritingChallenge') {
+    return null
+  }
+  return {
+    id: campaign.id,
+    shortHash: campaign.shortHash,
+    nameZhHant: campaign.nameZhHant,
+    nameZhHans: campaign.nameZhHans,
+    nameEn: campaign.nameEn,
+  }
+}

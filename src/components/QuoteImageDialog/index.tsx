@@ -35,4 +35,10 @@ export const QuoteImageDialog = (props: QuoteImageDialogProps) => {
   )
 }
 
-export { canPostQuoteToWall, fragments, isSevenDayBookArticle } from './gql'
+export type { QuoteWallCampaign } from './gql'
+export {
+  canPostQuoteToWall,
+  fragments,
+  getQuoteWallCampaign,
+  isSevenDayBookArticle,
+} from './gql'
