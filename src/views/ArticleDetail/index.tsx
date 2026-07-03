@@ -505,7 +505,7 @@ const ArticleDetail = ({
   const resultByHash = usePublicQuery<ArticleDetailPublicQuery>(
     ARTICLE_DETAIL_PUBLIC,
     {
-      fetchPolicy: 'no-cache',
+      fetchPolicy: 'network-only',
       variables: {
         shortHash,
         language: routerLang || UserLanguage.ZhHant,
@@ -626,7 +626,7 @@ const ArticleDetailOuter = () => {
 
   const resultByHash = usePublicQuery<ArticleAvailableTranslationsQuery>(
     ARTICLE_AVAILABLE_TRANSLATIONS,
-    { fetchPolicy: 'no-cache', variables: { shortHash } }
+    { fetchPolicy: 'network-only', variables: { shortHash } }
   )
   const { data } = resultByHash
   const loading = resultByHash.loading

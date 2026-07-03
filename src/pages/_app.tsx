@@ -32,12 +32,14 @@ import { AppContext, AppInitialProps, AppProps } from 'next/app'
 import { getApollo } from '~/common/utils/apollo'
 import { ErrorBoundary } from '~/components'
 import { ClientUpdater } from '~/components/ClientUpdater'
+import { HttpStatus, HttpStatusProvider } from '~/components/Context'
 import Root from '~/components/Root'
 
 type AppOwnProps = {
   apolloClient?: ApolloClient<NormalizedCacheObject>
   apolloState?: object
   headers?: IncomingHttpHeaders
+  httpStatus?: HttpStatus
 }
 
 export interface MattersPageContext extends NextPageContext {
@@ -54,6 +56,7 @@ function MattersApp({
   apolloClient,
   apolloState,
   headers,
+  httpStatus,
 }: AppOwnProps & AppProps) {
   const apollo = apolloClient ?? getApollo(apolloState, headers)
 
@@ -61,7 +64,9 @@ function MattersApp({
     <ErrorBoundary>
       <ApolloProvider client={apollo}>
         <Root headers={headers}>
-          <Component {...pageProps} />
+          <HttpStatusProvider httpStatus={httpStatus}>
+            <Component {...pageProps} />
+          </HttpStatusProvider>
           <ClientUpdater />
         </Root>
       </ApolloProvider>
@@ -89,17 +94,26 @@ MattersApp.getInitialProps = async (
 
     const { getDataFromTree } = await import('@apollo/client/react/ssr')
 
+    // collects the HTTP status marked by error pages (e.g. <Throw404>)
+    // during the data-collection render below
+    const httpStatus: HttpStatus = {}
+
     try {
       await getDataFromTree(
         <AppTree
           Component={Component}
           pageProps={pageProps}
           apolloClient={apolloClient}
+          httpStatus={httpStatus}
         />,
         apolloClient.cache.extract()
       )
     } catch (error) {
       console.error('Error while runing `getDataFromTree`', error)
+    }
+
+    if (ctx.res && !ctx.res.headersSent && httpStatus.statusCode) {
+      ctx.res.statusCode = httpStatus.statusCode
     }
   }
 

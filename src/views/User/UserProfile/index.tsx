@@ -51,7 +51,7 @@ export const UserProfile = () => {
   const isMe = !userName || viewer.userName === userName
   const { data, loading, client } = usePublicQuery<UserProfileUserPublicQuery>(
     USER_PROFILE_PUBLIC,
-    { fetchPolicy: 'no-cache', variables: { userName } }
+    { fetchPolicy: 'network-only', variables: { userName } }
   )
   const user = data?.user
 
