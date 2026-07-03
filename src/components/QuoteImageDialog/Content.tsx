@@ -4,7 +4,7 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { defineMessages, FormattedMessage, useIntl } from 'react-intl'
 
 import { analytics } from '~/common/utils'
-import { Dialog, ShareDialog, toast, useMutation } from '~/components'
+import { Dialog, toast, useMutation } from '~/components'
 import { PUT_QUOTE } from '~/components/GQL/mutations/putQuote'
 import { PutQuoteMutation } from '~/gql/graphql'
 
@@ -110,15 +110,6 @@ const QuoteImageDialogContent: React.FC<QuoteImageDialogContentProps> = ({
     })
   }
 
-  const imageFileName = `matters-quote-${style.id}-${size.id}.jpg`
-
-  const triggerDownload = (dataUrl: string) => {
-    const a = document.createElement('a')
-    a.href = dataUrl
-    a.download = imageFileName
-    a.click()
-  }
-
   const onDownload = async () => {
     const url = await generate()
     if (!url) return
@@ -126,7 +117,10 @@ const QuoteImageDialogContent: React.FC<QuoteImageDialogContentProps> = ({
       type: 'quote_image_download',
       pageType: 'article_detail',
     })
-    triggerDownload(url)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = `matters-quote-${style.id}-${size.id}.jpg`
+    a.click()
   }
 
   const onPostToWall = async () => {
@@ -163,49 +157,6 @@ const QuoteImageDialogContent: React.FC<QuoteImageDialogContentProps> = ({
     } finally {
       setPosting(false)
     }
-  }
-
-  // 分享：優先用系統分享一次帶「金句圖 + 文章連結」（行動裝置與支援 Web Share
-  // Level 2 的桌面瀏覽器）；不支援帶檔的瀏覽器則下載金句圖並開啟連結分享選單。
-  const onShare = async (openLinkMenu: () => void) => {
-    analytics.trackEvent('click_button', {
-      type: 'quote_image_share',
-      pageType: 'article_detail',
-    })
-
-    let dataUrl: string | null = null
-    try {
-      dataUrl = await generate()
-      if (dataUrl) {
-        const blob = await (await fetch(dataUrl)).blob()
-        const file = new File([blob], imageFileName, { type: 'image/jpeg' })
-        const shareData: ShareData = { files: [file], url: shareLink, title }
-        if (navigator.canShare?.(shareData)) {
-          try {
-            await navigator.share(shareData)
-          } catch {
-            // 使用者取消或分享失敗；不再退回連結選單
-          }
-          return
-        }
-      }
-    } catch {
-      // 產圖失敗，改用連結選單分享
-    }
-
-    // 桌面瀏覽器多不支援帶檔分享：先下載金句圖供貼文附上，再開連結分享選單
-    if (dataUrl) {
-      triggerDownload(dataUrl)
-      toast.info({
-        message: (
-          <FormattedMessage
-            defaultMessage="Quote image downloaded — attach it to your post, and share the link from the menu."
-            id="nBpgyU"
-          />
-        ),
-      })
-    }
-    openLinkMenu()
   }
 
   // 上牆成功後改顯示成功頁（打勾 +「前往活動頁」）
@@ -324,17 +275,6 @@ const QuoteImageDialogContent: React.FC<QuoteImageDialogContentProps> = ({
               color="green"
               onClick={onDownload}
             />
-            <ShareDialog title={title}>
-              {({ openDialog }) => (
-                <Dialog.RoundedButton
-                  text={
-                    <FormattedMessage defaultMessage="Share" id="OKhRC6" />
-                  }
-                  color="green"
-                  onClick={() => onShare(openDialog)}
-                />
-              )}
-            </ShareDialog>
           </>
         }
         smUpBtns={
@@ -355,15 +295,6 @@ const QuoteImageDialogContent: React.FC<QuoteImageDialogContentProps> = ({
               color="green"
               onClick={onDownload}
             />
-            <ShareDialog title={title}>
-              {({ openDialog }) => (
-                <Dialog.TextButton
-                  text={<FormattedMessage defaultMessage="Share" id="OKhRC6" />}
-                  color="green"
-                  onClick={() => onShare(openDialog)}
-                />
-              )}
-            </ShareDialog>
           </>
         }
       />
