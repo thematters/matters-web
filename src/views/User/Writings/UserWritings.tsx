@@ -18,7 +18,7 @@ import {
   useRoute,
   ViewerContext,
 } from '~/components'
-import { UserWritingsPublicQuery } from '~/gql/graphql'
+import { UserState, UserWritingsPublicQuery } from '~/gql/graphql'
 
 import MomentForm from '../MomentForm'
 import {
@@ -41,6 +41,7 @@ const UserWritings = () => {
   // public data
   const { data, loading, error, fetchMore, client } =
     usePublicQuery<UserWritingsPublicQuery>(USER_WRITINGS_PUBLIC, {
+      fetchPolicy: 'no-cache',
       variables: { userName },
     })
 
@@ -150,16 +151,29 @@ const UserWritings = () => {
     return <></>
   }
 
-  if (user?.status?.state === 'archived') {
+  const userState = user?.status?.state
+  const isArchived = userState === UserState.Archived
+  const isFrozen = userState === UserState.Frozen
+  const isBanned = userState === UserState.Banned
+
+  if (isArchived || isFrozen || isBanned) {
     return (
       <Empty
         spacingY="xxxloose"
         description={
-          <Translate
-            en="Deleted user"
-            zh_hans="用户已注销"
-            zh_hant="用戶已註銷"
-          />
+          isArchived ? (
+            <Translate
+              en="Deleted user"
+              zh_hans="用户已注销"
+              zh_hant="用戶已註銷"
+            />
+          ) : (
+            <Translate
+              en="Unavailable user"
+              zh_hans="用户已停用"
+              zh_hant="用戶已停用"
+            />
+          )
         }
       />
     )

@@ -20,7 +20,7 @@ import {
   ViewerContext,
 } from '~/components'
 import { EmptyCollection } from '~/components/Empty/EmptyCollection'
-import { UserCollectionsQuery } from '~/gql/graphql'
+import { UserCollectionsQuery, UserState } from '~/gql/graphql'
 
 import CreateCollection from './CreateCollection'
 import { USER_COLLECTIONS } from './gql'
@@ -40,7 +40,7 @@ const UserCollections = () => {
   const { data, loading, error, fetchMore } =
     usePublicQuery<UserCollectionsQuery>(
       USER_COLLECTIONS,
-      { variables: { userName } },
+      { fetchPolicy: 'no-cache', variables: { userName } },
       { publicQuery: true }
     )
   const user = data?.user
@@ -87,16 +87,29 @@ const UserCollections = () => {
     return <></>
   }
 
-  if (user?.status?.state === 'archived') {
+  const userState = user?.status?.state
+  const isArchived = userState === UserState.Archived
+  const isFrozen = userState === UserState.Frozen
+  const isBanned = userState === UserState.Banned
+
+  if (isArchived || isFrozen || isBanned) {
     return (
       <Empty
         spacingY="xxxloose"
         description={
-          <Translate
-            en="Deleted user"
-            zh_hans="用户已注销"
-            zh_hant="用戶已註銷"
-          />
+          isArchived ? (
+            <Translate
+              en="Deleted user"
+              zh_hans="用户已注销"
+              zh_hant="用戶已註銷"
+            />
+          ) : (
+            <Translate
+              en="Unavailable user"
+              zh_hans="用户已停用"
+              zh_hant="用戶已停用"
+            />
+          )
         }
       />
     )

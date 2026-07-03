@@ -47,6 +47,7 @@ import {
   ArticleDetailPublicQuery,
   ArticleTranslationQuery,
   UserLanguage,
+  UserState,
 } from '~/gql/graphql'
 
 import { AuthorSidebar } from './AuthorSidebar'
@@ -105,6 +106,12 @@ const DynamicSupportDrawer = dynamic(
     ssr: false,
   }
 )
+
+const restrictedAuthorStates = new Set<string>([
+  UserState.Archived,
+  UserState.Banned,
+  UserState.Frozen,
+])
 
 const BaseArticleDetail = ({
   article,
@@ -498,6 +505,7 @@ const ArticleDetail = ({
   const resultByHash = usePublicQuery<ArticleDetailPublicQuery>(
     ARTICLE_DETAIL_PUBLIC,
     {
+      fetchPolicy: 'no-cache',
       variables: {
         shortHash,
         language: routerLang || UserLanguage.ZhHant,
@@ -510,6 +518,8 @@ const ArticleDetail = ({
   const article = data?.article
   const authorId = article?.author?.id
   const isAuthor = viewer.id === authorId
+  const authorState = article?.author?.status?.state
+  const isRestrictedAuthor = restrictedAuthorStates.has(authorState || '')
 
   /**
    * fetch private data
@@ -569,6 +579,14 @@ const ArticleDetail = ({
     )
   }
 
+  if (isRestrictedAuthor && !isAuthor) {
+    return (
+      <EmptyLayout>
+        <Throw404 />
+      </EmptyLayout>
+    )
+  }
+
   /**
    * Render:Archived/Banned
    */
@@ -608,7 +626,7 @@ const ArticleDetailOuter = () => {
 
   const resultByHash = usePublicQuery<ArticleAvailableTranslationsQuery>(
     ARTICLE_AVAILABLE_TRANSLATIONS,
-    { variables: { shortHash } }
+    { fetchPolicy: 'no-cache', variables: { shortHash } }
   )
   const { data } = resultByHash
   const loading = resultByHash.loading
