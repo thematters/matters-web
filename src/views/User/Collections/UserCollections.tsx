@@ -40,7 +40,7 @@ const UserCollections = () => {
   const { data, loading, error, fetchMore } =
     usePublicQuery<UserCollectionsQuery>(
       USER_COLLECTIONS,
-      { fetchPolicy: 'no-cache', variables: { userName } },
+      { fetchPolicy: 'network-only', variables: { userName } },
       { publicQuery: true }
     )
   const user = data?.user

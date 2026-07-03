@@ -41,7 +41,7 @@ const UserWritings = () => {
   // public data
   const { data, loading, error, fetchMore, client } =
     usePublicQuery<UserWritingsPublicQuery>(USER_WRITINGS_PUBLIC, {
-      fetchPolicy: 'no-cache',
+      fetchPolicy: 'network-only',
       variables: { userName },
     })
 

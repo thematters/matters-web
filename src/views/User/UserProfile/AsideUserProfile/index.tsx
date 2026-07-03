@@ -67,7 +67,7 @@ export const AsideUserProfile = () => {
   const { data, loading, client } = usePublicQuery<UserProfileUserPublicQuery>(
     USER_PROFILE_PUBLIC,
     {
-      fetchPolicy: 'no-cache',
+      fetchPolicy: 'network-only',
       variables: { userName },
     }
   )
