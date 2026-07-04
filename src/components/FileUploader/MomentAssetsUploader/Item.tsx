@@ -102,11 +102,7 @@ export const Item = memo(function Item({
         const { id: assetId, path, uploadURL } = data?.directImageUpload || {}
 
         if (assetId && path && uploadURL) {
-          const { id: cfImageId } = await uploadImage({ uploadURL, file })
-
-          if (!cfImageId || !path.includes(cfImageId)) {
-            throw new Error()
-          }
+          await uploadImage({ uploadURL, file })
 
           // (async) mark asset draft as false
           directImageUploadDone({
