@@ -78,6 +78,10 @@ export const Item = memo(function Item({
       }
 
       const { file } = asset
+      if (!(file instanceof File)) {
+        setError(new Error('Moment asset upload file is missing'))
+        return
+      }
 
       const mime = await validateImage(file)
       if (!mime) {
