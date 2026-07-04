@@ -23,11 +23,13 @@
 
   &::after {
     display: block;
-    padding-bottom: 21%;
+
+    /* cover height roughly halved, to lift the discussion area up the page */
+    padding-bottom: 11%;
     content: '';
 
     @media (--sm-up) {
-      padding-bottom: 23.26%;
+      padding-bottom: 12%;
     }
   }
 }
@@ -37,7 +39,13 @@
 
   flex-wrap: wrap;
   row-gap: var(--sp8);
-  margin-top: var(--sp24);
+
+  /* tighter gap under the (half-height) cover on mobile; roomier on desktop */
+  margin-top: var(--sp12);
+
+  @media (--md-up) {
+    margin-top: var(--sp24);
+  }
 
   & .name {
     font-size: var(--text18);

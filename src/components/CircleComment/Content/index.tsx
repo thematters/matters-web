@@ -4,7 +4,7 @@ import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { COMMENT_TYPE_TEXT, TEST_ID } from '~/common/enums'
-import { captureClicks } from '~/common/utils'
+import { addUserGeneratedContentLinkRel, captureClicks } from '~/common/utils'
 import {
   CircleCommentFormType,
   Expandable,
@@ -63,6 +63,12 @@ export const CircleCommentContent = ({
   const { content, state } = comment
   const isBlocked = comment.author?.isBlocked
 
+  // campaign discussion: clamp each comment to 2 lines, then expand-only (no
+  // collapse, like article comments) via the rich path — keeps the font
+  // consistent between the clamped and expanded states
+  const isCampaignDiscussion = type === 'campaignDiscussion'
+  const expandLimit = isCampaignDiscussion ? 2 : limit
+
   const contentClasses = classNames({
     [styles.content]: true,
     [size ? styles[`size${size}`] : '']: !!size,
@@ -96,15 +102,18 @@ export const CircleCommentContent = ({
       <>
         <Expandable
           content={content}
-          limit={limit}
+          limit={expandLimit}
           isRichShow={isRichShow}
           bgColor={bgColor}
           textIndent={textIndent}
+          // match the "展開" button font to the comment text (14px for campaign
+          // discussion); leave other comment types untouched
+          size={isCampaignDiscussion ? size : undefined}
         >
           <section
             className={`${contentClasses} u-content-comment`}
             dangerouslySetInnerHTML={{
-              __html: content || '',
+              __html: addUserGeneratedContentLinkRel(content || ''),
             }}
             onClick={captureClicks}
             data-test-id={TEST_ID.COMMENT_CONETNT}

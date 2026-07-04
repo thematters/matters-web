@@ -1,10 +1,18 @@
-import { Protected } from '~/components'
-import CreateCircle from '~/views/CreateCircle'
+import { EmptyLayout, Throw404 } from '~/components'
+// import { Protected } from '~/components'
+// import CreateCircle from '~/views/CreateCircle'
 
-const ProtectedCreateCircle = () => (
-  <Protected>
-    <CreateCircle />
-  </Protected>
+const CirclesCreate = () => (
+  <EmptyLayout>
+    <Throw404 />
+  </EmptyLayout>
 )
 
-export default ProtectedCreateCircle
+// const ProtectedCreateCircle = () => (
+//   <Protected>
+//     <CreateCircle />
+//   </Protected>
+// )
+
+export default CirclesCreate
+// export default ProtectedCreateCircle

@@ -1,10 +1,18 @@
 import gql from 'graphql-tag'
 import { useIntl } from 'react-intl'
 
+import IconLike from '@/public/static/icons/24px/like.svg'
+import IconLikeFill from '@/public/static/icons/24px/like-fill.svg'
 import IconVoteUp from '@/public/static/icons/24px/vote-up.svg'
 import IconVoteUpFill from '@/public/static/icons/24px/vote-up-fill.svg'
 import { numAbbr } from '~/common/utils'
-import { Button, Icon, TextIcon, useMutation } from '~/components'
+import {
+  Button,
+  CircleCommentFormType,
+  Icon,
+  TextIcon,
+  useMutation,
+} from '~/components'
 import {
   UNVOTE_COMMENT,
   VOTE_COMMENT,
@@ -20,6 +28,7 @@ import {
 interface UpvoteButtonProps {
   comment: CircleCommentUpvoteCommentPublicFragment &
     Partial<CircleCommentUpvoteCommentPrivateFragment>
+  type?: CircleCommentFormType
   onClick?: () => void
   disabled?: boolean
   inCard: boolean
@@ -45,11 +54,15 @@ const fragments = {
 
 const UpvoteButton = ({
   comment,
+  type,
   onClick,
   disabled,
   inCard,
 }: UpvoteButtonProps) => {
   const intl = useIntl()
+
+  // campaign discussion uses a heart (like) instead of the circle up-vote arrow
+  const isLike = type === 'campaignDiscussion'
 
   const [unvote] = useMutation<UnvoteCommentMutation>(UNVOTE_COMMENT, {
     variables: { id: comment.id },
@@ -95,8 +108,13 @@ const UpvoteButton = ({
         })}
       >
         <TextIcon
-          icon={<Icon icon={IconVoteUpFill} />}
-          color="green"
+          icon={
+            <Icon
+              icon={isLike ? IconLikeFill : IconVoteUpFill}
+              color={isLike ? 'redLight' : undefined}
+            />
+          }
+          color={isLike ? 'black' : 'green'}
           weight="medium"
         >
           {comment.upvotes > 0 ? numAbbr(comment.upvotes) : undefined}
@@ -123,7 +141,7 @@ const UpvoteButton = ({
       })}
     >
       <TextIcon
-        icon={<Icon icon={IconVoteUp} color="grey" />}
+        icon={<Icon icon={isLike ? IconLike : IconVoteUp} color="grey" />}
         color="grey"
         weight="medium"
       >

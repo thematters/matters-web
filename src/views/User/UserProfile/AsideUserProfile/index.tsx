@@ -22,12 +22,13 @@ import {
   useRoute,
   ViewerContext,
 } from '~/components'
-import { UserProfileUserPublicQuery } from '~/gql/graphql'
+import { UserProfileUserPublicQuery, UserState } from '~/gql/graphql'
 
 import { BadgeGrandDialog } from '../BadgeGrandDialog'
 import { BadgeNomadDialog } from '../BadgeNomadDialog'
 import {
   ArchitectBadge,
+  CarbonBasedBadge,
   CivicLikerBadge,
   CommunityWatchBadge,
   GoldenMotorBadge,
@@ -36,7 +37,8 @@ import {
   SeedBadge,
   TraveloggersBadge,
 } from '../Badges'
-import CircleWidget from '../CircleWidget'
+// FEATURE IS SUNSETTING: circle entry on aside user profile is hidden
+// import CircleWidget from '../CircleWidget'
 import DropdownActions from '../DropdownActions'
 import { FollowersDialog } from '../FollowersDialog'
 import { FollowingDialog } from '../FollowingDialog'
@@ -65,6 +67,7 @@ export const AsideUserProfile = () => {
   const { data, loading, client } = usePublicQuery<UserProfileUserPublicQuery>(
     USER_PROFILE_PUBLIC,
     {
+      fetchPolicy: 'network-only',
       variables: { userName },
     }
   )
@@ -113,13 +116,15 @@ export const AsideUserProfile = () => {
   }
 
   const badges = user.info.badges || []
-  const circles = user.ownCircles || []
+  // FEATURE IS SUNSETTING: circle entry on aside user profile is hidden
+  // const circles = user.ownCircles || []
   const hasSeedBadge = badges.some((b) => b.type === 'seed')
   const hasArchitectBadge = badges.some((b) => b.type === 'architect')
   const hasGoldenMotorBadge = badges.some((b) => b.type === 'golden_motor')
   const hasCommunityWatchBadge = badges.some(
     (b) => b.type === 'community_watch'
   )
+  const hasCarbonBasedBadge = badges.some((b) => b.type === 'carbon_based')
   const hasTraveloggersBadge = !!user.info.cryptoWallet?.hasNFTs
   const nomadBadgeType = badges.filter((b) =>
     ['nomad1', 'nomad2', 'nomad3', 'nomad4'].includes(b.type)
@@ -132,8 +137,10 @@ export const AsideUserProfile = () => {
 
   const userState = user.status?.state as string
   const isCivicLiker = user.liker.civicLiker
-  const isUserArchived = userState === 'archived'
-  const isUserInactive = isUserArchived
+  const isUserArchived = userState === UserState.Archived
+  const isUserFrozen = userState === UserState.Frozen
+  const isUserBanned = userState === UserState.Banned
+  const isUserInactive = isUserArchived || isUserFrozen || isUserBanned
 
   /**
    * Inactive User
@@ -152,6 +159,15 @@ export const AsideUserProfile = () => {
             <h1 className={styles.name}>
               {isUserArchived && (
                 <FormattedMessage defaultMessage="Deleted user" id="9J0iCw" />
+              )}
+              {isUserFrozen && (
+                <FormattedMessage defaultMessage="Frozen user" id="MeqJEO" />
+              )}
+              {isUserBanned && (
+                <FormattedMessage
+                  defaultMessage="Unavailable user"
+                  id="115cw4"
+                />
               )}
             </h1>
           </section>
@@ -257,6 +273,7 @@ export const AsideUserProfile = () => {
           hasGoldenMotorBadge ||
           hasArchitectBadge ||
           hasCommunityWatchBadge ||
+          hasCarbonBasedBadge ||
           hasGrandBadge ||
           isCivicLiker ||
           user?.info.ethAddress) && (
@@ -284,6 +301,7 @@ export const AsideUserProfile = () => {
             {hasGoldenMotorBadge && <GoldenMotorBadge hasTooltip />}
             {hasArchitectBadge && <ArchitectBadge hasTooltip />}
             {hasCommunityWatchBadge && <CommunityWatchBadge hasTooltip />}
+            {hasCarbonBasedBadge && <CarbonBasedBadge hasTooltip />}
             {isCivicLiker && <CivicLikerBadge hasTooltip />}
 
             {user?.info.ethAddress && (
@@ -370,11 +388,12 @@ export const AsideUserProfile = () => {
         )}
       </section>
 
-      {isInUserPage && (
+      {/* FEATURE IS SUNSETTING: circle entry on aside user profile is hidden */}
+      {/* {isInUserPage && (
         <footer className={styles.footer}>
           <CircleWidget circles={circles} isMe={isMe} />
         </footer>
-      )}
+      )} */}
     </section>
   )
 }

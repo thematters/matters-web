@@ -2,12 +2,15 @@ import gql from 'graphql-tag'
 
 import { UserNoticeFragment } from '~/gql/graphql'
 
+import MomentFeedApproved from './MomentFeedApproved'
 import UserNewFollower from './UserNewFollower'
 
 const UserNotice = ({ notice }: { notice: UserNoticeFragment }) => {
   switch (notice.userNoticeType) {
     case 'UserNewFollower':
       return <UserNewFollower notice={notice} />
+    case 'MomentFeedApproved':
+      return <MomentFeedApproved notice={notice} />
     default:
       return null
   }
@@ -21,8 +24,10 @@ UserNotice.fragments = {
       __typename
       userNoticeType: type
       ...UserNewFollower
+      ...MomentFeedApproved
     }
     ${UserNewFollower.fragments.notice}
+    ${MomentFeedApproved.fragments.notice}
   `,
 }
 

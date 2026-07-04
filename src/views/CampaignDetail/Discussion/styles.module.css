@@ -1,0 +1,74 @@
+.discussion {
+  /* no top padding: the aside already gives the first module a top margin, so
+     dropping it lines the "討論區" title up with the cover top in the main column.
+     bottom = sp8: with the "view all" button's own 8px, the gap above the dashed
+     rule matches the participants' sp16 padding-top below it */
+  padding: 0 0 var(--sp8);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--sp12);
+}
+
+.title {
+  /* match the "參與者" (SideParticipants) section title — same rail level */
+  font-size: var(--text20);
+  font-weight: var(--font-medium);
+}
+
+.count {
+  margin-left: var(--sp4);
+  font-weight: var(--font-normal);
+  color: var(--color-grey);
+}
+
+/* mobile one-line entry button: keep it from crowding the apply button above */
+.chipEntry {
+  margin-top: var(--sp12);
+}
+
+/* full discussion dialog body: widen the panel from the default `small`
+   (375px) to the design-system dialog `medium` (480px) so avatars + threaded
+   comments aren't cramped; ≤sm it's still a full-width bottom sheet */
+.dialogBody {
+  padding: var(--sp16);
+
+  @media (--sm-up) {
+    width: 30rem; /* 480px (incl. padding) — DS dialog `medium` */
+    max-width: calc(100vw - var(--sp32)); /* keep a 16px gutter at 463–480px */
+    padding: 0 var(--sp20);
+  }
+}
+
+.hint {
+  padding: var(--sp12);
+  margin-bottom: var(--sp12);
+  font-size: var(--text14);
+  color: var(--color-grey-dark);
+  text-align: center;
+  background: var(--color-grey-lighter);
+  border-radius: var(--sp8);
+}
+
+.preview {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp16);
+
+  /* cap the height so a busy discussion scrolls instead of pushing the
+     participants list further down the rail; scroll without visible bars */
+  max-height: 20rem;
+  padding: 0;
+  margin: var(--sp12) 0;
+  overflow: hidden auto;
+  list-style: none;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}

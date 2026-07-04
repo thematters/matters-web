@@ -114,6 +114,26 @@ const SideChannelNav = () => {
           </span>
         </Link>
 
+        <Link
+          href={PATHS.HOTTEST_MOMENTS}
+          className={classnames({
+            [styles.item]: true,
+            [styles.selected]: isInPath('HOTTEST_MOMENTS'),
+          })}
+          aria-selected={isInPath('HOTTEST_MOMENTS')}
+          onClick={() => onTabClick('hottest_moments')}
+        >
+          <span className={styles.name}>
+            <span className={styles.inner}>
+              <FormattedMessage
+                defaultMessage="Moments"
+                id="hdbKK1"
+                description="src/components/Layout/SideChannelNav/index.tsx"
+              />
+            </span>
+          </span>
+        </Link>
+
         {channels.map((c) => (
           <ChannelItem key={c.id} channel={c} />
         ))}

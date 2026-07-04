@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import IMAGE_CIRCLE_COVER from '@/public/static/images/circle-cover.svg?url'
@@ -11,7 +11,6 @@ import {
   Head,
   Layout,
   SpinnerBlock,
-  SubscribeCircleDialog,
   Throw404,
   useEventListener,
   usePublicQuery,
@@ -20,7 +19,6 @@ import {
 } from '~/components'
 import { CircleProfileCirclePublicQuery } from '~/gql/graphql'
 
-import SubscriptionBanner from '../SubscriptionBanner'
 import { AddCircleArticle } from './AddCircleArticle'
 import AuthorWidget from './AuthorWidget'
 import DropdownActions from './DropdownActions'
@@ -46,10 +44,8 @@ const CircleProfile = () => {
   })
   const circle = data?.circle
   const isOwner = circle?.owner.id === viewer.id
-  const price = circle?.prices && circle?.prices[0]
 
   // private data
-  const [privateFetched, setPrivateFetched] = useState(false)
   const loadPrivate = async () => {
     if (!viewer.isAuthed) {
       return
@@ -60,8 +56,6 @@ const CircleProfile = () => {
       fetchPolicy: 'network-only',
       variables: { name },
     })
-
-    setPrivateFetched(true)
   }
 
   // fetch private data
@@ -72,8 +66,6 @@ const CircleProfile = () => {
 
     if (viewer.isAuthed) {
       loadPrivate()
-    } else {
-      setPrivateFetched(true)
     }
   }, [circle?.id])
 
@@ -163,15 +155,6 @@ const CircleProfile = () => {
             <CircleAvatar size={72} circle={circle} />
             <h2 className={styles.name}>{circle.displayName}</h2>
           </section>
-
-          {price && (
-            <section className={styles.price}>
-              <span className={styles.amount}>{price.amount}</span>
-              <br />
-              {price.currency} /{' '}
-              <FormattedMessage defaultMessage="month" id="Cu3Cty" />
-            </section>
-          )}
         </header>
 
         {circle.description && (
@@ -186,8 +169,6 @@ const CircleProfile = () => {
             </Expandable>
           </section>
         )}
-
-        {privateFetched && <SubscriptionBanner circle={circle} />}
 
         <footer className={styles.footer}>
           <section className={styles.counts}>
@@ -229,8 +210,6 @@ const CircleProfile = () => {
           )}
         </footer>
         <AuthorWidget circle={circle} />
-
-        <SubscribeCircleDialog circle={circle} />
       </section>
     </>
   )

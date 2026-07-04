@@ -2,7 +2,6 @@ import gql from 'graphql-tag'
 
 import { CircleAvatar } from '~/components'
 
-import SubscriptionBanner from '../SubscriptionBanner'
 import AuthorWidget from './AuthorWidget'
 import DropdownActions from './DropdownActions'
 import FollowButton from './FollowButton'
@@ -31,12 +30,10 @@ const fragments = {
         ...AvatarCircle
         ...AuthorWidgetCircle
         ...DropdownActionsCirclePublic
-        ...SubscriptionBannerCirclePublic
       }
       ${CircleAvatar.fragments.circle}
       ${AuthorWidget.fragments.circle}
       ${DropdownActions.fragments.circle.public}
-      ${SubscriptionBanner.fragments.circle.public}
     `,
     private: gql`
       fragment ProfileCirclePrivate on Circle {
@@ -47,11 +44,9 @@ const fragments = {
         isMember
         ...FollowButtonCirclePrivate
         ...DropdownActionsCirclePrivate
-        ...SubscriptionBannerCirclePrivate
       }
       ${FollowButton.fragments.circle.private}
       ${DropdownActions.fragments.circle.private}
-      ${SubscriptionBanner.fragments.circle.private}
     `,
   },
 }

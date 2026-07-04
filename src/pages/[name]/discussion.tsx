@@ -1,3 +1,11 @@
-import CircleDiscussion from '~/views/Circle/Discussion'
+import { EmptyLayout, Throw404 } from '~/components'
+// import CircleDiscussion from '~/views/Circle/Discussion'
 
-export default CircleDiscussion
+const NameDiscussion = () => (
+  <EmptyLayout>
+    <Throw404 />
+  </EmptyLayout>
+)
+
+export default NameDiscussion
+// export default CircleDiscussion

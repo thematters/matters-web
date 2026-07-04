@@ -13,7 +13,7 @@ import {
   ViewerContext,
 } from '~/components'
 import { useReadTimer } from '~/components/Hook'
-import { ReadArticleMutation } from '~/gql/graphql'
+import { QuoteImageArticleFragment, ReadArticleMutation } from '~/gql/graphql'
 
 import styles from './styles.module.css'
 
@@ -27,10 +27,12 @@ const READ_ARTICLE = gql`
 
 const Content = ({
   articleId,
+  article,
   content,
   indentFirstLine,
 }: {
   articleId: string
+  article?: QuoteImageArticleFragment | null
   content: string
   indentFirstLine: boolean
 }) => {
@@ -40,6 +42,15 @@ const Content = ({
   })
 
   const contentContainer = useRef<HTMLDivElement>(null)
+
+  // `contentContainer.current` is null on first render, and assigning a ref
+  // does not trigger a re-render, so the selection popover would not mount
+  // until some other state change (e.g. scroll) forced one. Gate it on a
+  // mounted flag that flips right after commit, when the ref is set.
+  const [isContentMounted, setIsContentMounted] = useState(false)
+  useEffect(() => {
+    setIsContentMounted(true)
+  }, [])
 
   const { isInPath } = useRoute()
   const isInArticleDetailHistory = isInPath('ARTICLE_DETAIL_HISTORY')
@@ -137,11 +148,27 @@ const Content = ({
         data-test-id={TEST_ID.ARTICLE_CONTENT}
       />
       <Media greaterThanOrEqual="md">
-        {!isInArticleDetailHistory && contentContainer.current && (
-          <TextSelectionPopover
-            targetElement={contentContainer.current as HTMLElement}
-          />
-        )}
+        {!isInArticleDetailHistory &&
+          isContentMounted &&
+          contentContainer.current && (
+            <TextSelectionPopover
+              targetElement={contentContainer.current as HTMLElement}
+              article={article}
+            />
+          )}
+      </Media>
+      {/* mobile: a floating bubble would fight with the native selection
+          menu, so render a fixed bottom action bar instead */}
+      <Media lessThan="md">
+        {!isInArticleDetailHistory &&
+          isContentMounted &&
+          contentContainer.current && (
+            <TextSelectionPopover
+              targetElement={contentContainer.current as HTMLElement}
+              article={article}
+              variant="bottomBar"
+            />
+          )}
       </Media>
     </>
   )

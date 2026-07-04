@@ -18,11 +18,21 @@ const NoticeActorName = ({
   }
 
   const isArchived = user?.status?.state === 'archived'
+  const isFrozen = user?.status?.state === 'frozen'
 
   if (isArchived) {
     return (
       <span className={styles.archivedDisplayname}>
         <FormattedMessage defaultMessage="Account Archived" id="YS8YSV" />
+      </span>
+    )
+  }
+
+  // frozen actors are redacted in notices, mirroring the archived case
+  if (isFrozen) {
+    return (
+      <span className={styles.archivedDisplayname}>
+        <FormattedMessage defaultMessage="Frozen user" id="MeqJEO" />
       </span>
     )
   }

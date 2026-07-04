@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
-import { ArticleState, CommentState } from '~/gql/graphql'
+import { ArticleState, CommentState, UserState } from '~/gql/graphql'
 import { MOCK_ARTILCE, MOCK_COMMENT } from '~/stories/mocks'
 
 import { filterComments, filterResponses } from './comment'
@@ -19,6 +19,29 @@ describe('utils/comment/filterComments', () => {
     const comments = [
       { ...MOCK_COMMENT, state: CommentState.Banned },
       { ...MOCK_COMMENT, state: CommentState.Archived },
+    ]
+    const result = filterComments(comments)
+    expect(result.length).toEqual(0)
+  })
+
+  it('should filter out comments by restricted authors', () => {
+    const comments = [
+      {
+        ...MOCK_COMMENT,
+        state: CommentState.Active,
+        author: {
+          ...MOCK_COMMENT.author,
+          status: { ...MOCK_COMMENT.author.status, state: UserState.Frozen },
+        },
+      },
+      {
+        ...MOCK_COMMENT,
+        state: CommentState.Collapsed,
+        author: {
+          ...MOCK_COMMENT.author,
+          status: { ...MOCK_COMMENT.author.status, state: UserState.Archived },
+        },
+      },
     ]
     const result = filterComments(comments)
     expect(result.length).toEqual(0)
@@ -102,8 +125,16 @@ describe('utils/comment/filterResponses', () => {
       { ...MOCK_ARTILCE, state: ArticleState.Banned },
       { ...MOCK_COMMENT, state: CommentState.Active },
       { ...MOCK_COMMENT, state: CommentState.Banned },
+      {
+        ...MOCK_COMMENT,
+        state: CommentState.Active,
+        author: {
+          ...MOCK_COMMENT.author,
+          status: { ...MOCK_COMMENT.author.status, state: UserState.Frozen },
+        },
+      },
     ]
     const result = filterResponses(responses)
-    expect(result.length).toEqual(responses.length - 1)
+    expect(result.length).toEqual(responses.length - 2)
   })
 })
