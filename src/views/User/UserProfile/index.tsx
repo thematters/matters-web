@@ -23,12 +23,13 @@ import {
   useRoute,
   ViewerContext,
 } from '~/components'
-import { UserProfileUserPublicQuery } from '~/gql/graphql'
+import { UserProfileUserPublicQuery, UserState } from '~/gql/graphql'
 
 import UserTabs from '../UserTabs'
 import { Badges } from './Badges'
 import { BadgesDialog } from './BadgesDialog'
-import CircleWidget from './CircleWidget'
+// FEATURE IS SUNSETTING: circle entry on user profile is hidden
+// import CircleWidget from './CircleWidget'
 import DropdownActions from './DropdownActions'
 import { FollowersDialog } from './FollowersDialog'
 import { FollowingDialog } from './FollowingDialog'
@@ -50,7 +51,7 @@ export const UserProfile = () => {
   const isMe = !userName || viewer.userName === userName
   const { data, loading, client } = usePublicQuery<UserProfileUserPublicQuery>(
     USER_PROFILE_PUBLIC,
-    { variables: { userName } }
+    { fetchPolicy: 'network-only', variables: { userName } }
   )
   const user = data?.user
 
@@ -102,13 +103,15 @@ export const UserProfile = () => {
   }
 
   const badges = user.info.badges || []
-  const circles = user.ownCircles || []
+  // FEATURE IS SUNSETTING: circle entry on user profile is hidden
+  // const circles = user.ownCircles || []
   const hasSeedBadge = badges.some((b) => b.type === 'seed')
   const hasArchitectBadge = badges.some((b) => b.type === 'architect')
   const hasGoldenMotorBadge = badges.some((b) => b.type === 'golden_motor')
   const hasCommunityWatchBadge = badges.some(
     (b) => b.type === 'community_watch'
   )
+  const hasCarbonBasedBadge = badges.some((b) => b.type === 'carbon_based')
   const hasTraveloggersBadge = !!user.info.cryptoWallet?.hasNFTs
   const nomadBadgeType = badges.filter((b) =>
     ['nomad1', 'nomad2', 'nomad3', 'nomad4'].includes(b.type)
@@ -126,9 +129,11 @@ export const UserProfile = () => {
   /**
    * Inactive User
    */
-  const isUserArchived = userState === 'archived'
-  const isUserFrozen = userState === 'frozen'
-  if (isUserArchived || isUserFrozen) {
+  const isUserArchived = userState === UserState.Archived
+  const isUserFrozen = userState === UserState.Frozen
+  const isUserBanned = userState === UserState.Banned
+  const isUserInactive = isUserArchived || isUserFrozen || isUserBanned
+  if (isUserInactive) {
     return <Inactive state={userState} />
   }
 
@@ -219,6 +224,7 @@ export const UserProfile = () => {
                 hasGoldenMotorBadge={hasGoldenMotorBadge}
                 hasArchitectBadge={hasArchitectBadge}
                 hasCommunityWatchBadge={hasCommunityWatchBadge}
+                hasCarbonBasedBadge={hasCarbonBasedBadge}
                 isCivicLiker={isCivicLiker}
               >
                 {({ openDialog }) => (
@@ -236,6 +242,7 @@ export const UserProfile = () => {
                       hasGoldenMotorBadge={hasGoldenMotorBadge}
                       hasArchitectBadge={hasArchitectBadge}
                       hasCommunityWatchBadge={hasCommunityWatchBadge}
+                      hasCarbonBasedBadge={hasCarbonBasedBadge}
                       isCivicLiker={isCivicLiker}
                     />
                   </section>
@@ -304,12 +311,13 @@ export const UserProfile = () => {
               </p>
             </Expandable>
 
-            <CircleWidget
+            {/* FEATURE IS SUNSETTING: circle entry on user profile is hidden */}
+            {/* <CircleWidget
               circles={circles}
               isMe={isMe}
               hasDescription={false}
               hasFooter={false}
-            />
+            /> */}
           </section>
         </Media>
       </section>

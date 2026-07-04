@@ -2,11 +2,13 @@ import { FormattedMessage } from 'react-intl'
 
 import IMAGE_COVER from '@/public/static/images/profile-cover.png'
 import { Avatar, Cover, Media } from '~/components'
+import { UserState } from '~/gql/graphql'
 
 import styles from './styles.module.css'
 
-const Inactive = ({ state }: { state?: string }) => {
-  const isFrozen = state === 'frozen'
+const Inactive: React.FC<{ state?: UserState | string }> = ({ state }) => {
+  const isFrozen = state === UserState.Frozen
+
   return (
     <section className={styles.userProfile}>
       <Cover fallbackCover={IMAGE_COVER.src} />

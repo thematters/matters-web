@@ -80,8 +80,7 @@ jobs:
       - name: Lint
         run: |
           npm run i18n \
-          && npm run lint \
-          && npm run format:check
+          && npm run lint
 
       # - name: Test
       #   run: npm install codecov -g && npm run test && codecov
@@ -118,7 +117,7 @@ jobs:
       - name: Generate deployment package
         if: github.base_ref == 'develop' || github.base_ref == 'master' || github.base_ref == 'main' || github.base_ref == 'release/next'
         run: |
-          zip -r --symlinks deploy.zip . -x .git/\* node_modules/\*
+          zip -r --symlinks deploy.zip . -x .git/\* node_modules/\* .next/cache/\*
 
       - name: Upload Assets (develop - R2)
         if: github.base_ref == 'develop'

@@ -26,6 +26,10 @@ const fragments = {
           id
           name
         }
+        ... on Campaign {
+          id
+          shortHash
+        }
       }
       createdAt
     }
@@ -34,12 +38,15 @@ const fragments = {
 
 const CreatedAt = ({ comment, hasLink }: CreatedAtProps) => {
   const circle = comment.node.__typename === 'Circle' ? comment.node : undefined
+  const campaign =
+    comment.node.__typename === 'WritingChallenge' ? comment.node : undefined
 
-  if (circle) {
+  if (circle || campaign) {
     const path = toPath({
       page: 'commentDetail',
       comment,
       circle,
+      campaign,
     })
 
     if (!hasLink) {

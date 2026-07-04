@@ -6,13 +6,9 @@ import IconBook2 from '@/public/static/icons/24px/book2.svg'
 import IconPaywall from '@/public/static/icons/24px/paywall.svg'
 import IconStar from '@/public/static/icons/24px/star.svg'
 import { toPath } from '~/common/utils'
-import {
-  CircleDigest,
-  Icon,
-  LanguageContext,
-  TextIcon,
-  ViewerContext,
-} from '~/components'
+// FEATURE IS SUNSETTING: CircleDigest import is no longer used here
+// import { CircleDigest } from '~/components'
+import { Icon, LanguageContext, TextIcon, ViewerContext } from '~/components'
 import { FooterActionsArticlePublicFragment } from '~/gql/graphql'
 
 import DropdownActions, { DropdownActionsControls } from '../../DropdownActions'
@@ -79,7 +75,11 @@ const FooterActions = ({
 
             {tag}
 
-            {hasCircle && circle && (
+            {/* FEATURE IS SUNSETTING: circle name is hidden, lock icon kept */}
+            {hasCircle && circle && article.access.type === 'paywall' && (
+              <Icon icon={IconPaywall} color="grey" size={14} />
+            )}
+            {/* {hasCircle && circle && (
               <TextIcon
                 icon={
                   article.access.type === 'paywall' ? (
@@ -96,7 +96,7 @@ const FooterActions = ({
                   textWeight="normal"
                 />
               </TextIcon>
-            )}
+            )} */}
 
             {hasTogglePinChannelArticles && channelId && pinned && (
               <TextIcon

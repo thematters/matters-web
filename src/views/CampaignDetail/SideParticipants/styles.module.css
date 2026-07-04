@@ -1,4 +1,13 @@
 .participants {
+  /* dashed top rule marking the seam from the discussion module above; uses
+     the same colour/style as the article-feed list separators (#ddd dashed)
+     so the two rules match. top gap comes from the discussion module's own
+     padding-bottom; padding-top gives the gap below the rule */
+  @mixin border-top-grey-light;
+
+  padding-top: var(--sp16);
+  border-top-style: dashed;
+
   & .header {
     @mixin flex-center-space-between;
 
@@ -19,4 +28,45 @@
   flex-wrap: wrap;
   gap: var(--sp16);
   margin-top: var(--sp16);
+}
+
+/* mobile one-line entry */
+.chip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: var(--sp12) var(--sp16);
+  margin-top: var(--sp8);
+  font-size: var(--text14);
+  font-weight: var(--font-medium);
+  color: var(--color-black);
+  cursor: pointer;
+  background: var(--color-white);
+  border: 1px solid var(--color-grey-light);
+  border-radius: var(--sp8);
+}
+
+.chipLeft {
+  display: flex;
+  gap: var(--sp8);
+  align-items: center;
+}
+
+.stack {
+  display: flex;
+}
+
+.stack > * + * {
+  margin-left: calc(var(--sp6) * -1);
+}
+
+.chipCount {
+  margin-left: var(--sp4);
+  font-weight: var(--font-normal);
+  color: var(--color-grey);
+}
+
+.chevron {
+  color: var(--color-grey);
 }

@@ -9,6 +9,7 @@ type ROUTE_KEY =
   | 'HOME'
   | 'FEATURED'
   | 'HOTTEST'
+  | 'HOTTEST_MOMENTS'
   | 'NEWEST'
   | 'CHANNEL'
   | 'FOLLOW'
@@ -59,6 +60,8 @@ type ROUTE_KEY =
   | 'ME_SETTINGS_NOTIFICATIONS'
   | 'ME_SETTINGS_MISC'
   | 'ME_SETTINGS_BLOCKED'
+  | 'ME_SETTINGS_PERSONHOOD_FEASIBILITY'
+  | 'ME_SETTINGS_PERSONHOOD_PROVE'
   | 'ME_DRAFT_NEW'
   | 'ME_DRAFT_DETAIL'
   | 'ME_DRAFT_DETAIL_OPTIONS'
@@ -81,6 +84,12 @@ type ROUTE_KEY =
   | 'COMMUNITY'
   | 'TOS'
   | 'RECOMMENDATION'
+  | 'APPEALS'
+  | 'TRANSPARENCY'
+  | 'TRANSPARENCY_REPORT_2026_H1'
+  | 'TRANSPARENCY_AUTOMATION'
+  | 'TRANSPARENCY_RECOMMENDATIONS'
+  | 'TRANSPARENCY_DIGITAL_LITERACY'
 
 export const PROTECTED_ROUTES: {
   key: ROUTE_KEY
@@ -113,6 +122,14 @@ export const PROTECTED_ROUTES: {
     pathname: '/me/settings/misc',
   },
   { key: 'ME_SETTINGS_BLOCKED', pathname: '/me/settings/blocked' },
+  {
+    key: 'ME_SETTINGS_PERSONHOOD_FEASIBILITY',
+    pathname: '/me/settings/personhood/feasibility',
+  },
+  {
+    key: 'ME_SETTINGS_PERSONHOOD_PROVE',
+    pathname: '/me/settings/personhood/prove',
+  },
 
   // Article
   { key: 'ARTICLE_DETAIL_EDIT', pathname: '/a/[shortHash]/edit' },
@@ -151,12 +168,30 @@ export const ROUTES: {
   { key: 'HOME', pathname: '/' },
   { key: 'FEATURED', pathname: '/featured' },
   { key: 'HOTTEST', pathname: '/hottest' },
+  { key: 'HOTTEST_MOMENTS', pathname: '/moments' },
   { key: 'NEWEST', pathname: '/newest' },
   { key: 'CHANNEL', pathname: '/c/[shortHash]' },
   { key: 'FOLLOW', pathname: '/follow' },
   { key: 'SEARCH', pathname: '/search' },
   // experient page for recommendation engine testing
   { key: 'RECOMMENDATION', pathname: '/recommendation' },
+
+  // Compliance and transparency
+  { key: 'APPEALS', pathname: '/appeals' },
+  { key: 'TRANSPARENCY', pathname: '/transparency' },
+  {
+    key: 'TRANSPARENCY_REPORT_2026_H1',
+    pathname: '/transparency/2026-h1',
+  },
+  { key: 'TRANSPARENCY_AUTOMATION', pathname: '/transparency/automation' },
+  {
+    key: 'TRANSPARENCY_RECOMMENDATIONS',
+    pathname: '/transparency/recommendations',
+  },
+  {
+    key: 'TRANSPARENCY_DIGITAL_LITERACY',
+    pathname: '/transparency/digital-literacy',
+  },
 
   // Tag
   { key: 'TAGS', pathname: '/tags' },

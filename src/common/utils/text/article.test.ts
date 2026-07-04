@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
 
 import {
+  addUserGeneratedContentLinkRel,
   containsFigureTag,
   countChars,
   makeSummary,
@@ -19,7 +20,7 @@ describe('utils/text/article/stripHtml', () => {
 
     expect(
       stripHtml(
-        '<p>Hello, <a class="mention" href="/@world" data-id="VXNlcjo0NDk1" data-user-name="world" data-display-name="world+16我" rel="noopener noreferrer nofollow"><span>@world+16我</span></a>好</p>',
+        '<p>Hello, <a class="mention" href="/@world" data-id="VXNlcjo0NDk1" data-user-name="world" data-display-name="world+16我" rel="noopener noreferrer ugc nofollow"><span>@world+16我</span></a>好</p>',
         {
           ensureMentionTrailingSpace: true,
         }
@@ -178,6 +179,32 @@ describe('utils/text/article/normalizeArticleTitle', () => {
 })
 
 describe('utils/text/article/optimizeEmbed', () => {
+  it('should add ugc nofollow rel tokens to user generated links', () => {
+    expect(
+      addUserGeneratedContentLinkRel(
+        '<p><a href="https://example.com">example</a></p>'
+      )
+    ).toBe(
+      '<p><a href="https://example.com" rel="noopener noreferrer ugc nofollow">example</a></p>'
+    )
+
+    expect(
+      addUserGeneratedContentLinkRel(
+        '<p><a href="https://example.com" rel="noopener noreferrer">example</a></p>'
+      )
+    ).toBe(
+      '<p><a href="https://example.com" rel="noopener noreferrer ugc nofollow">example</a></p>'
+    )
+
+    expect(
+      addUserGeneratedContentLinkRel(
+        "<p><a href='https://example.com' rel='sponsored'>example</a></p>"
+      )
+    ).toBe(
+      "<p><a href='https://example.com' rel='noopener noreferrer ugc nofollow sponsored'>example</a></p>"
+    )
+  })
+
   it('should add loading="lazy" to iframe tags', () => {
     const input = '<iframe src="https://example.com"></iframe>'
     const expected =

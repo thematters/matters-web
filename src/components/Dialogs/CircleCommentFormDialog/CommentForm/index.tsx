@@ -2,7 +2,7 @@ import dynamic from 'next/dynamic'
 import { useContext, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { COMMENT_TYPE_TEXT } from '~/common/enums'
+import { COMMENT_TYPE_TEXT, MAX_CAMPAIGN_COMMENT_LENGTH } from '~/common/enums'
 import { dom, formStorage, stripHtml } from '~/common/utils'
 import {
   CircleCommentFormType,
@@ -28,7 +28,9 @@ export interface CircleCommentFormProps {
   commentId?: string
   replyToId?: string
   parentId?: string
-  circleId: string
+  // exactly one of circleId / campaignId is set, depending on `type`
+  circleId?: string
+  campaignId?: string
   type: CircleCommentFormType
 
   defaultContent?: string | null
@@ -43,6 +45,7 @@ const CommentForm: React.FC<CircleCommentFormProps> = ({
   replyToId,
   parentId,
   circleId,
+  campaignId,
   type,
 
   defaultContent,
@@ -65,7 +68,7 @@ const CommentForm: React.FC<CircleCommentFormProps> = ({
 
   const formStorageKey = formStorage.genCircleCommentKey({
     authorId: viewer.id,
-    circleId,
+    circleId: circleId ?? campaignId ?? '',
     type,
     commentId,
     parentId,
@@ -77,7 +80,12 @@ const CommentForm: React.FC<CircleCommentFormProps> = ({
       defaultContent ||
       ''
   )
-  const isValid = stripHtml(content).length > 0
+  // campaign discussion comments are capped at 240 chars (like 短動態)
+  const maxLength =
+    type === 'campaignDiscussion' ? MAX_CAMPAIGN_COMMENT_LENGTH : undefined
+  const contentLength = stripHtml(content).length
+  const isOverLength = maxLength !== undefined && contentLength > maxLength
+  const isValid = contentLength > 0 && !isOverLength
 
   const handleSubmit = async (event?: React.FormEvent<HTMLFormElement>) => {
     const mentions = dom.getAttributes('data-id', content)
@@ -88,6 +96,7 @@ const CommentForm: React.FC<CircleCommentFormProps> = ({
         content,
         replyTo: replyToId,
         circleId,
+        campaignId,
         parentId,
         type,
         mentions,
@@ -181,6 +190,14 @@ const CommentForm: React.FC<CircleCommentFormProps> = ({
               window.dispatchEvent(new CustomEvent(formStorageKey))
             }
           />
+          {maxLength !== undefined && (
+            <p
+              className={styles.counter}
+              data-over={isOverLength ? 'true' : undefined}
+            >
+              {contentLength} / {maxLength}
+            </p>
+          )}
         </form>
       </Dialog.Content>
 

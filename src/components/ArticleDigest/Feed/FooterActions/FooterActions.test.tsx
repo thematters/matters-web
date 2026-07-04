@@ -16,11 +16,11 @@ describe('<ArticleDigest/Feed/FooterActions>', () => {
     expect(screen.getByLabelText('Donation count')).toBeTruthy()
   })
 
-  it('should render circle', () => {
+  it('should hide circle name when in circle (sunsetting)', () => {
     render(<FooterActions article={MOCK_ARTILCE} hasCircle />)
     expect(
-      screen.getByText(MOCK_ARTILCE.access.circle.displayName)
-    ).toBeTruthy()
+      screen.queryByText(MOCK_ARTILCE.access.circle.displayName)
+    ).toBeNull()
   })
 
   it('should not render metadata', () => {

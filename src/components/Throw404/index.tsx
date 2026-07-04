@@ -1,15 +1,24 @@
-import { BackToHomeButton, Error as ErrorComponent } from '~/components'
+import NextHead from 'next/head'
 
-/**
- * FIXME: SSR should response with HTTP 404 status code
- *
- * @see {@url https://github.com/lfades/next-with-apollo/issues/134}
- * @see {@url https://github.com/vercel/next.js/issues/4452}
- */
+import { BackToHomeButton, Error as ErrorComponent } from '~/components'
+import { useHttpStatus } from '~/components/Context'
+
 export const Throw404 = () => {
+  const httpStatus = useHttpStatus()
+  // mutating the shared object during render is how the status escapes the
+  // `getDataFromTree` pass in `_app` back to `ctx.res` (real HTTP 404)
+  httpStatus.statusCode = 404
+
   return (
-    <ErrorComponent type="not_found">
-      <BackToHomeButton />
-    </ErrorComponent>
+    <>
+      <NextHead>
+        {/* `key` matches next-seo so this overrides the default robots meta */}
+        <meta name="robots" content="noindex, nofollow" key="robots" />
+        <meta name="googlebot" content="noindex, nofollow" key="googlebot" />
+      </NextHead>
+      <ErrorComponent type="not_found">
+        <BackToHomeButton />
+      </ErrorComponent>
+    </>
   )
 }
