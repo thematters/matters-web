@@ -51,7 +51,7 @@ export const UserProfile = () => {
   const isMe = !userName || viewer.userName === userName
   const { data, loading, client } = usePublicQuery<UserProfileUserPublicQuery>(
     USER_PROFILE_PUBLIC,
-    { variables: { userName } }
+    { fetchPolicy: 'network-only', variables: { userName } }
   )
   const user = data?.user
 
@@ -131,7 +131,8 @@ export const UserProfile = () => {
    */
   const isUserArchived = userState === UserState.Archived
   const isUserFrozen = userState === UserState.Frozen
-  const isUserInactive = isUserArchived || isUserFrozen
+  const isUserBanned = userState === UserState.Banned
+  const isUserInactive = isUserArchived || isUserFrozen || isUserBanned
   if (isUserInactive) {
     return <Inactive state={userState} />
   }
