@@ -10,6 +10,7 @@ import { useDirectImageUpload, useMutation, ViewerContext } from '~/components'
 import {
   DIRECT_IMAGE_UPLOAD,
   DIRECT_IMAGE_UPLOAD_DONE,
+  SINGLE_FILE_UPLOAD,
 } from '~/components/GQL/mutations/uploadFile'
 import { Icon } from '~/components/Icon'
 import { ResponsiveImage } from '~/components/ResponsiveImage'
@@ -17,6 +18,7 @@ import { Spinner } from '~/components/Spinner'
 import {
   DirectImageUploadDoneMutation,
   DirectImageUploadMutation,
+  SingleFileUploadMutation,
 } from '~/gql/graphql'
 
 import { MomentAsset } from '.'
@@ -59,6 +61,11 @@ export const Item = memo(function Item({
     { showToast: false }
   )
 
+  const [singleFileUpload, { loading: singleUploading }] =
+    useMutation<SingleFileUploadMutation>(SINGLE_FILE_UPLOAD, undefined, {
+      showToast: false,
+    })
+
   const { upload: uploadImage, uploading } = useDirectImageUpload()
 
   useEffect(() => {
@@ -88,17 +95,17 @@ export const Item = memo(function Item({
         return
       }
 
-      try {
-        const variables = {
-          input: {
-            file,
-            mime,
-            type: ASSET_TYPE.moment,
-            entityId: viewer.id,
-            entityType: ENTITY_TYPE.user,
-          },
-        }
+      const variables = {
+        input: {
+          file,
+          mime,
+          type: ASSET_TYPE.moment,
+          entityId: viewer.id,
+          entityType: ENTITY_TYPE.user,
+        },
+      }
 
+      const tryDirectUpload = async () => {
         const { data } = await upload({
           variables: _omit(variables, ['input.file']),
         })
@@ -119,10 +126,34 @@ export const Item = memo(function Item({
 
           setUploadedAsset({ assetId, path })
         } else {
-          throw new Error()
+          throw new Error('directImageUpload failed')
         }
-      } catch (e) {
-        setError(e as Error)
+      }
+
+      const trySingleUpload = async () => {
+        const result = await singleFileUpload({
+          variables: { input: _omit(variables.input, ['mime']) },
+        })
+        const { id: assetId, path } = result?.data?.singleFileUpload || {}
+
+        if (assetId && path) {
+          setUploadedAsset({ assetId, path })
+        } else {
+          throw new Error('singleFileUpload failed')
+        }
+      }
+
+      try {
+        await tryDirectUpload()
+      } catch (directUploadError) {
+        console.error(directUploadError)
+
+        // fall back to server-side upload when direct upload fails
+        try {
+          await trySingleUpload()
+        } catch (e) {
+          setError(e as Error)
+        }
       }
     }
 
@@ -140,10 +171,10 @@ export const Item = memo(function Item({
         onMouseEnter={() => setHoverAction(true)}
         onMouseLeave={() => setHoverAction(false)}
       >
-        {(loading || uploading) && !hoverAction && (
+        {(loading || uploading || singleUploading) && !hoverAction && (
           <Spinner color="greyDarker" size={24} />
         )}
-        {((!loading && !uploading) || hoverAction) && (
+        {((!loading && !uploading && !singleUploading) || hoverAction) && (
           <Icon icon={IconCircleTimesFill} color="greyDarker" size={24} />
         )}
       </div>
