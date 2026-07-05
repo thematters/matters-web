@@ -78,6 +78,10 @@ export const Item = memo(function Item({
       }
 
       const { file } = asset
+      if (!(file instanceof File)) {
+        setError(new Error('Moment asset upload file is missing'))
+        return
+      }
 
       const mime = await validateImage(file)
       if (!mime) {
@@ -102,11 +106,7 @@ export const Item = memo(function Item({
         const { id: assetId, path, uploadURL } = data?.directImageUpload || {}
 
         if (assetId && path && uploadURL) {
-          const { id: cfImageId } = await uploadImage({ uploadURL, file })
-
-          if (!cfImageId || !path.includes(cfImageId)) {
-            throw new Error()
-          }
+          await uploadImage({ uploadURL, file })
 
           // (async) mark asset draft as false
           directImageUploadDone({
