@@ -1,6 +1,7 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
 import Link from 'next/link'
+import type { MouseEventHandler } from 'react'
 
 import IconHashTag from '@/public/static/icons/24px/hashtag.svg'
 import { TEST_ID } from '~/common/enums'
@@ -14,7 +15,8 @@ interface ArticleTagProps {
   tag: DigestTagFragment
   textIconProps?: TextIconProps
   canClamp?: boolean
-  onClick?: () => void
+  onClick?: MouseEventHandler<HTMLAnchorElement>
+  feedType?: string
 }
 
 export const ArticleTag = ({
@@ -22,12 +24,14 @@ export const ArticleTag = ({
   textIconProps: customTextIconProps,
   canClamp = false,
   onClick,
+  feedType,
 }: ArticleTagProps) => {
   const tagName = canClamp ? clampTag(tag.content) : tag.content
   const isClamped = tagName !== tag.content
   const path = toPath({
     page: 'tagDetail',
     tag,
+    feedType,
   })
 
   const tagClasses = classNames({

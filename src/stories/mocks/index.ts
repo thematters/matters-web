@@ -393,6 +393,7 @@ export const MOCK_MOMENT = {
     },
   ],
   author: MOCK_USER,
+  momentTags: [MOCK_TAG],
   state: 'active' as any,
   commentCount: 10,
   likeCount: 100,

@@ -93,6 +93,7 @@ export enum TEST_ID {
   MOMENT_DIGEST_AUTHOR = 'moment-digest/author',
   MOMENT_DIGEST_CONTENT = 'moment-digest/content',
   MOMENT_DIGEST_ASSETS = 'moment-digest/assets',
+  MOMENT_DIGEST_TAGS = 'moment-digest/tags',
   MOMENT_DIGEST_FOOTER_ACTIONS_COMMENTED_FOLLOWEES = 'moment-digest/footer-actions/commented-followees',
   MOMENT_DIGEST_FOOTER_ACTIONS_REPLY_BUTTON = 'moment-digest/footer-actions/reply-button',
   // circle

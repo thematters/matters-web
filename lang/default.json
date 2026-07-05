@@ -442,6 +442,10 @@
   "47FYwb": {
     "defaultMessage": "Cancel"
   },
+  "49zQVv": {
+    "defaultMessage": "Moments",
+    "description": "src/views/TagDetail/index.tsx"
+  },
   "4CrCbD": {
     "defaultMessage": "Community"
   },
@@ -1930,6 +1934,9 @@
   "Qlzm0s": {
     "defaultMessage": "mentioned you in a moment at"
   },
+  "QuQXDD": {
+    "defaultMessage": "{momentCount, plural, =1 {moment} other {moments}}"
+  },
   "QvPc1q": {
     "defaultMessage": "Upload Cover"
   },
@@ -2494,6 +2501,10 @@
   "aE5Qq+": {
     "defaultMessage": "Resend",
     "description": "src/components/Forms/Verification/ResendCodeButton/index.tsx"
+  },
+  "aGgSJp": {
+    "defaultMessage": "Articles",
+    "description": "src/views/TagDetail/index.tsx"
   },
   "aKEiNd": {
     "defaultMessage": "You missed the registration period, you can still join as a latecomer. Apply earlier next time for the chance to get the badge."

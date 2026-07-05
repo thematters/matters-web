@@ -29,6 +29,7 @@ type MomentAssetsUploaderProps = {
   updateAssets: (assets: MomentAsset[]) => void
   fieldId?: string
   isInPage?: boolean
+  hideAddButton?: boolean
 }
 
 export const MomentAssetsUploader: React.FC<MomentAssetsUploaderProps> = ({
@@ -36,6 +37,7 @@ export const MomentAssetsUploader: React.FC<MomentAssetsUploaderProps> = ({
   updateAssets,
   fieldId: _fieldId,
   isInPage,
+  hideAddButton,
 }) => {
   const intl = useIntl()
 
@@ -166,7 +168,7 @@ export const MomentAssetsUploader: React.FC<MomentAssetsUploaderProps> = ({
       ))}
       {assets.length < UPLOAD_MOMENT_ASSET_COUNT_LIMIT && (
         <label className={styles.label} htmlFor={fieldId}>
-          {!isInPage && (
+          {!hideAddButton && !isInPage && (
             <>
               {assets.length === 0 && (
                 <div className={imageButtonClasses}>
@@ -180,7 +182,7 @@ export const MomentAssetsUploader: React.FC<MomentAssetsUploaderProps> = ({
               )}
             </>
           )}
-          {isInPage && (
+          {!hideAddButton && isInPage && (
             <div className={styles.addAssetButton}>
               <Icon icon={IconCirclePlus} size={32} color="greyDarker" />
             </div>

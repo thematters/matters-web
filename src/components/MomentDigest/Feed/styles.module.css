@@ -28,4 +28,12 @@
   .assets {
     margin-top: var(--sp12);
   }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp8);
+    align-items: center;
+    margin-top: var(--sp12);
+  }
 }

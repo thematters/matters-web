@@ -33,18 +33,19 @@ import {
   TAG_DETAIL_PRIVATE,
   TAG_DETAIL_PUBLIC,
 } from './gql'
+import TagDetailMoments from './Moments'
 import RecommendedAuthors from './RecommendedAuthors'
 import RelatedTags from './RelatedTags'
 import styles from './styles.module.css'
 
-type TagFeedType = 'hottest' | 'latest'
+type TagFeedType = 'hottest' | 'latest' | 'moment'
 
-const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
+export const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
   const { router } = useRoute()
   const intl = useIntl()
 
   // feed type
-  const { getQuery, setQuery } = useRoute()
+  const { getQuery, setQuery, removeQuery } = useRoute()
   const qsType = getQuery('type') as TagFeedType
 
   const [feedType, setFeedType] = useState<TagFeedType>(qsType || 'latest')
@@ -54,14 +55,21 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
     setFeedType(newType)
   }
 
-  useEffect(() => {
-    setFeedType(qsType || 'latest')
-  }, [qsType])
-
   const isHottest = feedType === 'hottest'
   const isLatest = feedType === 'latest'
-  const hasArticles = tag.numArticles > 0
+  const isMoment = feedType === 'moment'
   const hasHottestArticles = tag.hottestArticles.totalCount > 0
+
+  useEffect(() => {
+    // fall back to latest when the hottest tab is hidden
+    if (qsType === 'hottest' && !hasHottestArticles) {
+      removeQuery('type')
+      setFeedType('latest')
+      return
+    }
+
+    setFeedType(qsType || 'latest')
+  }, [qsType])
 
   useEffect(() => {
     // backward compatible with `/tags/:globalId:`
@@ -125,18 +133,19 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
         <TagBookmarkButton tag={tag} />
       </section>
 
-      {hasArticles && hasHottestArticles && (
-        <section className={styles.tabs}>
-          <SquareTabs>
-            <SquareTabs.Tab
-              selected={isLatest}
-              onClick={() => changeFeed('latest')}
-              title={intl.formatMessage({
-                defaultMessage: 'Latest',
-                id: 'adThp5',
-              })}
-            />
+      <section className={styles.tabs}>
+        <SquareTabs>
+          <SquareTabs.Tab
+            selected={isLatest}
+            onClick={() => changeFeed('latest')}
+            title={intl.formatMessage({
+              defaultMessage: 'Articles',
+              id: 'aGgSJp',
+              description: 'src/views/TagDetail/index.tsx',
+            })}
+          />
 
+          {hasHottestArticles && (
             <SquareTabs.Tab
               selected={isHottest}
               onClick={() => changeFeed('hottest')}
@@ -145,11 +154,25 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
                 id: 'll/ufR',
               })}
             />
-          </SquareTabs>
-        </section>
-      )}
+          )}
 
-      <TagDetailArticles tag={tag} feedType={feedType} />
+          <SquareTabs.Tab
+            selected={isMoment}
+            onClick={() => changeFeed('moment')}
+            title={intl.formatMessage({
+              defaultMessage: 'Moments',
+              id: '49zQVv',
+              description: 'src/views/TagDetail/index.tsx',
+            })}
+          />
+        </SquareTabs>
+      </section>
+
+      {isMoment ? (
+        <TagDetailMoments tag={tag} />
+      ) : (
+        <TagDetailArticles tag={tag} feedType={feedType} />
+      )}
     </Layout.Main>
   )
 }

@@ -12,6 +12,7 @@ import {
   toPath,
 } from '~/common/utils'
 import {
+  ArticleTag,
   DateTime,
   Expandable,
   Icon,
@@ -35,12 +36,14 @@ export type MomentDigestFeedProps = {
     Partial<MomentDigestFeedMomentPrivateFragment>
   hasAuthor?: boolean
   hasCommentedFollowees?: boolean
+  hasTag?: boolean
 }
 
 type ContainerProps = {
   moment: MomentDigestFeedProps['moment']
   hasAuthor?: boolean
   hasCommentedFollowees?: boolean
+  hasTag?: boolean
   openMomentDetail: () => void
 }
 
@@ -48,9 +51,10 @@ const Container = ({
   moment,
   hasAuthor,
   hasCommentedFollowees,
+  hasTag = false,
   openMomentDetail,
 }: ContainerProps) => {
-  const { content, createdAt, assets, author } = moment
+  const { content, createdAt, assets, author, momentTags } = moment
 
   const momentDetailPath = toPath({
     page: 'momentDetail',
@@ -146,6 +150,26 @@ const Container = ({
           <Assets moment={moment} />
         </section>
       )}
+      {hasTag && !!momentTags && momentTags.length > 0 && (
+        <section
+          className={styles.tags}
+          data-test-id={TEST_ID.MOMENT_DIGEST_TAGS}
+        >
+          {momentTags.map(
+            (tag) =>
+              tag && (
+                <ArticleTag
+                  key={tag.id}
+                  tag={tag}
+                  canClamp
+                  feedType="moment"
+                  textIconProps={{ size: 13 }}
+                  onClick={(event) => event.stopPropagation()}
+                />
+              )
+          )}
+        </section>
+      )}
       <FooterActions
         moment={moment}
         hasCommentedFollowees={hasCommentedFollowees}
@@ -159,6 +183,7 @@ const BaseMomentDigestFeed = ({
   moment,
   hasAuthor,
   hasCommentedFollowees,
+  hasTag,
 }: MomentDigestFeedProps) => {
   const { router } = useRoute()
 
@@ -183,6 +208,7 @@ const BaseMomentDigestFeed = ({
           moment={moment}
           hasAuthor={hasAuthor}
           hasCommentedFollowees={hasCommentedFollowees}
+          hasTag={hasTag}
           openMomentDetail={goToMomentDetail}
         />
       </Media>
@@ -193,6 +219,7 @@ const BaseMomentDigestFeed = ({
               moment={moment}
               hasAuthor={hasAuthor}
               hasCommentedFollowees={hasCommentedFollowees}
+              hasTag={hasTag}
               openMomentDetail={openDialog}
             />
           )}

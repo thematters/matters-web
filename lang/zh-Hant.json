@@ -442,6 +442,10 @@
   "47FYwb": {
     "defaultMessage": "取消"
   },
+  "49zQVv": {
+    "defaultMessage": "動態",
+    "description": "src/views/TagDetail/index.tsx"
+  },
   "4CrCbD": {
     "defaultMessage": "自治"
   },
@@ -1929,6 +1933,9 @@
   "Qlzm0s": {
     "defaultMessage": "在動態中提及了你"
   },
+  "QuQXDD": {
+    "defaultMessage": "{momentCount, plural, =1 {則動態} other {則動態}}"
+  },
   "QvPc1q": {
     "defaultMessage": "上傳封面"
   },
@@ -2493,6 +2500,10 @@
   "aE5Qq+": {
     "defaultMessage": "重新發送",
     "description": "src/components/Forms/Verification/ResendCodeButton/index.tsx"
+  },
+  "aGgSJp": {
+    "defaultMessage": "文章",
+    "description": "src/views/TagDetail/index.tsx"
   },
   "aKEiNd": {
     "defaultMessage": "錯過報名期沒關係，仍然可以用晚鳥身份參與，一起書寫人生故事。下次早點報名，就有機會獲得大滿貫徽章！"
