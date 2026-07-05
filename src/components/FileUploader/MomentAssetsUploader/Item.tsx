@@ -1,12 +1,15 @@
+import { ApolloError } from '@apollo/client'
 import _omit from 'lodash/omit'
 import { memo, useContext, useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import IconCircleTimesFill from '@/public/static/icons/24px/circle-times-fill.svg'
 import IconWarn from '@/public/static/icons/24px/warn.svg'
+import { ERROR_CODES } from '~/common/enums'
 import { ASSET_TYPE, ENTITY_TYPE } from '~/common/enums/file'
 import { validateImage } from '~/common/utils'
 import { useDirectImageUpload, useMutation, ViewerContext } from '~/components'
+import { getErrorCodes } from '~/components/GQL'
 import {
   DIRECT_IMAGE_UPLOAD,
   DIRECT_IMAGE_UPLOAD_DONE,
@@ -31,6 +34,20 @@ type ItemProps = {
 type UploadedAsset = {
   assetId: string
   path: string
+}
+
+const UploadErrorMessage = ({ error }: { error?: Error }) => {
+  const [code] = getErrorCodes(error as ApolloError)
+
+  if (code === ERROR_CODES.ACTION_LIMIT_EXCEEDED) {
+    return <FormattedMessage defaultMessage="Too Frequent" id="WHd6DD" />
+  }
+
+  if (error) {
+    return <FormattedMessage defaultMessage="Upload Failed" id="/BZiQv" />
+  }
+
+  return <FormattedMessage defaultMessage="Unknown Error" id="tQV8l8" />
 }
 
 export const Item = memo(function Item({
@@ -115,7 +132,13 @@ export const Item = memo(function Item({
               draft: false,
               url: path,
             },
-          }).catch(console.error)
+          }).catch((error) => {
+            console.error('[MomentAssetsUploader] direct upload done failed', {
+              error,
+              assetId,
+              path,
+            })
+          })
 
           setUploadedAsset({ assetId, path })
         } else {
@@ -151,7 +174,7 @@ export const Item = memo(function Item({
         <div className={styles.error}>
           <Icon icon={IconWarn} color="red" size={24} />
           <span>
-            <FormattedMessage defaultMessage="Unknown Error" id="tQV8l8" />
+            <UploadErrorMessage error={error} />
           </span>
         </div>
       )}

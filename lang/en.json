@@ -97,6 +97,9 @@
     "defaultMessage": "Last 1 month",
     "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
   },
+  "/BZiQv": {
+    "defaultMessage": "Upload Failed"
+  },
   "/GCoTA": {
     "defaultMessage": "Clear"
   },
@@ -2204,6 +2207,9 @@
   },
   "WFCO2w": {
     "defaultMessage": "Set Collection"
+  },
+  "WHd6DD": {
+    "defaultMessage": "Too Frequent"
   },
   "WIOxG+": {
     "defaultMessage": "Collapse",

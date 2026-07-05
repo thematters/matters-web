@@ -97,6 +97,9 @@
     "defaultMessage": "最近 1 個月",
     "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
   },
+  "/BZiQv": {
+    "defaultMessage": "Upload Failed"
+  },
   "/GCoTA": {
     "defaultMessage": "清空"
   },
@@ -2204,6 +2207,9 @@
   },
   "WFCO2w": {
     "defaultMessage": "關聯作品"
+  },
+  "WHd6DD": {
+    "defaultMessage": "Too Frequent"
   },
   "WIOxG+": {
     "defaultMessage": "闔上",
