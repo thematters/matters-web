@@ -25,10 +25,12 @@ import {
 import {
   DIRECT_IMAGE_UPLOAD,
   DIRECT_IMAGE_UPLOAD_DONE,
+  SINGLE_FILE_UPLOAD,
 } from '~/components/GQL/mutations/uploadFile'
 import {
   DirectImageUploadDoneMutation,
   DirectImageUploadMutation,
+  SingleFileUploadMutation,
 } from '~/gql/graphql'
 
 import styles from './styles.module.css'
@@ -66,6 +68,10 @@ export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
     undefined,
     { showToast: false }
   )
+  const [singleFileUpload, { loading: singleUploading }] =
+    useMutation<SingleFileUploadMutation>(SINGLE_FILE_UPLOAD, undefined, {
+      showToast: false,
+    })
   const { upload: uploadImage, uploading } = useDirectImageUpload()
 
   const [avatar, setAvatar] = useState<string | undefined | null>(
@@ -122,27 +128,52 @@ export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
           mime,
         },
       }
-      const { data } = await upload({
-        variables: _omit(variables, ['input.file']),
-      })
-      const { id: assetId, path, uploadURL } = data?.directImageUpload || {}
+      const tryDirectUpload = async () => {
+        const { data } = await upload({
+          variables: _omit(variables, ['input.file']),
+        })
+        const { id: assetId, path, uploadURL } = data?.directImageUpload || {}
 
-      if (assetId && path && uploadURL) {
-        await uploadImage({ uploadURL, file })
+        if (assetId && path && uploadURL) {
+          await uploadImage({ uploadURL, file })
 
-        // (async) mark asset draft as false
-        directImageUploadDone({
-          variables: {
-            ..._omit(variables.input, ['file']),
-            draft: false,
-            url: path,
-          },
-        }).catch(console.error)
+          // (async) mark asset draft as false
+          directImageUploadDone({
+            variables: {
+              ..._omit(variables.input, ['file']),
+              draft: false,
+              url: path,
+            },
+          }).catch(console.error)
 
-        setAvatar(path)
-        onUploaded(assetId, path)
-      } else {
-        throw new Error()
+          setAvatar(path)
+          onUploaded(assetId, path)
+        } else {
+          throw new Error('directImageUpload failed')
+        }
+      }
+
+      const trySingleUpload = async () => {
+        const result = await singleFileUpload({
+          variables: { input: _omit(variables.input, ['mime']) },
+        })
+        const { id: assetId, path } = result?.data?.singleFileUpload || {}
+
+        if (assetId && path) {
+          setAvatar(path)
+          onUploaded(assetId, path)
+        } else {
+          throw new Error('singleFileUpload failed')
+        }
+      }
+
+      try {
+        await tryDirectUpload()
+      } catch (directUploadError) {
+        console.error(directUploadError)
+
+        // fall back to server-side upload when direct upload fails
+        await trySingleUpload()
       }
     } catch {
       toast.error({
@@ -177,7 +208,7 @@ export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
       )}
 
       <div className={styles.mask}>
-        {loading || uploading ? (
+        {loading || uploading || singleUploading ? (
           <SpinnerBlock />
         ) : (
           <Icon icon={IconCamera} color="white" size={32} />
