@@ -29,7 +29,11 @@ import {
   ViewerContext,
 } from '~/components'
 import MomentEditor from '~/components/Editor/Moment'
-import { MomentAsset, MomentAssetsUploader } from '~/components/FileUploader'
+import {
+  getStorableMomentAssets,
+  MomentAsset,
+  MomentAssetsUploader,
+} from '~/components/FileUploader'
 import { PUT_MOMENT } from '~/components/GQL/mutations/putMoment'
 import { MomentState, PutMomentMutation } from '~/gql/graphql'
 
@@ -74,12 +78,15 @@ const MomentForm = ({ setFirstRendered }: MomentFormProps) => {
   const [isSubmitting, setSubmitting] = useState(false)
   const [editor, setEditor] = useState<Editor | null>(null)
   const [content, setContent] = useState(formDraft?.content || '')
-  const [assets, setAssets] = useState<MomentAsset[]>(formDraft?.assets || [])
+  const [assets, setAssets] = useState<MomentAsset[]>(
+    getStorableMomentAssets(formDraft?.assets)
+  )
   const [isDragging, setIsDragging] = useState(false)
   const updateAssets = (assets: MomentAsset[]) => {
+    const currentDraft = formStorage.get<FormDraft>(formStorageKey, 'local')
     formStorage.set<FormDraft>(
       formStorageKey,
-      { ...formDraft, assets },
+      { ...currentDraft, assets: getStorableMomentAssets(assets) },
       'local'
     )
     setAssets(assets)
@@ -254,9 +261,10 @@ const MomentForm = ({ setFirstRendered }: MomentFormProps) => {
   }
 
   const onUpdate = ({ content: newContent }: { content: string }) => {
+    const currentDraft = formStorage.get<FormDraft>(formStorageKey, 'local')
     formStorage.set<FormDraft>(
       formStorageKey,
-      { ...formDraft, content: newContent },
+      { ...currentDraft, content: newContent },
       'local'
     )
     setContent(newContent)
