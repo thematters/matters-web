@@ -101,3 +101,25 @@ export const getQuoteWallCampaign = (
     nameEn: campaign.nameEn,
   }
 }
+
+/**
+ * 上牆失敗的原因分類。server 端這些情況都回同一個 BAD_USER_INPUT，
+ * 只能靠訊息內容區分，好對應到具體的友善提示。
+ */
+export type PostToWallErrorKind = 'duplicate' | 'excerpt' | 'noWall' | 'generic'
+
+export const classifyPostToWallError = (
+  message?: string | null
+): PostToWallErrorKind => {
+  const m = message || ''
+  if (/already on the wall/i.test(m)) {
+    return 'duplicate'
+  }
+  if (/excerpt/i.test(m)) {
+    return 'excerpt'
+  }
+  if (/quote wall|campaign article/i.test(m)) {
+    return 'noWall'
+  }
+  return 'generic'
+}
