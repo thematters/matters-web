@@ -1,3 +1,4 @@
+import { ApolloError } from '@apollo/client'
 import { toJpeg } from 'html-to-image'
 import QRCode from 'qrcode'
 import { useEffect, useMemo, useRef, useState } from 'react'
@@ -10,9 +11,27 @@ import { PutQuoteMutation } from '~/gql/graphql'
 
 import { QuoteCard } from './Card'
 import Complete from './Complete'
-import { QuoteWallCampaign } from './gql'
+import { classifyPostToWallError, QuoteWallCampaign } from './gql'
 import { clampQuote, MAX_QUOTE_LEN, QUOTE_SIZES, QUOTE_STYLES } from './presets'
 import styles from './styles.module.css'
+
+// 上牆失敗各原因的友善提示（server 端都回 BAD_USER_INPUT，靠訊息分類）
+const postToWallErrors = defineMessages({
+  duplicate: {
+    defaultMessage: 'This quote is already on the wall.',
+    id: 'JHH4g5',
+  },
+  excerpt: {
+    defaultMessage:
+      'The quote must be an exact excerpt of the article. Please select again.',
+    id: 'UVStSp',
+  },
+  noWall: {
+    defaultMessage: "This event's quote wall isn't open.",
+    id: 'EAzXiX',
+  },
+  generic: { defaultMessage: 'Failed to post to the wall', id: '5IlTNw' },
+})
 
 const PREVIEW_WIDTH = 320 // 預覽寬度（卡片以此等比縮放顯示）
 
@@ -64,7 +83,11 @@ const QuoteImageDialogContent: React.FC<QuoteImageDialogContentProps> = ({
   const [styleId, setStyleId] = useState('warm')
   const [sizeId, setSizeId] = useState('portrait')
   const [qrDataUrl, setQrDataUrl] = useState('')
-  const [putQuote] = useMutation<PutQuoteMutation>(PUT_QUOTE)
+  // showToast: false — 我們在 onPostToWall 依 server 訊息顯示具體原因，
+  // 不讓通用的錯誤 toast 一起跳出（避免雙重、且訊息含糊）
+  const [putQuote] = useMutation<PutQuoteMutation>(PUT_QUOTE, undefined, {
+    showToast: false,
+  })
   const [isPosting, setPosting] = useState(false)
   const [posted, setPosted] = useState(false)
 
@@ -144,16 +167,15 @@ const QuoteImageDialogContent: React.FC<QuoteImageDialogContentProps> = ({
       })
       // 上牆成功後切換到成功頁（含「前往活動頁」），取代原本的 toast
       setPosted(true)
-    } catch {
-      // 每日／同篇上限已於 matters-server#4867 移除，其餘失敗顯示通用訊息
-      toast.error({
-        message: (
-          <FormattedMessage
-            defaultMessage="Failed to post to the wall"
-            id="5IlTNw"
-          />
-        ),
-      })
+    } catch (error) {
+      // server 這些情況都回 BAD_USER_INPUT，靠訊息分類成具體提示
+      // （例如「已貼過」「非文章原文」），比通用的「出錯了」清楚
+      const kind = classifyPostToWallError(
+        error instanceof ApolloError
+          ? error.graphQLErrors?.[0]?.message
+          : undefined
+      )
+      toast.error({ message: intl.formatMessage(postToWallErrors[kind]) })
     } finally {
       setPosting(false)
     }
