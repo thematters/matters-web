@@ -362,6 +362,7 @@ const BaseArticleDetail = ({
           <>
             <Content
               articleId={article.id}
+              article={article}
               content={content}
               indentFirstLine={article.indentFirstLine}
             />
