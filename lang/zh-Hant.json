@@ -1149,6 +1149,9 @@
   "E8W3qa": {
     "defaultMessage": "2-20 個字元"
   },
+  "EAzXiX": {
+    "defaultMessage": "這個活動尚未開放金句牆。"
+  },
   "EBEwaP": {
     "defaultMessage": "請填寫有效郵件地址"
   },
@@ -1478,6 +1481,9 @@
   "JD0T8w": {
     "defaultMessage": "關閉選單",
     "description": "src/components/Editor"
+  },
+  "JHH4g5": {
+    "defaultMessage": "這則金句已經貼過了。"
   },
   "JTWayV": {
     "defaultMessage": "添加描述",
@@ -2159,6 +2165,9 @@
   },
   "UUJzml": {
     "defaultMessage": "Logbook 2.0 剛剛推出。如果你是 Traveloggers 的所有者，且尚未領取，你可以從新的日誌頁面領取："
+  },
+  "UVStSp": {
+    "defaultMessage": "金句必須是文章原文，請重新選取文章中的段落。"
   },
   "Ub+AGc": {
     "defaultMessage": "登入"

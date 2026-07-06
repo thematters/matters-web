@@ -4,6 +4,7 @@ import { QuoteImageArticleFragment } from '~/gql/graphql'
 
 import {
   canPostQuoteToWall,
+  classifyPostToWallError,
   getQuoteWallCampaign,
   isSevenDayBookArticle,
 } from './gql'
@@ -78,6 +79,30 @@ describe('canPostQuoteToWall', () => {
       false
     )
     expect(canPostQuoteToWall(makeArticle([]))).toBe(false)
+  })
+})
+
+describe('classifyPostToWallError', () => {
+  it('maps each server BAD_USER_INPUT message to a specific reason', () => {
+    expect(classifyPostToWallError('this quote is already on the wall')).toBe(
+      'duplicate'
+    )
+    expect(
+      classifyPostToWallError('quote must be an excerpt of the article')
+    ).toBe('excerpt')
+    expect(
+      classifyPostToWallError('this campaign does not have a quote wall')
+    ).toBe('noWall')
+    expect(
+      classifyPostToWallError('only campaign articles can be quoted onto wall')
+    ).toBe('noWall')
+  })
+
+  it('falls back to generic for unknown or missing messages', () => {
+    expect(classifyPostToWallError('some unexpected error')).toBe('generic')
+    expect(classifyPostToWallError('')).toBe('generic')
+    expect(classifyPostToWallError(undefined)).toBe('generic')
+    expect(classifyPostToWallError(null)).toBe('generic')
   })
 })
 
