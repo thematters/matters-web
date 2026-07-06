@@ -10,6 +10,7 @@ import {
   TEST_ID,
   toCommunityWatchRecordUrl,
 } from '~/common/enums'
+import { addUserGeneratedContentLinkRel } from '~/common/utils'
 import {
   Button,
   Expandable,
@@ -237,7 +238,7 @@ export const CommentContent = ({
             <section
               className={`${contentClasses} u-content-comment`}
               dangerouslySetInnerHTML={{
-                __html: content || '',
+                __html: addUserGeneratedContentLinkRel(content || ''),
               }}
               data-test-id={TEST_ID.COMMENT_CONETNT}
             />
@@ -247,7 +248,7 @@ export const CommentContent = ({
           <section
             className={`${contentClasses} u-content-comment`}
             dangerouslySetInnerHTML={{
-              __html: content || '',
+              __html: addUserGeneratedContentLinkRel(content || ''),
             }}
             data-test-id={TEST_ID.COMMENT_CONETNT}
           />

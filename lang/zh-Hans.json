@@ -84,6 +84,10 @@
   "+vVZ/G": {
     "defaultMessage": "绑定"
   },
+  "/0OJlF": {
+    "defaultMessage": "还没有人留言",
+    "description": "src/views/CampaignDetail/Discussion"
+  },
   "/5OvMK": {
     "defaultMessage": "喜欢你的动态"
   },
@@ -108,6 +112,10 @@
   },
   "/IMR+8": {
     "defaultMessage": "支持排行榜"
+  },
+  "/LjM9M": {
+    "defaultMessage": "Quote card",
+    "description": "src/components/TextSelectionPopover/index.tsx"
   },
   "/MS+jK": {
     "defaultMessage": "选集",
@@ -234,8 +242,14 @@
     "defaultMessage": "失败",
     "description": "src/components/Transaction/State/index.tsx"
   },
+  "1DQn89": {
+    "defaultMessage": "分享金句"
+  },
   "1EYCdR": {
     "defaultMessage": "标签"
+  },
+  "1HLo+Y": {
+    "defaultMessage": "金句墙"
   },
   "1PORwh": {
     "defaultMessage": "仅作者本人可见封存作品，",
@@ -281,6 +295,10 @@
   },
   "2/C36c": {
     "defaultMessage": "你无权进行此操作"
+  },
+  "2/u1aP": {
+    "defaultMessage": "讨论区",
+    "description": "src/views/CampaignDetail/Discussion"
   },
   "202PEj": {
     "defaultMessage": "确认 Matters ID",
@@ -469,11 +487,17 @@
     "defaultMessage": "确认要解绑 {type} 吗？",
     "description": "src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
   },
+  "5FUiH2": {
+    "defaultMessage": "活动期间，大家挑出的金句会出现在这里。"
+  },
   "5IGdjy": {
     "defaultMessage": "目前尚无标签，立即添加提高作品曝光度！"
   },
   "5IS+ui": {
     "defaultMessage": "支持设置"
+  },
+  "5IlTNw": {
+    "defaultMessage": "贴到金句墙失败"
   },
   "5JN+nl": {
     "defaultMessage": "请检查邮件",
@@ -508,6 +532,9 @@
   },
   "5mu8HJ": {
     "defaultMessage": "动态已删除"
+  },
+  "5q3qC0": {
+    "defaultMessage": "下载"
   },
   "5rxHb7": {
     "defaultMessage": "可能包含色情、暴力、血腥等，点此展开全部",
@@ -660,6 +687,9 @@
     "defaultMessage": "无结果",
     "description": "src/components/Dialogs/AddArticlesCollectionDialog/SearchingDialogContent.tsx"
   },
+  "7mL9QE": {
+    "defaultMessage": "样式"
+  },
   "7oytv9": {
     "defaultMessage": "（修改过）"
   },
@@ -811,6 +841,9 @@
   },
   "A4P0al": {
     "defaultMessage": "建议频道"
+  },
+  "A6dqhl": {
+    "defaultMessage": "IG / FB 帖文"
   },
   "A6ozr9": {
     "defaultMessage": "选集名称"
@@ -1015,6 +1048,9 @@
   "D+uyeZ": {
     "defaultMessage": "选择离开围炉，你将马上失去成员资格。下一个账单日（每月 1 日）将不会扣除费用。"
   },
+  "D0pP8T": {
+    "defaultMessage": "前往活动页"
+  },
   "D3idYv": {
     "defaultMessage": "设定"
   },
@@ -1079,6 +1115,9 @@
   "DrBuEI": {
     "defaultMessage": "取消置顶",
     "description": "src/components/CircleComment/DropdownActions/PinButton.tsx"
+  },
+  "Ds+7ro": {
+    "defaultMessage": "看全部 →"
   },
   "DtO278": {
     "defaultMessage": "检测到近期你的多篇文章被推荐到相关频道，他们有可能不会同时出现"
@@ -1213,6 +1252,9 @@
   "FuYW4i": {
     "defaultMessage": "成为围炉一员，一起谈天说地"
   },
+  "Fx9x/w": {
+    "defaultMessage": "完整金句墙／博物馆 →"
+  },
   "FxrSCh": {
     "defaultMessage": "ID 设置后无法修改，确认使用 {id} 作为 Matters ID 吗？",
     "description": "src/components/Dialogs/SetUserNameDialog/ConfirmStep.tsx"
@@ -1226,6 +1268,9 @@
   "G4KR8j": {
     "defaultMessage": "图片",
     "description": "src/components/Editor"
+  },
+  "GGd44x": {
+    "defaultMessage": "你的金句已贴上金句墙。"
   },
   "GHxtae": {
     "defaultMessage": "数字钱包",
@@ -1258,6 +1303,9 @@
   "Gju939": {
     "defaultMessage": "在作品中提及了你",
     "description": "src/components/Notice/ArticleNotice/ArticleMentionedYouNotice.tsx"
+  },
+  "GpR55j": {
+    "defaultMessage": "你的金句已贴上「{name}」的金句墙。"
   },
   "Gt7K6r": {
     "defaultMessage": "钱包地址",
@@ -1391,6 +1439,9 @@
   "IW6zQv": {
     "defaultMessage": "选择时间"
   },
+  "IWLb33": {
+    "defaultMessage": "已贴到金句墙"
+  },
   "IXycMo": {
     "defaultMessage": "重新发送"
   },
@@ -1417,6 +1468,9 @@
   },
   "J7hiLV": {
     "defaultMessage": "作者尚未绑定 LikeCoin 钱包"
+  },
+  "JBnAOd": {
+    "defaultMessage": "🔀 换一批"
   },
   "JCZFqh": {
     "defaultMessage": "现在报名，即可开始书写年度问卷，活动细则请查看公告"
@@ -1470,6 +1524,9 @@
   },
   "K2ec8y": {
     "defaultMessage": "请先验证邮箱"
+  },
+  "K3+ihp": {
+    "defaultMessage": "墨绿"
   },
   "K3r6DQ": {
     "defaultMessage": "刪除"
@@ -1737,6 +1794,9 @@
     "defaultMessage": "你的定时发布作品 {articleTitle} 已发布成功，由于选择活动已结束，投稿未能成功",
     "description": "src/components/Notice/ArticleNotice/ScheduledArticlePublishedNotice.tsx"
   },
+  "Oawtbo": {
+    "defaultMessage": "IG 帖文 · 最吸睛"
+  },
   "OhSg5a": {
     "defaultMessage": "限制级内容"
   },
@@ -1757,6 +1817,9 @@
   },
   "OwMuXW": {
     "defaultMessage": "取消定时发布"
+  },
+  "OwO+Nr": {
+    "defaultMessage": "薄荷"
   },
   "OwtCWk": {
     "defaultMessage": "仅供输入 {MIN_CIRCLE_DISPLAY_NAME_LENGTH}-{MAX_CIRCLE_DISPLAY_NAME_LENGTH} 個字符"
@@ -2175,6 +2238,10 @@
     "defaultMessage": "Oops！此网址名称已被使用了，换一个试试",
     "description": "src/components/Forms/CreateCircleForm/Init.tsx"
   },
+  "VyV+WO": {
+    "defaultMessage": "登录后即可参与讨论",
+    "description": "src/views/CampaignDetail/Discussion"
+  },
   "VzzYJk": {
     "defaultMessage": "新建"
   },
@@ -2457,6 +2524,9 @@
   "afLdf2": {
     "defaultMessage": "发动态"
   },
+  "agOXPD": {
+    "defaultMessage": "尺寸"
+  },
   "ai7kS4": {
     "defaultMessage": "我的创作"
   },
@@ -2495,6 +2565,10 @@
   "b6x6lm": {
     "defaultMessage": "输入简单明了的标题"
   },
+  "b8LMpq": {
+    "defaultMessage": "查看全部 {count} 则留言",
+    "description": "src/views/CampaignDetail/Discussion"
+  },
   "b8ogKp": {
     "defaultMessage": "新增邀请",
     "description": "src/views/Circle/Settings/ManageInvitation/AddButton/index.tsx"
@@ -2520,6 +2594,9 @@
   },
   "beLe/F": {
     "defaultMessage": "广播"
+  },
+  "bv9UzQ": {
+    "defaultMessage": "查看全部金句"
   },
   "c/z318": {
     "defaultMessage": "邮箱或密码错误",
@@ -2626,6 +2703,10 @@
     "defaultMessage": "投稿",
     "description": "src/views/CampaignDetail/Apply/Button/index.tsx"
   },
+  "dHVTYM": {
+    "defaultMessage": "和其他参与者分享想法…",
+    "description": "src/views/CampaignDetail/Discussion"
+  },
   "dK7Dnj": {
     "defaultMessage": "🔥 免费提领"
   },
@@ -2677,6 +2758,9 @@
   "e3qUqn": {
     "defaultMessage": "涉及未成年人的色情"
   },
+  "e4AtHq": {
+    "defaultMessage": "你选取了 {original} 个字，只会显示前 {max} 个字，精炼的金句最理想。"
+  },
   "eIlMHB": {
     "defaultMessage": "允许读者评论本文（开启后无法关闭）"
   },
@@ -2705,6 +2789,9 @@
   "eZ0m39": {
     "defaultMessage": "或输入自定义金额"
   },
+  "em7860": {
+    "defaultMessage": "直式 4:5"
+  },
   "enMIYK": {
     "defaultMessage": "我的"
   },
@@ -2714,6 +2801,9 @@
   },
   "eov+J2": {
     "defaultMessage": "自定义网址名称"
+  },
+  "epZb9X": {
+    "defaultMessage": "查看全部 {count} 则金句"
   },
   "erE5/4": {
     "defaultMessage": "互相关注",
@@ -2789,6 +2879,9 @@
   },
   "ftg7GK": {
     "defaultMessage": "选择日期"
+  },
+  "fyKoL1": {
+    "defaultMessage": "留言已送出"
   },
   "g//2O2": {
     "defaultMessage": "取消折叠",
@@ -2924,6 +3017,9 @@
   },
   "iEJeQH": {
     "defaultMessage": "设置 Liker ID"
+  },
+  "iII6Ry": {
+    "defaultMessage": "方形 1:1"
   },
   "iIitRg": {
     "defaultMessage": "尚未收藏标签"
@@ -3112,6 +3208,9 @@
   "lTleCS": {
     "defaultMessage": "Checking"
   },
+  "lY48xg": {
+    "defaultMessage": "奶油"
+  },
   "lYVn31": {
     "defaultMessage": "此作品已加入定时发布，请前往「我的创作」页确认"
   },
@@ -3193,6 +3292,9 @@
   "mbHf/6": {
     "defaultMessage": "已结束",
     "description": "src/views/CampaignDetail/Apply/Button/index.tsx"
+  },
+  "md2Ml3": {
+    "defaultMessage": "在文章里选一段你喜欢的话，做成金句卡片贴上墙吧 ✍️"
   },
   "me1nR+": {
     "defaultMessage": "复制地址"
@@ -3278,6 +3380,9 @@
   "oA2Pur": {
     "defaultMessage": "濫發廣告",
     "description": "src/components/Comment/DropdownActions/CommunityWatchRemoveComment.tsx"
+  },
+  "oCQmLu": {
+    "defaultMessage": "贴上金句墙"
   },
   "oEHAIT": {
     "defaultMessage": "取消发布",
@@ -3609,6 +3714,10 @@
   "u9LYjQ": {
     "defaultMessage": "留言已刪除",
     "description": "Moment"
+  },
+  "uDdAD+": {
+    "defaultMessage": "Quote",
+    "description": "src/components/TextSelectionPopover/index.tsx"
   },
   "uM5qZr": {
     "defaultMessage": "我赞赏的"
@@ -3993,6 +4102,9 @@
   "ze7hPz": {
     "defaultMessage": "申请举办活动",
     "description": "src/views/Campaigns/Portal/index.tsx"
+  },
+  "zecq9n": {
+    "defaultMessage": "深咖"
   },
   "zllCbU": {
     "defaultMessage": "在 {circleName} 中留言",

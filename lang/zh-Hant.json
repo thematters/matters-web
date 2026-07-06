@@ -84,6 +84,10 @@
   "+vVZ/G": {
     "defaultMessage": "綁定"
   },
+  "/0OJlF": {
+    "defaultMessage": "還沒有人留言",
+    "description": "src/views/CampaignDetail/Discussion"
+  },
   "/5OvMK": {
     "defaultMessage": "喜歡你的動態"
   },
@@ -108,6 +112,10 @@
   },
   "/IMR+8": {
     "defaultMessage": "支持排行榜"
+  },
+  "/LjM9M": {
+    "defaultMessage": "Quote card",
+    "description": "src/components/TextSelectionPopover/index.tsx"
   },
   "/MS+jK": {
     "defaultMessage": "選集",
@@ -234,8 +242,14 @@
     "defaultMessage": "失敗",
     "description": "src/components/Transaction/State/index.tsx"
   },
+  "1DQn89": {
+    "defaultMessage": "分享金句"
+  },
   "1EYCdR": {
     "defaultMessage": "標籤"
+  },
+  "1HLo+Y": {
+    "defaultMessage": "金句牆"
   },
   "1PORwh": {
     "defaultMessage": "僅作者本人可見封存作品，",
@@ -281,6 +295,10 @@
   },
   "2/C36c": {
     "defaultMessage": "你無權進行此操作"
+  },
+  "2/u1aP": {
+    "defaultMessage": "討論區",
+    "description": "src/views/CampaignDetail/Discussion"
   },
   "202PEj": {
     "defaultMessage": "確認 Matters ID",
@@ -469,11 +487,17 @@
     "defaultMessage": "確認要解綁 {type} 嗎？",
     "description": "src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
   },
+  "5FUiH2": {
+    "defaultMessage": "活動期間，大家挑出的金句會出現在這裡。"
+  },
   "5IGdjy": {
     "defaultMessage": "目前尚無標籤，立即添加提高作品曝光度！"
   },
   "5IS+ui": {
     "defaultMessage": "支持設置"
+  },
+  "5IlTNw": {
+    "defaultMessage": "貼到金句牆失敗"
   },
   "5JN+nl": {
     "defaultMessage": "請檢查郵件",
@@ -508,6 +532,9 @@
   },
   "5mu8HJ": {
     "defaultMessage": "動態已刪除"
+  },
+  "5q3qC0": {
+    "defaultMessage": "下載"
   },
   "5rxHb7": {
     "defaultMessage": "可能包含色情、暴力、血腥等，點此展開全部",
@@ -660,6 +687,9 @@
     "defaultMessage": "無結果",
     "description": "src/components/Dialogs/AddArticlesCollectionDialog/SearchingDialogContent.tsx"
   },
+  "7mL9QE": {
+    "defaultMessage": "樣式"
+  },
   "7oytv9": {
     "defaultMessage": "（修改過）"
   },
@@ -811,6 +841,9 @@
   },
   "A4P0al": {
     "defaultMessage": "建議頻道"
+  },
+  "A6dqhl": {
+    "defaultMessage": "IG / FB 貼文"
   },
   "A6ozr9": {
     "defaultMessage": "選集名稱"
@@ -1015,6 +1048,9 @@
   "D+uyeZ": {
     "defaultMessage": "選擇離開圍爐，你將馬上失去成員資格。下一個賬單日（每月 1 日）將不會扣除費用。"
   },
+  "D0pP8T": {
+    "defaultMessage": "前往活動頁"
+  },
   "D3idYv": {
     "defaultMessage": "設定"
   },
@@ -1079,6 +1115,9 @@
   "DrBuEI": {
     "defaultMessage": "取消置頂",
     "description": "src/components/CircleComment/DropdownActions/PinButton.tsx"
+  },
+  "Ds+7ro": {
+    "defaultMessage": "看全部 →"
   },
   "DtO278": {
     "defaultMessage": "檢測到近期你的多篇文章被推薦到相關頻道，它們有可能不會同時出現"
@@ -1213,6 +1252,9 @@
   "FuYW4i": {
     "defaultMessage": "成為圍爐一員，一起談天說地"
   },
+  "Fx9x/w": {
+    "defaultMessage": "完整金句牆／博物館 →"
+  },
   "FxrSCh": {
     "defaultMessage": "ID 設置後無法修改，確認使用 {id} 作為 Matters ID 嗎？",
     "description": "src/components/Dialogs/SetUserNameDialog/ConfirmStep.tsx"
@@ -1226,6 +1268,9 @@
   "G4KR8j": {
     "defaultMessage": "影像",
     "description": "src/components/Editor"
+  },
+  "GGd44x": {
+    "defaultMessage": "你的金句已貼上金句牆。"
   },
   "GHxtae": {
     "defaultMessage": "數字錢包",
@@ -1258,6 +1303,9 @@
   "Gju939": {
     "defaultMessage": "在作品中提及了你",
     "description": "src/components/Notice/ArticleNotice/ArticleMentionedYouNotice.tsx"
+  },
+  "GpR55j": {
+    "defaultMessage": "你的金句已貼上「{name}」的金句牆。"
   },
   "Gt7K6r": {
     "defaultMessage": "錢包地址",
@@ -1391,6 +1439,9 @@
   "IW6zQv": {
     "defaultMessage": "選擇時間"
   },
+  "IWLb33": {
+    "defaultMessage": "已貼到金句牆"
+  },
   "IXycMo": {
     "defaultMessage": "重新發送"
   },
@@ -1417,6 +1468,9 @@
   },
   "J7hiLV": {
     "defaultMessage": "作者尚未綁定 LikeCoin 錢包"
+  },
+  "JBnAOd": {
+    "defaultMessage": "🔀 換一批"
   },
   "JCZFqh": {
     "defaultMessage": "現在報名，即可開始書寫年度問卷，活動細則可查看公告"
@@ -1470,6 +1524,9 @@
   },
   "K2ec8y": {
     "defaultMessage": "請先驗證電子郵件"
+  },
+  "K3+ihp": {
+    "defaultMessage": "墨綠"
   },
   "K3r6DQ": {
     "defaultMessage": "刪除"
@@ -1737,6 +1794,9 @@
     "defaultMessage": "你的排程作品 {articleTitle} 已發布成功，由於選擇活動已結束，投稿未能成功",
     "description": "src/components/Notice/ArticleNotice/ScheduledArticlePublishedNotice.tsx"
   },
+  "Oawtbo": {
+    "defaultMessage": "IG 貼文 · 最吸睛"
+  },
   "OhSg5a": {
     "defaultMessage": "限制級內容"
   },
@@ -1757,6 +1817,9 @@
   },
   "OwMuXW": {
     "defaultMessage": "取消排程"
+  },
+  "OwO+Nr": {
+    "defaultMessage": "薄荷"
   },
   "OwtCWk": {
     "defaultMessage": "僅供輸入 {MIN_CIRCLE_DISPLAY_NAME_LENGTH}-{MAX_CIRCLE_DISPLAY_NAME_LENGTH} 個字元"
@@ -2175,6 +2238,10 @@
     "defaultMessage": "Oops！此網址已被使用了，換一個試試",
     "description": "src/components/Forms/CreateCircleForm/Init.tsx"
   },
+  "VyV+WO": {
+    "defaultMessage": "登入後即可參與討論",
+    "description": "src/views/CampaignDetail/Discussion"
+  },
   "VzzYJk": {
     "defaultMessage": "新建"
   },
@@ -2457,6 +2524,9 @@
   "afLdf2": {
     "defaultMessage": "發動態"
   },
+  "agOXPD": {
+    "defaultMessage": "尺寸"
+  },
   "ai7kS4": {
     "defaultMessage": "我的創作"
   },
@@ -2495,6 +2565,10 @@
   "b6x6lm": {
     "defaultMessage": "輸入簡單明瞭的標題"
   },
+  "b8LMpq": {
+    "defaultMessage": "查看全部 {count} 則留言",
+    "description": "src/views/CampaignDetail/Discussion"
+  },
   "b8ogKp": {
     "defaultMessage": "新增邀請",
     "description": "src/views/Circle/Settings/ManageInvitation/AddButton/index.tsx"
@@ -2520,6 +2594,9 @@
   },
   "beLe/F": {
     "defaultMessage": "廣播"
+  },
+  "bv9UzQ": {
+    "defaultMessage": "查看全部金句"
   },
   "c/z318": {
     "defaultMessage": "郵件地址或密碼錯誤",
@@ -2626,6 +2703,10 @@
     "defaultMessage": "投稿",
     "description": "src/views/CampaignDetail/Apply/Button/index.tsx"
   },
+  "dHVTYM": {
+    "defaultMessage": "和其他參與者分享想法…",
+    "description": "src/views/CampaignDetail/Discussion"
+  },
   "dK7Dnj": {
     "defaultMessage": "🔥 免費提領"
   },
@@ -2677,6 +2758,9 @@
   "e3qUqn": {
     "defaultMessage": "涉及未成年人的色情"
   },
+  "e4AtHq": {
+    "defaultMessage": "你選取了 {original} 個字，只會顯示前 {max} 個字，精煉的金句最理想。"
+  },
   "eIlMHB": {
     "defaultMessage": "允許讀者評論本文（開啟後無法關閉）"
   },
@@ -2705,6 +2789,9 @@
   "eZ0m39": {
     "defaultMessage": "或輸入自定義金額"
   },
+  "em7860": {
+    "defaultMessage": "直式 4:5"
+  },
   "enMIYK": {
     "defaultMessage": "我的"
   },
@@ -2714,6 +2801,9 @@
   },
   "eov+J2": {
     "defaultMessage": "自定義網址名稱"
+  },
+  "epZb9X": {
+    "defaultMessage": "查看全部 {count} 則金句"
   },
   "erE5/4": {
     "defaultMessage": "互相追蹤",
@@ -2789,6 +2879,9 @@
   },
   "ftg7GK": {
     "defaultMessage": "選擇日期"
+  },
+  "fyKoL1": {
+    "defaultMessage": "留言已送出"
   },
   "g//2O2": {
     "defaultMessage": "取消闔上",
@@ -2924,6 +3017,9 @@
   },
   "iEJeQH": {
     "defaultMessage": "設置 Liker ID"
+  },
+  "iII6Ry": {
+    "defaultMessage": "方形 1:1"
   },
   "iIitRg": {
     "defaultMessage": "尚未收藏標籤"
@@ -3112,6 +3208,9 @@
   "lTleCS": {
     "defaultMessage": "Checking"
   },
+  "lY48xg": {
+    "defaultMessage": "奶油"
+  },
   "lYVn31": {
     "defaultMessage": "此作品已加入排程，請前往「我的創作」頁面確認"
   },
@@ -3193,6 +3292,9 @@
   "mbHf/6": {
     "defaultMessage": "已結束",
     "description": "src/views/CampaignDetail/Apply/Button/index.tsx"
+  },
+  "md2Ml3": {
+    "defaultMessage": "在文章裡選一段你喜歡的話，做成金句卡片貼上牆吧 ✍️"
   },
   "me1nR+": {
     "defaultMessage": "複製地址"
@@ -3278,6 +3380,9 @@
   "oA2Pur": {
     "defaultMessage": "濫發廣告",
     "description": "src/components/Comment/DropdownActions/CommunityWatchRemoveComment.tsx"
+  },
+  "oCQmLu": {
+    "defaultMessage": "貼上金句牆"
   },
   "oEHAIT": {
     "defaultMessage": "取消排程",
@@ -3609,6 +3714,10 @@
   "u9LYjQ": {
     "defaultMessage": "留言已刪除",
     "description": "Moment"
+  },
+  "uDdAD+": {
+    "defaultMessage": "Quote",
+    "description": "src/components/TextSelectionPopover/index.tsx"
   },
   "uM5qZr": {
     "defaultMessage": "我讚賞的"
@@ -3993,6 +4102,9 @@
   "ze7hPz": {
     "defaultMessage": "申請舉辦活動",
     "description": "src/views/Campaigns/Portal/index.tsx"
+  },
+  "zecq9n": {
+    "defaultMessage": "深咖"
   },
   "zllCbU": {
     "defaultMessage": "在 {circleName} 中留言",

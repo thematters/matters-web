@@ -84,6 +84,12 @@ type ROUTE_KEY =
   | 'COMMUNITY'
   | 'TOS'
   | 'RECOMMENDATION'
+  | 'APPEALS'
+  | 'TRANSPARENCY'
+  | 'TRANSPARENCY_REPORT_2026_H1'
+  | 'TRANSPARENCY_AUTOMATION'
+  | 'TRANSPARENCY_RECOMMENDATIONS'
+  | 'TRANSPARENCY_DIGITAL_LITERACY'
 
 export const PROTECTED_ROUTES: {
   key: ROUTE_KEY
@@ -169,6 +175,23 @@ export const ROUTES: {
   { key: 'SEARCH', pathname: '/search' },
   // experient page for recommendation engine testing
   { key: 'RECOMMENDATION', pathname: '/recommendation' },
+
+  // Compliance and transparency
+  { key: 'APPEALS', pathname: '/appeals' },
+  { key: 'TRANSPARENCY', pathname: '/transparency' },
+  {
+    key: 'TRANSPARENCY_REPORT_2026_H1',
+    pathname: '/transparency/2026-h1',
+  },
+  { key: 'TRANSPARENCY_AUTOMATION', pathname: '/transparency/automation' },
+  {
+    key: 'TRANSPARENCY_RECOMMENDATIONS',
+    pathname: '/transparency/recommendations',
+  },
+  {
+    key: 'TRANSPARENCY_DIGITAL_LITERACY',
+    pathname: '/transparency/digital-literacy',
+  },
 
   // Tag
   { key: 'TAGS', pathname: '/tags' },

@@ -3,6 +3,7 @@ import dynamic from 'next/dynamic'
 import { useContext, useState } from 'react'
 import { useIntl } from 'react-intl'
 
+import { MAX_CAMPAIGN_COMMENT_LENGTH } from '~/common/enums'
 import { dom, formStorage, stripHtml } from '~/common/utils'
 import {
   Button,
@@ -24,19 +25,26 @@ const CommentEditor = dynamic(() => import('~/components/Editor/Comment'), {
   loading: () => <SpinnerBlock />,
 })
 
-export type CircleCommentFormType = 'circleDiscussion' | 'circleBroadcast'
+export type CircleCommentFormType =
+  | 'circleDiscussion'
+  | 'circleBroadcast'
+  | 'campaignDiscussion'
 
 export interface CircleCommentFormProps {
   commentId?: string
   replyToId?: string
   parentId?: string
-  circleId: string
+  // exactly one of circleId / campaignId is set, depending on `type`
+  circleId?: string
+  campaignId?: string
   type: CircleCommentFormType
 
   defaultContent?: string | null
   submitCallback?: () => void
 
   placeholder?: string
+  // render the submit footer inside the editor box (campaign discussion look)
+  inlineFooter?: boolean
 }
 
 export const CircleCommentForm: React.FC<CircleCommentFormProps> = ({
@@ -44,12 +52,14 @@ export const CircleCommentForm: React.FC<CircleCommentFormProps> = ({
   replyToId,
   parentId,
   circleId,
+  campaignId,
   type,
 
   defaultContent,
   submitCallback,
 
   placeholder,
+  inlineFooter = false,
 }) => {
   const viewer = useContext(ViewerContext)
   const intl = useIntl()
@@ -64,7 +74,7 @@ export const CircleCommentForm: React.FC<CircleCommentFormProps> = ({
 
   const formStorageKey = formStorage.genCircleCommentKey({
     authorId: viewer.id,
-    circleId,
+    circleId: circleId ?? campaignId ?? '',
     type,
     commentId,
     parentId,
@@ -77,7 +87,12 @@ export const CircleCommentForm: React.FC<CircleCommentFormProps> = ({
       defaultContent ||
       ''
   )
-  const isValid = stripHtml(content).length > 0
+  // campaign discussion comments are capped at 240 chars (like 短動態)
+  const maxLength =
+    type === 'campaignDiscussion' ? MAX_CAMPAIGN_COMMENT_LENGTH : undefined
+  const contentLength = stripHtml(content).length
+  const isOverLength = maxLength !== undefined && contentLength > maxLength
+  const isValid = contentLength > 0 && !isOverLength
 
   const handleSubmit = async (event?: React.FormEvent<HTMLFormElement>) => {
     const mentions = dom.getAttributes('data-id', content)
@@ -87,6 +102,7 @@ export const CircleCommentForm: React.FC<CircleCommentFormProps> = ({
         content,
         replyTo: replyToId,
         circleId,
+        campaignId,
         parentId,
         type,
         mentions,
@@ -137,6 +153,40 @@ export const CircleCommentForm: React.FC<CircleCommentFormProps> = ({
     handleSubmit()
   })
 
+  const footer = (
+    <footer className={inlineFooter ? styles.inlineFooter : styles.footer}>
+      {maxLength !== undefined && (
+        <span
+          className={styles.counter}
+          data-over={isOverLength ? 'true' : undefined}
+        >
+          {contentLength} / {maxLength}
+        </span>
+      )}
+      <Button
+        type="submit"
+        form={formStorageKey}
+        size={[null, '2rem']}
+        spacing={[0, 16]}
+        bgColor="green"
+        disabled={isSubmitting || !isValid}
+      >
+        <TextIcon
+          color="white"
+          // match the site's comment submit buttons (ArticleCommentForm = 14);
+          // scoped so circle broadcast/discussion keep their current size
+          size={type === 'campaignDiscussion' ? 14 : 15}
+          weight="medium"
+          icon={isSubmitting && <Spinner size={14} />}
+        >
+          {isSubmitting ? null : (
+            <Translate zh_hant="送出" zh_hans="送出" en="Send" />
+          )}
+        </TextIcon>
+      </Button>
+    </footer>
+  )
+
   return (
     <form
       className={styles.form}
@@ -148,7 +198,9 @@ export const CircleCommentForm: React.FC<CircleCommentFormProps> = ({
         description: 'src/components/Forms/CommentForm/index.tsx',
       })}
     >
-      <section className={styles.content}>
+      <section
+        className={`${styles.content} ${inlineFooter ? styles.contentBoxed : ''}`}
+      >
         <CommentEditor
           content={content}
           update={onUpdate}
@@ -158,29 +210,10 @@ export const CircleCommentForm: React.FC<CircleCommentFormProps> = ({
             setEditor(editor)
           }}
         />
+        {inlineFooter && footer}
       </section>
 
-      <footer className={styles.footer}>
-        <Button
-          type="submit"
-          form={formStorageKey}
-          size={[null, '2rem']}
-          spacing={[0, 16]}
-          bgColor="green"
-          disabled={isSubmitting || !isValid}
-        >
-          <TextIcon
-            color="white"
-            size={15}
-            weight="medium"
-            icon={isSubmitting && <Spinner size={14} />}
-          >
-            {isSubmitting ? null : (
-              <Translate zh_hant="送出" zh_hans="送出" en="Send" />
-            )}
-          </TextIcon>
-        </Button>
-      </footer>
+      {!inlineFooter && footer}
     </form>
   )
 }

@@ -1,0 +1,221 @@
+/*
+ * 金句用字：昭源宋體 Chiron Sung HK（Tamcy，SIL OFL 1.1）
+ * 子集化為 Big5 Level 1 常用字（次常用/罕見字 fallback 至系統襯線）。
+ * 授權：public/static/fonts/ChironSungHK-OFL.txt
+ */
+@font-face {
+  font-family: 'Chiron Sung HK';
+  font-style: normal;
+  font-weight: 400;
+  src: url('/static/fonts/chiron-sung-hk-subset.woff2') format('woff2');
+  font-display: swap;
+}
+
+/* === 金句卡片本體（固定 1080px 設計尺寸） === */
+.card {
+  position: relative;
+  display: block;
+  overflow: hidden;
+}
+
+.inner {
+  position: absolute;
+  inset: 118px 110px 280px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.mark,
+.markClose {
+  font-family: 'Chiron Sung HK', 'Noto Serif TC', 'Songti TC', serif;
+  font-size: 80px;
+  line-height: 0.6;
+  opacity: 0.9;
+}
+
+.mark {
+  margin-bottom: 8px;
+}
+
+/* 下引號：靠右；字符本身水平鏡射（原地翻轉、留在框內），與上引號左右對稱 */
+.markClose {
+  margin-top: 8px;
+  text-align: right;
+}
+
+.markCloseGlyph {
+  display: inline-block;
+  transform: scaleX(-1);
+}
+
+.quote {
+  font-weight: 400;
+  line-height: 1.7;
+  letter-spacing: 0.03em;
+
+  /* font-size / color 由元件 inline 指定 */
+}
+
+/* 作者、標題與金句同用昭源宋體（繼承 .card 的 font-family） */
+.author {
+  margin-top: 28px;
+  font-size: 46px;
+  font-weight: 400;
+}
+
+.author .dash {
+  margin-right: 14px;
+  opacity: 0.7;
+}
+
+/* 文章標題（作者下方，以〈〉標示） */
+.title {
+  display: -webkit-box;
+  max-width: 760px;
+  margin-top: 30px;
+  overflow: hidden;
+  -webkit-line-clamp: 2;
+  font-size: 32px;
+  line-height: 1.5;
+  opacity: 0.9;
+  -webkit-box-orient: vertical;
+}
+
+.foot {
+  position: absolute;
+  right: 110px;
+  bottom: 90px;
+  left: 110px;
+  display: flex;
+  gap: 32px;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+/* 直式（4:5）QR / logo 更靠近底部 */
+.portrait .foot {
+  bottom: 60px;
+}
+
+.brandLogo svg {
+  display: block;
+  width: auto;
+  height: 40px;
+}
+
+/* 一般文章：官方 Matters 字標 */
+.wordmark svg {
+  display: block;
+  width: auto;
+  height: 30px;
+}
+
+.qr {
+  flex: 0 0 auto;
+  width: 150px;
+  height: 150px;
+  padding: 12px;
+  border-radius: 14px;
+  box-shadow: 0 4px 16px rgb(0 0 0 / 12%);
+}
+
+.qr img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* === 對話框內容 === */
+.preview {
+  display: flex;
+  justify-content: center;
+  padding: var(--sp24, 24px);
+  background: var(--color-grey-lighter);
+  border-radius: var(--sp12, 12px);
+}
+
+.stage {
+  transform-origin: top left;
+}
+
+.truncHint {
+  margin: var(--sp12, 12px) 0 0;
+  font-size: var(--text13, 13px);
+  color: var(--color-function-warn, #dba34f);
+}
+
+.group {
+  margin-top: var(--sp16, 16px);
+}
+
+.groupLabel {
+  display: block;
+  margin-bottom: var(--sp8, 8px);
+  font-size: var(--text13, 13px);
+  font-weight: var(--font-semibold, 600);
+  color: var(--color-grey-darker);
+}
+
+.opts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp8, 8px);
+}
+
+.opt {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  padding: 7px 12px;
+  font-size: var(--text14, 14px);
+  cursor: pointer;
+  background: var(--color-white);
+  border: 1.5px solid var(--color-grey-light);
+  border-radius: 9px;
+}
+
+.opt.active {
+  font-weight: var(--font-semibold, 600);
+  color: var(--color-brand-legacy-green, #0d6763);
+  background: var(--color-brand-legacy-green-lighter, #f2faf7);
+  border-color: var(--color-brand-legacy-green, #0d6763);
+}
+
+.swatch {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border: 1px solid rgb(0 0 0 / 10%);
+  border-radius: 4px;
+}
+
+.sizeName {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.sizeNote {
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--color-grey-dark);
+}
+
+/* === 上牆成功頁 === */
+.complete {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp12, 12px);
+  align-items: center;
+  padding: var(--sp16, 16px) 0;
+  text-align: center;
+}
+
+.completeHint {
+  margin: 0;
+  font-size: var(--text16, 16px);
+  line-height: 1.6;
+  color: var(--color-grey-darker);
+}

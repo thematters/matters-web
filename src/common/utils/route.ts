@@ -48,16 +48,12 @@ interface CampaignStageArgs {
 
 interface CommentArgs {
   id: string
-  // comment type: article/discussion/broadcast/campaignDiscussion.
-  // campaignDiscussion is included so the staging CommentType (which already
-  // exposes it) is assignable here; production omits it and stays a subset.
-  // Full campaignDiscussion routing ships with the develop release.
   type:
     | 'article'
     | 'circleDiscussion'
     | 'circleBroadcast'
     | 'moment'
-    | 'campaignDiscussion'
+    | 'campaignDiscussion' // comment type: article/discussion/broadcast/campaignDiscussion
   parentComment?: {
     id: string
   } | null
@@ -99,6 +95,7 @@ type ToPathArgs =
       article?: ArticleArgs | null
       circle?: CircleArgs | null
       moment?: MomentArgs | null
+      campaign?: CampaignArgs | null
     }
   | { page: 'draftDetail'; id: string }
   | { page: 'draftDetailOptions'; id: string }
@@ -251,6 +248,13 @@ export const toPath = (
           href = toPath({
             page: type, // 'circleDiscussion' or 'circleBroadcast'
             circle: args.circle!, // as { name: string },
+            fragment,
+          }).href
+          break
+        case 'campaignDiscussion':
+          href = toPath({
+            page: 'campaignDetail',
+            campaign: args.campaign!,
             fragment,
           }).href
           break

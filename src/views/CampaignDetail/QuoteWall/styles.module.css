@@ -1,0 +1,190 @@
+.quoteWall {
+  padding: var(--sp16) 0;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--sp12);
+}
+
+.title {
+  font-size: var(--text16);
+  font-weight: var(--font-medium);
+}
+
+.count {
+  margin-left: var(--sp4);
+  font-weight: var(--font-normal);
+  color: var(--color-grey);
+}
+
+.museum {
+  font-size: var(--text12);
+  font-weight: var(--font-medium);
+  color: var(--color-matters-green);
+}
+
+/* "see all quotes" pill in the band header → external museum wall */
+.viewAllLink {
+  flex-shrink: 0;
+  padding: 0.1875rem 0.75rem;
+  font-size: var(--text13);
+  font-weight: var(--font-medium);
+  color: var(--color-matters-green);
+  white-space: nowrap;
+  border: 1px solid var(--color-matters-green);
+  border-radius: 999px;
+}
+
+/* compact preview: a vertical stack of memo cards */
+.previewWall {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp8);
+  margin-bottom: var(--sp8);
+}
+
+/* full wall (dialog): two-column masonry-ish grid */
+.wall {
+  column-count: 2;
+  column-gap: var(--sp12);
+}
+
+.wall > .card {
+  margin-bottom: var(--sp24);
+}
+
+.dialogTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--sp16);
+}
+
+.shuffle {
+  font-size: var(--text14);
+  font-weight: var(--font-medium);
+  color: var(--color-matters-green);
+}
+
+/* quote card — pull-quote with a green left rule, no fill/box (the original
+   form). Text follows the article-body standard. The whole card is a stretched
+   link to the source article (see .cardLink). */
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding-left: var(--sp16);
+  margin: 0;
+  border-left: 1px solid var(--color-matters-green);
+  break-inside: avoid;
+}
+
+/* stretched link: the ::after overlay makes the whole card clickable while the
+   quote text stays the link's accessible name. */
+.cardLink {
+  color: inherit;
+}
+
+.cardLink::after {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  content: '';
+}
+
+.quote {
+  /* campaign-description size (text15) at a 1.75 line-height, body colour #333 */
+  display: -webkit-box;
+  margin: 0;
+  overflow: hidden;
+  -webkit-line-clamp: 3;
+  font-size: var(--text15);
+  line-height: var(--line-height-article-base);
+  color: var(--color-black);
+  -webkit-box-orient: vertical;
+}
+
+.meta {
+  margin-top: var(--sp12);
+}
+
+.author {
+  font-size: var(--text13);
+  line-height: 1.5;
+  color: var(--color-grey-dark);
+}
+
+/* mobile one-line entry */
+.chip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: var(--sp12) var(--sp16);
+  font-size: var(--text14);
+  font-weight: var(--font-medium);
+  color: var(--color-warn-yellow);
+  cursor: pointer;
+  background: var(--color-top-up-yellow);
+  border: 1px solid var(--color-warn-yellow);
+  border-radius: var(--sp8);
+}
+
+.chevron {
+  color: var(--color-grey);
+}
+
+/* centre-column pull-quote band (Option A) */
+.band {
+  padding: var(--sp24) 0 var(--sp8);
+}
+
+/* band: a row of up to 3 pull-quotes (green left rule), gap-separated; on
+   narrow viewports they keep a min width and scroll horizontally */
+.bandRow {
+  display: flex;
+  gap: var(--sp24);
+  padding-bottom: var(--sp4);
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.bandRow::-webkit-scrollbar {
+  display: none;
+}
+
+.bandRow > .card {
+  /* basis 15rem with grow disabled: 3 fill the row (shrink to fit) yet 1-2
+     stay a fixed width, left-aligned, instead of stretching the full column */
+  flex: 0 1 15rem;
+  min-width: 12rem;
+  margin: 0;
+}
+
+/* empty band: an invitation card (soft green fill + green accent rule) shown
+   while the wall is enabled but still empty — keeps a card feel, no fake quote */
+.inviteCard {
+  /* full width, matching the article list / centre column (not a half-width
+     card) */
+  padding: var(--sp16);
+  margin: var(--sp4) 0 var(--sp8);
+  background: var(--color-green-lighter);
+  border-left: 1px solid var(--color-matters-green);
+  border-radius: 0 var(--sp8) var(--sp8) 0;
+}
+
+.inviteText {
+  margin: 0;
+  font-size: var(--text14);
+  line-height: 1.65;
+  color: var(--color-grey-darker);
+}
+
+.spark {
+  margin-right: var(--sp4);
+  color: var(--color-matters-green);
+}
