@@ -1150,6 +1150,9 @@
   "E8W3qa": {
     "defaultMessage": "2-20 个字符"
   },
+  "EAzXiX": {
+    "defaultMessage": "这个活动尚未开放金句墙。"
+  },
   "EBEwaP": {
     "defaultMessage": "请填写有效邮箱"
   },
@@ -1479,6 +1482,9 @@
   "JD0T8w": {
     "defaultMessage": "关闭菜单",
     "description": "src/components/Editor"
+  },
+  "JHH4g5": {
+    "defaultMessage": "这则金句已经贴过了。"
   },
   "JTWayV": {
     "defaultMessage": "添加描述",
@@ -2160,6 +2166,9 @@
   },
   "UUJzml": {
     "defaultMessage": "Logbook 2.0 刚刚推出。如果你是 Traveloggers 的所有者，且尚未领取，你可以从新的日志页面领取："
+  },
+  "UVStSp": {
+    "defaultMessage": "金句必须是文章原文，请重新选取文章中的段落。"
   },
   "Ub+AGc": {
     "defaultMessage": "登录"
