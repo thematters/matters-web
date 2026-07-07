@@ -43,6 +43,29 @@ describe('src/components/MomentDigest/Detail/MomentDigestDetail.test.tsx', () =>
     expect($content).not.toBeInTheDocument()
   })
 
+  it('should render MomentDigestDetail.Tags with tags', async () => {
+    render(<MomentDigestDetail.Tags moment={MOCK_MOMENT} />)
+
+    // tags
+    const $tags = screen.queryByTestId(TEST_ID.MOMENT_DIGEST_TAGS)
+    expect($tags).toBeInTheDocument()
+  })
+
+  it('should not render MomentDigestDetail.Tags when momentTags is empty', async () => {
+    render(
+      <MomentDigestDetail.Tags
+        moment={{
+          ...MOCK_MOMENT,
+          momentTags: [],
+        }}
+      />
+    )
+
+    // tags
+    const $tags = screen.queryByTestId(TEST_ID.MOMENT_DIGEST_TAGS)
+    expect($tags).not.toBeInTheDocument()
+  })
+
   it('should render MomentDigestDetail without assets', async () => {
     const handleClickDigest = vi.fn()
     render(

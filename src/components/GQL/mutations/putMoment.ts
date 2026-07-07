@@ -7,6 +7,10 @@ export const PUT_MOMENT = gql`
     putMoment(input: $input) {
       id
       momentState: state
+      tags {
+        id
+        content
+      }
       ...MomentDigestFeedMomentPublic
       ...MomentDigestFeedMomentPrivate
     }

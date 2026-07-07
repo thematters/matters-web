@@ -4,10 +4,18 @@ import classNames from 'classnames'
 import { useContext, useEffect, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
+import IconHashTag from '@/public/static/icons/24px/hashtag.svg'
+import IconImage from '@/public/static/icons/24px/image.svg'
 import IconTimes from '@/public/static/icons/24px/times.svg'
-import { CLEAR_MOMENT_FORM, MAX_MOMENT_CONTENT_LENGTH } from '~/common/enums'
+import {
+  CLEAR_MOMENT_FORM,
+  MAX_MOMENT_CONTENT_LENGTH,
+  UPLOAD_MOMENT_ASSET_COUNT_LIMIT,
+} from '~/common/enums'
+import { MOMENT_TAGS_MAX_COUNT } from '~/common/enums/moment'
 import {
   formStorage,
+  normalizeTag,
   parseFormSubmitErrors,
   sanitizeContent,
   stripHtml,
@@ -17,15 +25,19 @@ import {
   Button,
   ClearMomentDialog,
   Icon,
+  InlineTag,
   SpinnerBlock,
   TextIcon,
   toast,
+  toDigestTagPlaceholder,
   useEventListener,
+  useFeatures,
   useMutation,
   useRoute,
   ViewerContext,
 } from '~/components'
 import MomentEditor from '~/components/Editor/Moment'
+import TagInput from '~/components/Editor/Sidebar/Tags/TagInput'
 import {
   getStorableMomentAssets,
   MomentAsset,
@@ -39,11 +51,13 @@ import styles from './styles.module.css'
 type FormDraft = {
   content?: string
   assets?: MomentAsset[]
+  tags?: string[]
 }
 
 const Edit = () => {
   const intl = useIntl()
   const viewer = useContext(ViewerContext)
+  const features = useFeatures()
   const { router } = useRoute()
   const [putMoment] = useMutation<PutMomentMutation>(PUT_MOMENT, undefined, {
     showToast: false,
@@ -76,12 +90,54 @@ const Edit = () => {
     setAssets(assets)
   }
 
+  const [tags, setTags] = useState<string[]>(formDraft?.tags || [])
+  const [isTagInputOpen, setTagInputOpen] = useState(false)
+  const canTag = features.moment_tag
+  const isTagRowVisible = canTag && (isTagInputOpen || tags.length > 0)
+  const isTagsFull = tags.length >= MOMENT_TAGS_MAX_COUNT
+  const tagFragments = tags.map(toDigestTagPlaceholder)
+
+  const updateTags = (newTags: string[]) => {
+    formStorage.set<FormDraft>(
+      formStorageKey,
+      { ...formDraft, tags: newTags },
+      'local'
+    )
+    setTags(newTags)
+
+    if (newTags.length === 0) {
+      setTagInputOpen(false)
+    }
+  }
+
+  const onAddTag = (tag: string) => {
+    const newTag = normalizeTag(tag)
+
+    if (!newTag || tags.includes(newTag) || isTagsFull) {
+      return
+    }
+
+    updateTags([...tags, newTag])
+    setTagInputOpen(false)
+  }
+
+  const onRemoveTag = (tag: string) => {
+    updateTags(tags.filter((t) => t !== tag))
+  }
+
+  const onToggleTagInput = () => {
+    setTagInputOpen(!isTagInputOpen)
+  }
+
   const contentCount = stripHtml(content).length
 
   const isValid =
     ((contentCount > 0 && contentCount <= MAX_MOMENT_CONTENT_LENGTH) ||
       assets.length > 0) &&
     assets.every(({ uploaded }) => uploaded)
+
+  const showClearButton =
+    contentCount > 0 || assets.length > 0 || tags.length > 0
 
   const handleSubmit = async (event?: React.FormEvent<HTMLFormElement>) => {
     event?.preventDefault()
@@ -93,10 +149,22 @@ const Edit = () => {
           input: {
             content: sanitizeContent(content),
             assets: assets.map(({ assetId }) => assetId),
+            tags: canTag ? tags : undefined,
           },
         },
-        update: (cache) => {
+        update: (cache, mutationResult) => {
           cache.evict({ id: cache.identify(viewer), fieldName: 'writings' })
+
+          mutationResult.data?.putMoment.tags?.forEach((tag) => {
+            if (!tag) {
+              return
+            }
+
+            const tagCacheId = cache.identify(tag)
+            cache.evict({ id: tagCacheId, fieldName: 'moments' })
+            cache.evict({ id: tagCacheId, fieldName: 'numMoments' })
+          })
+
           cache.gc()
         },
       })
@@ -146,6 +214,8 @@ const Edit = () => {
       editor.commands.blur()
     }
     setAssets([])
+    setTags([])
+    setTagInputOpen(false)
     formStorage.remove(formStorageKey, 'local')
   }
 
@@ -186,6 +256,13 @@ const Edit = () => {
     [styles.over]: contentCount > MAX_MOMENT_CONTENT_LENGTH,
   })
 
+  const isAssetsFull = assets.length >= UPLOAD_MOMENT_ASSET_COUNT_LIMIT
+  const uploaderFieldId = 'moment-edit-assets-uploader-form'
+  const imageButtonClasses = classNames({
+    [styles.iconButton]: true,
+    [styles.iconButtonDisabled]: isAssetsFull,
+  })
+
   // use event listener to handle form submit since pass handleSubmit directly will cache the old content value in the closure
   useEventListener(formStorageKey, () => {
     if (isSubmitting || !isValid) {
@@ -221,7 +298,7 @@ const Edit = () => {
           </span>
         </section>
         <section className={styles.right}>
-          {isValid && (
+          {showClearButton && (
             <ClearMomentDialog onConfirm={onClear}>
               {({ openDialog }) => (
                 <Button
@@ -288,13 +365,66 @@ const Edit = () => {
           />
         </section>
 
+        {isTagRowVisible && (
+          <section className={styles.tags}>
+            {tagFragments.map((tag) => (
+              <InlineTag
+                key={tag.id}
+                tag={tag}
+                onRemoveTag={() => onRemoveTag(tag.content)}
+              />
+            ))}
+            {isTagInputOpen && !isTagsFull && (
+              <TagInput
+                tags={tagFragments}
+                onAddTag={onAddTag}
+                disableSuggestions={!viewer.isActive}
+              />
+            )}
+          </section>
+        )}
+
+        <section
+          className={classNames({
+            [styles.assets]: true,
+            [styles.hasAssets]: assets.length > 0,
+          })}
+        >
+          <MomentAssetsUploader
+            assets={assets}
+            updateAssets={updateAssets}
+            fieldId={uploaderFieldId}
+            hideAddButton
+          />
+        </section>
+
         <footer className={styles.footer}>
-          <section>
-            <MomentAssetsUploader
-              assets={assets}
-              updateAssets={updateAssets}
-              isInPage
-            />
+          <section className={styles.left}>
+            <label className={imageButtonClasses} htmlFor={uploaderFieldId}>
+              <Icon
+                icon={IconImage}
+                size={22}
+                color={isAssetsFull ? 'greyLight' : 'greyDarker'}
+              />
+            </label>
+            {canTag && (
+              <button
+                type="button"
+                className={styles.iconButton}
+                onClick={onToggleTagInput}
+                disabled={isTagsFull}
+                aria-label={intl.formatMessage({
+                  defaultMessage: 'Add Tags',
+                  id: 'WNxQX0',
+                })}
+              >
+                <Icon
+                  icon={IconHashTag}
+                  size={22}
+                  color={isTagsFull ? 'greyLight' : 'greyDarker'}
+                />
+              </button>
+            )}
           </section>
           <span className={countClass}>
             {contentCount}/{MAX_MOMENT_CONTENT_LENGTH}
