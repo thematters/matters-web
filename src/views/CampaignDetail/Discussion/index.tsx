@@ -42,12 +42,11 @@ const CampaignDiscussion = ({
   const viewer = useContext(ViewerContext)
   const intl = useIntl()
 
-  const { data, refetch } =
-    usePublicQuery<CampaignDiscussionCommentsQuery>(
-      CAMPAIGN_DISCUSSION_COMMENTS,
-      { variables: { shortHash, first: PREVIEW_COUNT } },
-      { publicQuery: !viewer.isAuthed }
-    )
+  const { data, refetch } = usePublicQuery<CampaignDiscussionCommentsQuery>(
+    CAMPAIGN_DISCUSSION_COMMENTS,
+    { variables: { shortHash, first: PREVIEW_COUNT } },
+    { publicQuery: !viewer.isAuthed }
+  )
 
   const campaign =
     data?.campaign?.__typename === 'WritingChallenge'

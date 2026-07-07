@@ -20,11 +20,13 @@ import {
 import {
   DIRECT_IMAGE_UPLOAD,
   DIRECT_IMAGE_UPLOAD_DONE,
+  SINGLE_FILE_UPLOAD,
 } from '~/components/GQL/mutations/uploadFile'
 import {
   AssetType,
   DirectImageUploadDoneMutation,
   DirectImageUploadMutation,
+  SingleFileUploadMutation,
 } from '~/gql/graphql'
 
 import { EditorAsset } from '.'
@@ -64,6 +66,10 @@ const Item: React.FC<ItemProps> = ({
     undefined,
     { showToast: false }
   )
+  const [singleFileUpload, { loading: singleUploading }] =
+    useMutation<SingleFileUploadMutation>(SINGLE_FILE_UPLOAD, undefined, {
+      showToast: false,
+    })
   const { upload: uploadImage, uploading } = useDirectImageUpload()
 
   const { isInPath } = useRoute()
@@ -101,38 +107,71 @@ const Item: React.FC<ItemProps> = ({
           mime,
         },
       }
-      const { data } = await upload({
-        variables: _omit(variables, ['input.file']),
-      })
-
-      const { id: assetId, path, uploadURL } = data?.directImageUpload || {}
-
-      if (assetId && path && uploadURL) {
-        await uploadImage({ uploadURL, file })
-
-        // (async) mark asset draft as false
-        directImageUploadDone({
-          variables: {
-            ..._omit(variables.input, ['file']),
-            draft: false,
-            url: path,
-          },
-        }).catch(console.error)
-        updateAsset({
-          draftId: asset.draftId,
-          id: assetId,
-          path: asset.path,
-          type: ASSET_TYPE.cover as unknown as AssetType,
-          draft: false,
-          file: undefined,
+      const tryDirectUpload = async () => {
+        const { data } = await upload({
+          variables: _omit(variables, ['input.file']),
         })
-        refetchAssets()
 
-        if (data?.directImageUpload) {
-          setSelected(data?.directImageUpload)
+        const { id: assetId, path, uploadURL } = data?.directImageUpload || {}
+
+        if (assetId && path && uploadURL) {
+          await uploadImage({ uploadURL, file })
+
+          // (async) mark asset draft as false
+          directImageUploadDone({
+            variables: {
+              ..._omit(variables.input, ['file']),
+              draft: false,
+              url: path,
+            },
+          }).catch(console.error)
+          updateAsset({
+            draftId: asset.draftId,
+            id: assetId,
+            path: asset.path,
+            type: ASSET_TYPE.cover as unknown as AssetType,
+            draft: false,
+            file: undefined,
+          })
+          refetchAssets()
+
+          if (data?.directImageUpload) {
+            setSelected(data?.directImageUpload)
+          }
+        } else {
+          throw new Error('directImageUpload failed')
         }
-      } else {
-        throw new Error()
+      }
+
+      const trySingleUpload = async () => {
+        const result = await singleFileUpload({
+          variables: { input: _omit(variables.input, ['mime']) },
+        })
+        const uploadedAsset = result?.data?.singleFileUpload
+
+        if (uploadedAsset?.id && uploadedAsset?.path) {
+          updateAsset({
+            draftId: asset.draftId,
+            id: uploadedAsset.id,
+            path: asset.path,
+            type: ASSET_TYPE.cover as unknown as AssetType,
+            draft: false,
+            file: undefined,
+          })
+          refetchAssets()
+          setSelected(uploadedAsset)
+        } else {
+          throw new Error('singleFileUpload failed')
+        }
+      }
+
+      try {
+        await tryDirectUpload()
+      } catch (directUploadError) {
+        console.error(directUploadError)
+
+        // fall back to server-side upload when direct upload fails
+        await trySingleUpload()
       }
     } catch {
       toast.error({
@@ -152,7 +191,7 @@ const Item: React.FC<ItemProps> = ({
     }
   }, [])
 
-  useUnloadConfirm({ block: loading || uploading })
+  useUnloadConfirm({ block: loading || uploading || singleUploading })
 
   const isSelected = asset.id === selected?.id
 
@@ -171,9 +210,9 @@ const Item: React.FC<ItemProps> = ({
           id: 'BNupBu',
         })}
         className={itemClasses}
-        disabled={loading || uploading}
+        disabled={loading || uploading || singleUploading}
       >
-        {(loading || uploading) && (
+        {(loading || uploading || singleUploading) && (
           <div className={styles.loading}>
             <Spinner color="greyLight" size={32} />
           </div>

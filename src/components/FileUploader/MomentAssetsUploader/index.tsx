@@ -18,11 +18,21 @@ import styles from './styles.module.css'
 
 export type MomentAsset = {
   id: string
-  file: File
+  file?: File
   uploaded: boolean
   path: string
   assetId?: string
 }
+
+export const getStorableMomentAssets = (assets?: MomentAsset[]) =>
+  (assets || [])
+    .filter(({ uploaded, assetId, path }) => uploaded && assetId && path)
+    .map(({ id, assetId, path }) => ({
+      id,
+      assetId,
+      path,
+      uploaded: true,
+    }))
 
 type MomentAssetsUploaderProps = {
   assets: MomentAsset[]

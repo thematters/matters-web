@@ -228,6 +228,9 @@
   "0xVT+0": {
     "defaultMessage": "Curated"
   },
+  "115cw4": {
+    "defaultMessage": "Unavailable user"
+  },
   "11nXAM": {
     "defaultMessage": "Your schedule article published successfully, but failed to submit because the selection event has ended",
     "description": "src/components/Notice/ArticleNotice/ScheduledArticlePublishedNotice.tsx"
@@ -1151,6 +1154,9 @@
   "E8W3qa": {
     "defaultMessage": "Must be between 2-20 characters long. Chinese characters, letters, numbers and underscores are allowed."
   },
+  "EAzXiX": {
+    "defaultMessage": "This event's quote wall isn't open."
+  },
   "EBEwaP": {
     "defaultMessage": "Please fill in a valid email address"
   },
@@ -1480,6 +1486,9 @@
   "JD0T8w": {
     "defaultMessage": "Close Menu",
     "description": "src/components/Editor"
+  },
+  "JHH4g5": {
+    "defaultMessage": "This quote is already on the wall."
   },
   "JTWayV": {
     "defaultMessage": "Add description",
@@ -2164,6 +2173,9 @@
   },
   "UUJzml": {
     "defaultMessage": "Logbook 2.0 has just launched. If you are an owner of Traveloggers, and haven't claimed, you may claim one from the new Logbook page:"
+  },
+  "UVStSp": {
+    "defaultMessage": "The quote must be an exact excerpt of the article. Please select again."
   },
   "Ub+AGc": {
     "defaultMessage": "Sign In"
