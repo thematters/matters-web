@@ -1,5 +1,5 @@
 import mockRouter from 'next-router-mock'
-import { describe, expect, it, vi } from 'vitest'
+import { afterEach, describe, expect, it, vi } from 'vitest'
 
 import { TEST_ID } from '~/common/enums'
 import { fireEvent, render, screen } from '~/common/utils/test'
@@ -7,7 +7,19 @@ import { MOCK_MOMENT } from '~/stories/mocks'
 
 import { MomentDigestFeed } from '.'
 
+const { mockFeatures } = vi.hoisted(() => ({
+  mockFeatures: { moment_tag_display: true },
+}))
+
+vi.mock('~/components/Hook/useFeatures', () => ({
+  useFeatures: () => mockFeatures,
+}))
+
 describe('src/components/MomentDigest/MomentDigestFeed.test.tsx', () => {
+  afterEach(() => {
+    mockFeatures.moment_tag_display = true
+  })
+
   it('should render MomentDigestFeed', async () => {
     render(<MomentDigestFeed moment={MOCK_MOMENT} />)
 
@@ -71,7 +83,25 @@ describe('src/components/MomentDigest/MomentDigestFeed.test.tsx', () => {
     expect($tags).length(2)
   })
 
-  it('should not render tags when hasTag is not set', async () => {
+  it('should render tags by default when hasTag is not set', async () => {
+    render(<MomentDigestFeed moment={MOCK_MOMENT} />)
+
+    // tags
+    const $tags = screen.queryAllByTestId(TEST_ID.MOMENT_DIGEST_TAGS)
+    expect($tags).length(2)
+  })
+
+  it('should not render tags when hasTag is false', async () => {
+    render(<MomentDigestFeed moment={MOCK_MOMENT} hasTag={false} />)
+
+    // tags
+    const $tags = screen.queryByTestId(TEST_ID.MOMENT_DIGEST_TAGS)
+    expect($tags).not.toBeInTheDocument()
+  })
+
+  it('should not render tags when moment_tag_display is off', async () => {
+    mockFeatures.moment_tag_display = false
+
     render(<MomentDigestFeed moment={MOCK_MOMENT} />)
 
     // tags

@@ -10,6 +10,8 @@ type FeatureName =
   | 'tag_adoption'
   | 'circle_management'
   | 'circle_interact'
+  | 'moment_tag'
+  | 'moment_tag_display'
 
 export const FeaturesContext = React.createContext({
   payment: false,
@@ -18,6 +20,8 @@ export const FeaturesContext = React.createContext({
   tag_adoption: false,
   circle_management: false,
   circle_interact: false,
+  moment_tag: false,
+  moment_tag_display: false,
 })
 
 export const FeaturesConsumer = FeaturesContext.Consumer

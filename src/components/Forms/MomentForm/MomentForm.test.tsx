@@ -4,10 +4,15 @@ import { fireEvent, render, screen, waitFor } from '~/common/utils/test'
 
 import MomentForm from '.'
 
-const { mockPutMoment } = vi.hoisted(() => ({
+const { mockPutMoment, mockFeatures } = vi.hoisted(() => ({
   mockPutMoment: vi.fn().mockResolvedValue({
     data: { putMoment: { id: 'moment-1', tags: [] } },
   }),
+  mockFeatures: { moment_tag: true },
+}))
+
+vi.mock('~/components/Hook/useFeatures', () => ({
+  useFeatures: () => mockFeatures,
 }))
 
 vi.mock('~/components/GQL/hooks', async (importOriginal) => {
@@ -63,6 +68,17 @@ describe('src/components/Forms/MomentForm/MomentForm.test.tsx', () => {
   afterEach(() => {
     localStorage.clear()
     mockPutMoment.mockClear()
+    mockFeatures.moment_tag = true
+  })
+
+  it('should not render tag button when moment_tag is off', () => {
+    mockFeatures.moment_tag = false
+
+    openForm()
+
+    expect(
+      screen.queryByRole('button', { name: 'Add Tags' })
+    ).not.toBeInTheDocument()
   })
 
   it('should disable tag button when tags reach the limit', () => {

@@ -31,6 +31,7 @@ import {
   toast,
   toDigestTagPlaceholder,
   useEventListener,
+  useFeatures,
   useMutation,
   ViewerContext,
 } from '~/components'
@@ -55,6 +56,7 @@ type MomentFormProps = {
 const MomentForm = ({ setFirstRendered }: MomentFormProps) => {
   const intl = useIntl()
   const viewer = useContext(ViewerContext)
+  const features = useFeatures()
   const [putMoment] = useMutation<PutMomentMutation>(PUT_MOMENT, undefined, {
     showToast: false,
   })
@@ -95,7 +97,8 @@ const MomentForm = ({ setFirstRendered }: MomentFormProps) => {
 
   const [tags, setTags] = useState<string[]>(formDraft?.tags || [])
   const [isTagInputOpen, setTagInputOpen] = useState(false)
-  const isTagRowVisible = isTagInputOpen || tags.length > 0
+  const canTag = features.moment_tag
+  const isTagRowVisible = canTag && (isTagInputOpen || tags.length > 0)
   const isTagsFull = tags.length >= MOMENT_TAGS_MAX_COUNT
   const tagFragments = tags.map(toDigestTagPlaceholder)
 
@@ -220,7 +223,7 @@ const MomentForm = ({ setFirstRendered }: MomentFormProps) => {
           input: {
             content: sanitizeContent(content),
             assets: assets.map(({ assetId }) => assetId),
-            tags,
+            tags: canTag ? tags : undefined,
           },
         },
         update: (cache, mutationResult) => {
@@ -454,22 +457,24 @@ const MomentForm = ({ setFirstRendered }: MomentFormProps) => {
               color={isAssetsFull ? 'greyLight' : 'greyDarker'}
             />
           </label>
-          <button
-            type="button"
-            className={styles.iconButton}
-            onClick={onToggleTagInput}
-            disabled={isTagsFull}
-            aria-label={intl.formatMessage({
-              defaultMessage: 'Add Tags',
-              id: 'WNxQX0',
-            })}
-          >
-            <Icon
-              icon={IconHashTag}
-              size={22}
-              color={isTagsFull ? 'greyLight' : 'greyDarker'}
-            />
-          </button>
+          {canTag && (
+            <button
+              type="button"
+              className={styles.iconButton}
+              onClick={onToggleTagInput}
+              disabled={isTagsFull}
+              aria-label={intl.formatMessage({
+                defaultMessage: 'Add Tags',
+                id: 'WNxQX0',
+              })}
+            >
+              <Icon
+                icon={IconHashTag}
+                size={22}
+                color={isTagsFull ? 'greyLight' : 'greyDarker'}
+              />
+            </button>
+          )}
         </section>
         <section className={styles.right}>
           <span className={countClasses}>

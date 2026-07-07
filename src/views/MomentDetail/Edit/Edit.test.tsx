@@ -10,6 +10,10 @@ const { mockPutMoment } = vi.hoisted(() => ({
   }),
 }))
 
+vi.mock('~/components/Hook/useFeatures', () => ({
+  useFeatures: () => ({ moment_tag: true }),
+}))
+
 vi.mock('~/components/GQL/hooks', async (importOriginal) => {
   const original = await importOriginal<object>()
   return {

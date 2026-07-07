@@ -18,6 +18,7 @@ import {
   Icon,
   Media,
   MomentDetailDialog,
+  useFeatures,
   UserDigest,
   useRoute,
 } from '~/components'
@@ -51,9 +52,10 @@ const Container = ({
   moment,
   hasAuthor,
   hasCommentedFollowees,
-  hasTag = false,
+  hasTag = true,
   openMomentDetail,
 }: ContainerProps) => {
+  const features = useFeatures()
   const { content, createdAt, assets, author, momentTags } = moment
 
   const momentDetailPath = toPath({
@@ -150,26 +152,30 @@ const Container = ({
           <Assets moment={moment} />
         </section>
       )}
-      {hasTag && !!momentTags && momentTags.length > 0 && (
-        <section
-          className={styles.tags}
-          data-test-id={TEST_ID.MOMENT_DIGEST_TAGS}
-        >
-          {momentTags.map(
-            (tag) =>
-              tag && (
-                <ArticleTag
-                  key={tag.id}
-                  tag={tag}
-                  canClamp
-                  feedType="moment"
-                  textIconProps={{ size: 13 }}
-                  onClick={(event) => event.stopPropagation()}
-                />
-              )
-          )}
-        </section>
-      )}
+      {hasTag &&
+        features.moment_tag_display &&
+        !!momentTags &&
+        momentTags.length > 0 && (
+          <section
+            className={styles.tags}
+            data-test-id={TEST_ID.MOMENT_DIGEST_TAGS}
+          >
+            {momentTags.map(
+              (tag) =>
+                tag && (
+                  <ArticleTag
+                    key={tag.id}
+                    tag={tag}
+                    canClamp
+                    size="sm"
+                    feedType="moment"
+                    textIconProps={{ size: 13 }}
+                    onClick={(event) => event.stopPropagation()}
+                  />
+                )
+            )}
+          </section>
+        )}
       <FooterActions
         moment={moment}
         hasCommentedFollowees={hasCommentedFollowees}

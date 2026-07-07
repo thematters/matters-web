@@ -25,3 +25,12 @@
     }
   }
 }
+
+.sm {
+  padding: var(--sp2) var(--sp8) var(--sp2) var(--sp6);
+
+  & .name {
+    font-size: var(--text13);
+    line-height: 1.25rem;
+  }
+}

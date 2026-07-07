@@ -17,6 +17,7 @@ interface ArticleTagProps {
   canClamp?: boolean
   onClick?: MouseEventHandler<HTMLAnchorElement>
   feedType?: string
+  size?: 'sm' | 'md'
 }
 
 export const ArticleTag = ({
@@ -25,6 +26,7 @@ export const ArticleTag = ({
   canClamp = false,
   onClick,
   feedType,
+  size = 'md',
 }: ArticleTagProps) => {
   const tagName = canClamp ? clampTag(tag.content) : tag.content
   const isClamped = tagName !== tag.content
@@ -36,6 +38,7 @@ export const ArticleTag = ({
 
   const tagClasses = classNames({
     [styles.article]: 'article',
+    [styles.sm]: size === 'sm',
     [styles.clickable]: !!onClick,
   })
 
