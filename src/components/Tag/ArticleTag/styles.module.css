@@ -27,7 +27,7 @@
 }
 
 .sm {
-  padding: var(--sp2) var(--sp8) var(--sp2) var(--sp6);
+  padding: var(--sp4) var(--sp8) var(--sp4) var(--sp6);
 
   & .name {
     font-size: var(--font-size-subtext);
