@@ -147,11 +147,6 @@ const Container = ({
           </Expandable>
         </section>
       )}
-      {!!assets && assets.length > 0 && (
-        <section className={styles.assets}>
-          <Assets moment={moment} />
-        </section>
-      )}
       {hasTag &&
         features.moment_tag_display &&
         !!momentTags &&
@@ -176,6 +171,11 @@ const Container = ({
             )}
           </section>
         )}
+      {!!assets && assets.length > 0 && (
+        <section className={styles.assets}>
+          <Assets moment={moment} />
+        </section>
+      )}
       <FooterActions
         moment={moment}
         hasCommentedFollowees={hasCommentedFollowees}
