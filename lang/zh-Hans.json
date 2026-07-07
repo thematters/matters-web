@@ -445,6 +445,10 @@
   "47FYwb": {
     "defaultMessage": "取消"
   },
+  "49zQVv": {
+    "defaultMessage": "动态",
+    "description": "src/views/TagDetail/index.tsx"
+  },
   "4CrCbD": {
     "defaultMessage": "自治"
   },
@@ -1939,6 +1943,9 @@
   "Qlzm0s": {
     "defaultMessage": "在动态中提及了你"
   },
+  "QuQXDD": {
+    "defaultMessage": "{momentCount, plural, =1 {则动态} other {则动态}}"
+  },
   "QvPc1q": {
     "defaultMessage": "上传封面"
   },
@@ -2506,6 +2513,10 @@
   "aE5Qq+": {
     "defaultMessage": "重新发送",
     "description": "src/components/Forms/Verification/ResendCodeButton/index.tsx"
+  },
+  "aGgSJp": {
+    "defaultMessage": "文章",
+    "description": "src/views/TagDetail/index.tsx"
   },
   "aKEiNd": {
     "defaultMessage": "错过报名期没关系，仍然可以用晚鸟身份参与，一起书写人生故事。下次早点报名，就有机会获得大满贯徽章！"
