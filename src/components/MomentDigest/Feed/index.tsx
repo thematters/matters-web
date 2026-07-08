@@ -164,7 +164,7 @@ const Container = ({
                     canClamp
                     size="sm"
                     feedType="moment"
-                    textIconProps={{ size: 13 }}
+                    textIconProps={{ size: 12 }}
                     onClick={(event) => event.stopPropagation()}
                   />
                 )
