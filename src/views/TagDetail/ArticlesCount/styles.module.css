@@ -5,3 +5,9 @@
   line-height: 1;
   color: var(--color-grey);
 }
+
+.dot {
+  display: inline-flex;
+  align-items: center;
+  margin: 0 var(--sp4);
+}

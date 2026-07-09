@@ -1,12 +1,25 @@
-import { describe, expect, it } from 'vitest'
+import mockRouter from 'next-router-mock'
+import { afterEach, describe, expect, it, vi } from 'vitest'
 
 import { TEST_ID } from '~/common/enums'
-import { render, screen } from '~/common/utils/test'
+import { fireEvent, render, screen } from '~/common/utils/test'
 import { MOCK_MOMENT } from '~/stories/mocks'
 
 import { MomentDigestFeed } from '.'
 
+const { mockFeatures } = vi.hoisted(() => ({
+  mockFeatures: { moment_tag_display: true },
+}))
+
+vi.mock('~/components/Hook/useFeatures', () => ({
+  useFeatures: () => mockFeatures,
+}))
+
 describe('src/components/MomentDigest/MomentDigestFeed.test.tsx', () => {
+  afterEach(() => {
+    mockFeatures.moment_tag_display = true
+  })
+
   it('should render MomentDigestFeed', async () => {
     render(<MomentDigestFeed moment={MOCK_MOMENT} />)
 
@@ -60,6 +73,62 @@ describe('src/components/MomentDigest/MomentDigestFeed.test.tsx', () => {
     // assets
     const $assets = screen.queryByTestId(TEST_ID.MOMENT_DIGEST_ASSETS)
     expect($assets).not.toBeInTheDocument()
+  })
+
+  it('should render MomentDigestFeed with tags when hasTag', async () => {
+    render(<MomentDigestFeed moment={MOCK_MOMENT} hasTag />)
+
+    // tags
+    const $tags = screen.queryAllByTestId(TEST_ID.MOMENT_DIGEST_TAGS)
+    expect($tags).length(2)
+  })
+
+  it('should render tags by default when hasTag is not set', async () => {
+    render(<MomentDigestFeed moment={MOCK_MOMENT} />)
+
+    // tags
+    const $tags = screen.queryAllByTestId(TEST_ID.MOMENT_DIGEST_TAGS)
+    expect($tags).length(2)
+  })
+
+  it('should not render tags when hasTag is false', async () => {
+    render(<MomentDigestFeed moment={MOCK_MOMENT} hasTag={false} />)
+
+    // tags
+    const $tags = screen.queryByTestId(TEST_ID.MOMENT_DIGEST_TAGS)
+    expect($tags).not.toBeInTheDocument()
+  })
+
+  it('should not render tags when moment_tag_display is off', async () => {
+    mockFeatures.moment_tag_display = false
+
+    render(<MomentDigestFeed moment={MOCK_MOMENT} />)
+
+    // tags
+    const $tags = screen.queryByTestId(TEST_ID.MOMENT_DIGEST_TAGS)
+    expect($tags).not.toBeInTheDocument()
+  })
+
+  it('should go to tag detail page instead of moment detail when clicking a tag', async () => {
+    const handleOuterClick = vi.fn()
+
+    render(
+      <div onClick={handleOuterClick}>
+        <MomentDigestFeed moment={MOCK_MOMENT} hasTag />
+      </div>
+    )
+
+    mockRouter.push('/')
+
+    const $tag = screen.getAllByTestId(TEST_ID.DIGEST_TAG_ARTICLE)[0]
+    fireEvent.click($tag)
+
+    // navigate to tag detail page only
+    expect(mockRouter.asPath).toContain('/tags/')
+    expect(mockRouter.asPath).not.toContain(MOCK_MOMENT.shortHash)
+
+    // stop bubbling to outer click handlers
+    expect(handleOuterClick).not.toBeCalled()
   })
 
   it('shoudl render MomentDigestFeed without content', async () => {

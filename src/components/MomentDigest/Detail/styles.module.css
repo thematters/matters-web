@@ -74,3 +74,12 @@
     margin-top: var(--sp12);
   }
 }
+
+/* rendered by Tags.tsx outside .container; keep top-level */
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp8);
+  align-items: center;
+  margin-top: var(--sp16);
+}

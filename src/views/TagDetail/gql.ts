@@ -7,6 +7,7 @@ const tagFragment = gql`
     id
     content
     numArticles
+    numMoments
     selectedArticles: articles(input: { first: 0 }) {
       totalCount
     }

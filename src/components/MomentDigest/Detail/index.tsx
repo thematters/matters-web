@@ -15,6 +15,7 @@ import Assets from '../Assets'
 import { fragments } from './gql'
 import Placeholder from './Placeholder'
 import styles from './styles.module.css'
+import Tags from './Tags'
 
 export type MomentDigestDetailProps = {
   moment: MomentDigestDetailMomentFragment
@@ -95,3 +96,4 @@ export const MomentDigestDetail = ({
 
 MomentDigestDetail.fragments = fragments
 MomentDigestDetail.Placeholder = Placeholder
+MomentDigestDetail.Tags = Tags

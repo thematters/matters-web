@@ -34,6 +34,7 @@ type TagInputProps = {
   tags: DigestTagFragment[]
   onAddTag: (tag: string) => void
   saving?: boolean
+  disableSuggestions?: boolean
 }
 
 type DropdownMenuProps = {
@@ -132,7 +133,12 @@ const DropdownMenu = ({
   )
 }
 
-const TagInput = ({ tags, onAddTag, saving }: TagInputProps) => {
+const TagInput = ({
+  tags,
+  onAddTag,
+  saving,
+  disableSuggestions,
+}: TagInputProps) => {
   const intl = useIntl()
   const client = useApolloClient()
 
@@ -143,13 +149,15 @@ const TagInput = ({ tags, onAddTag, saving }: TagInputProps) => {
 
   const formik = useFormik<{ tag: string }>({
     initialValues: { tag: '' },
-    onSubmit: (values) => {
+    onSubmit: (values, { resetForm }) => {
       const validationMessage = validateTagName(values.tag, intl)
       if (validationMessage) {
         toast.error({ message: validationMessage })
         return
       }
       onAddTag(values.tag)
+      resetForm()
+      setSearchKey('')
     },
   })
 
@@ -173,7 +181,7 @@ const TagInput = ({ tags, onAddTag, saving }: TagInputProps) => {
       }
     }
 
-    if (searchKey) {
+    if (searchKey && !disableSuggestions) {
       searchTags()
     }
   }, [debouncedSearchKey])
@@ -193,12 +201,21 @@ const TagInput = ({ tags, onAddTag, saving }: TagInputProps) => {
     formik.handleSubmit()
   }
 
+  const isDuplicateSearchKey =
+    debouncedSearchKey !== '' &&
+    tags.some((tag) => tag.content === normalizeTag(debouncedSearchKey))
+  const isInvalidSearchKey =
+    debouncedSearchKey !== '' && !!validateTagName(debouncedSearchKey, intl)
+
   const isDropdownVisible =
-    (debouncedSearchKey === '' &&
+    !disableSuggestions &&
+    !isDuplicateSearchKey &&
+    !isInvalidSearchKey &&
+    ((debouncedSearchKey === '' &&
       !recentTagsLoading &&
       processedRecentTags.length > 0 &&
       !saving) ||
-    (debouncedSearchKey !== '' && !searchLoading && !saving)
+      (debouncedSearchKey !== '' && !searchLoading && !saving))
 
   const inputAriaLabel = intl.formatMessage({
     defaultMessage: 'Input tags',
@@ -222,6 +239,8 @@ const TagInput = ({ tags, onAddTag, saving }: TagInputProps) => {
       content={dropdownContent}
       placement="bottom-start"
       visible={isDropdownVisible}
+      // attach to body so ancestors with overflow: hidden can't clip it
+      appendTo={() => document.body}
     >
       {({ ref }) => (
         <form
