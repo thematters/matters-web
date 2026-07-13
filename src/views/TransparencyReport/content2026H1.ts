@@ -1,9 +1,9 @@
 const zh_hant = `
-本頁是 2026 H1 透明度報告骨架。2026 H1 期間為 2026-01-01 至 2026-06-30，期間尚未結束，實際統計數字應在期間結束並完成資料檢核後填入。平台內部處理統計的 server 匯出與 ObservableHQ 交叉檢核路徑已建立。
+本頁是 2026 H1 透明度報告草稿。報告期間為 2026-01-01 至 2026-06-30，目前正在彙整並覆核正式統計數字。完成資料檢核前，本頁保留資料狀態與已知缺口，不將未驗證數字視為正式統計。平台內部處理統計的 server 匯出與 ObservableHQ 交叉檢核路徑已建立。
 
 ## 1. 報告期間與範圍
 
-資料狀態：匯出流程已建立，數字待期間結束後填入。
+資料狀態：報告期間已結束，正式統計數字正在匯出與覆核。
 
 本期預計涵蓋 Matters.town 站台上的文章、留言、動態、帳號處理、Community Watch、一般內容檢舉、申訴救濟、政府或法律請求、個人資料權利請求與重大政策變更。
 
@@ -97,11 +97,11 @@ const zh_hant = `
 `
 
 const zh_hans = `
-本页是 2026 H1 透明度报告骨架。2026 H1 期间为 2026-01-01 至 2026-06-30，期间尚未结束，实际统计数字应在期间结束并完成资料检核后填入。平台内部处理统计的 server 汇出与 ObservableHQ 交叉检核路径已建立。
+本页是 2026 H1 透明度报告草稿。报告期间为 2026-01-01 至 2026-06-30，目前正在汇整并复核正式统计数字。完成资料检核前，本页保留资料状态与已知缺口，不将未验证数字视为正式统计。平台内部处理统计的 server 汇出与 ObservableHQ 交叉检核路径已建立。
 
 ## 1. 报告期间与范围
 
-资料状态：汇出流程已建立，数字待期间结束后填入。
+资料状态：报告期间已结束，正式统计数字正在汇出与复核。
 
 本期预计涵盖 Matters.town 站台上的文章、留言、动态、帐号处理、Community Watch、一般内容举报、申诉救济、政府或法律请求、个人资料权利请求与重大政策变更。
 
@@ -195,11 +195,11 @@ const zh_hans = `
 `
 
 const en = `
-This page is the 2026 H1 transparency report skeleton. The 2026 H1 period runs from 2026-01-01 to 2026-06-30. The period has not ended yet, so actual metrics should be added after the period ends and the data is reviewed. The server export and ObservableHQ cross-check path for internal moderation metrics has been prepared.
+This page is the draft 2026 H1 transparency report. The reporting period ran from 2026-01-01 to 2026-06-30, and final metrics are now being compiled and reviewed. Until validation is complete, this page documents data status and known gaps without treating unverified figures as final. The server export and ObservableHQ cross-check path for internal moderation metrics has been prepared.
 
 ## 1. Reporting period and scope
 
-Data status: export path prepared, metrics pending after the period ends.
+Data status: reporting period complete; final metrics are being exported and reviewed.
 
 This report is expected to cover articles, comments, moments, account actions, Community Watch, ordinary content reports, appeals, government or legal requests, personal data rights requests, and major policy changes.
 
