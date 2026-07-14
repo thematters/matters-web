@@ -1,295 +1,271 @@
 const zh_hant = `
-本頁是 2026 H1 透明度報告草稿。報告期間為 2026-01-01 至 2026-06-30，目前正在彙整並覆核正式統計數字。完成資料檢核前，本頁保留資料狀態與已知缺口，不將未驗證數字視為正式統計。平台內部處理統計的 server 匯出與 ObservableHQ 交叉檢核路徑已建立。
+本頁是 Matters 2026 H1 透明度報告。報告期間為 2026-01-01 至 2026-06-30，時區為 Asia/Taipei。統計於 2026-07-14 完成匯出與核定。
 
-## 1. 報告期間與範圍
+公開數字只包含聚合結果，不包含姓名、電子郵件、IP、內容原文、案件編號、內部備註、法律文件或附件。正數低於 5 件時統一顯示為 \`<5\`，降低從交叉分類反推出單一個案的風險。
 
-資料狀態：報告期間已結束，正式統計數字正在匯出與覆核。
+## 1. 資料來源與範圍
 
-本期預計涵蓋 Matters.town 站台上的文章、留言、動態、帳號處理、Community Watch、一般內容檢舉、申訴救濟、政府或法律請求、個人資料權利請求與重大政策變更。
+站內統計由 production 唯讀資料庫的固定期間匯出產生。政府、法律與個資權利請求由私有法律及合規歷史底稿補充，公開政策、模型與推薦變更則依已合併的 GitHub PR 整理。
+
+一般內容檢舉與申訴的新案件資料模型尚未完整涵蓋舊制紀錄，因此相關 0 件只能解讀為本期結構化來源沒有可計入案件。Community Watch 公開紀錄的涵蓋較完整，可作為本期治理活動的主要量化資料。
 
 ## 2. Matters 內容治理架構
 
-資料狀態：可先以文字說明。
+Matters 的治理由使用者檢舉、Community Watch、站方管理員與反濫用模型共同運作。模型會依不同場景提供分數、候選提示或通知，部分明確規則可影響內容能見度，但高風險與不確定案件保留人工覆核及申訴管道。
 
-本章應說明使用者檢舉、Community Watch、站方管理員、反濫用模型輔助與平台規則之間的關係。若模型僅用於候選提示或通知，也應明確標示。
+## 3. 結構化案件與申訴
 
-## 3. 內容檢舉與處理統計
+- 結構化治理案件 0 件，資料狀態為部分涵蓋。
+- 結構化申訴 0 件，維持、撤銷、部分撤銷、待處理與因申訴恢復均為 0 件。
+- 本期沒有足以計算平均值、中位數或第 90 百分位的已結案結構化案件，處理時間標示為未記錄。
 
-資料狀態：案件資料模型、server 匯出與 ObservableHQ 檢核路徑已補上，統計待部署與檢核後填入。
+這些 0 件不代表平台沒有處理檢舉或申訴。舊制 email 與部署前案件沒有完整回填，下一期仍需改善來源涵蓋。
 
-本章應揭露檢舉件數、內容類型、檢舉理由、處理結果、平均處理時間與資料缺口。一般內容檢舉可由 moderation case 與 moderation event 匯出，舊資料或部署前資料仍應標示為資料缺口。
+## 4. Community Watch
 
-## 4. Community Watch 處理統計
+- 治理動作共 717 件。
+- 色情廣告 661 件。
+- 垃圾廣告 56 件。
+- Community Watch 申訴 0 件。
+- 工作人員主動恢復 \`<5\` 件。
+- 工作人員人工覆核 \`<5\` 件。
 
-資料狀態：部分可由公開紀錄彙整。
+主動恢復是工作人員自行覆核後的結果，沒有先發生申訴，因此不計入申訴成功。
 
-本章應揭露色情廣告、濫發廣告、申訴、恢復、覆核與資料清除件數。公開紀錄可作為第一版主要資料來源。
+## 5. 自動化與模型輔助
 
-## 5. 申訴、複查與恢復統計
+本期加入留言專用垃圾內容模型路由與備援、留言分級通知、動態專用模型路由，以及協同行為候選與人工覆核佇列。模型在不同介面可能扮演監測、通知、候選排序或能見度調節角色，不應把所有模型分數理解為自動刪除。
 
-資料狀態：案件與 Community Watch 聚合路徑已補上，email 申訴仍需結構化。
+詳細用途、限制與申訴方式請參考 [自動化與反濫用模型](/transparency/automation)。
 
-本章應揭露申訴件數、成立、不成立、部分成立、處理中、恢復內容與平均處理時間。若一般 email 申訴尚未結構化，應列為下一期改善。
+## 6. 政府與法律請求
 
-## 6. 自動化與模型輔助處理
+2026 H1 政府與法律請求為 0 件。
 
-資料狀態：待與 production flag 與工程紀錄核對。
+核定時已檢查已知私有法律及合規歷史底稿。該底稿最後一筆紀錄在 2025 年 7 月，主要維護者確認後續沒有新增紀錄。公開報告只揭露本期聚合總數，不公開歷史個案與內部證據連結。
 
-本章應揭露模型用途、是否直接影響可見性、人工審查角色、誤判救濟與重大變更。若某模型僅 shadow 或 notify-only，應明確標示。
+## 7. 個人資料權利請求
 
-主題說明請參考 [自動化與反濫用模型](/transparency/automation)。
+2026 H1 個資權利請求為 0 件。查詢、閱覽或複製，更正，刪除，以及停止蒐集、處理或利用均為 0 件。
 
-## 7. 政府與法律請求
+權利內容與聯絡管道請參考 [隱私政策與使用者協議](/tos) 及 [申訴與救濟中心](/appeals)。
 
-資料狀態：需由私有聚合 JSON 補入，若未提供應標示為尚未完整記錄。
+## 8. 推薦與排序
 
-本章應揭露聚合件數、法域或機關類型、請求類型、資料類型、回覆結果與使用者通知狀態。若本期才建立登錄流程，應如實標示。
+本期新增熱門動態入口，調整熱門動態排序與時間衰減，並讓主題頻道的非置頂內容一致套用垃圾內容排除規則。完整入口、訊號、使用者控制與限制請參考 [推薦與排序透明度](/transparency/recommendations)。
 
-## 8. 個人資料、資料分享與使用者權利
+## 9. 重大變更紀錄
 
-資料狀態：可由隱私政策摘要，個資權利請求需由私有聚合 JSON 補入。
+本期核定 3 筆政策變更、4 筆模型與自動化變更、4 筆推薦與排序變更。
 
-本章應摘要個資蒐集、使用、分享、保存、使用者權利與請求管道。若尚未統計個資權利請求件數，應列入下一期改善。
+- 2026-05-17，Community Watch 前端進入 production。[PR #5901](https://github.com/thematters/matters-web/pull/5901)
+- 2026-06-20，新增透明度、申訴、自動化、推薦與數位素養公開頁。[PR #5983](https://github.com/thematters/matters-web/pull/5983)
+- 2026-06-30，協同行為處置加入帳號年齡與貢獻保護措施。[PR #4888](https://github.com/thematters/matters-server/pull/4888)
+- 2026-06-15，加入留言專用垃圾內容模型路由與備援。[PR #4849](https://github.com/thematters/matters-server/pull/4849)
+- 2026-06-16，加入留言垃圾內容分級通知。[PR #4852](https://github.com/thematters/matters-server/pull/4852)
+- 2026-06-19，加入動態專用垃圾內容模型路由與備援。[PR #4860](https://github.com/thematters/matters-server/pull/4860)
+- 2026-06-20，加入協同行為候選、人工覆核與稽核事件。[PR #4863](https://github.com/thematters/matters-server/pull/4863)
+- 2026-06-02，新增熱門動態入口與候選內容查詢。[PR #5954](https://github.com/thematters/matters-web/pull/5954)
+- 2026-06-04，調整熱門動態排序邏輯。[PR #4836](https://github.com/thematters/matters-server/pull/4836)
+- 2026-06-16，調整熱門動態時間衰減。[PR #4853](https://github.com/thematters/matters-server/pull/4853)
+- 2026-06-21，主題頻道一致套用垃圾內容排除規則。[PR #4864](https://github.com/thematters/matters-server/pull/4864)
 
-## 9. 推薦系統與產品介面
+## 10. 已知限制與下一期改善
 
-資料狀態：尚未完整公開。
+- 舊制檢舉與 email 申訴沒有完整回填，無法提供完整成立率與處理時間。
+- 結構化案件資料模型在本期後段才完成，需持續累積才能進行趨勢比較。
+- 政府、法律與個資權利請求已完成本期零件數核定，後續應直接使用固定登錄表，減少期末人工回溯。
+- ObservableHQ 可在取得編輯權限後作為非阻塞的獨立交叉核對，不影響本期報告核定。
 
-本章應說明熱門、最新、追蹤、標籤、內容狀態與 spam exclusion 如何影響可見性。第一版可先描述主要入口與待補工程確認項目。
+## 機器可讀資料與相關頁面
 
-主題說明請參考 [推薦與排序透明度](/transparency/recommendations)。
-
-## 10. 資安與濫用防制
-
-資料狀態：待彙整。
-
-本章應揭露平台處理 spam、帳號濫用、資料風險與可用性事件的治理方式。不得揭露可被濫用的細節。
-
-## 11. 規則、政策與模型變更紀錄
-
-資料狀態：可由外部結構化變更紀錄補入，數字與摘要待審閱後填入。
-
-本章應列出本期 ToS、Privacy、Community Watch 規則、反濫用模型與推薦規則的重大變更。
-
-## 12. 外部回饋與下一期改善
-
-資料狀態：待建立流程。
-
-本章應列出使用者、研究者、社群或外部專家的回饋，以及採納、部分採納或未採納的原因。第一版可先列出下一期要補齊的資料。
-
-## 本期已知缺口
-
-- 一般內容檢舉的案件資料模型已補上，舊資料與部署前資料仍需標示缺口。
-- 一般申訴尚未完整統計成立率、處理時間與結果。
-- 政府或法律請求、個資權利請求與重大變更紀錄需要由資料維護者提供私有或公開安全的聚合 JSON。
-- 自動化與模型輔助需要與 production flag、通知與處理結果對齊。
-- 推薦與排序說明需要與實際產品與後端邏輯核對。
-
-## 相關頁面
-
+- [2026 H1 公開聚合 JSON](/transparency/aggregate-transparency-metrics-2026-H1.public.json)
 - [透明度中心](/transparency)
 - [自動化與反濫用模型](/transparency/automation)
 - [推薦與排序透明度](/transparency/recommendations)
 - [數位素養資源](/transparency/digital-literacy)
 - [申訴與救濟中心](/appeals)
 - [Community Watch 公開紀錄](https://community-watch.matters.town/)
-- [Community Watch 規則](https://community-watch.matters.town/rules/)
 `
 
 const zh_hans = `
-本页是 2026 H1 透明度报告草稿。报告期间为 2026-01-01 至 2026-06-30，目前正在汇整并复核正式统计数字。完成资料检核前，本页保留资料状态与已知缺口，不将未验证数字视为正式统计。平台内部处理统计的 server 汇出与 ObservableHQ 交叉检核路径已建立。
+本页是 Matters 2026 H1 透明度报告。报告期间为 2026-01-01 至 2026-06-30，时区为 Asia/Taipei。统计于 2026-07-14 完成汇出与核定。
 
-## 1. 报告期间与范围
+公开数字只包含聚合结果，不包含姓名、电子邮件、IP、内容原文、案件编号、内部备注、法律文件或附件。正数低于 5 件时统一显示为 \`<5\`，降低从交叉分类反推出单一个案的风险。
 
-资料状态：报告期间已结束，正式统计数字正在汇出与复核。
+## 1. 资料来源与范围
 
-本期预计涵盖 Matters.town 站台上的文章、留言、动态、帐号处理、Community Watch、一般内容举报、申诉救济、政府或法律请求、个人资料权利请求与重大政策变更。
+站内统计由 production 只读资料库的固定期间汇出产生。政府、法律与个资权利请求由私有法律及合规历史底稿补充，公开政策、模型与推荐变更则依已合并的 GitHub PR 整理。
+
+一般内容举报与申诉的新案件资料模型尚未完整涵盖旧制记录，因此相关 0 件只能解读为本期结构化来源没有可计入案件。Community Watch 公开记录的涵盖较完整，可作为本期治理活动的主要量化资料。
 
 ## 2. Matters 内容治理架构
 
-资料状态：可先以文字说明。
+Matters 的治理由使用者举报、Community Watch、站方管理员与反滥用模型共同运作。模型会依不同场景提供分数、候选提示或通知，部分明确规则可影响内容能见度，但高风险与不确定案件保留人工复核及申诉管道。
 
-本章应说明使用者举报、Community Watch、站方管理员、反滥用模型辅助与平台规则之间的关系。若模型仅用于候选提示或通知，也应明确标示。
+## 3. 结构化案件与申诉
 
-## 3. 内容举报与处理统计
+- 结构化治理案件 0 件，资料状态为部分涵盖。
+- 结构化申诉 0 件，维持、撤销、部分撤销、待处理与因申诉恢复均为 0 件。
+- 本期没有足以计算平均值、中位数或第 90 百分位的已结案结构化案件，处理时间标示为未记录。
 
-资料状态：案件资料模型、server 汇出与 ObservableHQ 检核路径已补上，统计待部署与检核后填入。
+这些 0 件不代表平台没有处理举报或申诉。旧制 email 与部署前案件没有完整回填，下一期仍需改善来源涵盖。
 
-本章应揭露举报件数、内容类型、举报理由、处理结果、平均处理时间与资料缺口。一般内容举报可由 moderation case 与 moderation event 汇出，旧资料或部署前资料仍应标示为资料缺口。
+## 4. Community Watch
 
-## 4. Community Watch 处理统计
+- 治理动作共 717 件。
+- 色情广告 661 件。
+- 垃圾广告 56 件。
+- Community Watch 申诉 0 件。
+- 工作人员主动恢复 \`<5\` 件。
+- 工作人员人工复核 \`<5\` 件。
 
-资料状态：部分可由公开记录汇整。
+主动恢复是工作人员自行复核后的结果，没有先发生申诉，因此不计入申诉成功。
 
-本章应揭露色情广告、滥发广告、申诉、恢复、复核与资料清除件数。公开记录可作为第一版主要资料来源。
+## 5. 自动化与模型辅助
 
-## 5. 申诉、复查与恢复统计
+本期加入留言专用垃圾内容模型路由与备援、留言分级通知、动态专用模型路由，以及协同行为候选与人工复核队列。模型在不同界面可能扮演监测、通知、候选排序或能见度调节角色，不应把所有模型分数理解为自动删除。
 
-资料状态：案件与 Community Watch 聚合路径已补上，email 申诉仍需结构化。
+详细用途、限制与申诉方式请参考 [自动化与反滥用模型](/transparency/automation)。
 
-本章应揭露申诉件数、成立、不成立、部分成立、处理中、恢复内容与平均处理时间。若一般 email 申诉尚未结构化，应列为下一期改善。
+## 6. 政府与法律请求
 
-## 6. 自动化与模型辅助处理
+2026 H1 政府与法律请求为 0 件。
 
-资料状态：待与 production flag 与工程记录核对。
+核定时已检查已知私有法律及合规历史底稿。该底稿最后一笔记录在 2025 年 7 月，主要维护者确认后续没有新增记录。公开报告只披露本期聚合总数，不公开历史个案与内部证据链接。
 
-本章应揭露模型用途、是否直接影响可见性、人工审查角色、误判救济与重大变更。若某模型仅 shadow 或 notify-only，应明确标示。
+## 7. 个人资料权利请求
 
-主题说明请参考 [自动化与反滥用模型](/transparency/automation)。
+2026 H1 个资权利请求为 0 件。查询、阅览或复制，更正，删除，以及停止搜集、处理或利用均为 0 件。
 
-## 7. 政府与法律请求
+权利内容与联系管道请参考 [隐私政策与使用者协议](/tos) 及 [申诉与救济中心](/appeals)。
 
-资料状态：需由私有聚合 JSON 补入，若未提供应标示为尚未完整记录。
+## 8. 推荐与排序
 
-本章应揭露聚合件数、法域或机关类型、请求类型、资料类型、回复结果与使用者通知状态。若本期才建立登录流程，应如实标示。
+本期新增热门动态入口，调整热门动态排序与时间衰减，并让主题频道的非置顶内容一致套用垃圾内容排除规则。完整入口、信号、使用者控制与限制请参考 [推荐与排序透明度](/transparency/recommendations)。
 
-## 8. 个人资料、资料分享与使用者权利
+## 9. 重大变更记录
 
-资料状态：可由隐私政策摘要，个资权利请求需由私有聚合 JSON 补入。
+本期核定 3 笔政策变更、4 笔模型与自动化变更、4 笔推荐与排序变更。
 
-本章应摘要个资搜集、使用、分享、保存、使用者权利与请求管道。若尚未统计个资权利请求件数，应列入下一期改善。
+- 2026-05-17，Community Watch 前端进入 production。[PR #5901](https://github.com/thematters/matters-web/pull/5901)
+- 2026-06-20，新增透明度、申诉、自动化、推荐与数字素养公开页。[PR #5983](https://github.com/thematters/matters-web/pull/5983)
+- 2026-06-30，协同行为处置加入帐号年龄与贡献保护措施。[PR #4888](https://github.com/thematters/matters-server/pull/4888)
+- 2026-06-15，加入留言专用垃圾内容模型路由与备援。[PR #4849](https://github.com/thematters/matters-server/pull/4849)
+- 2026-06-16，加入留言垃圾内容分级通知。[PR #4852](https://github.com/thematters/matters-server/pull/4852)
+- 2026-06-19，加入动态专用垃圾内容模型路由与备援。[PR #4860](https://github.com/thematters/matters-server/pull/4860)
+- 2026-06-20，加入协同行为候选、人工复核与稽核事件。[PR #4863](https://github.com/thematters/matters-server/pull/4863)
+- 2026-06-02，新增热门动态入口与候选内容查询。[PR #5954](https://github.com/thematters/matters-web/pull/5954)
+- 2026-06-04，调整热门动态排序逻辑。[PR #4836](https://github.com/thematters/matters-server/pull/4836)
+- 2026-06-16，调整热门动态时间衰减。[PR #4853](https://github.com/thematters/matters-server/pull/4853)
+- 2026-06-21，主题频道一致套用垃圾内容排除规则。[PR #4864](https://github.com/thematters/matters-server/pull/4864)
 
-## 9. 推荐系统与产品介面
+## 10. 已知限制与下一期改善
 
-资料状态：尚未完整公开。
+- 旧制举报与 email 申诉没有完整回填，无法提供完整成立率与处理时间。
+- 结构化案件资料模型在本期后段才完成，需持续累积才能进行趋势比较。
+- 政府、法律与个资权利请求已完成本期零件数核定，后续应直接使用固定登录表，减少期末人工回溯。
+- ObservableHQ 可在取得编辑权限后作为非阻塞的独立交叉核对，不影响本期报告核定。
 
-本章应说明热门、最新、追踪、标签、内容状态与 spam exclusion 如何影响可见性。第一版可先描述主要入口与待补工程确认项目。
+## 机器可读资料与相关页面
 
-主题说明请参考 [推荐与排序透明度](/transparency/recommendations)。
-
-## 10. 资安与滥用防制
-
-资料状态：待汇整。
-
-本章应揭露平台处理 spam、帐号滥用、资料风险与可用性事件的治理方式。不得揭露可被滥用的细节。
-
-## 11. 规则、政策与模型变更记录
-
-资料状态：可由外部结构化变更记录补入，数字与摘要待审阅后填入。
-
-本章应列出本期 ToS、Privacy、Community Watch 规则、反滥用模型与推荐规则的重大变更。
-
-## 12. 外部反馈与下一期改善
-
-资料状态：待建立流程。
-
-本章应列出使用者、研究者、社群或外部专家的反馈，以及采纳、部分采纳或未采纳的原因。第一版可先列出下一期要补齐的资料。
-
-## 本期已知缺口
-
-- 一般内容举报的案件资料模型已补上，旧资料与部署前资料仍需标示缺口。
-- 一般申诉尚未完整统计成立率、处理时间与结果。
-- 政府或法律请求、个资权利请求与重大变更记录需要由资料维护者提供私有或公开安全的聚合 JSON。
-- 自动化与模型辅助需要与 production flag、通知与处理结果对齐。
-- 推荐与排序说明需要与实际产品与后端逻辑核对。
-
-## 相关页面
-
+- [2026 H1 公开聚合 JSON](/transparency/aggregate-transparency-metrics-2026-H1.public.json)
 - [透明度中心](/transparency)
 - [自动化与反滥用模型](/transparency/automation)
 - [推荐与排序透明度](/transparency/recommendations)
 - [数字素养资源](/transparency/digital-literacy)
 - [申诉与救济中心](/appeals)
 - [Community Watch 公开记录](https://community-watch.matters.town/)
-- [Community Watch 规则](https://community-watch.matters.town/rules/)
 `
 
 const en = `
-This page is the draft 2026 H1 transparency report. The reporting period ran from 2026-01-01 to 2026-06-30, and final metrics are now being compiled and reviewed. Until validation is complete, this page documents data status and known gaps without treating unverified figures as final. The server export and ObservableHQ cross-check path for internal moderation metrics has been prepared.
+This is the Matters 2026 H1 Transparency Report. The reporting period is 2026-01-01 through 2026-06-30 in Asia/Taipei. Export and review were completed on 2026-07-14.
 
-## 1. Reporting period and scope
+Published figures contain aggregate results only. They exclude names, email addresses, IP addresses, original content, case identifiers, internal notes, legal documents, and attachments. Positive counts below 5 are shown as \`<5\` to reduce re-identification risk across categories.
 
-Data status: reporting period complete; final metrics are being exported and reviewed.
+## 1. Sources and scope
 
-This report is expected to cover articles, comments, moments, account actions, Community Watch, ordinary content reports, appeals, government or legal requests, personal data rights requests, and major policy changes.
+On-platform metrics come from a fixed-period export of the read-only production database. Government, legal, and privacy-rights request counts are supplemented by the private legal and compliance history. Public policy, model, and recommendation changes are compiled from merged GitHub pull requests.
 
-## 2. Matters content governance structure
+The new case schema for ordinary reports and appeals does not fully cover legacy records. A zero in those sections only means that the structured source contains no countable cases for this period. Community Watch public records have stronger coverage and provide the primary quantitative account of governance activity.
 
-Data status: text can be added first.
+## 2. Matters content governance
 
-This section should explain how user reports, Community Watch, staff admins, anti-abuse model support, and platform rules work together. If a model is only used for hints or notifications, that should be stated clearly.
+Matters governance combines user reports, Community Watch, staff administration, and anti-abuse models. Depending on the surface, models provide scores, candidate signals, or notifications. Some explicit rules can affect visibility, while high-risk and uncertain cases retain human review and appeal paths.
 
-## 3. Content reports and moderation statistics
+## 3. Structured cases and appeals
 
-Data status: case data model, server export, and ObservableHQ cross-check path added. Metrics are pending deployment and review.
+- Structured moderation cases: 0, with partial coverage.
+- Structured appeals: 0. Upheld, reversed, partially reversed, pending, and appeal-based restorations are all 0.
+- There are not enough resolved structured cases to calculate average, median, or 90th-percentile handling time. Handling time is marked not recorded.
 
-This section should disclose report counts, content types, reasons, outcomes, average handling time, and data gaps. Ordinary content reports can be exported from moderation cases and moderation events. Legacy data and pre-deployment records should still be marked as data gaps.
+These zeros do not mean that the platform handled no reports or appeals. Legacy email and pre-deployment cases were not fully backfilled and remain a coverage gap for the next report.
 
-## 4. Community Watch statistics
+## 4. Community Watch
 
-Data status: partially available from public records.
+- Total governance actions: 717.
+- Porn ads: 661.
+- Spam ads: 56.
+- Community Watch appeals: 0.
+- Proactive staff restorations: \`<5\`.
+- Staff reviews: \`<5\`.
 
-This section should disclose porn ad, spam ad, appeal, restore, review, and data-clearing counts. Public records can be the main source for the first version.
+Proactive restorations followed staff review without a preceding appeal, so they are not counted as successful appeals.
 
-## 5. Appeals, reviews, and restorations
+## 5. Automation and model assistance
 
-Data status: case and Community Watch aggregate paths have been added. Email appeals still need structured records.
+This period added a comment-specific spam model route and fallback, graded comment notifications, a moment-specific model route, and a coordinated-behavior candidate and human-review queue. Depending on the surface, models can monitor, notify, rank candidates, or adjust visibility. A model score should not be read as automatic deletion in every case.
 
-This section should disclose appeal counts, upheld, reversed, partially upheld, pending cases, restored content, and average handling time. If email appeals are not structured yet, mark that as an improvement for the next period.
+See [Automation and Anti-Abuse Models](/transparency/automation) for purposes, limitations, and appeal paths.
 
-## 6. Automation and model-assisted actions
+## 6. Government and legal requests
 
-Data status: needs production flag and engineering record review.
+Government and legal requests in 2026 H1: 0.
 
-This section should disclose model purpose, whether visibility is affected, human review roles, appeal paths, and major changes. If a model is shadow-only or notify-only, state that clearly.
+The review covered the known private legal and compliance history. Its latest entry is from July 2025, and the maintainer confirmed that no later records exist. This report publishes only the H1 aggregate and does not expose historical cases or internal evidence links.
 
-See [Automation and Anti-Abuse Models](/transparency/automation) for the topic page.
+## 7. Personal data rights requests
 
-## 7. Government and legal requests
+Personal data rights requests in 2026 H1: 0. Access or copy, correction, deletion, and restriction requests are all 0.
 
-Data status: requires a private aggregate JSON file. If not provided, this section should remain marked as not fully recorded.
+See the [Privacy Policy and Terms](/tos) and [Appeals and Remedies](/appeals) for rights and contact channels.
 
-This section should disclose aggregated counts, jurisdiction or agency type, request type, data type, response outcome, and user notice status. If the logging process was created during this period, state that clearly.
+## 8. Recommendations and ranking
 
-## 8. Personal data, data sharing, and user rights
+This period added the Hot Moments entry point, adjusted Hot Moments ranking and time decay, and made non-pinned topic-channel content consistently honor spam exclusion. See [Recommendation and Ranking Transparency](/transparency/recommendations) for surfaces, signals, user controls, and limitations.
 
-Data status: can summarize the Privacy Policy. Personal data rights request counts require a private aggregate JSON file.
+## 9. Material changes
 
-This section should summarize data collection, use, sharing, retention, user rights, and request channels. If personal data rights requests are not counted yet, list that as an improvement.
+The reviewed change log contains 3 policy changes, 4 model and automation changes, and 4 recommendation and ranking changes.
 
-## 9. Recommendation systems and product interfaces
+- 2026-05-17: Community Watch frontend entered production. [PR #5901](https://github.com/thematters/matters-web/pull/5901)
+- 2026-06-20: transparency, appeals, automation, recommendation, and digital-literacy pages were added. [PR #5983](https://github.com/thematters/matters-web/pull/5983)
+- 2026-06-30: coordinated-behavior actions gained account-age and contribution safeguards. [PR #4888](https://github.com/thematters/matters-server/pull/4888)
+- 2026-06-15: a comment-specific spam model route and fallback were added. [PR #4849](https://github.com/thematters/matters-server/pull/4849)
+- 2026-06-16: graded comment-spam notifications were added. [PR #4852](https://github.com/thematters/matters-server/pull/4852)
+- 2026-06-19: a moment-specific spam model route and fallback were added. [PR #4860](https://github.com/thematters/matters-server/pull/4860)
+- 2026-06-20: coordinated-behavior candidates, human review, and audit events were added. [PR #4863](https://github.com/thematters/matters-server/pull/4863)
+- 2026-06-02: the Hot Moments entry point and candidate query were added. [PR #5954](https://github.com/thematters/matters-web/pull/5954)
+- 2026-06-04: Hot Moments ranking was adjusted. [PR #4836](https://github.com/thematters/matters-server/pull/4836)
+- 2026-06-16: Hot Moments time decay was adjusted. [PR #4853](https://github.com/thematters/matters-server/pull/4853)
+- 2026-06-21: topic-channel content consistently adopted spam exclusion. [PR #4864](https://github.com/thematters/matters-server/pull/4864)
 
-Data status: not fully public.
+## 10. Known limitations and next improvements
 
-This section should explain how hot, latest, following, tags, content states, and spam exclusion affect visibility. The first version can describe main entry points and items that still require engineering confirmation.
+- Legacy reports and email appeals were not fully backfilled, so complete outcome rates and handling times are unavailable.
+- The structured case schema was completed late in the period and needs continued accumulation before trend comparisons are meaningful.
+- Government, legal, and privacy-rights requests were confirmed as zero for this period. Future requests should enter a fixed register as they arrive to reduce end-of-period reconstruction.
+- ObservableHQ can provide a non-blocking independent cross-check after edit access is granted. It does not block this report's approval.
 
-See [Recommendation and Ranking Transparency](/transparency/recommendations) for the topic page.
+## Machine-readable data and related pages
 
-## 10. Security and abuse prevention
-
-Data status: to be collected.
-
-This section should disclose how the platform handles spam, account abuse, data risk, and availability incidents. It should not disclose details that would help abuse.
-
-## 11. Rule, policy, and model change log
-
-Data status: can be filled from public-safe structured change logs after review.
-
-This section should list major changes to Terms, Privacy Policy, Community Watch rules, anti-abuse models, and recommendation rules.
-
-## 12. External feedback and next improvements
-
-Data status: process pending.
-
-This section should list feedback from users, researchers, the community, or external experts, along with adopted, partially adopted, or not adopted responses. The first version can list data to improve for the next period.
-
-## Known gaps for this period
-
-- The case data model for ordinary content reports has been added. Legacy and pre-deployment records still need to be marked as data gaps.
-- Ordinary appeals do not yet have complete statistics for success rate, handling time, and outcomes.
-- Government or legal requests, personal data rights requests, and major change logs require private or public-safe aggregate JSON from data maintainers.
-- Automation and model assistance need alignment with production flags, notices, and outcomes.
-- Recommendation and ranking explanations need review against actual product and backend logic.
-
-## Related pages
-
+- [2026 H1 public aggregate JSON](/transparency/aggregate-transparency-metrics-2026-H1.public.json)
 - [Transparency Center](/transparency)
 - [Automation and Anti-Abuse Models](/transparency/automation)
 - [Recommendation and Ranking Transparency](/transparency/recommendations)
 - [Digital Literacy Resources](/transparency/digital-literacy)
 - [Appeals and Remedies](/appeals)
 - [Community Watch records](https://community-watch.matters.town/)
-- [Community Watch rules](https://community-watch.matters.town/rules/)
 `
 
 const content = {
