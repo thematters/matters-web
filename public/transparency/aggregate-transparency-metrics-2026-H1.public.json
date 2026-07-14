@@ -1,0 +1,152 @@
+{
+  "schema_version": "2026-06-20.1",
+  "publication_status": "final",
+  "reporting_period": {
+    "start": "2026-01-01",
+    "end": "2026-06-30",
+    "timezone": "Asia/Taipei"
+  },
+  "data_status": {
+    "overall": "partial",
+    "not_recorded_fields": ["legacy_reports_before_moderation_case_schema"],
+    "notes": [
+      "Legacy moderation and appeal records before the structured case schema are only partially covered.",
+      "Only aggregated counts are exported; user ids, emails, IPs, original content, internal notes, and legal document contents are excluded.",
+      "The maintainer reviewed the known private legal and compliance history through 2025-07 and confirmed that no later government, legal, or privacy-rights request records exist for 2026 H1.",
+      "Change logs are derived from merged public pull requests and were reviewed for final publication."
+    ],
+    "review_required_fields": []
+  },
+  "low_count_protection": {
+    "threshold": 5,
+    "rule": "positive counts below 5 are published as <5"
+  },
+  "metrics": {
+    "moderation_cases": {
+      "total": 0,
+      "by_target_type": {},
+      "by_source": {},
+      "by_reason": {},
+      "by_status": {},
+      "by_outcome": {},
+      "by_automation_role": {},
+      "by_notice_state": {}
+    },
+    "appeals": {
+      "total": 0,
+      "upheld": 0,
+      "reversed": 0,
+      "partially_reversed": 0,
+      "pending": 0,
+      "restored_content": 0
+    },
+    "handling_time": {
+      "average_hours": null,
+      "median_hours": null,
+      "p90_hours": null,
+      "not_recorded": true
+    },
+    "community_watch": {
+      "total_actions": 717,
+      "by_reason": {
+        "spam_ad": 56,
+        "porn_ad": 661
+      },
+      "appeals": 0,
+      "restored": "<5",
+      "reviewed_by_staff": "<5"
+    },
+    "government_requests": {
+      "total": 0,
+      "by_jurisdiction": {},
+      "by_agency_type": {},
+      "by_request_type": {},
+      "by_data_type": {},
+      "by_result": {},
+      "by_user_notice": {},
+      "not_recorded": false
+    },
+    "privacy_requests": {
+      "total": 0,
+      "access": 0,
+      "correction": 0,
+      "deletion": 0,
+      "restriction": 0,
+      "not_recorded": false
+    },
+    "policy_changes": [
+      {
+        "date": "2026-05-17",
+        "category": "community_watch",
+        "summary": "Community Watch 前端進入 production，提供會員檢舉入口、治理原因、移除內容提示、管理工具與通知流程。",
+        "public_url": "https://github.com/thematters/matters-web/pull/5901"
+      },
+      {
+        "date": "2026-06-20",
+        "category": "transparency",
+        "summary": "新增公開申訴、透明度、自動化、推薦透明度、數位素養與 2026 H1 透明度報告頁面。",
+        "public_url": "https://github.com/thematters/matters-web/pull/5983"
+      },
+      {
+        "date": "2026-06-30",
+        "category": "content_rules",
+        "summary": "更新協同行為處置的保護措施，成立較久或累積貢獻較高的帳號改由人工覆核。",
+        "public_url": "https://github.com/thematters/matters-server/pull/4888"
+      }
+    ],
+    "model_changes": [
+      {
+        "date": "2026-06-15",
+        "category": "comment_classification",
+        "summary": "production 加入留言專用垃圾內容模型路由及備援路徑，自動收合仍由功能開關控制。",
+        "public_url": "https://github.com/thematters/matters-server/pull/4849"
+      },
+      {
+        "date": "2026-06-16",
+        "category": "automation_role",
+        "summary": "production 加入留言垃圾內容分級通知，供管理者覆核，通知本身不會自動隱藏留言。",
+        "public_url": "https://github.com/thematters/matters-server/pull/4852"
+      },
+      {
+        "date": "2026-06-19",
+        "category": "other",
+        "summary": "加入動態專用垃圾內容模型路由及備援路徑，模型分數作為輔助訊號，不直接自動處置內容。",
+        "public_url": "https://github.com/thematters/matters-server/pull/4860"
+      },
+      {
+        "date": "2026-06-20",
+        "category": "review_queue",
+        "summary": "新增協同垃圾行為候選資料、管理者覆核操作、可逆決定與稽核事件。",
+        "public_url": "https://github.com/thematters/matters-server/pull/4863"
+      }
+    ],
+    "recommendation_changes": [
+      {
+        "date": "2026-06-02",
+        "category": "hot_ranking",
+        "summary": "新增熱門動態入口與候選內容查詢。",
+        "public_url": "https://github.com/thematters/matters-web/pull/5954"
+      },
+      {
+        "date": "2026-06-04",
+        "category": "hot_ranking",
+        "summary": "調整熱門動態排序邏輯。",
+        "public_url": "https://github.com/thematters/matters-server/pull/4836"
+      },
+      {
+        "date": "2026-06-16",
+        "category": "hot_ranking",
+        "summary": "調整熱門動態的時間衰減。",
+        "public_url": "https://github.com/thematters/matters-server/pull/4853"
+      },
+      {
+        "date": "2026-06-21",
+        "category": "exclusion_or_downranking",
+        "summary": "主題頻道的非置頂內容統一套用垃圾內容排除規則，頻道指派不再覆寫既有治理狀態。",
+        "public_url": "https://github.com/thematters/matters-server/pull/4864"
+      }
+    ]
+  },
+  "source_generated_at": "2026-07-14T18:23:47+08:00",
+  "external_metrics_reviewed_at": "2026-07-14T20:02:46+08:00"
+}
