@@ -2067,7 +2067,7 @@
   "Sj+TN8": {
     "defaultMessage": "公告"
   },
-  "Su1LcW": {
+  "2cnZc/": {
     "defaultMessage": "开启后，新发布的公开作品会自动发送到 Fediverse。其他站点可能保留副本；关闭后将停止同步，并尝试删除先前内容。"
   },
   "SuRTsQ": {
@@ -2454,7 +2454,7 @@
     "defaultMessage": "因违反用户协定而被封存，",
     "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
   },
-  "ZAoAcG": {
+  "cY80V3": {
     "defaultMessage": "公开作品会自动发送，远程站点可能保留副本"
   },
   "ZAs170": {

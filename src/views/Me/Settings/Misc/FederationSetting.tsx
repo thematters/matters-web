@@ -100,7 +100,7 @@ const FederationSetting = () => {
       subtitle={
         <FormattedMessage
           defaultMessage="開啟後，新發佈的公開作品會自動送到 Fediverse。其他站台可能保留副本；關閉後將停止同步，並嘗試刪除先前內容。"
-          id="Su1LcW"
+          id="2cnZc/"
         />
       }
       right={

@@ -182,7 +182,7 @@ const SidebarFederationSetting: React.FC<SidebarFederationSettingProps> = ({
       subtitle={
         <FormattedMessage
           defaultMessage="公開作品會自動送出，遠端站台可能保留副本"
-          id="ZAoAcG"
+          id="cY80V3"
         />
       }
       rightButton={

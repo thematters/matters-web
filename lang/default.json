@@ -2068,7 +2068,7 @@
   "Sj+TN8": {
     "defaultMessage": "Announcement"
   },
-  "Su1LcW": {
+  "2cnZc/": {
     "defaultMessage": "開啟後，新發佈的公開作品會自動送到 Fediverse。其他站台可能保留副本；關閉後將停止同步，並嘗試刪除先前內容。"
   },
   "SuRTsQ": {
@@ -2455,7 +2455,7 @@
     "defaultMessage": "Archived for violation.",
     "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
   },
-  "ZAoAcG": {
+  "cY80V3": {
     "defaultMessage": "公開作品會自動送出，遠端站台可能保留副本"
   },
   "ZAs170": {
