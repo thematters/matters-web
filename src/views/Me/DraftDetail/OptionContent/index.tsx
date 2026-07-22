@@ -218,7 +218,6 @@ export const OptionContent = (
   const isPublished = props.draft.publishState === 'published'
   const disabled = isPending || isPublished
   const hasOwnCollections = (props.ownCollections?.length || 0) > 0
-  const isFediverseBeta = !!props.draftViewer?.viewer?.features.fediverseBeta
 
   return (
     <section>
@@ -268,7 +267,7 @@ export const OptionContent = (
             <EditDraftLicense {...props} disabled={disabled} />
             <EditDraftCanComment {...props} disabled={disabled} />
             <EditDraftSupportSetting {...props} disabled={disabled} />
-            {isFediverseBeta && <Sidebar.FederationSetting />}
+            <Sidebar.FederationSetting />
             <EditDraftSensitive {...props} disabled={disabled} />
           </>
         )}

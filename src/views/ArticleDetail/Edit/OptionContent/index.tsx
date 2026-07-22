@@ -266,7 +266,6 @@ export const OptionContent = (
   const isSettings = tab === 'settings'
   const hasOwnCollections = (props.ownCollections?.length || 0) > 0
   const hasOwnCircle = props.ownCircles && props.ownCircles.length >= 1
-  const isFediverseBeta = !!props.viewerData?.viewer?.features.fediverseBeta
   const disabled = false
 
   return (
@@ -312,9 +311,7 @@ export const OptionContent = (
             <EditLicense {...props} disabled={disabled} />
             <EditCanComment {...props} disabled={disabled} />
             <EditSupportSetting {...props} disabled={disabled} />
-            {isFediverseBeta && (
-              <EditFederationSetting {...props} disabled={disabled} />
-            )}
+            <EditFederationSetting {...props} disabled={disabled} />
             <EditSensitive {...props} disabled={disabled} />
             {hasOwnCircle && !!props.article.access.circle && (
               <EditCircle {...props} disabled={disabled} />

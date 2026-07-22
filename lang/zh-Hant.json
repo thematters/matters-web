@@ -2067,8 +2067,8 @@
   "Sj+TN8": {
     "defaultMessage": "公告"
   },
-  "Su1LcW": {
-    "defaultMessage": "開啟後，新發佈作品預設可輸出到 Fediverse。"
+  "2cnZc/": {
+    "defaultMessage": "開啟後，新發佈的公開作品會自動送到 Fediverse。其他站台可能保留副本；關閉後將停止同步，並嘗試刪除先前內容。"
   },
   "SuRTsQ": {
     "defaultMessage": "註冊 ISCN"
@@ -2454,8 +2454,8 @@
     "defaultMessage": "因違反用戶協定而被封存，",
     "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
   },
-  "ZAoAcG": {
-    "defaultMessage": "Threads, Mastodon, Misskey 這些地方的粉絲也會看到"
+  "cY80V3": {
+    "defaultMessage": "公開作品會自動送出，遠端站台可能保留副本"
   },
   "ZAs170": {
     "defaultMessage": "基本資料",
