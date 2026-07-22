@@ -181,8 +181,8 @@ const SidebarFederationSetting: React.FC<SidebarFederationSettingProps> = ({
       title={<FormattedMessage defaultMessage="分享到聯邦宇宙" id="tsUFZX" />}
       subtitle={
         <FormattedMessage
-          defaultMessage="Threads, Mastodon, Misskey 這些地方的粉絲也會看到"
-          id="ZAoAcG"
+          defaultMessage="公開作品會自動送出，遠端站台可能保留副本"
+          id="cY80V3"
         />
       }
       rightButton={

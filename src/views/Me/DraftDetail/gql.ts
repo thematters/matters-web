@@ -87,9 +87,6 @@ export const DRAFT_DETAIL_VIEWER = gql`
       }
       displayName
       avatar
-      features {
-        fediverseBeta
-      }
       collections(input: { first: 20, after: $collectionsAfter }) {
         pageInfo {
           hasNextPage
