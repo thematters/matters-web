@@ -30,7 +30,7 @@ describe('<FederationSetting>', () => {
     useQuery.mockReset()
   })
 
-  it('does not render before viewer feature eligibility is confirmed', () => {
+  it('renders for all signed-in viewers while settings are loading', () => {
     useQuery.mockReturnValue({ data: undefined, loading: true })
 
     render(
@@ -39,15 +39,14 @@ describe('<FederationSetting>', () => {
       </IntlProvider>
     )
 
-    expect(screen.queryByText('Fediverse 聯邦發佈')).not.toBeInTheDocument()
+    expect(screen.getByText('Fediverse 聯邦發佈')).toBeInTheDocument()
   })
 
-  it('renders for fediverse beta users', () => {
+  it('renders with the saved federation setting', () => {
     useQuery.mockReturnValue({
       data: {
         viewer: {
           id: '1',
-          features: { fediverseBeta: true },
           federationSetting: { state: 'disabled' },
         },
       },

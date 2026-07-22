@@ -15,9 +15,6 @@ const VIEWER_FEDERATION_SETTING = gql`
   query ViewerFederationSetting {
     viewer {
       id
-      features {
-        fediverseBeta
-      }
       federationSetting {
         state
       }
@@ -49,17 +46,12 @@ const FederationSetting = () => {
   >(SET_VIEWER_FEDERATION_SETTING)
 
   const viewer = data?.viewer
-  const isFediverseBeta = !!viewer?.features.fediverseBeta
 
   useEffect(() => {
     if (viewer?.federationSetting?.state) {
       setSetting(viewer.federationSetting.state)
     }
   }, [viewer?.federationSetting?.state])
-
-  if (!isFediverseBeta) {
-    return null
-  }
 
   const enabled = setting === FederationAuthorSettingState.Enabled
 
@@ -107,7 +99,7 @@ const FederationSetting = () => {
       }
       subtitle={
         <FormattedMessage
-          defaultMessage="開啟後，新發佈作品預設可輸出到 Fediverse。"
+          defaultMessage="開啟後，新發佈的公開作品會自動送到 Fediverse。其他站台可能保留副本；關閉後將停止同步，並嘗試刪除先前內容。"
           id="Su1LcW"
         />
       }

@@ -2069,7 +2069,7 @@
     "defaultMessage": "Announcement"
   },
   "Su1LcW": {
-    "defaultMessage": "開啟後，新發佈作品預設可輸出到 Fediverse。"
+    "defaultMessage": "When enabled, newly published public works are automatically sent to the Fediverse. Other servers may retain copies; disabling stops future sync and requests deletion of prior content."
   },
   "SuRTsQ": {
     "defaultMessage": "Register for ISCN"
@@ -2456,7 +2456,7 @@
     "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
   },
   "ZAoAcG": {
-    "defaultMessage": "Threads, Mastodon, Misskey 這些地方的粉絲也會看到"
+    "defaultMessage": "Public works are sent automatically and remote servers may retain copies"
   },
   "ZAs170": {
     "defaultMessage": "Profile",
