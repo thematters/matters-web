@@ -14,6 +14,7 @@ import IconProfile from '@/public/static/icons/24px/profile.svg'
 import IconSave from '@/public/static/icons/24px/save.svg'
 import IconSettings from '@/public/static/icons/24px/settings.svg'
 import IconWallet from '@/public/static/icons/24px/wallet.svg'
+import IconWorld from '@/public/static/icons/24px/world.svg'
 import {
   COOKIE_TOKEN_NAME,
   COOKIE_USER_GROUP,
@@ -107,6 +108,14 @@ const Top: React.FC = () => {
         text={<FormattedMessage defaultMessage="Stats" id="U86B6w" />}
         icon={<Icon icon={IconData} size={24} />}
         href={PATHS.ME_ANALYTICS}
+        is="link"
+      />
+
+      <Menu.Item
+        {...menuItemProps}
+        text={<FormattedMessage defaultMessage="Fediverse" id="R6sMIX" />}
+        icon={<Icon icon={IconWorld} size={24} />}
+        href={PATHS.ME_FEDIVERSE}
         is="link"
       />
     </Menu>
