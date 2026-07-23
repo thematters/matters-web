@@ -37,6 +37,10 @@ type FediversePost = {
   url?: string | null
   inReplyTo?: string | null
   publishedAt?: string | null
+  liked: boolean
+  announced: boolean
+  likeActivityId?: string | null
+  announceActivityId?: string | null
   remoteActor: RemoteActor
 }
 
@@ -82,7 +86,9 @@ type FediverseAction =
   | 'unfollow'
   | 'reply'
   | 'like'
+  | 'unlike'
   | 'announce'
+  | 'unannounce'
   | 'block'
   | 'report'
   | 'mark_read'
@@ -93,6 +99,7 @@ type ActionInput = {
   remoteActorId?: string
   objectId?: string
   content?: string
+  activityId?: string
   notificationIds?: string[]
   reason?: string
 }
@@ -497,32 +504,42 @@ const Fediverse = () => {
                     onClick={() =>
                       runAction(
                         {
-                          action: 'like',
+                          action: post.liked ? 'unlike' : 'like',
                           objectId: post.objectId,
                           remoteActorId: post.remoteActor.actorId,
+                          activityId: post.likeActivityId || undefined,
                         },
                         `like:${post.objectId}`
                       )
                     }
                     textColor="green"
                   >
-                    <FormattedMessage defaultMessage="喜歡" id="NDG8qY" />
+                    {post.liked ? (
+                      <FormattedMessage defaultMessage="取消喜歡" id="0/FjWm" />
+                    ) : (
+                      <FormattedMessage defaultMessage="喜歡" id="NDG8qY" />
+                    )}
                   </Button>
                   <Button
                     disabled={busyKey === `announce:${post.objectId}`}
                     onClick={() =>
                       runAction(
                         {
-                          action: 'announce',
+                          action: post.announced ? 'unannounce' : 'announce',
                           objectId: post.objectId,
                           remoteActorId: post.remoteActor.actorId,
+                          activityId: post.announceActivityId || undefined,
                         },
                         `announce:${post.objectId}`
                       )
                     }
                     textColor="green"
                   >
-                    <FormattedMessage defaultMessage="轉發" id="bmR7T4" />
+                    {post.announced ? (
+                      <FormattedMessage defaultMessage="取消轉發" id="gLotOL" />
+                    ) : (
+                      <FormattedMessage defaultMessage="轉發" id="bmR7T4" />
+                    )}
                   </Button>
                   <Button
                     disabled={busyKey === `block:${post.remoteActor.actorId}`}

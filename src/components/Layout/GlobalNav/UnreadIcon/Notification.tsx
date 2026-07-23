@@ -18,9 +18,7 @@ interface UnreadIconProps {
 
 const FEDIVERSE_UNREAD_COUNT = gql`
   query FediverseUnreadCount {
-    viewerFediverse {
-      unreadNotificationsCount
-    }
+    viewerFediverseUnreadCount
   }
 `
 
@@ -29,7 +27,7 @@ const NotificationUnreadIcon: React.FC<UnreadIconProps> = ({
   iconSize = 24,
 }) => {
   const viewer = useContext(ViewerContext)
-  const { data, startPolling } = useQuery<UnreadNoticeCountQuery>(
+  const { data, startPolling, stopPolling } = useQuery<UnreadNoticeCountQuery>(
     UNREAD_NOTICE_COUNT,
     {
       errorPolicy: 'ignore',
@@ -38,29 +36,43 @@ const NotificationUnreadIcon: React.FC<UnreadIconProps> = ({
     }
   )
   const federationEnabled = viewer.federationSetting?.state === 'enabled'
-  const { data: federationData, startPolling: startFederationPolling } =
-    useQuery<{
-      viewerFediverse: { unreadNotificationsCount: number }
-    }>(FEDIVERSE_UNREAD_COUNT, {
-      errorPolicy: 'ignore',
-      fetchPolicy: 'network-only',
-      skip:
-        !viewer.isAuthed || !federationEnabled || typeof window === 'undefined',
-    })
+  const {
+    data: federationData,
+    startPolling: startFederationPolling,
+    stopPolling: stopFederationPolling,
+  } = useQuery<{
+    viewerFediverseUnreadCount: number
+  }>(FEDIVERSE_UNREAD_COUNT, {
+    errorPolicy: 'ignore',
+    fetchPolicy: 'network-only',
+    skip:
+      !viewer.isAuthed || !federationEnabled || typeof window === 'undefined',
+  })
 
   // FIXME: https://github.com/apollographql/apollo-client/issues/3775
   useEffect(() => {
     if (viewer.isAuthed) {
       startPolling(1000 * 20) // 20s
       if (federationEnabled) {
-        startFederationPolling(1000 * 20)
+        startFederationPolling(1000 * 60) // 60s
       }
     }
-  }, [federationEnabled])
+    return () => {
+      stopPolling()
+      stopFederationPolling()
+    }
+  }, [
+    federationEnabled,
+    startFederationPolling,
+    startPolling,
+    stopFederationPolling,
+    stopPolling,
+    viewer.isAuthed,
+  ])
 
   const unread =
     (data?.viewer?.status?.unreadNoticeCount || 0) >= 1 ||
-    (federationData?.viewerFediverse.unreadNotificationsCount || 0) >= 1
+    (federationData?.viewerFediverseUnreadCount || 0) >= 1
   const iconClasses = classNames({
     [styles.unreadIcon]: true,
     [styles.unread]: unread,

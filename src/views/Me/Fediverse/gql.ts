@@ -53,6 +53,10 @@ export const VIEWER_FEDIVERSE = gql`
         url
         inReplyTo
         publishedAt
+        liked
+        announced
+        likeActivityId
+        announceActivityId
         remoteActor {
           ...FediverseRemoteActorFields
         }
