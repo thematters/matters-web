@@ -84,6 +84,9 @@
   "+vVZ/G": {
     "defaultMessage": "Connect"
   },
+  "+wqFkx": {
+    "defaultMessage": "聯邦宇宙互動"
+  },
   "/0OJlF": {
     "defaultMessage": "No discussion yet",
     "description": "src/views/CampaignDetail/Discussion"
@@ -187,6 +190,9 @@
   "0ThOw1": {
     "defaultMessage": "Create collection",
     "description": "src/views/User/Collections/UserCollections.tsx"
+  },
+  "0XnomJ": {
+    "defaultMessage": "找不到這個聯邦帳號"
   },
   "0bTlm4": {
     "defaultMessage": "Are you sure you want to delete this moment?"
@@ -353,6 +359,9 @@
     "defaultMessage": "Edit",
     "description": "src/views/ArticleDetail/MetaInfo/index.tsx"
   },
+  "2cnZc/": {
+    "defaultMessage": "開啟後，新發佈的公開作品會自動送到 Fediverse。其他站台可能保留副本；關閉後將停止同步，並嘗試刪除先前內容。"
+  },
   "2ef/Xl": {
     "defaultMessage": "Block",
     "description": "src/views/Me/Settings/Blocked/ToggleBlockButton.tsx"
@@ -456,6 +465,9 @@
     "defaultMessage": "色情廣告",
     "description": "src/components/Comment/DropdownActions/CommunityWatchRemoveComment.tsx"
   },
+  "4GmeZE": {
+    "defaultMessage": "來自其他 Fediverse 站台的互動"
+  },
   "4KuZ0o": {
     "defaultMessage": "Asset not found",
     "description": "ASSET_NOT_FOUND"
@@ -516,6 +528,9 @@
     "defaultMessage": "liked your deleted moment",
     "description": "src/components/Notice/MomentNotice/MomentLiked.tsx"
   },
+  "5UgS3k": {
+    "defaultMessage": "封鎖"
+  },
   "5UglrB": {
     "defaultMessage": "Successfully delivered"
   },
@@ -534,6 +549,9 @@
   },
   "5jlQTx": {
     "defaultMessage": "Manage Invitation"
+  },
+  "5kX6Qk": {
+    "defaultMessage": "檢舉"
   },
   "5mu8HJ": {
     "defaultMessage": "Moment deleted"
@@ -605,6 +623,9 @@
   },
   "6Sj2lN": {
     "defaultMessage": "Claim"
+  },
+  "6UaJbf": {
+    "defaultMessage": "送出"
   },
   "6Vznnt": {
     "defaultMessage": "left a comment in your circle",
@@ -978,6 +999,9 @@
     "defaultMessage": "Provide support funds to",
     "description": "src/components/Forms/PaymentForm/PaymentInfo/index.tsx"
   },
+  "ByvxDL": {
+    "defaultMessage": "追蹤中的作者"
+  },
   "C/4nS6": {
     "defaultMessage": "Connect and claim"
   },
@@ -1348,6 +1372,9 @@
     "defaultMessage": "Your schedule article has been published",
     "description": "src/components/Notice/ArticleNotice/ScheduledArticlePublishedNotice.tsx"
   },
+  "HFBocb": {
+    "defaultMessage": "追蹤遠端作者後，最新內容會出現在這裡"
+  },
   "HFVDeB": {
     "defaultMessage": "Related Tags",
     "description": "src/views/TagDetail/RelatedTags/index.tsx"
@@ -1429,6 +1456,9 @@
     "defaultMessage": "Unlink",
     "description": "src/components/Editor"
   },
+  "IK6Mk7": {
+    "defaultMessage": "查看原文"
+  },
   "IKPYe9": {
     "defaultMessage": "View",
     "description": "src/components/Dialogs/CollectionSelectDialog/index.tsx"
@@ -1458,6 +1488,9 @@
   },
   "IjNYll": {
     "defaultMessage": "Let me think about it"
+  },
+  "InCosw": {
+    "defaultMessage": "搜尋"
   },
   "IpMWC4": {
     "defaultMessage": "You’ve posted several times in a short period. Please take a break."
@@ -1714,6 +1747,9 @@
     "defaultMessage": "Supports",
     "description": "src/views/Me/Transactions/index.tsx"
   },
+  "NDG8qY": {
+    "defaultMessage": "喜歡"
+  },
   "NDV5Mq": {
     "defaultMessage": "Options"
   },
@@ -1758,6 +1794,9 @@
   },
   "NmhF45": {
     "defaultMessage": "Adding tags helps readers find your articles. Add or create new tags."
+  },
+  "Nw8VNu": {
+    "defaultMessage": "聯邦宇宙互動中心"
   },
   "O0MQs/": {
     "defaultMessage": "Please add email first",
@@ -1863,6 +1902,9 @@
   "PXAur5": {
     "defaultMessage": "Withdraw"
   },
+  "PbBsp5": {
+    "defaultMessage": "目前還沒有聯邦宇宙回覆"
+  },
   "PesLat": {
     "defaultMessage": "Publishing..."
   },
@@ -1899,8 +1941,14 @@
   "Q8Qw5B": {
     "defaultMessage": "Description"
   },
+  "Q8g2+W": {
+    "defaultMessage": "全部已讀"
+  },
   "QHRze5": {
     "defaultMessage": "Moments"
+  },
+  "QJd23B": {
+    "defaultMessage": "Fediverse 帳號"
   },
   "QKJWqd": {
     "defaultMessage": "Bookmark",
@@ -1952,6 +2000,9 @@
   "R410ei": {
     "defaultMessage": "Incorrect verification code",
     "description": "CODE_INVALID"
+  },
+  "R6sMIX": {
+    "defaultMessage": "Fediverse"
   },
   "R7yHDl": {
     "defaultMessage": "Circle Revenue",
@@ -2068,11 +2119,11 @@
   "Sj+TN8": {
     "defaultMessage": "Announcement"
   },
-  "2cnZc/": {
-    "defaultMessage": "開啟後，新發佈的公開作品會自動送到 Fediverse。其他站台可能保留副本；關閉後將停止同步，並嘗試刪除先前內容。"
-  },
   "SuRTsQ": {
     "defaultMessage": "Register for ISCN"
+  },
+  "SyxunU": {
+    "defaultMessage": "聯邦宇宙操作已送出"
   },
   "Szd1tH": {
     "defaultMessage": "Failed to log out, please try again."
@@ -2227,6 +2278,9 @@
     "defaultMessage": "Ended",
     "description": "src/views/Campaigns/Feeds/Tabs/index.tsx"
   },
+  "VWeoZC": {
+    "defaultMessage": "目前沒有通知"
+  },
   "VZsE96": {
     "defaultMessage": "Collection Name"
   },
@@ -2268,6 +2322,9 @@
   "W0sZaX": {
     "defaultMessage": "Last 3 months",
     "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
+  },
+  "W1j+F0": {
+    "defaultMessage": "請簡述檢舉原因"
   },
   "W3hNBA": {
     "defaultMessage": "Free Write in 7 days Grand Badge"
@@ -2345,6 +2402,9 @@
   },
   "XTRqqT": {
     "defaultMessage": "Add to event"
+  },
+  "XTkPen": {
+    "defaultMessage": "來自其他 Fediverse 站台的回應"
   },
   "XTyKFR": {
     "defaultMessage": "Adding articles to a collection helps readers find your articles."
@@ -2454,9 +2514,6 @@
   "Z7JXlF": {
     "defaultMessage": "Archived for violation.",
     "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
-  },
-  "cY80V3": {
-    "defaultMessage": "公開作品會自動送出，遠端站台可能保留副本"
   },
   "ZAs170": {
     "defaultMessage": "Profile",
@@ -2586,6 +2643,9 @@
   "b6x6lm": {
     "defaultMessage": "Enter a clear and concise title"
   },
+  "b8/cFV": {
+    "defaultMessage": "聯邦宇宙"
+  },
   "b8LMpq": {
     "defaultMessage": "View all {count} comments",
     "description": "src/views/CampaignDetail/Discussion"
@@ -2615,6 +2675,9 @@
   },
   "beLe/F": {
     "defaultMessage": "Broadcast"
+  },
+  "bmR7T4": {
+    "defaultMessage": "轉發"
   },
   "bv9UzQ": {
     "defaultMessage": "See all quotes"
@@ -2662,6 +2725,9 @@
   "cQYXjl": {
     "defaultMessage": "Currency",
     "description": "src/views/Me/Settings/Misc/Currency/index.tsx"
+  },
+  "cY80V3": {
+    "defaultMessage": "公開作品會自動送出，遠端站台可能保留副本"
   },
   "cYvIpp": {
     "defaultMessage": "Already subscribed to this circle.",
@@ -2947,6 +3013,9 @@
     "defaultMessage": "The payment amount is invalid, please re-enter.",
     "description": "PAYMENT_AMOUNT_INVALID"
   },
+  "glsBoL": {
+    "defaultMessage": "聯邦通知"
+  },
   "gsZ/aj": {
     "defaultMessage": "Comments allowed, cannot be closed once published",
     "description": "src/components/Editor/Sidebar/CanComment/index.tsx"
@@ -3033,6 +3102,9 @@
     "defaultMessage": "Number of readers",
     "description": "src/components/ArticleDigest/Published/FooterActions/index.tsx"
   },
+  "hyDCe8": {
+    "defaultMessage": "位追蹤者"
+  },
   "i4OBEw": {
     "defaultMessage": "\"{name}\" is invalid."
   },
@@ -3065,6 +3137,9 @@
   },
   "ieGrWo": {
     "defaultMessage": "Follow"
+  },
+  "ih+UCV": {
+    "defaultMessage": "回覆內容"
   },
   "imXsmo": {
     "defaultMessage": "back to latest",
@@ -3105,6 +3180,9 @@
   "jOgBV9": {
     "defaultMessage": "replied you",
     "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
+  },
+  "jWwn1K": {
+    "defaultMessage": "尋找遠端作者"
   },
   "jiB0Z2": {
     "defaultMessage": "Unable to bind wallet",
@@ -3159,6 +3237,9 @@
   "kHMa3H": {
     "defaultMessage": "The new password and confirmation password do not match."
   },
+  "kOStiL": {
+    "defaultMessage": "輸入完整帳號，例如 @alice@example.social"
+  },
   "kS3vTS": {
     "defaultMessage": "Liker ID",
     "description": "src/views/Me/Settings/Misc/LikerID.tsx"
@@ -3169,6 +3250,9 @@
   },
   "kc79d3": {
     "defaultMessage": "Topics"
+  },
+  "kggbxQ": {
+    "defaultMessage": "追蹤"
   },
   "kkZioy": {
     "defaultMessage": "Remove",
@@ -3188,6 +3272,9 @@
     "defaultMessage": "Please enter new transaction password",
     "description": "src/components/Forms/PaymentForm/ResetPassword/Confirm.tsx"
   },
+  "kw8J39": {
+    "defaultMessage": "回覆到聯邦宇宙"
+  },
   "l/f7bu": {
     "defaultMessage": "Want to know more? Check the",
     "description": "src/views/Me/Analytics/EmptyAnalytics/index.tsx"
@@ -3202,6 +3289,9 @@
   "l31hCd": {
     "defaultMessage": "Preview",
     "description": "src/components/Editor/MoreSettings/SupportSettingDialog/Content.tsx"
+  },
+  "lDTamI": {
+    "defaultMessage": "回覆"
   },
   "lFi0TA": {
     "defaultMessage": "Add to Collection"
@@ -3320,6 +3410,9 @@
   },
   "me1nR+": {
     "defaultMessage": "Copy Address"
+  },
+  "miEMcG": {
+    "defaultMessage": "追蹤中"
   },
   "mij/rJ": {
     "defaultMessage": "Delete draft"
@@ -3614,6 +3707,9 @@
   "rfz/fN": {
     "defaultMessage": "Recommended size: 1600px x 900px"
   },
+  "rjEc9z": {
+    "defaultMessage": "取消追蹤"
+  },
   "rqS2aA": {
     "defaultMessage": "Sign in to that account to unlink it then try again",
     "description": "src/components/AuthMethodFeed/AuthWalletFeed.tsx"
@@ -3625,8 +3721,14 @@
   "ruZqtT": {
     "defaultMessage": "Must be between {MIN_USER_DISPLAY_NAME_LENGTH}-{MAX_USER_DISPLAY_NAME_LENGTH} characters long."
   },
+  "rudmDY": {
+    "defaultMessage": "追蹤遠端作者、閱讀聯邦動態，並管理回覆與通知"
+  },
   "s2s6tx": {
     "defaultMessage": "The article has been successfully published and will be synced to IPFS soon."
+  },
+  "sAB+vZ": {
+    "defaultMessage": "等待核准"
   },
   "sE2Ui3": {
     "defaultMessage": "Account Frozen"
@@ -3669,9 +3771,15 @@
   "syEQFE": {
     "defaultMessage": "Publish"
   },
+  "t0kvjC": {
+    "defaultMessage": "查看全部"
+  },
   "t1wXVG": {
     "defaultMessage": "Say something? Someone might listen.",
     "description": "MOMENT_FORM"
+  },
+  "t1yrE4": {
+    "defaultMessage": "最多追蹤 {maxFollowing} 個帳號，動態保留 {days} 天，上限 {items} 筆"
   },
   "t2EpN/": {
     "defaultMessage": "Request on {network} network will be confirmed and synced to Matters in a bit"
@@ -4097,6 +4205,9 @@
   "zE51j6": {
     "defaultMessage": "Failed to publish, please try again."
   },
+  "zK82DU": {
+    "defaultMessage": "追蹤動態"
+  },
   "zKOr2x": {
     "defaultMessage": "Conversion Rate of Followers",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
@@ -4113,6 +4224,9 @@
   },
   "zWXgmM": {
     "defaultMessage": "Return and continue"
+  },
+  "zWonDB": {
+    "defaultMessage": "尚未追蹤任何遠端作者"
   },
   "zaY8Cu": {
     "defaultMessage": "Enter transaction password",

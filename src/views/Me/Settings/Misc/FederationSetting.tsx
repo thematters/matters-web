@@ -3,6 +3,7 @@ import gql from 'graphql-tag'
 import { useEffect, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
+import { PATHS } from '~/common/enums'
 import { Switch, TableView, toast, useMutation } from '~/components'
 import {
   FederationAuthorSettingState,
@@ -93,28 +94,48 @@ const FederationSetting = () => {
   }
 
   return (
-    <TableView.Cell
-      title={
-        <FormattedMessage defaultMessage="Fediverse 聯邦發佈" id="YC2b3b" />
-      }
-      subtitle={
-        <FormattedMessage
-          defaultMessage="開啟後，新發佈的公開作品會自動送到 Fediverse。其他站台可能保留副本；關閉後將停止同步，並嘗試刪除先前內容。"
-          id="2cnZc/"
-        />
-      }
-      right={
-        <Switch
-          name="fediverse-federation-setting"
-          label={
-            <FormattedMessage defaultMessage="Fediverse 聯邦發佈" id="YC2b3b" />
+    <>
+      <TableView.Cell
+        title={
+          <FormattedMessage defaultMessage="Fediverse 聯邦發佈" id="YC2b3b" />
+        }
+        subtitle={
+          <FormattedMessage
+            defaultMessage="開啟後，新發佈的公開作品會自動送到 Fediverse。其他站台可能保留副本；關閉後將停止同步，並嘗試刪除先前內容。"
+            id="2cnZc/"
+          />
+        }
+        right={
+          <Switch
+            name="fediverse-federation-setting"
+            label={
+              <FormattedMessage
+                defaultMessage="Fediverse 聯邦發佈"
+                id="YC2b3b"
+              />
+            }
+            checked={enabled}
+            loading={loading || saving}
+            onChange={updateSetting}
+          />
+        }
+      />
+      {enabled && (
+        <TableView.Cell
+          role="link"
+          title={
+            <FormattedMessage defaultMessage="聯邦宇宙互動中心" id="Nw8VNu" />
           }
-          checked={enabled}
-          loading={loading || saving}
-          onChange={updateSetting}
+          subtitle={
+            <FormattedMessage
+              defaultMessage="追蹤遠端作者、閱讀聯邦動態，並管理回覆與通知"
+              id="rudmDY"
+            />
+          }
+          href={PATHS.ME_FEDIVERSE}
         />
-      }
-    />
+      )}
+    </>
   )
 }
 

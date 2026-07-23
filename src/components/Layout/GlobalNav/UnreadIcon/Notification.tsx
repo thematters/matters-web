@@ -1,5 +1,6 @@
 import { useQuery } from '@apollo/client'
 import classNames from 'classnames'
+import gql from 'graphql-tag'
 import { useContext, useEffect } from 'react'
 
 import IconNavNotifications from '@/public/static/icons/24px/nav-notifications.svg'
@@ -15,6 +16,14 @@ interface UnreadIconProps {
   iconSize?: 24 | 26 | 28 | 30
 }
 
+const FEDIVERSE_UNREAD_COUNT = gql`
+  query FediverseUnreadCount {
+    viewerFediverse {
+      unreadNotificationsCount
+    }
+  }
+`
+
 const NotificationUnreadIcon: React.FC<UnreadIconProps> = ({
   active,
   iconSize = 24,
@@ -28,15 +37,30 @@ const NotificationUnreadIcon: React.FC<UnreadIconProps> = ({
       skip: !viewer.isAuthed || typeof window === 'undefined',
     }
   )
+  const federationEnabled = viewer.federationSetting?.state === 'enabled'
+  const { data: federationData, startPolling: startFederationPolling } =
+    useQuery<{
+      viewerFediverse: { unreadNotificationsCount: number }
+    }>(FEDIVERSE_UNREAD_COUNT, {
+      errorPolicy: 'ignore',
+      fetchPolicy: 'network-only',
+      skip:
+        !viewer.isAuthed || !federationEnabled || typeof window === 'undefined',
+    })
 
   // FIXME: https://github.com/apollographql/apollo-client/issues/3775
   useEffect(() => {
     if (viewer.isAuthed) {
       startPolling(1000 * 20) // 20s
+      if (federationEnabled) {
+        startFederationPolling(1000 * 20)
+      }
     }
-  }, [])
+  }, [federationEnabled])
 
-  const unread = (data?.viewer?.status?.unreadNoticeCount || 0) >= 1
+  const unread =
+    (data?.viewer?.status?.unreadNoticeCount || 0) >= 1 ||
+    (federationData?.viewerFediverse.unreadNotificationsCount || 0) >= 1
   const iconClasses = classNames({
     [styles.unreadIcon]: true,
     [styles.unread]: unread,

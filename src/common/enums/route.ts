@@ -53,6 +53,7 @@ type ROUTE_KEY =
   | 'ME_HISTORY_LIKES_SENT'
   | 'ME_HISTORY_LIKES_RECEIVED'
   | 'ME_NOTIFICATIONS'
+  | 'ME_FEDIVERSE'
   | 'ME_ANALYTICS'
   | 'ME_WALLET'
   | 'ME_WALLET_TRANSACTIONS'
@@ -106,6 +107,7 @@ export const PROTECTED_ROUTES: {
   { key: 'ME_HISTORY_LIKES_SENT', pathname: '/me/history/likes/sent' },
   { key: 'ME_HISTORY_LIKES_RECEIVED', pathname: '/me/history/likes/received' },
   { key: 'ME_NOTIFICATIONS', pathname: '/me/notifications' },
+  { key: 'ME_FEDIVERSE', pathname: '/me/fediverse' },
   { key: 'ME_WALLET', pathname: '/me/wallet' },
   { key: 'ME_WALLET_TRANSACTIONS', pathname: '/me/wallet/transactions' },
   { key: 'ME_ANALYTICS', pathname: '/me/analytics' },

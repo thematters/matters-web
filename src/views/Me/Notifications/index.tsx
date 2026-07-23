@@ -3,8 +3,10 @@ import gql from 'graphql-tag'
 import { useContext, useEffect } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
+import { PATHS } from '~/common/enums'
 import { mergeConnections, shouldRenderNode } from '~/common/utils'
 import {
+  Button,
   EmptyNotice,
   Head,
   InfiniteScroll,
@@ -24,6 +26,8 @@ import {
   MarkAllNoticesAsReadMutation,
   MeNotificationsQuery,
 } from '~/gql/graphql'
+
+import styles from './styles.module.css'
 
 const renderableTypes = new Set([
   'ArticleArticleNotice',
@@ -77,8 +81,34 @@ const MARK_ALL_NOTICES_AS_READ = gql`
   }
 `
 
+const FEDIVERSE_NOTIFICATIONS = gql`
+  query FediverseNotificationsDigest {
+    viewerFediverse {
+      unreadNotificationsCount
+      notifications {
+        id
+        category
+        headline
+        preview
+        eventCount
+        unreadCount
+        publishedAt
+      }
+    }
+  }
+`
+
+const MARK_FEDIVERSE_NOTIFICATIONS_READ = gql`
+  mutation MarkFediverseNotificationsRead($input: FediverseActionInput!) {
+    actFediverse(input: $input) {
+      status
+    }
+  }
+`
+
 const BaseNotifications = () => {
   const viewer = useContext(ViewerContext)
+  const federationEnabled = viewer.federationSetting?.state === 'enabled'
 
   const [markAllNoticesAsRead] = useMutation<MarkAllNoticesAsReadMutation>(
     MARK_ALL_NOTICES_AS_READ,
@@ -102,10 +132,47 @@ const BaseNotifications = () => {
   >(ME_NOTIFICATIONS, {
     fetchPolicy: 'network-only',
   })
+  const { data: federationData } = useQuery<{
+    viewerFediverse: {
+      unreadNotificationsCount: number
+      notifications: Array<{
+        id: string
+        category: string
+        headline?: string | null
+        preview?: string | null
+        eventCount: number
+        unreadCount: number
+      }>
+    }
+  }>(FEDIVERSE_NOTIFICATIONS, {
+    errorPolicy: 'ignore',
+    fetchPolicy: 'network-only',
+    skip: !federationEnabled,
+  })
+  const [markFediverseNotificationsRead] = useMutation(
+    MARK_FEDIVERSE_NOTIFICATIONS_READ
+  )
 
   useEffect(() => {
     markAllNoticesAsRead()
   }, [])
+
+  useEffect(() => {
+    const ids =
+      federationData?.viewerFediverse.notifications
+        .filter((notification) => notification.unreadCount > 0)
+        .map((notification) => notification.id) ?? []
+    if (ids.length > 0) {
+      markFediverseNotificationsRead({
+        variables: {
+          input: {
+            action: 'mark_read',
+            notificationIds: ids,
+          },
+        },
+      })
+    }
+  }, [federationData?.viewerFediverse.notifications])
 
   const connectionPath = 'viewer.notices'
   const { edges, pageInfo } = data?.viewer?.notices || {}
@@ -114,12 +181,21 @@ const BaseNotifications = () => {
     return <SpinnerBlock />
   }
 
-  if (!edges || edges.length <= 0 || !pageInfo) {
+  const federationNotifications =
+    federationData?.viewerFediverse.notifications ?? []
+
+  if (
+    (!edges || edges.length <= 0 || !pageInfo) &&
+    federationNotifications.length === 0
+  ) {
     return <EmptyNotice />
   }
 
-  const loadMore = () =>
-    fetchMore({
+  const loadMore = () => {
+    if (!pageInfo) {
+      return Promise.resolve()
+    }
+    return fetchMore({
       variables: { first: 20, after: pageInfo.endCursor },
       updateQuery: (previousResult, { fetchMoreResult }) =>
         mergeConnections({
@@ -128,20 +204,60 @@ const BaseNotifications = () => {
           path: connectionPath,
         }),
     })
+  }
 
   return (
-    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore} eof>
-      <List spacing={['xxxloose', 0]} hasBorder={false}>
-        {edges.map(
-          ({ node }) =>
-            shouldRenderNode(node, renderableTypes) && (
-              <List.Item key={node.id}>
-                <Notice notice={node} />
-              </List.Item>
-            )
-        )}
-      </List>
-    </InfiniteScroll>
+    <>
+      {federationNotifications.length > 0 && (
+        <section className={styles.fediverse}>
+          <header>
+            <div>
+              <h2>
+                <FormattedMessage defaultMessage="聯邦通知" id="glsBoL" />
+              </h2>
+              <p>
+                <FormattedMessage
+                  defaultMessage="來自其他 Fediverse 站台的互動"
+                  id="4GmeZE"
+                />
+              </p>
+            </div>
+            <Button href={PATHS.ME_FEDIVERSE} textColor="green">
+              <FormattedMessage defaultMessage="查看全部" id="t0kvjC" />
+            </Button>
+          </header>
+          {federationNotifications.slice(0, 5).map((notification) => (
+            <div className={styles.fediverseItem} key={notification.id}>
+              <div>
+                <strong>
+                  {notification.headline || notification.category}
+                </strong>
+                {notification.preview && <p>{notification.preview}</p>}
+              </div>
+              <span>{notification.eventCount}</span>
+            </div>
+          ))}
+        </section>
+      )}
+      {edges && pageInfo && (
+        <InfiniteScroll
+          hasNextPage={pageInfo.hasNextPage}
+          loadMore={loadMore}
+          eof
+        >
+          <List spacing={['xxxloose', 0]} hasBorder={false}>
+            {edges.map(
+              ({ node }) =>
+                shouldRenderNode(node, renderableTypes) && (
+                  <List.Item key={node.id}>
+                    <Notice notice={node} />
+                  </List.Item>
+                )
+            )}
+          </List>
+        </InfiniteScroll>
+      )}
+    </>
   )
 }
 
