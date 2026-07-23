@@ -159,6 +159,9 @@
   "/wbyoV": {
     "defaultMessage": "作品已从活动移除"
   },
+  "0/FjWm": {
+    "defaultMessage": "取消喜欢"
+  },
   "0/gRer": {
     "defaultMessage": "我正在搬家到 Matters，邀请你一起来"
   },
@@ -2993,6 +2996,9 @@
   "gK6OxL": {
     "defaultMessage": "留个友善的评论？",
     "description": "src/views/ArticleDetail/Toolbar/FixedToolbar/index.tsx"
+  },
+  "gLotOL": {
+    "defaultMessage": "取消转发"
   },
   "gN4jLB": {
     "defaultMessage": "你对 {articleTitle} 的修改已发布到 IPFS",
