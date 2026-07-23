@@ -6,7 +6,11 @@ import { toPath } from '~/common/utils'
 import { Card } from '~/components'
 import { ArticleDigestNoticeArticleFragment } from '~/gql/graphql'
 
-import { ArticleDigestTitle, ArticleDigestTitleTextSize } from '../Title'
+import {
+  ArticleDigestTitle,
+  ArticleDigestTitleTextSize,
+  isArticleAuthorFrozen,
+} from '../Title'
 import styles from './styles.module.css'
 
 export type ArticleDigestNoticeProps = {
@@ -30,6 +34,7 @@ export const ArticleDigestNotice = ({
   titleTextSize = 16,
 }: ArticleDigestNoticeProps) => {
   const { summary } = article
+  const isAuthorFrozen = isArticleAuthorFrozen(article)
 
   const containerClasses = classNames({
     [styles.container]: true,
@@ -40,7 +45,11 @@ export const ArticleDigestNotice = ({
   })
 
   return (
-    <Card {...path} spacing={[0, 0]} bgColor="none">
+    <Card
+      href={isAuthorFrozen ? undefined : path.href}
+      spacing={[0, 0]}
+      bgColor="none"
+    >
       <section
         className={containerClasses}
         data-test-id={TEST_ID.DIGEST_ARTICLE_NOTICE}
@@ -51,6 +60,7 @@ export const ArticleDigestNotice = ({
             textSize={titleTextSize}
             is="h3"
             lineClamp={1}
+            disabled={isAuthorFrozen}
           />
         </header>
 
