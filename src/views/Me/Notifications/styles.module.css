@@ -1,0 +1,40 @@
+.fediverse {
+  padding: var(--sp16);
+  margin-bottom: var(--sp24);
+  border: 1px solid var(--color-grey-lighter);
+  border-radius: 0.75rem;
+
+  & > header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: var(--sp8);
+
+    & h2 {
+      font-size: var(--font-size-18);
+    }
+
+    & p {
+      margin-top: var(--sp4);
+      font-size: var(--font-size-14);
+      color: var(--color-grey-darker);
+    }
+  }
+}
+
+.fediverseItem {
+  display: flex;
+  gap: var(--sp16);
+  justify-content: space-between;
+  padding: var(--sp12) 0;
+  border-top: 1px solid var(--color-grey-lighter);
+
+  & p {
+    margin-top: var(--sp4);
+    color: var(--color-grey-darker);
+  }
+
+  & > span {
+    color: var(--color-green);
+  }
+}

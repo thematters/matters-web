@@ -57,6 +57,7 @@ import { CommentsDialog } from './Comments/CommentsDialog'
 import { Placeholder as CommentsPlaceholder } from './Comments/Placeholder'
 import Content from './Content'
 import CustomizedSummary from './CustomizedSummary'
+import FediverseInteractions from './FediverseInteractions'
 import {
   ARTICLE_AVAILABLE_TRANSLATIONS,
   ARTICLE_DETAIL_PRIVATE,
@@ -378,6 +379,8 @@ const BaseArticleDetail = ({
         <License license={article.license} />
 
         <Channel article={article} privateFetched={privateFetched} />
+
+        <FediverseInteractions articleId={article.id} enabled={isAuthor} />
 
         {features.payment && (
           <DynamicSupportWidget

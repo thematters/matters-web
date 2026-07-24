@@ -60,6 +60,9 @@ const ViewerFragments = {
         followers(input: { first: 0 }) {
           totalCount
         }
+        federationSetting {
+          state
+        }
       }
     `,
     private: gql`

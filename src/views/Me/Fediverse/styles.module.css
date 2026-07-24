@@ -1,0 +1,247 @@
+.profile,
+.section {
+  margin-bottom: var(--sp24);
+  overflow: hidden;
+  background: var(--color-white);
+  border: 1px solid var(--color-grey-lighter);
+  border-radius: 0.75rem;
+}
+
+.headerImage {
+  height: 8rem;
+  background-color: var(--color-green-lighter);
+  background-position: center;
+  background-size: cover;
+}
+
+.profileBody {
+  display: flex;
+  gap: var(--sp16);
+  align-items: flex-start;
+  padding: 0 var(--sp20) var(--sp20);
+}
+
+.profileAvatar {
+  @mixin flex-center-all;
+
+  flex: 0 0 auto;
+  width: 5rem;
+  height: 5rem;
+  margin-top: -2.5rem;
+  overflow: hidden;
+  font-size: 2rem;
+  color: var(--color-white);
+  background-color: var(--color-green);
+  background-position: center;
+  background-size: cover;
+  border: 4px solid var(--color-white);
+  border-radius: 50%;
+}
+
+.profileText {
+  min-width: 0;
+  padding-top: var(--sp12);
+
+  & h2 {
+    font-size: var(--font-size-18);
+  }
+
+  & a,
+  & span {
+    color: var(--color-grey-darker);
+    overflow-wrap: anywhere;
+  }
+
+  & p {
+    margin-top: var(--sp8);
+    white-space: pre-wrap;
+  }
+}
+
+.metrics {
+  display: flex;
+  gap: var(--sp24);
+  padding: var(--sp16) var(--sp20);
+  border-top: 1px solid var(--color-grey-lighter);
+
+  & span {
+    display: flex;
+    gap: var(--sp4);
+    font-size: var(--font-size-14);
+    color: var(--color-grey-darker);
+  }
+
+  & strong {
+    color: var(--color-black);
+  }
+}
+
+.section {
+  padding: var(--sp20);
+
+  & > h2,
+  & .sectionHeader h2 {
+    font-size: var(--font-size-18);
+  }
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.hint,
+.empty,
+.retention {
+  margin-top: var(--sp8);
+  font-size: var(--font-size-14);
+  color: var(--color-grey-darker);
+}
+
+.search,
+.reply {
+  display: flex;
+  gap: var(--sp8);
+  margin-top: var(--sp12);
+
+  & input {
+    flex: 1;
+    min-width: 0;
+    padding: var(--sp10) var(--sp12);
+    background: var(--color-white);
+    border: 1px solid var(--color-grey-light);
+    border-radius: 0.5rem;
+  }
+}
+
+.error {
+  margin-top: var(--sp8);
+  color: var(--color-red);
+}
+
+.actorRow {
+  display: flex;
+  gap: var(--sp12);
+  align-items: center;
+  padding: var(--sp16) 0;
+  border-bottom: 1px solid var(--color-grey-lighter);
+
+  &:last-child {
+    padding-bottom: 0;
+    border-bottom: 0;
+  }
+}
+
+.avatar {
+  @mixin flex-center-all;
+
+  flex: 0 0 auto;
+  width: 2.75rem;
+  height: 2.75rem;
+  color: var(--color-white);
+  background-color: var(--color-green);
+  background-position: center;
+  background-size: cover;
+  border-radius: 50%;
+}
+
+.actorText {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+
+  & strong,
+  & span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  & span {
+    font-size: var(--font-size-12);
+    color: var(--color-grey-darker);
+  }
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.25rem;
+  height: 1.25rem;
+  padding: 0 var(--sp4);
+  margin-left: var(--sp8);
+  font-size: var(--font-size-12);
+  color: var(--color-white);
+  background: var(--color-red);
+  border-radius: 5rem;
+}
+
+.notification {
+  display: flex;
+  gap: var(--sp16);
+  justify-content: space-between;
+  padding: var(--sp16) 0;
+  border-bottom: 1px solid var(--color-grey-lighter);
+
+  & p {
+    margin-top: var(--sp4);
+    color: var(--color-grey-darker);
+  }
+
+  & > span {
+    color: var(--color-green);
+    white-space: nowrap;
+  }
+}
+
+.post {
+  padding: var(--sp20) 0;
+  border-bottom: 1px solid var(--color-grey-lighter);
+
+  & header {
+    display: flex;
+    gap: var(--sp12);
+    align-items: center;
+  }
+}
+
+.postContent {
+  margin: var(--sp12) 0;
+  white-space: pre-wrap;
+}
+
+.postLink {
+  font-size: var(--font-size-14);
+  color: var(--color-green);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp16);
+  margin-top: var(--sp12);
+}
+
+.retention {
+  padding-top: var(--sp16);
+  text-align: center;
+}
+
+@media (--sm-down) {
+  .metrics {
+    gap: var(--sp12);
+    justify-content: space-between;
+
+    & span {
+      flex-direction: column;
+      gap: 0;
+    }
+  }
+
+  .section {
+    padding: var(--sp16);
+  }
+}

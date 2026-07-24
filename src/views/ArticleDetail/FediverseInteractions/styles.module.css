@@ -1,0 +1,120 @@
+.container {
+  padding: var(--sp20);
+  margin-top: var(--sp24);
+  border: 1px solid var(--color-grey-lighter);
+  border-radius: 0.75rem;
+
+  & > header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    & h2 {
+      font-size: var(--font-size-18);
+    }
+
+    & p {
+      margin-top: var(--sp4);
+      font-size: var(--font-size-14);
+      color: var(--color-grey-darker);
+    }
+  }
+}
+
+.badge {
+  padding: var(--sp4) var(--sp8);
+  font-size: var(--font-size-12);
+  color: var(--color-white);
+  background: var(--color-red);
+  border-radius: 5rem;
+}
+
+.metrics {
+  display: flex;
+  gap: var(--sp24);
+  padding: var(--sp16) 0;
+  margin-top: var(--sp16);
+  border-top: 1px solid var(--color-grey-lighter);
+  border-bottom: 1px solid var(--color-grey-lighter);
+
+  & span {
+    display: flex;
+    gap: var(--sp4);
+    color: var(--color-grey-darker);
+  }
+
+  & strong {
+    color: var(--color-black);
+  }
+}
+
+.empty {
+  padding-top: var(--sp16);
+  color: var(--color-grey-darker);
+}
+
+.reply {
+  padding: var(--sp20) 0;
+  border-bottom: 1px solid var(--color-grey-lighter);
+
+  &:last-child {
+    padding-bottom: 0;
+    border-bottom: 0;
+  }
+
+  & > p {
+    margin: var(--sp12) 0;
+    white-space: pre-wrap;
+  }
+}
+
+.author {
+  display: flex;
+  gap: var(--sp12);
+  align-items: center;
+
+  & > div {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  & small {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--color-grey-darker);
+    white-space: nowrap;
+  }
+}
+
+.avatar {
+  @mixin flex-center-all;
+
+  flex: 0 0 auto;
+  width: 2.5rem;
+  height: 2.5rem;
+  color: var(--color-white);
+  background: var(--color-green);
+  background-position: center;
+  background-size: cover;
+  border-radius: 50%;
+}
+
+.actions {
+  display: flex;
+  gap: var(--sp16);
+}
+
+.replyForm {
+  display: flex;
+  gap: var(--sp8);
+  margin-top: var(--sp12);
+
+  & input {
+    flex: 1;
+    min-width: 0;
+    padding: var(--sp8) var(--sp12);
+    border: 1px solid var(--color-grey-light);
+    border-radius: 0.5rem;
+  }
+}

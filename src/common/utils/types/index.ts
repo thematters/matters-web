@@ -55,54 +55,17 @@ export default gql`
     community_watch
   }
 
-  enum FederationAuthorSettingState {
-    enabled
-    disabled
+  # Temporary schema extension for the Fediverse interaction hardening release.
+  # Remove these fields after the matching matters-server schema is deployed.
+  extend type Query {
+    viewerFediverseUnreadCount: Int!
   }
 
-  enum FederationArticleSettingState {
-    inherit
-    enabled
-    disabled
-  }
-
-  type UserFederationSetting {
-    userId: ID!
-    state: FederationAuthorSettingState!
-    updatedBy: ID
-  }
-
-  type ArticleFederationSetting {
-    articleId: ID!
-    state: FederationArticleSettingState!
-    updatedBy: ID
-  }
-
-  extend type User {
-    federationSetting: UserFederationSetting
-  }
-
-  extend type Article {
-    federationSetting: ArticleFederationSetting
-  }
-
-  input SetViewerFederationSettingInput {
-    state: FederationAuthorSettingState!
-  }
-
-  input SetArticleFederationSettingInput {
-    id: ID!
-    state: FederationArticleSettingState!
-  }
-
-  extend type Mutation {
-    setViewerFederationSetting(
-      input: SetViewerFederationSettingInput!
-    ): UserFederationSetting!
-
-    setArticleFederationSetting(
-      input: SetArticleFederationSettingInput!
-    ): ArticleFederationSetting!
+  extend type FediversePost {
+    liked: Boolean!
+    announced: Boolean!
+    likeActivityId: String
+    announceActivityId: String
   }
 
   enum CommunityWatchRemoveCommentReason {
