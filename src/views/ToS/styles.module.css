@@ -1,0 +1,29 @@
+.transparencyEntry {
+  display: flex;
+  gap: var(--sp16);
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: var(--sp24);
+  margin-bottom: var(--sp24);
+  border-bottom: 1px solid var(--color-grey-lighter);
+
+  & h2 {
+    font-size: var(--font-size-18);
+  }
+
+  & p {
+    max-width: 36rem;
+    margin-top: var(--sp8);
+    font-size: var(--font-size-14);
+    color: var(--color-grey-darker);
+  }
+
+  & > a {
+    flex: 0 0 auto;
+  }
+
+  @media (--sm-down) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
