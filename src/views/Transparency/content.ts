@@ -5,7 +5,7 @@ const zh_hant = `
 
 - [2026 H1 透明度報告](/transparency/2026-h1)
 
-2026 H1 報告已於 2026-07-14 完成核定。報告公開 717 件 Community Watch 治理動作、結構化案件與申訴的資料限制、政府與個資權利請求零件數，以及本期重大政策、模型與推薦變更。
+2026 H1 報告已於 2026-07-14 完成核定，並於 2026-07-24 完成正式收件信箱補充複核。報告公開 717 件 Community Watch 治理動作、結構化案件與申訴的資料限制、政府與法律請求 0 件、個資刪除請求 5 件，以及本期重大政策、模型與推薦變更。
 
 ## 主題說明
 
@@ -39,7 +39,7 @@ const zh_hans = `
 
 - [2026 H1 透明度报告](/transparency/2026-h1)
 
-2026 H1 报告已于 2026-07-14 完成核定。报告公开 717 件 Community Watch 治理动作、结构化案件与申诉的资料限制、政府与个资权利请求零件数，以及本期重大政策、模型与推荐变更。
+2026 H1 报告已于 2026-07-14 完成核定，并于 2026-07-24 完成正式收件信箱补充复核。报告公开 717 件 Community Watch 治理动作、结构化案件与申诉的资料限制、政府与法律请求 0 件、个人资料删除请求 5 件，以及本期重大政策、模型与推荐变更。
 
 ## 主题说明
 
@@ -73,7 +73,7 @@ This page collects public information about Matters content governance, appeals,
 
 - [2026 H1 Transparency Report](/transparency/2026-h1)
 
-The 2026 H1 report was approved on 2026-07-14. It publishes 717 Community Watch governance actions, coverage limits for structured cases and appeals, confirmed zero counts for government and privacy-rights requests, and material policy, model, and recommendation changes.
+The 2026 H1 report was approved on 2026-07-14 and supplemented by a direct review of the official inbox on 2026-07-24. It publishes 717 Community Watch governance actions, coverage limits for structured cases and appeals, 0 government and legal requests, 5 personal-data deletion requests, and material policy, model, and recommendation changes.
 
 ## Topic pages
 

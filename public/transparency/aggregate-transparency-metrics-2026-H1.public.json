@@ -12,7 +12,8 @@
     "notes": [
       "Legacy moderation and appeal records before the structured case schema are only partially covered.",
       "Only aggregated counts are exported; user ids, emails, IPs, original content, internal notes, and legal document contents are excluded.",
-      "The maintainer reviewed the known private legal and compliance history through 2025-07 and confirmed that no later government, legal, or privacy-rights request records exist for 2026 H1.",
+      "The maintainer reviewed the known private legal and compliance history through 2025-07 and completed a supplemental read-only review of the official inbox on 2026-07-24.",
+      "The official-inbox review confirmed 0 government or legal requests and identified 5 user-initiated account deletion requests in 2026 H1.",
       "Change logs are derived from merged public pull requests and were reviewed for final publication."
     ],
     "review_required_fields": []
@@ -67,10 +68,10 @@
       "not_recorded": false
     },
     "privacy_requests": {
-      "total": 0,
+      "total": 5,
       "access": 0,
       "correction": 0,
-      "deletion": 0,
+      "deletion": 5,
       "restriction": 0,
       "not_recorded": false
     },
@@ -148,5 +149,5 @@
     ]
   },
   "source_generated_at": "2026-07-14T18:23:47+08:00",
-  "external_metrics_reviewed_at": "2026-07-14T20:02:46+08:00"
+  "external_metrics_reviewed_at": "2026-07-24T16:51:52+08:00"
 }
