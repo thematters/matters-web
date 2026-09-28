@@ -23,12 +23,14 @@ export const useColorThief = () => {
   let tryGetColorTime = 5
 
   const _getColor = () => {
-    import('colorthief').then(({ default: ColorThief }) => {
+    import('colorthief').then(({ getColorSync }) => {
       try {
-        const colorThief = new ColorThief()
-        const $img = nodeRef.current?.querySelector('img') as HTMLImageElement
-        const colors = colorThief.getColor($img)
-        const hsl = rgbToHsl(...colors)
+        const $img = nodeRef.current?.querySelector('img')
+        const color = $img ? getColorSync($img) : null
+        if (!color) {
+          return
+        }
+        const hsl = rgbToHsl(...color.array())
         setDominantColor(
           `hsla(${parseInt(hsl[0] + '')}, ${parseFloat(
             hsl[1] * 100 + ''

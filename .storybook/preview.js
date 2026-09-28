@@ -1,5 +1,5 @@
 import React from 'react'
-import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport'
+import { INITIAL_VIEWPORTS } from 'storybook/viewport'
 import { IntlProvider } from 'react-intl'
 
 import './styles.css'

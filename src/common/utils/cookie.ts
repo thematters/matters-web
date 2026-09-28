@@ -1,6 +1,8 @@
-import Cookie, { CookieAttributes } from 'js-cookie'
+import Cookie from 'js-cookie'
 
 import { COOKIE_EXPIRES_IN_DAYS } from '~/common/enums'
+
+type CookieAttributes = NonNullable<Parameters<typeof Cookie.set>[2]>
 
 const isLocal = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'local'
 
