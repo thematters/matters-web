@@ -9,6 +9,7 @@ import {
 import { analytics } from '~/common/utils'
 import {
   ButtonProps,
+  useFeatures,
   // useNativeEventListener,
   ViewerContext,
 } from '~/components'
@@ -37,6 +38,7 @@ const FloatToolbar = ({
   toggleDonationDrawer,
 }: FloatToolbarProps) => {
   const viewer = useContext(ViewerContext)
+  const features = useFeatures()
   const isAuthor = viewer.id === articleDetails.author.id
 
   const [mounted, setMounted] = useState(false)
@@ -134,28 +136,32 @@ const FloatToolbar = ({
             {...buttonProps}
           />
 
-          <span className={styles.divider} />
+          {features.payment && (
+            <>
+              <span className={styles.divider} />
 
-          <DonationButton
-            articleDetail={articleDetails}
-            disabled={lock || isAuthor}
-            textIconSpacing={6}
-            onClick={() => {
-              if (!viewer.isAuthed) {
-                window.dispatchEvent(
-                  new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
-                    detail: {
-                      trigger: UNIVERSAL_AUTH_TRIGGER.support,
-                    },
-                  })
-                )
-                return
-              }
+              <DonationButton
+                articleDetail={articleDetails}
+                disabled={lock || isAuthor}
+                textIconSpacing={6}
+                onClick={() => {
+                  if (!viewer.isAuthed) {
+                    window.dispatchEvent(
+                      new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
+                        detail: {
+                          trigger: UNIVERSAL_AUTH_TRIGGER.support,
+                        },
+                      })
+                    )
+                    return
+                  }
 
-              toggleDonationDrawer()
-            }}
-            {...buttonProps}
-          />
+                  toggleDonationDrawer()
+                }}
+                {...buttonProps}
+              />
+            </>
+          )}
         </section>
       </section>
     </section>
