@@ -45,7 +45,7 @@
   "dependencies": {
     "@apollo/client": "^3.13.8",
     "@artsy/fresnel": "^8.1.0",
-    "@matters/matters-editor": "^0.3.3",
+    "@matters/matters-editor": "^1.0.3",
     "@next/bundle-analyzer": "^15.5.26",
     "@sentry/nextjs": "^9.28.0",
     "@stripe/react-stripe-js": "^3.7.0",
