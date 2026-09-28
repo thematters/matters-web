@@ -11,6 +11,7 @@ import { analytics, toLocale, toPath } from '~/common/utils'
 import {
   ArticleCommentFormDialog,
   ButtonProps,
+  useFeatures,
   ViewerContext,
 } from '~/components'
 import DropdownActions, {
@@ -44,6 +45,7 @@ const FixedToolbar = ({
   ...props
 }: FixedToolbarProps) => {
   const viewer = useContext(ViewerContext)
+  const features = useFeatures()
   const path = toPath({ page: 'articleDetail', article: articleDetails })
   const sharePath =
     translated && translatedLanguage
@@ -166,15 +168,17 @@ const FixedToolbar = ({
               />
             )}
 
-            <DonationButton
-              articleDetail={articleDetails}
-              disabled={lock || isAuthor}
-              iconSize={24}
-              textWeight="normal"
-              textIconSpacing={4}
-              resideIn="fixedToolbar"
-              {...buttonProps}
-            />
+            {features.payment && (
+              <DonationButton
+                articleDetail={articleDetails}
+                disabled={lock || isAuthor}
+                iconSize={24}
+                textWeight="normal"
+                textIconSpacing={4}
+                resideIn="fixedToolbar"
+                {...buttonProps}
+              />
+            )}
 
             <DropdownActions
               article={articleDetails}
