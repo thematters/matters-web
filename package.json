@@ -48,7 +48,7 @@
     "@artsy/fresnel": "^8.1.0",
     "@matters/matters-editor": "^0.3.3",
     "@next/bundle-analyzer": "^15.5.26",
-    "@sentry/nextjs": "^9.28.0",
+    "@sentry/nextjs": "^11.8.0",
     "@stripe/react-stripe-js": "^3.7.0",
     "@stripe/stripe-js": "^7.3.1",
     "@tanstack/react-query": "^5.80.6",
