@@ -17,7 +17,7 @@ describe('<FetchPolicy>/useFetchPolicy', () => {
     expect(result.current.fetchPolicy).toBe('cache-first')
 
     act(() => {
-      result.current.setFetchPolicy('network-only')
+      result.current.setFetchPolicy('cache-and-network')
     })
 
     expect(result.current.fetchPolicy).toBe('cache-first')
@@ -30,13 +30,13 @@ describe('<FetchPolicy>/useFetchPolicy', () => {
     })
 
     act(() => {
-      result.current.setFetchPolicy('network-only')
+      result.current.setFetchPolicy('cache-and-network')
     })
     act(() => {
       mockRouter.setCurrentUrl('/c/bar')
     })
     rerender()
 
-    expect(result.current.fetchPolicy).toBe('network-only')
+    expect(result.current.fetchPolicy).toBe('cache-and-network')
   })
 })
