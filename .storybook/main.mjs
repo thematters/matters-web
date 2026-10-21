@@ -1,7 +1,18 @@
-const path = require('path')
-const postcssOptions = require('../postcss.config.json')
+import { createRequire } from 'module'
+import path from 'path'
+import { fileURLToPath } from 'url'
 
-module.exports = {
+import postcssOptions from '../postcss.config.json' with { type: 'json' }
+
+const require = createRequire(import.meta.url)
+const dirname = path.dirname(fileURLToPath(import.meta.url))
+
+const isCssRule = (rule) =>
+  rule && typeof rule === 'object' && rule.test instanceof RegExp
+    ? rule.test.test('.css')
+    : false
+
+export default {
   framework: {
     name: '@storybook/nextjs',
     options: {},
@@ -11,38 +22,37 @@ module.exports = {
 
   addons: [
     '@storybook/addon-links',
-    '@storybook/addon-essentials',
+    '@storybook/addon-docs',
     '@storybook/addon-a11y',
-    '@storybook/addon-mdx-gfm',
-    {
-      name: '@storybook/addon-styling-webpack',
-      options: {
-        rules: [
-          {
-            test: /\.css$/,
-            sideEffects: true,
-            use: [
-              require.resolve('style-loader'),
-              {
-                loader: require.resolve('css-loader'),
-                options: { importLoaders: 1 },
-              },
-              {
-                loader: require.resolve('postcss-loader'),
-                options: {
-                  implementation: require.resolve('postcss'),
-                  postcssOptions,
-                },
-              },
-            ],
-          },
-        ],
-      },
-    },
     '@chromatic-com/storybook',
   ],
 
   webpackFinal: async (config) => {
+    // replace the built-in CSS rules so our PostCSS config is applied
+    config.module.rules = config.module.rules.filter((rule) => !isCssRule(rule))
+    config.module.rules.push({
+      test: /\.css$/,
+      sideEffects: true,
+      use: [
+        require.resolve('style-loader'),
+        {
+          loader: require.resolve('css-loader'),
+          // keep absolute URLs (e.g. /static/fonts) pointing to public/
+          options: {
+            importLoaders: 1,
+            url: { filter: (url) => !url.startsWith('/') },
+          },
+        },
+        {
+          loader: require.resolve('postcss-loader'),
+          options: {
+            implementation: require.resolve('postcss'),
+            postcssOptions,
+          },
+        },
+      ],
+    })
+
     // this modifies the existing image rule to exclude .svg files
     // since we want to handle those files with @svgr/webpack
     const imageRule = config.module.rules.find((rule) => {
@@ -92,8 +102,8 @@ module.exports = {
 
     config.resolve.alias = {
       ...config.resolve.alias,
-      '@': path.resolve(__dirname, '..'),
-      '~': path.resolve(__dirname, '../src'),
+      '@': path.resolve(dirname, '..'),
+      '~': path.resolve(dirname, '../src'),
     }
 
     return config

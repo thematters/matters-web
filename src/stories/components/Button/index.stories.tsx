@@ -1,5 +1,5 @@
 import { MockedProvider } from '@apollo/client/testing'
-import { Meta } from '@storybook/react'
+import { Meta } from '@storybook/nextjs'
 import React from 'react'
 
 import IconMore from '@/public/static/icons/24px/more.svg'

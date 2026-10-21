@@ -42,12 +42,18 @@ vi.mock('next/router', () => require('next-router-mock'))
 
 vi.mock('next/dynamic', async () => {
   const dynamicModule: any = await vi.importActual('next/dynamic')
+  // Serialize preloads: concurrent imports of the same module can resolve to a
+  // partially evaluated namespace (default: undefined) in vitest's module runner
+  let loadQueue: Promise<unknown> = Promise.resolve()
   return {
     default: (loader: any) => {
       const dynamicActualComp = dynamicModule.default
-      const RequiredComponent = dynamicActualComp(() =>
-        loader().then((mod: any) => mod.default || mod)
-      )
+      const load = () => {
+        const loaded = loadQueue.then(() => loader())
+        loadQueue = loaded.catch(() => undefined)
+        return loaded.then((mod: any) => mod.default || mod)
+      }
+      const RequiredComponent = dynamicActualComp(load)
 
       if (RequiredComponent?.render?.displayName) {
         RequiredComponent.render.displayName = loader.toString()

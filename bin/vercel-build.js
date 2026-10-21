@@ -58,7 +58,7 @@ if (gitCommitRef && gitCommitRef === 'release/next-beta') {
   // Default development configuration
   // Deployed to *.vercel.app preview
   console.log('Configuring for development (default)')
-  exec('npm run gen:type')
+  exec('npm run gen:type:ci')
   exec('cp -va .env.dev .env.local')
   setEnvLocal('NEXT_PUBLIC_SITE_DOMAIN', process.env.NEXT_PUBLIC_VERCEL_URL)
   setEnvLocal('NEXT_PUBLIC_VERCEL', 'true')

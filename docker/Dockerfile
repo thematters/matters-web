@@ -1,4 +1,4 @@
-FROM node:18
+FROM node:22
 
 # install os level packages
 RUN apt-get update && apt-get -y install \
