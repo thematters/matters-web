@@ -32,6 +32,7 @@
     "analyze": "ANALYZE=true next build",
     "gen:type": "GRAPHQL_SCHEMA_URL=https://server.matters.icu/graphql graphql-codegen --config codegen.ts",
     "gen:type:prod": "GRAPHQL_SCHEMA_URL=https://server.matters.town/graphql graphql-codegen --config codegen.ts",
+    "gen:type:ci": "npm run gen:type || (echo '::warning::Develop schema unavailable, falling back to production schema' && npm run gen:type:prod)",
     "gen:fragmentTypes": "node bin/buildFragmentTypes.js",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
