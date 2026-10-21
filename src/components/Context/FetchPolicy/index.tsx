@@ -28,7 +28,21 @@ export function FetchPolicyProvider({ children }: { children: ReactNode }) {
 }
 
 export function useFetchPolicy() {
-  return useContext(FetchPolicyContext)
+  const context = useContext(FetchPolicyContext)
+  const { asPath } = useRouter()
+
+  // Pin the policy to the current route. Otherwise the policy switch on
+  // `routeChangeStart` makes the leaving page refetch (placeholder + scroll
+  // to top) before the next page renders.
+  const pinnedRef = useRef({ asPath, fetchPolicy: context.fetchPolicy })
+  if (pinnedRef.current.asPath !== asPath) {
+    pinnedRef.current = { asPath, fetchPolicy: context.fetchPolicy }
+  }
+
+  return {
+    fetchPolicy: pinnedRef.current.fetchPolicy,
+    setFetchPolicy: context.setFetchPolicy,
+  }
 }
 
 export const FetchPolicyOnRouteChange = () => {
