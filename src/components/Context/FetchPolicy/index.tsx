@@ -1,4 +1,4 @@
-import { FetchPolicy } from '@apollo/client'
+import { WatchQueryFetchPolicy } from '@apollo/client'
 import { useRouter } from 'next/router'
 import {
   createContext,
@@ -10,15 +10,16 @@ import {
 } from 'react'
 
 const FetchPolicyContext = createContext<{
-  fetchPolicy: FetchPolicy
-  setFetchPolicy: (fetchPolicy: FetchPolicy) => void
+  fetchPolicy: WatchQueryFetchPolicy
+  setFetchPolicy: (fetchPolicy: WatchQueryFetchPolicy) => void
 }>({
   fetchPolicy: 'cache-first',
   setFetchPolicy: () => {},
 })
 
 export function FetchPolicyProvider({ children }: { children: ReactNode }) {
-  const [fetchPolicy, setFetchPolicy] = useState<FetchPolicy>('cache-first')
+  const [fetchPolicy, setFetchPolicy] =
+    useState<WatchQueryFetchPolicy>('cache-first')
 
   return (
     <FetchPolicyContext.Provider value={{ fetchPolicy, setFetchPolicy }}>
@@ -28,7 +29,21 @@ export function FetchPolicyProvider({ children }: { children: ReactNode }) {
 }
 
 export function useFetchPolicy() {
-  return useContext(FetchPolicyContext)
+  const context = useContext(FetchPolicyContext)
+  const { asPath } = useRouter()
+
+  // Pin the policy to the current route. Otherwise the policy switch on
+  // `routeChangeStart` makes the leaving page refetch (placeholder + scroll
+  // to top) before the next page renders.
+  const pinnedRef = useRef({ asPath, fetchPolicy: context.fetchPolicy })
+  if (pinnedRef.current.asPath !== asPath) {
+    pinnedRef.current = { asPath, fetchPolicy: context.fetchPolicy }
+  }
+
+  return {
+    fetchPolicy: pinnedRef.current.fetchPolicy,
+    setFetchPolicy: context.setFetchPolicy,
+  }
 }
 
 export const FetchPolicyOnRouteChange = () => {
@@ -37,11 +52,11 @@ export const FetchPolicyOnRouteChange = () => {
   const isPopStateRef = useRef(false)
 
   useEffect(() => {
-    // Force refresh when clicking links (but not for back/forward)
+    // Refresh when clicking links (but not for back/forward)
     const handleRouteChange = () => {
       if (!isPopStateRef.current) {
-        // This is a regular navigation (link click), use network-only
-        setFetchPolicy('network-only')
+        // Render cached data first to avoid flashing placeholders
+        setFetchPolicy('cache-and-network')
       }
 
       // Reset the flag after handling

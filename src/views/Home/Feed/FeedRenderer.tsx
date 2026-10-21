@@ -66,7 +66,8 @@ const FeedRenderer: React.FC<FeedRendererProps> = ({
   const { getQuery } = useRoute()
   const shortHash = getQuery('shortHash')
   const isCreatorChannel = shortHash === CREATIONS_CHANNEL_SHORT_HASH
-  if (loading) {
+  // Only show placeholders when there is no cached data yet
+  if (loading && edges.length === 0) {
     if (typeof window !== 'undefined') {
       window.scrollTo(0, 0)
       document.body.focus()

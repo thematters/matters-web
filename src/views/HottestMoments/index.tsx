@@ -88,7 +88,7 @@ const HottestMoments = () => {
   }
 
   const renderContent = () => {
-    if (loading) {
+    if (loading && !edges) {
       return <ArticleFeedPlaceholder />
     }
 
