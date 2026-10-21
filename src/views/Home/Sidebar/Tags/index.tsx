@@ -26,7 +26,7 @@ const Tags = () => {
 
   return (
     <section className={styles.container}>
-      <SectionHeader type="tags" viewAll={true} />
+      <SectionHeader type="tags" viewAll={false} />
 
       <List hasBorder={false} className={styles.list}>
         {edges &&

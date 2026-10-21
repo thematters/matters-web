@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 
 import { analytics } from '~/common/utils'
-import { ArticleTag, Media, QueryError, ViewerContext } from '~/components'
+import { ArticleTag, QueryError, ViewerContext } from '~/components'
 
 import { useTagsRecommendation } from '../../common'
 import SectionHeader from '../../SectionHeader'
@@ -25,12 +25,7 @@ const TagsFeed = () => {
 
   return (
     <section className={styles.tags}>
-      <Media lessThan="sm">
-        <SectionHeader type="tags" rightButton={<></>} viewAll={false} />
-      </Media>
-      <Media greaterThanOrEqual="sm">
-        <SectionHeader type="tags" viewAll={true} />
-      </Media>
+      <SectionHeader type="tags" viewAll={false} />
       <section className={styles.tagSection}>
         {edges.map(({ node }, nodeIndex) => (
           <ArticleTag
