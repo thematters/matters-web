@@ -174,7 +174,7 @@
     "postcss-mixins": "^11.0.3",
     "postcss-preset-env": "^10.2.2",
     "prettier": "^3.5.3",
-    "storybook": "^10.6.0",
+    "storybook": "^10.6.3",
     "storybook-css-modules": "^1.0.8",
     "stylelint": "^16.20.0",
     "stylelint-config-recess-order": "^6.0.0",
