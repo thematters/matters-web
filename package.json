@@ -151,7 +151,7 @@
     "@types/webpack-env": "^1.18.8",
     "@vitejs/plugin-react": "^4.5.2",
     "@vitest/coverage-v8": "^5.0.2",
-    "@vitest/ui": "^5.0.2",
+    "@vitest/ui": "^5.0.5",
     "babel-loader": "^10.0.0",
     "babel-plugin-dynamic-import-node": "^2.3.3",
     "babel-polyfill": "^6.26.0",
